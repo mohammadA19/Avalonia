@@ -12,7 +12,7 @@ namespace Avalonia.Win32.WinRT
             Single = f;
         }
 
-        public WinRTPropertyValue(uint u)
+        public WinRTPropertyValue(uint32 u)
         {
             UInt32 = u;
             Type = PropertyType.UInt32;
@@ -32,7 +32,7 @@ namespace Avalonia.Win32.WinRT
         public short Int16 { get; }
         public ushort UInt16 { get; }
         public int32 Int32 { get; }
-        public uint UInt32 { get; }
+        public uint32 UInt32 { get; }
         public long Int64 { get; }
         public ulong UInt64 { get; }
         public float Single { get; }
@@ -54,28 +54,28 @@ namespace Avalonia.Win32.WinRT
 
         public unsafe void GetRect(void* value) => throw NotImplemented;
 
-        public unsafe byte* GetUInt8Array(uint* __valueSize) => throw NotImplemented;
+        public unsafe byte* GetUInt8Array(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe short* GetInt16Array(uint* __valueSize) => throw NotImplemented;
+        public unsafe short* GetInt16Array(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe ushort* GetUInt16Array(uint* __valueSize) => throw NotImplemented;
+        public unsafe ushort* GetUInt16Array(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe int32* GetInt32Array(uint* __valueSize)
+        public unsafe int32* GetInt32Array(uint32* __valueSize)
         {
             throw NotImplemented;
         }
 
-        public unsafe uint* GetUInt32Array(uint* __valueSize) => throw NotImplemented;
+        public unsafe uint32* GetUInt32Array(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe long* GetInt64Array(uint* __valueSize) => throw NotImplemented;
+        public unsafe long* GetInt64Array(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe ulong* GetUInt64Array(uint* __valueSize) => throw NotImplemented;
+        public unsafe ulong* GetUInt64Array(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe float* GetSingleArray(uint* __valueSize)
+        public unsafe float* GetSingleArray(uint32* __valueSize)
         {
             if (_singleArray == null)
                 throw NotImplemented;
-            *__valueSize = (uint)_singleArray.Length;
+            *__valueSize = (uint32)_singleArray.Length;
             var allocCoTaskMem = Marshal.AllocCoTaskMem(_singleArray.Length * Unsafe.SizeOf<float>());
             Marshal.Copy(_singleArray, 0, allocCoTaskMem, _singleArray.Length);
             float* s = (float*)allocCoTaskMem;
@@ -83,26 +83,26 @@ namespace Avalonia.Win32.WinRT
             return s;
         }
 
-        public unsafe double* GetDoubleArray(uint* __valueSize) => throw NotImplemented;
+        public unsafe double* GetDoubleArray(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe char* GetChar16Array(uint* __valueSize) => throw NotImplemented;
+        public unsafe char* GetChar16Array(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe int32* GetBooleanArray(uint* __valueSize) => throw NotImplemented;
+        public unsafe int32* GetBooleanArray(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe IntPtr* GetStringArray(uint* __valueSize) => throw NotImplemented;
+        public unsafe IntPtr* GetStringArray(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe void** GetInspectableArray(uint* __valueSize) => throw NotImplemented;
+        public unsafe void** GetInspectableArray(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe Guid* GetGuidArray(uint* __valueSize) => throw NotImplemented;
+        public unsafe Guid* GetGuidArray(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe void* GetDateTimeArray(uint* __valueSize) => throw NotImplemented;
+        public unsafe void* GetDateTimeArray(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe void* GetTimeSpanArray(uint* __valueSize) => throw NotImplemented;
+        public unsafe void* GetTimeSpanArray(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe void* GetPointArray(uint* __valueSize) => throw NotImplemented;
+        public unsafe void* GetPointArray(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe void* GetSizeArray(uint* __valueSize) => throw NotImplemented;
+        public unsafe void* GetSizeArray(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe void* GetRectArray(uint* __valueSize) => throw NotImplemented;
+        public unsafe void* GetRectArray(uint32* __valueSize) => throw NotImplemented;
     }
 }

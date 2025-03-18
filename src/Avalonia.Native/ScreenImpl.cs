@@ -8,7 +8,7 @@ using MicroCom.Runtime;
 
 namespace Avalonia.Native
 {
-    internal sealed class AvnScreen(uint displayId)
+    internal sealed class AvnScreen(uint32 displayId)
         : PlatformScreen(new PlatformHandle(new IntPtr(displayId), "CGDirectDisplayID"))
     {
         public unsafe void Refresh(IAvnScreens native)
@@ -35,7 +35,7 @@ namespace Avalonia.Native
         }
     }
 
-    internal class ScreenImpl : ScreensBase<uint, AvnScreen>, IDisposable
+    internal class ScreenImpl : ScreensBase<uint32, AvnScreen>, IDisposable
     {
         private IAvnScreens _native;
 
@@ -47,11 +47,11 @@ namespace Avalonia.Native
 
         protected override unsafe int32 GetScreenCount() => _native.GetScreenIds(null);
 
-        protected override unsafe IReadOnlyList<uint> GetAllScreenKeys()
+        protected override unsafe IReadOnlyList<uint32> GetAllScreenKeys()
         {
             var screenCount = _native.GetScreenIds(null);
-            var displayIds = new uint[screenCount];
-            fixed (uint* displayIdsPtr = displayIds)
+            var displayIds = new uint32[screenCount];
+            fixed (uint32* displayIdsPtr = displayIds)
             {
                 _native.GetScreenIds(displayIdsPtr);
             }
@@ -59,7 +59,7 @@ namespace Avalonia.Native
             return displayIds;
         }
 
-        protected override AvnScreen CreateScreenFromKey(uint key) => new(key);
+        protected override AvnScreen CreateScreenFromKey(uint32 key) => new(key);
         protected override void ScreenChanged(AvnScreen screen) => screen.Refresh(_native);
 
         protected override Screen? ScreenFromTopLevelCore(ITopLevelImpl topLevel)

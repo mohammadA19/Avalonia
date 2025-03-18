@@ -400,7 +400,7 @@ namespace Avalonia.Collections.Pooled
         {
             if (typeof(T) != typeof(byte) && typeof(T) != typeof(sbyte) &&
                 typeof(T) != typeof(short) && typeof(T) != typeof(ushort) &&
-                typeof(T) != typeof(int32) && typeof(T) != typeof(uint) &&
+                typeof(T) != typeof(int32) && typeof(T) != typeof(uint32) &&
                 typeof(T) != typeof(long) && typeof(T) != typeof(ulong) &&
                 typeof(T) != typeof(float) && typeof(T) != typeof(double))
             {

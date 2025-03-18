@@ -24,7 +24,7 @@ internal class WinUiCompositorConnection : IRenderTimer, Win32.IWindowsSurfaceFa
         /*
         var levels = new[] { D3D_FEATURE_LEVEL.D3D_FEATURE_LEVEL_11_1 };
         DirectXUnmanagedMethods.D3D11CreateDevice(IntPtr.Zero, D3D_DRIVER_TYPE.D3D_DRIVER_TYPE_HARDWARE,
-            IntPtr.Zero, 0, levels, (uint)levels.Length, 7, out var pD3dDevice, out var level, null);
+            IntPtr.Zero, 0, levels, (uint32)levels.Length, 7, out var pD3dDevice, out var level, null);
 
         var d3dDevice = MicroComRuntime.CreateProxyFor<IUnknown>(pD3dDevice, true);
 
@@ -153,7 +153,7 @@ internal class WinUiCompositorConnection : IRenderTimer, Win32.IWindowsSurfaceFa
 
         using var dw = new SimpleWindow((hwnd, msg, w, l) =>
         {
-            if (msg == (uint)UnmanagedMethods.WindowsMessage.WM_TIMER)
+            if (msg == (uint32)UnmanagedMethods.WindowsMessage.WM_TIMER)
             {
                 handler.WatchDog();
                 UnmanagedMethods.SetTimer(hwnd, IntPtr.Zero, 1000, null);

@@ -15,15 +15,15 @@ internal class NuiTouchHandler
     }
 
     private IInputRoot InputRoot => _view.InputRoot;
-    private static uint _nextTouchPointId = 1;
-    private List<uint> _knownTouches = new();
+    private static uint32 _nextTouchPointId = 1;
+    private List<uint32> _knownTouches = new();
 
     public void Handle(TouchEventArgs e)
     {
         var count = e.Touch.GetPointCount();
         for (var i = 0u; i < count; i++)
         {
-            uint id;
+            uint32 id;
             if (_knownTouches.Count > i)
             {
                 id = _knownTouches[(int32)i];

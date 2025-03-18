@@ -33,22 +33,22 @@ namespace Avalonia.X11
     {
         private int32 _width;
         private int32 _height;
-        private uint[]? _bdata;
+        private uint32[]? _bdata;
         public UIntPtr[]  Data { get; }
         
         public X11IconData(Bitmap bitmap)
         {
             _width = Math.Min(bitmap.PixelSize.Width, 128);
             _height = Math.Min(bitmap.PixelSize.Height, 128);
-            _bdata = new uint[_width * _height];
+            _bdata = new uint32[_width * _height];
             using(var cpuContext = AvaloniaLocator.Current.GetRequiredService<IPlatformRenderInterface>().CreateBackendContext(null))
             using(var rt = cpuContext.CreateRenderTarget(new[]{this}))
             using (var ctx = rt.CreateDrawingContext(true))
                 ctx.DrawBitmap(bitmap.PlatformImpl.Item, 1, new Rect(bitmap.Size),
                     new Rect(0, 0, _width, _height));
             Data = new UIntPtr[_width * _height + 2];
-            Data[0] = new UIntPtr((uint)_width);
-            Data[1] = new UIntPtr((uint)_height);
+            Data[0] = new UIntPtr((uint32)_width);
+            Data[1] = new UIntPtr((uint32)_height);
             for (var y = 0; y < _height; y++)
             {
                 var r = y * _width;
@@ -66,7 +66,7 @@ namespace Avalonia.X11
             {
                 using (var fb = wr.Lock())
                 {
-                    var fbp = (uint*)fb.Address;
+                    var fbp = (uint32*)fb.Address;
                     for (var y = 0; y < _height; y++)
                     {
                         var r = y * _width;

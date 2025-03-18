@@ -77,13 +77,13 @@ internal class OpenGlFbo : IDisposable
         _grContext.ResetContext();
         
         using var texture = new GRBackendTexture(_size.Width, _size.Height, false,
-            new GRGlTextureInfo(GlConsts.GL_TEXTURE_2D, (uint)_texture, SKColorType.Rgba8888.ToGlSizedFormat()));
+            new GRGlTextureInfo(GlConsts.GL_TEXTURE_2D, (uint32)_texture, SKColorType.Rgba8888.ToGlSizedFormat()));
         
         var surf = SKSurface.Create(_grContext, texture, GRSurfaceOrigin.BottomLeft, SKColorType.Rgba8888);
         if (surf == null)
         {
             using var unformatted = new GRBackendTexture(_size.Width, _size.Height, false,
-                new GRGlTextureInfo(GlConsts.GL_TEXTURE_2D, (uint)_texture));
+                new GRGlTextureInfo(GlConsts.GL_TEXTURE_2D, (uint32)_texture));
 
             surf = SKSurface.Create(_grContext, unformatted, GRSurfaceOrigin.BottomLeft, SKColorType.Rgba8888);
         }
@@ -95,7 +95,7 @@ internal class OpenGlFbo : IDisposable
         return rv;
         /*
         var target = new GRBackendRenderTarget(_size.Width, _size.Height, 0, 0,
-            new GRGlFramebufferInfo((uint)_fbo, SKColorType.Rgba8888.ToGlSizedFormat()));
+            new GRGlFramebufferInfo((uint32)_fbo, SKColorType.Rgba8888.ToGlSizedFormat()));
         SKImage rv;
         using (var surface = SKSurface.Create(_grContext, target,
                    GRSurfaceOrigin.BottomLeft, SKColorType.Rgba8888,

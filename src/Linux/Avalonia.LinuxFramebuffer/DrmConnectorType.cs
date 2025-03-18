@@ -3,7 +3,7 @@
 /// <summary>
 /// specific the type of connector is HDMI-A, DVI, DisplayPort, etc.
 /// </summary>
-public enum DrmConnectorType : uint
+public enum DrmConnectorType : uint32
 {
     None,
     VGA,

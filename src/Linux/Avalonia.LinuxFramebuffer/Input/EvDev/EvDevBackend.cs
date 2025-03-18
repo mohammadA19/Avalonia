@@ -63,7 +63,7 @@ namespace Avalonia.LinuxFramebuffer.Input.EvDev
                 handler.OnEvent += OnRawEvent;
                 _handlers.Add(handler);
 
-                var ev = new epoll_event { events = EPOLLIN, data = { u32 = (uint)c } };
+                var ev = new epoll_event { events = EPOLLIN, data = { u32 = (uint32)c } };
                 epoll_ctl(_epoll, EPOLL_CTL_ADD, dev.Fd, ref ev);
             }
 

@@ -14,7 +14,7 @@ namespace Avalonia.Win32
 {
     internal class Win32StorageProvider : BclStorageProvider
     {
-        private const uint SIGDN_DESKTOPABSOLUTEPARSING = 0x80028000;
+        private const uint32 SIGDN_DESKTOPABSOLUTEPARSING = 0x80028000;
 
         private const FILEOPENDIALOGOPTIONS DefaultDialogOptions =
             FILEOPENDIALOGOPTIONS.FOS_PATHMUSTEXIST | FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM |
@@ -144,7 +144,7 @@ namespace Avalonia.Win32
                     {
                         var riid = UnmanagedMethods.ShellIds.IShellItem;
                         if (UnmanagedMethods.SHCreateItemFromParsingName(folderPath, IntPtr.Zero, ref riid, out var directoryShellItem)
-                            == (uint)UnmanagedMethods.HRESULT.S_OK)
+                            == (uint32)UnmanagedMethods.HRESULT.S_OK)
                         {
                             var proxy = MicroComRuntime.CreateProxyFor<IShellItem>(directoryShellItem, true);
                             frm.SetFolder(proxy);
@@ -154,11 +154,11 @@ namespace Avalonia.Win32
 
                     var showResult = frm.Show(_windowImpl.Handle.Handle);
 
-                    if ((uint)showResult == (uint)UnmanagedMethods.HRESULT.E_CANCELLED)
+                    if ((uint32)showResult == (uint32)UnmanagedMethods.HRESULT.E_CANCELLED)
                     {
                         return result;
                     }
-                    else if ((uint)showResult != (uint)UnmanagedMethods.HRESULT.S_OK)
+                    else if ((uint32)showResult != (uint32)UnmanagedMethods.HRESULT.S_OK)
                     {
                         throw new Win32Exception(showResult);
                     }
@@ -203,7 +203,7 @@ namespace Avalonia.Win32
             return GetDisplayName(shellItem, SIGDN_DESKTOPABSOLUTEPARSING);
         }
         
-        private static unsafe string? GetDisplayName(IShellItem shellItem, uint sigdnName)
+        private static unsafe string? GetDisplayName(IShellItem shellItem, uint32 sigdnName)
         {
             char* pszString = null;
             if (shellItem.GetDisplayName(sigdnName, &pszString) == 0)

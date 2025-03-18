@@ -5,7 +5,7 @@ namespace Avalonia.Vulkan.Interop;
 
 internal static class VulkanMemoryHelper
 {
-    internal static int32 FindSuitableMemoryTypeIndex(IVulkanPlatformGraphicsContext context, uint memoryTypeBits,
+    internal static int32 FindSuitableMemoryTypeIndex(IVulkanPlatformGraphicsContext context, uint32 memoryTypeBits,
         VkMemoryPropertyFlags flags)
     {
         context.InstanceApi.GetPhysicalDeviceMemoryProperties(context.PhysicalDeviceHandle,
@@ -30,7 +30,7 @@ internal static class VulkanMemoryHelper
         VkAccessFlags sourceAccessMask,
         VkImageLayout destinationLayout,
         VkAccessFlags destinationAccessMask,
-        uint mipLevels)
+        uint32 mipLevels)
     {
         var subresourceRange = new VkImageSubresourceRange
         {

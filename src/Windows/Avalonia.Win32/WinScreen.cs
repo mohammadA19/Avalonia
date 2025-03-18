@@ -70,10 +70,10 @@ internal sealed unsafe class WinScreen(IntPtr hMonitor) : PlatformScreen(new Pla
 
             var sourceName = new DISPLAYCONFIG_SOURCE_DEVICE_NAME();
             sourceName.header.type = DISPLAYCONFIG_DEVICE_INFO_TYPE.DISPLAYCONFIG_DEVICE_INFO_GET_SOURCE_NAME;
-            sourceName.header.size = (uint)sizeof(DISPLAYCONFIG_SOURCE_DEVICE_NAME);
+            sourceName.header.size = (uint32)sizeof(DISPLAYCONFIG_SOURCE_DEVICE_NAME);
             var targetName = new DISPLAYCONFIG_TARGET_DEVICE_NAME();
             targetName.header.type = DISPLAYCONFIG_DEVICE_INFO_TYPE.DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME;
-            targetName.header.size = (uint)sizeof(DISPLAYCONFIG_TARGET_DEVICE_NAME);
+            targetName.header.size = (uint32)sizeof(DISPLAYCONFIG_TARGET_DEVICE_NAME);
 
             for (var i = 0; i < numPathInfo; i++)
             {

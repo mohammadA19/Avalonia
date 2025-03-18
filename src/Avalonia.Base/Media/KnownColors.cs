@@ -9,7 +9,7 @@ namespace Avalonia.Media
     internal static partial class KnownColors
     {
         private static readonly IReadOnlyDictionary<string, KnownColor> _knownColorNames;
-        private static readonly IReadOnlyDictionary<uint, string> _knownColors;
+        private static readonly IReadOnlyDictionary<uint32, string> _knownColors;
 #if !BUILDTASK
         private static readonly Dictionary<KnownColor, IImmutableSolidColorBrush> _knownBrushes;
 #endif
@@ -20,7 +20,7 @@ namespace Avalonia.Media
         static KnownColors()
         {
             var knownColorNames = new Dictionary<string, KnownColor>(StringComparer.OrdinalIgnoreCase);
-            var knownColors = new Dictionary<uint, string>();
+            var knownColors = new Dictionary<uint32, string>();
 
             foreach (var field in GetKnownColors())
             {
@@ -30,9 +30,9 @@ namespace Avalonia.Media
                 knownColorNames.Add(field.Key, knownColor);
 
                 // some known colors have the same value, so use the first
-                if (!knownColors.ContainsKey((uint)knownColor))
+                if (!knownColors.ContainsKey((uint32)knownColor))
                 {
-                    knownColors.Add((uint)knownColor, field.Key);
+                    knownColors.Add((uint32)knownColor, field.Key);
                 }
             }
 
@@ -62,17 +62,17 @@ namespace Avalonia.Media
             return KnownColor.None;
         }
 
-        public static string? GetKnownColorName(uint rgb)
+        public static string? GetKnownColorName(uint32 rgb)
         {
             return _knownColors.TryGetValue(rgb, out var name) ? name : null;
         }
 
-        internal static bool TryGetKnownColorName(uint rgb, [NotNullWhen(true)] out string? name)
+        internal static bool TryGetKnownColorName(uint32 rgb, [NotNullWhen(true)] out string? name)
             => _knownColors.TryGetValue(rgb, out name);
 
         public static Color ToColor(this KnownColor color)
         {
-            return Color.FromUInt32((uint)color);
+            return Color.FromUInt32((uint32)color);
         }
 
 #if !BUILDTASK
@@ -92,7 +92,7 @@ namespace Avalonia.Media
 #endif
     }
 
-    internal enum KnownColor : uint
+    internal enum KnownColor : uint32
     {
         None,
         AliceBlue = 0xfff0f8ff,

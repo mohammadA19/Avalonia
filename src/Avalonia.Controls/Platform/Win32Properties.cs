@@ -17,8 +17,8 @@ namespace Avalonia.Controls
     /// </summary>
     public static class Win32Properties
     {
-        public delegate (uint style, uint exStyle) CustomWindowStylesCallback(uint style, uint exStyle);
-        public delegate IntPtr CustomWndProcHookCallback(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam, ref bool handled);
+        public delegate (uint32 style, uint32 exStyle) CustomWindowStylesCallback(uint32 style, uint32 exStyle);
+        public delegate IntPtr CustomWndProcHookCallback(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam, ref bool handled);
 
         /// <summary>
         /// Adds a callback to set the window's style.

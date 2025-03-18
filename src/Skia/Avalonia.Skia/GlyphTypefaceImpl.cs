@@ -246,7 +246,7 @@ namespace Avalonia.Skia
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort GetGlyph(uint codepoint)
+        public ushort GetGlyph(uint32 codepoint)
         {
             if (Font.TryGetGlyph(codepoint, out var glyph))
             {
@@ -256,7 +256,7 @@ namespace Avalonia.Skia
             return 0;
         }
 
-        public bool TryGetGlyph(uint codepoint, out ushort glyph)
+        public bool TryGetGlyph(uint32 codepoint, out ushort glyph)
         {
             glyph = GetGlyph(codepoint);
 
@@ -264,7 +264,7 @@ namespace Avalonia.Skia
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort[] GetGlyphs(ReadOnlySpan<uint> codepoints)
+        public ushort[] GetGlyphs(ReadOnlySpan<uint32> codepoints)
         {
             var glyphs = new ushort[codepoints.Length];
 
@@ -288,7 +288,7 @@ namespace Avalonia.Skia
         /// <inheritdoc cref="IGlyphTypeface"/>
         public int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
         {
-            var glyphIndices = new uint[glyphs.Length];
+            var glyphIndices = new uint32[glyphs.Length];
 
             for (var i = 0; i < glyphs.Length; i++)
             {
@@ -357,7 +357,7 @@ namespace Avalonia.Skia
             GC.SuppressFinalize(this);
         }
 
-        public bool TryGetTable(uint tag, out byte[] table)
+        public bool TryGetTable(uint32 tag, out byte[] table)
         {
             return _typeface.TryGetTableData(tag, out table);
         }

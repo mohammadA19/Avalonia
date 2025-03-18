@@ -22,11 +22,11 @@ namespace Avalonia.Win32
             Justification = "Using Win32 naming for consistency.")]
         [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "We do .NET COM interop availability checks")]
         [UnconditionalSuppressMessage("Trimming", "IL2050", Justification = "We do .NET COM interop availability checks")]
-        protected virtual unsafe IntPtr AppWndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        protected virtual unsafe IntPtr AppWndProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam)
         {
             const double wheelDelta = 120.0;
             const long uiaRootObjectId = -25;
-            uint timestamp = unchecked((uint)GetMessageTime());
+            uint32 timestamp = unchecked((uint32)GetMessageTime());
             RawInputEventArgs? e = null;
             var shouldTakeFocus = false;
             var message = (WindowsMessage)msg;
@@ -129,7 +129,7 @@ namespace Avalonia.Win32
                 case WindowsMessage.WM_DPICHANGED:
                     if (!_ignoreDpiChanges)
                     {
-                        _dpi = (uint)wParam >> 16;
+                        _dpi = (uint32)wParam >> 16;
                         var newDisplayRect = Marshal.PtrToStructure<RECT>(lParam);
                         _scaling = _dpi / StandardDpi;
                         RefreshIcon();
@@ -170,7 +170,7 @@ namespace Avalonia.Win32
                     }
 
                     var requestIcon = (Icons)wParam;
-                    var requestDpi = (uint) lParam;
+                    var requestDpi = (uint32) lParam;
 
                     if (requestDpi == 0)
                     {
@@ -444,7 +444,7 @@ namespace Avalonia.Win32
                         var pTouchInputs = stackalloc TOUCHINPUT[touchInputCount];
                         var touchInputs = new Span<TOUCHINPUT>(pTouchInputs, touchInputCount);
 
-                        if (GetTouchInputInfo(lParam, (uint)touchInputCount, pTouchInputs, Marshal.SizeOf<TOUCHINPUT>()))
+                        if (GetTouchInputInfo(lParam, (uint32)touchInputCount, pTouchInputs, Marshal.SizeOf<TOUCHINPUT>()))
                         {
                             foreach (var touchInput in touchInputs)
                             {
@@ -842,11 +842,11 @@ namespace Avalonia.Win32
                     break;
                 case WindowsMessage.WM_WINDOWPOSCHANGED:
                     var winPos = Marshal.PtrToStructure<WINDOWPOS>(lParam);
-                    if((winPos.flags & (uint)SetWindowPosFlags.SWP_SHOWWINDOW) != 0)
+                    if((winPos.flags & (uint32)SetWindowPosFlags.SWP_SHOWWINDOW) != 0)
                     {
                         OnShowHideMessage(true);
                     }
-                    else if ((winPos.flags & (uint)SetWindowPosFlags.SWP_HIDEWINDOW) != 0)
+                    else if ((winPos.flags & (uint32)SetWindowPosFlags.SWP_HIDEWINDOW) != 0)
                     {
                         OnShowHideMessage(false);
                     }
@@ -976,7 +976,7 @@ namespace Avalonia.Win32
                 var movePointCopy = movePoint;
                 movePointCopy.time = 0; // empty "time" as otherwise WinAPI will always fail
                 int32 pointsCount = GetMouseMovePointsEx(
-                    (uint)(Marshal.SizeOf(movePointCopy)),
+                    (uint32)(Marshal.SizeOf(movePointCopy)),
                     &movePointCopy, movePoints, s_mouseHistoryInfos.Length,
                     1);
 
@@ -1025,7 +1025,7 @@ namespace Avalonia.Win32
             }
         }
 
-        private RawPointerEventArgs CreatePointerArgs(IInputDevice device, ulong timestamp, RawPointerEventType eventType, RawPointerPoint point, RawInputModifiers modifiers, uint rawPointerId)
+        private RawPointerEventArgs CreatePointerArgs(IInputDevice device, ulong timestamp, RawPointerEventType eventType, RawPointerPoint point, RawInputModifiers modifiers, uint32 rawPointerId)
         {
             return device is TouchDevice
                 ? new RawTouchEventArgs(device, timestamp, Owner, eventType, point, modifiers, rawPointerId)
@@ -1037,9 +1037,9 @@ namespace Avalonia.Win32
 
         private void GetDevicePointerInfo(IntPtr wParam,
             out IPointerDevice device, out POINTER_INFO info, out RawPointerPoint point,
-            out RawInputModifiers modifiers, ref uint timestamp)
+            out RawInputModifiers modifiers, ref uint32 timestamp)
         {
-            var pointerId = (uint)(ToInt32(wParam) & 0xFFFF);
+            var pointerId = (uint32)(ToInt32(wParam) & 0xFFFF);
             GetPointerType(pointerId, out var type);
 
             modifiers = default;

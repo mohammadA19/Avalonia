@@ -103,7 +103,7 @@ namespace Avalonia.Win32
                         UnmanagedMethods.LayeredWindowFlags.LWA_ALPHA);
             }
 
-            private static IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+            private static IntPtr WndProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam)
             {
                 return UnmanagedMethods.DefWindowProc(hWnd, msg, wParam, lParam);
             }

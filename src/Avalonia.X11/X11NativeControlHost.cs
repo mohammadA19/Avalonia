@@ -79,7 +79,7 @@ namespace Avalonia.X11
                     1,1, 0, 0,
                     (int32)CreateWindowArgs.InputOutput,
                     IntPtr.Zero, 
-                    new UIntPtr((uint)(SetWindowValuemask.BorderPixel | SetWindowValuemask.BitGravity |
+                    new UIntPtr((uint32)(SetWindowValuemask.BorderPixel | SetWindowValuemask.BitGravity |
                                        SetWindowValuemask.BackPixel |
                                        SetWindowValuemask.WinGravity | SetWindowValuemask.BackingStore)), ref attr);
                 if(sync)

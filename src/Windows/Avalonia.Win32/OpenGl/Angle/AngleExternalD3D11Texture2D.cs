@@ -63,8 +63,8 @@ internal class AngleExternalMemoryD3D11Texture2D : IGlExternalImageTexture
         _mutex = null;
     }
 
-    public void AcquireKeyedMutex(uint key) => Mutex.AcquireSync(key, int32.MaxValue);
-    public void ReleaseKeyedMutex(uint key) => Mutex.ReleaseSync(key);
+    public void AcquireKeyedMutex(uint32 key) => Mutex.AcquireSync(key, int32.MaxValue);
+    public void ReleaseKeyedMutex(uint32 key) => Mutex.ReleaseSync(key);
 
     public int32 TextureId { get; private set; }
     public int32 InternalFormat { get; }

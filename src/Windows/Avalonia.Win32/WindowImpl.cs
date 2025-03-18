@@ -87,11 +87,11 @@ namespace Avalonia.Win32
         private IInputRoot? _owner;
         protected WindowProperties _windowProperties;
         private IconImpl? _iconImpl;
-        private readonly Dictionary<(Icons type, uint dpi), Win32Icon> _iconCache = new();
+        private readonly Dictionary<(Icons type, uint32 dpi), Win32Icon> _iconCache = new();
         private bool _trackingMouse;//ToDo - there is something missed. Needs investigation @Steven Kirk
         private bool _topmost;
         private double _scaling = 1;
-        private uint _dpi = 96;
+        private uint32 _dpi = 96;
         private WindowState _showWindowState;
         private WindowState _lastWindowState;
         private OleDropTarget? _dropTarget;
@@ -103,7 +103,7 @@ namespace Avalonia.Win32
         private bool _isCloseRequested;
         private bool _shown;
         private bool _hiddenWindowIsParent;
-        private uint _langid;
+        private uint32 _langid;
         private bool _ignoreDpiChanges;
         internal bool _ignoreWmChar;
         private WindowTransparencyLevel _transparencyLevel;
@@ -219,7 +219,7 @@ namespace Avalonia.Win32
 
                     var padding = new RECT();
 
-                    if (AdjustWindowRectEx(ref padding, (uint)style, false, (uint)exStyle))
+                    if (AdjustWindowRectEx(ref padding, (uint32)style, false, (uint32)exStyle))
                     {
                         return new Thickness(-padding.left, -padding.top, padding.right, padding.bottom);
                     }
@@ -820,7 +820,7 @@ namespace Avalonia.Win32
             _iconCache.Clear();
         }
 
-        private Win32Icon? LoadIcon(Icons type, uint dpi)
+        private Win32Icon? LoadIcon(Icons type, uint32 dpi)
         {
             if (_iconImpl == null)
             {
@@ -1003,7 +1003,7 @@ namespace Avalonia.Win32
             }
         }
 
-        private IntPtr WndProcMessageHandler(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        private IntPtr WndProcMessageHandler(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam)
         {
             bool handled = false;
             IntPtr ret = IntPtr.Zero;
@@ -1095,8 +1095,8 @@ namespace Avalonia.Win32
             RECT borderThickness = new RECT();
             RECT borderCaptionThickness = new RECT();
 
-            AdjustWindowRectEx(ref borderCaptionThickness, (uint)(GetStyle()), false, 0);
-            AdjustWindowRectEx(ref borderThickness, (uint)(GetStyle() & ~WindowStyles.WS_CAPTION), false, 0);
+            AdjustWindowRectEx(ref borderCaptionThickness, (uint32)(GetStyle()), false, 0);
+            AdjustWindowRectEx(ref borderThickness, (uint32)(GetStyle() & ~WindowStyles.WS_CAPTION), false, 0);
             borderThickness.left *= -1;
             borderThickness.top *= -1;
             borderCaptionThickness.left *= -1;
@@ -1356,7 +1356,7 @@ namespace Avalonia.Win32
 
             if (!_isFullScreenActive)
             {
-                SetWindowLong(_hwnd, (int32)WindowLongParam.GWL_STYLE, (uint)style);
+                SetWindowLong(_hwnd, (int32)WindowLongParam.GWL_STYLE, (uint32)style);
             }
         }
 
@@ -1369,7 +1369,7 @@ namespace Avalonia.Win32
 
             if (!_isFullScreenActive)
             {
-                SetWindowLong(_hwnd, (int32)WindowLongParam.GWL_EXSTYLE, (uint)style);
+                SetWindowLong(_hwnd, (int32)WindowLongParam.GWL_EXSTYLE, (uint32)style);
             }
         }
 
@@ -1475,7 +1475,7 @@ namespace Avalonia.Win32
 
                 if (WindowStylesCallback is { } callback)
                 {
-                    var (s, e) = callback((uint)style, (uint)exStyle);
+                    var (s, e) = callback((uint32)style, (uint32)exStyle);
 
                     style = (WindowStyles)s;
                     exStyle = (WindowStyles)e;
@@ -1539,8 +1539,8 @@ namespace Avalonia.Win32
             var extendedStyle = extendedStyleOverride ?? GetExtendedStyle();
 
             var result = Win32Platform.WindowsVersion < PlatformConstants.Windows10_1607
-                ? AdjustWindowRectEx(ref clientRect, (uint)style, false, (uint)extendedStyle)
-                : AdjustWindowRectExForDpi(ref clientRect, style, false, extendedStyle, (uint)(RenderScaling * StandardDpi));
+                ? AdjustWindowRectEx(ref clientRect, (uint32)style, false, (uint32)extendedStyle)
+                : AdjustWindowRectExForDpi(ref clientRect, style, false, extendedStyle, (uint32)(RenderScaling * StandardDpi));
 
             if (!result)
             {

@@ -109,7 +109,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
             var data = new int32[256 * 256];
             for (int32 y = 0; y < 256; y++)
                 for (int32 x = 0; x < 256; x++)
-                    data[y * 256 + x] =(int32)((uint)(x + (y << 8)) | 0xFF000000u);
+                    data[y * 256 + x] =(int32)((uint32)(x + (y << 8)) | 0xFF000000u);
 
 
             using (var l = writeableBitmap.Lock())
@@ -194,7 +194,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
                                 for (var y = 0; y < size.Height; y++)
                                 {
                                     Unsafe.CopyBlock((l.Address + y * l.RowBytes).ToPointer(), pData + y * stride,
-                                        (uint)minStride);
+                                        (uint32)minStride);
                                 }
                             }
 

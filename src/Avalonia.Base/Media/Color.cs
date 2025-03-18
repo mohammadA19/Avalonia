@@ -90,7 +90,7 @@ namespace Avalonia.Media
         /// </summary>
         /// <param name="value">The integer value.</param>
         /// <returns>The color.</returns>
-        public static Color FromUInt32(uint value)
+        public static Color FromUInt32(uint32 value)
         {
             return new Color(
                 (byte)((value >> 24) & 0xff),
@@ -443,13 +443,13 @@ namespace Avalonia.Media
         /// </returns>
         public override string ToString()
         {
-            uint rgb = ToUInt32();
+            uint32 rgb = ToUInt32();
             return KnownColors.GetKnownColorName(rgb) ?? $"#{rgb.ToString("x8", CultureInfo.InvariantCulture)}";
         }
 
         internal void ToString(System.Text.StringBuilder builder)
         {
-            uint rgb = ToUInt32();
+            uint32 rgb = ToUInt32();
             if(KnownColors.TryGetKnownColorName(rgb, out var name))
             {
                 builder.Append(name);
@@ -467,14 +467,14 @@ namespace Avalonia.Media
         /// <returns>
         /// The integer representation of the color.
         /// </returns>
-        public uint ToUInt32()
+        public uint32 ToUInt32()
         {
-            return ((uint)A << 24) | ((uint)R << 16) | ((uint)G << 8) | (uint)B;
+            return ((uint32)A << 24) | ((uint32)R << 16) | ((uint32)G << 8) | (uint32)B;
         }
 
         /// <inheritdoc cref="Color.ToUInt32"/>
         [Obsolete("Use Color.ToUInt32() instead."), EditorBrowsable(EditorBrowsableState.Never)]
-        public uint ToUint32()
+        public uint32 ToUint32()
         {
             return ToUInt32();
         }

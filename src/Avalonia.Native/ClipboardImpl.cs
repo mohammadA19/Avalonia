@@ -68,7 +68,7 @@ namespace Avalonia.Native
             using (var formats = Native.ObtainFormats())
             {
                 var cnt = formats.Count;
-                for (uint c = 0; c < cnt; c++)
+                for (uint32 c = 0; c < cnt; c++)
                 {
                     using (var fmt = formats.Get(c))
                     {

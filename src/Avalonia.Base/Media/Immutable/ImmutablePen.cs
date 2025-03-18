@@ -19,7 +19,7 @@ namespace Avalonia.Media.Immutable
         /// <param name="lineJoin">The line join.</param>
         /// <param name="miterLimit">The miter limit.</param>
         public ImmutablePen(
-            uint color,
+            uint32 color,
             double thickness = 1.0,
             ImmutableDashStyle? dashStyle = null,
             PenLineCap lineCap = PenLineCap.Flat,

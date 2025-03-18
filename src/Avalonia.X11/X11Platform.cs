@@ -106,10 +106,10 @@ namespace Avalonia.X11
         public IntPtr DeferredDisplay { get; set; }
         public IntPtr Display { get; set; }
 
-        private static uint[] X11IconConverter(IWindowIconImpl? icon)
+        private static uint32[] X11IconConverter(IWindowIconImpl? icon)
         {
             if (!(icon is X11IconData x11icon))
-                return Array.Empty<uint>();
+                return Array.Empty<uint32>();
 
             return x11icon.Data.Select(x => x.ToUInt32()).ToArray();
         }

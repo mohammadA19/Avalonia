@@ -198,7 +198,7 @@ namespace Avalonia.Native
             _items = items.Select(x => AvnAutomationPeer.Wrap(x)).ToArray();
         }
         
-        public uint Count => (uint)_items.Length;
-        public IAvnAutomationPeer Get(uint index) => _items[index];
+        public uint32 Count => (uint32)_items.Length;
+        public IAvnAutomationPeer Get(uint32 index) => _items[index];
     }
 }

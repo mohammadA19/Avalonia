@@ -20,7 +20,7 @@ internal unsafe class WindowsInputPane : InputPaneBase, IDisposable
 
     private WindowImpl _windowImpl;
     private IFrameworkInputPane? _inputPane;
-    private readonly uint _cookie;
+    private readonly uint32 _cookie;
     private bool _disposed;
 
     private WindowsInputPane(WindowImpl windowImpl)
@@ -34,7 +34,7 @@ internal unsafe class WindowsInputPane : InputPaneBase, IDisposable
 
         using (var handler = new Handler(this))
         {
-            uint cookie = 0;
+            uint32 cookie = 0;
             _inputPane.AdviseWithHWND(windowImpl.Handle.Handle, handler, &cookie);
             _cookie = cookie;
         }

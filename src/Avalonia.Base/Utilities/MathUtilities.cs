@@ -366,14 +366,14 @@ namespace Avalonia.Utilities
         
 #if !BUILDTASK
         internal static int32 WhichPolygonSideIntersects(
-            uint cPoly,
+            uint32 cPoly,
             ReadOnlySpan<Vector> pPtPoly,
             Vector ptCurrent,
             Vector vecEdge)
         {
-            uint nPositive = 0;
-            uint nNegative = 0;
-            uint nZero = 0;
+            uint32 nPositive = 0;
+            uint32 nNegative = 0;
+            uint32 nZero = 0;
 
             var vecEdgeNormal = new Point(-vecEdge.Y, vecEdge.X);
 
@@ -405,9 +405,9 @@ namespace Avalonia.Utilities
         }
 
         internal static bool DoPolygonsIntersect(
-            uint cPolyA,
+            uint32 cPolyA,
             ReadOnlySpan<Vector> pPtPolyA,
-            uint cPolyB,
+            uint32 cPolyB,
             ReadOnlySpan<Vector> pPtPolyB)
         {
             for (var i = 0; i < cPolyA; i++)
@@ -432,9 +432,9 @@ namespace Avalonia.Utilities
         }
         
         internal static bool IsEntirelyContained(
-            uint cPolyA,
+            uint32 cPolyA,
             ReadOnlySpan<Vector> pPtPolyA,
-            uint cPolyB,
+            uint32 cPolyB,
             ReadOnlySpan<Vector> pPtPolyB)
         {
             for (var i = 0; i < cPolyB; i++)

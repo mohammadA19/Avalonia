@@ -169,5 +169,5 @@ internal abstract class BclStorageProvider : IStorageProvider
 
     private static readonly Guid s_folderDownloads = new Guid("374DE290-123F-4565-9164-39C4925E467B");
     [DllImport("shell32.dll", ExactSpelling = true)]
-    private static unsafe extern int32 SHGetKnownFolderPath(Guid* rfid, uint dwFlags, void* hToken, char** ppszPath);
+    private static unsafe extern int32 SHGetKnownFolderPath(Guid* rfid, uint32 dwFlags, void* hToken, char** ppszPath);
 }

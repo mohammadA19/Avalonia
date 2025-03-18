@@ -29,92 +29,92 @@ namespace Avalonia.Controls
                 {
                     // Red
                     {
-                        Color.FromUInt32((uint)MaterialColor.Red50),
-                        Color.FromUInt32((uint)MaterialColor.Red200),
-                        Color.FromUInt32((uint)MaterialColor.Red400),
-                        Color.FromUInt32((uint)MaterialColor.Red600),
-                        Color.FromUInt32((uint)MaterialColor.Red800),
+                        Color.FromUInt32((uint32)MaterialColor.Red50),
+                        Color.FromUInt32((uint32)MaterialColor.Red200),
+                        Color.FromUInt32((uint32)MaterialColor.Red400),
+                        Color.FromUInt32((uint32)MaterialColor.Red600),
+                        Color.FromUInt32((uint32)MaterialColor.Red800),
                     },
 
                     // Purple
                     {
-                        Color.FromUInt32((uint)MaterialColor.Purple50),
-                        Color.FromUInt32((uint)MaterialColor.Purple200),
-                        Color.FromUInt32((uint)MaterialColor.Purple400),
-                        Color.FromUInt32((uint)MaterialColor.Purple600),
-                        Color.FromUInt32((uint)MaterialColor.Purple800),
+                        Color.FromUInt32((uint32)MaterialColor.Purple50),
+                        Color.FromUInt32((uint32)MaterialColor.Purple200),
+                        Color.FromUInt32((uint32)MaterialColor.Purple400),
+                        Color.FromUInt32((uint32)MaterialColor.Purple600),
+                        Color.FromUInt32((uint32)MaterialColor.Purple800),
                     },
 
                     // Indigo
                     {
-                        Color.FromUInt32((uint)MaterialColor.Indigo50),
-                        Color.FromUInt32((uint)MaterialColor.Indigo200),
-                        Color.FromUInt32((uint)MaterialColor.Indigo400),
-                        Color.FromUInt32((uint)MaterialColor.Indigo600),
-                        Color.FromUInt32((uint)MaterialColor.Indigo800),
+                        Color.FromUInt32((uint32)MaterialColor.Indigo50),
+                        Color.FromUInt32((uint32)MaterialColor.Indigo200),
+                        Color.FromUInt32((uint32)MaterialColor.Indigo400),
+                        Color.FromUInt32((uint32)MaterialColor.Indigo600),
+                        Color.FromUInt32((uint32)MaterialColor.Indigo800),
                     },
 
                     // Light Blue
                     {
-                        Color.FromUInt32((uint)MaterialColor.LightBlue50),
-                        Color.FromUInt32((uint)MaterialColor.LightBlue200),
-                        Color.FromUInt32((uint)MaterialColor.LightBlue400),
-                        Color.FromUInt32((uint)MaterialColor.LightBlue600),
-                        Color.FromUInt32((uint)MaterialColor.LightBlue800),
+                        Color.FromUInt32((uint32)MaterialColor.LightBlue50),
+                        Color.FromUInt32((uint32)MaterialColor.LightBlue200),
+                        Color.FromUInt32((uint32)MaterialColor.LightBlue400),
+                        Color.FromUInt32((uint32)MaterialColor.LightBlue600),
+                        Color.FromUInt32((uint32)MaterialColor.LightBlue800),
                     },
 
                     // Teal
                     {
-                        Color.FromUInt32((uint)MaterialColor.Teal50),
-                        Color.FromUInt32((uint)MaterialColor.Teal200),
-                        Color.FromUInt32((uint)MaterialColor.Teal400),
-                        Color.FromUInt32((uint)MaterialColor.Teal600),
-                        Color.FromUInt32((uint)MaterialColor.Teal800),
+                        Color.FromUInt32((uint32)MaterialColor.Teal50),
+                        Color.FromUInt32((uint32)MaterialColor.Teal200),
+                        Color.FromUInt32((uint32)MaterialColor.Teal400),
+                        Color.FromUInt32((uint32)MaterialColor.Teal600),
+                        Color.FromUInt32((uint32)MaterialColor.Teal800),
                     },
 
                     // Light Green
                     {
-                        Color.FromUInt32((uint)MaterialColor.LightGreen50),
-                        Color.FromUInt32((uint)MaterialColor.LightGreen200),
-                        Color.FromUInt32((uint)MaterialColor.LightGreen400),
-                        Color.FromUInt32((uint)MaterialColor.LightGreen600),
-                        Color.FromUInt32((uint)MaterialColor.LightGreen800),
+                        Color.FromUInt32((uint32)MaterialColor.LightGreen50),
+                        Color.FromUInt32((uint32)MaterialColor.LightGreen200),
+                        Color.FromUInt32((uint32)MaterialColor.LightGreen400),
+                        Color.FromUInt32((uint32)MaterialColor.LightGreen600),
+                        Color.FromUInt32((uint32)MaterialColor.LightGreen800),
                     },
 
                     // Yellow
                     {
-                        Color.FromUInt32((uint)MaterialColor.Yellow50),
-                        Color.FromUInt32((uint)MaterialColor.Yellow200),
-                        Color.FromUInt32((uint)MaterialColor.Yellow400),
-                        Color.FromUInt32((uint)MaterialColor.Yellow600),
-                        Color.FromUInt32((uint)MaterialColor.Yellow800),
+                        Color.FromUInt32((uint32)MaterialColor.Yellow50),
+                        Color.FromUInt32((uint32)MaterialColor.Yellow200),
+                        Color.FromUInt32((uint32)MaterialColor.Yellow400),
+                        Color.FromUInt32((uint32)MaterialColor.Yellow600),
+                        Color.FromUInt32((uint32)MaterialColor.Yellow800),
                     },
 
                     // Orange
                     {
-                        Color.FromUInt32((uint)MaterialColor.Orange50),
-                        Color.FromUInt32((uint)MaterialColor.Orange200),
-                        Color.FromUInt32((uint)MaterialColor.Orange400),
-                        Color.FromUInt32((uint)MaterialColor.Orange600),
-                        Color.FromUInt32((uint)MaterialColor.Orange800),
+                        Color.FromUInt32((uint32)MaterialColor.Orange50),
+                        Color.FromUInt32((uint32)MaterialColor.Orange200),
+                        Color.FromUInt32((uint32)MaterialColor.Orange400),
+                        Color.FromUInt32((uint32)MaterialColor.Orange600),
+                        Color.FromUInt32((uint32)MaterialColor.Orange800),
                     },
 
                     // Brown
                     {
-                        Color.FromUInt32((uint)MaterialColor.Brown50),
-                        Color.FromUInt32((uint)MaterialColor.Brown200),
-                        Color.FromUInt32((uint)MaterialColor.Brown400),
-                        Color.FromUInt32((uint)MaterialColor.Brown600),
-                        Color.FromUInt32((uint)MaterialColor.Brown800),
+                        Color.FromUInt32((uint32)MaterialColor.Brown50),
+                        Color.FromUInt32((uint32)MaterialColor.Brown200),
+                        Color.FromUInt32((uint32)MaterialColor.Brown400),
+                        Color.FromUInt32((uint32)MaterialColor.Brown600),
+                        Color.FromUInt32((uint32)MaterialColor.Brown800),
                     },
 
                     // Blue Gray
                     {
-                        Color.FromUInt32((uint)MaterialColor.BlueGray50),
-                        Color.FromUInt32((uint)MaterialColor.BlueGray200),
-                        Color.FromUInt32((uint)MaterialColor.BlueGray400),
-                        Color.FromUInt32((uint)MaterialColor.BlueGray600),
-                        Color.FromUInt32((uint)MaterialColor.BlueGray800),
+                        Color.FromUInt32((uint32)MaterialColor.BlueGray50),
+                        Color.FromUInt32((uint32)MaterialColor.BlueGray200),
+                        Color.FromUInt32((uint32)MaterialColor.BlueGray400),
+                        Color.FromUInt32((uint32)MaterialColor.BlueGray600),
+                        Color.FromUInt32((uint32)MaterialColor.BlueGray800),
                     },
                 };
             }

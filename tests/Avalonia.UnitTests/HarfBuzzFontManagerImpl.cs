@@ -42,7 +42,7 @@ namespace Avalonia.UnitTests
             {
                 var glyphTypeface = customTypeface.GlyphTypeface;
 
-                if (!glyphTypeface.TryGetGlyph((uint)codepoint, out _))
+                if (!glyphTypeface.TryGetGlyph((uint32)codepoint, out _))
                 {
                     continue;
                 }

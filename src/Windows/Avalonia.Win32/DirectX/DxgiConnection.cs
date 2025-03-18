@@ -12,7 +12,7 @@ namespace Avalonia.Win32.DirectX
 {
     internal unsafe class DxgiConnection : IRenderTimer, IWindowsSurfaceFactory
     {
-        public const uint ENUM_CURRENT_SETTINGS = unchecked((uint)(-1));
+        public const uint32 ENUM_CURRENT_SETTINGS = unchecked((uint32)(-1));
 
         public bool RunsInBackground => true;
 

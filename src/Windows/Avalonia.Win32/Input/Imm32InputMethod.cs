@@ -337,7 +337,7 @@ namespace Avalonia.Win32.Input
             IsComposing = true;
         }
 
-        public void HandleCompositionEnd(uint timestamp)
+        public void HandleCompositionEnd(uint32 timestamp)
         {
             //Cleanup composition state.
             IsComposing = false;
@@ -362,7 +362,7 @@ namespace Avalonia.Win32.Input
             }
         }
 
-        public void HandleComposition(IntPtr wParam, IntPtr lParam, uint timestamp)
+        public void HandleComposition(IntPtr wParam, IntPtr lParam, uint32 timestamp)
         {
             if (_ignoreComposition)
             {

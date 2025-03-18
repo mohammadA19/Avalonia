@@ -261,7 +261,7 @@ internal unsafe class VulkanExternalObjectsFeature : IVulkanContextExternalObjec
             this.CurrentLayout = VkImageLayout.VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
         }
 
-        protected override VkDeviceMemory CreateMemory(VkImage image, ulong size, uint memoryTypeBits)
+        protected override VkDeviceMemory CreateMemory(VkImage image, ulong size, uint32 memoryTypeBits)
         {
             var handle = _importHandle;
 
@@ -296,7 +296,7 @@ internal unsafe class VulkanExternalObjectsFeature : IVulkanContextExternalObjec
                 pNext =  new IntPtr(isPosixHandle ? &posixInfo : &win32Info),
                 sType = VkStructureType.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
                 allocationSize = size,
-                memoryTypeIndex = (uint)VulkanMemoryHelper.FindSuitableMemoryTypeIndex(_context,
+                memoryTypeIndex = (uint32)VulkanMemoryHelper.FindSuitableMemoryTypeIndex(_context,
                     memoryTypeBits,
                     VkMemoryPropertyFlags.VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT),
             };

@@ -8,21 +8,21 @@ namespace Avalonia.Media.Fonts
         public static readonly OpenTypeTag Max = new OpenTypeTag(byte.MaxValue, byte.MaxValue, byte.MaxValue, byte.MaxValue);
         public static readonly OpenTypeTag MaxSigned = new OpenTypeTag((byte)sbyte.MaxValue, byte.MaxValue, byte.MaxValue, byte.MaxValue);
 
-        private readonly uint _value;
+        private readonly uint32 _value;
 
-        public OpenTypeTag(uint value)
+        public OpenTypeTag(uint32 value)
         {
             _value = value;
         }
 
         public OpenTypeTag(char c1, char c2, char c3, char c4)
         {
-            _value = (uint)(((byte)c1 << 24) | ((byte)c2 << 16) | ((byte)c3 << 8) | (byte)c4);
+            _value = (uint32)(((byte)c1 << 24) | ((byte)c2 << 16) | ((byte)c3 << 8) | (byte)c4);
         }
 
         private OpenTypeTag(byte c1, byte c2, byte c3, byte c4)
         {
-            _value = (uint)((c1 << 24) | (c2 << 16) | (c3 << 8) | c4);
+            _value = (uint32)((c1 << 24) | (c2 << 16) | (c3 << 8) | c4);
         }
 
         public static OpenTypeTag Parse(string tag)
@@ -64,8 +64,8 @@ namespace Avalonia.Media.Fonts
                 (char)(byte)_value);
         }
 
-        public static implicit operator uint(OpenTypeTag tag) => tag._value;
+        public static implicit operator uint32(OpenTypeTag tag) => tag._value;
 
-        public static implicit operator OpenTypeTag(uint tag) => new OpenTypeTag(tag);
+        public static implicit operator OpenTypeTag(uint32 tag) => new OpenTypeTag(tag);
     }
 }

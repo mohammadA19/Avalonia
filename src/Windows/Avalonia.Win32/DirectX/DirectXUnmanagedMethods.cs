@@ -21,10 +21,10 @@ namespace Avalonia.Win32.DirectX
         public static extern void D3D11CreateDevice(
             IntPtr adapter, D3D_DRIVER_TYPE DriverType,
             IntPtr Software,
-            uint Flags,
+            uint32 Flags,
             D3D_FEATURE_LEVEL[] pFeatureLevels,
-            uint FeatureLevels,
-            uint SDKVersion,
+            uint32 FeatureLevels,
+            uint32 SDKVersion,
             out IntPtr ppDevice,
             out D3D_FEATURE_LEVEL pFeatureLevel,
             IntPtr* ppImmediateContext);

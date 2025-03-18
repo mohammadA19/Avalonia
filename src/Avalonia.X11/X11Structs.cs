@@ -540,7 +540,7 @@ namespace Avalonia.X11 {
         internal IntPtr display; /* Display the event was read from */
         internal int32 extension; /* major opcode of extension that caused the event */
         internal int32 evtype; /* actual event type. */
-        internal uint cookie;
+        internal uint32 cookie;
         internal void* data;
 
         public T GetEvent<T>() where T : unmanaged
@@ -821,7 +821,7 @@ namespace Avalonia.X11 {
 		StaticGravity	= 10
 	}
 
-	internal enum XKeySym : uint {
+	internal enum XKeySym : uint32 {
 		XK_BackSpace	= 0xFF08,
 		XK_Tab		= 0xFF09,
 		XK_Clear	= 0xFF0B,
@@ -1190,7 +1190,7 @@ namespace Avalonia.X11 {
 	internal struct XKeyBoardState {
 		public int32 key_click_percent;
 		public int32 bell_percent;
-		public uint bell_pitch, bell_duration;
+		public uint32 bell_pitch, bell_duration;
 		public IntPtr led_mask;
 		public int32 global_auto_repeat;
 		public AutoRepeats auto_repeats;
@@ -1793,7 +1793,7 @@ namespace Avalonia.X11 {
         internal IntPtr visual;
         internal IntPtr visualid;
         internal int32 screen;
-        internal uint depth;
+        internal uint32 depth;
         internal int32 klass;
         internal IntPtr red_mask;
         internal IntPtr green_mask;

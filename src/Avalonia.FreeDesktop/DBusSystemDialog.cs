@@ -23,7 +23,7 @@ namespace Avalonia.FreeDesktop
             using var restoreContext = AvaloniaSynchronizationContext.Ensure(DispatcherPriority.Input);
 
             var dbusFileChooser = new OrgFreedesktopPortalFileChooserProxy(conn, "org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop");
-            uint version;
+            uint32 version;
             try
             {
                 version = await dbusFileChooser.GetVersionPropertyAsync();
@@ -39,9 +39,9 @@ namespace Avalonia.FreeDesktop
         private readonly Connection _connection;
         private readonly OrgFreedesktopPortalFileChooserProxy _fileChooser;
         private readonly IPlatformHandle _handle;
-        private readonly uint _version;
+        private readonly uint32 _version;
 
-        private DBusSystemDialog(Connection connection, IPlatformHandle handle, OrgFreedesktopPortalFileChooserProxy fileChooser, uint version)
+        private DBusSystemDialog(Connection connection, IPlatformHandle handle, OrgFreedesktopPortalFileChooserProxy fileChooser, uint32 version)
         {
             _connection = connection;
             _fileChooser = fileChooser;
@@ -182,8 +182,8 @@ namespace Avalonia.FreeDesktop
 
         private static bool TryParseFilters(IReadOnlyList<FilePickerFileType>? fileTypes, out VariantValue result)
         {
-            const uint GlobStyle = 0u;
-            const uint MimeStyle = 1u;
+            const uint32 GlobStyle = 0u;
+            const uint32 MimeStyle = 1u;
 
             // Example: [('Images', [(0, '*.ico'), (1, 'image/png')]), ('Text', [(0, '*.txt')])]
             if (fileTypes is null)
@@ -192,11 +192,11 @@ namespace Avalonia.FreeDesktop
                 return false;
             }
 
-            var filters = new Array<Struct<string, Array<Struct<uint, string>>>>();
+            var filters = new Array<Struct<string, Array<Struct<uint32, string>>>>();
 
             foreach (var fileType in fileTypes)
             {
-                var extensions = new List<Struct<uint, string>>();
+                var extensions = new List<Struct<uint32, string>>();
                 if (fileType.Patterns?.Count > 0)
                     extensions.AddRange(fileType.Patterns.Select(static pattern => Struct.Create(GlobStyle, pattern)));
                 else if (fileType.MimeTypes?.Count > 0)
@@ -204,7 +204,7 @@ namespace Avalonia.FreeDesktop
                 else
                     continue;
 
-                filters.Add(Struct.Create(fileType.Name, new Array<Struct<uint, string>>(extensions)));
+                filters.Add(Struct.Create(fileType.Name, new Array<Struct<uint32, string>>(extensions)));
             }
 
             result = filters.AsVariantValue();

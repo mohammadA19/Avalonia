@@ -130,7 +130,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
                 _outputHelper.WriteLine($"Expected Breaks: {string.Join(" ", breakPoints)}");
                 _outputHelper.WriteLine($"  Actual Breaks: {string.Join(" ", foundBreaks)}");
                 _outputHelper.WriteLine($"           Text: {text}");
-                _outputHelper.WriteLine($"     Char Props: {string.Join(" ", codePoints.Select(x => new Codepoint((uint)x).LineBreakClass))}");
+                _outputHelper.WriteLine($"     Char Props: {string.Join(" ", codePoints.Select(x => new Codepoint((uint32)x).LineBreakClass))}");
                 _outputHelper.WriteLine($"     Rules: {rules}");
                 _outputHelper.WriteLine("");
             }

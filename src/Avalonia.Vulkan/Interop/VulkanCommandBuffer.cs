@@ -91,9 +91,9 @@ internal class VulkanCommandBuffer : IDisposable
             var submitInfo = new VkSubmitInfo
             {
                 sType = VkStructureType.VK_STRUCTURE_TYPE_SUBMIT_INFO,
-                waitSemaphoreCount = (uint)waitSemaphores.Length,
+                waitSemaphoreCount = (uint32)waitSemaphores.Length,
                 pWaitSemaphores = pWaitSempaphores,
-                signalSemaphoreCount = (uint)signalSemaphores.Length,
+                signalSemaphoreCount = (uint32)signalSemaphores.Length,
                 pSignalSemaphores = pSignalSemaphores,
                 commandBufferCount = 1,
                 pCommandBuffers = &commandBuffer,

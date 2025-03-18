@@ -4,7 +4,7 @@ using Avalonia.Threading;
 
 namespace Avalonia.Browser.Interop;
 
-internal record GLInfo(int32 ContextId, uint FboId, int32 Stencils, int32 Samples, int32 Depth);
+internal record GLInfo(int32 ContextId, uint32 FboId, int32 Stencils, int32 Samples, int32 Depth);
 
 internal static partial class CanvasHelper
 {

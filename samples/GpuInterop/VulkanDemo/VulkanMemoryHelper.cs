@@ -4,7 +4,7 @@ namespace GpuInterop.VulkanDemo;
 
 internal static class VulkanMemoryHelper
 {
-    internal static int32 FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint memoryTypeBits,
+    internal static int32 FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint32 memoryTypeBits,
         MemoryPropertyFlags flags)
     {
         api.GetPhysicalDeviceMemoryProperties(physicalDevice, out var properties);
@@ -27,7 +27,7 @@ internal static class VulkanMemoryHelper
         AccessFlags sourceAccessMask,
         ImageLayout destinationLayout,
         AccessFlags destinationAccessMask,
-        uint mipLevels)
+        uint32 mipLevels)
     {
         var subresourceRange = new ImageSubresourceRange(ImageAspectFlags.ColorBit, 0, mipLevels, 0, 1);
 

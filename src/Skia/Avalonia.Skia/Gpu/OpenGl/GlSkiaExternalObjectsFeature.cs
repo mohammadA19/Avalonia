@@ -112,13 +112,13 @@ internal class GlSkiaImportedImage : IPlatformRenderInterfaceImportedImage
     {
         var origin = topLeft ? GRSurfaceOrigin.TopLeft : GRSurfaceOrigin.BottomLeft; 
         using var texture = new GRBackendTexture(width, height, false,
-            new GRGlTextureInfo(GlConsts.GL_TEXTURE_2D, (uint)textureId, (uint)format));
+            new GRGlTextureInfo(GlConsts.GL_TEXTURE_2D, (uint32)textureId, (uint32)format));
         var surf = SKSurface.Create(_gpu.GrContext, texture, origin, SKColorType.Rgba8888);
         if (surf != null)
             return surf;
         
         using var unformatted = new GRBackendTexture(width, height, false,
-            new GRGlTextureInfo(GlConsts.GL_TEXTURE_2D, (uint)textureId));
+            new GRGlTextureInfo(GlConsts.GL_TEXTURE_2D, (uint32)textureId));
         
         return SKSurface.Create(_gpu.GrContext, unformatted, origin, SKColorType.Rgba8888);
     }
@@ -132,7 +132,7 @@ internal class GlSkiaImportedImage : IPlatformRenderInterfaceImportedImage
         var topLeft = _image?.Properties.TopLeftOrigin ?? false;
         
         using var texture = new GRBackendTexture(width, height, false,
-            new GRGlTextureInfo(GlConsts.GL_TEXTURE_2D, (uint)textureId, (uint)internalFormat));
+            new GRGlTextureInfo(GlConsts.GL_TEXTURE_2D, (uint32)textureId, (uint32)internalFormat));
         
         IBitmapImpl rv;
         using (var surf = TryCreateSurface(textureId, internalFormat, width, height, topLeft))
@@ -147,7 +147,7 @@ internal class GlSkiaImportedImage : IPlatformRenderInterfaceImportedImage
         return rv;
     }
     
-    public IBitmapImpl SnapshotWithKeyedMutex(uint acquireIndex, uint releaseIndex)
+    public IBitmapImpl SnapshotWithKeyedMutex(uint32 acquireIndex, uint32 releaseIndex)
     {
         if (_image is null)
         {

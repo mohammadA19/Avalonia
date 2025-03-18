@@ -9,7 +9,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting;
 
 internal static class EastAsianWidthClassTrieGenerator
 {
-    public static UnicodeTrie Execute(out List<(uint start, uint end, EastAsianWidthClass)> values)
+    public static UnicodeTrie Execute(out List<(uint32 start, uint32 end, EastAsianWidthClass)> values)
     {
         if (!Directory.Exists("Generated"))
         {
@@ -23,13 +23,13 @@ internal static class EastAsianWidthClassTrieGenerator
         return trie;
     }
 
-    private static UnicodeTrie GenerateTrie(out List<(uint start, uint end, EastAsianWidthClass)> values)
+    private static UnicodeTrie GenerateTrie(out List<(uint32 start, uint32 end, EastAsianWidthClass)> values)
     {
-        var trieBuilder = new UnicodeTrieBuilder((uint)EastAsianWidthClass.Neutral);
+        var trieBuilder = new UnicodeTrieBuilder((uint32)EastAsianWidthClass.Neutral);
 
         var data = ReadData(Path.Combine(UnicodeDataGenerator.Ucd, "EastAsianWidth.txt"));
 
-        values = new List<(uint start, uint end, EastAsianWidthClass)>(data.Count);
+        values = new List<(uint32 start, uint32 end, EastAsianWidthClass)>(data.Count);
 
         foreach (var (start, end, tag) in data)
         {
@@ -61,14 +61,14 @@ internal static class EastAsianWidthClassTrieGenerator
 
             if (start == end)
             {
-                trieBuilder.Set(start, (uint)value);
+                trieBuilder.Set(start, (uint32)value);
             }
             else
             {
-                trieBuilder.SetRange(start, end, (uint)value);
+                trieBuilder.SetRange(start, end, (uint32)value);
             }
 
-            values.Add(((uint)start, (uint)end, value));
+            values.Add(((uint32)start, (uint32)end, value));
         }
 
         return trieBuilder.Freeze();

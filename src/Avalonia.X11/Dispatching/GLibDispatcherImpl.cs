@@ -79,7 +79,7 @@ internal class GlibDispatcherImpl :
     private readonly Stack<ManagedLoopFrame> _runLoopStack = new();
     
     private readonly Stopwatch _stopwatch = Stopwatch.StartNew();
-    private uint? _glibTimerSourceTag;
+    private uint32? _glibTimerSourceTag;
 
     public GlibDispatcherImpl(AvaloniaX11Platform platform)
     {
@@ -153,7 +153,7 @@ internal class GlibDispatcherImpl :
         if (dueTimeInMs == null)
             return;
 
-        var interval = (uint)Math.Max(0, (int32)Math.Min(int32.MaxValue, dueTimeInMs.Value - Now));
+        var interval = (uint32)Math.Max(0, (int32)Math.Min(int32.MaxValue, dueTimeInMs.Value - Now));
         _glibTimerSourceTag = g_timeout_add_once(interval, TimerCallback);
     }
     

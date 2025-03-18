@@ -110,8 +110,8 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
                 FcitxKeyEventType.FCITX_PRESS_KEY :
                 FcitxKeyEventType.FCITX_RELEASE_KEY;
             if (_context is not null)
-                return await _context.ProcessKeyEventAsync((uint)keyVal, (uint)keyCode, (uint)state, (int32)type,
-                    (uint)args.Timestamp).ConfigureAwait(false);
+                return await _context.ProcessKeyEventAsync((uint32)keyVal, (uint32)keyCode, (uint32)state, (int32)type,
+                    (uint32)args.Timestamp).ConfigureAwait(false);
 
             return false;
         }
@@ -148,7 +148,7 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
             if (flags != _lastReportedFlags)
             {
                 _lastReportedFlags = flags;
-                await _context.SetCapacityAsync((uint)flags);
+                await _context.SetCapacityAsync((uint32)flags);
             }
         }
 
@@ -168,7 +168,7 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
                 return PushFlagsIfNeeded();
             });
 
-        private void OnForward(Exception? e, (uint keyval, uint state, int32 type) ev)
+        private void OnForward(Exception? e, (uint32 keyval, uint32 state, int32 type) ev)
         {
             var state = (FcitxKeyState)ev.state;
             KeyModifiers mods = default;

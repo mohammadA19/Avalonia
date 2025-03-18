@@ -22,7 +22,7 @@ public unsafe class VulkanContext : IDisposable
     public required PhysicalDevice PhysicalDevice { get; init; }
     public required Device Device { get; init; }
     public required Queue Queue { get; init; }
-    public required uint QueueFamilyIndex { get; init; }
+    public required uint32 QueueFamilyIndex { get; init; }
     public required VulkanCommandBufferPool Pool { get; init; }
     public required GRContext GrContext { get; init; }
     public required DescriptorPool DescriptorPool { get; init; }
@@ -124,13 +124,13 @@ public unsafe class VulkanContext : IDisposable
                 requireDeviceExtensions.Add(KhrExternalSemaphoreFd.ExtensionName);
             }
 
-            uint count = 0;
+            uint32 count = 0;
             api.EnumeratePhysicalDevices(vkInstance, ref count, null).ThrowOnError();
             var physicalDevices = stackalloc PhysicalDevice[(int32)count];
             api.EnumeratePhysicalDevices(vkInstance, ref count, physicalDevices)
                 .ThrowOnError();
 
-            for (uint c = 0; c < count; c++)
+            for (uint32 c = 0; c < count; c++)
             {
                 if (requireDeviceExtensions.Any(ext => !api.IsDeviceExtensionPresent(physicalDevices[c], ext)))
                     continue;
@@ -164,11 +164,11 @@ public unsafe class VulkanContext : IDisposable
                 var name = Marshal.PtrToStringAnsi(new IntPtr(physicalDeviceProperties2.Properties.DeviceName))!;
 
 
-                uint queueFamilyCount = 0;
+                uint32 queueFamilyCount = 0;
                 api.GetPhysicalDeviceQueueFamilyProperties(physicalDevice, ref queueFamilyCount, null);
                 var familyProperties = stackalloc QueueFamilyProperties[(int32)queueFamilyCount];
                 api.GetPhysicalDeviceQueueFamilyProperties(physicalDevice, ref queueFamilyCount, familyProperties);
-                for (uint queueFamilyIndex = 0; queueFamilyIndex < queueFamilyCount; queueFamilyIndex++)
+                for (uint32 queueFamilyIndex = 0; queueFamilyIndex < queueFamilyCount; queueFamilyIndex++)
                 {
                     var family = familyProperties[queueFamilyIndex];
                     if (!family.QueueFlags.HasFlag(QueueFlags.GraphicsBit))
@@ -291,7 +291,7 @@ public unsafe class VulkanContext : IDisposable
 
     private static unsafe bool IsLayerAvailable(Vk api, string layerName)
     {
-        uint layerPropertiesCount;
+        uint32 layerPropertiesCount;
 
         api.EnumerateInstanceLayerProperties(&layerPropertiesCount, null).ThrowOnError();
 
@@ -312,7 +312,7 @@ public unsafe class VulkanContext : IDisposable
         return false;
     }
 
-    private static unsafe uint LogCallback(DebugUtilsMessageSeverityFlagsEXT messageSeverity, DebugUtilsMessageTypeFlagsEXT messageTypes, DebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData)
+    private static unsafe uint32 LogCallback(DebugUtilsMessageSeverityFlagsEXT messageSeverity, DebugUtilsMessageTypeFlagsEXT messageTypes, DebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData)
     {
         if (messageSeverity != DebugUtilsMessageSeverityFlagsEXT.VerboseBitExt)
         {

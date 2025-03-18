@@ -23,7 +23,7 @@ namespace Avalonia.X11
             [FieldOffset(0)]
             public int32 fd;
             [FieldOffset(0)]
-            public uint u32;
+            public uint32 u32;
             [FieldOffset(0)]
             public ulong u64;
         }
@@ -35,7 +35,7 @@ namespace Avalonia.X11
         [StructLayout(LayoutKind.Sequential)]
         private struct epoll_event
         {
-            public uint events;
+            public uint32 events;
             public epoll_data data;
         }
         

@@ -113,12 +113,12 @@ namespace Avalonia.Headless
         {
         }
 
-        public ushort GetGlyph(uint codepoint)
+        public ushort GetGlyph(uint32 codepoint)
         {
             return (ushort)codepoint;
         }
 
-        public bool TryGetGlyph(uint codepoint, out ushort glyph)
+        public bool TryGetGlyph(uint32 codepoint, out ushort glyph)
         {
             glyph = 8;
 
@@ -142,12 +142,12 @@ namespace Avalonia.Headless
             return advances;
         }
 
-        public ushort[] GetGlyphs(ReadOnlySpan<uint> codepoints)
+        public ushort[] GetGlyphs(ReadOnlySpan<uint32> codepoints)
         {
             return codepoints.ToArray().Select(x => (ushort)x).ToArray();
         }
 
-        public bool TryGetTable(uint tag, out byte[] table)
+        public bool TryGetTable(uint32 tag, out byte[] table)
         {
             table = null!;
             return false;

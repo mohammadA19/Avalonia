@@ -242,7 +242,7 @@ namespace Avalonia.Utilities
                 do
                 {
                     // hi and lo are never negative: there's no overflow using unsigned math
-                    var i = (int32)(((uint)hi + (uint)lo) >> 1);
+                    var i = (int32)(((uint32)hi + (uint32)lo) >> 1);
 
 #if NET6_0_OR_GREATER
                     // nuint cast to force zero extend instead of sign extend
@@ -286,7 +286,7 @@ namespace Avalonia.Utilities
                 do
                 {
                     // hi and lo are never negative: there's no overflow using unsigned math
-                    var i = (int32)(((uint)hi + (uint)lo) >> 1);
+                    var i = (int32)(((uint32)hi + (uint32)lo) >> 1);
 
 #if NET6_0_OR_GREATER
                     // nuint cast to force zero extend instead of sign extend
@@ -363,7 +363,7 @@ namespace Avalonia.Utilities
 #if NET6_0_OR_GREATER && !DEBUG
             // This type is performance critical: in release mode, skip any bound check the JIT compiler couldn't elide.
             // The index parameter should always be correct when calling this method: no unchecked user input should get here.
-            return ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_entries!), (uint)index);
+            return ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(_entries!), (uint32)index);
 #else
             return ref _entries![index];
 #endif

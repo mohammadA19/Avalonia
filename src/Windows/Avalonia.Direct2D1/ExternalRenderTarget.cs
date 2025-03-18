@@ -31,7 +31,7 @@ namespace Avalonia.Direct2D1
                 {
                     _externalRenderTargetProvider.AfterDrawing();
                 }
-                catch (SharpDXException ex) when ((uint) ex.HResult == 0x8899000C) // D2DERR_RECREATE_TARGET
+                catch (SharpDXException ex) when ((uint32) ex.HResult == 0x8899000C) // D2DERR_RECREATE_TARGET
                 {
                     _externalRenderTargetProvider.DestroyRenderTarget();
                 }

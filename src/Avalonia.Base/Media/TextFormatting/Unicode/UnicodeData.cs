@@ -35,7 +35,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="codepoint">The codepoint in question.</param>
         /// <returns>The code point's general category.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static GeneralCategory GetGeneralCategory(uint codepoint)
+        public static GeneralCategory GetGeneralCategory(uint32 codepoint)
         {
             return (GeneralCategory)(UnicodeDataTrie.Trie.Get(codepoint) & CATEGORY_MASK);
         }
@@ -46,7 +46,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="codepoint">The codepoint in question.</param>
         /// <returns>The code point's script.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Script GetScript(uint codepoint)
+        public static Script GetScript(uint32 codepoint)
         {
             return (Script)((UnicodeDataTrie.Trie.Get(codepoint) >> SCRIPT_SHIFT) & SCRIPT_MASK);
         }
@@ -57,7 +57,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="codepoint">The codepoint in question.</param>
         /// <returns>The code point's biDi class.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static BidiClass GetBiDiClass(uint codepoint)
+        public static BidiClass GetBiDiClass(uint32 codepoint)
         {
             return (BidiClass)((BidiTrie.Trie.Get(codepoint) >> BIDICLASS_SHIFT) & BIDICLASS_MASK);
         }
@@ -68,7 +68,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="codepoint">The codepoint in question.</param>
         /// <returns>The code point's paired bracket type.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static BidiPairedBracketType GetBiDiPairedBracketType(uint codepoint)
+        public static BidiPairedBracketType GetBiDiPairedBracketType(uint32 codepoint)
         {
             return (BidiPairedBracketType)((BidiTrie.Trie.Get(codepoint) >> BIDIPAIREDBRACKEDTYPE_SHIFT) & BIDIPAIREDBRACKEDTYPE_MASK);
         }
@@ -79,7 +79,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="codepoint">The codepoint in question.</param>
         /// <returns>The code point's paired bracket.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Codepoint GetBiDiPairedBracket(uint codepoint)
+        public static Codepoint GetBiDiPairedBracket(uint32 codepoint)
         {
             return new Codepoint(BidiTrie.Trie.Get(codepoint) & BIDIPAIREDBRACKED_MASK);
         }
@@ -90,7 +90,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="codepoint">The codepoint in question.</param>
         /// <returns>The code point's line break class.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static LineBreakClass GetLineBreakClass(uint codepoint)
+        public static LineBreakClass GetLineBreakClass(uint32 codepoint)
         {
             return (LineBreakClass)((UnicodeDataTrie.Trie.Get(codepoint) >> LINEBREAK_SHIFT) & LINEBREAK_MASK);
         }
@@ -101,7 +101,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="codepoint">The codepoint in question.</param>
         /// <returns>The code point's grapheme break type.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static GraphemeBreakClass GetGraphemeClusterBreak(uint codepoint)
+        public static GraphemeBreakClass GetGraphemeClusterBreak(uint32 codepoint)
         {
             return (GraphemeBreakClass)GraphemeBreakTrie.Trie.Get(codepoint);
         }
@@ -112,7 +112,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="codepoint">The codepoint in question.</param>
         /// <returns>The code point's EastAsianWidth class.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static EastAsianWidthClass GetEastAsianWidthClass(uint codepoint)
+        public static EastAsianWidthClass GetEastAsianWidthClass(uint32 codepoint)
         {
             return (EastAsianWidthClass)EastAsianWidthTrie.Trie.Get(codepoint);
         }

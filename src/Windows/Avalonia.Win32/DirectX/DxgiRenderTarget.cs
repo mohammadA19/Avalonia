@@ -11,7 +11,7 @@ namespace Avalonia.Win32.DirectX
     {
         // DXGI_FORMAT_B8G8R8A8_UNORM is target texture format as per ANGLE documentation 
 
-        public const uint DXGI_USAGE_RENDER_TARGET_OUTPUT = 0x00000020U;
+        public const uint32 DXGI_USAGE_RENDER_TARGET_OUTPUT = 0x00000020U;
         private readonly Guid ID3D11Texture2DGuid = Guid.Parse("6F15AAF2-D208-4E89-9AB4-489535D34F9C");
 
         private readonly EglGlPlatformSurface.IEglWindowGlPlatformSurfaceInfo _window;
@@ -19,7 +19,7 @@ namespace Avalonia.Win32.DirectX
         private readonly IDXGIDevice? _dxgiDevice;
         private readonly IDXGIFactory2? _dxgiFactory;
         private readonly IDXGISwapChain1? _swapChain;
-        private readonly uint _flagsUsed;
+        private readonly uint32 _flagsUsed;
 
         private IUnknown? _renderTexture;
         private RECT _clientRect;
@@ -50,14 +50,14 @@ namespace Avalonia.Win32.DirectX
             dxgiSwapChainDesc.SampleDesc.Quality = 0U;
             dxgiSwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
             dxgiSwapChainDesc.AlphaMode = DXGI_ALPHA_MODE.DXGI_ALPHA_MODE_IGNORE;
-            dxgiSwapChainDesc.Width = (uint)_window.Size.Width;
-            dxgiSwapChainDesc.Height = (uint)_window.Size.Height;
+            dxgiSwapChainDesc.Width = (uint32)_window.Size.Width;
+            dxgiSwapChainDesc.Height = (uint32)_window.Size.Height;
             dxgiSwapChainDesc.BufferCount = 2U;
             dxgiSwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT.DXGI_SWAP_EFFECT_FLIP_DISCARD;
 
             // okay I know this looks bad, but we're hitting our render-calls by awaiting via dxgi 
             // this is done in the DxgiConnection itself 
-            _flagsUsed = dxgiSwapChainDesc.Flags = (uint)(DXGI_SWAP_CHAIN_FLAG.DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING);
+            _flagsUsed = dxgiSwapChainDesc.Flags = (uint32)(DXGI_SWAP_CHAIN_FLAG.DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING);
 
             _swapChain = _dxgiFactory.CreateSwapChainForHwnd
             (

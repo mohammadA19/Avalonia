@@ -138,7 +138,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
     {
         public VkStructureType sType;
         public IntPtr pNext;
-        public uint flags;
+        public uint32 flags;
         public IntPtr pMessageIdName;
         public int32_t messageIdNumber;
         public IntPtr pMessage;
@@ -160,7 +160,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
     {
         public VkStructureType sType;
         public IntPtr pNext;
-        public uint flags;
+        public uint32 flags;
         public VkDebugUtilsMessageSeverityFlagsEXT messageSeverity;
         public VkDebugUtilsMessageTypeFlagsEXT messageType;
         public IntPtr pfnUserCallback;
@@ -379,7 +379,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
     {
         public VkStructureType sType;
         public IntPtr pNext;
-        public uint flags;
+        public uint32 flags;
         public uint32_t queueCreateInfoCount;
         public VkDeviceQueueCreateInfo* pQueueCreateInfos;
         public uint32_t enabledLayerCount;
@@ -427,7 +427,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
     {
         public VkStructureType sType;
         IntPtr pNext;
-        uint flags;
+        uint32 flags;
     }
 
     unsafe struct VkSubmitInfo

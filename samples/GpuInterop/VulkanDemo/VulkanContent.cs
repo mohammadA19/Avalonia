@@ -90,7 +90,7 @@ unsafe class VulkanContent : IDisposable
             {
                 SType = StructureType.ShaderModuleCreateInfo,
                 CodeSize = (nuint)vertShaderData.Length,
-                PCode = (uint*)ptr,
+                PCode = (uint32*)ptr,
             };
 
             api.CreateShaderModule(device, shaderCreateInfo, null, out _vertShader);
@@ -102,7 +102,7 @@ unsafe class VulkanContent : IDisposable
             {
                 SType = StructureType.ShaderModuleCreateInfo,
                 CodeSize = (nuint)fragShaderData.Length,
-                PCode = (uint*)ptr,
+                PCode = (uint32*)ptr,
             };
 
             api.CreateShaderModule(device, shaderCreateInfo, null, out _fragShader);
@@ -177,7 +177,7 @@ unsafe class VulkanContent : IDisposable
 
         var scissor = new Rect2D
         {
-            Extent = new Extent2D((uint?)image.Size.Width, (uint?)image.Size.Height)
+            Extent = new Extent2D((uint32?)image.Size.Width, (uint32?)image.Size.Height)
         };
 
         api.CmdSetScissor(commandBufferHandle, 0, 1, &scissor);
@@ -195,8 +195,8 @@ unsafe class VulkanContent : IDisposable
                 SType = StructureType.RenderPassBeginInfo,
                 RenderPass = _renderPass,
                 Framebuffer = _framebuffer,
-                RenderArea = new Rect2D(new Offset2D(0, 0), new Extent2D((uint?)image.Size.Width, (uint?)image.Size.Height)),
-                ClearValueCount = (uint)clearValues.Length,
+                RenderArea = new Rect2D(new Offset2D(0, 0), new Extent2D((uint32?)image.Size.Width, (uint32?)image.Size.Height)),
+                ClearValueCount = (uint32)clearValues.Length,
                 PClearValues = clearValue
             };
 
@@ -210,11 +210,11 @@ unsafe class VulkanContent : IDisposable
             _pipelineLayout,0,1, &dset, null);
 
         api.CmdPushConstants(commandBufferHandle, _pipelineLayout, ShaderStageFlags.VertexBit | ShaderStageFlags.FragmentBit, 0,
-            (uint)Marshal.SizeOf<VertextPushConstant>(), &vertexConstant);
+            (uint32)Marshal.SizeOf<VertextPushConstant>(), &vertexConstant);
         api.CmdBindVertexBuffers(commandBufferHandle, 0, 1, _vertexBuffer, 0);
         api.CmdBindIndexBuffer(commandBufferHandle, _indexBuffer, 0, IndexType.Uint16);
 
-        api.CmdDrawIndexed(commandBufferHandle, (uint)_indices.Length, 1, 0, 0, 0);
+        api.CmdDrawIndexed(commandBufferHandle, (uint32)_indices.Length, 1, 0, 0, 0);
 
         
         api.CmdEndRenderPass(commandBufferHandle);
@@ -330,8 +330,8 @@ unsafe class VulkanContent : IDisposable
             ImageType = ImageType.Type2D,
             Format = Format.D32Sfloat,
             Extent =
-                new Extent3D((uint?)size.Width,
-                    (uint?)size.Height, 1),
+                new Extent3D((uint32?)size.Width,
+                    (uint32?)size.Height, 1),
             MipLevels = 1,
             ArrayLayers = 1,
             Samples = SampleCountFlags.Count1Bit,
@@ -354,7 +354,7 @@ unsafe class VulkanContent : IDisposable
         {
             SType = StructureType.MemoryAllocateInfo,
             AllocationSize = memoryRequirements.Size,
-            MemoryTypeIndex = (uint)FindSuitableMemoryTypeIndex(api,
+            MemoryTypeIndex = (uint32)FindSuitableMemoryTypeIndex(api,
                 _context.PhysicalDevice,
                 memoryRequirements.MemoryTypeBits, MemoryPropertyFlags.DeviceLocalBit)
         };
@@ -397,7 +397,7 @@ unsafe class VulkanContent : IDisposable
             Matrix4x4.CreatePerspectiveFieldOfView((float)(Math.PI / 4), (float)size.Width / size.Height,
                 0.01f, 1000);
         
-        _colorAttachment = new VulkanImage(_context, (uint)Format.R8G8B8A8Unorm, size, false, Array.Empty<string>());
+        _colorAttachment = new VulkanImage(_context, (uint32)Format.R8G8B8A8Unorm, size, false, Array.Empty<string>());
         CreateDepthAttachment(size);
 
         var api = _context.Api;
@@ -463,7 +463,7 @@ unsafe class VulkanContent : IDisposable
             var renderPassCreateInfo = new RenderPassCreateInfo()
             {
                 SType = StructureType.RenderPassCreateInfo,
-                AttachmentCount = (uint)attachments.Length,
+                AttachmentCount = (uint32)attachments.Length,
                 PAttachments = atPtr,
                 SubpassCount = 1,
                 PSubpasses = &subpassDescription,
@@ -483,10 +483,10 @@ unsafe class VulkanContent : IDisposable
                 {
                     SType = StructureType.FramebufferCreateInfo,
                     RenderPass = _renderPass,
-                    AttachmentCount = (uint)frameBufferAttachments.Length,
+                    AttachmentCount = (uint32)frameBufferAttachments.Length,
                     PAttachments = frAtPtr,
-                    Width = (uint)size.Width,
-                    Height = (uint)size.Height,
+                    Width = (uint32)size.Width,
+                    Height = (uint32)size.Height,
                     Layers = 1
                 };
 
@@ -521,7 +521,7 @@ unsafe class VulkanContent : IDisposable
             var vertextInputInfo = new PipelineVertexInputStateCreateInfo()
             {
                 SType = StructureType.PipelineVertexInputStateCreateInfo,
-                VertexAttributeDescriptionCount = (uint)attributeDescription.Length,
+                VertexAttributeDescriptionCount = (uint32)attributeDescription.Length,
                 VertexBindingDescriptionCount = 1,
                 PVertexAttributeDescriptions = attrPtr,
                 PVertexBindingDescriptions = &bindingDescription
@@ -546,7 +546,7 @@ unsafe class VulkanContent : IDisposable
 
             var scissor = new Rect2D()
             {
-                Offset = new Offset2D(0, 0), Extent = new Extent2D((uint)viewport.Width, (uint)viewport.Height)
+                Offset = new Offset2D(0, 0), Extent = new Extent2D((uint32)viewport.Width, (uint32)viewport.Height)
             };
 
             var pipelineViewPortCreateInfo = new PipelineViewportStateCreateInfo()
@@ -610,21 +610,21 @@ unsafe class VulkanContent : IDisposable
                 var dynamicStateCreateInfo = new PipelineDynamicStateCreateInfo()
                 {
                     SType = StructureType.PipelineDynamicStateCreateInfo,
-                    DynamicStateCount = (uint)dynamicStates.Length,
+                    DynamicStateCount = (uint32)dynamicStates.Length,
                     PDynamicStates = states
                 };
 
                 var vertexPushConstantRange = new PushConstantRange()
                 {
                     Offset = 0,
-                    Size = (uint)Marshal.SizeOf<VertextPushConstant>(),
+                    Size = (uint32)Marshal.SizeOf<VertextPushConstant>(),
                     StageFlags = ShaderStageFlags.VertexBit
                 };
 
                 var fragPushConstantRange = new PushConstantRange()
                 {
                     //Offset = vertexPushConstantRange.Size,
-                    Size = (uint)Marshal.SizeOf<VertextPushConstant>(),
+                    Size = (uint32)Marshal.SizeOf<VertextPushConstant>(),
                     StageFlags = ShaderStageFlags.FragmentBit
                 };
 
@@ -689,7 +689,7 @@ unsafe class VulkanContent : IDisposable
                     var pipelineLayoutCreateInfo = new PipelineLayoutCreateInfo()
                     {
                         SType = StructureType.PipelineLayoutCreateInfo,
-                        PushConstantRangeCount = (uint)constants.Length,
+                        PushConstantRangeCount = (uint32)constants.Length,
                         PPushConstantRanges = constant,
                         SetLayoutCount = 1,
                         PSetLayouts = &setLayout
@@ -740,7 +740,7 @@ unsafe class VulkanContent : IDisposable
             out _indexBufferMemory, _indices);
     }
 
-    private static int32 FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint memoryTypeBits,
+    private static int32 FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint32 memoryTypeBits,
         MemoryPropertyFlags flags)
     {
         api.GetPhysicalDeviceMemoryProperties(physicalDevice, out var properties);
@@ -770,7 +770,7 @@ unsafe class VulkanContent : IDisposable
                 return new VertexInputBindingDescription()
                 {
                     Binding = 0,
-                    Stride = (uint)Marshal.SizeOf<Vertex>(),
+                    Stride = (uint32)Marshal.SizeOf<Vertex>(),
                     InputRate = VertexInputRate.Vertex
                 };
             }
@@ -787,14 +787,14 @@ unsafe class VulkanContent : IDisposable
                         Binding = 0,
                         Location = 0,
                         Format = Format.R32G32B32Sfloat,
-                        Offset = (uint)Marshal.OffsetOf<Vertex>("Position")
+                        Offset = (uint32)Marshal.OffsetOf<Vertex>("Position")
                     },
                     new VertexInputAttributeDescription
                     {
                         Binding = 0,
                         Location = 1,
                         Format = Format.R32G32B32Sfloat,
-                        Offset = (uint)Marshal.OffsetOf<Vertex>("Normal")
+                        Offset = (uint32)Marshal.OffsetOf<Vertex>("Normal")
                     }
                 };
             }

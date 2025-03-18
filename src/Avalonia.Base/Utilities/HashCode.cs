@@ -12,27 +12,27 @@ namespace System;
 
 internal unsafe struct HashCode
 {
-    private static readonly uint s_seed = GenerateGlobalSeed();
+    private static readonly uint32 s_seed = GenerateGlobalSeed();
 
-    private const uint Prime1 = 2654435761U;
-    private const uint Prime2 = 2246822519U;
-    private const uint Prime3 = 3266489917U;
-    private const uint Prime4 = 668265263U;
-    private const uint Prime5 = 374761393U;
+    private const uint32 Prime1 = 2654435761U;
+    private const uint32 Prime2 = 2246822519U;
+    private const uint32 Prime3 = 3266489917U;
+    private const uint32 Prime4 = 668265263U;
+    private const uint32 Prime5 = 374761393U;
 
-    private uint _v1, _v2, _v3, _v4;
-    private uint _queue1, _queue2, _queue3;
-    private uint _length;
+    private uint32 _v1, _v2, _v3, _v4;
+    private uint32 _queue1, _queue2, _queue3;
+    private uint32 _length;
 
-    private static unsafe uint GenerateGlobalSeed()
+    private static unsafe uint32 GenerateGlobalSeed()
     {
         var rnd = new Random();
         var result = rnd.Next();
-        return unchecked((uint)result);
+        return unchecked((uint32)result);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void Initialize(out uint v1, out uint v2, out uint v3, out uint v4)
+    private static void Initialize(out uint32 v1, out uint32 v2, out uint32 v3, out uint32 v4)
     {
         v1 = s_seed + Prime1 + Prime2;
         v2 = s_seed + Prime2;
@@ -41,26 +41,26 @@ internal unsafe struct HashCode
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint Round(uint hash, uint input) =>
+    private static uint32 Round(uint32 hash, uint32 input) =>
         RotateLeft(hash + input * Prime2, 13) * Prime1;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint QueueRound(uint hash, uint queuedValue) =>
+    private static uint32 QueueRound(uint32 hash, uint32 queuedValue) =>
         RotateLeft(hash + queuedValue * Prime3, 17) * Prime4;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint MixState(uint v1, uint v2, uint v3, uint v4) =>
+    private static uint32 MixState(uint32 v1, uint32 v2, uint32 v3, uint32 v4) =>
         RotateLeft(v1, 1) + RotateLeft(v2, 7) + RotateLeft(v3, 12) + RotateLeft(v4, 18);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint RotateLeft(uint value, int32 offset) =>
+    private static uint32 RotateLeft(uint32 value, int32 offset) =>
         (value << offset) | (value >> (32 - offset));
 
-    private static uint MixEmptyState() =>
+    private static uint32 MixEmptyState() =>
         s_seed + Prime5;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint MixFinal(uint hash)
+    private static uint32 MixFinal(uint32 hash)
     {
         hash ^= hash >> 15;
         hash *= Prime2;
@@ -78,12 +78,12 @@ internal unsafe struct HashCode
 
     private void Add(int32 value)
     {
-        uint val = (uint)value;
+        uint32 val = (uint32)value;
 
         // Storing the value of _length locally shaves of quite a few bytes
         // in the resulting machine code.
-        uint previousLength = _length++;
-        uint position = previousLength % 4;
+        uint32 previousLength = _length++;
+        uint32 position = previousLength % 4;
 
         // Switch can't be inlined.
 
@@ -109,17 +109,17 @@ internal unsafe struct HashCode
     {
         // Storing the value of _length locally shaves of quite a few bytes
         // in the resulting machine code.
-        uint length = _length;
+        uint32 length = _length;
 
         // position refers to the *next* queue position in this method, so
         // position == 1 means that _queue1 is populated; _queue2 would have
         // been populated on the next call to Add.
-        uint position = length % 4;
+        uint32 position = length % 4;
 
         // If the length is less than 4, _v1 to _v4 don't contain anything
         // yet. xxHash32 treats this differently.
 
-        uint hash = length < 4 ? MixEmptyState() : MixState(_v1, _v2, _v3, _v4);
+        uint32 hash = length < 4 ? MixEmptyState() : MixState(_v1, _v2, _v3, _v4);
 
         // _length is incremented once per Add(Int32) and is therefore 4
         // times too small (xxHash length is in bytes, not ints).

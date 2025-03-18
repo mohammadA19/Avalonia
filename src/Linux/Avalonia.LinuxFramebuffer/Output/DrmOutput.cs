@@ -112,20 +112,20 @@ namespace Avalonia.LinuxFramebuffer.Output
         private EglContext _deferredContext;
         private IntPtr _currentBo;
         private IntPtr _gbmTargetSurface;
-        private uint _crtcId;
+        private uint32 _crtcId;
 
         void FbDestroyCallback(IntPtr bo, IntPtr userData)
         {
             drmModeRmFB(_card.Fd, userData.ToInt32());
         }
 
-        uint GetFbIdForBo(IntPtr bo)
+        uint32 GetFbIdForBo(IntPtr bo)
         {
             if (bo == IntPtr.Zero)
                 throw new ArgumentException("bo is 0");
             var data = gbm_bo_get_user_data(bo);
             if (data != IntPtr.Zero)
-                return (uint)data.ToInt32();
+                return (uint32)data.ToInt32();
 
             var w = gbm_bo_get_width(bo);
             var h = gbm_bo_get_height(bo);
@@ -134,9 +134,9 @@ namespace Avalonia.LinuxFramebuffer.Output
             var format = gbm_bo_get_format(bo);
 
             // prepare for the new ioctl call
-            var handles = new uint[] { handle, 0, 0, 0 };
-            var pitches = new uint[] { stride, 0, 0, 0 };
-            var offsets = new uint[4];
+            var handles = new uint32[] { handle, 0, 0, 0 };
+            var pitches = new uint32[] { stride, 0, 0, 0 };
+            var offsets = new uint32[4];
 
             var ret = drmModeAddFB2(_card.Fd, w, h, format, handles, pitches,
                                     offsets, out var fbHandle, 0);
@@ -144,7 +144,7 @@ namespace Avalonia.LinuxFramebuffer.Output
             if (ret != 0)
             {
                 // legacy fallback
-                ret = drmModeAddFB(_card.Fd, w, h, 24, 32, stride, (uint)handle,
+                ret = drmModeAddFB(_card.Fd, w, h, 24, 32, stride, (uint32)handle,
                                    out fbHandle);
 
                 if (ret != 0)
@@ -168,7 +168,7 @@ namespace Avalonia.LinuxFramebuffer.Output
         {
             FbDestroyDelegate = FbDestroyCallback;
             _card = card;
-            uint GetCrtc()
+            uint32 GetCrtc()
             {
                 if (resources.Encoders.TryGetValue(connector.EncoderId, out var encoder))
                 {
@@ -306,7 +306,7 @@ namespace Avalonia.LinuxFramebuffer.Output
                         drmModePageFlip(_parent._card.Fd, _parent._crtcId, fb, DrmModePageFlip.Event, null);
 
                         DrmEventPageFlipHandlerDelegate flipCb =
-                            (int32 fd, uint sequence, uint tv_sec, uint tv_usec, void* user_data) =>
+                            (int32 fd, uint32 sequence, uint32 tv_sec, uint32 tv_usec, void* user_data) =>
                             {
                                 waitingForFlip = false;
                             };

@@ -38,7 +38,7 @@ namespace Avalonia.X11
             XLockDisplay(_display);
             XInitImage(ref image);
             var gc = XCreateGC(_display, _xid, 0, IntPtr.Zero);
-            XPutImage(_display, _xid, gc, ref image, 0, 0, 0, 0, (uint)fb.Size.Width, (uint)fb.Size.Height);
+            XPutImage(_display, _xid, gc, ref image, 0, 0, 0, 0, (uint32)fb.Size.Width, (uint32)fb.Size.Height);
             XFreeGC(_display, gc);
             XSync(_display, true);
             XUnlockDisplay(_display);

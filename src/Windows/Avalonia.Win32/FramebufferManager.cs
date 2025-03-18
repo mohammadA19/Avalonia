@@ -124,8 +124,8 @@ namespace Avalonia.Win32
 
             var bmpInfo = framebufferData.Header;
 
-            UnmanagedMethods.SetDIBitsToDevice(hDC, destX, destY, (uint)width, (uint)height, srcX, srcY,
-                0, (uint)framebufferData.Size.Height, framebufferData.Data.Address, ref bmpInfo, 0);
+            UnmanagedMethods.SetDIBitsToDevice(hDC, destX, destY, (uint32)width, (uint32)height, srcX, srcY,
+                0, (uint32)framebufferData.Size.Height, framebufferData.Data.Address, ref bmpInfo, 0);
         }
 
         private static bool DrawToWindow(IntPtr hWnd, FramebufferData framebufferData, int32 destX = 0, int32 destY = 0, int32 srcX = 0,

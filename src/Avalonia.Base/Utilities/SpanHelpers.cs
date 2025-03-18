@@ -10,12 +10,12 @@ namespace Avalonia.Utilities
     static class SpanHelpers
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryParseUInt(this ReadOnlySpan<char> span, NumberStyles style, IFormatProvider provider, out uint value)
+        public static bool TryParseUInt(this ReadOnlySpan<char> span, NumberStyles style, IFormatProvider provider, out uint32 value)
         {
 #if NETSTANDARD2_0
-            return uint.TryParse(span.ToString(), style, provider, out value);
+            return uint32.TryParse(span.ToString(), style, provider, out value);
 #else
-            return uint.TryParse(span, style, provider, out value);
+            return uint32.TryParse(span, style, provider, out value);
 #endif
         }
 

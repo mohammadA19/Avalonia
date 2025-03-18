@@ -23,29 +23,29 @@ namespace Avalonia.Media.TextFormatting.Unicode
 {
     internal ref struct UnicodeTrie
     {
-        public UnicodeTrie(ReadOnlySpan<uint> data, int32 highStart, uint errorValue)
+        public UnicodeTrie(ReadOnlySpan<uint32> data, int32 highStart, uint32 errorValue)
         {
             Data = data;
             HighStart = highStart;
             ErrorValue = errorValue;
         }
 
-        public ReadOnlySpan<uint> Data { get; }
+        public ReadOnlySpan<uint32> Data { get; }
 
         public int32 HighStart { get; }
 
-        public uint ErrorValue { get; }
+        public uint32 ErrorValue { get; }
 
         /// <summary>
         /// Get the value for a code point as stored in the trie.
         /// </summary>
         /// <param name="codePoint">The code point.</param>
-        /// <returns>The <see cref="uint"/> value.</returns>
+        /// <returns>The <see cref="uint32"/> value.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public uint Get(uint codePoint)
+        public uint32 Get(uint32 codePoint)
         {
-            uint index;
-            ref uint dataBase = ref MemoryMarshal.GetReference(Data);
+            uint32 index;
+            ref uint32 dataBase = ref MemoryMarshal.GetReference(Data);
 
             if (codePoint is < 0x0d800 or (> 0x0dbff and <= 0x0ffff))
             {

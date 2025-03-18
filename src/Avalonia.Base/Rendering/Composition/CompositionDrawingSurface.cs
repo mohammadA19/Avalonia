@@ -19,7 +19,7 @@ public sealed class CompositionDrawingSurface : CompositionSurface, IDisposable
     /// <param name="acquireIndex">The mutex key to wait for before accessing the image</param>
     /// <param name="releaseIndex">The mutex key to release for after accessing the image </param>
     /// <returns>A task that completes when update operation is completed and user code is free to destroy or dispose the image</returns>
-    public Task UpdateWithKeyedMutexAsync(ICompositionImportedGpuImage image, uint acquireIndex, uint releaseIndex)
+    public Task UpdateWithKeyedMutexAsync(ICompositionImportedGpuImage image, uint32 acquireIndex, uint32 releaseIndex)
     {
         var img = (CompositionImportedGpuImage)image;
         return Compositor.InvokeServerJobAsync(() => Server.UpdateWithKeyedMutex(img, acquireIndex, releaseIndex));

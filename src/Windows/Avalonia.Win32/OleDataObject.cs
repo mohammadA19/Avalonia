@@ -158,7 +158,7 @@ namespace Avalonia.Win32
 
                 try
                 {
-                    uint fetched = 0;
+                    uint32 fetched = 0;
                     do
                     {
                         fixed (Interop.FORMATETC* formatsPtr = formats)

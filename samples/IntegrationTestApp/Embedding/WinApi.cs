@@ -7,17 +7,17 @@ namespace IntegrationTestApp.Embedding;
 internal class WinApi
 {
     public const int32 GWL_WNDPROC = -4;
-    public const uint TME_HOVER = 1;
-    public const uint TME_LEAVE = 2;
-    public const uint WM_CONTEXTMENU = 0x007B;
-    public const uint WM_MOUSELEAVE = 0x02A3;
-    public const uint WM_MOUSEHOVER = 0x02A1;
-    public const uint WM_MOUSEMOVE = 0x0200;
+    public const uint32 TME_HOVER = 1;
+    public const uint32 TME_LEAVE = 2;
+    public const uint32 WM_CONTEXTMENU = 0x007B;
+    public const uint32 WM_MOUSELEAVE = 0x02A3;
+    public const uint32 WM_MOUSEHOVER = 0x02A1;
+    public const uint32 WM_MOUSEMOVE = 0x0200;
 
-    public delegate IntPtr WndProcDelegate(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+    public delegate IntPtr WndProcDelegate(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam);
 
     [Flags]
-    public enum WindowStyles : uint
+    public enum WindowStyles : uint32
     {
         WS_BORDER = 0x800000,
         WS_CAPTION = 0xc00000,
@@ -71,7 +71,7 @@ internal class WinApi
     }
 
     [DllImport("user32.dll", SetLastError = true)]
-    public static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+    public static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, uint32 Msg, IntPtr wParam, IntPtr lParam);
 
     [DllImport("user32.dll", SetLastError = true)]
     public static extern bool DestroyWindow(IntPtr hwnd);
@@ -88,7 +88,7 @@ internal class WinApi
         int32 dwExStyle,
         string lpClassName,
         string lpWindowName,
-        uint dwStyle,
+        uint32 dwStyle,
         int32 x,
         int32 y,
         int32 nWidth,
@@ -111,8 +111,8 @@ internal class WinApi
     public struct TRACKMOUSEEVENT
     {
         public int32 cbSize;
-        public uint dwFlags;
+        public uint32 dwFlags;
         public IntPtr hwndTrack;
-        public uint dwHoverTime;
+        public uint32 dwHoverTime;
     }
 }

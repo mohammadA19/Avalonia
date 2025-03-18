@@ -5,7 +5,7 @@ namespace ControlCatalog.NetCore;
 
 internal unsafe class WinApi
 {
-    public enum CommonControls : uint
+    public enum CommonControls : uint32
     {
         ICC_LISTVIEW_CLASSES = 0x00000001, // listview, header
         ICC_TREEVIEW_CLASSES = 0x00000002, // treeview, tooltips
@@ -30,7 +30,7 @@ internal unsafe class WinApi
     public struct INITCOMMONCONTROLSEX
     {
         public int32 dwSize;
-        public uint dwICC;
+        public uint32 dwICC;
     }
 
     [DllImport("Comctl32.dll")]
@@ -51,7 +51,7 @@ internal unsafe class WinApi
         int32 dwExStyle,
         string lpClassName,
         string lpWindowName,
-        uint dwStyle,
+        uint32 dwStyle,
         int32 x,
         int32 y,
         int32 nWidth,
@@ -64,8 +64,8 @@ internal unsafe class WinApi
     [StructLayout(LayoutKind.Sequential)]
     public struct SETTEXTEX
     {
-        public uint Flags;
-        public uint Codepage;
+        public uint32 Flags;
+        public uint32 Codepage;
     }
 
     [DllImport("user32.dll", CharSet = CharSet.Unicode, EntryPoint = "SendMessageW")]

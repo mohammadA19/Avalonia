@@ -64,7 +64,7 @@ namespace Avalonia.Media
         /// <returns>
         ///     A glyph index.
         /// </returns>
-        ushort GetGlyph(uint codepoint);
+        ushort GetGlyph(uint32 codepoint);
 
         /// <summary>
         ///     Tries to get an glyph index for specified codepoint.
@@ -74,7 +74,7 @@ namespace Avalonia.Media
         /// <returns>
         ///     <c>true</c> if an glyph index was found, <c>false</c> otherwise.
         /// </returns>
-        bool TryGetGlyph(uint codepoint, out ushort glyph);
+        bool TryGetGlyph(uint32 codepoint, out ushort glyph);
 
         /// <summary>
         ///     Returns an array of glyph indices. Codepoints that are not represented by the font are returned as <code>0</code>.
@@ -83,7 +83,7 @@ namespace Avalonia.Media
         /// <returns>
         ///     An array of glyph indices.
         /// </returns>
-        ushort[] GetGlyphs(ReadOnlySpan<uint> codepoints);
+        ushort[] GetGlyphs(ReadOnlySpan<uint32> codepoints);
 
         /// <summary>
         ///     Returns the glyph advance for the specified glyph.
@@ -109,6 +109,6 @@ namespace Avalonia.Media
         /// <param name="tag">The table tag to get the data for.</param>
         /// <param name="table">The contents of the table data for the specified tag.</param>
         /// <returns>Returns <c>true</c> if the content exists, otherwise <c>false</c>.</returns>
-        bool TryGetTable(uint tag, out byte[] table);
+        bool TryGetTable(uint32 tag, out byte[] table);
     }
 }

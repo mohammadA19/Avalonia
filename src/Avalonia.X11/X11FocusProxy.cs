@@ -80,10 +80,10 @@ namespace Avalonia.X11
                 DepthCopyFromParent,
                 (int32)CreateWindowArgs.InputOutput,
                 _visualCopyFromParent,
-                new UIntPtr((uint)valueMask),
+                new UIntPtr((uint32)valueMask),
                 ref attrs);
             XMapWindow(display, handle);
-            XSelectInput(display, handle, new IntPtr((uint)valueMask));
+            XSelectInput(display, handle, new IntPtr((uint32)valueMask));
             return handle;
         }
     }

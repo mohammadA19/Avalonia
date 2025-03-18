@@ -18,7 +18,7 @@ internal class VulkanImageBase : IDisposable
     internal VkImage Handle => _handle;
     internal VkFormat Format { get; }
     internal VkImageAspectFlags AspectFlags { get; private set; }
-    public uint MipLevels { get; private set; }
+    public uint32 MipLevels { get; private set; }
     public PixelSize Size { get; }
     public ulong MemorySize { get; private set; }
     public VkImageLayout CurrentLayout { get; protected set; }
@@ -30,13 +30,13 @@ internal class VulkanImageBase : IDisposable
     {
         Handle = Handle.Handle,
         PixelSize = Size,
-        Format = (uint)Format,
+        Format = (uint32)Format,
         MemoryHandle = MemoryHandle.Handle,
         MemorySize = MemorySize,
         ViewHandle = _imageView.Handle,
-        UsageFlags = (uint)UsageFlags,
-        Layout = (uint)CurrentLayout,
-        Tiling = (uint)Tiling,
+        UsageFlags = (uint32)UsageFlags,
+        Layout = (uint32)CurrentLayout,
+        Tiling = (uint32)Tiling,
         LevelCount = MipLevels,
         SampleCount = 1,
         IsProtected = false
@@ -51,7 +51,7 @@ internal class VulkanImageBase : IDisposable
     
     public VulkanImageBase(IVulkanPlatformGraphicsContext context,
         VulkanCommandBufferPool commandBufferPool,
-        VkFormat format, PixelSize size, uint mipLevels = 0)
+        VkFormat format, PixelSize size, uint32 mipLevels = 0)
     {
         Format = format;
         Size = size;
@@ -64,13 +64,13 @@ internal class VulkanImageBase : IDisposable
                            | VkImageUsageFlags.VK_IMAGE_USAGE_SAMPLED_BIT;
     }
 
-    protected virtual VkDeviceMemory CreateMemory(VkImage image, ulong size, uint memoryTypeBits)
+    protected virtual VkDeviceMemory CreateMemory(VkImage image, ulong size, uint32 memoryTypeBits)
     {
         var memoryAllocateInfo = new VkMemoryAllocateInfo
         {
             sType = VkStructureType.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
             allocationSize = size,
-            memoryTypeIndex = (uint)VulkanMemoryHelper.FindSuitableMemoryTypeIndex(_context,
+            memoryTypeIndex = (uint32)VulkanMemoryHelper.FindSuitableMemoryTypeIndex(_context,
                 memoryTypeBits,
                 VkMemoryPropertyFlags.VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT),
         };
@@ -84,7 +84,7 @@ internal class VulkanImageBase : IDisposable
     {
         if (Handle.Handle != 0)
             return;
-        MipLevels = MipLevels != 0 ? MipLevels : (uint)Math.Floor(Math.Log(Math.Max(Size.Width, Size.Height), 2));
+        MipLevels = MipLevels != 0 ? MipLevels : (uint32)Math.Floor(Math.Log(Math.Max(Size.Width, Size.Height), 2));
         var createInfo = new VkImageCreateInfo
         {
             pNext = pNext,
@@ -94,8 +94,8 @@ internal class VulkanImageBase : IDisposable
             extent = new VkExtent3D
             {
                 depth = 1,
-                width = (uint)Size.Width,
-                height = (uint)Size.Height
+                width = (uint32)Size.Width,
+                height = (uint32)Size.Height
             },
             mipLevels = MipLevels,
             arrayLayers = 1,
@@ -159,7 +159,7 @@ internal class VulkanImageBase : IDisposable
         _currentAccessFlags = destinationAccessFlags;
     }
     
-    public void TransitionLayout(uint destinationLayout, uint destinationAccessFlags)
+    public void TransitionLayout(uint32 destinationLayout, uint32 destinationAccessFlags)
     {
         TransitionLayout((VkImageLayout)destinationLayout, (VkAccessFlags)destinationAccessFlags);
     }
@@ -189,7 +189,7 @@ internal class VulkanImageBase : IDisposable
 unsafe class VulkanImage : VulkanImageBase
 {
     public VulkanImage(IVulkanPlatformGraphicsContext context, VulkanCommandBufferPool commandBufferPool,
-        VkFormat format, PixelSize size, uint mipLevels = 0) : base(context, commandBufferPool, format, size, mipLevels)
+        VkFormat format, PixelSize size, uint32 mipLevels = 0) : base(context, commandBufferPool, format, size, mipLevels)
     {
         Initialize(null);
         TransitionLayout(VkImageLayout.VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL, VkAccessFlags.VK_ACCESS_NONE_KHR);

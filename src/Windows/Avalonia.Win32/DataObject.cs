@@ -26,9 +26,9 @@ namespace Avalonia.Win32
         private class FormatEnumerator : CallbackBase, Win32Com.IEnumFORMATETC
         {
             private readonly FORMATETC[] _formats;
-            private uint _current;
+            private uint32 _current;
 
-            private FormatEnumerator(FORMATETC[] formats, uint current)
+            private FormatEnumerator(FORMATETC[] formats, uint32 current)
             {
                 _formats = formats;
                 _current = current;
@@ -51,12 +51,12 @@ namespace Avalonia.Win32
                 return result;
             }
 
-            public unsafe uint Next(uint celt, FORMATETC* rgelt, uint* results)
+            public unsafe uint32 Next(uint32 celt, FORMATETC* rgelt, uint32* results)
             {
                 if (rgelt == null)
-                    return (uint)UnmanagedMethods.HRESULT.E_INVALIDARG;
+                    return (uint32)UnmanagedMethods.HRESULT.E_INVALIDARG;
 
-                uint i = 0;
+                uint32 i = 0;
                 while (i < celt && _current < _formats.Length)
                 {
                     rgelt[i] = _formats[_current];
@@ -65,7 +65,7 @@ namespace Avalonia.Win32
                 }
 
                 if (i != celt)
-                    return (uint)UnmanagedMethods.HRESULT.S_FALSE;
+                    return (uint32)UnmanagedMethods.HRESULT.S_FALSE;
 
                 // "results" parameter can be NULL if celt is 1.
                 if (celt != 1 || results != default)
@@ -73,11 +73,11 @@ namespace Avalonia.Win32
                 return 0;
             }
 
-            public uint Skip(uint celt)
+            public uint32 Skip(uint32 celt)
             {
                 _current += Math.Min(celt, int32.MaxValue - _current);
                 if (_current >= _formats.Length)
-                    return (uint)UnmanagedMethods.HRESULT.S_FALSE;
+                    return (uint32)UnmanagedMethods.HRESULT.S_FALSE;
                 return 0;
             }
 
@@ -92,11 +92,11 @@ namespace Avalonia.Win32
             }
         }
 
-        private const uint DV_E_TYMED = 0x80040069;
-        private const uint DV_E_DVASPECT = 0x8004006B;
-        private const uint DV_E_FORMATETC = 0x80040064;
-        private const uint OLE_E_ADVISENOTSUPPORTED = 0x80040003;
-        private const uint STG_E_MEDIUMFULL = 0x80030070;
+        private const uint32 DV_E_TYMED = 0x80040069;
+        private const uint32 DV_E_DVASPECT = 0x8004006B;
+        private const uint32 DV_E_FORMATETC = 0x80040064;
+        private const uint32 OLE_E_ADVISENOTSUPPORTED = 0x80040003;
+        private const uint32 STG_E_MEDIUMFULL = 0x80030070;
 
         private const int32 GMEM_ZEROINIT = 0x0040;
         private const int32 GMEM_MOVEABLE = 0x0002;
@@ -175,7 +175,7 @@ namespace Avalonia.Win32
             throw new COMException(nameof(UnmanagedMethods.HRESULT.E_NOTIMPL), unchecked((int32)UnmanagedMethods.HRESULT.E_NOTIMPL));
         }
 
-        unsafe uint Win32Com.IDataObject.GetData(FORMATETC* format, Interop.STGMEDIUM* medium)
+        unsafe uint32 Win32Com.IDataObject.GetData(FORMATETC* format, Interop.STGMEDIUM* medium)
         {
             if (_wrapped is Win32Com.IDataObject ole)
             {
@@ -197,7 +197,7 @@ namespace Avalonia.Win32
             return WriteDataToHGlobal(fmt, ref medium->unionmember);
         }
 
-        unsafe uint Win32Com.IDataObject.GetDataHere(FORMATETC* format, Interop.STGMEDIUM* medium)
+        unsafe uint32 Win32Com.IDataObject.GetDataHere(FORMATETC* format, Interop.STGMEDIUM* medium)
         {
             if (_wrapped is Win32Com.IDataObject ole)
             {
@@ -220,7 +220,7 @@ namespace Avalonia.Win32
             return WriteDataToHGlobal(fmt, ref medium->unionmember);
         }
 
-        unsafe uint Win32Com.IDataObject.QueryGetData(FORMATETC* format)
+        unsafe uint32 Win32Com.IDataObject.QueryGetData(FORMATETC* format)
         {
             if (_wrapped is Win32Com.IDataObject ole)
             {
@@ -240,16 +240,16 @@ namespace Avalonia.Win32
             return 0;
         }
         
-        unsafe uint Win32Com.IDataObject.SetData(FORMATETC* pformatetc, Interop.STGMEDIUM* pmedium, int32 fRelease)
+        unsafe uint32 Win32Com.IDataObject.SetData(FORMATETC* pformatetc, Interop.STGMEDIUM* pmedium, int32 fRelease)
         {
             if (_wrapped is Win32Com.IDataObject ole)
             {
                 return ole.SetData(pformatetc, pmedium, fRelease);
             }
-            return (uint)UnmanagedMethods.HRESULT.E_NOTIMPL;
+            return (uint32)UnmanagedMethods.HRESULT.E_NOTIMPL;
         }
 
-        private uint WriteDataToHGlobal(string dataFormat, ref IntPtr hGlobal)
+        private uint32 WriteDataToHGlobal(string dataFormat, ref IntPtr hGlobal)
         {
             object data = _wrapped.Get(dataFormat)!;
             if (dataFormat == DataFormats.Text || data is string)
@@ -296,7 +296,7 @@ namespace Avalonia.Win32
             }
         }
 
-        private static unsafe uint WriteBytesToHGlobal(ref IntPtr hGlobal, ReadOnlySpan<byte> data)
+        private static unsafe uint32 WriteBytesToHGlobal(ref IntPtr hGlobal, ReadOnlySpan<byte> data)
         {
             int32 required = data.Length;
             if (hGlobal == IntPtr.Zero)
@@ -320,7 +320,7 @@ namespace Avalonia.Win32
             }
         }
 
-        private static uint WriteFileListToHGlobal(ref IntPtr hGlobal, IEnumerable<string> files)
+        private static uint32 WriteFileListToHGlobal(ref IntPtr hGlobal, IEnumerable<string> files)
         {
             if (!files.Any())
                 return unchecked((int32)UnmanagedMethods.HRESULT.S_OK);
@@ -352,7 +352,7 @@ namespace Avalonia.Win32
             }
         }
 
-        private static uint WriteStringToHGlobal(ref IntPtr hGlobal, string data)
+        private static uint32 WriteStringToHGlobal(ref IntPtr hGlobal, string data)
         {
             int32 required = (data.Length + 1) * sizeof(char);
             if (hGlobal == IntPtr.Zero)

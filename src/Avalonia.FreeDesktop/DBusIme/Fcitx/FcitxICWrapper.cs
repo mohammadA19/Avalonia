@@ -31,7 +31,7 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
 
         public Task DestroyICAsync() => _old?.DestroyICAsync() ?? _modern?.DestroyICAsync() ?? Task.CompletedTask;
 
-        public async Task<bool> ProcessKeyEventAsync(uint keyVal, uint keyCode, uint state, int32 type, uint time)
+        public async Task<bool> ProcessKeyEventAsync(uint32 keyVal, uint32 keyCode, uint32 state, int32 type, uint32 time)
         {
             if (_old is not null)
                 return await _old.ProcessKeyEventAsync(keyVal, keyCode, state, type, time) != 0;
@@ -43,7 +43,7 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
             ?? _modern?.WatchCommitStringAsync(handler)
             ?? new ValueTask<IDisposable>(Disposable.Empty);
 
-        public ValueTask<IDisposable> WatchForwardKeyAsync(Action<Exception?, (uint keyval, uint state, int32 type)> handler) =>
+        public ValueTask<IDisposable> WatchForwardKeyAsync(Action<Exception?, (uint32 keyval, uint32 state, int32 type)> handler) =>
             _old?.WatchForwardKeyAsync(handler)
             ?? _modern?.WatchForwardKeyAsync((e, ev) => handler.Invoke(e, (ev.Keyval, ev.State, ev.Type ? 1 : 0)))
             ?? new ValueTask<IDisposable>(Disposable.Empty);
@@ -54,7 +54,7 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
             ?? _modern?.WatchUpdateFormattedPreeditAsync(handler!)
             ?? new ValueTask<IDisposable>(Disposable.Empty);
 
-        public Task SetCapacityAsync(uint flags) =>
+        public Task SetCapacityAsync(uint32 flags) =>
             _old?.SetCapacityAsync(flags) ?? _modern?.SetCapabilityAsync(flags) ?? Task.CompletedTask;
     }
 }

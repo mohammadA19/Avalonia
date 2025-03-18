@@ -13,7 +13,7 @@ public class EffectTests
         Assert.Equal(123.34, effect.Radius);
     }
 
-    private const uint Black = 0xff000000;
+    private const uint32 Black = 0xff000000;
 
     [Theory,
      InlineData("drop-shadow(10 20)", 10, 20, 0, Black),
@@ -28,7 +28,7 @@ public class EffectTests
      InlineData("drop-shadow(10 20 30 rgba(100, 30, 45, 90%))", 10, 20, 30, 0xe6641e2d),
      InlineData("drop-shadow(10 20 30  rgba(100, 30, 45, 90%) ) ", 10, 20, 30, 0xe6641e2d)
     ]
-    public void Parse_Parses_DropShadow(string s, double x, double y, double r, uint color)
+    public void Parse_Parses_DropShadow(string s, double x, double y, double r, uint32 color)
     {
         var effect = (ImmutableDropShadowEffect)Effect.Parse(s);
         Assert.Equal(x, effect.OffsetX);

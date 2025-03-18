@@ -400,7 +400,7 @@ namespace Avalonia.Win32.Input
             {
                 var scanCode = GetScanCode(keyData);
 
-                virtualKey = (int32)MapVirtualKey(scanCode, (uint)MapVirtualKeyMapTypes.MAPVK_VSC_TO_VK_EX);
+                virtualKey = (int32)MapVirtualKey(scanCode, (uint32)MapVirtualKeyMapTypes.MAPVK_VSC_TO_VK_EX);
 
                 if (virtualKey == 0)
                 {
@@ -474,12 +474,12 @@ namespace Avalonia.Win32.Input
         /// <returns>An Avalonia physical key, or <see cref="PhysicalKey.None"/> if none matched.</returns>
         public static PhysicalKey PhysicalKeyFromVirtualKey(int32 virtualKey, int32 keyData)
         {
-            uint scanCode = GetScanCode(keyData);
+            uint32 scanCode = GetScanCode(keyData);
             if (scanCode == 0U)
             {
                 // in some cases, the scan code contained in the keyData might be zero:
                 // try to get one from the virtual key instead
-                scanCode = MapVirtualKey((uint)virtualKey, (uint)MapVirtualKeyMapTypes.MAPVK_VK_TO_VSC);
+                scanCode = MapVirtualKey((uint32)virtualKey, (uint32)MapVirtualKeyMapTypes.MAPVK_VK_TO_VSC);
                 if (scanCode == 0U)
                     return PhysicalKey.None;
             }
@@ -502,7 +502,7 @@ namespace Avalonia.Win32.Input
         public static unsafe string? GetKeySymbol(int32 virtualKey, int32 keyData)
         {
             const int32 bufferSize = 4;
-            const uint doNotChangeKeyboardState = 1U << 2;
+            const uint32 doNotChangeKeyboardState = 1U << 2;
 
             fixed (byte* keyStates = stackalloc byte[256])
             fixed (char* buffer = stackalloc char[bufferSize])
@@ -510,7 +510,7 @@ namespace Avalonia.Win32.Input
                 GetKeyboardState(keyStates);
 
                 var length = ToUnicodeEx(
-                    (uint)virtualKey,
+                    (uint32)virtualKey,
                     GetScanCode(keyData),
                     keyStates,
                     buffer,

@@ -11,7 +11,7 @@ internal unsafe partial class VulkanDevice
     public static IVulkanDevice Create(IVulkanInstance instance,
         VulkanDeviceCreationOptions options, VulkanPlatformSpecificOptions platformOptions)
     {
-        uint deviceCount = 0;
+        uint32 deviceCount = 0;
         var api = new VulkanInstanceApi(instance);
         var vkInstance = new VkInstance(instance.Handle);
         api.EnumeratePhysicalDevices(vkInstance, ref deviceCount, null)
@@ -95,15 +95,15 @@ internal unsafe partial class VulkanDevice
     struct DeviceInfo
     {
         public VkPhysicalDevice PhysicalDevice;
-        public uint QueueFamilyIndex;
+        public uint32 QueueFamilyIndex;
         public VkPhysicalDeviceType Type;
         public List<string> Extensions;
-        public uint QueueCount;
+        public uint32 QueueCount;
     }
 
     static List<string> GetDeviceExtensions(VulkanInstanceApi instance, VkPhysicalDevice physicalDevice)
     {
-        uint propertyCount = 0;
+        uint32 propertyCount = 0;
         instance.EnumerateDeviceExtensionProperties(physicalDevice, null, ref propertyCount, null);
         var extensionProps = new VkExtensionProperties[propertyCount];
         var extensions = new List<string>((int32)propertyCount);
@@ -130,7 +130,7 @@ internal unsafe partial class VulkanDevice
         if (!supportedExtensions.Contains(VK_KHR_swapchain))
             return null;
         
-        uint familyCount = 0;
+        uint32 familyCount = 0;
         instance.GetPhysicalDeviceQueueFamilyProperties(physicalDevice, ref familyCount, null);
         var familyProperties = stackalloc VkQueueFamilyProperties[(int32)familyCount];
         instance.GetPhysicalDeviceQueueFamilyProperties(physicalDevice, ref familyCount, familyProperties);
@@ -144,7 +144,7 @@ internal unsafe partial class VulkanDevice
                 continue;
             if (surface.HasValue)
             {
-                instance.GetPhysicalDeviceSurfaceSupportKHR(physicalDevice, (uint)c, surface.Value, out var supported)
+                instance.GetPhysicalDeviceSurfaceSupportKHR(physicalDevice, (uint32)c, surface.Value, out var supported)
                     .ThrowOnError("vkGetPhysicalDeviceSurfaceSupportKHR");
                 if (supported == 0)
                     continue;
@@ -155,7 +155,7 @@ internal unsafe partial class VulkanDevice
                 PhysicalDevice = physicalDevice,
                 Extensions = supportedExtensions,
                 Type = properties.deviceType,
-                QueueFamilyIndex = (uint)c,
+                QueueFamilyIndex = (uint32)c,
                 QueueCount = familyProperties[c].queueCount
             };
 

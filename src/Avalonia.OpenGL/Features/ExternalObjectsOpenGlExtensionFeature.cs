@@ -16,44 +16,44 @@ unsafe partial class ExternalObjectsInterface
     }
     
     [GetProcAddress("glImportMemoryFdEXT", true)]
-    public partial void ImportMemoryFdEXT(uint memory, ulong size, int32 handleType, int32 fd);
+    public partial void ImportMemoryFdEXT(uint32 memory, ulong size, int32 handleType, int32 fd);
     
     [GetProcAddress("glImportSemaphoreFdEXT", true)]
-    public partial void ImportSemaphoreFdEXT(uint semaphore,
+    public partial void ImportSemaphoreFdEXT(uint32 semaphore,
                               int32 handleType,
                               int32 fd);
     
     [GetProcAddress("glCreateMemoryObjectsEXT")]
-    public partial void CreateMemoryObjectsEXT(int32 n, out uint memoryObjects);
+    public partial void CreateMemoryObjectsEXT(int32 n, out uint32 memoryObjects);
     
     [GetProcAddress("glDeleteMemoryObjectsEXT")]
-    public partial void DeleteMemoryObjectsEXT(int32 n, ref uint objects);
+    public partial void DeleteMemoryObjectsEXT(int32 n, ref uint32 objects);
 
     [GetProcAddress("glTexStorageMem2DEXT")]
     public partial void TexStorageMem2DEXT(int32 target, int32 levels, int32 internalFormat, int32 width, int32 height,
-        uint memory, ulong offset);
+        uint32 memory, ulong offset);
     
     [GetProcAddress("glGenSemaphoresEXT")]
-    public partial void GenSemaphoresEXT(int32 n, out uint semaphores);
+    public partial void GenSemaphoresEXT(int32 n, out uint32 semaphores);
 
     [GetProcAddress("glDeleteSemaphoresEXT")]
-    public partial void DeleteSemaphoresEXT(int32 n, ref uint semaphores);
+    public partial void DeleteSemaphoresEXT(int32 n, ref uint32 semaphores);
     
     [GetProcAddress("glWaitSemaphoreEXT")]
-    public partial void WaitSemaphoreEXT(uint semaphore,
-        uint numBufferBarriers, uint* buffers,
-        uint numTextureBarriers, int32* textures,
+    public partial void WaitSemaphoreEXT(uint32 semaphore,
+        uint32 numBufferBarriers, uint32* buffers,
+        uint32 numTextureBarriers, int32* textures,
         int32* srcLayouts);
     
     [GetProcAddress("glSignalSemaphoreEXT")]
-    public partial void SignalSemaphoreEXT(uint semaphore,
-        uint numBufferBarriers, uint* buffers,
-        uint numTextureBarriers, int32* textures,
+    public partial void SignalSemaphoreEXT(uint32 semaphore,
+        uint32 numBufferBarriers, uint32* buffers,
+        uint32 numTextureBarriers, int32* textures,
         int32* dstLayouts);
     
     
     [GetProcAddress("glGetUnsignedBytei_vEXT", true)]
-    public partial void GetUnsignedBytei_vEXT(int32 target, uint index, byte* data);
+    public partial void GetUnsignedBytei_vEXT(int32 target, uint32 index, byte* data);
     
     [GetProcAddress("glGetUnsignedBytevEXT", true)]
     public partial void GetUnsignedBytevEXT(int32 target, byte* data);
@@ -216,9 +216,9 @@ public class ExternalObjectsOpenGlExtensionFeature : IGlContextExternalObjectsFe
     {
         private readonly IGlContext _context;
         private readonly ExternalObjectsInterface _ext;
-        private uint _semaphore;
+        private uint32 _semaphore;
 
-        public ExternalSemaphore(IGlContext context, ExternalObjectsInterface ext, uint semaphore)
+        public ExternalSemaphore(IGlContext context, ExternalObjectsInterface ext, uint32 semaphore)
         {
             _context = context;
             _ext = ext;
@@ -255,11 +255,11 @@ public class ExternalObjectsOpenGlExtensionFeature : IGlContextExternalObjectsFe
     {
         private readonly IGlContext _context;
         private readonly ExternalObjectsInterface _ext;
-        private uint _objectId;
+        private uint32 _objectId;
 
         public ExternalImageTexture(IGlContext context,
             PlatformGraphicsExternalImageProperties properties,
-            ExternalObjectsInterface ext, uint objectId, int32 textureId)
+            ExternalObjectsInterface ext, uint32 objectId, int32 textureId)
         {
             Properties = properties;
             TextureId = textureId;
@@ -280,9 +280,9 @@ public class ExternalObjectsOpenGlExtensionFeature : IGlContextExternalObjectsFe
             }
         }
 
-        public void AcquireKeyedMutex(uint key) => throw new NotSupportedException();
+        public void AcquireKeyedMutex(uint32 key) => throw new NotSupportedException();
 
-        public void ReleaseKeyedMutex(uint key) => throw new NotSupportedException();
+        public void ReleaseKeyedMutex(uint32 key) => throw new NotSupportedException();
 
         public int32 TextureId { get; }
         public int32 InternalFormat => GL_RGBA8;

@@ -16,7 +16,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <returns></returns>
         public bool MoveNext(out Codepoint codepoint)
         {
-            if ((uint)_offset >= (uint)_text.Length)
+            if ((uint32)_offset >= (uint32)_text.Length)
             {
                 codepoint = Codepoint.ReplacementCodepoint;
                 return false;

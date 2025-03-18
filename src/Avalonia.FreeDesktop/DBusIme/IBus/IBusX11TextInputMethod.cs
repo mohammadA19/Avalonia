@@ -33,7 +33,7 @@ namespace Avalonia.FreeDesktop.DBusIme.IBus
             AddDisposable(await _context.WatchUpdatePreeditTextAsync(OnUpdatePreedit));
             AddDisposable(await _context.WatchShowPreeditTextAsync(OnShowPreedit));
             AddDisposable(await _context.WatchHidePreeditTextAsync(OnHidePreedit));
-            Enqueue(() => _context.SetCapabilitiesAsync((uint)IBusCapability.CapFocus));
+            Enqueue(() => _context.SetCapabilitiesAsync((uint32)IBusCapability.CapFocus));
             return true;
         }
 
@@ -51,7 +51,7 @@ namespace Avalonia.FreeDesktop.DBusIme.IBus
                 Client.SetPreeditText(_preeditText, _preeditText == null ? null : _preeditCursor);
         }
 
-        private void OnUpdatePreedit(Exception? arg1, (VariantValue Text, uint CursorPos, bool Visible) preeditComponents)
+        private void OnUpdatePreedit(Exception? arg1, (VariantValue Text, uint32 CursorPos, bool Visible) preeditComponents)
         {
             if (preeditComponents.Text is { Type: VariantValueType.Struct, Count: >= 3 } structItem && structItem.GetItem(2) is { Type: VariantValueType.String} stringItem)
             {
@@ -75,7 +75,7 @@ namespace Avalonia.FreeDesktop.DBusIme.IBus
                     _preeditShown ? _preeditText : null, _preeditCursor);
         }
 
-        private void OnForwardKey(Exception? e, (uint keyval, uint keycode, uint state) k)
+        private void OnForwardKey(Exception? e, (uint32 keyval, uint32 keycode, uint32 state) k)
         {
             if (e is not null)
             {
@@ -172,7 +172,7 @@ namespace Avalonia.FreeDesktop.DBusIme.IBus
             if (args.Type == RawKeyEventType.KeyUp)
                 state |= IBusModifierMask.ReleaseMask;
 
-            return _context is not null ? _context.ProcessKeyEventAsync((uint)keyVal, (uint)keyCode, (uint)state) : Task.FromResult(false);
+            return _context is not null ? _context.ProcessKeyEventAsync((uint32)keyVal, (uint32)keyCode, (uint32)state) : Task.FromResult(false);
         }
 
         public override void SetOptions(TextInputOptions options)
@@ -186,7 +186,7 @@ namespace Avalonia.FreeDesktop.DBusIme.IBus
             if (supportsPreedit)
                 caps |= IBusCapability.CapPreeditText;
             if (_context != null)
-                await _context.SetCapabilitiesAsync((uint)caps);
+                await _context.SetCapabilitiesAsync((uint32)caps);
         }
     }
 }

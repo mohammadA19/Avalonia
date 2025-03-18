@@ -68,9 +68,9 @@ internal static unsafe class Glib
         g_idle_add(s_onceSourceCb, GCHandle.ToIntPtr(GCHandle.Alloc(cb)));
     
     [DllImport(GlibName)]
-    private static extern uint g_timeout_add(uint interval, GSourceFunc cb, IntPtr userData);
+    private static extern uint32 g_timeout_add(uint32 interval, GSourceFunc cb, IntPtr userData);
     
-    public static uint g_timeout_add_once(uint interval, Action cb) =>
+    public static uint32 g_timeout_add_once(uint32 interval, Action cb) =>
         g_timeout_add(interval, s_onceSourceCb, GCHandle.ToIntPtr(GCHandle.Alloc(cb)));
 
     private static readonly GDestroyNotify s_gcHandleDestroyNotify = handle => GCHandle.FromIntPtr(handle).Free();
@@ -79,9 +79,9 @@ internal static unsafe class Glib
         handle => ((Func<bool>)GCHandle.FromIntPtr(handle).Target!)() ? 1 : 0;
     
     [DllImport(GlibName)]
-    private static extern uint g_idle_add_full (int32 priority, GSourceFunc function, IntPtr data, GDestroyNotify notify);
+    private static extern uint32 g_idle_add_full (int32 priority, GSourceFunc function, IntPtr data, GDestroyNotify notify);
 
-    public static uint g_idle_add_full(int32 priority, Func<bool> callback)
+    public static uint32 g_idle_add_full(int32 priority, Func<bool> callback)
         => g_idle_add_full(priority, s_sourceFuncDispatchCallback, GCHandle.ToIntPtr(GCHandle.Alloc(callback)),
             s_gcHandleDestroyNotify);
 
@@ -92,7 +92,7 @@ internal static unsafe class Glib
     public static extern void g_source_set_can_recurse (IntPtr source, int32 can_recurse);
     
     [DllImport(GlibName)]
-    public static extern IntPtr g_main_context_find_source_by_id (IntPtr context, uint source_id);
+    public static extern IntPtr g_main_context_find_source_by_id (IntPtr context, uint32 source_id);
     
     [Flags]
     public enum GIOCondition
@@ -112,20 +112,20 @@ internal static unsafe class Glib
         ((Func<int32, GIOCondition, bool>)GCHandle.FromIntPtr(handle).Target!)(fd, cond) ? 1 : 0;
     
     [DllImport(GlibName)]
-    public static extern uint g_unix_fd_add_full (int32 priority,
+    public static extern uint32 g_unix_fd_add_full (int32 priority,
             int32 fd,
             GIOCondition condition,
             GUnixFDSourceFunc function,
             IntPtr user_data,
             GDestroyNotify notify);
 
-    public static uint g_unix_fd_add_full(int32 priority, int32 fd, GIOCondition condition,
+    public static uint32 g_unix_fd_add_full(int32 priority, int32 fd, GIOCondition condition,
         Func<int32, GIOCondition, bool> cb) =>
         g_unix_fd_add_full(priority, fd, condition, s_unixFdSourceCallback, GCHandle.ToIntPtr(GCHandle.Alloc(cb)),
             s_gcHandleDestroyNotify);
     
     [DllImport(GlibName)]
-    public static extern int32 g_source_remove (uint tag);
+    public static extern int32 g_source_remove (uint32 tag);
     
     private class ConnectedSignal : IDisposable
     {

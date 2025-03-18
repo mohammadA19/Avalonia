@@ -41,6 +41,6 @@ namespace Avalonia.LinuxFramebuffer
         /// Specifies the connector type ID used with <see cref="ConnectorType"/>.
         /// If null, the preferred connector type ID will be used.
         /// </summary>
-        public uint? ConnectorTypeId { get; set; }
+        public uint32? ConnectorTypeId { get; set; }
     }
 }

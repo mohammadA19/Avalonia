@@ -36,7 +36,7 @@ unsafe class ByteStringList : IDisposable
     }
 
     public int32 Count => _inner.Count;
-    public uint UCount => (uint)_inner.Count;
+    public uint32 UCount => (uint32)_inner.Count;
 
     public void Dispose()
     {

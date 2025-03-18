@@ -234,7 +234,7 @@ internal class IOSStorageProvider : IStorageProvider
         {
             fixed (byte* ptr = bytes)
             {
-                using var data = new NSData(new IntPtr(ptr), new UIntPtr((uint)bytes.Length), null);
+                using var data = new NSData(new IntPtr(ptr), new UIntPtr((uint32)bytes.Length), null);
                 return DecodeFromNSData(data);
             }
         }

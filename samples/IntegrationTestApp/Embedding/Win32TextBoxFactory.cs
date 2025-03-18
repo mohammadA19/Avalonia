@@ -25,7 +25,7 @@ internal class Win32TextBoxFactory : INativeTextBoxFactory
         {
             var handle = CreateWindowEx(0, "EDIT",
                 string.Empty,
-                (uint)(WinApi.WindowStyles.WS_CHILD | WinApi.WindowStyles.WS_VISIBLE | WinApi.WindowStyles.WS_BORDER),
+                (uint32)(WinApi.WindowStyles.WS_CHILD | WinApi.WindowStyles.WS_VISIBLE | WinApi.WindowStyles.WS_BORDER),
                 0, 0, 1, 1,
                 parent.Handle,
                 IntPtr.Zero,
@@ -60,7 +60,7 @@ internal class Win32TextBoxFactory : INativeTextBoxFactory
         public event EventHandler? Hovered;
         public event EventHandler? PointerExited;
 
-        private IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        private IntPtr WndProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam)
         {
             switch (msg)
             {

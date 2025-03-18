@@ -117,16 +117,16 @@ namespace Avalonia.X11
         public static extern int32 XRaiseWindow(IntPtr display, IntPtr window);
 
         [DllImport(libX11)]
-        public static extern uint XLowerWindow(IntPtr display, IntPtr window);
+        public static extern uint32 XLowerWindow(IntPtr display, IntPtr window);
 
         [DllImport(libX11)]
-        public static extern uint XConfigureWindow(IntPtr display, IntPtr window, ChangeWindowFlags value_mask,
+        public static extern uint32 XConfigureWindow(IntPtr display, IntPtr window, ChangeWindowFlags value_mask,
             ref XWindowChanges values);
 
-        public static uint XConfigureResizeWindow(IntPtr display, IntPtr window, PixelSize size)
+        public static uint32 XConfigureResizeWindow(IntPtr display, IntPtr window, PixelSize size)
             => XConfigureResizeWindow(display, window, size.Width, size.Height);
         
-        public static uint XConfigureResizeWindow(IntPtr display, IntPtr window, int32 width, int32 height)
+        public static uint32 XConfigureResizeWindow(IntPtr display, IntPtr window, int32 width, int32 height)
         {
             var changes = new XWindowChanges
             {
@@ -193,8 +193,8 @@ namespace Avalonia.X11
             out int32 width, out int32 height, IntPtr border_width, IntPtr depth);
 
         [DllImport(libX11)]
-        public static extern uint XWarpPointer(IntPtr display, IntPtr src_w, IntPtr dest_w, int32 src_x, int32 src_y,
-            uint src_width, uint src_height, int32 dest_x, int32 dest_y);
+        public static extern uint32 XWarpPointer(IntPtr display, IntPtr src_w, IntPtr dest_w, int32 src_x, int32 src_y,
+            uint32 src_width, uint32 src_height, int32 dest_x, int32 dest_y);
 
         [DllImport(libX11)]
         public static extern int32 XClearWindow(IntPtr display, IntPtr window);
@@ -214,7 +214,7 @@ namespace Avalonia.X11
         public static extern IntPtr XDefaultVisual(IntPtr display, int32 screen_number);
 
         [DllImport(libX11)]
-        public static extern uint XDefaultDepth(IntPtr display, int32 screen_number);
+        public static extern uint32 XDefaultDepth(IntPtr display, int32 screen_number);
 
         [DllImport(libX11)]
         public static extern int32 XDefaultScreen(IntPtr display);
@@ -238,7 +238,7 @@ namespace Avalonia.X11
 
         [DllImport(libX11)]
         public static extern int32 XChangeProperty(IntPtr display, IntPtr window, IntPtr property, IntPtr type,
-            int32 format, PropertyMode mode, ref uint value, int32 nelements);
+            int32 format, PropertyMode mode, ref uint32 value, int32 nelements);
 
         [DllImport(libX11)]
         public static extern int32 XChangeProperty(IntPtr display, IntPtr window, IntPtr property, IntPtr type,
@@ -250,7 +250,7 @@ namespace Avalonia.X11
         
         [DllImport(libX11)]
         public static extern int32 XChangeProperty(IntPtr display, IntPtr window, IntPtr property, IntPtr type,
-            int32 format, PropertyMode mode, uint[] data, int32 nelements);
+            int32 format, PropertyMode mode, uint32[] data, int32 nelements);
 
         [DllImport(libX11)]
         public static extern int32 XChangeProperty(IntPtr display, IntPtr window, IntPtr property, IntPtr type,
@@ -451,14 +451,14 @@ namespace Avalonia.X11
 
         [DllImport(libX11)]
         public static extern int32 XPutImage(IntPtr display, IntPtr drawable, IntPtr gc, ref XImage image,
-            int32 srcx, int32 srcy, int32 destx, int32 desty, uint width, uint height);
+            int32 srcx, int32 srcy, int32 destx, int32 desty, uint32 width, uint32 height);
         [DllImport(libX11)]
         public static extern int32 XSync(IntPtr display, bool discard);
         
         [DllImport(libX11)]
         public static extern IntPtr XCreateColormap(IntPtr display, IntPtr window, IntPtr visual, int32 create);
         
-        public enum XLookupStatus : uint
+        public enum XLookupStatus : uint32
         {
             XBufferOverflow = 0xffffffffu,
             XLookupNone = 1,
@@ -671,7 +671,7 @@ namespace Avalonia.X11
         
         public struct XSyncValue {
             public int32 Hi;
-            public uint Lo;
+            public uint32 Lo;
         }
 
         public static bool XGetGeometry(IntPtr display, IntPtr window, out XGeometry geo)

@@ -71,7 +71,7 @@ namespace Avalonia.Media
         /// <param name="lineJoin">The line join.</param>
         /// <param name="miterLimit">The miter limit.</param>
         public Pen(
-            uint color,
+            uint32 color,
             double thickness = 1.0,
             IDashStyle? dashStyle = null,
             PenLineCap lineCap = PenLineCap.Flat,

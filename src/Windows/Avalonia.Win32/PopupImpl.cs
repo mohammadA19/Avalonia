@@ -60,7 +60,7 @@ namespace Avalonia.Win32
                 (int32)exStyle,
                 atom,
                 null,
-                (uint)style,
+                (uint32)style,
                 UnmanagedMethods.CW_USEDEFAULT,
                 UnmanagedMethods.CW_USEDEFAULT,
                 UnmanagedMethods.CW_USEDEFAULT,
@@ -76,7 +76,7 @@ namespace Avalonia.Win32
             return result;
         }
 
-        protected override IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        protected override IntPtr WndProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam)
         {
             switch ((UnmanagedMethods.WindowsMessage)msg)
             {

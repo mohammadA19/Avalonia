@@ -17,7 +17,7 @@ namespace Avalonia.Win32.WinRT
             => WindowsCreateString(sourceString, sourceString.Length);
 
         [DllImport("api-ms-win-core-winrt-string-l1-1-0.dll", CallingConvention = CallingConvention.StdCall)]
-        internal static extern unsafe char* WindowsGetStringRawBuffer(IntPtr hstring, uint* length);
+        internal static extern unsafe char* WindowsGetStringRawBuffer(IntPtr hstring, uint32* length);
 
         [DllImport("api-ms-win-core-winrt-string-l1-1-0.dll", 
             CallingConvention = CallingConvention.StdCall, PreserveSig = false)]
@@ -140,7 +140,7 @@ namespace Avalonia.Win32.WinRT
                 if (_s == IntPtr.Zero)
                     return null;
 
-                uint length;
+                uint32 length;
                 var buffer = NativeWinRTMethods.WindowsGetStringRawBuffer(_s, &length);
                 return new string(buffer, 0, (int32) length);
             }

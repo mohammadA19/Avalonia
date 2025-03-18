@@ -24,7 +24,7 @@ namespace Avalonia.Direct2D1
         {
             if (UnmanagedMethods.ShCoreAvailable && Win32Platform.WindowsVersion > PlatformConstants.Windows8)
             {
-                uint dpix, dpiy;
+                uint32 dpix, dpiy;
 
                 var monitor = UnmanagedMethods.MonitorFromWindow(
                     _window.Handle,

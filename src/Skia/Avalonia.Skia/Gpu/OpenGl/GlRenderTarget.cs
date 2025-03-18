@@ -95,7 +95,7 @@ namespace Avalonia.Skia
                     if (samples > maxSamples)
                         samples = maxSamples;
 
-                    var glInfo = new GRGlFramebufferInfo((uint)fb, colorType.ToGlSizedFormat());
+                    var glInfo = new GRGlFramebufferInfo((uint32)fb, colorType.ToGlSizedFormat());
                     var renderTarget = new GRBackendRenderTarget(size.Width, size.Height, samples, disp.StencilSize, glInfo);
                     var surface = SKSurface.Create(_grContext, renderTarget,
                         glSession.IsYFlipped ? GRSurfaceOrigin.TopLeft : GRSurfaceOrigin.BottomLeft,

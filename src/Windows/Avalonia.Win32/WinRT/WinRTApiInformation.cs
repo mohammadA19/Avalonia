@@ -66,7 +66,7 @@ internal static unsafe class WinRTApiInformation
         return false;
     }
 
-    public static bool IsMethodPresentWithArity(string typeName, string methodName, uint inputParameterCount)
+    public static bool IsMethodPresentWithArity(string typeName, string methodName, uint32 inputParameterCount)
     {
         if (s_statics.Value == null)
         {

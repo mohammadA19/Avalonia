@@ -18,10 +18,10 @@ partial class Win32VulkanInterface
 
 struct VkWin32SurfaceCreateInfoKHR
 {
-    public const uint VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR = 1000009000;
-    public uint sType;
+    public const uint32 VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR = 1000009000;
+    public uint32 sType;
     public IntPtr pNext;
-    public uint flags;
+    public uint32 flags;
     public IntPtr hinstance;
     public IntPtr hwnd;
 }

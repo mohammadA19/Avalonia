@@ -105,7 +105,7 @@ namespace Avalonia.FreeDesktop
             return null;
         }
 
-        private static PlatformThemeVariant ToColorScheme(uint value)
+        private static PlatformThemeVariant ToColorScheme(uint32 value)
         {
             /*
             0: No preference

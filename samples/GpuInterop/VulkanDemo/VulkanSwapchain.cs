@@ -52,7 +52,7 @@ class VulkanSwapchainImage : ISwapchainImage
         _interop = interop;
         _target = target;
         Size = size;
-        _image = new VulkanImage(vk, (uint)Format.R8G8B8A8Unorm, size, true, interop.SupportedImageHandleTypes);
+        _image = new VulkanImage(vk, (uint32)Format.R8G8B8A8Unorm, size, true, interop.SupportedImageHandleTypes);
         _semaphorePair = new VulkanSemaphorePair(vk, true);
     }
 

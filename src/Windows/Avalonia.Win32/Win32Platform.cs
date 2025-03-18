@@ -137,14 +137,14 @@ namespace Avalonia.Win32
         public event EventHandler<ShutdownRequestedEventArgs>? ShutdownRequested;
 
         [SuppressMessage("Microsoft.StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Using Win32 naming for consistency.")]
-        private IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        private IntPtr WndProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam)
         {
             if (msg == (int32)WindowsMessage.WM_DISPATCH_WORK_ITEM 
                 && wParam.ToInt64() == Win32DispatcherImpl.SignalW 
                 && lParam.ToInt64() == Win32DispatcherImpl.SignalL) 
                 _dispatcher?.DispatchWorkItem();
 
-            if(msg == (uint)WindowsMessage.WM_QUERYENDSESSION)
+            if(msg == (uint32)WindowsMessage.WM_QUERYENDSESSION)
             {
                 if (ShutdownRequested != null)
                 {
@@ -159,7 +159,7 @@ namespace Avalonia.Win32
                 }
             }
 
-            if (msg == (uint)WindowsMessage.WM_SETTINGCHANGE 
+            if (msg == (uint32)WindowsMessage.WM_SETTINGCHANGE 
                 && PlatformSettings is Win32PlatformSettings win32PlatformSettings)
             {
                 var changedSetting = Marshal.PtrToStringAuto(lParam);
@@ -170,7 +170,7 @@ namespace Avalonia.Win32
                 }
             }
 
-            if (msg == (uint)WindowsMessage.WM_TIMER)
+            if (msg == (uint32)WindowsMessage.WM_TIMER)
             {
                 if (wParam == (IntPtr)TIMERID_DISPATCHER)
                     _dispatcher?.FireTimer();

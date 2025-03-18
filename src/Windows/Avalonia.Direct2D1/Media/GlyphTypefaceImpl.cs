@@ -70,7 +70,7 @@ namespace Avalonia.Direct2D1.Media
             return null;
         }
 
-        private static uint SwapBytes(uint x)
+        private static uint32 SwapBytes(uint32 x)
         {
             x = (x >> 16) | (x << 16);
 
@@ -100,7 +100,7 @@ namespace Avalonia.Direct2D1.Media
         public Avalonia.Media.FontStretch Stretch { get; }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort GetGlyph(uint codepoint)
+        public ushort GetGlyph(uint32 codepoint)
         {
             if (Font.TryGetGlyph(codepoint, out var glyph))
             {
@@ -110,7 +110,7 @@ namespace Avalonia.Direct2D1.Media
             return 0;
         }
 
-        public bool TryGetGlyph(uint codepoint, out ushort glyph)
+        public bool TryGetGlyph(uint32 codepoint, out ushort glyph)
         {
             glyph = GetGlyph(codepoint);
 
@@ -118,7 +118,7 @@ namespace Avalonia.Direct2D1.Media
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort[] GetGlyphs(ReadOnlySpan<uint> codepoints)
+        public ushort[] GetGlyphs(ReadOnlySpan<uint32> codepoints)
         {
             var glyphs = new ushort[codepoints.Length];
 
@@ -142,7 +142,7 @@ namespace Avalonia.Direct2D1.Media
         /// <inheritdoc cref="IGlyphTypeface"/>
         public int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
         {
-            var glyphIndices = new uint[glyphs.Length];
+            var glyphIndices = new uint32[glyphs.Length];
 
             for (var i = 0; i < glyphs.Length; i++)
             {
@@ -197,7 +197,7 @@ namespace Avalonia.Direct2D1.Media
             GC.SuppressFinalize(this);
         }
 
-        public bool TryGetTable(uint tag, out byte[] table)
+        public bool TryGetTable(uint32 tag, out byte[] table)
         {
             table = null;
             var blob = Face.ReferenceTable(tag);

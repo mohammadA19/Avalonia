@@ -346,7 +346,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool IsIsolateStart(BidiClass type)
         {
-            const uint mask =
+            const uint32 mask =
                 (1U << (int32)BidiClass.LeftToRightIsolate) |
                 (1U << (int32)BidiClass.RightToLeftIsolate) |
                 (1U << (int32)BidiClass.FirstStrongIsolate);
@@ -875,13 +875,13 @@ namespace Avalonia.Media.TextFormatting.Unicode
             int32 i;
             var previousClass = sos;
             
-            const uint isolateMask =
+            const uint32 isolateMask =
                 (1U << (int32)BidiClass.LeftToRightIsolate) |
                 (1U << (int32)BidiClass.RightToLeftIsolate) |
                 (1U << (int32)BidiClass.FirstStrongIsolate) |
                 (1U << (int32)BidiClass.PopDirectionalIsolate);
 
-            const uint wRulesMask =
+            const uint32 wRulesMask =
                 (1U << (int32)BidiClass.EuropeanNumber) |
                 (1U << (int32)BidiClass.ArabicLetter) |
                 (1U << (int32)BidiClass.EuropeanSeparator) |
@@ -889,7 +889,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 (1U << (int32)BidiClass.ArabicNumber) |
                 (1U << (int32)BidiClass.EuropeanTerminator);
 
-            uint wRules = 0;
+            uint32 wRules = 0;
 
             for (i = 0; i < _runLength; i++)
             {
@@ -1534,7 +1534,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool IsWhitespace(BidiClass biDiClass)
         {
-            const uint mask =
+            const uint32 mask =
                 (1U << (int32)BidiClass.LeftToRightEmbedding) |
                 (1U << (int32)BidiClass.RightToLeftEmbedding) |
                 (1U << (int32)BidiClass.LeftToRightOverride) |
@@ -1568,7 +1568,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool IsRemovedByX9(BidiClass biDiClass)
         {
-            const uint mask =
+            const uint32 mask =
                 (1U << (int32)BidiClass.LeftToRightEmbedding) |
                 (1U << (int32)BidiClass.RightToLeftEmbedding) |
                 (1U << (int32)BidiClass.LeftToRightOverride) |
@@ -1585,7 +1585,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool IsNeutralClass(BidiClass direction)
         {
-            const uint mask =
+            const uint32 mask =
                 (1U << (int32)BidiClass.ParagraphSeparator) |
                 (1U << (int32)BidiClass.SegmentSeparator) |
                 (1U << (int32)BidiClass.WhiteSpace) |

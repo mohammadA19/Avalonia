@@ -5,8 +5,8 @@ namespace Avalonia.Win32.DComposition;
 [StructLayout(LayoutKind.Sequential)]
 internal struct DXGI_RATIONAL
 {
-    public uint Numerator;
-    public uint Denominator;
+    public uint32 Numerator;
+    public uint32 Denominator;
 }
 
 [StructLayout(LayoutKind.Sequential)]

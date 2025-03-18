@@ -213,7 +213,7 @@ namespace Avalonia.Media.Imaging
             {
                 var srcAddress = fb.Address + fb.RowBytes * (sourceRect.Y + y) + offsetX;
                 var dstAddress = buffer + stride * y;
-                Unsafe.CopyBlock(dstAddress.ToPointer(), srcAddress.ToPointer(), (uint)minStride);
+                Unsafe.CopyBlock(dstAddress.ToPointer(), srcAddress.ToPointer(), (uint32)minStride);
             }
         }
 

@@ -72,7 +72,7 @@ namespace Avalonia.LinuxFramebuffer
         public short revents;    /* returned events */
     };
     
-    enum FbIoCtl : uint
+    enum FbIoCtl : uint32
     {
         FBIOGET_VSCREENINFO = 0x4600,
         FBIOPUT_VSCREENINFO = 0x4601,
@@ -299,7 +299,7 @@ namespace Avalonia.LinuxFramebuffer
         [FieldOffset(0)]
         public int32 fd;
         [FieldOffset(0)]
-        public uint u32;
+        public uint32 u32;
         [FieldOffset(0)]
         public ulong u64;
     }
@@ -307,7 +307,7 @@ namespace Avalonia.LinuxFramebuffer
     [StructLayout(LayoutKind.Sequential)]
     struct epoll_event
     {
-        public uint events;
+        public uint32 events;
         public epoll_data data;
     }
 }

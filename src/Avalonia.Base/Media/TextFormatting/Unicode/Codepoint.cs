@@ -5,7 +5,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
 {
     public readonly record struct Codepoint
     {
-        private readonly uint _value;
+        private readonly uint32 _value;
 
         /// <summary>
         /// The replacement codepoint that is used for non supported values.
@@ -21,12 +21,12 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// </summary>
         /// <param name="value">The codepoint value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Codepoint(uint value) => _value = value;
+        public Codepoint(uint32 value) => _value = value;
 
         /// <summary>
         /// Get the codepoint's value.
         /// </summary>
-        public uint Value => _value;
+        public uint32 Value => _value;
 
         /// <summary>
         /// Gets the <see cref="Unicode.GeneralCategory"/>.
@@ -188,7 +188,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return (int32)codepoint._value;
         }
 
-        public static implicit operator uint(Codepoint codepoint)
+        public static implicit operator uint32(Codepoint codepoint)
         {
             return codepoint._value;
         }
@@ -211,23 +211,23 @@ namespace Avalonia.Media.TextFormatting.Unicode
 
             count = 1;
 
-            // Perf note: uint check allows the JIT to ellide the next bound check
-            if ((uint)index >= (uint)text.Length)
+            // Perf note: uint32 check allows the JIT to ellide the next bound check
+            if ((uint32)index >= (uint32)text.Length)
             {
                 return ReplacementCodepoint;
             }
 
-            uint code = text[index];
+            uint32 code = text[index];
 
             //# Surrogate
             if (IsInRangeInclusive(code, 0xD800U, 0xDFFFU))
             {
-                uint hi, low;
+                uint32 hi, low;
 
                 //# High surrogate
                 if (code <= 0xDBFF)
                 {
-                    if ((uint)(index + 1) < (uint)text.Length)
+                    if ((uint32)(index + 1) < (uint32)text.Length)
                     {
                         hi = code;
                         low = text[index + 1];
@@ -265,7 +265,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool IsInRangeInclusive(uint value, uint lowerBound, uint upperBound)
+        private static bool IsInRangeInclusive(uint32 value, uint32 lowerBound, uint32 upperBound)
             => value - lowerBound <= upperBound - lowerBound;
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <paramref name="lowerBound"/> and <paramref name="upperBound"/>, inclusive.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInRangeInclusive(Codepoint cp, uint lowerBound, uint upperBound)
+        public static bool IsInRangeInclusive(Codepoint cp, uint32 lowerBound, uint32 upperBound)
             => IsInRangeInclusive(cp._value, lowerBound, upperBound);
     }
 }

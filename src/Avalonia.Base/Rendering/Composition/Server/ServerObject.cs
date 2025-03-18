@@ -15,7 +15,7 @@ namespace Avalonia.Rendering.Composition.Server
     /// </summary>
     internal abstract class ServerObject : SimpleServerObject, IExpressionObject
     {
-        private uint _activationCount;
+        private uint32 _activationCount;
         private ServerObjectAnimations? _animations;
         public ServerObjectAnimations? Animations => _animations;
         public ServerObjectAnimations GetOrCreateAnimations() => _animations ??= new(this);

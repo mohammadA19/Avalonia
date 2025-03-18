@@ -19,10 +19,10 @@ namespace Avalonia.Media.Fonts.Tables
         private readonly string tag;
         private readonly ushort codePageRange1;
         private readonly ushort codePageRange2;
-        private readonly uint unicodeRange1;
-        private readonly uint unicodeRange2;
-        private readonly uint unicodeRange3;
-        private readonly uint unicodeRange4;
+        private readonly uint32 unicodeRange1;
+        private readonly uint32 unicodeRange2;
+        private readonly uint32 unicodeRange3;
+        private readonly uint32 unicodeRange4;
         private readonly ushort breakChar;
         private readonly ushort defaultChar;
         private readonly ushort firstCharIndex;
@@ -49,10 +49,10 @@ namespace Avalonia.Media.Fonts.Tables
             short strikeoutPosition,
             short familyClass,
             byte[] panose,
-            uint unicodeRange1,
-            uint unicodeRange2,
-            uint unicodeRange3,
-            uint unicodeRange4,
+            uint32 unicodeRange1,
+            uint32 unicodeRange2,
+            uint32 unicodeRange3,
+            uint32 unicodeRange4,
             string tag,
             FontStyleSelection fontStyle,
             ushort firstCharIndex,
@@ -329,10 +329,10 @@ namespace Avalonia.Media.Fonts.Tables
             short strikeoutPosition = reader.ReadInt16();
             short familyClass = reader.ReadInt16();
             byte[] panose = reader.ReadUInt8Array(10);
-            uint unicodeRange1 = reader.ReadUInt32(); // Bits 0–31
-            uint unicodeRange2 = reader.ReadUInt32(); // Bits 32–63
-            uint unicodeRange3 = reader.ReadUInt32(); // Bits 64–95
-            uint unicodeRange4 = reader.ReadUInt32(); // Bits 96–127
+            uint32 unicodeRange1 = reader.ReadUInt32(); // Bits 0–31
+            uint32 unicodeRange2 = reader.ReadUInt32(); // Bits 32–63
+            uint32 unicodeRange3 = reader.ReadUInt32(); // Bits 64–95
+            uint32 unicodeRange4 = reader.ReadUInt32(); // Bits 96–127
             string tag = reader.ReadTag();
             FontStyleSelection fontStyle = reader.ReadUInt16<FontStyleSelection>();
             ushort firstCharIndex = reader.ReadUInt16();

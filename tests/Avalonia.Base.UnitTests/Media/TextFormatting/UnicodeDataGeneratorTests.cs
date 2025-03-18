@@ -22,7 +22,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
             foreach (var value in unicodeData.Values)
             {
-                var data = unicodeDataTrie.Get((uint)value.Codepoint);
+                var data = unicodeDataTrie.Get((uint32)value.Codepoint);
                 
                 Assert.Equal(value.GeneralCategory, GetValue(data, 0, UnicodeData.CATEGORY_MASK));
                 
@@ -35,7 +35,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
             foreach (var value in biDiData.Values)
             {
-                var data = biDiTrie.Get((uint)value.Codepoint);
+                var data = biDiTrie.Get((uint32)value.Codepoint);
                 
                 Assert.Equal(value.Bracket, GetValue(data, 0, UnicodeData.BIDIPAIREDBRACKED_MASK));
                 
@@ -47,7 +47,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             UnicodeEnumsGenerator.CreatePropertyValueAliasHelper(unicodeDataEntries, biDiDataEntries);
         }
 
-        private static int32 GetValue(uint value, int32 shift, int32 mask)
+        private static int32 GetValue(uint32 value, int32 shift, int32 mask)
         {
             return (int32)((value >> shift) & mask);
         }

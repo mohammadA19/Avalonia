@@ -193,9 +193,9 @@ namespace Avalonia.Direct2D1.Media
 
                 features[i] = new Feature(
                     Tag.Parse(fontFeature.Tag), 
-                    (uint)fontFeature.Value,
-                    (uint)fontFeature.Start,
-                    (uint)fontFeature.End);
+                    (uint32)fontFeature.Value,
+                    (uint32)fontFeature.Start,
+                    (uint32)fontFeature.End);
             }
             
             return features;

@@ -27,20 +27,20 @@ namespace Avalonia.Win32.WinRT.Composition
         }
 
         public abstract Guid EffectId { get; }
-        public unsafe void GetNamedPropertyMapping(IntPtr name, uint* index, GRAPHICS_EFFECT_PROPERTY_MAPPING* mapping) =>
+        public unsafe void GetNamedPropertyMapping(IntPtr name, uint32* index, GRAPHICS_EFFECT_PROPERTY_MAPPING* mapping) =>
             throw new COMException("Not supported", unchecked((int32)0x80004001));
 
-        public abstract uint PropertyCount { get; }
-        public abstract IPropertyValue? GetProperty(uint index);
+        public abstract uint32 PropertyCount { get; }
+        public abstract IPropertyValue? GetProperty(uint32 index);
 
-        public IGraphicsEffectSource GetSource(uint index)
+        public IGraphicsEffectSource GetSource(uint32 index)
         {
             if (_sources == null || index> _sources.Length)
                 throw new COMException("Invalid index", unchecked((int32)0x80070057));
             return _sources[index];
         }
 
-        public uint SourceCount => (uint)(_sources?.Length ?? 0);
+        public uint32 SourceCount => (uint32)(_sources?.Length ?? 0);
 
         public override void OnUnreferencedFromNative()
         {
@@ -58,7 +58,7 @@ namespace Avalonia.Win32.WinRT.Composition
         private readonly int32 _x;
         private readonly int32 _y;
         public override Guid EffectId => D2DEffects.CLSID_D2D1Border;
-        public override uint PropertyCount => 2;
+        public override uint32 PropertyCount => 2;
 
         public BorderEffect(int32 x, int32 y, params IGraphicsEffectSource[] _sources):base(_sources)
         {
@@ -66,12 +66,12 @@ namespace Avalonia.Win32.WinRT.Composition
             _y = y;
         }
         
-        public override IPropertyValue? GetProperty(uint index)
+        public override IPropertyValue? GetProperty(uint32 index)
         {
             if (index == 0)
-                return new WinRTPropertyValue((uint)_x);
+                return new WinRTPropertyValue((uint32)_x);
             if (index == 1)
-                return new WinRTPropertyValue((uint)_y);
+                return new WinRTPropertyValue((uint32)_y);
             return null;
         }
     }
@@ -86,12 +86,12 @@ namespace Avalonia.Win32.WinRT.Composition
         }
 
         public override Guid EffectId => D2DEffects.CLSID_D2D1Blend;
-        public override uint PropertyCount => 1;
+        public override uint32 PropertyCount => 1;
 
-        public override IPropertyValue? GetProperty(uint index)
+        public override IPropertyValue? GetProperty(uint32 index)
         {
             if (index == 0)
-                return new WinRTPropertyValue((uint)_mode);
+                return new WinRTPropertyValue((uint32)_mode);
             return null;
         }
     }
@@ -106,12 +106,12 @@ namespace Avalonia.Win32.WinRT.Composition
         }
 
         public override Guid EffectId => D2DEffects.CLSID_D2D1Composite;
-        public override uint PropertyCount => 1;
+        public override uint32 PropertyCount => 1;
 
-        public override IPropertyValue? GetProperty(uint index)
+        public override IPropertyValue? GetProperty(uint32 index)
         {
             if (index == 0)
-                return new WinRTPropertyValue((uint)_mode);
+                return new WinRTPropertyValue((uint32)_mode);
             return null;
         }
     }  
@@ -126,9 +126,9 @@ namespace Avalonia.Win32.WinRT.Composition
         }
 
         public override Guid EffectId => D2DEffects.CLSID_D2D1Opacity;
-        public override uint PropertyCount => 1;
+        public override uint32 PropertyCount => 1;
 
-        public override IPropertyValue? GetProperty(uint index)
+        public override IPropertyValue? GetProperty(uint32 index)
         {
             if (index == 0)
                 return new WinRTPropertyValue(_opacity);
@@ -146,9 +146,9 @@ namespace Avalonia.Win32.WinRT.Composition
         }
 
         public override Guid EffectId => D2DEffects.CLSID_D2D1Flood;
-        public override uint PropertyCount => 1;
+        public override uint32 PropertyCount => 1;
 
-        public override IPropertyValue? GetProperty(uint index)
+        public override IPropertyValue? GetProperty(uint32 index)
         {
             if (index == 0)
                 return new WinRTPropertyValue(_color);
@@ -188,9 +188,9 @@ namespace Avalonia.Win32.WinRT.Composition
 
         public override Guid EffectId => D2DEffects.CLSID_D2D1GaussianBlur;
 
-        public override uint PropertyCount => 3;
+        public override uint32 PropertyCount => 3;
 
-        public override IPropertyValue? GetProperty(uint index)
+        public override IPropertyValue? GetProperty(uint32 index)
         {
             switch ((D2D1GaussianBlurProp)index)
             {
@@ -198,11 +198,11 @@ namespace Avalonia.Win32.WinRT.Composition
                     return new WinRTPropertyValue(30.0f);
 
                 case D2D1GaussianBlurProp.D2D1_GAUSSIANBLUR_PROP_OPTIMIZATION:
-                    return new WinRTPropertyValue((uint)D2D1_GAUSSIANBLUR_OPTIMIZATION
+                    return new WinRTPropertyValue((uint32)D2D1_GAUSSIANBLUR_OPTIMIZATION
                         .D2D1_GAUSSIANBLUR_OPTIMIZATION_BALANCED);
 
                 case D2D1GaussianBlurProp.D2D1_GAUSSIANBLUR_PROP_BORDER_MODE:
-                    return new WinRTPropertyValue((uint)D2D1_BORDER_MODE.D2D1_BORDER_MODE_HARD);
+                    return new WinRTPropertyValue((uint32)D2D1_BORDER_MODE.D2D1_BORDER_MODE_HARD);
             }
 
             return null;
@@ -223,9 +223,9 @@ namespace Avalonia.Win32.WinRT.Composition
 
         public override Guid EffectId => D2DEffects.CLSID_D2D1Saturation;
 
-        public override uint PropertyCount => 1;
+        public override uint32 PropertyCount => 1;
 
-        public override IPropertyValue? GetProperty(uint index)
+        public override IPropertyValue? GetProperty(uint32 index)
         {
             switch ((D2D1_SATURATION_PROP)index)
             {

@@ -58,7 +58,7 @@ namespace Avalonia.Media.Imaging
             {
                 for (var y = 0; y < size.Height; y++)
                     Unsafe.CopyBlock((locked.Address + locked.RowBytes * y).ToPointer(),
-                        (data + y * stride).ToPointer(), (uint)minStride);
+                        (data + y * stride).ToPointer(), (uint32)minStride);
             }
         }
 

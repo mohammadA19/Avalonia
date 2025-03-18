@@ -24,7 +24,7 @@ namespace Avalonia.Media.Immutable
         /// Initializes a new instance of the <see cref="ImmutableSolidColorBrush"/> class.
         /// </summary>
         /// <param name="color">The color to use.</param>
-        public ImmutableSolidColorBrush(uint color)
+        public ImmutableSolidColorBrush(uint32 color)
             : this(Color.FromUInt32(color))
         {
         }

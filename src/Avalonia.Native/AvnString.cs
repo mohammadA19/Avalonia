@@ -75,8 +75,8 @@ namespace Avalonia.Native.Interop
 
         public string[] ToStringArray() => _items.Select(n => n.String).ToArray();
 
-        public uint Count => (uint)_items.Length;
-        public IAvnString Get(uint index) => _items[(int32)index];
+        public uint32 Count => (uint32)_items.Length;
+        public IAvnString Get(uint32 index) => _items[(int32)index];
 
         protected override void Destroyed()
         {
@@ -132,7 +132,7 @@ namespace Avalonia.Native.Interop.Impl
         public string[] ToStringArray()
         {
             var arr = new string[Count];
-            for(uint c = 0; c<arr.Length;c++)
+            for(uint32 c = 0; c<arr.Length;c++)
                 using (var s = Get(c))
                     arr[c] = s.String;
             return arr;

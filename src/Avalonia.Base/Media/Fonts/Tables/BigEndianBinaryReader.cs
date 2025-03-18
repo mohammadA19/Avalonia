@@ -210,9 +210,9 @@ namespace Avalonia.Media.Fonts.Tables
         /// <returns>
         /// The 32-bit unsigned integer read.
         /// </returns>
-        public uint[] ReadUInt32Array(int32 length)
+        public uint32[] ReadUInt32Array(int32 length)
         {
-            uint[] data = new uint[length];
+            uint32[] data = new uint32[length];
             for (int32 i = 0; i < length; i++)
             {
                 data[i] = ReadUInt32();
@@ -287,7 +287,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// for this reader. 4 bytes are read.
         /// </summary>
         /// <returns>The 32-bit unsigned integer read.</returns>
-        public uint ReadUInt32()
+        public uint32 ReadUInt32()
         {
             ReadInternal(_buffer, 4);
 
@@ -299,7 +299,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// 4 bytes are read.
         /// </summary>
         /// <returns>The 32-bit unsigned integer read.</returns>
-        public uint ReadOffset32() => ReadUInt32();
+        public uint32 ReadOffset32() => ReadUInt32();
 
         /// <summary>
         /// Reads the specified number of bytes, returning them in a new byte array.

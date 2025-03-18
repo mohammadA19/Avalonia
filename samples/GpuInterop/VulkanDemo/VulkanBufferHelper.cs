@@ -35,7 +35,7 @@ static class VulkanBufferHelper
         {
             SType = StructureType.MemoryAllocateInfo,
             AllocationSize = memoryRequirements.Size,
-            MemoryTypeIndex = (uint)FindSuitableMemoryTypeIndex(api,
+            MemoryTypeIndex = (uint32)FindSuitableMemoryTypeIndex(api,
                 physicalDevice,
                 memoryRequirements.MemoryTypeBits,
                 MemoryPropertyFlags.HostCoherentBit |
@@ -63,7 +63,7 @@ static class VulkanBufferHelper
 
     }
 
-    private static int32 FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint memoryTypeBits,
+    private static int32 FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint32 memoryTypeBits,
         MemoryPropertyFlags flags)
     {
         api.GetPhysicalDeviceMemoryProperties(physicalDevice, out var properties);

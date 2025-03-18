@@ -13,13 +13,13 @@ internal partial class VulkanDevice : IVulkanDevice
     private VkDevice _handle;
     private readonly VkPhysicalDevice _physicalDeviceHandle;
     private readonly VkQueue _mainQueue;
-    private readonly uint _graphicsQueueIndex;
+    private readonly uint32 _graphicsQueueIndex;
     private readonly object _lock = new();
     private Thread? _lockedByThread;
     private int32 _lockCount;
 
     private VulkanDevice(VulkanInstanceApi instanceApi, VkDevice handle, VkPhysicalDevice physicalDeviceHandle,
-        VkQueue mainQueue, uint graphicsQueueIndex, string[] enabledExtensions)
+        VkQueue mainQueue, uint32 graphicsQueueIndex, string[] enabledExtensions)
     {
         _instanceApi = instanceApi;
         _handle = handle;
@@ -57,7 +57,7 @@ internal partial class VulkanDevice : IVulkanDevice
     public IntPtr Handle => _handle.Handle;
     public IntPtr PhysicalDeviceHandle => _physicalDeviceHandle.Handle;
     public IntPtr MainQueueHandle => CheckAccess(_mainQueue).Handle;
-    public uint GraphicsQueueFamilyIndex => _graphicsQueueIndex;
+    public uint32 GraphicsQueueFamilyIndex => _graphicsQueueIndex;
     public IVulkanInstance Instance { get; }
     public void Dispose()
     {

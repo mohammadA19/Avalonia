@@ -46,7 +46,7 @@ internal class Win32DispatcherImpl : IControlledDispatcherImpl
         }
         else
         {
-            var interval = (uint)Math.Min(int32.MaxValue - 10, Math.Max(1, Now - dueTimeInMs.Value));
+            var interval = (uint32)Math.Min(int32.MaxValue - 10, Math.Max(1, Now - dueTimeInMs.Value));
             SetTimer(
                 _messageWindow,
                 (IntPtr)Win32Platform.TIMERID_DISPATCHER,

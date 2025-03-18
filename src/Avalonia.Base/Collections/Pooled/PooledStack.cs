@@ -448,7 +448,7 @@ namespace Avalonia.Collections.Pooled
             int32 size = _size - 1;
             T[] array = _array;
 
-            if ((uint)size >= (uint)array.Length)
+            if ((uint32)size >= (uint32)array.Length)
             {
                 ThrowForEmptyStack();
             }
@@ -461,7 +461,7 @@ namespace Avalonia.Collections.Pooled
             int32 size = _size - 1;
             T[] array = _array;
 
-            if ((uint)size >= (uint)array.Length)
+            if ((uint32)size >= (uint32)array.Length)
             {
                 result = default;
                 return false;
@@ -480,9 +480,9 @@ namespace Avalonia.Collections.Pooled
             T[] array = _array;
 
             // if (_size == 0) is equivalent to if (size == -1), and this case
-            // is covered with (uint)size, thus allowing bounds check elimination 
+            // is covered with (uint32)size, thus allowing bounds check elimination 
             // https://github.com/dotnet/coreclr/pull/9773
-            if ((uint)size >= (uint)array.Length)
+            if ((uint32)size >= (uint32)array.Length)
             {
                 ThrowForEmptyStack();
             }
@@ -502,7 +502,7 @@ namespace Avalonia.Collections.Pooled
             int32 size = _size - 1;
             T[] array = _array;
 
-            if ((uint)size >= (uint)array.Length)
+            if ((uint32)size >= (uint32)array.Length)
             {
                 result = default;
                 return false;
@@ -526,7 +526,7 @@ namespace Avalonia.Collections.Pooled
             int32 size = _size;
             T[] array = _array;
 
-            if ((uint)size < (uint)array.Length)
+            if ((uint32)size < (uint32)array.Length)
             {
                 array[size] = item;
                 _version++;

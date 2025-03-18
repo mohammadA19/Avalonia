@@ -32,10 +32,10 @@ internal unsafe partial struct SafeArrayRef
         internal ADVANCED_FEATURE_FLAGS fFeatures;
 
         /// <summary>The size of an array element.</summary>
-        internal uint cbElements;
+        internal uint32 cbElements;
 
         /// <summary>The number of times the array has been locked without a corresponding unlock.</summary>
-        internal uint cLocks;
+        internal uint32 cLocks;
 
         /// <summary>The data.</summary>
         internal void* pvData;
@@ -46,7 +46,7 @@ internal unsafe partial struct SafeArrayRef
     internal struct SAFEARRAYBOUND
     {
         /// <summary>The number of elements in the dimension.</summary>
-        internal uint cElements;
+        internal uint32 cElements;
 
         /// <summary>The lower bound of the dimension.</summary>
         internal int32 lLbound;
@@ -116,7 +116,7 @@ internal unsafe partial struct SafeArrayRef
                 Marshal.Copy(data, (byte[])(object)array, 0, length);
             else if (typeof(T) == typeof(ushort))
                 Marshal.Copy(data, (short[])(object)array, 0, length);
-            else if (typeof(T) == typeof(uint))
+            else if (typeof(T) == typeof(uint32))
                 Marshal.Copy(data, (int32[])(object)array, 0, length);
             else if (typeof(T) == typeof(ulong))
                 Marshal.Copy(data, (long[])(object)array, 0, length);
@@ -185,7 +185,7 @@ internal unsafe partial struct SafeArrayRef
 
         static SafeArrayRef CreateFromSpan<T>(ReadOnlySpan<T> span, VarEnum varEnum)
         {
-            var bound = new SAFEARRAYBOUND { cElements = (uint)span.Length, lLbound = 0 };
+            var bound = new SAFEARRAYBOUND { cElements = (uint32)span.Length, lLbound = 0 };
             var safearray = SafeArrayCreate(varEnum, 1, bound);
             if (span.Length == 0)
             {
@@ -284,7 +284,7 @@ internal unsafe partial struct SafeArrayRef
 
             IReadOnlyCollection<byte> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI1),
             IReadOnlyCollection<ushort> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI2),
-            IReadOnlyCollection<uint> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI4),
+            IReadOnlyCollection<uint32> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI4),
             IReadOnlyCollection<ulong> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI8),
 
             IReadOnlyCollection<float> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_R4),
@@ -306,7 +306,7 @@ internal unsafe partial struct SafeArrayRef
     }
 
     [LibraryImport("oleaut32.dll")]
-    private static unsafe partial SAFEARRAY* SafeArrayCreate(VarEnum vt, uint cDims, in SAFEARRAYBOUND rgsabound);
+    private static unsafe partial SAFEARRAY* SafeArrayCreate(VarEnum vt, uint32 cDims, in SAFEARRAYBOUND rgsabound);
 
     [LibraryImport("oleaut32.dll")]
     private static unsafe partial void SafeArrayDestroy(SAFEARRAY* array);

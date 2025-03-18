@@ -35,13 +35,13 @@ namespace Avalonia.Win32.DirectX
     {
         public fixed ushort Description[128];
 
-        public uint VendorId;
+        public uint32 VendorId;
 
-        public uint DeviceId;
+        public uint32 DeviceId;
 
-        public uint SubSysId;
+        public uint32 SubSysId;
 
-        public uint Revision;
+        public uint32 Revision;
 
         public nuint DedicatedVideoMemory;
 
@@ -56,13 +56,13 @@ namespace Avalonia.Win32.DirectX
     {
         public fixed ushort Description[128];
 
-        public uint VendorId;
+        public uint32 VendorId;
 
-        public uint DeviceId;
+        public uint32 DeviceId;
 
-        public uint SubSysId;
+        public uint32 SubSysId;
 
-        public uint Revision;
+        public uint32 Revision;
 
         public nuint DedicatedVideoMemory;
 
@@ -72,16 +72,16 @@ namespace Avalonia.Win32.DirectX
 
         public ulong AdapterLuid;
 
-        public uint Flags;
+        public uint32 Flags;
     }
 
     internal struct DXGI_FRAME_STATISTICS
     {
-        public uint PresentCount;
+        public uint32 PresentCount;
 
-        public uint PresentRefreshCount;
+        public uint32 PresentRefreshCount;
 
-        public uint SyncRefreshCount;
+        public uint32 SyncRefreshCount;
 
         public ulong SyncQPCTime;
 
@@ -96,7 +96,7 @@ namespace Avalonia.Win32.DirectX
 
         public float MinConvertedValue;
 
-        public uint NumGammaControlPoints;
+        public uint32 NumGammaControlPoints;
 
         public fixed float ControlPointPositions[1025];
     }
@@ -132,7 +132,7 @@ namespace Avalonia.Win32.DirectX
 
     internal unsafe struct DXGI_PRESENT_PARAMETERS
     {
-        public uint DirtyRectsCount;
+        public uint32 DirtyRectsCount;
 
         public RECT* pDirtyRects;
 
@@ -169,15 +169,15 @@ namespace Avalonia.Win32.DirectX
 
     internal struct DXGI_SAMPLE_DESC
     {
-        public uint Count;
-        public uint Quality;
+        public uint32 Count;
+        public uint32 Quality;
     }
 
     internal struct DXGI_SURFACE_DESC
     {
-        public uint Width;
+        public uint32 Width;
 
-        public uint Height;
+        public uint32 Height;
 
         public DXGI_FORMAT Format;
 
@@ -188,7 +188,7 @@ namespace Avalonia.Win32.DirectX
     {
         public DXGI_MODE_DESC BufferDesc;
         public DXGI_SAMPLE_DESC SampleDesc;
-        public uint BufferUsage;
+        public uint32 BufferUsage;
         public ushort BufferCount;
         public IntPtr OutputWindow;
         public int32 Windowed;
@@ -198,17 +198,17 @@ namespace Avalonia.Win32.DirectX
 
     internal struct DXGI_SWAP_CHAIN_DESC1
     {
-        public uint Width;
-        public uint Height;
+        public uint32 Width;
+        public uint32 Height;
         public DXGI_FORMAT Format;
         public int32 Stereo; // BOOL maps to int32. If we use the CLR 'bool' type here, the struct becomes non-blittable. See #9599
         public DXGI_SAMPLE_DESC SampleDesc;
-        public uint BufferUsage;
-        public uint BufferCount;
+        public uint32 BufferUsage;
+        public uint32 BufferCount;
         public DXGI_SCALING Scaling;
         public DXGI_SWAP_EFFECT SwapEffect;
         public DXGI_ALPHA_MODE AlphaMode;
-        public uint Flags;
+        public uint32 Flags;
     }
 
     internal struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC
@@ -224,13 +224,13 @@ namespace Avalonia.Win32.DirectX
 
     internal struct D3D11_TEXTURE2D_DESC
     {
-        public uint Width;
+        public uint32 Width;
 
-        public uint Height;
+        public uint32 Height;
 
-        public uint MipLevels;
+        public uint32 MipLevels;
 
-        public uint ArraySize;
+        public uint32 ArraySize;
 
         public DXGI_FORMAT Format;
 
@@ -240,7 +240,7 @@ namespace Avalonia.Win32.DirectX
 
         public D3D11_BIND_FLAG BindFlags;
 
-        public uint CPUAccessFlags;
+        public uint32 CPUAccessFlags;
 
         public D3D11_RESOURCE_MISC_FLAG MiscFlags;
     }

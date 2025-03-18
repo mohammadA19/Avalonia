@@ -55,8 +55,8 @@ internal class AngleExternalObjectsFeature : IGlContextExternalObjectsFeature, I
             var desc = new D3D11_TEXTURE2D_DESC
             {
                 Format = fmt,
-                Width = (uint)size.Width,
-                Height = (uint)size.Height,
+                Width = (uint32)size.Width,
+                Height = (uint32)size.Height,
                 ArraySize = 1,
                 MipLevels = 1,
                 SampleDesc = new DXGI_SAMPLE_DESC { Count = 1, Quality = 0 },

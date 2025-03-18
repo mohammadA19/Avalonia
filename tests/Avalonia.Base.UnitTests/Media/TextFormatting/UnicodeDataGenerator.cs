@@ -50,7 +50,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
                 var value = (properties.BiDiClass << UnicodeData.BIDICLASS_SHIFT) |
                             (properties.BracketType << UnicodeData.BIDIPAIREDBRACKEDTYPE_SHIFT) | properties.Bracket;
 
-                biDiTrieBuilder.Set(properties.Codepoint, (uint)value);
+                biDiTrieBuilder.Set(properties.Codepoint, (uint32)value);
             }
 
             biDiDataEntries = new BiDiDataEntries()
@@ -92,7 +92,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
                           get => new(Data, 0x{{trie.HighStart:X8}}, 0x{{trie.ErrorValue:X8}});
                       } 
                       
-                      private static ReadOnlySpan<uint> Data => new uint[]
+                      private static ReadOnlySpan<uint32> Data => new uint32[]
                       {
                   """);
 
@@ -146,7 +146,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
                 var value = (properties.LineBreakClass << UnicodeData.LINEBREAK_SHIFT) |
                             (properties.Script << UnicodeData.SCRIPT_SHIFT) | properties.GeneralCategory;
 
-                unicodeDataTrieBuilder.Set(properties.Codepoint, (uint)value);
+                unicodeDataTrieBuilder.Set(properties.Codepoint, (uint32)value);
             }
 
             dataEntries = new UnicodeDataEntries

@@ -9,7 +9,7 @@ namespace Avalonia.Win32
 {
     internal partial class WindowImpl
     {
-        protected virtual unsafe IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        protected virtual unsafe IntPtr WndProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam)
         {
             IntPtr lRet = IntPtr.Zero;
             bool callDwp = true;

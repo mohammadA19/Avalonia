@@ -124,7 +124,7 @@ namespace Avalonia.Win32.OpenGl.Angle
             using (chosenAdapter)
                 DirectXUnmanagedMethods.D3D11CreateDevice(chosenAdapter?.GetNativeIntPtr() ?? IntPtr.Zero,
                     D3D_DRIVER_TYPE.D3D_DRIVER_TYPE_UNKNOWN,
-                    IntPtr.Zero, 0, featureLevels, (uint)featureLevels.Length,
+                    IntPtr.Zero, 0, featureLevels, (uint32)featureLevels.Length,
                     7, out pD3dDevice, out _, null);
 
 

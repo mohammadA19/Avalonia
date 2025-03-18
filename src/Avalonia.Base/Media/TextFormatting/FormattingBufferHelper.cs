@@ -14,7 +14,7 @@ namespace Avalonia.Media.TextFormatting
         {
             arrayBuilder.Clear();
 
-            if (IsBufferTooLarge<T>((uint) arrayBuilder.Capacity))
+            if (IsBufferTooLarge<T>((uint32) arrayBuilder.Capacity))
             {
                 arrayBuilder = default;
             }
@@ -24,7 +24,7 @@ namespace Avalonia.Media.TextFormatting
         {
             list.Clear();
 
-            if (IsBufferTooLarge<T>((uint) list.Capacity))
+            if (IsBufferTooLarge<T>((uint32) list.Capacity))
             {
                 list.TrimExcess();
             }
@@ -32,7 +32,7 @@ namespace Avalonia.Media.TextFormatting
 
         public static void ClearThenResetIfTooLarge<T>(Stack<T> stack)
         {
-            var approximateCapacity = RoundUpToPowerOf2((uint)stack.Count);
+            var approximateCapacity = RoundUpToPowerOf2((uint32)stack.Count);
 
             stack.Clear();
 
@@ -45,7 +45,7 @@ namespace Avalonia.Media.TextFormatting
         public static void ClearThenResetIfTooLarge<TKey, TValue>(ref Dictionary<TKey, TValue> dictionary)
             where TKey : notnull
         {
-            var approximateCapacity = RoundUpToPowerOf2((uint)dictionary.Count);
+            var approximateCapacity = RoundUpToPowerOf2((uint32)dictionary.Count);
 
             dictionary.Clear();
 
@@ -61,11 +61,11 @@ namespace Avalonia.Media.TextFormatting
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool IsBufferTooLarge<T>(uint capacity)
-            => (long) (uint) Unsafe.SizeOf<T>() * capacity > MaxKeptBufferSizeInBytes;
+        private static bool IsBufferTooLarge<T>(uint32 capacity)
+            => (long) (uint32) Unsafe.SizeOf<T>() * capacity > MaxKeptBufferSizeInBytes;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static uint RoundUpToPowerOf2(uint value)
+        private static uint32 RoundUpToPowerOf2(uint32 value)
         {
 #if NET6_0_OR_GREATER
             return BitOperations.RoundUpToPowerOf2(value);

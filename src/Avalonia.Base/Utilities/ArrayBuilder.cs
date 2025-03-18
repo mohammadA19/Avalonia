@@ -170,7 +170,7 @@ namespace Avalonia.Utilities
             }
 
             // Same expansion algorithm as List<T>.
-            var newCapacity = length == 0 ? DefaultCapacity : (uint)length * 2u;
+            var newCapacity = length == 0 ? DefaultCapacity : (uint32)length * 2u;
 
             if (newCapacity > MaxCoreClrArrayLength)
             {
@@ -179,7 +179,7 @@ namespace Avalonia.Utilities
 
             if (newCapacity < min)
             {
-                newCapacity = (uint)min;
+                newCapacity = (uint32)min;
             }
             
             var array = new T[newCapacity];

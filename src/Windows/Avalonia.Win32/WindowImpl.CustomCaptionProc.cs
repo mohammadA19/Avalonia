@@ -19,11 +19,11 @@ namespace Avalonia.Win32
 
             // Get the frame rectangle, adjusted for the style without a caption.
             var rcFrame = new RECT();
-            AdjustWindowRectEx(ref rcFrame, (uint)(WindowStyles.WS_OVERLAPPEDWINDOW & ~WindowStyles.WS_CAPTION), false, 0);
+            AdjustWindowRectEx(ref rcFrame, (uint32)(WindowStyles.WS_OVERLAPPEDWINDOW & ~WindowStyles.WS_CAPTION), false, 0);
 
             var borderThickness = new RECT();
             
-            AdjustWindowRectEx(ref borderThickness, (uint)GetStyle(), false, 0);
+            AdjustWindowRectEx(ref borderThickness, (uint32)GetStyle(), false, 0);
             borderThickness.left *= -1;
             borderThickness.top *= -1;
 
@@ -78,7 +78,7 @@ namespace Avalonia.Win32
             return hitZones[zoneIndex];
         }
 
-        protected virtual IntPtr CustomCaptionProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam, ref bool callDwp)
+        protected virtual IntPtr CustomCaptionProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam, ref bool callDwp)
         {
             RawPointerEventArgs? e = null;
             IntPtr lRet = IntPtr.Zero;
@@ -125,7 +125,7 @@ namespace Avalonia.Win32
                     {
                         e = new RawPointerEventArgs(
                             _mouseDevice,
-                            unchecked((uint)GetMessageTime()),
+                            unchecked((uint32)GetMessageTime()),
                             Owner,
                             (WindowsMessage)msg switch
                             {
@@ -144,7 +144,7 @@ namespace Avalonia.Win32
                     if (lRet == IntPtr.Zero
                         && ShouldRedirectNonClientInput(hWnd, wParam, lParam))
                     {
-                        uint timestamp = 0;
+                        uint32 timestamp = 0;
                         GetDevicePointerInfo(wParam, out var device, out var info, out var point, out var modifiers, ref timestamp);
                         var eventType = (WindowsMessage)msg switch
                         {

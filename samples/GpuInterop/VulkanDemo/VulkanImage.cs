@@ -36,16 +36,16 @@ public unsafe class VulkanImage : IDisposable
         
         public ulong Handle => InternalHandle.Handle;
         public ulong ViewHandle => _imageView.Handle;
-        public uint UsageFlags => (uint) _imageUsageFlags;
+        public uint32 UsageFlags => (uint32) _imageUsageFlags;
         public ulong MemoryHandle => _imageMemory.Handle;
         public DeviceMemory DeviceMemory => _imageMemory;
-        public uint MipLevels { get; }
+        public uint32 MipLevels { get; }
         public Vk Api { get; }
         public PixelSize Size { get; }
         public ulong MemorySize { get; }
-        public uint CurrentLayout => (uint) _currentLayout;
+        public uint32 CurrentLayout => (uint32) _currentLayout;
 
-        public VulkanImage(VulkanContext vk, uint format, PixelSize size,
+        public VulkanImage(VulkanContext vk, uint32 format, PixelSize size,
             bool exportable, IReadOnlyList<string> supportedHandleTypes)
         {
             _vk = vk;
@@ -61,7 +61,7 @@ public unsafe class VulkanImage : IDisposable
                 ImageUsageFlags.ColorAttachmentBit | ImageUsageFlags.TransferDstBit |
                 ImageUsageFlags.TransferSrcBit | ImageUsageFlags.SampledBit;
             
-            //MipLevels = MipLevels != 0 ? MipLevels : (uint)Math.Floor(Math.Log(Math.Max(Size.Width, Size.Height), 2));
+            //MipLevels = MipLevels != 0 ? MipLevels : (uint32)Math.Floor(Math.Log(Math.Max(Size.Width, Size.Height), 2));
 
             var handleType = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ?
                 (supportedHandleTypes.Contains(KnownPlatformGraphicsExternalImageHandleTypes.D3D11TextureNtHandle)
@@ -83,8 +83,8 @@ public unsafe class VulkanImage : IDisposable
                 ImageType = ImageType.Type2D,
                 Format = Format,
                 Extent =
-                    new Extent3D((uint?)Size.Width,
-                        (uint?)Size.Height, 1),
+                    new Extent3D((uint32?)Size.Width,
+                        (uint32?)Size.Height, 1),
                 MipLevels = MipLevels,
                 ArrayLayers = 1,
                 Samples = SampleCountFlags.Count1Bit,
@@ -136,7 +136,7 @@ public unsafe class VulkanImage : IDisposable
                     exportable ? handleImport.Handle != IntPtr.Zero  ? &handleImport : &fdExport : null,
                 SType = StructureType.MemoryAllocateInfo,
                 AllocationSize = memoryRequirements.Size,
-                MemoryTypeIndex = (uint)VulkanMemoryHelper.FindSuitableMemoryTypeIndex(
+                MemoryTypeIndex = (uint32)VulkanMemoryHelper.FindSuitableMemoryTypeIndex(
                     Api,
                     _physicalDevice,
                     memoryRequirements.MemoryTypeBits, MemoryPropertyFlags.DeviceLocalBit)
@@ -263,7 +263,7 @@ public unsafe class VulkanImage : IDisposable
             commandBuffer.Submit();
         }
 
-        public void TransitionLayout(uint destinationLayout, uint destinationAccessFlags)
+        public void TransitionLayout(uint32 destinationLayout, uint32 destinationAccessFlags)
         {
             TransitionLayout((ImageLayout)destinationLayout, (AccessFlags)destinationAccessFlags);
         }
@@ -286,11 +286,11 @@ public unsafe class VulkanImage : IDisposable
             var imageInfo = new GRVkImageInfo()
             {
                 CurrentQueueFamily = _vk.QueueFamilyIndex,
-                Format = (uint)_image.Format,
+                Format = (uint32)_image.Format,
                 Image = _image.Handle,
-                ImageLayout = (uint)_image.CurrentLayout,
-                ImageTiling = (uint)_image.Tiling,
-                ImageUsageFlags = (uint)_image.UsageFlags,
+                ImageLayout = (uint32)_image.CurrentLayout,
+                ImageTiling = (uint32)_image.Tiling,
+                ImageUsageFlags = (uint32)_image.UsageFlags,
                 LevelCount = _image.MipLevels,
                 SampleCount = 1,
                 Protected = false,

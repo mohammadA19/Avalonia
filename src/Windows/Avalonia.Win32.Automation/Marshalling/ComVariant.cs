@@ -41,10 +41,10 @@ internal struct ComVariant : IDisposable
         [FieldOffset(0)] public long _i8;
         [FieldOffset(0)] public byte _ui1;
         [FieldOffset(0)] public ushort _ui2;
-        [FieldOffset(0)] public uint _ui4;
+        [FieldOffset(0)] public uint32 _ui4;
         [FieldOffset(0)] public ulong _ui8;
         [FieldOffset(0)] public int32 _int;
-        [FieldOffset(0)] public uint _uint;
+        [FieldOffset(0)] public uint32 _uint;
         [FieldOffset(0)] public short _bool;
         [FieldOffset(0)] public int32 _error;
         [FieldOffset(0)] public float _r4;
@@ -166,10 +166,10 @@ internal struct ComVariant : IDisposable
             variant.VarType = VarEnum.VT_UI2;
             variant._typeUnion._unionTypes._ui2 = (ushort)value;
         }
-        else if (value is uint)
+        else if (value is uint32)
         {
             variant.VarType = VarEnum.VT_UI4;
-            variant._typeUnion._unionTypes._ui4 = (uint)value;
+            variant._typeUnion._unionTypes._ui4 = (uint32)value;
         }
         else if (value is long)
         {
@@ -254,9 +254,9 @@ internal struct ComVariant : IDisposable
                 // unsigned integer
                 VarEnum.VT_UI1 => SafeArrayRef.ToArray<byte>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_UI2 => SafeArrayRef.ToArray<ushort>(_typeUnion._unionTypes.parray),
-                VarEnum.VT_UI4 => SafeArrayRef.ToArray<uint>(_typeUnion._unionTypes.parray),
+                VarEnum.VT_UI4 => SafeArrayRef.ToArray<uint32>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_UI8 => SafeArrayRef.ToArray<ulong>(_typeUnion._unionTypes.parray),
-                VarEnum.VT_UINT => SafeArrayRef.ToArray<uint>(_typeUnion._unionTypes.parray),
+                VarEnum.VT_UINT => SafeArrayRef.ToArray<uint32>(_typeUnion._unionTypes.parray),
                 // floating
                 VarEnum.VT_R4 => SafeArrayRef.ToArray<float>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_R8 => SafeArrayRef.ToArray<double>(_typeUnion._unionTypes.parray),

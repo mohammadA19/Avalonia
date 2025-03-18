@@ -67,7 +67,7 @@ namespace Avalonia.UnitTests
 
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort GetGlyph(uint codepoint)
+        public ushort GetGlyph(uint32 codepoint)
         {
             if (Font.TryGetGlyph(codepoint, out var glyph))
             {
@@ -77,7 +77,7 @@ namespace Avalonia.UnitTests
             return 0;
         }
 
-        public bool TryGetGlyph(uint codepoint,out ushort glyph)
+        public bool TryGetGlyph(uint32 codepoint,out ushort glyph)
         {
             glyph = 0;
 
@@ -92,7 +92,7 @@ namespace Avalonia.UnitTests
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort[] GetGlyphs(ReadOnlySpan<uint> codepoints)
+        public ushort[] GetGlyphs(ReadOnlySpan<uint32> codepoints)
         {
             var glyphs = new ushort[codepoints.Length];
 
@@ -116,7 +116,7 @@ namespace Avalonia.UnitTests
         /// <inheritdoc cref="IGlyphTypeface"/>
         public int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
         {
-            var glyphIndices = new uint[glyphs.Length];
+            var glyphIndices = new uint32[glyphs.Length];
 
             for (var i = 0; i < glyphs.Length; i++)
             {
@@ -126,7 +126,7 @@ namespace Avalonia.UnitTests
             return Font.GetHorizontalGlyphAdvances(glyphIndices);
         }
 
-        public bool TryGetTable(uint tag, out byte[] table)
+        public bool TryGetTable(uint32 tag, out byte[] table)
         {
             table = null;
             var blob = Face.ReferenceTable(tag);

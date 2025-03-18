@@ -12,7 +12,7 @@ internal class VulkanDisplay : IDisposable
 {
     private IVulkanPlatformGraphicsContext _context;
     private VulkanSemaphorePair _semaphorePair;
-    private uint _nextImage;
+    private uint32 _nextImage;
     private VulkanKhrSurface? _surface;
     private VkSurfaceFormatKHR _surfaceFormat;
     private VkSwapchainKHR _swapchain;
@@ -54,7 +54,7 @@ internal class VulkanDisplay : IDisposable
         context.InstanceApi.GetPhysicalDeviceSurfaceCapabilitiesKHR(context.PhysicalDeviceHandle,
                 surface.Handle, out var capabilities)
             .ThrowOnError("vkGetPhysicalDeviceSurfaceCapabilitiesKHR");
-        uint presentModesCount = 0;
+        uint32 presentModesCount = 0;
         context.InstanceApi.GetPhysicalDeviceSurfacePresentModesKHR(context.PhysicalDeviceHandle,
                 surface.Handle, ref presentModesCount, null)
             .ThrowOnError("vkGetPhysicalDeviceSurfacePresentModesKHR");
@@ -79,16 +79,16 @@ internal class VulkanDisplay : IDisposable
             || capabilities.currentTransform.HasAllFlags(VkSurfaceTransformFlagsKHR
                 .VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR);
 
-        if (capabilities.currentExtent.width != uint.MaxValue) 
+        if (capabilities.currentExtent.width != uint32.MaxValue) 
             swapchainExtent = capabilities.currentExtent;
         else
         {
             var surfaceSize = surface.Size;
 
             var width = Math.Max(capabilities.minImageExtent.width,
-                Math.Min(capabilities.maxImageExtent.width, (uint)surfaceSize.Width));
+                Math.Min(capabilities.maxImageExtent.width, (uint32)surfaceSize.Width));
             var height = Math.Max(capabilities.minImageExtent.height,
-                Math.Min(capabilities.maxImageExtent.height, (uint)surfaceSize.Height));
+                Math.Min(capabilities.maxImageExtent.height, (uint32)surfaceSize.Height));
 
             swapchainExtent = new VkExtent2D
             {
@@ -159,7 +159,7 @@ internal class VulkanDisplay : IDisposable
     {
         DestroyCurrentImageViews();
         Size = new PixelSize((int32)_swapchainExtent.width, (int32)_swapchainExtent.height);
-        uint imageCount = 0;
+        uint32 imageCount = 0;
         _context.DeviceApi.GetSwapchainImagesKHR(_context.DeviceHandle, _swapchain, ref imageCount, null)
             .ThrowOnError("vkGetSwapchainImagesKHR");
         _swapchainImages = new VkImage[imageCount];

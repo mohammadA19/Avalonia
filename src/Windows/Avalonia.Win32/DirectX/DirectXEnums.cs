@@ -185,7 +185,7 @@ namespace Avalonia.Win32.DirectX
         D3D_DRIVER_TYPE_WARP
     }
 
-    internal enum DXGI_ERROR : uint
+    internal enum DXGI_ERROR : uint32
     {
         DXGI_ERROR_ACCESS_DENIED = 0x887A002B,
         DXGI_ERROR_ACCESS_LOST = 0x887A0026,

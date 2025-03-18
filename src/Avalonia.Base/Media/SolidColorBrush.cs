@@ -40,7 +40,7 @@ namespace Avalonia.Media
         /// Initializes a new instance of the <see cref="SolidColorBrush"/> class.
         /// </summary>
         /// <param name="color">The color to use.</param>
-        public SolidColorBrush(uint color)
+        public SolidColorBrush(uint32 color)
             : this(Color.FromUInt32(color))
         {
         }

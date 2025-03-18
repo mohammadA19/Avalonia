@@ -18,12 +18,12 @@ internal unsafe partial class VulkanGlobalApi
 
 
     [GetProcAddress("vkEnumerateInstanceLayerProperties")]
-    public partial VkResult EnumerateInstanceLayerProperties(ref uint pPropertyCount, VkLayerProperties* pProperties);
+    public partial VkResult EnumerateInstanceLayerProperties(ref uint32 pPropertyCount, VkLayerProperties* pProperties);
 
     [GetProcAddress("vkCreateInstance")]
     public partial VkResult vkCreateInstance(ref VkInstanceCreateInfo pCreateInfo, IntPtr pAllocator, out VkInstance pInstance);
 
     [GetProcAddress("vkEnumerateInstanceExtensionProperties")]
-    public partial VkResult vkEnumerateInstanceExtensionProperties(IntPtr pLayerName, uint* pPropertyCount,
+    public partial VkResult vkEnumerateInstanceExtensionProperties(IntPtr pLayerName, uint32* pPropertyCount,
         VkExtensionProperties* pProperties);
 }

@@ -28,7 +28,7 @@ internal class VulkanKhrSurface : IDisposable
 
     internal unsafe VkSurfaceFormatKHR GetSurfaceFormat()
     {
-        uint surfaceFormatsCount = 0;
+        uint32 surfaceFormatsCount = 0;
         _context.InstanceApi.GetPhysicalDeviceSurfaceFormatsKHR(_context.PhysicalDeviceHandle,
             _handle, ref surfaceFormatsCount, null)
             .ThrowOnError("vkGetPhysicalDeviceSurfaceFormatsKHR");

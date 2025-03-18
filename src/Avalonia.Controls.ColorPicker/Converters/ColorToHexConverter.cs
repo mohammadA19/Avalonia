@@ -88,19 +88,19 @@ namespace Avalonia.Controls.Converters
             bool includeAlpha = true,
             bool includeSymbol = false)
         {
-            uint intColor;
+            uint32 intColor;
             string hexColor;
 
             if (includeAlpha)
             {
                 if (alphaPosition == AlphaComponentPosition.Trailing)
                 {
-                    intColor = ((uint)color.R << 24) | ((uint)color.G << 16) | ((uint)color.B << 8) | (uint)color.A;
+                    intColor = ((uint32)color.R << 24) | ((uint32)color.G << 16) | ((uint32)color.B << 8) | (uint32)color.A;
                 }
                 else
                 {
                     // Default is Leading alpha (same as XAML)
-                    intColor = ((uint)color.A << 24) | ((uint)color.R << 16) | ((uint)color.G << 8) | (uint)color.B;
+                    intColor = ((uint32)color.A << 24) | ((uint32)color.R << 16) | ((uint32)color.G << 8) | (uint32)color.B;
                 }
 
                 hexColor = intColor.ToString("x8", CultureInfo.InvariantCulture).ToUpperInvariant();
@@ -109,7 +109,7 @@ namespace Avalonia.Controls.Converters
             {
                 // In this case the alpha position no longer matters
                 // Both cases are calculated the same
-                intColor = ((uint)color.R << 16) | ((uint)color.G << 8) | (uint)color.B;
+                intColor = ((uint32)color.R << 16) | ((uint32)color.G << 8) | (uint32)color.B;
                 hexColor = intColor.ToString("x6", CultureInfo.InvariantCulture).ToUpperInvariant();
             }
 

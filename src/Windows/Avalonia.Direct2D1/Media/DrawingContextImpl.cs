@@ -123,7 +123,7 @@ namespace Avalonia.Direct2D1.Media
                 _swapChain?.Present(1, SharpDX.DXGI.PresentFlags.None);
                 _finishedCallback?.Invoke();
             }
-            catch (SharpDXException ex) when ((uint)ex.HResult == 0x8899000C) // D2DERR_RECREATE_TARGET
+            catch (SharpDXException ex) when ((uint32)ex.HResult == 0x8899000C) // D2DERR_RECREATE_TARGET
             {
                 throw new RenderTargetCorruptedException(ex);
             }

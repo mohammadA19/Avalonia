@@ -37,7 +37,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         {
             var startOffset = _currentCodeUnitOffset;
 
-            if ((uint)startOffset >= (uint)_text.Length)
+            if ((uint32)startOffset >= (uint32)_text.Length)
             {
                 grapheme = default;
                 return false;
@@ -61,7 +61,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 } while (_currentType == GraphemeBreakClass.Prepend);
 
                 // There were only Prepend scalars in the text
-                if ((uint)_currentCodeUnitOffset >= (uint)_text.Length)
+                if ((uint32)_currentCodeUnitOffset >= (uint32)_text.Length)
                 {
                     goto Return;
                 }
@@ -71,7 +71,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             // Essentially, if we saw Prepend data, we can't have Control | CR | LF data afterward (rule GB5).
             if (_currentCodeUnitOffset > startOffset)
             {
-                const uint controlCrLfMask =
+                const uint32 controlCrLfMask =
                     (1U << (int32)GraphemeBreakClass.Control) |
                     (1U << (int32)GraphemeBreakClass.CR) |
                     (1U << (int32)GraphemeBreakClass.LF);
@@ -198,7 +198,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                     break; // nothing but trailers after the final RI
             }
 
-            const uint gb9Mask =
+            const uint32 gb9Mask =
                 (1U << (int32)GraphemeBreakClass.Extend) |
                 (1U << (int32)GraphemeBreakClass.ZWJ) |
                 (1U << (int32)GraphemeBreakClass.SpacingMark);

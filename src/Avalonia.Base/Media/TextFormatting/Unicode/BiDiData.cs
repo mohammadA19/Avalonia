@@ -74,14 +74,14 @@ namespace Avalonia.Media.TextFormatting.Unicode
 
             int32 i = Length;
 
-            const uint embeddingMask =
+            const uint32 embeddingMask =
                 (1U << (int32)BidiClass.LeftToRightEmbedding) |
                 (1U << (int32)BidiClass.LeftToRightOverride) |
                 (1U << (int32)BidiClass.RightToLeftEmbedding) |
                 (1U << (int32)BidiClass.RightToLeftOverride) |
                 (1U << (int32)BidiClass.PopDirectionalFormat);
 
-            const uint isolateMask =
+            const uint32 isolateMask =
                 (1U << (int32)BidiClass.LeftToRightIsolate) |
                 (1U << (int32)BidiClass.RightToLeftIsolate) |
                 (1U << (int32)BidiClass.FirstStrongIsolate) |

@@ -18,7 +18,7 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
     {
         [FieldOffset(0)] public IntPtr ptr;
         [FieldOffset(0)] public int32 fd;
-        [FieldOffset(0)] public uint u32;
+        [FieldOffset(0)] public uint32 u32;
         [FieldOffset(0)] public ulong u64;
     }
 
@@ -32,7 +32,7 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
     [StructLayout(LayoutKind.Sequential)]
     private struct epoll_event
     {
-        public uint events;
+        public uint32 events;
         public epoll_data data;
     }
 

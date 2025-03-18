@@ -20,15 +20,15 @@ namespace Avalonia.LinuxFramebuffer.Output
         };
 
         public DrmModeConnection Connection { get; }
-        public uint Id { get; }
+        public uint32 Id { get; }
         public string Name { get; }
         public Size SizeMm { get; }
         public DrmModeSubPixel SubPixel { get; }
-        internal uint EncoderId { get; }
-        internal List<uint> EncoderIds { get; } = new List<uint>();
+        internal uint32 EncoderId { get; }
+        internal List<uint32> EncoderIds { get; } = new List<uint32>();
         public List<DrmModeInfo> Modes { get; } = new List<DrmModeInfo>();
         public DrmConnectorType ConnectorType { get; }
-        public uint ConnectorTypeId { get; }
+        public uint32 ConnectorTypeId { get; }
         internal DrmConnector(drmModeConnector* conn)
         {
             Connection = conn->connection;
@@ -86,7 +86,7 @@ namespace Avalonia.LinuxFramebuffer.Output
     public unsafe class DrmResources
     {
         public List<DrmConnector> Connectors { get; } = new List<DrmConnector>();
-        internal Dictionary<uint, DrmEncoder> Encoders { get; } = new Dictionary<uint, DrmEncoder>();
+        internal Dictionary<uint32, DrmEncoder> Encoders { get; } = new Dictionary<uint32, DrmEncoder>();
         public DrmResources(int32 fd, bool connectorsForceProbe = false)
         {
             var res = drmModeGetResources(fd);

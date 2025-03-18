@@ -168,7 +168,7 @@ namespace Avalonia.X11
                 depth,
                 (int32)CreateWindowArgs.InputOutput, 
                 visual,
-                new UIntPtr((uint)valueMask), ref attr);
+                new UIntPtr((uint32)valueMask), ref attr);
             AppendPid(_handle);
 
             if (_useRenderWindow)
@@ -176,7 +176,7 @@ namespace Avalonia.X11
                 _renderHandle = XCreateWindow(_x11.Display, _handle, 0, 0, defaultWidth, defaultHeight, 0, depth,
                     (int32)CreateWindowArgs.InputOutput,
                     visual,
-                    new UIntPtr((uint)(SetWindowValuemask.BorderPixel | SetWindowValuemask.BitGravity |
+                    new UIntPtr((uint32)(SetWindowValuemask.BorderPixel | SetWindowValuemask.BitGravity |
                                        SetWindowValuemask.WinGravity | SetWindowValuemask.BackingStore)), ref attr);
             }
             else
@@ -351,7 +351,7 @@ namespace Avalonia.X11
         private void AppendPid(IntPtr windowXId)
         {
             // See https://github.com/AvaloniaUI/Avalonia/issues/17444
-            var pid = (uint)s_pid;
+            var pid = (uint32)s_pid;
             // The type of `_NET_WM_PID` is `CARDINAL` which is 32-bit unsigned integer, see https://specifications.freedesktop.org/wm-spec/1.3/ar01s05.html
             XChangeProperty(_x11.Display, windowXId,
                 _x11.Atoms._NET_WM_PID, _x11.Atoms.XA_CARDINAL, 32,

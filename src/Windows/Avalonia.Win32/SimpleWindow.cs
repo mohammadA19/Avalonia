@@ -12,7 +12,7 @@ internal class SimpleWindow : IDisposable
     private static UnmanagedMethods.WndProc s_wndProcDelegate;
     public IntPtr Handle { get; private set; }
     private static string s_className;
-    private static uint s_classAtom;
+    private static uint32 s_classAtom;
     private static ConcurrentDictionary<IntPtr, SimpleWindow> s_Instances = new();
 
     static SimpleWindow()
@@ -61,10 +61,10 @@ internal class SimpleWindow : IDisposable
         }
     }
 
-    private static IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+    private static IntPtr WndProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam)
     {
         SimpleWindow? window;
-        if (msg == (uint)UnmanagedMethods.WindowsMessage.WM_CREATE)
+        if (msg == (uint32)UnmanagedMethods.WindowsMessage.WM_CREATE)
         {
             var handle = Marshal.ReadIntPtr(lParam);
             window = (SimpleWindow?)GCHandle.FromIntPtr(handle).Target;
@@ -77,7 +77,7 @@ internal class SimpleWindow : IDisposable
             s_Instances.TryGetValue(hWnd, out window);
         }
 
-        if (msg == (uint)UnmanagedMethods.WindowsMessage.WM_DESTROY)
+        if (msg == (uint32)UnmanagedMethods.WindowsMessage.WM_DESTROY)
             s_Instances.TryRemove(hWnd, out _);
             
         return window?._wndProc?.Invoke(hWnd, msg, wParam, lParam)

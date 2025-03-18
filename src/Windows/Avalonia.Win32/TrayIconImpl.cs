@@ -29,7 +29,7 @@ namespace Avalonia.Win32
         private readonly Win32NativeToManagedMenuExporter _exporter;
         private static readonly Dictionary<int32, TrayIconImpl> s_trayIcons = new();
         private bool _disposedValue;
-        private static readonly uint WM_TASKBARCREATED = RegisterWindowMessage("TaskbarCreated");
+        private static readonly uint32 WM_TASKBARCREATED = RegisterWindowMessage("TaskbarCreated");
 
         static TrayIconImpl()
         {
@@ -53,17 +53,17 @@ namespace Avalonia.Win32
 
         public INativeMenuExporter MenuExporter => _exporter;
 
-        internal static void ProcWnd(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        internal static void ProcWnd(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam)
         {
             switch (msg)
             {
-                case (uint)CustomWindowsMessage.WM_TRAYMOUSE:
+                case (uint32)CustomWindowsMessage.WM_TRAYMOUSE:
                     if (s_trayIcons.TryGetValue(wParam.ToInt32(), out var value))
                     {
                         value.WndProc(hWnd, msg, wParam, lParam);
                     }
                     break;
-                case (uint)WindowsMessage.WM_DISPLAYCHANGE:
+                case (uint32)WindowsMessage.WM_DISPLAYCHANGE:
                     FindTaskBarMonitor();
                     foreach (var tray in s_trayIcons.Values)
                     {
@@ -172,7 +172,7 @@ namespace Avalonia.Win32
         {
             if (ShCoreAvailable && Win32Platform.WindowsVersion > PlatformConstants.Windows8_1)
             {
-                uint dpiX, dpiY;
+                uint32 dpiX, dpiY;
 
                 if ((HRESULT)GetDpiForMonitor(
                         s_taskBarMonitor,
@@ -188,9 +188,9 @@ namespace Avalonia.Win32
             return 1.0;
         }
 
-        private IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        private IntPtr WndProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam)
         {
-            if (msg == (uint)CustomWindowsMessage.WM_TRAYMOUSE)
+            if (msg == (uint32)CustomWindowsMessage.WM_TRAYMOUSE)
             {
                 // Determine the type of message and call the matching event handlers
                 switch (lParam.ToInt32())
@@ -238,7 +238,7 @@ namespace Avalonia.Win32
         /// <summary>
         /// Custom Win32 window messages for the NotifyIcon
         /// </summary>
-        private enum CustomWindowsMessage : uint
+        private enum CustomWindowsMessage : uint32
         {
             WM_TRAYICON = WindowsMessage.WM_APP + 1024,
             WM_TRAYMOUSE = WindowsMessage.WM_USER + 1024,

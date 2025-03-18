@@ -24,14 +24,14 @@ namespace Avalonia.Win32.Interop
     {
         public const int32 CW_USEDEFAULT = unchecked((int32)0x80000000);
 
-        public delegate void TimerProc(IntPtr hWnd, uint uMsg, IntPtr nIDEvent, uint dwTime);
+        public delegate void TimerProc(IntPtr hWnd, uint32 uMsg, IntPtr nIDEvent, uint32 dwTime);
 
-        public delegate void TimeCallback(uint uTimerID, uint uMsg, UIntPtr dwUser, UIntPtr dw1, UIntPtr dw2);
+        public delegate void TimeCallback(uint32 uTimerID, uint32 uMsg, UIntPtr dwUser, UIntPtr dw1, UIntPtr dw2);
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         public delegate void WaitOrTimerCallback(IntPtr lpParameter, bool timerOrWaitFired);
 
-        public delegate IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+        public delegate IntPtr WndProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam);
 
         public static readonly IntPtr DPI_AWARENESS_CONTEXT_UNAWARE = new IntPtr(-1);
         public static readonly IntPtr DPI_AWARENESS_CONTEXT_SYSTEM_AWARE = new IntPtr(-2);
@@ -67,7 +67,7 @@ namespace Avalonia.Win32.Interop
         }
 
         [Flags]
-        public enum SetWindowPosFlags : uint
+        public enum SetWindowPosFlags : uint32
         {
             SWP_ASYNCWINDOWPOS = 0x4000,
             SWP_DEFERERASE = 0x2000,
@@ -482,7 +482,7 @@ namespace Avalonia.Win32.Interop
         }
 
         [Flags]
-        public enum WindowStyles : uint
+        public enum WindowStyles : uint32
         {
             WS_BORDER = 0x800000,
             WS_CAPTION = 0xc00000,
@@ -536,7 +536,7 @@ namespace Avalonia.Win32.Interop
         }
 
         [Flags]
-        public enum ClassStyles : uint
+        public enum ClassStyles : uint32
         {
             CS_VREDRAW = 0x0001,
             CS_HREDRAW = 0x0002,
@@ -580,7 +580,7 @@ namespace Avalonia.Win32.Interop
             PT_TOUCHPAD = 0x00000005
         }
 
-        public enum WindowsMessage : uint
+        public enum WindowsMessage : uint32
         {
             WM_NULL = 0x0000,
             WM_CREATE = 0x0001,
@@ -833,7 +833,7 @@ namespace Avalonia.Win32.Interop
             WM_DISPATCH_WORK_ITEM = WM_USER,
         }
 
-        public enum DwmWindowAttribute : uint
+        public enum DwmWindowAttribute : uint32
         {
             DWMWA_NCRENDERING_ENABLED = 1,
             DWMWA_NCRENDERING_POLICY,
@@ -861,7 +861,7 @@ namespace Avalonia.Win32.Interop
             DWMWA_LAST
         };
 
-        public enum DwmWindowCornerPreference : uint
+        public enum DwmWindowCornerPreference : uint32
         {
             DWMWCP_DEFAULT = 0,
             DWMWCP_DONOTROUND,
@@ -869,7 +869,7 @@ namespace Avalonia.Win32.Interop
             DWMWCP_ROUNDSMALL
         }
 
-        public enum MapVirtualKeyMapTypes : uint
+        public enum MapVirtualKeyMapTypes : uint32
         {
             MAPVK_VK_TO_VSC = 0x00,
             MAPVK_VSC_TO_VK = 0x01,
@@ -877,7 +877,7 @@ namespace Avalonia.Win32.Interop
             MAPVK_VSC_TO_VK_EX = 0x03,
         }
 
-        public enum BitmapCompressionMode : uint
+        public enum BitmapCompressionMode : uint32
         {
             BI_RGB = 0,
             BI_RLE8 = 1,
@@ -1024,8 +1024,8 @@ namespace Avalonia.Win32.Interop
             public int32 rcContactRawTop;
             public int32 rcContactRawRight;
             public int32 rcContactRawBottom;
-            public uint orientation;
-            public uint pressure;
+            public uint32 orientation;
+            public uint32 pressure;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -1034,8 +1034,8 @@ namespace Avalonia.Win32.Interop
             public POINTER_INFO pointerInfo;
             public PenFlags penFlags;
             public PenMask penMask;
-            public uint pressure;
-            public uint rotation;
+            public uint32 pressure;
+            public uint32 rotation;
             public int32 tiltX;
             public int32 tiltY;
         }
@@ -1044,8 +1044,8 @@ namespace Avalonia.Win32.Interop
         public struct POINTER_INFO
         {
             public PointerInputType pointerType;
-            public uint pointerId;
-            public uint frameId;
+            public uint32 pointerId;
+            public uint32 frameId;
             public PointerFlags pointerFlags;
             public IntPtr sourceDevice;
             public IntPtr hwndTarget;
@@ -1057,8 +1057,8 @@ namespace Avalonia.Win32.Interop
             public int32 ptPixelLocationRawY;
             public int32 ptHimetricLocationRawX;
             public int32 ptHimetricLocationRawY;
-            public uint dwTime;
-            public uint historyCount;
+            public uint32 dwTime;
+            public uint32 historyCount;
             public int32 inputData;
             public ModifierKeys dwKeyStates;
             public ulong PerformanceCount;
@@ -1077,21 +1077,21 @@ namespace Avalonia.Win32.Interop
         [StructLayout(LayoutKind.Sequential)]
         public struct BITMAPINFOHEADER
         {
-            public uint biSize;
+            public uint32 biSize;
             public int32 biWidth;
             public int32 biHeight;
             public ushort biPlanes;
             public ushort biBitCount;
-            public uint biCompression;
-            public uint biSizeImage;
+            public uint32 biCompression;
+            public uint32 biSizeImage;
             public int32 biXPelsPerMeter;
             public int32 biYPelsPerMeter;
-            public uint biClrUsed;
-            public uint biClrImportant;
+            public uint32 biClrUsed;
+            public uint32 biClrImportant;
 
             public void Init()
             {
-                biSize = (uint)sizeof(BITMAPINFOHEADER);
+                biSize = (uint32)sizeof(BITMAPINFOHEADER);
             }
         }
 
@@ -1103,21 +1103,21 @@ namespace Avalonia.Win32.Interop
             //[StructLayout(LayoutKind.Sequential)]
             //public struct BITMAPINFOHEADER
             //{
-            public uint biSize;
+            public uint32 biSize;
             public int32 biWidth;
             public int32 biHeight;
             public ushort biPlanes;
             public ushort biBitCount;
             public BitmapCompressionMode biCompression;
-            public uint biSizeImage;
+            public uint32 biSizeImage;
             public int32 biXPelsPerMeter;
             public int32 biYPelsPerMeter;
-            public uint biClrUsed;
-            public uint biClrImportant;
+            public uint32 biClrUsed;
+            public uint32 biClrImportant;
             //}
 
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-            public uint[] cols;
+            public uint32[] cols;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1134,8 +1134,8 @@ namespace Avalonia.Win32.Interop
 
         [DllImport("user32.dll", ExactSpelling = true, CharSet = CharSet.Auto, SetLastError = true)]
         internal static extern int32 GetMouseMovePointsEx(
-            uint cbSize, MOUSEMOVEPOINT* pointsIn,
-            MOUSEMOVEPOINT* pointsBufferOut, int32 nBufPoints, uint resolution);
+            uint32 cbSize, MOUSEMOVEPOINT* pointsIn,
+            MOUSEMOVEPOINT* pointsBufferOut, int32 nBufPoints, uint32 resolution);
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)] // For GetMouseMovePointsEx
         public struct MOUSEMOVEPOINT
@@ -1153,41 +1153,41 @@ namespace Avalonia.Win32.Interop
         public static extern int32 EnableMouseInPointer(bool enable);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetPointerCursorId(uint pointerId, out uint cursorId);
+        public static extern bool GetPointerCursorId(uint32 pointerId, out uint32 cursorId);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetPointerType(uint pointerId, out PointerInputType pointerType);
+        public static extern bool GetPointerType(uint32 pointerId, out PointerInputType pointerType);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetPointerInfo(uint pointerId, out POINTER_INFO pointerInfo);
+        public static extern bool GetPointerInfo(uint32 pointerId, out POINTER_INFO pointerInfo);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetPointerInfoHistory(uint pointerId, ref int32 entriesCount, [MarshalAs(UnmanagedType.LPArray), In, Out] POINTER_INFO[] pointerInfos);
+        public static extern bool GetPointerInfoHistory(uint32 pointerId, ref int32 entriesCount, [MarshalAs(UnmanagedType.LPArray), In, Out] POINTER_INFO[] pointerInfos);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetPointerPenInfo(uint pointerId, out POINTER_PEN_INFO penInfo);
+        public static extern bool GetPointerPenInfo(uint32 pointerId, out POINTER_PEN_INFO penInfo);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetPointerPenInfoHistory(uint pointerId, ref int32 entriesCount, [MarshalAs(UnmanagedType.LPArray), In, Out] POINTER_PEN_INFO[] penInfos);
+        public static extern bool GetPointerPenInfoHistory(uint32 pointerId, ref int32 entriesCount, [MarshalAs(UnmanagedType.LPArray), In, Out] POINTER_PEN_INFO[] penInfos);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetPointerTouchInfo(uint pointerId, out POINTER_TOUCH_INFO touchInfo);
+        public static extern bool GetPointerTouchInfo(uint32 pointerId, out POINTER_TOUCH_INFO touchInfo);
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool GetPointerDeviceRects(IntPtr device, out RECT pointerDeviceRect, out RECT displayRect);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool GetPointerTouchInfoHistory(uint pointerId, ref int32 entriesCount, [MarshalAs(UnmanagedType.LPArray), In, Out] POINTER_TOUCH_INFO[] touchInfos);
+        public static extern bool GetPointerTouchInfoHistory(uint32 pointerId, ref int32 entriesCount, [MarshalAs(UnmanagedType.LPArray), In, Out] POINTER_TOUCH_INFO[] touchInfos);
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr GetDC(IntPtr hWnd);
 
         [DllImport("gdi32.dll")]
         public static extern int32 SetDIBitsToDevice(IntPtr hdc, int32 XDest, int32 YDest,
-            uint dwWidth, uint dwHeight,
+            uint32 dwWidth, uint32 dwHeight,
             int32 XSrc, int32 YSrc,
-            uint uStartScan, uint cScanLines,
-           IntPtr lpvBits, [In] ref BITMAPINFO lpbmi, uint fuColorUse);
+            uint32 uStartScan, uint32 cScanLines,
+           IntPtr lpvBits, [In] ref BITMAPINFO lpbmi, uint32 fuColorUse);
 
         [DllImport("gdi32.dll", SetLastError = false, ExactSpelling = true)]
         public static extern IntPtr CreateRectRgn(int32 x1, int32 y1, int32 x2, int32 y2);
@@ -1196,10 +1196,10 @@ namespace Avalonia.Win32.Interop
         public static extern bool ReleaseDC(IntPtr hWnd, IntPtr hDC);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool AdjustWindowRectEx(ref RECT lpRect, uint dwStyle, bool bMenu, uint dwExStyle);
+        public static extern bool AdjustWindowRectEx(ref RECT lpRect, uint32 dwStyle, bool bMenu, uint32 dwExStyle);
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool AdjustWindowRectExForDpi(ref RECT lpRect, WindowStyles dwStyle, bool bMenu, WindowStyles dwExStyle, uint dpi);
+        public static extern bool AdjustWindowRectExForDpi(ref RECT lpRect, WindowStyles dwStyle, bool bMenu, WindowStyles dwExStyle, uint32 dpi);
 
         [DllImport("user32.dll")]
         public static extern IntPtr BeginPaint(IntPtr hwnd, out PAINTSTRUCT lpPaint);
@@ -1210,9 +1210,9 @@ namespace Avalonia.Win32.Interop
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "CreateWindowExW", ExactSpelling = true)]
         public static extern IntPtr CreateWindowEx(
            int32 dwExStyle,
-           uint lpClassName,
+           uint32 lpClassName,
            string? lpWindowName,
-           uint dwStyle,
+           uint32 dwStyle,
            int32 x,
            int32 y,
            int32 nWidth,
@@ -1223,7 +1223,7 @@ namespace Avalonia.Win32.Interop
            IntPtr lpParam);
 
         [DllImport("user32.dll", EntryPoint = "DefWindowProcW")]
-        public static extern IntPtr DefWindowProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr DefWindowProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam);
 
         public const int32 SC_MOUSEMOVE = 0xf012;
 
@@ -1243,7 +1243,7 @@ namespace Avalonia.Win32.Interop
         public static extern bool EndPaint(IntPtr hWnd, ref PAINTSTRUCT lpPaint);
 
         [DllImport("user32.dll")]
-        public static extern uint GetCaretBlinkTime();
+        public static extern uint32 GetCaretBlinkTime();
 
         [DllImport("user32.dll")]
         public static extern bool GetClientRect(IntPtr hwnd, out RECT lpRect);
@@ -1252,17 +1252,17 @@ namespace Avalonia.Win32.Interop
         public static extern bool GetCursorPos(out POINT lpPoint);
 
         [DllImport("user32.dll")]
-        public static extern uint GetDoubleClickTime();
+        public static extern uint32 GetDoubleClickTime();
 
         [DllImport("user32.dll", ExactSpelling = true, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool GetKeyboardState(byte* lpKeyState);
 
         [DllImport("user32.dll", EntryPoint = "MapVirtualKeyW")]
-        public static extern uint MapVirtualKey(uint uCode, uint uMapType);
+        public static extern uint32 MapVirtualKey(uint32 uCode, uint32 uMapType);
 
         [DllImport("user32.dll", EntryPoint = "GetMessageW", SetLastError = true)]
-        public static extern int32 GetMessage(out MSG lpMsg, IntPtr hWnd, uint wMsgFilterMin, uint wMsgFilterMax);
+        public static extern int32 GetMessage(out MSG lpMsg, IntPtr hWnd, uint32 wMsgFilterMin, uint32 wMsgFilterMax);
 
         [DllImport("user32.dll")]
         public static extern int32 GetMessageTime();
@@ -1279,12 +1279,12 @@ namespace Avalonia.Win32.Interop
         public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true, EntryPoint = "GetWindowLongPtrW", ExactSpelling = true)]
-        public static extern uint GetWindowLongPtr(IntPtr hWnd, int32 nIndex);
+        public static extern uint32 GetWindowLongPtr(IntPtr hWnd, int32 nIndex);
 
         [DllImport("user32.dll", SetLastError = true, EntryPoint = "GetWindowLongW", ExactSpelling = true)]
-        public static extern uint GetWindowLong32b(IntPtr hWnd, int32 nIndex);
+        public static extern uint32 GetWindowLong32b(IntPtr hWnd, int32 nIndex);
 
-        public static uint GetWindowLong(IntPtr hWnd, int32 nIndex)
+        public static uint32 GetWindowLong(IntPtr hWnd, int32 nIndex)
         {
             if (IntPtr.Size == 4)
             {
@@ -1297,12 +1297,12 @@ namespace Avalonia.Win32.Interop
         }
 
         [DllImport("user32.dll", SetLastError = true, EntryPoint = "SetWindowLongW", ExactSpelling = true)]
-        private static extern uint SetWindowLong32b(IntPtr hWnd, int32 nIndex, uint value);
+        private static extern uint32 SetWindowLong32b(IntPtr hWnd, int32 nIndex, uint32 value);
 
         [DllImport("user32.dll", SetLastError = true, EntryPoint = "SetWindowLongPtrW", ExactSpelling = true)]
         private static extern IntPtr SetWindowLong64b(IntPtr hWnd, int32 nIndex, IntPtr value);
 
-        public static uint SetWindowLong(IntPtr hWnd, int32 nIndex, uint value)
+        public static uint32 SetWindowLong(IntPtr hWnd, int32 nIndex, uint32 value)
         {
             if (IntPtr.Size == 4)
             {
@@ -1310,7 +1310,7 @@ namespace Avalonia.Win32.Interop
             }
             else
             {
-                return (uint)SetWindowLong64b(hWnd, nIndex, new IntPtr(value)).ToInt32();
+                return (uint32)SetWindowLong64b(hWnd, nIndex, new IntPtr(value)).ToInt32();
             }
         }
 
@@ -1318,7 +1318,7 @@ namespace Avalonia.Win32.Interop
         {
             if (IntPtr.Size == 4)
             {
-                return new IntPtr(SetWindowLong32b(hWnd, nIndex, (uint)handle.ToInt32()));
+                return new IntPtr(SetWindowLong32b(hWnd, nIndex, (uint32)handle.ToInt32()));
             }
             else
             {
@@ -1330,7 +1330,7 @@ namespace Avalonia.Win32.Interop
         public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
 
         [DllImport("user32.dll")]
-        public static extern bool EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
+        public static extern bool EnableMenuItem(IntPtr hMenu, uint32 uIDEnableItem, uint32 uEnable);
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool GetWindowPlacement(IntPtr hWnd, out WINDOWPLACEMENT lpwndpl);
@@ -1374,14 +1374,14 @@ namespace Avalonia.Win32.Interop
         public static extern IntPtr CreateIconIndirect([In] ref ICONINFO iconInfo);
 
         [DllImport("user32.dll")]
-        public static extern IntPtr CreateIconFromResourceEx(byte* pbIconBits, uint cbIconBits,
+        public static extern IntPtr CreateIconFromResourceEx(byte* pbIconBits, uint32 cbIconBits,
             int32 fIcon, int32 dwVersion, int32 csDesired, int32 cyDesired, int32 flags);
 
         [DllImport("user32.dll")]
         public static extern bool DestroyIcon(IntPtr hIcon);
 
         [DllImport("user32.dll", EntryPoint = "PeekMessageW", ExactSpelling = true)]
-        public static extern bool PeekMessage(out MSG lpMsg, IntPtr hWnd, uint wMsgFilterMin, uint wMsgFilterMax, uint wRemoveMsg);
+        public static extern bool PeekMessage(out MSG lpMsg, IntPtr hWnd, uint32 wMsgFilterMin, uint32 wMsgFilterMax, uint32 wRemoveMsg);
 
         [DllImport("user32")]
         public static extern IntPtr GetMessageExtraInfo();
@@ -1396,7 +1396,7 @@ namespace Avalonia.Win32.Interop
         public static extern bool ReleaseCapture();
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "RegisterWindowMessageW", ExactSpelling = true)]
-        public static extern uint RegisterWindowMessage(string lpString);
+        public static extern uint32 RegisterWindowMessage(string lpString);
 
         [DllImport("user32.dll")]
         public static extern bool ScreenToClient(IntPtr hWnd, ref POINT lpPoint);
@@ -1414,7 +1414,7 @@ namespace Avalonia.Win32.Interop
         public static extern IntPtr SetCapture(IntPtr hWnd);
 
         [DllImport("user32.dll")]
-        public static extern IntPtr SetTimer(IntPtr hWnd, IntPtr nIDEvent, uint uElapse, TimerProc? lpTimerFunc);
+        public static extern IntPtr SetTimer(IntPtr hWnd, IntPtr nIDEvent, uint32 uElapse, TimerProc? lpTimerFunc);
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool MoveWindow(IntPtr hWnd, int32 X, int32 Y, int32 nWidth, int32 nHeight, bool bRepaint);
         [DllImport("user32.dll")]
@@ -1455,21 +1455,21 @@ namespace Avalonia.Win32.Interop
             IntPtr TimerQueue,
             WaitOrTimerCallback Callback,
             IntPtr Parameter,
-            uint DueTime,
-            uint Period,
-            uint Flags);
+            uint32 DueTime,
+            uint32 Period,
+            uint32 Flags);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool DeleteTimerQueueTimer(IntPtr TimerQueue, IntPtr Timer, IntPtr CompletionEvent);
 
         [DllImport("user32.dll", ExactSpelling = true)]
         public static extern int32 ToUnicodeEx(
-            uint wVirtKey,
-            uint wScanCode,
+            uint32 wVirtKey,
+            uint32 wScanCode,
             byte* lpKeyState,
             char* pwszBuff,
             int32 cchBuff,
-            uint wFlags,
+            uint32 wFlags,
             IntPtr dwhkl);
 
         [DllImport("user32.dll", SetLastError = true)]
@@ -1530,7 +1530,7 @@ namespace Avalonia.Win32.Interop
         }
 
         [DllImport("user32.dll", EntryPoint = "GetClassLongW", ExactSpelling = true)]
-        public static extern uint GetClassLongPtr32(IntPtr hWnd, int32 nIndex);
+        public static extern uint32 GetClassLongPtr32(IntPtr hWnd, int32 nIndex);
 
         [DllImport("user32.dll", EntryPoint = "GetClassLongPtrW", ExactSpelling = true)]
         public static extern IntPtr GetClassLongPtr64(IntPtr hWnd, int32 nIndex);
@@ -1621,13 +1621,13 @@ namespace Avalonia.Win32.Interop
         public static extern bool SetProcessDpiAwarenessContext(IntPtr dpiAWarenessContext);
 
         [DllImport("shcore.dll")]
-        public static extern long GetDpiForMonitor(IntPtr hmonitor, MONITOR_DPI_TYPE dpiType, out uint dpiX, out uint dpiY);
+        public static extern long GetDpiForMonitor(IntPtr hmonitor, MONITOR_DPI_TYPE dpiType, out uint32 dpiX, out uint32 dpiY);
 
         [DllImport("gdi32.dll")]
         public static extern int32 GetDeviceCaps(IntPtr hdc, DEVICECAP nIndex);
 
         [DllImport("shcore.dll")]
-        public static extern void GetScaleFactorForMonitor(IntPtr hMon, out uint pScale);
+        public static extern void GetScaleFactorForMonitor(IntPtr hMon, out uint32 pScale);
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool SetProcessDPIAware();
@@ -1644,7 +1644,7 @@ namespace Avalonia.Win32.Interop
         [DllImport("user32")]
         public static extern bool GetTouchInputInfo(
             IntPtr hTouchInput,
-            uint cInputs,
+            uint32 cInputs,
             TOUCHINPUT* pInputs,
             int32 cbSize
         );
@@ -1654,16 +1654,16 @@ namespace Avalonia.Win32.Interop
 
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "PostMessageW")]
-        public static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        public static extern bool PostMessage(IntPtr hWnd, uint32 Msg, IntPtr wParam, IntPtr lParam);
 
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "SendMessageW")]
-        public static extern bool SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        public static extern bool SendMessage(IntPtr hWnd, uint32 Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("gdi32.dll")]
-        public static extern int32 SetDIBitsToDevice(IntPtr hdc, int32 XDest, int32 YDest, uint
-                dwWidth, uint dwHeight, int32 XSrc, int32 YSrc, uint uStartScan, uint cScanLines,
-            IntPtr lpvBits, [In] ref BITMAPINFOHEADER lpbmi, uint fuColorUse);
+        public static extern int32 SetDIBitsToDevice(IntPtr hdc, int32 XDest, int32 YDest, uint32
+                dwWidth, uint32 dwHeight, int32 XSrc, int32 YSrc, uint32 uStartScan, uint32 cScanLines,
+            IntPtr lpvBits, [In] ref BITMAPINFOHEADER lpbmi, uint32 fuColorUse);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -1717,9 +1717,9 @@ namespace Avalonia.Win32.Interop
         [DllImport("kernel32.dll", SetLastError = true, EntryPoint = "CreateFileMappingW", ExactSpelling = true)]
         public static extern IntPtr CreateFileMapping(IntPtr hFile,
             IntPtr lpFileMappingAttributes,
-            uint flProtect,
-            uint dwMaximumSizeHigh,
-            uint dwMaximumSizeLow,
+            uint32 flProtect,
+            uint32 dwMaximumSizeHigh,
+            uint32 dwMaximumSizeLow,
             string lpName);
 
         [DllImport("msvcrt.dll", EntryPoint = "memcpy", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
@@ -1768,7 +1768,7 @@ namespace Avalonia.Win32.Interop
         public static extern void DwmFlush();
 
         [DllImport("dwmapi.dll")]
-        public static extern bool DwmDefWindowProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam, ref IntPtr plResult);
+        public static extern bool DwmDefWindowProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam, ref IntPtr plResult);
 
         [DllImport("dwmapi.dll", SetLastError = false)]
         public static extern int32 DwmEnableBlurBehindWindow(IntPtr hwnd, ref DWM_BLURBEHIND blurBehind);
@@ -1781,7 +1781,7 @@ namespace Avalonia.Win32.Interop
         }
 
         [DllImport("user32.dll")]
-        public static extern bool SetLayeredWindowAttributes(IntPtr hwnd, uint crKey, byte bAlpha, LayeredWindowFlags dwFlags);
+        public static extern bool SetLayeredWindowAttributes(IntPtr hwnd, uint32 crKey, byte bAlpha, LayeredWindowFlags dwFlags);
 
         [Flags]
         public enum DWM_BB
@@ -1803,11 +1803,11 @@ namespace Avalonia.Win32.Interop
         [StructLayout(LayoutKind.Sequential)]
         internal struct RTL_OSVERSIONINFOEX
         {
-            internal uint dwOSVersionInfoSize;
-            internal uint dwMajorVersion;
-            internal uint dwMinorVersion;
-            internal uint dwBuildNumber;
-            internal uint dwPlatformId;
+            internal uint32 dwOSVersionInfoSize;
+            internal uint32 dwMajorVersion;
+            internal uint32 dwMinorVersion;
+            internal uint32 dwBuildNumber;
+            internal uint32 dwPlatformId;
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
             internal string szCSDVersion;
         }
@@ -1818,7 +1818,7 @@ namespace Avalonia.Win32.Interop
         internal static Version RtlGetVersion()
         {
             RTL_OSVERSIONINFOEX v = new RTL_OSVERSIONINFOEX();
-            v.dwOSVersionInfoSize = (uint)Marshal.SizeOf<RTL_OSVERSIONINFOEX>();
+            v.dwOSVersionInfoSize = (uint32)Marshal.SizeOf<RTL_OSVERSIONINFOEX>();
             if (RtlGetVersion(ref v) == 0)
             {
                 return new Version((int32)v.dwMajorVersion, (int32)v.dwMinorVersion, (int32)v.dwBuildNumber);
@@ -1889,7 +1889,7 @@ namespace Avalonia.Win32.Interop
         }
 
         [Flags]
-        public enum GCS : uint
+        public enum GCS : uint32
         {
             /// <summary>Retrieve or update the attribute of the composition string.</summary>
             GCS_COMPATTR = 0x0010,
@@ -1952,7 +1952,7 @@ namespace Avalonia.Win32.Interop
         public static extern bool ImmSetCompositionFont(IntPtr hIMC, ref LOGFONT lf);
 
         [DllImport("imm32.dll", SetLastError = false, CharSet = CharSet.Unicode, EntryPoint = "ImmGetCompositionStringW", ExactSpelling = true)]
-        public static extern int32 ImmGetCompositionString(IntPtr hIMC, GCS dwIndex, [Out, Optional] IntPtr lpBuf, uint dwBufLen);
+        public static extern int32 ImmGetCompositionString(IntPtr hIMC, GCS dwIndex, [Out, Optional] IntPtr lpBuf, uint32 dwBufLen);
 
         public static string? ImmGetCompositionString(IntPtr hIMC, GCS dwIndex)
         {
@@ -1964,7 +1964,7 @@ namespace Avalonia.Win32.Interop
 
                 fixed (byte* bufferPtr = buffer)
                 {
-                    var result = ImmGetCompositionString(hIMC, dwIndex, (IntPtr)bufferPtr, (uint)bufferLength);
+                    var result = ImmGetCompositionString(hIMC, dwIndex, (IntPtr)bufferPtr, (uint32)bufferLength);
                     if (result >= 0)
                     {
                         return Encoding.Unicode.GetString(bufferPtr, result);
@@ -1986,24 +1986,24 @@ namespace Avalonia.Win32.Interop
         [DllImport("user32.dll")]
         public static extern IntPtr GetKeyboardLayout(int32 idThread);
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        public static extern int32 LCIDToLocaleName(uint Locale, StringBuilder lpName, int32 cchName, int32 dwFlags);
+        public static extern int32 LCIDToLocaleName(uint32 Locale, StringBuilder lpName, int32 cchName, int32 dwFlags);
 
-        public static uint MAKELCID(uint lgid, uint srtid)
+        public static uint32 MAKELCID(uint32 lgid, uint32 srtid)
         {
-            return (((uint)(ushort)srtid) << 16) |
+            return (((uint32)(ushort)srtid) << 16) |
                    ((ushort)lgid);
         }
 
-        public static ushort PRIMARYLANGID(uint lgid)
+        public static ushort PRIMARYLANGID(uint32 lgid)
         {
             return (ushort)(lgid & 0x3ff);
         }
 
-        public static uint LGID(IntPtr HKL)
+        public static uint32 LGID(IntPtr HKL)
         {
             unchecked
             {
-                return (uint)((ulong)HKL & 0xffff);
+                return (uint32)((ulong)HKL & 0xffff);
             }
         }
 
@@ -2137,7 +2137,7 @@ namespace Avalonia.Win32.Interop
             public static MONITORINFOEX Create()
             {
                 var info = new MONITORINFO();
-                info.cbSize = (uint)Marshal.SizeOf<MONITORINFOEX>();
+                info.cbSize = (uint32)Marshal.SizeOf<MONITORINFOEX>();
                 return new MONITORINFOEX() { Base = info };
             }
         }
@@ -2192,10 +2192,10 @@ namespace Avalonia.Win32.Interop
         public struct MSG
         {
             public IntPtr hwnd;
-            public uint message;
+            public uint32 message;
             public IntPtr wParam;
             public IntPtr lParam;
-            public uint time;
+            public uint32 time;
             public POINT pt;
         }
 
@@ -2264,7 +2264,7 @@ namespace Avalonia.Win32.Interop
             public int32 y;
             public int32 cx;
             public int32 cy;
-            public uint flags;
+            public uint32 flags;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -2278,13 +2278,13 @@ namespace Avalonia.Win32.Interop
         public struct TRACKMOUSEEVENT
         {
             public int32 cbSize;
-            public uint dwFlags;
+            public uint32 dwFlags;
             public IntPtr hwndTrack;
             public int32 dwHoverTime;
         }
 
         [Flags]
-        public enum WindowPlacementFlags : uint
+        public enum WindowPlacementFlags : uint32
         {
             SetMinPosition = 0x0001,
             RestoreToMaximized = 0x0002,
@@ -2364,10 +2364,10 @@ namespace Avalonia.Win32.Interop
             public int32 X;
             public int32 Y;
             public IntPtr Source;
-            public uint Id;
+            public uint32 Id;
             public TouchInputFlags Flags;
             public int32 Mask;
-            public uint Time;
+            public uint32 Time;
             public IntPtr ExtraInfo;
             public int32 CxContact;
             public int32 CyContact;
@@ -2432,7 +2432,7 @@ namespace Avalonia.Win32.Interop
             OFN_OVERWRITEPROMPT = 0x00000002
         }
 
-        public enum HRESULT : uint
+        public enum HRESULT : uint32
         {
             S_FALSE = 0x0001,
             S_OK = 0x0000,
@@ -2506,8 +2506,8 @@ namespace Avalonia.Win32.Interop
 
             public int32 cbSize;
             public nint hWnd;
-            public uint uCallbackMessage;
-            public uint uEdge;
+            public uint32 uCallbackMessage;
+            public uint32 uEdge;
             public RECT rc;
             public int32 lParam;
 
@@ -2547,7 +2547,7 @@ namespace Avalonia.Win32.Interop
     }
 
     [Flags]
-    internal enum PixelFormatDescriptorFlags : uint
+    internal enum PixelFormatDescriptorFlags : uint32
     {
         PFD_DOUBLEBUFFER = 0x00000001,
         PFD_STEREO = 0x00000002,
@@ -2594,12 +2594,12 @@ namespace Avalonia.Win32.Interop
         public byte AuxBuffers;
         public byte LayerType;
         private byte Reserved;
-        public uint LayerMask;
-        public uint VisibleMask;
-        public uint DamageMask;
+        public uint32 LayerMask;
+        public uint32 VisibleMask;
+        public uint32 DamageMask;
     }
 
-    internal enum NIM : uint
+    internal enum NIM : uint32
     {
         ADD = 0x00000000,
         MODIFY = 0x00000001,
@@ -2608,14 +2608,14 @@ namespace Avalonia.Win32.Interop
         SETVERSION = 0x00000004
     }
 
-    internal enum AppBarMessage : uint
+    internal enum AppBarMessage : uint32
     {
         ABM_GETSTATE = 0x00000004,
         ABM_GETTASKBARPOS = 0x00000005,
     }
 
     [Flags]
-    internal enum NIF : uint
+    internal enum NIF : uint32
     {
         MESSAGE = 0x00000001,
         ICON = 0x00000002,
@@ -2628,7 +2628,7 @@ namespace Avalonia.Win32.Interop
     }
 
     [Flags]
-    internal enum NIIF : uint
+    internal enum NIIF : uint32
     {
         NONE = 0x00000000,
         INFO = 0x00000001,

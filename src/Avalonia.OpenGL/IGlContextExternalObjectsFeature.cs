@@ -36,8 +36,8 @@ public interface IGlExportableExternalSemaphore : IGlExternalSemaphore
 
 public interface IGlExternalImageTexture : IDisposable
 {
-    void AcquireKeyedMutex(uint key);
-    void ReleaseKeyedMutex(uint key);
+    void AcquireKeyedMutex(uint32 key);
+    void ReleaseKeyedMutex(uint32 key);
     int32 TextureId { get; }
     int32 InternalFormat { get; }
     

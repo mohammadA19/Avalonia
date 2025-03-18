@@ -103,7 +103,7 @@ internal class Win32Icon : IDisposable
         if (!source.Format!.Value.HasAlpha)
         {
             Unsafe.InitBlock((void*)alphaMaskBuffer.Address, 0xff,
-                (uint)(alphaMaskBuffer.RowBytes * alphaMaskBuffer.Size.Height));
+                (uint32)(alphaMaskBuffer.RowBytes * alphaMaskBuffer.Size.Height));
         }
         else
         {
@@ -170,8 +170,8 @@ internal class Win32Icon : IDisposable
         public byte bReserved;
         public ushort wPlanes;
         public ushort wBitCount;
-        public uint dwBytesInRes;
-        public uint dwImageOffset;
+        public uint32 dwBytesInRes;
+        public uint32 dwImageOffset;
     }
 
 
@@ -225,7 +225,7 @@ internal class Win32Icon : IDisposable
             foreach (ICONDIRENTRY entry in entries)
             {
                 bool fUpdateBestFit = false;
-                uint iconBitDepth;
+                uint32 iconBitDepth;
                 if (entry.bColorCount != 0)
                 {
                     iconBitDepth = 4;
@@ -286,7 +286,7 @@ internal class Win32Icon : IDisposable
                 return default;
             }
 
-            uint endOffset;
+            uint32 endOffset;
             try
             {
                 endOffset = checked(_bestImageOffset + _bestBytesInRes);

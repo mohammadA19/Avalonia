@@ -10,7 +10,7 @@ public interface IVulkanDevice : IDisposable, IOptionalFeatureProvider
     public IntPtr Handle { get; }
     public IntPtr PhysicalDeviceHandle { get; }
     public IntPtr MainQueueHandle { get; }
-    public uint GraphicsQueueFamilyIndex { get; }
+    public uint32 GraphicsQueueFamilyIndex { get; }
     public IVulkanInstance Instance { get; }
     bool IsLost { get; }
     public IDisposable Lock();
@@ -36,6 +36,6 @@ public interface IVulkanPlatformGraphicsContext : IPlatformGraphicsContext
     internal VkPhysicalDevice PhysicalDeviceHandle { get; }
     internal VkInstance InstanceHandle { get; }
     internal VkQueue MainQueueHandle { get; }
-    internal uint GraphicsQueueFamilyIndex { get; }
+    internal uint32 GraphicsQueueFamilyIndex { get; }
     IVulkanRenderTarget CreateRenderTarget(IEnumerable<object> surfaces);
 }

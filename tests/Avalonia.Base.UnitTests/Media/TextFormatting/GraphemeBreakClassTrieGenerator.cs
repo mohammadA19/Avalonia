@@ -40,11 +40,11 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
                     if (start == end)
                     {
-                        trieBuilder.Set(start, (uint)value);
+                        trieBuilder.Set(start, (uint32)value);
                     }
                     else
                     {
-                        trieBuilder.SetRange(start, end, (uint)value);
+                        trieBuilder.SetRange(start, end, (uint32)value);
                     }
                 }
             }

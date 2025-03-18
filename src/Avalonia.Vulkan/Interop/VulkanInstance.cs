@@ -118,7 +118,7 @@ internal class VulkanInstance : IVulkanInstance
 
     private static unsafe bool IsLayerAvailable(VulkanGlobalApi api, string layerName)
     {
-        uint layerPropertiesCount = 0;
+        uint32 layerPropertiesCount = 0;
 
         api.EnumerateInstanceLayerProperties(ref layerPropertiesCount, null)
             .ThrowOnError("vkEnumerateInstanceLayerProperties");
@@ -143,7 +143,7 @@ internal class VulkanInstance : IVulkanInstance
     private static unsafe HashSet<string> GetSupportedExtensions(VulkanGlobalApi api)
     {
         var supportedExtensions = new HashSet<string>();
-        uint supportedExtensionCount = 0;
+        uint32 supportedExtensionCount = 0;
         api.vkEnumerateInstanceExtensionProperties(IntPtr.Zero, &supportedExtensionCount, null);
         if (supportedExtensionCount > 0)
         {

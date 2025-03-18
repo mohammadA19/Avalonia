@@ -28,24 +28,24 @@ namespace Avalonia.LinuxFramebuffer.Output
         private const string libgbm = "libgbm.so.1";
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public unsafe delegate void DrmEventVBlankHandlerDelegate(int32 fd,
-            uint sequence,
-            uint tv_sec,
-            uint tv_usec,
+            uint32 sequence,
+            uint32 tv_sec,
+            uint32 tv_usec,
             void* user_data);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public unsafe delegate void DrmEventPageFlipHandlerDelegate(int32 fd,
-            uint sequence,
-            uint tv_sec,
-            uint tv_usec,
+            uint32 sequence,
+            uint32 tv_sec,
+            uint32 tv_usec,
             void* user_data);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public unsafe delegate IntPtr DrmEventPageFlipHandler2Delegate(int32 fd,
-            uint sequence,
-            uint tv_sec,
-            uint tv_usec,
-            uint crtc_id,
+            uint32 sequence,
+            uint32 tv_sec,
+            uint32 tv_usec,
+            uint32 crtc_id,
             void* user_data);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -68,19 +68,19 @@ namespace Avalonia.LinuxFramebuffer.Output
         public struct drmModeRes {
 
             public int32 count_fbs;
-            public uint *fbs;
+            public uint32 *fbs;
 
             public int32 count_crtcs;
-            public uint *crtcs;
+            public uint32 *crtcs;
 
             public int32 count_connectors;
-            public uint *connectors;
+            public uint32 *connectors;
 
             public int32 count_encoders;
-            public uint *encoders;
+            public uint32 *encoders;
 
-            uint min_width, max_width;
-            uint min_height, max_height;
+            uint32 min_width, max_width;
+            uint32 min_height, max_height;
         }
 
         [Flags]
@@ -98,13 +98,13 @@ namespace Avalonia.LinuxFramebuffer.Output
         [StructLayout(LayoutKind.Sequential)]
         public struct drmModeModeInfo
         {
-            public uint clock;
+            public uint32 clock;
             public ushort hdisplay, hsync_start, hsync_end, htotal, hskew;
             public ushort vdisplay, vsync_start, vsync_end, vtotal, vscan;
 
-            public uint vrefresh;
+            public uint32 vrefresh;
 
-            public uint flags;
+            public uint32 flags;
             public DrmModeType type;
             public fixed byte name[32];
             public PixelSize Resolution => new PixelSize(hdisplay, vdisplay);
@@ -112,41 +112,41 @@ namespace Avalonia.LinuxFramebuffer.Output
 
         [StructLayout(LayoutKind.Sequential)]
         public struct drmModeConnector {
-            public uint connector_id;
-            public uint encoder_id; // Encoder currently connected to 
-            public uint connector_type;
-            public uint connector_type_id;
+            public uint32 connector_id;
+            public uint32 encoder_id; // Encoder currently connected to 
+            public uint32 connector_type;
+            public uint32 connector_type_id;
             public DrmModeConnection connection;
-            public uint mmWidth, mmHeight; //  HxW in millimeters 
+            public uint32 mmWidth, mmHeight; //  HxW in millimeters 
             public DrmModeSubPixel subpixel;
 
             public int32 count_modes;
             public drmModeModeInfo* modes;
 
             public int32 count_props;
-            public uint *props; // List of property ids 
+            public uint32 *props; // List of property ids 
             public ulong *prop_values; // List of property values 
 
             public int32 count_encoders;
-            public uint *encoders; //List of encoder ids
+            public uint32 *encoders; //List of encoder ids
         }
         
         [StructLayout(LayoutKind.Sequential)]
         public struct drmModeEncoder {
-            public uint encoder_id;
-            public uint encoder_type;
-            public uint crtc_id;
-            public uint possible_crtcs;
-            public uint possible_clones;
+            public uint32 encoder_id;
+            public uint32 encoder_type;
+            public uint32 crtc_id;
+            public uint32 possible_crtcs;
+            public uint32 possible_clones;
         }
         
         [StructLayout(LayoutKind.Sequential)]
         public struct drmModeCrtc {
-            public uint crtc_id;
-            public uint buffer_id; // FB id to connect to 0 = disconnect 
+            public uint32 crtc_id;
+            public uint32 buffer_id; // FB id to connect to 0 = disconnect 
 
-            public uint x, y; // Position on the framebuffer 
-            public uint width, height;
+            public uint32 x, y; // Position on the framebuffer 
+            public uint32 width, height;
             public int32 mode_valid;
             public drmModeModeInfo mode;
 
@@ -160,34 +160,34 @@ namespace Avalonia.LinuxFramebuffer.Output
         public static extern void drmModeFreeResources(drmModeRes* res);
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern drmModeConnector* drmModeGetConnector(int32 fd, uint connector);
+        public static extern drmModeConnector* drmModeGetConnector(int32 fd, uint32 connector);
         [DllImport(libdrm, SetLastError = true)]
-        public static extern drmModeConnector* drmModeGetConnectorCurrent(int32 fd, uint connector);
+        public static extern drmModeConnector* drmModeGetConnectorCurrent(int32 fd, uint32 connector);
         [DllImport(libdrm, SetLastError = true)]
         public static extern void drmModeFreeConnector(drmModeConnector* res);
         
         [DllImport(libdrm, SetLastError = true)]
-        public static extern drmModeEncoder* drmModeGetEncoder(int32 fd, uint id);
+        public static extern drmModeEncoder* drmModeGetEncoder(int32 fd, uint32 id);
         [DllImport(libdrm, SetLastError = true)]
         public static extern void drmModeFreeEncoder(drmModeEncoder* enc);
         [DllImport(libdrm, SetLastError = true)]
-        public static extern drmModeCrtc* drmModeGetCrtc(int32 fd, uint id);
+        public static extern drmModeCrtc* drmModeGetCrtc(int32 fd, uint32 id);
         [DllImport(libdrm, SetLastError = true)]
         public static extern void drmModeFreeCrtc(drmModeCrtc* enc);
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern int32 drmModeAddFB(int32 fd, uint width, uint height, byte depth,
-            byte bpp, uint pitch, uint bo_handle,
-            out uint buf_id);
+        public static extern int32 drmModeAddFB(int32 fd, uint32 width, uint32 height, byte depth,
+            byte bpp, uint32 pitch, uint32 bo_handle,
+            out uint32 buf_id);
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern int32 drmModeAddFB2(int32 fd, uint width, uint height,
-            uint pixel_format, uint[] bo_handles, uint[] pitches,
-            uint[] offsets, out uint buf_id, uint flags);
+        public static extern int32 drmModeAddFB2(int32 fd, uint32 width, uint32 height,
+            uint32 pixel_format, uint32[] bo_handles, uint32[] pitches,
+            uint32[] offsets, out uint32 buf_id, uint32 flags);
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern int32 drmModeSetCrtc(int32 fd, uint crtcId, uint bufferId,
-            uint x, uint y, uint *connectors, int32 count,
+        public static extern int32 drmModeSetCrtc(int32 fd, uint32 crtcId, uint32 bufferId,
+            uint32 x, uint32 y, uint32 *connectors, int32 count,
             drmModeModeInfo* mode);
         
         [DllImport(libdrm, SetLastError = true)]
@@ -203,7 +203,7 @@ namespace Avalonia.LinuxFramebuffer.Output
         }
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern void drmModePageFlip(int32 fd, uint crtc_id, uint fb_id,
+        public static extern void drmModePageFlip(int32 fd, uint32 crtc_id, uint32 fb_id,
             DrmModePageFlip flags, void *user_data);
 
 
@@ -245,7 +245,7 @@ namespace Avalonia.LinuxFramebuffer.Output
         };
 
         [DllImport(libgbm, SetLastError = true)]
-        public static extern IntPtr gbm_surface_create(IntPtr device, int32 width, int32 height, uint format, GbmBoFlags flags);
+        public static extern IntPtr gbm_surface_create(IntPtr device, int32 width, int32 height, uint32 format, GbmBoFlags flags);
         [DllImport(libgbm, SetLastError = true)]
         public static extern IntPtr gbm_surface_lock_front_buffer(IntPtr surface);
         [DllImport(libgbm, SetLastError = true)]
@@ -261,16 +261,16 @@ namespace Avalonia.LinuxFramebuffer.Output
             GbmBoUserDataDestroyCallbackDelegate onFree);
 
         [DllImport(libgbm, SetLastError = true)]
-        public static extern uint gbm_bo_get_width(IntPtr bo);
+        public static extern uint32 gbm_bo_get_width(IntPtr bo);
 
         [DllImport(libgbm, SetLastError = true)]
-        public static extern uint gbm_bo_get_height(IntPtr bo);
+        public static extern uint32 gbm_bo_get_height(IntPtr bo);
 
         [DllImport(libgbm, SetLastError = true)]
-        public static extern uint gbm_bo_get_stride(IntPtr bo);
+        public static extern uint32 gbm_bo_get_stride(IntPtr bo);
 
         [DllImport(libgbm, SetLastError = true)]
-        public static extern uint gbm_bo_get_format(IntPtr bo);
+        public static extern uint32 gbm_bo_get_format(IntPtr bo);
 
         [StructLayout(LayoutKind.Explicit)]
         public struct GbmBoHandle
@@ -280,7 +280,7 @@ namespace Avalonia.LinuxFramebuffer.Output
             [FieldOffset(0)]
             public int32 s32;
             [FieldOffset(0)]
-            public uint u32;
+            public uint32 u32;
             [FieldOffset(0)]
             public long s64;
             [FieldOffset(0)]
@@ -292,10 +292,10 @@ namespace Avalonia.LinuxFramebuffer.Output
 
         public static  class GbmColorFormats
         {
-            public static uint FourCC(char a, char b, char c, char d) =>
-                (uint)a | ((uint)b) << 8 | ((uint)c) << 16 | ((uint)d) << 24;
+            public static uint32 FourCC(char a, char b, char c, char d) =>
+                (uint32)a | ((uint32)b) << 8 | ((uint32)c) << 16 | ((uint32)d) << 24;
 
-            public static uint GBM_FORMAT_XRGB8888 { get; } = FourCC('X', 'R', '2', '4');
+            public static uint32 GBM_FORMAT_XRGB8888 { get; } = FourCC('X', 'R', '2', '4');
         }
     }
     

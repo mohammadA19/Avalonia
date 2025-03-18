@@ -65,7 +65,7 @@ namespace Avalonia.Rendering.Composition.Animations
             _innerface.Values;
         
         // UWP compat
-        public uint Size => (uint) Count;
+        public uint32 Size => (uint32) Count;
 
         public IReadOnlyDictionary<string, ICompositionAnimationBase> GetView() =>
             new Dictionary<string, ICompositionAnimationBase>(this);

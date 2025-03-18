@@ -50,7 +50,7 @@ internal class VulkanContext : IVulkanPlatformGraphicsContext
     public VkPhysicalDevice PhysicalDeviceHandle => new (Device.PhysicalDeviceHandle);
     public VkInstance InstanceHandle => new(Instance.Handle);
     public VkQueue MainQueueHandle => new(Device.MainQueueHandle);
-    public uint GraphicsQueueFamilyIndex => Device.GraphicsQueueFamilyIndex;
+    public uint32 GraphicsQueueFamilyIndex => Device.GraphicsQueueFamilyIndex;
 
     public VulkanInstanceApi InstanceApi { get; }
     public VulkanDeviceApi DeviceApi { get; }

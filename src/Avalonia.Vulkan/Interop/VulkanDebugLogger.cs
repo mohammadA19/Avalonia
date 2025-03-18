@@ -10,7 +10,7 @@ unsafe static class VulkanDebugLogger
     private static VkDebugUtilsMessengerCallbackEXTDelegate s_Delegate = WriteLogEvent;
     public static IntPtr CallbackPtr { get;  } = Marshal.GetFunctionPointerForDelegate(s_Delegate);
 
-    private static uint WriteLogEvent(VkDebugUtilsMessageSeverityFlagsEXT messageSeverity,
+    private static uint32 WriteLogEvent(VkDebugUtilsMessageSeverityFlagsEXT messageSeverity,
         VkDebugUtilsMessageTypeFlagsEXT messagetypes,
         VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
         void* puserdata)

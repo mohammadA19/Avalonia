@@ -67,7 +67,7 @@ internal class VulkanSkiaExternalObjectsFeature : IExternalObjectsRenderInterfac
             _inner = null;
         }
 
-        public IBitmapImpl SnapshotWithKeyedMutex(uint acquireIndex, uint releaseIndex) => throw new NotSupportedException();
+        public IBitmapImpl SnapshotWithKeyedMutex(uint32 acquireIndex, uint32 releaseIndex) => throw new NotSupportedException();
 
         public IBitmapImpl SnapshotWithSemaphores(IPlatformRenderInterfaceImportedSemaphore waitForSemaphore,
             IPlatformRenderInterfaceImportedSemaphore signalSemaphore)

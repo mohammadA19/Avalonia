@@ -15,7 +15,7 @@ namespace Avalonia.Vulkan
         private readonly List<VulkanCommandBuffer> _usedCommandBuffers = new();
         private readonly object _lock = new();
 
-        public unsafe VulkanCommandBufferPool(Vk api, Device device, Queue queue, uint queueFamilyIndex)
+        public unsafe VulkanCommandBufferPool(Vk api, Device device, Queue queue, uint32 queueFamilyIndex)
         {
             _api = api;
             _device = device;
@@ -177,7 +177,7 @@ namespace Avalonia.Vulkan
 
                 ulong acquireKey = keyedMutex?.AcquireKey ?? 0, releaseKey = keyedMutex?.ReleaseKey ?? 0;
                 DeviceMemory devMem = keyedMutex?.DeviceMemory ?? default;
-                uint timeout = uint.MaxValue;
+                uint32 timeout = uint32.MaxValue;
                 Win32KeyedMutexAcquireReleaseInfoKHR mutex = default;
                 if (keyedMutex != null)
                     mutex = new Win32KeyedMutexAcquireReleaseInfoKHR
@@ -201,12 +201,12 @@ namespace Avalonia.Vulkan
                         {
                             PNext = keyedMutex != null ? &mutex : null,
                             SType = StructureType.SubmitInfo,
-                            WaitSemaphoreCount = waitSemaphores != null ? (uint)waitSemaphores.Length : 0,
+                            WaitSemaphoreCount = waitSemaphores != null ? (uint32)waitSemaphores.Length : 0,
                             PWaitSemaphores = pWaitSemaphores,
                             PWaitDstStageMask = pWaitDstStageMask,
                             CommandBufferCount = 1,
                             PCommandBuffers = &commandBuffer,
-                            SignalSemaphoreCount = signalSemaphores != null ? (uint)signalSemaphores.Length : 0,
+                            SignalSemaphoreCount = signalSemaphores != null ? (uint32)signalSemaphores.Length : 0,
                             PSignalSemaphores = pSignalSemaphores,
                         };
 

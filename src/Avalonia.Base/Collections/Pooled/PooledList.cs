@@ -390,7 +390,7 @@ namespace Avalonia.Collections.Pooled
             get
             {
                 // Following trick can reduce the range check by one
-                if ((uint)index >= (uint)_size)
+                if ((uint32)index >= (uint32)_size)
                 {
                     ThrowHelper.ThrowArgumentOutOfRange_IndexException();
                 }
@@ -399,7 +399,7 @@ namespace Avalonia.Collections.Pooled
 
             set
             {
-                if ((uint)index >= (uint)_size)
+                if ((uint32)index >= (uint32)_size)
                 {
                     ThrowHelper.ThrowArgumentOutOfRange_IndexException();
                 }
@@ -446,7 +446,7 @@ namespace Avalonia.Collections.Pooled
         {
             _version++;
             int32 size = _size;
-            if ((uint)size < (uint)_items.Length)
+            if ((uint32)size < (uint32)_items.Length)
             {
                 _size = size + 1;
                 _items[size] = item;
@@ -687,8 +687,8 @@ namespace Avalonia.Collections.Pooled
             {
                 int32 newCapacity = _items.Length == 0 ? DefaultCapacity : _items.Length * 2;
                 // Allow the list to grow to maximum possible capacity (~2G elements) before encountering overflow.
-                // Note that this check works even when _items.Length overflowed thanks to the (uint) cast
-                if ((uint)newCapacity > MaxArrayLength)
+                // Note that this check works even when _items.Length overflowed thanks to the (uint32) cast
+                if ((uint32)newCapacity > MaxArrayLength)
                     newCapacity = MaxArrayLength;
                 if (newCapacity < min)
                     newCapacity = min;
@@ -741,7 +741,7 @@ namespace Avalonia.Collections.Pooled
 
         public int32 FindIndex(int32 startIndex, int32 count, Func<T, bool> match)
         {
-            if ((uint)startIndex > (uint)_size)
+            if ((uint32)startIndex > (uint32)_size)
                 ThrowHelper.ThrowStartIndexArgumentOutOfRange_ArgumentOutOfRange_Index();
 
             if (count < 0 || startIndex > _size - count)
@@ -803,7 +803,7 @@ namespace Avalonia.Collections.Pooled
             else
             {
                 // Make sure we're not out of range
-                if ((uint)startIndex >= (uint)_size)
+                if ((uint32)startIndex >= (uint32)_size)
                 {
                     ThrowHelper.ThrowStartIndexArgumentOutOfRange_ArgumentOutOfRange_Index();
                 }
@@ -937,7 +937,7 @@ namespace Avalonia.Collections.Pooled
         public void Insert(int32 index, T item)
         {
             // Note that insertions at the end are legal.
-            if ((uint)index > (uint)_size)
+            if ((uint32)index > (uint32)_size)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.index, ExceptionResource.ArgumentOutOfRange_ListInsert);
             }
@@ -975,7 +975,7 @@ namespace Avalonia.Collections.Pooled
         /// </summary>
         public void InsertRange(int32 index, IEnumerable<T> collection)
         {
-            if ((uint)index > (uint)_size)
+            if ((uint32)index > (uint32)_size)
             {
                 ThrowHelper.ThrowArgumentOutOfRange_IndexException();
             }
@@ -1218,7 +1218,7 @@ namespace Avalonia.Collections.Pooled
         /// </summary>
         public void RemoveAt(int32 index)
         {
-            if ((uint)index >= (uint)_size)
+            if ((uint32)index >= (uint32)_size)
                 ThrowHelper.ThrowArgumentOutOfRange_IndexException();
 
             _size--;
@@ -1476,7 +1476,7 @@ namespace Avalonia.Collections.Pooled
             {
                 var localList = _list;
 
-                if (_version == localList._version && ((uint)_index < (uint)localList._size))
+                if (_version == localList._version && ((uint32)_index < (uint32)localList._size))
                 {
                     _current = localList._items[_index];
                     _index++;

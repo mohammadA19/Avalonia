@@ -13,7 +13,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
             foreach (var (start, end, value) in values)
             {
-                var expected = (uint)value;
+                var expected = (uint32)value;
                 var actual = trie.Get(start);
 
                 Assert.Equal(expected, actual);

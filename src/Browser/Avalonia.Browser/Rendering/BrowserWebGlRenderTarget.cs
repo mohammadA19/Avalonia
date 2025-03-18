@@ -22,7 +22,7 @@ partial class BrowserWebGlRenderTarget : BrowserRenderTarget, IGlPlatformSurface
         _sizeGetter = sizeGetter;
         _glInfo = new GLInfo(
             js.GetPropertyAsInt32("contextHandle")!,
-            (uint)js.GetPropertyAsInt32("fboId"),
+            (uint32)js.GetPropertyAsInt32("fboId"),
             js.GetPropertyAsInt32("stencil"),
             js.GetPropertyAsInt32("sample"),
             js.GetPropertyAsInt32("depth"));
