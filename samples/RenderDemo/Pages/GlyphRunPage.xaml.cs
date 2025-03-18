@@ -24,7 +24,7 @@ namespace RenderDemo.Pages
     {
         private IGlyphTypeface _glyphTypeface = Typeface.Default.GlyphTypeface;
         private readonly Random _rand = new Random();
-        private ushort[] _glyphIndices = new ushort[1];
+        private uint16[] _glyphIndices = new uint16[1];
         private char[] _characters = new char[1];
         private float _fontSize = 20;
         private int32 _direction = 10;
@@ -83,7 +83,7 @@ namespace RenderDemo.Pages
     {
         private IGlyphTypeface _glyphTypeface = Typeface.Default.GlyphTypeface;
         private readonly Random _rand = new Random();
-        private ushort[] _glyphIndices = new ushort[1];
+        private uint16[] _glyphIndices = new uint16[1];
         private char[] _characters = new char[1];
         private float _fontSize = 20;
         private int32 _direction = 10;

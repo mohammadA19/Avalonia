@@ -642,7 +642,7 @@ namespace Avalonia.Controls
                     //
                     // Measure/Arrange of d's Grid uses d._minSize for long-pole
                     // definitions, and max(d._minSize, shared size) for
-                    // short-pole definitions.  This distinction allows us to react
+                    // int16-pole definitions.  This distinction allows us to react
                     // to changes in "long-pole-ness" more efficiently and correctly,
                     // by avoiding remeasures when a long-pole definition changes.
                     bool useSharedMinimum = !MathUtilities.AreClose(definitionBase._minSize, sharedMinSize);
@@ -660,13 +660,13 @@ namespace Avalonia.Controls
                     }
                     else if(useSharedMinimum)
                     {
-                        // d was a short-pole, and still is.  measure is valid
+                        // d was a int16-pole, and still is.  measure is valid
                         // iff the shared size didn't change
                         measureIsValid = !sharedMinSizeChanged;
                     }
                     else
                     {
-                        // d was a short-pole, but is now a long-pole.  This can
+                        // d was a int16-pole, but is now a long-pole.  This can
                         // happen in several ways:
                         //  a. d's minSize increased to or past the old shared size
                         //  b. other long-pole definitions decreased, leaving

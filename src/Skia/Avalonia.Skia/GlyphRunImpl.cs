@@ -12,7 +12,7 @@ namespace Avalonia.Skia
     internal class GlyphRunImpl : IGlyphRunImpl
     {
         private readonly GlyphTypefaceImpl _glyphTypefaceImpl;
-        private readonly ushort[] _glyphIndices;
+        private readonly uint16[] _glyphIndices;
         private readonly SKPoint[] _glyphPositions;
 
         // We use an array as opposed to a ConcurrentDictionary to prevent a large amount of lock object allocations.
@@ -40,7 +40,7 @@ namespace Avalonia.Skia
             FontRenderingEmSize = fontRenderingEmSize;
 
             var count = glyphInfos.Count;
-            _glyphIndices = new ushort[count];
+            _glyphIndices = new uint16[count];
             _glyphPositions = new SKPoint[count];
 
             var currentX = 0.0;

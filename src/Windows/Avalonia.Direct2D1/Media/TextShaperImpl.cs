@@ -65,7 +65,7 @@ namespace Avalonia.Direct2D1.Media
                 {
                     var sourceInfo = glyphInfos[i];
 
-                    var glyphIndex = (ushort)sourceInfo.Codepoint;
+                    var glyphIndex = (uint16)sourceInfo.Codepoint;
 
                     var glyphCluster = (int32)(sourceInfo.Cluster);
 

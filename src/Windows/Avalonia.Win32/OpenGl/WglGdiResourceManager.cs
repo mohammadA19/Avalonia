@@ -67,7 +67,7 @@ internal class WglGdiResourceManager
 
     private static readonly Queue<object> s_queue = new();
     private static readonly AutoResetEvent s_event = new(false);
-    private static readonly ushort s_windowClass;
+    private static readonly uint16 s_windowClass;
     private static readonly UnmanagedMethods.WndProc s_wndProcDelegate = WndProc;
 
     private static void Worker()

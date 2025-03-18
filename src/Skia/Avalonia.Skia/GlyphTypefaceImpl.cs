@@ -75,7 +75,7 @@ namespace Avalonia.Skia
 
             Metrics = new FontMetrics
             {
-                DesignEmHeight = (short)Face.UnitsPerEm,
+                DesignEmHeight = (int16)Face.UnitsPerEm,
                 Ascent = ascent,
                 Descent = descent,
                 LineGap = lineGap,
@@ -105,14 +105,14 @@ namespace Avalonia.Skia
             _nameTable = NameTable.Load(this);
 
             //Rely on Skia if no name table is present
-            FamilyName = _nameTable?.FontFamilyName((ushort)CultureInfo.InvariantCulture.LCID) ?? typeface.FamilyName;
+            FamilyName = _nameTable?.FontFamilyName((uint16)CultureInfo.InvariantCulture.LCID) ?? typeface.FamilyName;
 
-            TypographicFamilyName = _nameTable?.GetNameById((ushort)CultureInfo.InvariantCulture.LCID, KnownNameIds.TypographicFamilyName) ?? FamilyName;
+            TypographicFamilyName = _nameTable?.GetNameById((uint16)CultureInfo.InvariantCulture.LCID, KnownNameIds.TypographicFamilyName) ?? FamilyName;
 
             if(_nameTable != null)
             {
-                var familyNames = new Dictionary<ushort, string>(1);
-                var faceNames = new Dictionary<ushort, string>(1);
+                var familyNames = new Dictionary<uint16, string>(1);
+                var faceNames = new Dictionary<uint16, string>(1);
 
                 foreach (var nameRecord in _nameTable)
                 {
@@ -148,16 +148,16 @@ namespace Avalonia.Skia
             }
             else
             {
-                FamilyNames = new Dictionary<ushort, string> { { (ushort)CultureInfo.InvariantCulture.LCID, FamilyName } };
-                FaceNames = new Dictionary<ushort, string> { { (ushort)CultureInfo.InvariantCulture.LCID, Weight.ToString() } };
+                FamilyNames = new Dictionary<uint16, string> { { (uint16)CultureInfo.InvariantCulture.LCID, FamilyName } };
+                FaceNames = new Dictionary<uint16, string> { { (uint16)CultureInfo.InvariantCulture.LCID, Weight.ToString() } };
             }
         }
 
         public string TypographicFamilyName { get; }
 
-        public IReadOnlyDictionary<ushort, string> FamilyNames { get; }
+        public IReadOnlyDictionary<uint16, string> FamilyNames { get; }
 
-        public IReadOnlyDictionary<ushort, string> FaceNames { get; }
+        public IReadOnlyDictionary<uint16, string> FaceNames { get; }
 
         public IReadOnlyList<OpenTypeTag> SupportedFeatures
         {
@@ -225,7 +225,7 @@ namespace Avalonia.Skia
 
         public FontStretch Stretch { get; }
 
-        public bool TryGetGlyphMetrics(ushort glyph, out GlyphMetrics metrics)
+        public bool TryGetGlyphMetrics(uint16 glyph, out GlyphMetrics metrics)
         {
             metrics = default;
 
@@ -246,17 +246,17 @@ namespace Avalonia.Skia
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort GetGlyph(uint32 codepoint)
+        public uint16 GetGlyph(uint32 codepoint)
         {
             if (Font.TryGetGlyph(codepoint, out var glyph))
             {
-                return (ushort)glyph;
+                return (uint16)glyph;
             }
 
             return 0;
         }
 
-        public bool TryGetGlyph(uint32 codepoint, out ushort glyph)
+        public bool TryGetGlyph(uint32 codepoint, out uint16 glyph)
         {
             glyph = GetGlyph(codepoint);
 
@@ -264,15 +264,15 @@ namespace Avalonia.Skia
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort[] GetGlyphs(ReadOnlySpan<uint32> codepoints)
+        public uint16[] GetGlyphs(ReadOnlySpan<uint32> codepoints)
         {
-            var glyphs = new ushort[codepoints.Length];
+            var glyphs = new uint16[codepoints.Length];
 
             for (var i = 0; i < codepoints.Length; i++)
             {
                 if (Font.TryGetGlyph(codepoints[i], out var glyph))
                 {
-                    glyphs[i] = (ushort)glyph;
+                    glyphs[i] = (uint16)glyph;
                 }
             }
 
@@ -280,13 +280,13 @@ namespace Avalonia.Skia
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int32 GetGlyphAdvance(ushort glyph)
+        public int32 GetGlyphAdvance(uint16 glyph)
         {
             return Font.GetHorizontalGlyphAdvance(glyph);
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
+        public int32[] GetGlyphAdvances(ReadOnlySpan<uint16> glyphs)
         {
             var glyphIndices = new uint32[glyphs.Length];
 

@@ -38,7 +38,7 @@ namespace Avalonia.Direct2D1.Media
 
             Metrics = new FontMetrics
             {
-                DesignEmHeight = (short)xScale,
+                DesignEmHeight = (int16)xScale,
                 Ascent = -fontExtents.Ascender,
                 Descent = -fontExtents.Descender,
                 LineGap = fontExtents.LineGap,
@@ -100,17 +100,17 @@ namespace Avalonia.Direct2D1.Media
         public Avalonia.Media.FontStretch Stretch { get; }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort GetGlyph(uint32 codepoint)
+        public uint16 GetGlyph(uint32 codepoint)
         {
             if (Font.TryGetGlyph(codepoint, out var glyph))
             {
-                return (ushort)glyph;
+                return (uint16)glyph;
             }
 
             return 0;
         }
 
-        public bool TryGetGlyph(uint32 codepoint, out ushort glyph)
+        public bool TryGetGlyph(uint32 codepoint, out uint16 glyph)
         {
             glyph = GetGlyph(codepoint);
 
@@ -118,15 +118,15 @@ namespace Avalonia.Direct2D1.Media
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort[] GetGlyphs(ReadOnlySpan<uint32> codepoints)
+        public uint16[] GetGlyphs(ReadOnlySpan<uint32> codepoints)
         {
-            var glyphs = new ushort[codepoints.Length];
+            var glyphs = new uint16[codepoints.Length];
 
             for (var i = 0; i < codepoints.Length; i++)
             {
                 if (Font.TryGetGlyph(codepoints[i], out var glyph))
                 {
-                    glyphs[i] = (ushort)glyph;
+                    glyphs[i] = (uint16)glyph;
                 }
             }
 
@@ -134,13 +134,13 @@ namespace Avalonia.Direct2D1.Media
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int32 GetGlyphAdvance(ushort glyph)
+        public int32 GetGlyphAdvance(uint16 glyph)
         {
             return Font.GetHorizontalGlyphAdvance(glyph);
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
+        public int32[] GetGlyphAdvances(ReadOnlySpan<uint16> glyphs)
         {
             var glyphIndices = new uint32[glyphs.Length];
 
@@ -152,7 +152,7 @@ namespace Avalonia.Direct2D1.Media
             return Font.GetHorizontalGlyphAdvances(glyphIndices);
         }
 
-        public bool TryGetGlyphMetrics(ushort glyph, out GlyphMetrics metrics)
+        public bool TryGetGlyphMetrics(uint16 glyph, out GlyphMetrics metrics)
         {
             metrics = default;
 

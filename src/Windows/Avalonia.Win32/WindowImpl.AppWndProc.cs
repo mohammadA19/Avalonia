@@ -1224,12 +1224,12 @@ namespace Avalonia.Win32
 
         private Point DipFromLParam(IntPtr lParam)
         {
-            return new Point((short)(ToInt32(lParam) & 0xffff), (short)(ToInt32(lParam) >> 16)) / RenderScaling;
+            return new Point((int16)(ToInt32(lParam) & 0xffff), (int16)(ToInt32(lParam) >> 16)) / RenderScaling;
         }
 
         private static PixelPoint PointFromLParam(IntPtr lParam)
         {
-            return new PixelPoint((short)(ToInt32(lParam) & 0xffff), (short)(ToInt32(lParam) >> 16));
+            return new PixelPoint((int16)(ToInt32(lParam) & 0xffff), (int16)(ToInt32(lParam) >> 16));
         }
 
         private bool ShouldIgnoreTouchEmulatedMessage()

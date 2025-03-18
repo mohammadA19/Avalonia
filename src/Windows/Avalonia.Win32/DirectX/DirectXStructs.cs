@@ -33,7 +33,7 @@ namespace Avalonia.Win32.DirectX
 
     internal unsafe struct DXGI_ADAPTER_DESC
     {
-        public fixed ushort Description[128];
+        public fixed uint16 Description[128];
 
         public uint32 VendorId;
 
@@ -54,7 +54,7 @@ namespace Avalonia.Win32.DirectX
 
     internal unsafe struct DXGI_ADAPTER_DESC1
     {
-        public fixed ushort Description[128];
+        public fixed uint16 Description[128];
 
         public uint32 VendorId;
 
@@ -109,8 +109,8 @@ namespace Avalonia.Win32.DirectX
 
     internal struct DXGI_MODE_DESC
     {
-        public ushort Width;
-        public ushort Height;
+        public uint16 Width;
+        public uint16 Height;
         public DXGI_RATIONAL RefreshRate;
         public DXGI_FORMAT Format;
         public DXGI_MODE_SCANLINE_ORDER ScanlineOrdering;
@@ -119,7 +119,7 @@ namespace Avalonia.Win32.DirectX
 
     internal unsafe struct DXGI_OUTPUT_DESC
     {
-        internal fixed ushort DeviceName[32];
+        internal fixed uint16 DeviceName[32];
 
         internal RECT DesktopCoordinates;
 
@@ -143,8 +143,8 @@ namespace Avalonia.Win32.DirectX
 
     internal struct DXGI_RATIONAL
     {
-        public ushort Numerator;
-        public ushort Denominator;
+        public uint16 Numerator;
+        public uint16 Denominator;
     }
 
     internal struct DXGI_RGB
@@ -189,11 +189,11 @@ namespace Avalonia.Win32.DirectX
         public DXGI_MODE_DESC BufferDesc;
         public DXGI_SAMPLE_DESC SampleDesc;
         public uint32 BufferUsage;
-        public ushort BufferCount;
+        public uint16 BufferCount;
         public IntPtr OutputWindow;
         public int32 Windowed;
         public DXGI_SWAP_EFFECT SwapEffect;
-        public ushort Flags;
+        public uint16 Flags;
     }
 
     internal struct DXGI_SWAP_CHAIN_DESC1

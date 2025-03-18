@@ -16,7 +16,7 @@ namespace Avalonia.Win32
             };
         }
 
-        protected override IntPtr CreateWindowOverride(ushort atom)
+        protected override IntPtr CreateWindowOverride(uint16 atom)
         {
             var hWnd = UnmanagedMethods.CreateWindowEx(
                 0,

@@ -132,7 +132,7 @@ namespace Avalonia.Win32
                     {
                         fixed (void* pFilters = FiltersToPointer(filters, out var count))
                         {
-                            frm.SetFileTypes((ushort)count, pFilters);
+                            frm.SetFileTypes((uint16)count, pFilters);
                             if (count > 0)
                             {
                                 frm.SetFileTypeIndex(0);

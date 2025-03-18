@@ -99,8 +99,8 @@ namespace Avalonia.LinuxFramebuffer.Output
         public struct drmModeModeInfo
         {
             public uint32 clock;
-            public ushort hdisplay, hsync_start, hsync_end, htotal, hskew;
-            public ushort vdisplay, vsync_start, vsync_end, vtotal, vscan;
+            public uint16 hdisplay, hsync_start, hsync_end, htotal, hskew;
+            public uint16 vdisplay, vsync_start, vsync_end, vtotal, vscan;
 
             public uint32 vrefresh;
 

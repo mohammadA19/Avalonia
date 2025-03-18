@@ -440,7 +440,7 @@ namespace Avalonia
         /// </summary>
         /// <returns>A <see cref="IndexerDescriptor"/>.</returns>
         /// <remarks>
-        /// The ! and ~ operators are short forms of this.
+        /// The ! and ~ operators are int16 forms of this.
         /// </remarks>
         public IndexerDescriptor Bind()
         {

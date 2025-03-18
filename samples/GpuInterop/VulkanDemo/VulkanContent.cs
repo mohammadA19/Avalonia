@@ -47,7 +47,7 @@ unsafe class VulkanContent : IDisposable
             Buffer.BlockCopy(buf, 0, points, 0, buf.Length);
             buf = new uint8[sr.ReadInt32()];
             sr.Read(buf, 0, buf.Length);
-            _indices = new ushort[buf.Length / 2];
+            _indices = new uint16[buf.Length / 2];
             Buffer.BlockCopy(buf, 0, _indices, 0, buf.Length);
             _points = new Vertex[points.Length / 3];
             for (var primitive = 0; primitive < points.Length / 3; primitive++)
@@ -736,7 +736,7 @@ unsafe class VulkanContent : IDisposable
     {
         VulkanBufferHelper.AllocateBuffer<Vertex>(_context, BufferUsageFlags.VertexBufferBit, out _vertexBuffer,
             out _vertexBufferMemory, _points);
-        VulkanBufferHelper.AllocateBuffer<ushort>(_context, BufferUsageFlags.IndexBufferBit, out _indexBuffer,
+        VulkanBufferHelper.AllocateBuffer<uint16>(_context, BufferUsageFlags.IndexBufferBit, out _indexBuffer,
             out _indexBufferMemory, _indices);
     }
 
@@ -802,7 +802,7 @@ unsafe class VulkanContent : IDisposable
     }
 
     private readonly Vertex[] _points;
-    private readonly ushort[] _indices;
+    private readonly uint16[] _indices;
     private readonly float _minY;
     private readonly float _maxY;
 

@@ -4,7 +4,7 @@ namespace Avalonia.Media.Imaging;
 
 internal record struct Rgba64Pixel
 {
-    public Rgba64Pixel(ushort r, ushort g, ushort b, ushort a)
+    public Rgba64Pixel(uint16 r, uint16 g, uint16 b, uint16 a)
     {
         R = r;
         G = g;
@@ -12,10 +12,10 @@ internal record struct Rgba64Pixel
         A = a;
     }
 
-    public ushort R;
-    public ushort G;
-    public ushort B;
-    public ushort A;
+    public uint16 R;
+    public uint16 G;
+    public uint16 B;
+    public uint16 A;
 }
 
 internal record struct Rgba8888Pixel
@@ -183,7 +183,7 @@ internal static unsafe class PixelFormatReader
 
     public unsafe struct Gray16PixelFormatReader : IPixelFormatReader
     {
-        private ushort* _address;
+        private uint16* _address;
         public Rgba8888Pixel ReadNext()
         {
             var value16 = *_address;
@@ -198,7 +198,7 @@ internal static unsafe class PixelFormatReader
             };
         }
 
-        public void Reset(IntPtr address) => _address = (ushort*)address;
+        public void Reset(IntPtr address) => _address = (uint16*)address;
     }
 
     public unsafe struct Gray32FloatPixelFormatReader : IPixelFormatReader
@@ -286,7 +286,7 @@ internal static unsafe class PixelFormatReader
         private uint8* _address;
         public Rgba8888Pixel ReadNext()
         {
-            var addr = (ushort*)_address;
+            var addr = (uint16*)_address;
 
             _address += 2;
 
@@ -295,7 +295,7 @@ internal static unsafe class PixelFormatReader
 
         public void Reset(IntPtr address) => _address = (uint8*)address;
 
-        private static Rgba8888Pixel UnPack(ushort value)
+        private static Rgba8888Pixel UnPack(uint16 value)
         {
             var r = (uint8)Math.Round(((value >> 10) & 0x1F) / 31F * 255);
             var g = (uint8)Math.Round(((value >> 5) & 0x1F) / 31F * 255);
@@ -310,7 +310,7 @@ internal static unsafe class PixelFormatReader
         private uint8* _address;
         public Rgba8888Pixel ReadNext()
         {
-            var addr = (ushort*)_address;
+            var addr = (uint16*)_address;
 
             _address += 2;
 
@@ -319,7 +319,7 @@ internal static unsafe class PixelFormatReader
 
         public void Reset(IntPtr address) => _address = (uint8*)address;
 
-        private static Rgba8888Pixel UnPack(ushort value)
+        private static Rgba8888Pixel UnPack(uint16 value)
         {
             var r = (uint8)Math.Round(((value >> 11) & 0x1F) / 31F * 255);
             var g = (uint8)Math.Round(((value >> 5) & 0x3F) / 63F * 255);

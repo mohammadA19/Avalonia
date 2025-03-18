@@ -68,8 +68,8 @@ namespace Avalonia.LinuxFramebuffer
     [StructLayout(LayoutKind.Sequential)]
     struct PollFd {
         public int32   fd;         /* file descriptor */
-        public short events;     /* requested events */
-        public short revents;    /* returned events */
+        public int16 events;     /* requested events */
+        public int16 revents;    /* returned events */
     };
     
     enum FbIoCtl : uint32
@@ -204,7 +204,7 @@ namespace Avalonia.LinuxFramebuffer
     struct input_event
     {
         private IntPtr timeval1, timeval2;
-        public ushort _type, _code;
+        public uint16 _type, _code;
         public int32 value;
         public EvType Type => (EvType)_type;
         public EvKey Key => (EvKey)_code;

@@ -256,7 +256,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
         {
             [FieldOffset(0)] public uint8 Mask;
             [FieldOffset(1)] public uint8 Length8;
-            [FieldOffset(2)] public ushort Length16;
+            [FieldOffset(2)] public uint16 Length16;
             [FieldOffset(2)] public ulong Length64;
         }
 
@@ -313,7 +313,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
                 {
                     headerLength = WebsocketLen16Length;
                     header.Length8 = WebsocketLen16Code;
-                    header.Length16 = (ushort) IPAddress.HostToNetworkOrder((short) (ushort) length);
+                    header.Length16 = (uint16) IPAddress.HostToNetworkOrder((int16) (uint16) length);
 
                 }
                 else
@@ -359,7 +359,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
             else if (len0 == WebsocketLen16Code)
             {
                 await ReadExact(_stream, _recvHeaderBuffer, 0, 2);
-                length = (ushort) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(_recvHeaderBuffer, 0));
+                length = (uint16) IPAddress.NetworkToHostOrder(BitConverter.ToInt16(_recvHeaderBuffer, 0));
             }
             
             else

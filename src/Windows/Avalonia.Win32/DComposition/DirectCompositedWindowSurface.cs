@@ -92,7 +92,7 @@ internal class DirectCompositedWindowRenderTarget : IDirect3D11TextureRenderTarg
             var scale = _window.WindowInfo.Scaling;
             if (_size != size)
             {
-                _surface.Resize((ushort)size.Width, (ushort)size.Height);
+                _surface.Resize((uint16)size.Width, (uint16)size.Height);
                 _size = size;
             }
 

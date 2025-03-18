@@ -1080,8 +1080,8 @@ namespace Avalonia.Win32.Interop
             public uint32 biSize;
             public int32 biWidth;
             public int32 biHeight;
-            public ushort biPlanes;
-            public ushort biBitCount;
+            public uint16 biPlanes;
+            public uint16 biBitCount;
             public uint32 biCompression;
             public uint32 biSizeImage;
             public int32 biXPelsPerMeter;
@@ -1106,8 +1106,8 @@ namespace Avalonia.Win32.Interop
             public uint32 biSize;
             public int32 biWidth;
             public int32 biHeight;
-            public ushort biPlanes;
-            public ushort biBitCount;
+            public uint16 biPlanes;
+            public uint16 biBitCount;
             public BitmapCompressionMode biCompression;
             public uint32 biSizeImage;
             public int32 biXPelsPerMeter;
@@ -1387,7 +1387,7 @@ namespace Avalonia.Win32.Interop
         public static extern IntPtr GetMessageExtraInfo();
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "RegisterClassExW")]
-        public static extern ushort RegisterClassEx(ref WNDCLASSEX lpwcx);
+        public static extern uint16 RegisterClassEx(ref WNDCLASSEX lpwcx);
 
         [DllImport("user32.dll")]
         public static extern void RegisterTouchWindow(IntPtr hWnd, int32 flags);
@@ -1990,13 +1990,13 @@ namespace Avalonia.Win32.Interop
 
         public static uint32 MAKELCID(uint32 lgid, uint32 srtid)
         {
-            return (((uint32)(ushort)srtid) << 16) |
-                   ((ushort)lgid);
+            return (((uint32)(uint16)srtid) << 16) |
+                   ((uint16)lgid);
         }
 
-        public static ushort PRIMARYLANGID(uint32 lgid)
+        public static uint16 PRIMARYLANGID(uint32 lgid)
         {
-            return (ushort)(lgid & 0x3ff);
+            return (uint16)(lgid & 0x3ff);
         }
 
         public static uint32 LGID(IntPtr HKL)
@@ -2539,7 +2539,7 @@ namespace Avalonia.Win32.Interop
     [StructLayout(LayoutKind.Sequential)]
     internal struct FORMATETC
     {
-        public ushort cfFormat;
+        public uint16 cfFormat;
         public IntPtr ptd;
         public DVASPECT dwAspect;
         public int32 lindex;
@@ -2571,8 +2571,8 @@ namespace Avalonia.Win32.Interop
     [StructLayout(LayoutKind.Sequential)]
     internal struct PixelFormatDescriptor
     {
-        public ushort Size;
-        public ushort Version;
+        public uint16 Size;
+        public uint16 Version;
         public PixelFormatDescriptorFlags Flags;
         public uint8 PixelType;
         public uint8 ColorBits;

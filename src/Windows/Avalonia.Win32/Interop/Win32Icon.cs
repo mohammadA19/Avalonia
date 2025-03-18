@@ -151,11 +151,11 @@ internal class Win32Icon : IDisposable
     public struct ICONDIR
     {
         // Must be 0
-        public ushort idReserved;
+        public uint16 idReserved;
         // Must be 1
-        public ushort idType;
+        public uint16 idType;
         // Count of entries
-        public ushort idCount;
+        public uint16 idCount;
         // First entry (anysize array)
         public ICONDIRENTRY idEntries;
     }
@@ -168,8 +168,8 @@ internal class Win32Icon : IDisposable
         public uint8 bHeight;
         public uint8 bColorCount;
         public uint8 bReserved;
-        public ushort wPlanes;
-        public ushort wBitCount;
+        public uint16 wPlanes;
+        public uint16 wBitCount;
         public uint32 dwBytesInRes;
         public uint32 dwImageOffset;
     }

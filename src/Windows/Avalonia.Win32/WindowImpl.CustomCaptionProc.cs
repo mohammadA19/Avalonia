@@ -33,8 +33,8 @@ namespace Avalonia.Win32
             }
 
             // Determine if the hit test is for resizing. Default middle (1,1).
-            ushort uRow = 1;
-            ushort uCol = 1;
+            uint16 uRow = 1;
+            uint16 uCol = 1;
             bool onResizeBorder = false;
 
             // Determine if the point is at the left or right of the window.

@@ -34,7 +34,7 @@ internal sealed unsafe class WinScreen(IntPtr hMonitor) : PlatformScreen(new Pla
         var deviceMode = new DEVMODEW
         {
             dmFields = DEVMODE_FIELD_FLAGS.DM_DISPLAYORIENTATION | DEVMODE_FIELD_FLAGS.DM_DISPLAYFREQUENCY,
-            dmSize = (ushort)Marshal.SizeOf<DEVMODEW>()
+            dmSize = (uint16)Marshal.SizeOf<DEVMODEW>()
         };
         PInvoke.EnumDisplaySettings(info.szDevice.ToString(), ENUM_DISPLAY_SETTINGS_MODE.ENUM_CURRENT_SETTINGS,
             ref deviceMode);

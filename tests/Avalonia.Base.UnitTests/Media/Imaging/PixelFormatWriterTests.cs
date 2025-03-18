@@ -345,7 +345,7 @@ namespace Avalonia.Base.UnitTests.Media.Imaging
 
         private static Rgba8888Pixel GetGray16(Rgba8888Pixel pixel)
         {
-            var grayscale = (ushort)Math.Round((0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B) * 0x0101);
+            var grayscale = (uint16)Math.Round((0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B) * 0x0101);
 
             var value = (uint8)(grayscale >> 8);
 

@@ -10,7 +10,7 @@ namespace Avalonia.Media.Fonts.Tables
     [DebuggerDisplay("Offset: {Offset}, Length: {Length}, Value: {Value}")]
     internal class StringLoader
     {
-        public StringLoader(ushort length, ushort offset, Encoding encoding)
+        public StringLoader(uint16 length, uint16 offset, Encoding encoding)
         {
             Length = length;
             Offset = offset;
@@ -18,9 +18,9 @@ namespace Avalonia.Media.Fonts.Tables
             Value = string.Empty;
         }
 
-        public ushort Length { get; }
+        public uint16 Length { get; }
 
-        public ushort Offset { get; }
+        public uint16 Offset { get; }
 
         public string Value { get; private set; }
 

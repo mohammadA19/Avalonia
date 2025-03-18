@@ -12,17 +12,17 @@ namespace Avalonia.Media.Fonts.Tables
         internal static OpenTypeTag Tag = OpenTypeTag.Parse(TableName);
 
         public HorizontalHeadTable(
-            short ascender,
-            short descender,
-            short lineGap,
-            ushort advanceWidthMax,
-            short minLeftSideBearing,
-            short minRightSideBearing,
-            short xMaxExtent,
-            short caretSlopeRise,
-            short caretSlopeRun,
-            short caretOffset,
-            ushort numberOfHMetrics)
+            int16 ascender,
+            int16 descender,
+            int16 lineGap,
+            uint16 advanceWidthMax,
+            int16 minLeftSideBearing,
+            int16 minRightSideBearing,
+            int16 xMaxExtent,
+            int16 caretSlopeRise,
+            int16 caretSlopeRun,
+            int16 caretOffset,
+            uint16 numberOfHMetrics)
         {
             Ascender = ascender;
             Descender = descender;
@@ -37,27 +37,27 @@ namespace Avalonia.Media.Fonts.Tables
             NumberOfHMetrics = numberOfHMetrics;
         }
 
-        public ushort AdvanceWidthMax { get; }
+        public uint16 AdvanceWidthMax { get; }
 
-        public short Ascender { get; }
+        public int16 Ascender { get; }
 
-        public short CaretOffset { get; }
+        public int16 CaretOffset { get; }
 
-        public short CaretSlopeRise { get; }
+        public int16 CaretSlopeRise { get; }
 
-        public short CaretSlopeRun { get; }
+        public int16 CaretSlopeRun { get; }
 
-        public short Descender { get; }
+        public int16 Descender { get; }
 
-        public short LineGap { get; }
+        public int16 LineGap { get; }
 
-        public short MinLeftSideBearing { get; }
+        public int16 MinLeftSideBearing { get; }
 
-        public short MinRightSideBearing { get; }
+        public int16 MinRightSideBearing { get; }
 
-        public ushort NumberOfHMetrics { get; }
+        public uint16 NumberOfHMetrics { get; }
 
-        public short XMaxExtent { get; }
+        public int16 XMaxExtent { get; }
 
         public static HorizontalHeadTable? Load(IGlyphTypeface glyphTypeface)
         {
@@ -112,29 +112,29 @@ namespace Avalonia.Media.Fonts.Tables
             // +--------+---------------------+---------------------------------------------------------------------------------+
             // | uint16 | numOfLongHorMetrics | number of advance widths in metrics table                                       |
             // +--------+---------------------+---------------------------------------------------------------------------------+
-            ushort majorVersion = reader.ReadUInt16();
-            ushort minorVersion = reader.ReadUInt16();
-            short ascender = reader.ReadFWORD();
-            short descender = reader.ReadFWORD();
-            short lineGap = reader.ReadFWORD();
-            ushort advanceWidthMax = reader.ReadUFWORD();
-            short minLeftSideBearing = reader.ReadFWORD();
-            short minRightSideBearing = reader.ReadFWORD();
-            short xMaxExtent = reader.ReadFWORD();
-            short caretSlopeRise = reader.ReadInt16();
-            short caretSlopeRun = reader.ReadInt16();
-            short caretOffset = reader.ReadInt16();
+            uint16 majorVersion = reader.ReadUInt16();
+            uint16 minorVersion = reader.ReadUInt16();
+            int16 ascender = reader.ReadFWORD();
+            int16 descender = reader.ReadFWORD();
+            int16 lineGap = reader.ReadFWORD();
+            uint16 advanceWidthMax = reader.ReadUFWORD();
+            int16 minLeftSideBearing = reader.ReadFWORD();
+            int16 minRightSideBearing = reader.ReadFWORD();
+            int16 xMaxExtent = reader.ReadFWORD();
+            int16 caretSlopeRise = reader.ReadInt16();
+            int16 caretSlopeRun = reader.ReadInt16();
+            int16 caretOffset = reader.ReadInt16();
             reader.ReadInt16(); // reserved
             reader.ReadInt16(); // reserved
             reader.ReadInt16(); // reserved
             reader.ReadInt16(); // reserved
-            short metricDataFormat = reader.ReadInt16(); // 0
+            int16 metricDataFormat = reader.ReadInt16(); // 0
             if (metricDataFormat != 0)
             {
                 throw new InvalidFontTableException($"Expected metricDataFormat = 0 found {metricDataFormat}", TableName);
             }
 
-            ushort numberOfHMetrics = reader.ReadUInt16();
+            uint16 numberOfHMetrics = reader.ReadUInt16();
 
             return new HorizontalHeadTable(
                 ascender,

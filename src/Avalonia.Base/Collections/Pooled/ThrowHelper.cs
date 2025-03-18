@@ -67,7 +67,7 @@ namespace Avalonia.Collections.Pooled
         [DoesNotReturn]
         internal static void ThrowArgumentException_DestinationTooShort()
         {
-            throw new ArgumentException("Destination too short.");
+            throw new ArgumentException("Destination too int16.");
         }
 
         [DoesNotReturn]
@@ -399,7 +399,7 @@ namespace Avalonia.Collections.Pooled
         internal static void ThrowForUnsupportedVectorBaseType<T>() where T : struct
         {
             if (typeof(T) != typeof(uint8) && typeof(T) != typeof(int8) &&
-                typeof(T) != typeof(short) && typeof(T) != typeof(ushort) &&
+                typeof(T) != typeof(int16) && typeof(T) != typeof(uint16) &&
                 typeof(T) != typeof(int32) && typeof(T) != typeof(uint32) &&
                 typeof(T) != typeof(long) && typeof(T) != typeof(ulong) &&
                 typeof(T) != typeof(float) && typeof(T) != typeof(double))

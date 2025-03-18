@@ -27,7 +27,7 @@ namespace Avalonia.Media.Fonts.Tables.Name
         /// <value>
         /// The name of the font.
         /// </value>
-        public string Id(ushort culture)
+        public string Id(uint16 culture)
             => GetNameById(culture, KnownNameIds.UniqueFontID);
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Avalonia.Media.Fonts.Tables.Name
         /// <value>
         /// The name of the font.
         /// </value>
-        public string FontName(ushort culture)
+        public string FontName(uint16 culture)
             => GetNameById(culture, KnownNameIds.FullFontName);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Avalonia.Media.Fonts.Tables.Name
         /// <value>
         /// The name of the font.
         /// </value>
-        public string FontFamilyName(ushort culture)
+        public string FontFamilyName(uint16 culture)
             => GetNameById(culture, KnownNameIds.FontFamilyName);
 
         /// <summary>
@@ -54,10 +54,10 @@ namespace Avalonia.Media.Fonts.Tables.Name
         /// <value>
         /// The name of the font.
         /// </value>
-        public string FontSubFamilyName(ushort culture)
+        public string FontSubFamilyName(uint16 culture)
             => GetNameById(culture, KnownNameIds.FontSubfamilyName);
 
-        public string GetNameById(ushort culture, KnownNameIds nameId)
+        public string GetNameById(uint16 culture, KnownNameIds nameId)
         {
             var languageId = culture;
             NameRecord? usaVersion = null;
@@ -94,7 +94,7 @@ namespace Avalonia.Media.Fonts.Tables.Name
                    string.Empty;
         }
 
-        public string GetNameById(ushort culture, ushort nameId)
+        public string GetNameById(uint16 culture, uint16 nameId)
             => GetNameById(culture, (KnownNameIds)nameId);
 
         public static NameTable? Load(IGlyphTypeface glyphTypeface)

@@ -15,7 +15,7 @@ namespace Avalonia.Utilities;
 internal static class StringBuilderCache
 {
     // The value 360 was chosen in discussion with performance experts as a compromise between using
-    // as little memory per thread as possible and still covering a large part of short-lived
+    // as little memory per thread as possible and still covering a large part of int16-lived
     // StringBuilder creations on the startup path of VS designers.
     internal const int32 MaxBuilderSize = 360;
     private const int32 DefaultCapacity = 16; // == StringBuilder.DefaultCapacity

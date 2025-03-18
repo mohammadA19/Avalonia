@@ -42,7 +42,7 @@ namespace Avalonia.Media
             IGlyphTypeface glyphTypeface,
             double fontRenderingEmSize,
             ReadOnlyMemory<char> characters,
-            IReadOnlyList<ushort> glyphIndices,
+            IReadOnlyList<uint16> glyphIndices,
             Point? baselineOrigin = null,
             int32 biDiLevel = 0)
             : this(glyphTypeface, fontRenderingEmSize, characters,
@@ -89,7 +89,7 @@ namespace Avalonia.Media
             _baselineOrigin = platformImpl.Item.BaselineOrigin;
         }
 
-        private static IReadOnlyList<GlyphInfo> CreateGlyphInfos(IReadOnlyList<ushort> glyphIndices,
+        private static IReadOnlyList<GlyphInfo> CreateGlyphInfos(IReadOnlyList<uint16> glyphIndices,
             double fontRenderingEmSize, IGlyphTypeface glyphTypeface)
         {
             var glyphIndexSpan = ListToSpan(glyphIndices);
@@ -106,7 +106,7 @@ namespace Avalonia.Media
             return glyphInfos;
         }
 
-        private static ReadOnlySpan<ushort> ListToSpan(IReadOnlyList<ushort> list)
+        private static ReadOnlySpan<uint16> ListToSpan(IReadOnlyList<uint16> list)
         {
             var count = list.Count;
 
@@ -115,19 +115,19 @@ namespace Avalonia.Media
                 return default;
             }
 
-            if (list is ushort[] array)
+            if (list is uint16[] array)
             {
                 return array.AsSpan();
             }
 
 #if NET6_0_OR_GREATER
-            if (list is List<ushort> concreteList)
+            if (list is List<uint16> concreteList)
             {
                 return CollectionsMarshal.AsSpan(concreteList);
             }
 #endif
 
-            array = new ushort[count];
+            array = new uint16[count];
             for (var i = 0; i < count; ++i)
             {
                 array[i] = list[i];

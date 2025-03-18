@@ -15,8 +15,8 @@ namespace Avalonia.Win32.Automation.Marshalling;
 internal struct ComVariant : IDisposable
 {
     // VARIANT_BOOL constants.
-    internal const short VARIANT_TRUE = -1;
-    internal const short VARIANT_FALSE = 0;
+    internal const int16 VARIANT_TRUE = -1;
+    internal const int16 VARIANT_FALSE = 0;
 
     // Most of the data types in the Variant are carried in _typeUnion
     [FieldOffset(0)] private TypeUnion _typeUnion;
@@ -24,10 +24,10 @@ internal struct ComVariant : IDisposable
     [StructLayout(LayoutKind.Sequential)]
     private struct TypeUnion
     {
-        public ushort _vt;
-        public ushort _wReserved1;
-        public ushort _wReserved2;
-        public ushort _wReserved3;
+        public uint16 _vt;
+        public uint16 _wReserved1;
+        public uint16 _wReserved2;
+        public uint16 _wReserved3;
 
         public UnionTypes _unionTypes;
     }
@@ -36,16 +36,16 @@ internal struct ComVariant : IDisposable
     private unsafe struct UnionTypes
     {
         [FieldOffset(0)] public int8 _i1;
-        [FieldOffset(0)] public short _i2;
+        [FieldOffset(0)] public int16 _i2;
         [FieldOffset(0)] public int32 _i4;
         [FieldOffset(0)] public long _i8;
         [FieldOffset(0)] public uint8 _ui1;
-        [FieldOffset(0)] public ushort _ui2;
+        [FieldOffset(0)] public uint16 _ui2;
         [FieldOffset(0)] public uint32 _ui4;
         [FieldOffset(0)] public ulong _ui8;
         [FieldOffset(0)] public int32 _int;
         [FieldOffset(0)] public uint32 _uint;
-        [FieldOffset(0)] public short _bool;
+        [FieldOffset(0)] public int16 _bool;
         [FieldOffset(0)] public int32 _error;
         [FieldOffset(0)] public float _r4;
         [FieldOffset(0)] public double _r8;
@@ -115,10 +115,10 @@ internal struct ComVariant : IDisposable
             value = Convert.ChangeType(value, underlyingType);
         }
 
-        if (value is short)
+        if (value is int16)
         {
             variant.VarType = VarEnum.VT_I2;
-            variant._typeUnion._unionTypes._i2 = (short)value;
+            variant._typeUnion._unionTypes._i2 = (int16)value;
         }
         else if (value is int32)
         {
@@ -161,10 +161,10 @@ internal struct ComVariant : IDisposable
             variant.VarType = VarEnum.VT_UI1;
             variant._typeUnion._unionTypes._ui1 = (uint8)value;
         }
-        else if (value is ushort)
+        else if (value is uint16)
         {
             variant.VarType = VarEnum.VT_UI2;
-            variant._typeUnion._unionTypes._ui2 = (ushort)value;
+            variant._typeUnion._unionTypes._ui2 = (uint16)value;
         }
         else if (value is uint32)
         {
@@ -247,13 +247,13 @@ internal struct ComVariant : IDisposable
             {
                 // integer
                 VarEnum.VT_I1 => SafeArrayRef.ToArray<int8>(_typeUnion._unionTypes.parray),
-                VarEnum.VT_I2 => SafeArrayRef.ToArray<short>(_typeUnion._unionTypes.parray),
+                VarEnum.VT_I2 => SafeArrayRef.ToArray<int16>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_I4 => SafeArrayRef.ToArray<int32>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_I8 => SafeArrayRef.ToArray<long>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_INT => SafeArrayRef.ToArray<int32>(_typeUnion._unionTypes.parray),
                 // unsigned integer
                 VarEnum.VT_UI1 => SafeArrayRef.ToArray<uint8>(_typeUnion._unionTypes.parray),
-                VarEnum.VT_UI2 => SafeArrayRef.ToArray<ushort>(_typeUnion._unionTypes.parray),
+                VarEnum.VT_UI2 => SafeArrayRef.ToArray<uint16>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_UI4 => SafeArrayRef.ToArray<uint32>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_UI8 => SafeArrayRef.ToArray<ulong>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_UINT => SafeArrayRef.ToArray<uint32>(_typeUnion._unionTypes.parray),
@@ -276,7 +276,7 @@ internal struct ComVariant : IDisposable
     public VarEnum VarType
     {
         readonly get => (VarEnum)_typeUnion._vt;
-        private set => _typeUnion._vt = (ushort)value;
+        private set => _typeUnion._vt = (uint16)value;
     }
 }
 #endif

@@ -78,7 +78,7 @@ namespace Avalonia.Win32.OpenGl.Angle
                 
                 if (redefineDefaultAdapter)
                 {
-                    ushort adapterIndex = 0;
+                    uint16 adapterIndex = 0;
                     var adapters = new List<(IDXGIAdapter1 adapter, PlatformGraphicsDeviceAdapterDescription desc)>();
                     while (factory.EnumAdapters1(adapterIndex, &pAdapter) == 0)
                     {

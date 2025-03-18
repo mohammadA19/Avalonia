@@ -28,7 +28,7 @@ namespace Avalonia.UnitTests
 
             Metrics = new FontMetrics
             {
-                DesignEmHeight = (short)scale,
+                DesignEmHeight = (int16)scale,
                 Ascent = (int32)(metrics.GetXVariation(OpenTypeMetricsTag.HorizontalAscender) / defaultFontRenderingEmSize * scale),
                 Descent = (int32)(metrics.GetXVariation(OpenTypeMetricsTag.HorizontalDescender) / defaultFontRenderingEmSize * scale),
                 LineGap = (int32)(metrics.GetXVariation(OpenTypeMetricsTag.HorizontalLineGap) / defaultFontRenderingEmSize * scale),
@@ -67,23 +67,23 @@ namespace Avalonia.UnitTests
 
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort GetGlyph(uint32 codepoint)
+        public uint16 GetGlyph(uint32 codepoint)
         {
             if (Font.TryGetGlyph(codepoint, out var glyph))
             {
-                return (ushort)glyph;
+                return (uint16)glyph;
             }
 
             return 0;
         }
 
-        public bool TryGetGlyph(uint32 codepoint,out ushort glyph)
+        public bool TryGetGlyph(uint32 codepoint,out uint16 glyph)
         {
             glyph = 0;
 
             if (Font.TryGetGlyph(codepoint, out var glyphId))
             {
-                glyph = (ushort)glyphId;
+                glyph = (uint16)glyphId;
 
                 return true;
             }
@@ -92,15 +92,15 @@ namespace Avalonia.UnitTests
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public ushort[] GetGlyphs(ReadOnlySpan<uint32> codepoints)
+        public uint16[] GetGlyphs(ReadOnlySpan<uint32> codepoints)
         {
-            var glyphs = new ushort[codepoints.Length];
+            var glyphs = new uint16[codepoints.Length];
 
             for (var i = 0; i < codepoints.Length; i++)
             {
                 if (Font.TryGetGlyph(codepoints[i], out var glyph))
                 {
-                    glyphs[i] = (ushort)glyph;
+                    glyphs[i] = (uint16)glyph;
                 }
             }
 
@@ -108,13 +108,13 @@ namespace Avalonia.UnitTests
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int32 GetGlyphAdvance(ushort glyph)
+        public int32 GetGlyphAdvance(uint16 glyph)
         {
             return Font.GetHorizontalGlyphAdvance(glyph);
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
+        public int32[] GetGlyphAdvances(ReadOnlySpan<uint16> glyphs)
         {
             var glyphIndices = new uint32[glyphs.Length];
 
@@ -166,7 +166,7 @@ namespace Avalonia.UnitTests
             GC.SuppressFinalize(this);
         }
 
-        public bool TryGetGlyphMetrics(ushort glyph, out GlyphMetrics metrics)
+        public bool TryGetGlyphMetrics(uint16 glyph, out GlyphMetrics metrics)
         {
             metrics = default;
 

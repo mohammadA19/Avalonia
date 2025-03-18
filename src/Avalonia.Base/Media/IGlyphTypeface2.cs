@@ -23,7 +23,7 @@ namespace Avalonia.Media
         /// Gets the localized family names.
         /// <para>Keys are culture identifiers.</para>
         /// </summary>
-        IReadOnlyDictionary<ushort, string> FamilyNames { get; }
+        IReadOnlyDictionary<uint16, string> FamilyNames { get; }
 
         /// <summary>
         /// Gets supported font features.
@@ -34,6 +34,6 @@ namespace Avalonia.Media
         /// Gets the localized face names.
         /// <para>Keys are culture identifiers.</para>
         /// </summary>
-        IReadOnlyDictionary<ushort, string> FaceNames { get; }
+        IReadOnlyDictionary<uint16, string> FaceNames { get; }
     }
 }

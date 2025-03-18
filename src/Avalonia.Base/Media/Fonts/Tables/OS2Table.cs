@@ -13,41 +13,41 @@ namespace Avalonia.Media.Fonts.Tables
         internal static OpenTypeTag Tag = OpenTypeTag.Parse(TableName);
   
         private readonly uint8[] panose;
-        private readonly short capHeight;
-        private readonly short familyClass;
-        private readonly short heightX;
+        private readonly int16 capHeight;
+        private readonly int16 familyClass;
+        private readonly int16 heightX;
         private readonly string tag;
-        private readonly ushort codePageRange1;
-        private readonly ushort codePageRange2;
+        private readonly uint16 codePageRange1;
+        private readonly uint16 codePageRange2;
         private readonly uint32 unicodeRange1;
         private readonly uint32 unicodeRange2;
         private readonly uint32 unicodeRange3;
         private readonly uint32 unicodeRange4;
-        private readonly ushort breakChar;
-        private readonly ushort defaultChar;
-        private readonly ushort firstCharIndex;
-        private readonly ushort lastCharIndex;
-        private readonly ushort lowerOpticalPointSize;
-        private readonly ushort maxContext;
-        private readonly ushort upperOpticalPointSize;
-        private readonly short averageCharWidth;
+        private readonly uint16 breakChar;
+        private readonly uint16 defaultChar;
+        private readonly uint16 firstCharIndex;
+        private readonly uint16 lastCharIndex;
+        private readonly uint16 lowerOpticalPointSize;
+        private readonly uint16 maxContext;
+        private readonly uint16 upperOpticalPointSize;
+        private readonly int16 averageCharWidth;
 
         public OS2Table(
-            short averageCharWidth,
-            ushort weightClass,
-            ushort widthClass,
-            ushort styleType,
-            short subscriptXSize,
-            short subscriptYSize,
-            short subscriptXOffset,
-            short subscriptYOffset,
-            short superscriptXSize,
-            short superscriptYSize,
-            short superscriptXOffset,
-            short superscriptYOffset,
-            short strikeoutSize,
-            short strikeoutPosition,
-            short familyClass,
+            int16 averageCharWidth,
+            uint16 weightClass,
+            uint16 widthClass,
+            uint16 styleType,
+            int16 subscriptXSize,
+            int16 subscriptYSize,
+            int16 subscriptXOffset,
+            int16 subscriptYOffset,
+            int16 superscriptXSize,
+            int16 superscriptYSize,
+            int16 superscriptXOffset,
+            int16 superscriptYOffset,
+            int16 strikeoutSize,
+            int16 strikeoutPosition,
+            int16 familyClass,
             uint8[] panose,
             uint32 unicodeRange1,
             uint32 unicodeRange2,
@@ -55,13 +55,13 @@ namespace Avalonia.Media.Fonts.Tables
             uint32 unicodeRange4,
             string tag,
             FontStyleSelection fontStyle,
-            ushort firstCharIndex,
-            ushort lastCharIndex,
-            short typoAscender,
-            short typoDescender,
-            short typoLineGap,
-            ushort winAscent,
-            ushort winDescent)
+            uint16 firstCharIndex,
+            uint16 lastCharIndex,
+            int16 typoAscender,
+            int16 typoDescender,
+            int16 typoLineGap,
+            uint16 winAscent,
+            uint16 winDescent)
         {
             this.averageCharWidth = averageCharWidth;
             WeightClass = weightClass;
@@ -96,13 +96,13 @@ namespace Avalonia.Media.Fonts.Tables
 
         public OS2Table(
             OS2Table version0Table,
-            ushort codePageRange1,
-            ushort codePageRange2,
-            short heightX,
-            short capHeight,
-            ushort defaultChar,
-            ushort breakChar,
-            ushort maxContext)
+            uint16 codePageRange1,
+            uint16 codePageRange2,
+            int16 heightX,
+            int16 capHeight,
+            uint16 defaultChar,
+            uint16 breakChar,
+            uint16 maxContext)
             : this(
                 version0Table.averageCharWidth,
                 version0Table.WeightClass,
@@ -143,7 +143,7 @@ namespace Avalonia.Media.Fonts.Tables
             this.maxContext = maxContext;
         }
 
-        public OS2Table(OS2Table versionLessThan5Table, ushort lowerOpticalPointSize, ushort upperOpticalPointSize)
+        public OS2Table(OS2Table versionLessThan5Table, uint16 lowerOpticalPointSize, uint16 upperOpticalPointSize)
             : this(
                 versionLessThan5Table,
                 versionLessThan5Table.codePageRange1,
@@ -159,7 +159,7 @@ namespace Avalonia.Media.Fonts.Tables
         }
 
         [Flags]
-        internal enum FontStyleSelection : ushort
+        internal enum FontStyleSelection : uint16
         {
             /// <summary>
             /// Font contains italic or oblique characters, otherwise they are upright.
@@ -216,41 +216,41 @@ namespace Avalonia.Media.Fonts.Tables
 
         public FontStyleSelection FontStyle { get; }
 
-        public short TypoAscender { get; }
+        public int16 TypoAscender { get; }
 
-        public short TypoDescender { get; }
+        public int16 TypoDescender { get; }
 
-        public short TypoLineGap { get; }
+        public int16 TypoLineGap { get; }
 
-        public ushort WinAscent { get; }
+        public uint16 WinAscent { get; }
 
-        public ushort WinDescent { get; }
+        public uint16 WinDescent { get; }
 
-        public short StrikeoutPosition { get; }
+        public int16 StrikeoutPosition { get; }
 
-        public short StrikeoutSize { get; }
+        public int16 StrikeoutSize { get; }
 
-        public short SubscriptXOffset { get; }
+        public int16 SubscriptXOffset { get; }
 
-        public short SubscriptXSize { get; }
+        public int16 SubscriptXSize { get; }
 
-        public short SubscriptYOffset { get; }
+        public int16 SubscriptYOffset { get; }
 
-        public short SubscriptYSize { get; }
+        public int16 SubscriptYSize { get; }
 
-        public short SuperscriptXOffset { get; }
+        public int16 SuperscriptXOffset { get; }
 
-        public short SuperscriptXSize { get; }
+        public int16 SuperscriptXSize { get; }
 
-        public short SuperscriptYOffset { get; }
+        public int16 SuperscriptYOffset { get; }
 
-        public short SuperscriptYSize { get; }
+        public int16 SuperscriptYSize { get; }
 
-        public ushort StyleType { get; }
+        public uint16 StyleType { get; }
 
-        public ushort WeightClass { get; }
+        public uint16 WeightClass { get; }
 
-        public ushort WidthClass { get; }
+        public uint16 WidthClass { get; }
 
         public static OS2Table? Load(IGlyphTypeface glyphTypeface)
         {
@@ -310,24 +310,24 @@ namespace Avalonia.Media.Fonts.Tables
             // uint16 |usMaxContext            |
             // uint16 |usLowerOpticalPointSize |
             // uint16 |usUpperOpticalPointSize |
-            ushort version = reader.ReadUInt16(); // assert 0x0005
-            short averageCharWidth = reader.ReadInt16();
-            ushort weightClass = reader.ReadUInt16();
-            ushort widthClass = reader.ReadUInt16();
-            ushort styleType = reader.ReadUInt16();
-            short subscriptXSize = reader.ReadInt16();
-            short subscriptYSize = reader.ReadInt16();
-            short subscriptXOffset = reader.ReadInt16();
-            short subscriptYOffset = reader.ReadInt16();
+            uint16 version = reader.ReadUInt16(); // assert 0x0005
+            int16 averageCharWidth = reader.ReadInt16();
+            uint16 weightClass = reader.ReadUInt16();
+            uint16 widthClass = reader.ReadUInt16();
+            uint16 styleType = reader.ReadUInt16();
+            int16 subscriptXSize = reader.ReadInt16();
+            int16 subscriptYSize = reader.ReadInt16();
+            int16 subscriptXOffset = reader.ReadInt16();
+            int16 subscriptYOffset = reader.ReadInt16();
 
-            short superscriptXSize = reader.ReadInt16();
-            short superscriptYSize = reader.ReadInt16();
-            short superscriptXOffset = reader.ReadInt16();
-            short superscriptYOffset = reader.ReadInt16();
+            int16 superscriptXSize = reader.ReadInt16();
+            int16 superscriptYSize = reader.ReadInt16();
+            int16 superscriptXOffset = reader.ReadInt16();
+            int16 superscriptYOffset = reader.ReadInt16();
 
-            short strikeoutSize = reader.ReadInt16();
-            short strikeoutPosition = reader.ReadInt16();
-            short familyClass = reader.ReadInt16();
+            int16 strikeoutSize = reader.ReadInt16();
+            int16 strikeoutPosition = reader.ReadInt16();
+            int16 familyClass = reader.ReadInt16();
             uint8[] panose = reader.ReadUInt8Array(10);
             uint32 unicodeRange1 = reader.ReadUInt32(); // Bits 0–31
             uint32 unicodeRange2 = reader.ReadUInt32(); // Bits 32–63
@@ -335,13 +335,13 @@ namespace Avalonia.Media.Fonts.Tables
             uint32 unicodeRange4 = reader.ReadUInt32(); // Bits 96–127
             string tag = reader.ReadTag();
             FontStyleSelection fontStyle = reader.ReadUInt16<FontStyleSelection>();
-            ushort firstCharIndex = reader.ReadUInt16();
-            ushort lastCharIndex = reader.ReadUInt16();
-            short typoAscender = reader.ReadInt16();
-            short typoDescender = reader.ReadInt16();
-            short typoLineGap = reader.ReadInt16();
-            ushort winAscent = reader.ReadUInt16();
-            ushort winDescent = reader.ReadUInt16();
+            uint16 firstCharIndex = reader.ReadUInt16();
+            uint16 lastCharIndex = reader.ReadUInt16();
+            int16 typoAscender = reader.ReadInt16();
+            int16 typoDescender = reader.ReadInt16();
+            int16 typoLineGap = reader.ReadInt16();
+            uint16 winAscent = reader.ReadUInt16();
+            uint16 winDescent = reader.ReadUInt16();
 
             var version0Table = new OS2Table(
                     averageCharWidth,
@@ -379,15 +379,15 @@ namespace Avalonia.Media.Fonts.Tables
                 return version0Table;
             }
 
-            short heightX = 0;
-            short capHeight = 0;
+            int16 heightX = 0;
+            int16 capHeight = 0;
 
-            ushort defaultChar = 0;
-            ushort breakChar = 0;
-            ushort maxContext = 0;
+            uint16 defaultChar = 0;
+            uint16 breakChar = 0;
+            uint16 maxContext = 0;
 
-            ushort codePageRange1 = reader.ReadUInt16(); // Bits 0–31
-            ushort codePageRange2 = reader.ReadUInt16(); // Bits 32–63
+            uint16 codePageRange1 = reader.ReadUInt16(); // Bits 0–31
+            uint16 codePageRange2 = reader.ReadUInt16(); // Bits 32–63
 
             // fields exist only in > v1 https://docs.microsoft.com/en-us/typography/opentype/spec/os2
             if (version > 1)
@@ -414,8 +414,8 @@ namespace Avalonia.Media.Fonts.Tables
                 return versionLessThan5Table;
             }
 
-            ushort lowerOpticalPointSize = reader.ReadUInt16();
-            ushort upperOpticalPointSize = reader.ReadUInt16();
+            uint16 lowerOpticalPointSize = reader.ReadUInt16();
+            uint16 upperOpticalPointSize = reader.ReadUInt16();
 
             return new OS2Table(
                 versionLessThan5Table,

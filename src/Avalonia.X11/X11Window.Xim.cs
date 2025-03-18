@@ -46,8 +46,8 @@ namespace Avalonia.X11
                         
                         var pt = new XPoint
                         {
-                            X = (short)Math.Min(Math.Max(rect.X, short.MinValue), short.MaxValue),
-                            Y = (short)Math.Min(Math.Max(rect.Y + rect.Height, short.MinValue), short.MaxValue)
+                            X = (int16)Math.Min(Math.Max(rect.X, int16.MinValue), int16.MaxValue),
+                            Y = (int16)Math.Min(Math.Max(rect.Y + rect.Height, int16.MinValue), int16.MaxValue)
                         };
 
                         using var spotLoc = new Utf8Buffer(XNames.XNSpotLocation);

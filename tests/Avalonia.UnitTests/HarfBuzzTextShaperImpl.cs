@@ -64,7 +64,7 @@ namespace Avalonia.UnitTests
                 {
                     var sourceInfo = glyphInfos[i];
 
-                    var glyphIndex = (ushort)sourceInfo.Codepoint;
+                    var glyphIndex = (uint16)sourceInfo.Codepoint;
 
                     var glyphCluster = (int32)(sourceInfo.Cluster);
 

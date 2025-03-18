@@ -7,7 +7,7 @@ namespace Avalonia.Media.Fonts.Tables
     /// <summary>
     /// Encoding IDS
     /// </summary>
-    internal enum EncodingIDs : ushort
+    internal enum EncodingIDs : uint16
     {
         /// <summary>
         /// Unicode 1.0 semantics

@@ -14,11 +14,11 @@ namespace Avalonia.Win32
 
         private class ClipboardFormat
         {
-            public ushort Format { get; }
+            public uint16 Format { get; }
             public string Name { get; }
-            public ushort[] Synthesized { get; }
+            public uint16[] Synthesized { get; }
 
-            public ClipboardFormat(string name, ushort format, params ushort[] synthesized)
+            public ClipboardFormat(string name, uint16 format, params uint16[] synthesized)
             {
                 Format = format;
                 Name = name;
@@ -28,15 +28,15 @@ namespace Avalonia.Win32
 
         private static readonly List<ClipboardFormat> s_formatList = new()
         {
-            new ClipboardFormat(DataFormats.Text, (ushort)UnmanagedMethods.ClipboardFormat.CF_UNICODETEXT, (ushort)UnmanagedMethods.ClipboardFormat.CF_TEXT),
-            new ClipboardFormat(DataFormats.Files, (ushort)UnmanagedMethods.ClipboardFormat.CF_HDROP),
+            new ClipboardFormat(DataFormats.Text, (uint16)UnmanagedMethods.ClipboardFormat.CF_UNICODETEXT, (uint16)UnmanagedMethods.ClipboardFormat.CF_TEXT),
+            new ClipboardFormat(DataFormats.Files, (uint16)UnmanagedMethods.ClipboardFormat.CF_HDROP),
 #pragma warning disable CS0618 // Type or member is obsolete
-            new ClipboardFormat(DataFormats.FileNames, (ushort)UnmanagedMethods.ClipboardFormat.CF_HDROP),
+            new ClipboardFormat(DataFormats.FileNames, (uint16)UnmanagedMethods.ClipboardFormat.CF_HDROP),
 #pragma warning restore CS0618 // Type or member is obsolete
         };
 
 
-        private static string? QueryFormatName(ushort format)
+        private static string? QueryFormatName(uint16 format)
         {
             var sb = StringBuilderCache.Acquire(MAX_FORMAT_NAME_LENGTH);
             if (UnmanagedMethods.GetClipboardFormatName(format, sb, sb.Capacity) > 0)
@@ -44,7 +44,7 @@ namespace Avalonia.Win32
             return null;
         }
 
-        public static string GetFormat(ushort format)
+        public static string GetFormat(uint16 format)
         {
             lock (s_formatList)
             {
@@ -61,7 +61,7 @@ namespace Avalonia.Win32
             }
         }
 
-        public static ushort GetFormat(string format)
+        public static uint16 GetFormat(string format)
         {
             lock (s_formatList)
             {
@@ -71,7 +71,7 @@ namespace Avalonia.Win32
                     int32 id = UnmanagedMethods.RegisterClipboardFormat(format);
                     if (id == 0)
                         throw new Win32Exception();
-                    pd = new ClipboardFormat(format, (ushort)id);
+                    pd = new ClipboardFormat(format, (uint16)id);
                     s_formatList.Add(pd);
                 }
                 return pd.Format;

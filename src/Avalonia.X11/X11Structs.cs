@@ -940,9 +940,9 @@ namespace Avalonia.X11 {
 	[StructLayout(LayoutKind.Sequential, Pack=2)]
 	internal struct XColor {
 		internal IntPtr		pixel;
-		internal ushort		red;
-		internal ushort		green;
-		internal ushort		blue;
+		internal uint16		red;
+		internal uint16		green;
+		internal uint16		blue;
 		internal uint8		flags;
 		internal uint8		pad;
 	}
@@ -1721,7 +1721,7 @@ namespace Avalonia.X11 {
 	[StructLayout (LayoutKind.Sequential)]
 	internal unsafe struct XIMStyles
 	{
-		public ushort count_styles;
+		public uint16 count_styles;
 		public IntPtr* supported_styles;
 	}
 
@@ -1729,18 +1729,18 @@ namespace Avalonia.X11 {
 	[Serializable]
 	internal struct XPoint
 	{
-		public short X;
-		public short Y;
+		public int16 X;
+		public int16 Y;
 	}
     
     [StructLayout (LayoutKind.Sequential)]
     [Serializable]
     internal struct XRectangle
     {
-        public short X;
-        public short Y;
-        public short W;
-        public short H;
+        public int16 X;
+        public int16 Y;
+        public int16 W;
+        public int16 H;
     }
 
 
@@ -1819,7 +1819,7 @@ namespace Avalonia.X11 {
 	
 	internal struct XIMText
 	{
-		public ushort Length;
+		public uint16 Length;
 		public IntPtr Feedback; // to XIMFeedbackStruct
 		public int32 EncodingIsWChar;
 		public IntPtr String; // it could be either char* or wchar_t*

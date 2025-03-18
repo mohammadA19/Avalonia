@@ -172,7 +172,7 @@ internal class DispatcherPriorityQueue
     {
         // Scan along the sequential chain, in the previous direction,
         // looking for an item that is already in the new chain.  We will
-        // insert ourselves after the item we found.  We can short-circuit
+        // insert ourselves after the item we found.  We can int16-circuit
         // this search if the new chain is empty.
         if (chain.Head == null)
         {

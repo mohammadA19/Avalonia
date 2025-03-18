@@ -202,11 +202,11 @@ namespace Avalonia.Direct2D1
             using (var sink = pathGeometry.Open())
             {
                 var glyphInfos = glyphRun.GlyphInfos;
-                var glyphs = new short[glyphInfos.Count];
+                var glyphs = new int16[glyphInfos.Count];
 
                 for (int32 i = 0; i < glyphInfos.Count; i++)
                 {
-                    glyphs[i] = (short)glyphInfos[i].GlyphIndex;
+                    glyphs[i] = (int16)glyphInfos[i].GlyphIndex;
                 }
 
                 glyphTypeface.FontFace.GetGlyphRunOutline((float)glyphRun.FontRenderingEmSize, glyphs, null, null, false, !glyphRun.IsLeftToRight, sink);

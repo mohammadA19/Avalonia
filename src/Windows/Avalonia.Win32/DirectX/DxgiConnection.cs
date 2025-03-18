@@ -109,14 +109,14 @@ namespace Avalonia.Win32.DirectX
 
             void* adapterPointer = null;
 
-            ushort adapterIndex = 0;
+            uint16 adapterIndex = 0;
 
             // this looks odd, but that's just how one enumerates adapters in DXGI 
             while (fact.EnumAdapters(adapterIndex, &adapterPointer) == 0)
             {
                 using var adapter = MicroComRuntime.CreateProxyFor<IDXGIAdapter>(adapterPointer, true);
                 void* outputPointer = null;
-                ushort outputIndex = 0;
+                uint16 outputIndex = 0;
                 while (adapter.EnumOutputs(outputIndex, &outputPointer) == 0)
                 {
                     using var output = MicroComRuntime.CreateProxyFor<IDXGIOutput>(outputPointer, true);

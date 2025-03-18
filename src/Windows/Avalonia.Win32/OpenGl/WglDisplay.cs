@@ -49,7 +49,7 @@ namespace Avalonia.Win32.OpenGl
             _bootstrapDc = WglGdiResourceManager.GetDC(_bootstrapWindow);
             _defaultPfd = new PixelFormatDescriptor
             {
-                Size = (ushort)Marshal.SizeOf<PixelFormatDescriptor>(),
+                Size = (uint16)Marshal.SizeOf<PixelFormatDescriptor>(),
                 Version = 1,
                 Flags = PixelFormatDescriptorFlags.PFD_DRAW_TO_WINDOW |
                         PixelFormatDescriptorFlags.PFD_SUPPORT_OPENGL | PixelFormatDescriptorFlags.PFD_DOUBLEBUFFER,

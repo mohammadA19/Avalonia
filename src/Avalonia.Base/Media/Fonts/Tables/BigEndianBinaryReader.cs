@@ -92,7 +92,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// for this reader. 2 bytes are read.
         /// </summary>
         /// <returns>The 16-bit integer read</returns>
-        public short ReadInt16()
+        public int16 ReadInt16()
         {
             ReadInternal(_buffer, 2);
 
@@ -106,11 +106,11 @@ namespace Avalonia.Media.Fonts.Tables
             return value;
         }
 
-        public short ReadFWORD() => ReadInt16();
+        public int16 ReadFWORD() => ReadInt16();
 
-        public short[] ReadFWORDArray(int32 length) => ReadInt16Array(length);
+        public int16[] ReadFWORDArray(int32 length) => ReadInt16Array(length);
 
-        public ushort ReadUFWORD() => ReadUInt16();
+        public uint16 ReadUFWORD() => ReadUInt16();
 
         /// <summary>
         /// Reads a fixed 32-bit value from the stream.
@@ -152,7 +152,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// 2 bytes are read.
         /// </summary>
         /// <returns>The 16-bit unsigned integer read.</returns>
-        public ushort ReadUInt16()
+        public uint16 ReadUInt16()
         {
             ReadInternal(_buffer, 2);
 
@@ -164,7 +164,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// 2 bytes are read.
         /// </summary>
         /// <returns>The 16-bit unsigned integer read.</returns>
-        public ushort ReadOffset16() => ReadUInt16();
+        public uint16 ReadOffset16() => ReadUInt16();
 
         public TEnum ReadUInt16<TEnum>()
             where TEnum : struct, Enum
@@ -180,9 +180,9 @@ namespace Avalonia.Media.Fonts.Tables
         /// <returns>
         /// The 16-bit unsigned integer read.
         /// </returns>
-        public ushort[] ReadUInt16Array(int32 length)
+        public uint16[] ReadUInt16Array(int32 length)
         {
-            ushort[] data = new ushort[length];
+            uint16[] data = new uint16[length];
             for (int32 i = 0; i < length; i++)
             {
                 data[i] = ReadUInt16();
@@ -195,7 +195,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// Reads array of 16-bit unsigned integers from the stream to the buffer.
         /// </summary>
         /// <param name="buffer">The buffer to read to.</param>
-        public void ReadUInt16Array(Span<ushort> buffer)
+        public void ReadUInt16Array(Span<uint16> buffer)
         {
             for (int32 i = 0; i < buffer.Length; i++)
             {
@@ -237,9 +237,9 @@ namespace Avalonia.Media.Fonts.Tables
         /// <returns>
         /// The 16-bit signed integer read.
         /// </returns>
-        public short[] ReadInt16Array(int32 length)
+        public int16[] ReadInt16Array(int32 length)
         {
-            short[] data = new short[length];
+            int16[] data = new int16[length];
             for (int32 i = 0; i < length; i++)
             {
                 data[i] = ReadInt16();
@@ -252,7 +252,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// Reads an array of 16-bit signed integers from the stream to the buffer.
         /// </summary>
         /// <param name="buffer">The buffer to read to.</param>
-        public void ReadInt16Array(Span<short> buffer)
+        public void ReadInt16Array(Span<int16> buffer)
         {
             for (int32 i = 0; i < buffer.Length; i++)
             {

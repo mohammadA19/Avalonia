@@ -22,7 +22,7 @@ internal unsafe partial struct SafeArrayRef
     internal struct SAFEARRAY
     {
         /// <summary>The number of dimensions.</summary>
-        internal ushort cDims;
+        internal uint16 cDims;
 
         /// <summary>
         /// <para>Flags. </para>
@@ -73,7 +73,7 @@ internal unsafe partial struct SafeArrayRef
     }
 
     [Flags]
-    internal enum ADVANCED_FEATURE_FLAGS : ushort
+    internal enum ADVANCED_FEATURE_FLAGS : uint16
     {
         FADF_AUTO = 0x0001,
         FADF_STATIC = 0x0002,
@@ -106,16 +106,16 @@ internal unsafe partial struct SafeArrayRef
             var array = new T[length];
             if (typeof(T) == typeof(int8))
                 Marshal.Copy(data, (uint8[])(object)array, 0, length);
-            else if (typeof(T) == typeof(short))
-                Marshal.Copy(data, (short[])(object)array, 0, length);
+            else if (typeof(T) == typeof(int16))
+                Marshal.Copy(data, (int16[])(object)array, 0, length);
             else if (typeof(T) == typeof(int32))
                 Marshal.Copy(data, (int32[])(object)array, 0, length);
             else if (typeof(T) == typeof(long))
                 Marshal.Copy(data, (long[])(object)array, 0, length);
             else if (typeof(T) == typeof(uint8))
                 Marshal.Copy(data, (uint8[])(object)array, 0, length);
-            else if (typeof(T) == typeof(ushort))
-                Marshal.Copy(data, (short[])(object)array, 0, length);
+            else if (typeof(T) == typeof(uint16))
+                Marshal.Copy(data, (int16[])(object)array, 0, length);
             else if (typeof(T) == typeof(uint32))
                 Marshal.Copy(data, (int32[])(object)array, 0, length);
             else if (typeof(T) == typeof(ulong))
@@ -237,7 +237,7 @@ internal unsafe partial struct SafeArrayRef
         static SafeArrayRef CreateFromBools(IReadOnlyList<bool> bools, VarEnum varEnum)
         {
             Debug.Assert(varEnum == VarEnum.VT_BOOL); // other types not supported
-            var shorts = ArrayPool<short>.Shared.Rent(bools.Count);
+            var shorts = ArrayPool<int16>.Shared.Rent(bools.Count);
             try
             {
                 for (int32 i = 0; i < bools.Count; i++)
@@ -245,11 +245,11 @@ internal unsafe partial struct SafeArrayRef
                     shorts[i] = bools[i] ? ComVariant.VARIANT_TRUE : ComVariant.VARIANT_FALSE;
                 }
 
-                return CreateFromSpan<short>(shorts.AsSpan(0, bools.Count), varEnum);
+                return CreateFromSpan<int16>(shorts.AsSpan(0, bools.Count), varEnum);
             }
             finally
             {
-                ArrayPool<short>.Shared.Return(shorts);
+                ArrayPool<int16>.Shared.Return(shorts);
             }
         }
 
@@ -278,12 +278,12 @@ internal unsafe partial struct SafeArrayRef
         safearray = managed switch
         {
             IReadOnlyCollection<int8> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I1),
-            IReadOnlyCollection<short> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I2),
+            IReadOnlyCollection<int16> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I2),
             IReadOnlyCollection<int32> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I4),
             IReadOnlyCollection<long> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I8),
 
             IReadOnlyCollection<uint8> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI1),
-            IReadOnlyCollection<ushort> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI2),
+            IReadOnlyCollection<uint16> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI2),
             IReadOnlyCollection<uint32> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI4),
             IReadOnlyCollection<ulong> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI8),
 

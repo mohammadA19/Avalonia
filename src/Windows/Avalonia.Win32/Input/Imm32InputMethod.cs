@@ -21,7 +21,7 @@ namespace Avalonia.Win32.Input
 
         private Imm32CaretManager _caretManager;
 
-        private ushort _langId;
+        private uint16 _langId;
         private const int32 CaretMargin = 1;
 
         private bool _ignoreComposition;

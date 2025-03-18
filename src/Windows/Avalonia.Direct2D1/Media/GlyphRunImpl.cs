@@ -13,7 +13,7 @@ namespace Avalonia.Direct2D1.Media
     {
         private readonly GlyphTypefaceImpl _glyphTypefaceImpl;
 
-        private readonly short[] _glyphIndices;
+        private readonly int16[] _glyphIndices;
         private readonly float[] _glyphAdvances;
         private readonly GlyphOffset[] _glyphOffsets;
 
@@ -29,11 +29,11 @@ namespace Avalonia.Direct2D1.Media
 
             var glyphCount = glyphInfos.Count;
 
-            _glyphIndices = new short[glyphCount];
+            _glyphIndices = new int16[glyphCount];
 
             for (var i = 0; i < glyphCount; i++)
             {
-                _glyphIndices[i] = (short)glyphInfos[i].GlyphIndex;
+                _glyphIndices[i] = (int16)glyphInfos[i].GlyphIndex;
             }
 
             _glyphAdvances = new float[glyphCount];

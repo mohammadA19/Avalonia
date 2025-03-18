@@ -8,7 +8,7 @@ namespace Avalonia.Media.Fonts.Tables.Name
     {
         private readonly string value;
 
-        public NameRecord(PlatformIDs platform, ushort languageId, KnownNameIds nameId, string value)
+        public NameRecord(PlatformIDs platform, uint16 languageId, KnownNameIds nameId, string value)
         {
             Platform = platform;
             LanguageID = languageId;
@@ -18,7 +18,7 @@ namespace Avalonia.Media.Fonts.Tables.Name
 
         public PlatformIDs Platform { get; }
 
-        public ushort LanguageID { get; }
+        public uint16 LanguageID { get; }
 
         public KnownNameIds NameID { get; }
 

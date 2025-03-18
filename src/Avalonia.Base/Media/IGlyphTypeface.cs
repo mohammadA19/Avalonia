@@ -52,7 +52,7 @@ namespace Avalonia.Media
         /// <returns>
         ///   <c>true</c> if an glyph's metrics was found, <c>false</c> otherwise.
         /// </returns>
-        bool TryGetGlyphMetrics(ushort glyph, out GlyphMetrics metrics);
+        bool TryGetGlyphMetrics(uint16 glyph, out GlyphMetrics metrics);
         
         /// <summary>
         ///     Returns an glyph index for the specified codepoint.
@@ -64,7 +64,7 @@ namespace Avalonia.Media
         /// <returns>
         ///     A glyph index.
         /// </returns>
-        ushort GetGlyph(uint32 codepoint);
+        uint16 GetGlyph(uint32 codepoint);
 
         /// <summary>
         ///     Tries to get an glyph index for specified codepoint.
@@ -74,7 +74,7 @@ namespace Avalonia.Media
         /// <returns>
         ///     <c>true</c> if an glyph index was found, <c>false</c> otherwise.
         /// </returns>
-        bool TryGetGlyph(uint32 codepoint, out ushort glyph);
+        bool TryGetGlyph(uint32 codepoint, out uint16 glyph);
 
         /// <summary>
         ///     Returns an array of glyph indices. Codepoints that are not represented by the font are returned as <code>0</code>.
@@ -83,7 +83,7 @@ namespace Avalonia.Media
         /// <returns>
         ///     An array of glyph indices.
         /// </returns>
-        ushort[] GetGlyphs(ReadOnlySpan<uint32> codepoints);
+        uint16[] GetGlyphs(ReadOnlySpan<uint32> codepoints);
 
         /// <summary>
         ///     Returns the glyph advance for the specified glyph.
@@ -92,7 +92,7 @@ namespace Avalonia.Media
         /// <returns>
         ///     The advance.
         /// </returns>
-        int32 GetGlyphAdvance(ushort glyph);
+        int32 GetGlyphAdvance(uint16 glyph);
 
         /// <summary>
         ///     Returns an array of glyph advances in design em size.
@@ -101,7 +101,7 @@ namespace Avalonia.Media
         /// <returns>
         ///     An array of glyph advances.
         /// </returns>
-        int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs);
+        int32[] GetGlyphAdvances(ReadOnlySpan<uint16> glyphs);
 
         /// <summary>
         ///     Returns the contents of the table data for the specified tag.

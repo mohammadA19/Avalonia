@@ -248,7 +248,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
                     if (line[p] == '÷')
                     {
-                        breakPoints.Add(codePoints.Select(x => x > ushort.MaxValue ? 2 : 1).Sum());
+                        breakPoints.Add(codePoints.Select(x => x > uint16.MaxValue ? 2 : 1).Sum());
                         p++;
                         continue;
                     }

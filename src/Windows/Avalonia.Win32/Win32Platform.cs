@@ -194,7 +194,7 @@ namespace Avalonia.Win32
                 lpszClassName = "AvaloniaMessageWindow " + Guid.NewGuid(),
             };
 
-            ushort atom = RegisterClassEx(ref wndClassEx);
+            uint16 atom = RegisterClassEx(ref wndClassEx);
 
             if (atom == 0)
             {

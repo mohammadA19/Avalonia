@@ -927,7 +927,7 @@ namespace Avalonia.Win32
             }
         }
 
-        protected virtual IntPtr CreateWindowOverride(ushort atom)
+        protected virtual IntPtr CreateWindowOverride(uint16 atom)
         {
             return CreateWindowEx(
                 UseRedirectionBitmap ? 0 : (int32)WindowStyles.WS_EX_NOREDIRECTIONBITMAP,
@@ -968,7 +968,7 @@ namespace Avalonia.Win32
                 lpszClassName = _className
             };
 
-            ushort atom = RegisterClassEx(ref wndClassEx);
+            uint16 atom = RegisterClassEx(ref wndClassEx);
 
             if (atom == 0)
             {

@@ -174,7 +174,7 @@ internal static unsafe class WinRTApiInformation
         return false;
     }
 
-    public static bool IsApiContractPresentByMajor(string contractName, ushort majorVersion)
+    public static bool IsApiContractPresentByMajor(string contractName, uint16 majorVersion)
     {
         if (s_statics.Value == null)
         {
@@ -191,7 +191,7 @@ internal static unsafe class WinRTApiInformation
         return false;
     }
 
-    public static bool IsApiContractPresentByMajorAndMinor(string contractName, ushort majorVersion, ushort minorVersion)
+    public static bool IsApiContractPresentByMajorAndMinor(string contractName, uint16 majorVersion, uint16 minorVersion)
     {
         if (s_statics.Value == null)
         {

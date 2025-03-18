@@ -99,10 +99,10 @@ namespace Avalonia.Win32.DirectX
                     }
 
                     _swapChain.ResizeBuffers(2,
-                        (ushort)(pClientRect.right - pClientRect.left),
-                        (ushort)(pClientRect.bottom - pClientRect.top),
+                        (uint16)(pClientRect.right - pClientRect.left),
+                        (uint16)(pClientRect.bottom - pClientRect.top),
                         DXGI_FORMAT.DXGI_FORMAT_B8G8R8A8_UNORM,
-                        (ushort)_flagsUsed
+                        (uint16)_flagsUsed
                         );
                 }
 
@@ -123,7 +123,7 @@ namespace Avalonia.Win32.DirectX
 
                 var res = base.BeginDraw(surface, _window.Size, _window.Scaling, () =>
                 {
-                    _swapChain.Present((ushort)0U, (ushort)0U);
+                    _swapChain.Present((uint16)0U, (uint16)0U);
                     surface.Dispose();
                     transaction?.Dispose();
                     contextLock?.Dispose();

@@ -8,7 +8,7 @@ namespace Avalonia.Media.Fonts.Tables
     /// Provides enumeration of common name ids
     /// <see href="https://docs.microsoft.com/en-us/typography/opentype/spec/name#name-ids"/>
     /// </summary>
-    internal enum KnownNameIds : ushort
+    internal enum KnownNameIds : uint16
     {
         /// <summary>
         /// The copyright notice

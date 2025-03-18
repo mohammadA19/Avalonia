@@ -127,7 +127,7 @@ internal class OpenGlContent
     }
 
     private readonly Vertex[] _points;
-    private readonly ushort[] _indices;
+    private readonly uint16[] _indices;
     private readonly float _minY;
     private readonly float _maxY;
 
@@ -142,7 +142,7 @@ internal class OpenGlContent
             Buffer.BlockCopy(buf, 0, points, 0, buf.Length);
             buf = new uint8[sr.ReadInt32()];
             sr.Read(buf, 0, buf.Length);
-            _indices = new ushort[buf.Length / 2];
+            _indices = new uint16[buf.Length / 2];
             Buffer.BlockCopy(buf, 0, _indices, 0, buf.Length);
             _points = new Vertex[points.Length / 3];
             for (var primitive = 0; primitive < points.Length / 3; primitive++)
@@ -225,7 +225,7 @@ internal class OpenGlContent
         GL.BindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBufferObject);
         CheckError(GL);
         fixed (void* pdata = _indices)
-            GL.BufferData(GL_ELEMENT_ARRAY_BUFFER, new IntPtr(_indices.Length * sizeof(ushort)), new IntPtr(pdata),
+            GL.BufferData(GL_ELEMENT_ARRAY_BUFFER, new IntPtr(_indices.Length * sizeof(uint16)), new IntPtr(pdata),
                 GL_STATIC_DRAW);
         CheckError(GL);
         _vertexArrayObject = GL.GenVertexArray();
