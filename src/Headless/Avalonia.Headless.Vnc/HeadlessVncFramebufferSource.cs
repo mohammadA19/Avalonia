@@ -329,7 +329,7 @@ namespace Avalonia.Headless.Vnc
                     }
 
                     var buffer = _framebuffer.GetBuffer();
-                    fixed (byte* bufferPtr = buffer)
+                    fixed (uint8* bufferPtr = buffer)
                     {
                         bmp.CopyPixels(new PixelRect(default, bmp.PixelSize), (IntPtr)bufferPtr, buffer.Length, _framebuffer.Stride);
                     }

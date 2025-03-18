@@ -441,10 +441,10 @@ namespace Avalonia.Media
             }
 
             return new Color(
-                (byte)Math.Round(255 * alpha),
-                (byte)Math.Round(255 * (r1 + m)),
-                (byte)Math.Round(255 * (g1 + m)),
-                (byte)Math.Round(255 * (b1 + m)));
+                (uint8)Math.Round(255 * alpha),
+                (uint8)Math.Round(255 * (r1 + m)),
+                (uint8)Math.Round(255 * (g1 + m)),
+                (uint8)Math.Round(255 * (b1 + m)));
         }
 
         /// <summary>

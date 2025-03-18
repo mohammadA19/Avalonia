@@ -10,7 +10,7 @@ namespace Avalonia.X11
 {
     internal partial class X11CursorFactory : ICursorFactory
     {
-        private static readonly byte[] NullCursorData = new byte[] { 0 };
+        private static readonly uint8[] NullCursorData = new uint8[] { 0 };
 
         private static IntPtr _nullCursor;
 

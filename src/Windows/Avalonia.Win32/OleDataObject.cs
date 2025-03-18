@@ -69,7 +69,7 @@ namespace Avalonia.Win32
                                 // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
                                 .Where(f => f is not null);
 
-                        byte[] data = ReadBytesFromHGlobal(medium.unionmember);
+                        uint8[] data = ReadBytesFromHGlobal(medium.unionmember);
 
                         if (IsSerializedObject(data))
                         {
@@ -93,7 +93,7 @@ namespace Avalonia.Win32
             return null;
         }
 
-        private static bool IsSerializedObject(ReadOnlySpan<byte> data) =>
+        private static bool IsSerializedObject(ReadOnlySpan<uint8> data) =>
             data.StartsWith(DataObject.SerializedObjectGUID);
 
         private static IEnumerable<string> ReadFileNamesFromHGlobal(IntPtr hGlobal)
@@ -129,13 +129,13 @@ namespace Avalonia.Win32
             }
         }
 
-        private static byte[] ReadBytesFromHGlobal(IntPtr hGlobal)
+        private static uint8[] ReadBytesFromHGlobal(IntPtr hGlobal)
         {
             IntPtr source = UnmanagedMethods.GlobalLock(hGlobal);
             try
             {
                 int32 size = (int32)UnmanagedMethods.GlobalSize(hGlobal).ToInt64();
-                byte[] data = new byte[size];
+                uint8[] data = new uint8[size];
                 Marshal.Copy(source, data, 0, size);
                 return data;
             }

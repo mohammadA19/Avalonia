@@ -86,10 +86,10 @@ internal unsafe class VulkanExternalObjectsFeature : IVulkanContextExternalObjec
         };
         _context.InstanceApi.GetPhysicalDeviceProperties2(_context.PhysicalDeviceHandle, &physicalDeviceProperties2);
 
-        var luid = new Span<byte>(physicalDeviceIDProperties.deviceLUID, 8).ToArray();
+        var luid = new Span<uint8>(physicalDeviceIDProperties.deviceLUID, 8).ToArray();
         if (luid.Any(b => b != 0))
             DeviceLuid = luid;
-        var uuid = new Span<byte>(physicalDeviceIDProperties.deviceUUID, 16).ToArray();
+        var uuid = new Span<uint8>(physicalDeviceIDProperties.deviceUUID, 16).ToArray();
         if (uuid.Any(b => b != 0))
             DeviceUuid = uuid;
         _pool = new VulkanCommandBufferPool(_context, true);
@@ -97,8 +97,8 @@ internal unsafe class VulkanExternalObjectsFeature : IVulkanContextExternalObjec
     
     public IReadOnlyList<string> SupportedImageHandleTypes { get; }
     public IReadOnlyList<string> SupportedSemaphoreTypes { get; }
-    public byte[]? DeviceUuid { get; }
-    public byte[]? DeviceLuid { get; }
+    public uint8[]? DeviceUuid { get; }
+    public uint8[]? DeviceLuid { get; }
     
     
     public CompositionGpuImportedImageSynchronizationCapabilities GetSynchronizationCapabilities(string imageHandleType)

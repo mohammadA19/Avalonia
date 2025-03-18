@@ -20,7 +20,7 @@ internal record struct Rgba64Pixel
 
 internal record struct Rgba8888Pixel
 {
-    public Rgba8888Pixel(byte r, byte g, byte b, byte a)
+    public Rgba8888Pixel(uint8 r, uint8 g, uint8 b, uint8 a)
     {
         R = r;
         G = g;
@@ -28,10 +28,10 @@ internal record struct Rgba8888Pixel
         A = a;
     }
 
-    public byte R;
-    public byte G;
-    public byte B;
-    public byte A;
+    public uint8 R;
+    public uint8 G;
+    public uint8 B;
+    public uint8 A;
 }
 
 internal interface IPixelFormatReader
@@ -61,11 +61,11 @@ internal static unsafe class PixelFormatReader
     public unsafe struct BlackWhitePixelFormatReader : IPixelFormatReader
     {
         private int32 _bit;
-        private byte* _address;
+        private uint8* _address;
 
         public void Reset(IntPtr address)
         {
-            _address = (byte*)address;
+            _address = (uint8*)address;
             _bit = 0;
         }
 
@@ -86,11 +86,11 @@ internal static unsafe class PixelFormatReader
     public unsafe struct Gray2PixelFormatReader : IPixelFormatReader
     {
         private int32 _bit;
-        private byte* _address;
+        private uint8* _address;
 
         public void Reset(IntPtr address)
         {
-            _address = (byte*)address;
+            _address = (uint8*)address;
             _bit = 0;
         }
 
@@ -111,8 +111,8 @@ internal static unsafe class PixelFormatReader
         public Rgba8888Pixel ReadNext()
         {
             var shift = 6 - _bit;
-            var value = (byte)((*_address >> shift));
-            value = (byte)((value & 3));
+            var value = (uint8)((*_address >> shift));
+            value = (uint8)((value & 3));
             _bit += 2;
             if (_bit == 8)
             {
@@ -127,20 +127,20 @@ internal static unsafe class PixelFormatReader
     public unsafe struct Gray4PixelFormatReader : IPixelFormatReader
     {
         private int32 _bit;
-        private byte* _address;
+        private uint8* _address;
 
         public void Reset(IntPtr address)
         {
-            _address = (byte*)address;
+            _address = (uint8*)address;
             _bit = 0;
         }
 
         public Rgba8888Pixel ReadNext()
         {
             var shift = 4 - _bit;
-            var value = (byte)((*_address >> shift));
-            value = (byte)((value & 0xF));
-            value = (byte)(value | (value << 4));
+            var value = (uint8)((*_address >> shift));
+            value = (uint8)((value & 0xF));
+            value = (uint8)(value | (value << 4));
             _bit += 4;
             if (_bit == 8)
             {
@@ -160,10 +160,10 @@ internal static unsafe class PixelFormatReader
 
     public unsafe struct Gray8PixelFormatReader : IPixelFormatReader
     {
-        private byte* _address;
+        private uint8* _address;
         public void Reset(IntPtr address)
         {
-            _address = (byte*)address;
+            _address = (uint8*)address;
         }
 
         public Rgba8888Pixel ReadNext()
@@ -188,7 +188,7 @@ internal static unsafe class PixelFormatReader
         {
             var value16 = *_address;
             _address++;
-            var value8 = (byte)(value16 >> 8);
+            var value8 = (uint8)(value16 >> 8);
             return new Rgba8888Pixel
             {
                 A = 255,
@@ -203,12 +203,12 @@ internal static unsafe class PixelFormatReader
 
     public unsafe struct Gray32FloatPixelFormatReader : IPixelFormatReader
     {
-        private byte* _address;
+        private uint8* _address;
         public Rgba8888Pixel ReadNext()
         {
             var f = *(float*)_address;
             var srgb = Math.Pow(f, 1 / 2.2);
-            var value = (byte)(srgb * 255);
+            var value = (uint8)(srgb * 255);
 
             _address += 4;
             return new Rgba8888Pixel
@@ -220,7 +220,7 @@ internal static unsafe class PixelFormatReader
             };
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Rgba64PixelFormatReader : IPixelFormatReader
@@ -233,10 +233,10 @@ internal static unsafe class PixelFormatReader
             _address++;
             return new Rgba8888Pixel
             {
-                A = (byte)(value.A >> 8),
-                B = (byte)(value.B >> 8),
-                G = (byte)(value.G >> 8),
-                R = (byte)(value.R >> 8),
+                A = (uint8)(value.A >> 8),
+                B = (uint8)(value.B >> 8),
+                G = (uint8)(value.G >> 8),
+                R = (uint8)(value.R >> 8),
             };
         }
 
@@ -245,7 +245,7 @@ internal static unsafe class PixelFormatReader
 
     public unsafe struct Rgb24PixelFormatReader : IPixelFormatReader
     {
-        private byte* _address;
+        private uint8* _address;
         public Rgba8888Pixel ReadNext()
         {
             var addr = _address;
@@ -259,12 +259,12 @@ internal static unsafe class PixelFormatReader
             };
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Bgr24PixelFormatReader : IPixelFormatReader
     {
-        private byte* _address;
+        private uint8* _address;
         public Rgba8888Pixel ReadNext()
         {
             var addr = _address;
@@ -278,12 +278,12 @@ internal static unsafe class PixelFormatReader
             };
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Bgr555PixelFormatReader : IPixelFormatReader
     {
-        private byte* _address;
+        private uint8* _address;
         public Rgba8888Pixel ReadNext()
         {
             var addr = (ushort*)_address;
@@ -293,13 +293,13 @@ internal static unsafe class PixelFormatReader
             return UnPack(*addr);
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
 
         private static Rgba8888Pixel UnPack(ushort value)
         {
-            var r = (byte)Math.Round(((value >> 10) & 0x1F) / 31F * 255);
-            var g = (byte)Math.Round(((value >> 5) & 0x1F) / 31F * 255);
-            var b = (byte)Math.Round(((value >> 0) & 0x1F) / 31F * 255);
+            var r = (uint8)Math.Round(((value >> 10) & 0x1F) / 31F * 255);
+            var g = (uint8)Math.Round(((value >> 5) & 0x1F) / 31F * 255);
+            var b = (uint8)Math.Round(((value >> 0) & 0x1F) / 31F * 255);
 
             return new Rgba8888Pixel(r, g, b, 255);
         }
@@ -307,7 +307,7 @@ internal static unsafe class PixelFormatReader
 
     public unsafe struct Bgr565PixelFormatReader : IPixelFormatReader
     {
-        private byte* _address;
+        private uint8* _address;
         public Rgba8888Pixel ReadNext()
         {
             var addr = (ushort*)_address;
@@ -317,13 +317,13 @@ internal static unsafe class PixelFormatReader
             return UnPack(*addr);
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
 
         private static Rgba8888Pixel UnPack(ushort value)
         {
-            var r = (byte)Math.Round(((value >> 11) & 0x1F) / 31F * 255);
-            var g = (byte)Math.Round(((value >> 5) & 0x3F) / 63F * 255);
-            var b = (byte)Math.Round(((value >> 0) & 0x1F) / 31F * 255);
+            var r = (uint8)Math.Round(((value >> 11) & 0x1F) / 31F * 255);
+            var g = (uint8)Math.Round(((value >> 5) & 0x3F) / 63F * 255);
+            var b = (uint8)Math.Round(((value >> 0) & 0x1F) / 31F * 255);
 
             return new Rgba8888Pixel(r, g, b, 255);
         }
@@ -349,7 +349,7 @@ internal static unsafe class PixelFormatReader
         private Rgba8888Pixel* _address;
         public Rgba8888Pixel ReadNext()
         {
-            var address = (byte*)_address;
+            var address = (uint8*)_address;
 
             var value = new Rgba8888Pixel(address[0], address[1], address[2], 255);
 
@@ -363,7 +363,7 @@ internal static unsafe class PixelFormatReader
 
     public unsafe struct Bgra8888PixelFormatReader : IPixelFormatReader
     {
-        private byte* _address;
+        private uint8* _address;
         public Rgba8888Pixel ReadNext()
         {
             var addr = _address;
@@ -373,7 +373,7 @@ internal static unsafe class PixelFormatReader
             return new Rgba8888Pixel(addr[2], addr[1], addr[0], addr[3]);
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Bgr32PixelFormatReader : IPixelFormatReader
@@ -381,7 +381,7 @@ internal static unsafe class PixelFormatReader
         private Rgba8888Pixel* _address;
         public Rgba8888Pixel ReadNext()
         {
-            var address = (byte*)_address;
+            var address = (uint8*)_address;
 
             var value = new Rgba8888Pixel(address[2], address[1], address[0], 255);
 

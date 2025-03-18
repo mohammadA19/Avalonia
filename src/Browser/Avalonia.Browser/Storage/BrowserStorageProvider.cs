@@ -13,7 +13,7 @@ namespace Avalonia.Browser.Storage;
 
 internal class BrowserStorageProvider : IStorageProvider
 {
-    internal static ReadOnlySpan<byte> BrowserBookmarkKey => "browser"u8;
+    internal static ReadOnlySpan<uint8> BrowserBookmarkKey => "browser"u8;
     internal const string PickerCancelMessage = "The user aborted a request";
     internal const string NoPermissionsMessage = "Permissions denied";
     internal const string FileFolderNotFoundMessage = "A requested file or directory could not be found";

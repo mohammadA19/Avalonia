@@ -1118,14 +1118,14 @@ namespace Avalonia.Controls.Primitives
                     ? pixelDataSize : 0;
 
             var newHsvValues = new List<Hsv>(pixelCount);
-            using var bgraMinPixelData = new PooledList<byte>(pixelDataSize, ClearMode.Never);
-            using var bgraMaxPixelData = new PooledList<byte>(pixelDataSize, ClearMode.Never);
+            using var bgraMinPixelData = new PooledList<uint8>(pixelDataSize, ClearMode.Never);
+            using var bgraMaxPixelData = new PooledList<uint8>(pixelDataSize, ClearMode.Never);
             // The middle 4 are only needed and used in the case of hue as the third dimension.
             // Saturation and luminosity need only a min and max.
-            using var bgraMiddle1PixelData = new PooledList<byte>(middleBitmapsSize, ClearMode.Never);
-            using var bgraMiddle2PixelData = new PooledList<byte>(middleBitmapsSize, ClearMode.Never);
-            using var bgraMiddle3PixelData = new PooledList<byte>(middleBitmapsSize, ClearMode.Never);
-            using var bgraMiddle4PixelData = new PooledList<byte>(middleBitmapsSize, ClearMode.Never);
+            using var bgraMiddle1PixelData = new PooledList<uint8>(middleBitmapsSize, ClearMode.Never);
+            using var bgraMiddle2PixelData = new PooledList<uint8>(middleBitmapsSize, ClearMode.Never);
+            using var bgraMiddle3PixelData = new PooledList<uint8>(middleBitmapsSize, ClearMode.Never);
+            using var bgraMiddle4PixelData = new PooledList<uint8>(middleBitmapsSize, ClearMode.Never);
 
             await Task.Run(() =>
             {
@@ -1242,12 +1242,12 @@ namespace Avalonia.Controls.Primitives
             double maxSaturation,
             double minValue,
             double maxValue,
-            PooledList<byte> bgraMinPixelData,
-            PooledList<byte> bgraMiddle1PixelData,
-            PooledList<byte> bgraMiddle2PixelData,
-            PooledList<byte> bgraMiddle3PixelData,
-            PooledList<byte> bgraMiddle4PixelData,
-            PooledList<byte> bgraMaxPixelData,
+            PooledList<uint8> bgraMinPixelData,
+            PooledList<uint8> bgraMiddle1PixelData,
+            PooledList<uint8> bgraMiddle2PixelData,
+            PooledList<uint8> bgraMiddle3PixelData,
+            PooledList<uint8> bgraMiddle4PixelData,
+            PooledList<uint8> bgraMaxPixelData,
             List<Hsv> newHsvValues)
         {
             double hMin = minHue;
@@ -1349,9 +1349,9 @@ namespace Avalonia.Controls.Primitives
             newHsvValues.Add(hsvMin);
 
             Rgb rgbMin = hsvMin.ToRgb();
-            bgraMinPixelData.Add((byte)Math.Round(rgbMin.B * 255.0)); // b
-            bgraMinPixelData.Add((byte)Math.Round(rgbMin.G * 255.0)); // g
-            bgraMinPixelData.Add((byte)Math.Round(rgbMin.R * 255.0)); // r
+            bgraMinPixelData.Add((uint8)Math.Round(rgbMin.B * 255.0)); // b
+            bgraMinPixelData.Add((uint8)Math.Round(rgbMin.G * 255.0)); // g
+            bgraMinPixelData.Add((uint8)Math.Round(rgbMin.R * 255.0)); // r
             bgraMinPixelData.Add(255); // a - ignored
 
             // We'll only save pixel data for the middle bitmaps if our third dimension is hue.
@@ -1359,34 +1359,34 @@ namespace Avalonia.Controls.Primitives
                 components == ColorSpectrumComponents.SaturationValue)
             {
                 Rgb rgbMiddle1 = hsvMiddle1.ToRgb();
-                bgraMiddle1PixelData.Add((byte)Math.Round(rgbMiddle1.B * 255.0)); // b
-                bgraMiddle1PixelData.Add((byte)Math.Round(rgbMiddle1.G * 255.0)); // g
-                bgraMiddle1PixelData.Add((byte)Math.Round(rgbMiddle1.R * 255.0)); // r
+                bgraMiddle1PixelData.Add((uint8)Math.Round(rgbMiddle1.B * 255.0)); // b
+                bgraMiddle1PixelData.Add((uint8)Math.Round(rgbMiddle1.G * 255.0)); // g
+                bgraMiddle1PixelData.Add((uint8)Math.Round(rgbMiddle1.R * 255.0)); // r
                 bgraMiddle1PixelData.Add(255); // a - ignored
 
                 Rgb rgbMiddle2 = hsvMiddle2.ToRgb();
-                bgraMiddle2PixelData.Add((byte)Math.Round(rgbMiddle2.B * 255.0)); // b
-                bgraMiddle2PixelData.Add((byte)Math.Round(rgbMiddle2.G * 255.0)); // g
-                bgraMiddle2PixelData.Add((byte)Math.Round(rgbMiddle2.R * 255.0)); // r
+                bgraMiddle2PixelData.Add((uint8)Math.Round(rgbMiddle2.B * 255.0)); // b
+                bgraMiddle2PixelData.Add((uint8)Math.Round(rgbMiddle2.G * 255.0)); // g
+                bgraMiddle2PixelData.Add((uint8)Math.Round(rgbMiddle2.R * 255.0)); // r
                 bgraMiddle2PixelData.Add(255); // a - ignored
 
                 Rgb rgbMiddle3 = hsvMiddle3.ToRgb();
-                bgraMiddle3PixelData.Add((byte)Math.Round(rgbMiddle3.B * 255.0)); // b
-                bgraMiddle3PixelData.Add((byte)Math.Round(rgbMiddle3.G * 255.0)); // g
-                bgraMiddle3PixelData.Add((byte)Math.Round(rgbMiddle3.R * 255.0)); // r
+                bgraMiddle3PixelData.Add((uint8)Math.Round(rgbMiddle3.B * 255.0)); // b
+                bgraMiddle3PixelData.Add((uint8)Math.Round(rgbMiddle3.G * 255.0)); // g
+                bgraMiddle3PixelData.Add((uint8)Math.Round(rgbMiddle3.R * 255.0)); // r
                 bgraMiddle3PixelData.Add(255); // a - ignored
 
                 Rgb rgbMiddle4 = hsvMiddle4.ToRgb();
-                bgraMiddle4PixelData.Add((byte)Math.Round(rgbMiddle4.B * 255.0)); // b
-                bgraMiddle4PixelData.Add((byte)Math.Round(rgbMiddle4.G * 255.0)); // g
-                bgraMiddle4PixelData.Add((byte)Math.Round(rgbMiddle4.R * 255.0)); // r
+                bgraMiddle4PixelData.Add((uint8)Math.Round(rgbMiddle4.B * 255.0)); // b
+                bgraMiddle4PixelData.Add((uint8)Math.Round(rgbMiddle4.G * 255.0)); // g
+                bgraMiddle4PixelData.Add((uint8)Math.Round(rgbMiddle4.R * 255.0)); // r
                 bgraMiddle4PixelData.Add(255); // a - ignored
             }
 
             Rgb rgbMax = hsvMax.ToRgb();
-            bgraMaxPixelData.Add((byte)Math.Round(rgbMax.B * 255.0)); // b
-            bgraMaxPixelData.Add((byte)Math.Round(rgbMax.G * 255.0)); // g
-            bgraMaxPixelData.Add((byte)Math.Round(rgbMax.R * 255.0)); // r
+            bgraMaxPixelData.Add((uint8)Math.Round(rgbMax.B * 255.0)); // b
+            bgraMaxPixelData.Add((uint8)Math.Round(rgbMax.G * 255.0)); // g
+            bgraMaxPixelData.Add((uint8)Math.Round(rgbMax.R * 255.0)); // r
             bgraMaxPixelData.Add(255); // a - ignored
         }
 
@@ -1402,12 +1402,12 @@ namespace Avalonia.Controls.Primitives
             double maxSaturation,
             double minValue,
             double maxValue,
-            PooledList<byte> bgraMinPixelData,
-            PooledList<byte> bgraMiddle1PixelData,
-            PooledList<byte> bgraMiddle2PixelData,
-            PooledList<byte> bgraMiddle3PixelData,
-            PooledList<byte> bgraMiddle4PixelData,
-            PooledList<byte> bgraMaxPixelData,
+            PooledList<uint8> bgraMinPixelData,
+            PooledList<uint8> bgraMiddle1PixelData,
+            PooledList<uint8> bgraMiddle2PixelData,
+            PooledList<uint8> bgraMiddle3PixelData,
+            PooledList<uint8> bgraMiddle4PixelData,
+            PooledList<uint8> bgraMaxPixelData,
             List<Hsv> newHsvValues)
         {
             double hMin = minHue;
@@ -1535,9 +1535,9 @@ namespace Avalonia.Controls.Primitives
             newHsvValues.Add(hsvMin);
 
             Rgb rgbMin = hsvMin.ToRgb();
-            bgraMinPixelData.Add((byte)Math.Round(rgbMin.B * 255)); // b
-            bgraMinPixelData.Add((byte)Math.Round(rgbMin.G * 255)); // g
-            bgraMinPixelData.Add((byte)Math.Round(rgbMin.R * 255)); // r
+            bgraMinPixelData.Add((uint8)Math.Round(rgbMin.B * 255)); // b
+            bgraMinPixelData.Add((uint8)Math.Round(rgbMin.G * 255)); // g
+            bgraMinPixelData.Add((uint8)Math.Round(rgbMin.R * 255)); // r
             bgraMinPixelData.Add(255); // a
 
             // We'll only save pixel data for the middle bitmaps if our third dimension is hue.
@@ -1545,34 +1545,34 @@ namespace Avalonia.Controls.Primitives
                 components == ColorSpectrumComponents.SaturationValue)
             {
                 Rgb rgbMiddle1 = hsvMiddle1.ToRgb();
-                bgraMiddle1PixelData.Add((byte)Math.Round(rgbMiddle1.B * 255)); // b
-                bgraMiddle1PixelData.Add((byte)Math.Round(rgbMiddle1.G * 255)); // g
-                bgraMiddle1PixelData.Add((byte)Math.Round(rgbMiddle1.R * 255)); // r
+                bgraMiddle1PixelData.Add((uint8)Math.Round(rgbMiddle1.B * 255)); // b
+                bgraMiddle1PixelData.Add((uint8)Math.Round(rgbMiddle1.G * 255)); // g
+                bgraMiddle1PixelData.Add((uint8)Math.Round(rgbMiddle1.R * 255)); // r
                 bgraMiddle1PixelData.Add(255); // a
 
                 Rgb rgbMiddle2 = hsvMiddle2.ToRgb();
-                bgraMiddle2PixelData.Add((byte)Math.Round(rgbMiddle2.B * 255)); // b
-                bgraMiddle2PixelData.Add((byte)Math.Round(rgbMiddle2.G * 255)); // g
-                bgraMiddle2PixelData.Add((byte)Math.Round(rgbMiddle2.R * 255)); // r
+                bgraMiddle2PixelData.Add((uint8)Math.Round(rgbMiddle2.B * 255)); // b
+                bgraMiddle2PixelData.Add((uint8)Math.Round(rgbMiddle2.G * 255)); // g
+                bgraMiddle2PixelData.Add((uint8)Math.Round(rgbMiddle2.R * 255)); // r
                 bgraMiddle2PixelData.Add(255); // a
 
                 Rgb rgbMiddle3 = hsvMiddle3.ToRgb();
-                bgraMiddle3PixelData.Add((byte)Math.Round(rgbMiddle3.B * 255)); // b
-                bgraMiddle3PixelData.Add((byte)Math.Round(rgbMiddle3.G * 255)); // g
-                bgraMiddle3PixelData.Add((byte)Math.Round(rgbMiddle3.R * 255)); // r
+                bgraMiddle3PixelData.Add((uint8)Math.Round(rgbMiddle3.B * 255)); // b
+                bgraMiddle3PixelData.Add((uint8)Math.Round(rgbMiddle3.G * 255)); // g
+                bgraMiddle3PixelData.Add((uint8)Math.Round(rgbMiddle3.R * 255)); // r
                 bgraMiddle3PixelData.Add(255); // a
 
                 Rgb rgbMiddle4 = hsvMiddle4.ToRgb();
-                bgraMiddle4PixelData.Add((byte)Math.Round(rgbMiddle4.B * 255)); // b
-                bgraMiddle4PixelData.Add((byte)Math.Round(rgbMiddle4.G * 255)); // g
-                bgraMiddle4PixelData.Add((byte)Math.Round(rgbMiddle4.R * 255)); // r
+                bgraMiddle4PixelData.Add((uint8)Math.Round(rgbMiddle4.B * 255)); // b
+                bgraMiddle4PixelData.Add((uint8)Math.Round(rgbMiddle4.G * 255)); // g
+                bgraMiddle4PixelData.Add((uint8)Math.Round(rgbMiddle4.R * 255)); // r
                 bgraMiddle4PixelData.Add(255); // a
             }
 
             Rgb rgbMax = hsvMax.ToRgb();
-            bgraMaxPixelData.Add((byte)Math.Round(rgbMax.B * 255)); // b
-            bgraMaxPixelData.Add((byte)Math.Round(rgbMax.G * 255)); // g
-            bgraMaxPixelData.Add((byte)Math.Round(rgbMax.R * 255)); // r
+            bgraMaxPixelData.Add((uint8)Math.Round(rgbMax.B * 255)); // b
+            bgraMaxPixelData.Add((uint8)Math.Round(rgbMax.G * 255)); // g
+            bgraMaxPixelData.Add((uint8)Math.Round(rgbMax.R * 255)); // r
             bgraMaxPixelData.Add(255); // a
         }
 

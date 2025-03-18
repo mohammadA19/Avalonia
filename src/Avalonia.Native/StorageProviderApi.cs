@@ -102,7 +102,7 @@ internal class StorageProviderApi(IAvnStorageProvider native, bool sandboxEnable
 
     // Avalonia.Native technically can be used for more than just macOS,
     // In which case we should provide different bookmark platform keys, and parse accordingly.
-    private static ReadOnlySpan<byte> MacOSKey => "macOS"u8;
+    private static ReadOnlySpan<uint8> MacOSKey => "macOS"u8;
     public unsafe string? SaveBookmark(Uri uri)
     {
         void* error = null;
@@ -126,7 +126,7 @@ internal class StorageProviderApi(IAvnStorageProvider native, bool sandboxEnable
     {
         if (StorageBookmarkHelper.TryDecodeBookmark(MacOSKey, bookmark, out var bytes) == StorageBookmarkHelper.DecodeResult.Success)
         {
-            fixed (byte* ptr = bytes)
+            fixed (uint8* ptr = bytes)
             {
                 using var uriString = _native.ReadBookmarkFromBytes(ptr, bytes!.Length);
                 return uriString is not null && Uri.TryCreate(uriString.String, UriKind.Absolute, out var uri) ?

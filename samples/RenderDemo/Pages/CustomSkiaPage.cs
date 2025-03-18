@@ -87,7 +87,7 @@ namespace RenderDemo.Pages
                             new SKColor(255, 200, 200, 100), 
                             SKColors.Transparent,
                             new SKColor(40,40,40, 220), 
-                            new SKColor(20,20,20, (byte)Animate(100, 200,220)) },
+                            new SKColor(20,20,20, (uint8)Animate(100, 200,220)) },
                         new float[] { 0.3f, 0.3f, 0.8f, 1 },
                         SKShaderTileMode.Clamp))
                     using (var paint = new SKPaint

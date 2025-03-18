@@ -18,7 +18,7 @@ namespace Avalonia.X11
             [MarshalAs(UnmanagedType.LPStr)] string? previousId,
             ref IntPtr clientIdRet,
             int32 errorLength,
-            [Out] byte[] errorStringRet
+            [Out] uint8[] errorStringRet
         );
 
         [DllImport(LibSm, CallingConvention = CallingConvention.StdCall)]

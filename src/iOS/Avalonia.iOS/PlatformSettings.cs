@@ -37,10 +37,10 @@ internal class PlatformSettings : DefaultPlatformSettings
                     ThemeVariant = themeVariant,
                     ContrastPreference = contrastPreference,
                     AccentColor1 = new Color(
-                        (byte)(alpha * 255),
-                        (byte)(red * 255),
-                        (byte)(green * 255),
-                        (byte)(blue * 255))
+                        (uint8)(alpha * 255),
+                        (uint8)(red * 255),
+                        (uint8)(green * 255),
+                        (uint8)(blue * 255))
                 };
             }
         }

@@ -60,12 +60,12 @@ namespace Avalonia.Utilities
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryParseByte(this ReadOnlySpan<char> span, NumberStyles style, IFormatProvider provider, out byte value)
+        public static bool TryParseByte(this ReadOnlySpan<char> span, NumberStyles style, IFormatProvider provider, out uint8 value)
         {
 #if NETSTANDARD2_0
-            return byte.TryParse(span.ToString(), style, provider, out value);
+            return uint8.TryParse(span.ToString(), style, provider, out value);
 #else
-            return byte.TryParse(span, style, provider, out value);
+            return uint8.TryParse(span, style, provider, out value);
 #endif
         }
 

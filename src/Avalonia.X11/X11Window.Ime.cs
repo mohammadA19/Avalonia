@@ -186,7 +186,7 @@ namespace Avalonia.X11
         {
             var keySym = (nint)x11Key;
             const int32 bufferSize = 4;
-            var buffer = stackalloc byte[bufferSize];
+            var buffer = stackalloc uint8[bufferSize];
             var length = XkbTranslateKeySym(_x11.Display, ref keySym, 0, buffer, bufferSize, out var extraSize);
 
             if (length == 0)
@@ -199,8 +199,8 @@ namespace Avalonia.X11
                 return Encoding.UTF8.GetString(buffer, length);
 
             // A symbol should normally fit in 4 bytes, so this path isn't expected to be taken.
-            var heapBuffer = new byte[length + extraSize];
-            fixed (byte* heapBufferPtr = heapBuffer)
+            var heapBuffer = new uint8[length + extraSize];
+            fixed (uint8* heapBufferPtr = heapBuffer)
                 length = XkbTranslateKeySym(_x11.Display, ref keySym, 0, heapBufferPtr, heapBuffer.Length, out _);
 
             return Encoding.UTF8.GetString(heapBuffer, 0, length);
@@ -209,7 +209,7 @@ namespace Avalonia.X11
         private static unsafe (X11Key x11Key, Key key, string? symbol) LookupKeyXCore(ref XKeyEvent keyEvent)
         {
             const int32 bufferSize = 4;
-            var buffer = stackalloc byte[bufferSize];
+            var buffer = stackalloc uint8[bufferSize];
 
             // We don't have Xkb enabled, which should be rare: use XLookupString which will map to the first keyboard
             // while handling modifiers for us (XKeycodeToKeysym doesn't).
@@ -258,7 +258,7 @@ namespace Avalonia.X11
                 if (ImeBuffer == IntPtr.Zero)
                     ImeBuffer = Marshal.AllocHGlobal(ImeBufferSize);
 
-                var imeBufferPtr = (byte*)ImeBuffer.ToPointer();
+                var imeBufferPtr = (uint8*)ImeBuffer.ToPointer();
                 XLookupStatus status = 0;
 
                 var len = _xic == IntPtr.Zero ?

@@ -69,5 +69,5 @@ internal unsafe class WinApi
     }
 
     [DllImport("user32.dll", CharSet = CharSet.Unicode, EntryPoint = "SendMessageW")]
-    public static extern IntPtr SendMessage(IntPtr hWnd, int32 Msg, ref SETTEXTEX wParam, byte[] lParam);
+    public static extern IntPtr SendMessage(IntPtr hWnd, int32 Msg, ref SETTEXTEX wParam, uint8[] lParam);
 }

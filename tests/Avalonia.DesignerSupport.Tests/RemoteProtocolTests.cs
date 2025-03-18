@@ -102,8 +102,8 @@ namespace Avalonia.DesignerSupport.Tests
                     return true;
                 if (t == typeof(int32) || t == typeof(long))
                     return rnd.Next();
-                if (t == typeof(byte))
-                    return (byte)rnd.Next(255);
+                if (t == typeof(uint8))
+                    return (uint8)rnd.Next(255);
                 if (t == typeof(double))
                     return rnd.NextDouble();
                 if (t.IsEnum)

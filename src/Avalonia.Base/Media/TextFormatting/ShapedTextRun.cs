@@ -19,7 +19,7 @@ namespace Avalonia.Media.TextFormatting
 
         public bool IsReversed { get; private set; }
 
-        public sbyte BidiLevel => ShapedBuffer.BidiLevel;
+        public int8 BidiLevel => ShapedBuffer.BidiLevel;
 
         public ShapedBuffer ShapedBuffer { get; }
 

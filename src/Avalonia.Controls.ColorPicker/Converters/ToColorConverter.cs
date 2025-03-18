@@ -36,7 +36,7 @@ namespace Avalonia.Controls.Converters
                 double alpha = valueBrush.Color.A * valueBrush.Opacity;
 
                 return new Color(
-                    (byte)MathUtilities.Clamp(alpha, 0x00, 0xFF),
+                    (uint8)MathUtilities.Clamp(alpha, 0x00, 0xFF),
                     valueBrush.Color.R,
                     valueBrush.Color.G,
                     valueBrush.Color.B);

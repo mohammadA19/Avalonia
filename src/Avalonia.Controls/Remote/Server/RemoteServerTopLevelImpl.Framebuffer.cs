@@ -24,8 +24,8 @@ namespace Avalonia.Controls.Remote.Server
             private readonly double _dpi;
             private readonly PixelSize _frameSize;
             private readonly object _dataLock = new();
-            private readonly byte[] _data; // for rendering only
-            private readonly byte[] _dataCopy; // for messages only
+            private readonly uint8[] _data; // for rendering only
+            private readonly uint8[] _dataCopy; // for messages only
             private FrameStatus _status = FrameStatus.NotRendered;
 
             public Framebuffer(ProtocolPixelFormat format, Size clientSize, double renderScaling)
@@ -45,8 +45,8 @@ namespace Avalonia.Controls.Remote.Server
                 RenderScaling = renderScaling;
 
                 (Stride, _data, _dataCopy) = dataLength > 0 ?
-                    (stride, new byte[dataLength], new byte[dataLength]) :
-                    (0, Array.Empty<byte>(), Array.Empty<byte>());
+                    (stride, new uint8[dataLength], new uint8[dataLength]) :
+                    (0, Array.Empty<uint8>(), Array.Empty<uint8>());
             }
 
             public ProtocolPixelFormat Format { get; }

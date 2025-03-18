@@ -11,8 +11,8 @@ public interface IVulkanContextExternalObjectsFeature
 {
     IReadOnlyList<string> SupportedImageHandleTypes { get; }
     IReadOnlyList<string> SupportedSemaphoreTypes { get; }
-    byte[]? DeviceUuid { get; }
-    byte[]? DeviceLuid { get; }
+    uint8[]? DeviceUuid { get; }
+    uint8[]? DeviceLuid { get; }
     CompositionGpuImportedImageSynchronizationCapabilities GetSynchronizationCapabilities(string imageHandleType);
     IVulkanExternalImage ImportImage(IPlatformHandle handle, PlatformGraphicsExternalImageProperties properties);
     IVulkanExternalSemaphore ImportSemaphore(IPlatformHandle handle);

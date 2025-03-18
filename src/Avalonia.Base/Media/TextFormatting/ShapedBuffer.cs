@@ -12,7 +12,7 @@ namespace Avalonia.Media.TextFormatting
         private GlyphInfo[]? _rentedBuffer;
         private ArraySlice<GlyphInfo> _glyphInfos;
 
-        public ShapedBuffer(ReadOnlyMemory<char> text, int32 bufferLength, IGlyphTypeface glyphTypeface, double fontRenderingEmSize, sbyte bidiLevel)
+        public ShapedBuffer(ReadOnlyMemory<char> text, int32 bufferLength, IGlyphTypeface glyphTypeface, double fontRenderingEmSize, int8 bidiLevel)
         {
             Text = text;
             _rentedBuffer = ArrayPool<GlyphInfo>.Shared.Rent(bufferLength);
@@ -22,7 +22,7 @@ namespace Avalonia.Media.TextFormatting
             BidiLevel = bidiLevel;
         }
 
-        internal ShapedBuffer(ReadOnlyMemory<char> text, ArraySlice<GlyphInfo> glyphInfos, IGlyphTypeface glyphTypeface, double fontRenderingEmSize, sbyte bidiLevel)
+        internal ShapedBuffer(ReadOnlyMemory<char> text, ArraySlice<GlyphInfo> glyphInfos, IGlyphTypeface glyphTypeface, double fontRenderingEmSize, int8 bidiLevel)
         {
             Text = text;
             _glyphInfos = glyphInfos;
@@ -49,7 +49,7 @@ namespace Avalonia.Media.TextFormatting
         /// <summary>
         /// The buffer's bidi level.
         /// </summary>
-        public sbyte BidiLevel { get; private set; }
+        public int8 BidiLevel { get; private set; }
 
         /// <summary>
         /// The buffer's reading direction.
@@ -169,7 +169,7 @@ namespace Avalonia.Media.TextFormatting
             return new SplitResult<ShapedBuffer>(first, second);
         }
 
-        internal void ResetBidiLevel(sbyte paragraphEmbeddingLevel) => BidiLevel = paragraphEmbeddingLevel;
+        internal void ResetBidiLevel(int8 paragraphEmbeddingLevel) => BidiLevel = paragraphEmbeddingLevel;
 
         int32 IReadOnlyCollection<GlyphInfo>.Count => _glyphInfos.Length;
 

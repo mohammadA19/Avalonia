@@ -147,7 +147,7 @@ namespace Avalonia.Headless
             return codepoints.ToArray().Select(x => (ushort)x).ToArray();
         }
 
-        public bool TryGetTable(uint32 tag, out byte[] table)
+        public bool TryGetTable(uint32 tag, out uint8[] table)
         {
             table = null!;
             return false;

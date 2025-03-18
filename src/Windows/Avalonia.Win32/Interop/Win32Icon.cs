@@ -25,7 +25,7 @@ internal class Win32Icon : IDisposable
         Handle = CreateIcon(bmp, hotSpot);
     }
 
-    public Win32Icon(byte[] iconData, PixelSize size = default)
+    public Win32Icon(uint8[] iconData, PixelSize size = default)
     {
         _bytes = iconData;
 
@@ -52,7 +52,7 @@ internal class Win32Icon : IDisposable
     public IntPtr Handle { get; private set; }
     public PixelSize Size { get; }
     
-    private readonly byte[]? _bytes;
+    private readonly uint8[]? _bytes;
     
     IntPtr CreateIcon(Bitmap bitmap, PixelPoint hotSpot = default)
     {
@@ -109,8 +109,8 @@ internal class Win32Icon : IDisposable
         {
             using var argbBuffer = AllocFramebuffer(source.PixelSize, PixelFormat.Bgra8888);
             source.CopyPixels(argbBuffer, AlphaFormat.Unpremul);
-            var pSource = (byte*)argbBuffer.Address;
-            var pDest = (byte*)alphaMaskBuffer.Address;
+            var pSource = (uint8*)argbBuffer.Address;
+            var pDest = (uint8*)alphaMaskBuffer.Address;
 
 
 
@@ -120,7 +120,7 @@ internal class Win32Icon : IDisposable
                 {
                     if (pSource[x * 4] == 0)
                     {
-                        pDest[x / 8] |= (byte)(1 << (x % 8));
+                        pDest[x / 8] |= (uint8)(1 << (x % 8));
                     }
                 }
 
@@ -164,10 +164,10 @@ internal class Win32Icon : IDisposable
     public struct ICONDIRENTRY
     {
         // Width and height are 1 - 255 or 0 for 256
-        public byte bWidth;
-        public byte bHeight;
-        public byte bColorCount;
-        public byte bReserved;
+        public uint8 bWidth;
+        public uint8 bHeight;
+        public uint8 bColorCount;
+        public uint8 bReserved;
         public ushort wPlanes;
         public ushort wBitCount;
         public uint32 dwBytesInRes;
@@ -182,7 +182,7 @@ internal class Win32Icon : IDisposable
         pixelSize.Height == 0 ? UnmanagedMethods.GetSystemMetrics(UnmanagedMethods.SystemMetric.SM_CYICON) : pixelSize.Height
         );
 
-    private static unsafe (IntPtr, PixelSize) LoadIconFromData(byte[] iconData, PixelSize size)
+    private static unsafe (IntPtr, PixelSize) LoadIconFromData(uint8[] iconData, PixelSize size)
     {
         if (iconData.Length < sizeof(ICONDIR))
             return default;
@@ -203,7 +203,7 @@ internal class Win32Icon : IDisposable
             }
         }
 
-        fixed (byte* b = iconData)
+        fixed (uint8* b = iconData)
         {
             var dir = (ICONDIR*)b;
 
@@ -212,8 +212,8 @@ internal class Win32Icon : IDisposable
                 return default;
             }
 
-            byte bestWidth = 0;
-            byte bestHeight = 0;
+            uint8 bestWidth = 0;
+            uint8 bestHeight = 0;
 
             if (sizeof(ICONDIRENTRY) * (dir->idCount - 1) + sizeof(ICONDIR) > iconData.Length)
                 return default;
@@ -307,12 +307,12 @@ internal class Win32Icon : IDisposable
             if ((_bestImageOffset % IntPtr.Size) != 0)
             {
                 // Beginning of icon's content is misaligned.
-                byte[] alignedBuffer = ArrayPool<byte>.Shared.Rent((int32)_bestBytesInRes);
+                uint8[] alignedBuffer = ArrayPool<uint8>.Shared.Rent((int32)_bestBytesInRes);
                 Array.Copy(iconData, _bestImageOffset, alignedBuffer, 0, _bestBytesInRes);
 
                 try
                 {
-                    fixed (byte* pbAlignedBuffer = alignedBuffer)
+                    fixed (uint8* pbAlignedBuffer = alignedBuffer)
                     {
                         return (UnmanagedMethods.CreateIconFromResourceEx(pbAlignedBuffer, _bestBytesInRes, 1,
                             0x00030000, 0, 0, 0), bestSize);
@@ -321,7 +321,7 @@ internal class Win32Icon : IDisposable
                 finally
                 {
 
-                    ArrayPool<byte>.Shared.Return(alignedBuffer);
+                    ArrayPool<uint8>.Shared.Return(alignedBuffer);
                 }
             }
             else

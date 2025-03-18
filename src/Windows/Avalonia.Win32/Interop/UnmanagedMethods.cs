@@ -1068,10 +1068,10 @@ namespace Avalonia.Win32.Interop
         [StructLayout(LayoutKind.Sequential)]
         public struct RGBQUAD
         {
-            public byte rgbBlue;
-            public byte rgbGreen;
-            public byte rgbRed;
-            public byte rgbReserved;
+            public uint8 rgbBlue;
+            public uint8 rgbGreen;
+            public uint8 rgbRed;
+            public uint8 rgbReserved;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1256,7 +1256,7 @@ namespace Avalonia.Win32.Interop
 
         [DllImport("user32.dll", ExactSpelling = true, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool GetKeyboardState(byte* lpKeyState);
+        internal static extern bool GetKeyboardState(uint8* lpKeyState);
 
         [DllImport("user32.dll", EntryPoint = "MapVirtualKeyW")]
         public static extern uint32 MapVirtualKey(uint32 uCode, uint32 uMapType);
@@ -1374,7 +1374,7 @@ namespace Avalonia.Win32.Interop
         public static extern IntPtr CreateIconIndirect([In] ref ICONINFO iconInfo);
 
         [DllImport("user32.dll")]
-        public static extern IntPtr CreateIconFromResourceEx(byte* pbIconBits, uint32 cbIconBits,
+        public static extern IntPtr CreateIconFromResourceEx(uint8* pbIconBits, uint32 cbIconBits,
             int32 fIcon, int32 dwVersion, int32 csDesired, int32 cyDesired, int32 flags);
 
         [DllImport("user32.dll")]
@@ -1466,7 +1466,7 @@ namespace Avalonia.Win32.Interop
         public static extern int32 ToUnicodeEx(
             uint32 wVirtKey,
             uint32 wScanCode,
-            byte* lpKeyState,
+            uint8* lpKeyState,
             char* pwszBuff,
             int32 cchBuff,
             uint32 wFlags,
@@ -1781,7 +1781,7 @@ namespace Avalonia.Win32.Interop
         }
 
         [DllImport("user32.dll")]
-        public static extern bool SetLayeredWindowAttributes(IntPtr hwnd, uint32 crKey, byte bAlpha, LayeredWindowFlags dwFlags);
+        public static extern bool SetLayeredWindowAttributes(IntPtr hwnd, uint32 crKey, uint8 bAlpha, LayeredWindowFlags dwFlags);
 
         [Flags]
         public enum DWM_BB
@@ -1960,9 +1960,9 @@ namespace Avalonia.Win32.Interop
 
             if (bufferLength > 0)
             {
-                var buffer = bufferLength <= 64 ? stackalloc byte[bufferLength] : new byte[bufferLength];
+                var buffer = bufferLength <= 64 ? stackalloc uint8[bufferLength] : new uint8[bufferLength];
 
-                fixed (byte* bufferPtr = buffer)
+                fixed (uint8* bufferPtr = buffer)
                 {
                     var result = ImmGetCompositionString(hIMC, dwIndex, (IntPtr)bufferPtr, (uint32)bufferLength);
                     if (result >= 0)
@@ -2056,14 +2056,14 @@ namespace Avalonia.Win32.Interop
             public int32 lfEscapement;
             public int32 lfOrientation;
             public int32 lfWeight;
-            public byte lfItalic;
-            public byte lfUnderline;
-            public byte lfStrikeOut;
-            public byte lfCharSet;
-            public byte lfOutPrecision;
-            public byte lfClipPrecision;
-            public byte lfQuality;
-            public byte lfPitchAndFamily;
+            public uint8 lfItalic;
+            public uint8 lfUnderline;
+            public uint8 lfStrikeOut;
+            public uint8 lfCharSet;
+            public uint8 lfOutPrecision;
+            public uint8 lfClipPrecision;
+            public uint8 lfQuality;
+            public uint8 lfPitchAndFamily;
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
             public string lfFaceName;
         }
@@ -2208,7 +2208,7 @@ namespace Avalonia.Win32.Interop
             public bool fRestore;
             public bool fIncUpdate;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
-            public byte[] rgbReserved;
+            public uint8[] rgbReserved;
         }
 
         public struct POINT
@@ -2574,26 +2574,26 @@ namespace Avalonia.Win32.Interop
         public ushort Size;
         public ushort Version;
         public PixelFormatDescriptorFlags Flags;
-        public byte PixelType;
-        public byte ColorBits;
-        public byte RedBits;
-        public byte RedShift;
-        public byte GreenBits;
-        public byte GreenShift;
-        public byte BlueBits;
-        public byte BlueShift;
-        public byte AlphaBits;
-        public byte AlphaShift;
-        public byte AccumBits;
-        public byte AccumRedBits;
-        public byte AccumGreenBits;
-        public byte AccumBlueBits;
-        public byte AccumAlphaBits;
-        public byte DepthBits;
-        public byte StencilBits;
-        public byte AuxBuffers;
-        public byte LayerType;
-        private byte Reserved;
+        public uint8 PixelType;
+        public uint8 ColorBits;
+        public uint8 RedBits;
+        public uint8 RedShift;
+        public uint8 GreenBits;
+        public uint8 GreenShift;
+        public uint8 BlueBits;
+        public uint8 BlueShift;
+        public uint8 AlphaBits;
+        public uint8 AlphaShift;
+        public uint8 AccumBits;
+        public uint8 AccumRedBits;
+        public uint8 AccumGreenBits;
+        public uint8 AccumBlueBits;
+        public uint8 AccumAlphaBits;
+        public uint8 DepthBits;
+        public uint8 StencilBits;
+        public uint8 AuxBuffers;
+        public uint8 LayerType;
+        private uint8 Reserved;
         public uint32 LayerMask;
         public uint32 VisibleMask;
         public uint32 DamageMask;

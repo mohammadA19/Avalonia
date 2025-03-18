@@ -16,7 +16,7 @@ namespace Avalonia.iOS.Storage;
 
 internal class IOSStorageProvider : IStorageProvider
 {
-    public static ReadOnlySpan<byte> PlatformKey => "ios"u8; 
+    public static ReadOnlySpan<uint8> PlatformKey => "ios"u8; 
 
     private readonly AvaloniaView _view;
     public IOSStorageProvider(AvaloniaView view)
@@ -230,9 +230,9 @@ internal class IOSStorageProvider : IStorageProvider
             _ => null
         };
 
-        NSUrl DecodeFromBytes(byte[] bytes)
+        NSUrl DecodeFromBytes(uint8[] bytes)
         {
-            fixed (byte* ptr = bytes)
+            fixed (uint8* ptr = bytes)
             {
                 using var data = new NSData(new IntPtr(ptr), new UIntPtr((uint32)bytes.Length), null);
                 return DecodeFromNSData(data);

@@ -56,9 +56,9 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
 
                 if (preeditString.Length > 0 && args.cursorpos >= 0)
                 {
-                    // cursorpos is a byte offset in UTF8 sequence that got sent through dbus
+                    // cursorpos is a uint8 offset in UTF8 sequence that got sent through dbus
                     // Tmds.DBus has already converted it to UTF16, so we need to convert it back
-                    // and figure out the byte offset
+                    // and figure out the uint8 offset
                     var utf8String = Encoding.UTF8.GetBytes(preeditString);
                     if (utf8String.Length >= args.cursorpos)
                     {

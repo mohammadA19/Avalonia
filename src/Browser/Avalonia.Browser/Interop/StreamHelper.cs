@@ -16,7 +16,7 @@ internal static partial class StreamHelper
     public static partial void Truncate(JSObject stream, [JSMarshalAs<JSType.Number>] long size);
 
     [JSImport("StreamHelper.write", AvaloniaModule.MainModuleName)]
-    public static partial Task WriteAsync(JSObject stream, [JSMarshalAs<JSType.MemoryView>] ArraySegment<byte> data, int32 offset, int32 count);
+    public static partial Task WriteAsync(JSObject stream, [JSMarshalAs<JSType.MemoryView>] ArraySegment<uint8> data, int32 offset, int32 count);
 
     [JSImport("StreamHelper.close", AvaloniaModule.MainModuleName)]
     public static partial Task CloseAsync(JSObject stream);
@@ -30,9 +30,9 @@ internal static partial class StreamHelper
 
     [JSImport("StreamHelper.toMemoryView", AvaloniaModule.MainModuleName)]
     [return: JSMarshalAs<JSType.Array<JSType.Number>>]
-    private static partial byte[] ArrayBufferToMemoryView(JSObject stream);
+    private static partial uint8[] ArrayBufferToMemoryView(JSObject stream);
 
-    public static async Task<byte[]> SliceAsync(JSObject stream, long offset, int32 count)
+    public static async Task<uint8[]> SliceAsync(JSObject stream, long offset, int32 count)
     {
         using var buffer = await SliceToArrayBuffer(stream, offset, count);
         return ArrayBufferToMemoryView(buffer);

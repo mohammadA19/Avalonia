@@ -25,8 +25,8 @@ public interface IExternalObjectsRenderInterfaceContextFeature
 
     IPlatformRenderInterfaceImportedSemaphore ImportSemaphore(IPlatformHandle handle);
     CompositionGpuImportedImageSynchronizationCapabilities GetSynchronizationCapabilities(string imageHandleType);
-    public byte[]? DeviceUuid { get; }
-    public byte[]? DeviceLuid { get; }
+    public uint8[]? DeviceUuid { get; }
+    public uint8[]? DeviceLuid { get; }
 }
 
 [Unstable]

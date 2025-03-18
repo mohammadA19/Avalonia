@@ -82,8 +82,8 @@ namespace Avalonia.Visuals.UnitTests.Media.TextFormatting
                         var data = new object[]
                         {
                             line, lineNumber,
-                            Encoding.UTF32.GetString(MemoryMarshal.Cast<int32, byte>(grapheme.ToArray()).ToArray()),
-                            Encoding.UTF32.GetString(MemoryMarshal.Cast<int32, byte>(codepoints.ToArray()).ToArray())
+                            Encoding.UTF32.GetString(MemoryMarshal.Cast<int32, uint8>(grapheme.ToArray()).ToArray()),
+                            Encoding.UTF32.GetString(MemoryMarshal.Cast<int32, uint8>(codepoints.ToArray()).ToArray())
                         };
 
                     

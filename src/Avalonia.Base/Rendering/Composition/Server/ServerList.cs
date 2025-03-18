@@ -14,7 +14,7 @@ namespace Avalonia.Rendering.Composition.Server
 
         protected override void DeserializeChangesCore(BatchStreamReader reader, TimeSpan committedAt)
         {
-            if (reader.Read<byte>() == 1)
+            if (reader.Read<uint8>() == 1)
             {
                 List.Clear();
                 var count = reader.Read<int32>();

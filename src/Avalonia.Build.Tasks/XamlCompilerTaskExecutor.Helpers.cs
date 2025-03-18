@@ -87,11 +87,11 @@ namespace Avalonia.Build.Tasks
             class AvaloniaResource : IResource
             {
                 private readonly AvaloniaResources _grp;
-                private readonly byte[] _data;
+                private readonly uint8[] _data;
 
                 public AvaloniaResource(AvaloniaResources grp,
                     string projectDir,
-                    string name, byte[] data)
+                    string name, uint8[] data)
                 {
                     _grp = grp;
                     _data = data;
@@ -102,7 +102,7 @@ namespace Avalonia.Build.Tasks
                 public string Uri { get; }
                 public string Name { get; }
                 public string FilePath { get; }
-                public byte[] FileContents => _data;
+                public uint8[] FileContents => _data;
 
                 public void Remove() => _grp._resources.Remove(Name);
             }

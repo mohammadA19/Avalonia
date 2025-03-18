@@ -247,7 +247,7 @@ namespace Avalonia.Skia
 
             var paint = SKPaintCache.Shared.Get();
 
-            paint.Color = new SKColor(255, 255, 255, (byte)(255 * opacity * _currentOpacity));
+            paint.Color = new SKColor(255, 255, 255, (uint8)(255 * opacity * _currentOpacity));
             paint.FilterQuality = RenderOptions.BitmapInterpolationMode.ToSKFilterQuality();
             paint.BlendMode = RenderOptions.BitmapBlendingMode.ToSKBlendMode();
 
@@ -329,7 +329,7 @@ namespace Avalonia.Skia
                 var ac = shadow.Color;
 
                 var filter = SKImageFilter.CreateBlur(SkBlurRadiusToSigma(shadow.Blur), SkBlurRadiusToSigma(shadow.Blur));
-                var color = new SKColor(ac.R, ac.G, ac.B, (byte)(ac.A * opacity));
+                var color = new SKColor(ac.R, ac.G, ac.B, (uint8)(ac.A * opacity));
 
                 paint.Reset();
                 paint.IsAntialias = true;
@@ -1279,25 +1279,25 @@ namespace Avalonia.Skia
         {
             if (opacity > 1)
                 opacity = 1;
-            var c = new byte[256];
-            var a = new byte[256];
+            var c = new uint8[256];
+            var a = new uint8[256];
             for (var i = 0; i < 256; i++)
             {
-                c[i] = (byte)i;
-                a[i] = (byte)(i * opacity);
+                c[i] = (uint8)i;
+                a[i] = (uint8)(i * opacity);
             }
 
             return SKColorFilter.CreateTable(a, c, c, c);
         }
 
-        private static byte Blend(byte leftColor, byte leftAlpha, byte rightColor, byte rightAlpha)
+        private static uint8 Blend(uint8 leftColor, uint8 leftAlpha, uint8 rightColor, uint8 rightAlpha)
         {
             var ca = leftColor / 255d;
             var aa = leftAlpha / 255d;
             var cb = rightColor / 255d;
             var ab = rightAlpha / 255d;
             var r = (ca * aa + cb * ab * (1 - aa)) / (aa + ab * (1 - aa));
-            return (byte)(r * 255);
+            return (uint8)(r * 255);
         }
 
         private static Color Blend(Color left, Color right)
@@ -1305,7 +1305,7 @@ namespace Avalonia.Skia
             var aa = left.A / 255d;
             var ab = right.A / 255d;
             return new Color(
-                (byte)((aa + ab * (1 - aa)) * 255),
+                (uint8)((aa + ab * (1 - aa)) * 255),
                 Blend(left.R, left.A, right.R, right.A),
                 Blend(left.G, left.A, right.G, right.A),
                 Blend(left.B, left.A, right.B, right.A)                
@@ -1370,12 +1370,12 @@ namespace Avalonia.Skia
 
             if (brush is ISolidColorBrush solid)
             {
-                paint.Color = new SKColor(solid.Color.R, solid.Color.G, solid.Color.B, (byte) (solid.Color.A * opacity));
+                paint.Color = new SKColor(solid.Color.R, solid.Color.G, solid.Color.B, (uint8) (solid.Color.A * opacity));
 
                 return paintWrapper;
             }
 
-            paint.Color = new SKColor(255, 255, 255, (byte) (255 * opacity));
+            paint.Color = new SKColor(255, 255, 255, (uint8) (255 * opacity));
 
             if (brush is IGradientBrush gradient)
             {

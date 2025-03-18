@@ -5,8 +5,8 @@ namespace Avalonia.Media.Fonts
     internal readonly record struct OpenTypeTag
     {
         public static readonly OpenTypeTag None = new OpenTypeTag(0, 0, 0, 0);
-        public static readonly OpenTypeTag Max = new OpenTypeTag(byte.MaxValue, byte.MaxValue, byte.MaxValue, byte.MaxValue);
-        public static readonly OpenTypeTag MaxSigned = new OpenTypeTag((byte)sbyte.MaxValue, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+        public static readonly OpenTypeTag Max = new OpenTypeTag(uint8.MaxValue, uint8.MaxValue, uint8.MaxValue, uint8.MaxValue);
+        public static readonly OpenTypeTag MaxSigned = new OpenTypeTag((uint8)int8.MaxValue, uint8.MaxValue, uint8.MaxValue, uint8.MaxValue);
 
         private readonly uint32 _value;
 
@@ -17,10 +17,10 @@ namespace Avalonia.Media.Fonts
 
         public OpenTypeTag(char c1, char c2, char c3, char c4)
         {
-            _value = (uint32)(((byte)c1 << 24) | ((byte)c2 << 16) | ((byte)c3 << 8) | (byte)c4);
+            _value = (uint32)(((uint8)c1 << 24) | ((uint8)c2 << 16) | ((uint8)c3 << 8) | (uint8)c4);
         }
 
-        private OpenTypeTag(byte c1, byte c2, byte c3, byte c4)
+        private OpenTypeTag(uint8 c1, uint8 c2, uint8 c3, uint8 c4)
         {
             _value = (uint32)((c1 << 24) | (c2 << 16) | (c3 << 8) | c4);
         }
@@ -58,10 +58,10 @@ namespace Avalonia.Media.Fonts
             }
 
             return string.Concat(
-                (char)(byte)(_value >> 24),
-                (char)(byte)(_value >> 16),
-                (char)(byte)(_value >> 8),
-                (char)(byte)_value);
+                (char)(uint8)(_value >> 24),
+                (char)(uint8)(_value >> 16),
+                (char)(uint8)(_value >> 8),
+                (char)(uint8)_value);
         }
 
         public static implicit operator uint32(OpenTypeTag tag) => tag._value;

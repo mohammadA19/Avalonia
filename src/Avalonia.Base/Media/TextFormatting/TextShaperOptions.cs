@@ -12,7 +12,7 @@ namespace Avalonia.Media.TextFormatting
         public TextShaperOptions(
             IGlyphTypeface typeface,
             double fontRenderingEmSize = 12,
-            sbyte bidiLevel = 0,
+            int8 bidiLevel = 0,
             CultureInfo? culture = null,
             double incrementalTabWidth = 0,
             double letterSpacing = 0)
@@ -25,7 +25,7 @@ namespace Avalonia.Media.TextFormatting
             IGlyphTypeface typeface, 
             IReadOnlyList<FontFeature>? fontFeatures,
             double fontRenderingEmSize = 12, 
-            sbyte bidiLevel = 0, 
+            int8 bidiLevel = 0, 
             CultureInfo? culture = null, 
             double incrementalTabWidth = 0,
             double letterSpacing = 0)
@@ -51,7 +51,7 @@ namespace Avalonia.Media.TextFormatting
         /// <summary>
         /// Get the bidi level of the text.
         /// </summary>
-        public sbyte BidiLevel { get; }
+        public int8 BidiLevel { get; }
 
         /// <summary>
         /// Get the culture.

@@ -436,9 +436,9 @@ namespace Avalonia.Controls.Presenters
 
                 if (backgroundColor.HasValue)
                 {
-                    var red = (byte)~(backgroundColor.Value.R);
-                    var green = (byte)~(backgroundColor.Value.G);
-                    var blue = (byte)~(backgroundColor.Value.B);
+                    var red = (uint8)~(backgroundColor.Value.R);
+                    var green = (uint8)~(backgroundColor.Value.G);
+                    var blue = (uint8)~(backgroundColor.Value.B);
 
                     caretBrush = new ImmutableSolidColorBrush(Color.FromRgb(red, green, blue));
                 }

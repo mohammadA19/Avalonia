@@ -69,13 +69,13 @@ namespace Avalonia.Visuals.UnitTests.Media.TextFormatting
                             var codePoints = fields[0].Split(' ').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt32(x, 16)).ToArray();
 
                             // Parse field 1 - paragraph level
-                            var paragraphLevel = sbyte.Parse(fields[1]);
+                            var paragraphLevel = int8.Parse(fields[1]);
 
                             // Parse field 2 - resolved paragraph level
-                            var resolvedParagraphLevel = sbyte.Parse(fields[2]);
+                            var resolvedParagraphLevel = int8.Parse(fields[2]);
 
                             // Parse field 3 - resolved levels
-                            var resolvedLevels = fields[3].Split(' ').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => x == "x" ? (sbyte)-1 : Convert.ToSByte(x)).ToArray();
+                            var resolvedLevels = fields[3].Split(' ').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => x == "x" ? (int8)-1 : Convert.ToSByte(x)).ToArray();
 
                             // Parse field 4 - resolved levels
                             var resolvedOrder = fields[4].Split(' ').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt32(x)).ToArray();
@@ -104,9 +104,9 @@ namespace Avalonia.Visuals.UnitTests.Media.TextFormatting
     {
         public int32 LineNumber { get; set; }
         public int32[] CodePoints{ get; set; }
-        public sbyte ParagraphLevel{ get; set; }
-        public  sbyte ResolvedParagraphLevel{ get; set; }
-        public sbyte[] ResolvedLevels{ get; set; }
+        public int8 ParagraphLevel{ get; set; }
+        public  int8 ResolvedParagraphLevel{ get; set; }
+        public int8[] ResolvedLevels{ get; set; }
         public int32[] ResolvedOrder{ get; set; }
     }
 }

@@ -113,7 +113,7 @@ namespace Avalonia.X11 {
 		internal int32		x_root;
 		internal int32		y_root;
 		internal XModifierMask		state;
-		internal byte		is_hint;
+		internal uint8		is_hint;
 		internal int32		same_screen;
 	}
 
@@ -156,38 +156,38 @@ namespace Avalonia.X11 {
 		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
-		internal byte		key_vector0;
-		internal byte		key_vector1;
-		internal byte		key_vector2;
-		internal byte		key_vector3;
-		internal byte		key_vector4;
-		internal byte		key_vector5;
-		internal byte		key_vector6;
-		internal byte		key_vector7;
-		internal byte		key_vector8;
-		internal byte		key_vector9;
-		internal byte		key_vector10;
-		internal byte		key_vector11;
-		internal byte		key_vector12;
-		internal byte		key_vector13;
-		internal byte		key_vector14;
-		internal byte		key_vector15;
-		internal byte		key_vector16;
-		internal byte		key_vector17;
-		internal byte		key_vector18;
-		internal byte		key_vector19;
-		internal byte		key_vector20;
-		internal byte		key_vector21;
-		internal byte		key_vector22;
-		internal byte		key_vector23;
-		internal byte		key_vector24;
-		internal byte		key_vector25;
-		internal byte		key_vector26;
-		internal byte		key_vector27;
-		internal byte		key_vector28;
-		internal byte		key_vector29;
-		internal byte		key_vector30;
-		internal byte		key_vector31;
+		internal uint8		key_vector0;
+		internal uint8		key_vector1;
+		internal uint8		key_vector2;
+		internal uint8		key_vector3;
+		internal uint8		key_vector4;
+		internal uint8		key_vector5;
+		internal uint8		key_vector6;
+		internal uint8		key_vector7;
+		internal uint8		key_vector8;
+		internal uint8		key_vector9;
+		internal uint8		key_vector10;
+		internal uint8		key_vector11;
+		internal uint8		key_vector12;
+		internal uint8		key_vector13;
+		internal uint8		key_vector14;
+		internal uint8		key_vector15;
+		internal uint8		key_vector16;
+		internal uint8		key_vector17;
+		internal uint8		key_vector18;
+		internal uint8		key_vector19;
+		internal uint8		key_vector20;
+		internal uint8		key_vector21;
+		internal uint8		key_vector22;
+		internal uint8		key_vector23;
+		internal uint8		key_vector24;
+		internal uint8		key_vector25;
+		internal uint8		key_vector26;
+		internal uint8		key_vector27;
+		internal uint8		key_vector28;
+		internal uint8		key_vector29;
+		internal uint8		key_vector30;
+		internal uint8		key_vector31;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -489,9 +489,9 @@ namespace Avalonia.X11 {
 		internal IntPtr		display;
 		internal IntPtr		resourceid;
 		internal IntPtr		serial;
-		internal byte		error_code;
+		internal uint8		error_code;
 		internal XRequest	request_code;
-		internal byte		minor_code;
+		internal uint8		minor_code;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -943,8 +943,8 @@ namespace Avalonia.X11 {
 		internal ushort		red;
 		internal ushort		green;
 		internal ushort		blue;
-		internal byte		flags;
-		internal byte		pad;
+		internal uint8		flags;
+		internal uint8		pad;
 	}
 
 	internal enum Atom {
@@ -1198,10 +1198,10 @@ namespace Avalonia.X11 {
 		[StructLayout (LayoutKind.Explicit)]
 			public struct AutoRepeats {
 			[FieldOffset (0)]
-			public byte first;
+			public uint8 first;
 				
 			[FieldOffset (31)]
-			public byte last;
+			public uint8 last;
 		}
 	}
 
@@ -1297,7 +1297,7 @@ namespace Avalonia.X11 {
 		internal int32			clib_y_origin;
 		internal IntPtr			clip_mask;
 		internal int32			dash_offset;
-		internal byte			dashes;
+		internal uint8			dashes;
 	}
 
 	internal enum GXFunction {
@@ -1533,7 +1533,7 @@ namespace Avalonia.X11 {
 
 	internal delegate int32  XErrorHandler(IntPtr DisplayHandle, ref XErrorEvent error_event);
 
-	internal enum XRequest : byte {
+	internal enum XRequest : uint8 {
 		X_CreateWindow			= 1,
 		X_ChangeWindowAttributes	= 2,
 		X_GetWindowAttributes           = 3,
@@ -1774,7 +1774,7 @@ namespace Avalonia.X11 {
         public int32 xoffset; /* number of pixels offset in X direction */
         public int32 format; /* XYBitmap, XYPixmap, ZPixmap */
         public IntPtr data; /* pointer to image data */
-        public int32 byte_order; /* data byte order, LSBFirst, MSBFirst */
+        public int32 byte_order; /* data uint8 order, LSBFirst, MSBFirst */
         public int32 bitmap_unit; /* quant. of scanline 8, 16, 32 */
         public int32 bitmap_bit_order; /* LSBFirst, MSBFirst */
         public int32 bitmap_pad; /* 8, 16, 32 either XY or ZPixmap */
@@ -1784,7 +1784,7 @@ namespace Avalonia.X11 {
         public ulong red_mask; /* bits in z arrangement */
         public ulong green_mask;
         public ulong blue_mask;
-        private fixed byte funcs[128];
+        private fixed uint8 funcs[128];
     }
     
     [StructLayout(LayoutKind.Sequential)]
@@ -1814,7 +1814,7 @@ namespace Avalonia.X11 {
 
 	internal struct XIMFeedbackStruct
 	{
-		public byte FeedbackMask; // one or more of XIMFeedback enum
+		public uint8 FeedbackMask; // one or more of XIMFeedback enum
 	}
 	
 	internal struct XIMText

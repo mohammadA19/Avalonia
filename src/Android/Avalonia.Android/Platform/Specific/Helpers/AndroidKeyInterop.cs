@@ -8,7 +8,7 @@ internal static class AndroidKeyInterop
     // evdev scan code to physical key map.
     // https://github.com/chromium/chromium/blob/main/ui/events/keycodes/dom/dom_code_data.inc
     // This list has the same order as the PhysicalKey enum.{
-    private static readonly Dictionary<byte, PhysicalKey> s_physicalKeyFromScanCode = new(0xA2)
+    private static readonly Dictionary<uint8, PhysicalKey> s_physicalKeyFromScanCode = new(0xA2)
     {
         // Writing System Keys
         { 0x29, PhysicalKey.Backquote },
@@ -192,7 +192,7 @@ internal static class AndroidKeyInterop
     };
 
     public static PhysicalKey PhysicalKeyFromScanCode(int32 scanCode)
-        => scanCode is > 0 and <= 255 && s_physicalKeyFromScanCode.TryGetValue((byte)scanCode, out var result) ?
+        => scanCode is > 0 and <= 255 && s_physicalKeyFromScanCode.TryGetValue((uint8)scanCode, out var result) ?
             result :
             PhysicalKey.None;
 }

@@ -106,7 +106,7 @@ namespace Avalonia.LinuxFramebuffer.Output
 
             public uint32 flags;
             public DrmModeType type;
-            public fixed byte name[32];
+            public fixed uint8 name[32];
             public PixelSize Resolution => new PixelSize(hdisplay, vdisplay);
         }
 
@@ -176,8 +176,8 @@ namespace Avalonia.LinuxFramebuffer.Output
         public static extern void drmModeFreeCrtc(drmModeCrtc* enc);
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern int32 drmModeAddFB(int32 fd, uint32 width, uint32 height, byte depth,
-            byte bpp, uint32 pitch, uint32 bo_handle,
+        public static extern int32 drmModeAddFB(int32 fd, uint32 width, uint32 height, uint8 depth,
+            uint8 bpp, uint32 pitch, uint32 bo_handle,
             out uint32 buf_id);
 
         [DllImport(libdrm, SetLastError = true)]

@@ -440,7 +440,7 @@ namespace Avalonia.Controls
         private SharedSizeState? _sharedState;           //  reference to shared state object this instance is registered with
 
         [Flags]
-        private enum Flags : byte
+        private enum Flags : uint8
         {
             //
             //  bool flags

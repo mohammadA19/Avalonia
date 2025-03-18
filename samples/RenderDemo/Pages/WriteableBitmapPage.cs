@@ -38,7 +38,7 @@ namespace RenderDemo.Pages
 
         public override void Render(DrawingContext context)
         {
-            void FillPixels(WriteableBitmap bitmap, byte fillAlpha, bool premul)
+            void FillPixels(WriteableBitmap bitmap, uint8 fillAlpha, bool premul)
             {
                 using (var fb = bitmap.Lock())
                 {
@@ -52,9 +52,9 @@ namespace RenderDemo.Pages
 
                             if (premul)
                             {
-                                byte r = (byte) (color.R * color.A / 255);
-                                byte g = (byte) (color.G * color.A / 255);
-                                byte b = (byte) (color.B * color.A / 255);
+                                uint8 r = (uint8) (color.R * color.A / 255);
+                                uint8 g = (uint8) (color.G * color.A / 255);
+                                uint8 b = (uint8) (color.B * color.A / 255);
 
                                 color = new Color(fillAlpha, r, g, b);
                             }
@@ -69,7 +69,7 @@ namespace RenderDemo.Pages
 
             base.Render(context);
 
-            byte alpha = (byte)((_st.ElapsedMilliseconds / 10) % 256);
+            uint8 alpha = (uint8)((_st.ElapsedMilliseconds / 10) % 256);
 
             FillPixels(_unpremulBitmap, alpha, false);
             FillPixels(_premulBitmap, alpha, true);

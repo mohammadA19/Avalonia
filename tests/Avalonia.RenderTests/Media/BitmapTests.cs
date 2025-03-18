@@ -155,7 +155,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
                 formatName = "P" + formatName.ToLowerInvariant();
 
             var bitsData = File.ReadAllBytes(Path.Combine(filesDir, formatName + ".bits")).AsSpan();
-            var header = MemoryMarshal.Cast<byte, RawHeader>(bitsData.Slice(0, Unsafe.SizeOf<RawHeader>()))[0];
+            var header = MemoryMarshal.Cast<uint8, RawHeader>(bitsData.Slice(0, Unsafe.SizeOf<RawHeader>()))[0];
             var data = bitsData.Slice(Unsafe.SizeOf<RawHeader>());
 
             var size = new PixelSize(header.Width, header.Height);
@@ -178,7 +178,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
                 var testName = nameof(BitmapsShouldSupportTranscoders_Lenna) + "_" + formatName + names[step];
 
                 var path = Path.Combine(OutputPath, testName + ".out.png");
-                fixed (byte* pData = data)
+                fixed (uint8* pData = data)
                 {
                     Bitmap? b = null;
                     try
@@ -209,8 +209,8 @@ namespace Avalonia.Direct2D1.RenderTests.Media
 
                         if (step < 2)
                         {
-                            var copyTo = new byte[data.Length];
-                            fixed (byte* pCopyTo = copyTo)
+                            var copyTo = new uint8[data.Length];
+                            fixed (uint8* pCopyTo = copyTo)
                                 b.CopyPixels(default, new IntPtr(pCopyTo), copyTo.Length, stride);
                             Assert.Equal(data.ToArray(), copyTo);
                         }
@@ -230,19 +230,19 @@ namespace Avalonia.Direct2D1.RenderTests.Media
         public unsafe void CopyPixelsShouldWorkForNonTranscodedBitmaps()
         {
             var stride = 32 * 4;
-            var data = new byte[32 * stride];
+            var data = new uint8[32 * stride];
             new Random().NextBytes(data);
             for (var c = 0; c < data.Length; c++)
                 if (data[c] == 0)
                     data[c] = 1;
 
             Bitmap bmp;
-            fixed (byte* pData = data)
+            fixed (uint8* pData = data)
                 bmp = new Bitmap(PixelFormat.Bgra8888, AlphaFormat.Unpremul, new IntPtr(pData), new PixelSize(32, 32),
                     new Vector(96, 96), 32 * 4);
 
-            var copyTo = new byte[data.Length];
-            fixed (byte* pCopyTo = copyTo)
+            var copyTo = new uint8[data.Length];
+            fixed (uint8* pCopyTo = copyTo)
                 bmp.CopyPixels(default, new IntPtr(pCopyTo), data.Length, stride);
             Assert.Equal(data, copyTo);
         }
@@ -262,9 +262,9 @@ namespace Avalonia.Direct2D1.RenderTests.Media
             }
 
             var bpp = bitmap.Format!.Value.BitsPerPixel / 8;
-            var buffer = new byte[partSize * partSize * bpp];
+            var buffer = new uint8[partSize * partSize * bpp];
 
-            fixed (byte* pointer = buffer)
+            fixed (uint8* pointer = buffer)
             {
                 bitmap.CopyPixels(new PixelRect(partSize, partSize, partSize, partSize), (IntPtr)pointer,
                     buffer.Length, partSize * bpp);
@@ -272,7 +272,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
 
             foreach (var t in buffer)
             {
-                Assert.Equal(byte.MaxValue, t);
+                Assert.Equal(uint8.MaxValue, t);
             }
         }
     }

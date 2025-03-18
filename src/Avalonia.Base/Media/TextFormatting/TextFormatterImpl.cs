@@ -196,7 +196,7 @@ namespace Avalonia.Media.TextFormatting
 
             var bidiData = t_bidiData ??= new();
             bidiData.Reset();
-            bidiData.ParagraphEmbeddingLevel = (sbyte)flowDirection;
+            bidiData.ParagraphEmbeddingLevel = (int8)flowDirection;
 
             for (var i = 0; i < textRuns.Count; ++i)
             {
@@ -391,7 +391,7 @@ namespace Avalonia.Media.TextFormatting
         /// <param name="fontManager">The font manager to use.</param>
         /// <param name="processedRuns">A list that will be filled with the processed runs.</param>
         /// <returns></returns>
-        private static void CoalesceLevels(IReadOnlyList<TextRun> textCharacters, ReadOnlySpan<sbyte> levels,
+        private static void CoalesceLevels(IReadOnlyList<TextRun> textCharacters, ReadOnlySpan<int8> levels,
             FontManager fontManager, RentedList<TextRun> processedRuns)
         {
             if (levels.Length == 0)
@@ -681,7 +681,7 @@ namespace Avalonia.Media.TextFormatting
             var glyphInfos = new[] { new GlyphInfo(glyph, firstTextSourceIndex, 0.0) };
 
             var shapedBuffer = new ShapedBuffer(s_empty.AsMemory(), glyphInfos, glyphTypeface, properties.FontRenderingEmSize,
-                (sbyte)flowDirection);
+                (int8)flowDirection);
 
             var textRuns = new TextRun[] { new ShapedTextRun(shapedBuffer, properties) };
 
@@ -944,7 +944,7 @@ namespace Avalonia.Media.TextFormatting
                 return;
             }
 
-            var paragraphEmbeddingLevel = (sbyte)paragraphFlowDirection;
+            var paragraphEmbeddingLevel = (int8)paragraphFlowDirection;
 
             if (shapedText.BidiLevel == paragraphEmbeddingLevel)
             {

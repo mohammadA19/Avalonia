@@ -73,7 +73,7 @@ namespace Avalonia.Animation.Animators
             g = OECF_sRGB(g) * 255d;
             b = OECF_sRGB(b) * 255d;
 
-            return new Color((byte)Math.Round(a), (byte)Math.Round(r), (byte)Math.Round(g), (byte)Math.Round(b));
+            return new Color((uint8)Math.Round(a), (uint8)Math.Round(r), (uint8)Math.Round(g), (uint8)Math.Round(b));
         }
     }
 }

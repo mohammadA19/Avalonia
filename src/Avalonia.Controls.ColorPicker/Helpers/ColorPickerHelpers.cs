@@ -37,7 +37,7 @@ namespace Avalonia.Controls.Primitives
         /// This will ensure colors are always discernible.</param>
         /// <returns>A new bitmap representing a gradient of color component values.</returns>
         public static Task CreateComponentBitmapAsync(
-            PooledList<byte> bgraPixelData,
+            PooledList<uint8> bgraPixelData,
             int32 width,
             int32 height,
             Orientation orientation,
@@ -61,7 +61,7 @@ namespace Avalonia.Controls.Primitives
                 int32 bgraPixelDataHeight;
                 int32 bgraPixelDataWidth;
 
-                // BGRA formatted color components 1 byte each (4 bytes in a pixel)
+                // BGRA formatted color components 1 uint8 each (4 bytes in a pixel)
                 bgraPixelDataHeight = height * 4;
                 bgraPixelDataWidth  = width * 4;
 
@@ -618,11 +618,11 @@ namespace Avalonia.Controls.Primitives
         /// <param name="pixelHeight">The pixel height of the bitmap.</param>
         /// <returns>A new <see cref="WriteableBitmap"/>.</returns>
         public static unsafe Bitmap CreateBitmapFromPixelData(
-            PooledList<byte> bgraPixelData,
+            PooledList<uint8> bgraPixelData,
             int32 pixelWidth,
             int32 pixelHeight)
         {
-            fixed (byte* array = bgraPixelData.Span)
+            fixed (uint8* array = bgraPixelData.Span)
             {
                 return new Bitmap(PixelFormat.Bgra8888, AlphaFormat.Premul, new IntPtr(array),
                     new PixelSize(pixelWidth, pixelHeight),

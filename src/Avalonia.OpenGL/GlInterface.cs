@@ -229,7 +229,7 @@ namespace Avalonia.OpenGL
             GetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
             if (logLength == 0)
                 logLength = 4096;
-            var logData = new byte[logLength];
+            var logData = new uint8[logLength];
             int32 len;
             fixed (void* ptr = logData)
                 GetShaderInfoLog(shader, logLength, out len, ptr);
@@ -261,7 +261,7 @@ namespace Avalonia.OpenGL
                 return null;
             int32 logLength;
             GetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
-            var logData = new byte[logLength];
+            var logData = new uint8[logLength];
             int32 len;
             fixed (void* ptr = logData)
                 GetProgramInfoLog(program, logLength, out len, ptr);

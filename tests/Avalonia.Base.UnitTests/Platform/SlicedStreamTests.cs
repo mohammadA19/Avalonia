@@ -17,7 +17,7 @@ public class SlicedStreamTests
         long expectedPosition,
         long expectedUnderlyingPosition)
     {
-        var memoryStream = new MemoryStream(new byte[1024]);
+        var memoryStream = new MemoryStream(new uint8[1024]);
         var slicedStream = new SlicedStream(memoryStream, 7, 42);
         memoryStream.Position = startingUnderlyingPosition;
 

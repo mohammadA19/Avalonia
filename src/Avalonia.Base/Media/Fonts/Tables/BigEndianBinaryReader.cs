@@ -20,7 +20,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// <summary>
         /// Buffer used for temporary storage before conversion into primitives
         /// </summary>
-        private readonly byte[] _buffer = new byte[16];
+        private readonly uint8[] _buffer = new uint8[16];
 
         private readonly bool _leaveOpen;
 
@@ -62,23 +62,23 @@ namespace Avalonia.Media.Fonts.Tables
         }
 
         /// <summary>
-        /// Reads a single byte from the stream.
+        /// Reads a single uint8 from the stream.
         /// </summary>
-        /// <returns>The byte read</returns>
-        public byte ReadByte()
+        /// <returns>The uint8 read</returns>
+        public uint8 ReadByte()
         {
             ReadInternal(_buffer, 1);
             return _buffer[0];
         }
 
         /// <summary>
-        /// Reads a single signed byte from the stream.
+        /// Reads a single signed uint8 from the stream.
         /// </summary>
-        /// <returns>The byte read</returns>
-        public sbyte ReadSByte()
+        /// <returns>The uint8 read</returns>
+        public int8 ReadSByte()
         {
             ReadInternal(_buffer, 1);
-            return unchecked((sbyte)_buffer[0]);
+            return unchecked((int8)_buffer[0]);
         }
 
         public float ReadF2dot14()
@@ -221,9 +221,9 @@ namespace Avalonia.Media.Fonts.Tables
             return data;
         }
 
-        public byte[] ReadUInt8Array(int32 length)
+        public uint8[] ReadUInt8Array(int32 length)
         {
-            byte[] data = new byte[length];
+            uint8[] data = new uint8[length];
 
             ReadInternal(data, length);
 
@@ -265,7 +265,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// for this reader. 1 bytes are read.
         /// </summary>
         /// <returns>The 8-bit unsigned integer read.</returns>
-        public byte ReadUInt8()
+        public uint8 ReadUInt8()
         {
             ReadInternal(_buffer, 1);
             return _buffer[0];
@@ -278,7 +278,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// <returns>The 24-bit unsigned integer read.</returns>
         public int32 ReadUInt24()
         {
-            byte highByte = ReadByte();
+            uint8 highByte = ReadByte();
             return (highByte << 16) | ReadUInt16();
         }
 
@@ -302,15 +302,15 @@ namespace Avalonia.Media.Fonts.Tables
         public uint32 ReadOffset32() => ReadUInt32();
 
         /// <summary>
-        /// Reads the specified number of bytes, returning them in a new byte array.
+        /// Reads the specified number of bytes, returning them in a new uint8 array.
         /// If not enough bytes are available before the end of the stream, this
         /// method will return what is available.
         /// </summary>
         /// <param name="count">The number of bytes to read.</param>
         /// <returns>The bytes read.</returns>
-        public byte[] ReadBytes(int32 count)
+        public uint8[] ReadBytes(int32 count)
         {
-            byte[] ret = new byte[count];
+            uint8[] ret = new uint8[count];
             int32 index = 0;
             while (index < count)
             {
@@ -319,7 +319,7 @@ namespace Avalonia.Media.Fonts.Tables
                 // Stream has finished half way through. That's fine, return what we've got.
                 if (read == 0)
                 {
-                    byte[] copy = new byte[index];
+                    uint8[] copy = new uint8[index];
                     Buffer.BlockCopy(ret, 0, copy, 0, index);
                     return copy;
                 }
@@ -342,7 +342,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// </returns>
         public string ReadString(int32 bytesToRead, Encoding encoding)
         {
-            byte[] data = new byte[bytesToRead];
+            uint8[] data = new uint8[bytesToRead];
             ReadInternal(data, bytesToRead);
             return encoding.GetString(data, 0, data.Length);
         }
@@ -380,7 +380,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// </summary>
         /// <param name="data">Buffer to read into.</param>
         /// <param name="size">Number of bytes to read.</param>
-        private void ReadInternal(byte[] data, int32 size)
+        private void ReadInternal(uint8[] data, int32 size)
         {
             int32 index = 0;
 
@@ -389,7 +389,7 @@ namespace Avalonia.Media.Fonts.Tables
                 int32 read = BaseStream.Read(data, index, size - index);
                 if (read == 0)
                 {
-                    throw new EndOfStreamException($"End of stream reached with {size - index} byte{(size - index == 1 ? "s" : string.Empty)} left to read.");
+                    throw new EndOfStreamException($"End of stream reached with {size - index} uint8{(size - index == 1 ? "s" : string.Empty)} left to read.");
                 }
 
                 index += read;

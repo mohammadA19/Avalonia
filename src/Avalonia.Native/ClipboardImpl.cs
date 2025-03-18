@@ -159,9 +159,9 @@ namespace Avalonia.Native
                             Native.SetStrings(toFormat, strings);
                         }
                         break;
-                    case byte[] bytes:
+                    case uint8[] bytes:
                     {
-                        fixed (byte* pbytes = bytes)
+                        fixed (uint8* pbytes = bytes)
                             Native.SetBytes(toFormat, pbytes, bytes.Length);
                         break;
                     }

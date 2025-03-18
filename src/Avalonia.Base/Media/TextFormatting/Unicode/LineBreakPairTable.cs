@@ -9,32 +9,32 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <summary>
         /// Direct break opportunity
         /// </summary>
-        public const byte DIBRK = 0;
+        public const uint8 DIBRK = 0;
 
         /// <summary>
         /// Indirect break opportunity
         /// </summary>
-        public const byte INBRK = 1;
+        public const uint8 INBRK = 1;
 
         /// <summary>
         /// Indirect break opportunity for combining marks
         /// </summary>
-        public const byte CIBRK = 2;
+        public const uint8 CIBRK = 2;
 
         /// <summary>
         /// Prohibited break for combining marks
         /// </summary>
-        public const byte CPBRK = 3;
+        public const uint8 CPBRK = 3;
 
         /// <summary>
         /// Prohibited break
         /// </summary>
-        public const byte PRBRK = 4;
+        public const uint8 PRBRK = 4;
 
         // Based on example pair table from https://www.unicode.org/reports/tr14/tr14-37.html#Table2
         // - ZWJ special processing for LB8a
         // - CB manually added as per Rule LB20
-        public static byte[][] Table { get; } = {
+        public static uint8[][] Table { get; } = {
               // .         OP     CL     CP     QU     GL     NS     EX     SY     IS     PR     PO     NU     AL     HL     ID     IN     HY     BA     BB     B2     ZW     CM     WJ     H2     H3     JL     JV     JT     RI     EB     EM     ZWJ    CB
               new[] { PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, CPBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK, PRBRK }, // OP
               new[] { DIBRK, PRBRK, PRBRK, INBRK, INBRK, PRBRK, PRBRK, PRBRK, PRBRK, INBRK, INBRK, DIBRK, DIBRK, DIBRK, DIBRK, DIBRK, INBRK, INBRK, DIBRK, DIBRK, PRBRK, CIBRK, PRBRK, DIBRK, DIBRK, DIBRK, DIBRK, DIBRK, DIBRK, DIBRK, DIBRK, INBRK, DIBRK }, // CL

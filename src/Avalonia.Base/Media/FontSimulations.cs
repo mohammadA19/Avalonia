@@ -7,7 +7,7 @@ namespace Avalonia.Media
     ///     Bold and oblique simulations can be combined via bitwise OR operation.
     /// </summary>
     [Flags]
-    public enum FontSimulations : byte
+    public enum FontSimulations : uint8
     {
         /// <summary>
         /// No simulations are performed.

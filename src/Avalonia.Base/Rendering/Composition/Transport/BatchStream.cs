@@ -31,24 +31,24 @@ public record struct BatchStreamSegment<TData>
 // see https://github.com/dotnet/runtime/issues/80068
 static unsafe class UnalignedMemoryHelper
 {
-    public static T ReadUnaligned<T>(byte* src) where T : unmanaged
+    public static T ReadUnaligned<T>(uint8* src) where T : unmanaged
     {
 #if NET6_0_OR_GREATER
         Unsafe.SkipInit<T>(out var rv);
 #else
         T rv;
 #endif
-        UnalignedMemcpy((byte*)&rv, src, Unsafe.SizeOf<T>());
+        UnalignedMemcpy((uint8*)&rv, src, Unsafe.SizeOf<T>());
         return rv;
     }
     
-    public static void WriteUnaligned<T>(byte* dst, T value) where T : unmanaged
+    public static void WriteUnaligned<T>(uint8* dst, T value) where T : unmanaged
     {
-        UnalignedMemcpy(dst, (byte*)&value, Unsafe.SizeOf<T>());
+        UnalignedMemcpy(dst, (uint8*)&value, Unsafe.SizeOf<T>());
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static unsafe void UnalignedMemcpy(byte* dst, byte* src, int32 count)
+    static unsafe void UnalignedMemcpy(uint8* dst, uint8* src, int32 count)
     {
         for (var c = 0; c < count; c++)
         {
@@ -104,7 +104,7 @@ internal class BatchStreamWriter : IDisposable
         var size = Unsafe.SizeOf<T>();
         if (_currentDataSegment.Data == IntPtr.Zero || _currentDataSegment.ElementCount + size > _memoryPool.BufferSize)
             NextDataSegment();
-        var ptr = (byte*)_currentDataSegment.Data + _currentDataSegment.ElementCount;
+        var ptr = (uint8*)_currentDataSegment.Data + _currentDataSegment.ElementCount;
         
         // Unsafe.ReadUnaligned/Unsafe.WriteUnaligned are broken on arm32,
         // see https://github.com/dotnet/runtime/issues/80068
@@ -163,7 +163,7 @@ internal class BatchStreamReader : IDisposable
         if (_memoryOffset + size > _currentDataSegment.ElementCount)
             throw new InvalidOperationException("Attempted to read more memory then left in the current segment");
 
-        var ptr = (byte*)_currentDataSegment.Data + _memoryOffset;
+        var ptr = (uint8*)_currentDataSegment.Data + _memoryOffset;
         T rv;
         
         // Unsafe.ReadUnaligned/Unsafe.WriteUnaligned are broken on arm32,

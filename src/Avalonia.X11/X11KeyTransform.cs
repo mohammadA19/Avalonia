@@ -8,7 +8,7 @@ namespace Avalonia.X11
         // X scan code to physical key map.
         // https://github.com/chromium/chromium/blob/main/ui/events/keycodes/dom/dom_code_data.inc
         // This list has the same order as the PhysicalKey enum.
-        private static readonly Dictionary<byte, PhysicalKey> s_physicalKeyFromScanCode = new(162)
+        private static readonly Dictionary<uint8, PhysicalKey> s_physicalKeyFromScanCode = new(162)
         {
             // Writing System Keys
             { 0x31, PhysicalKey.Backquote },
@@ -192,7 +192,7 @@ namespace Avalonia.X11
         };
 
         public static PhysicalKey PhysicalKeyFromScanCode(int32 scanCode)
-            => scanCode is > 0 and <= 255 && s_physicalKeyFromScanCode.TryGetValue((byte)scanCode, out var result) ?
+            => scanCode is > 0 and <= 255 && s_physicalKeyFromScanCode.TryGetValue((uint8)scanCode, out var result) ?
                 result :
                 PhysicalKey.None;
 

@@ -16,12 +16,12 @@ namespace Avalonia.Visuals.UnitTests.Media.TextFormatting
 
         [ClassData(typeof(BiDiTestDataGenerator))]
         [Theory(Skip = "Only run when the Unicode spec changes.")]
-        public void Should_Process(int32 lineNumber, BidiClass[] classes, sbyte paragraphEmbeddingLevel, int32[] levels)
+        public void Should_Process(int32 lineNumber, BidiClass[] classes, int8 paragraphEmbeddingLevel, int32[] levels)
         {
             var bidi = new BidiAlgorithm();
 
             // Run the algorithm...
-            ArraySlice<sbyte> resultLevels;
+            ArraySlice<int8> resultLevels;
 
             bidi.Process(
                 classes,

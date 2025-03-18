@@ -358,7 +358,7 @@ namespace Avalonia.X11
                 PropertyMode.Replace, ref pid, 1);
 
             const int32 maxLength = 1024;
-            var name = stackalloc byte[maxLength];
+            var name = stackalloc uint8[maxLength];
             var result = gethostname(name, maxLength);
             if (result != 0)
             {
@@ -378,7 +378,7 @@ namespace Avalonia.X11
         }
 
         [DllImport("libc")]
-        private static extern int32 gethostname(byte* name, int32 len);
+        private static extern int32 gethostname(uint8* name, int32 len);
 
         private static readonly int32 s_pid = GetProcessId();
 
@@ -1327,8 +1327,8 @@ namespace Avalonia.X11
             var encodedWmClass = Encoding.ASCII.GetBytes(wmClass ?? appId);
 
             var hint = XAllocClassHint();
-            fixed(byte* pAppId = encodedAppId)
-            fixed (byte* pWmClass = encodedWmClass)
+            fixed(uint8* pAppId = encodedAppId)
+            fixed (uint8* pWmClass = encodedWmClass)
             {
                 hint->res_name = pAppId;
                 hint->res_class = pWmClass;

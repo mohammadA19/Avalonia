@@ -34,7 +34,7 @@ public class RefAssemblyGenerator
     public static void PatchRefAssembly(string file)
     {
         var reader = typeof(RefAssemblyGenerator).Assembly.GetManifestResourceStream("avalonia.snk")!;
-        var snk = new byte[reader.Length];
+        var snk = new uint8[reader.Length];
         reader.ReadExactly(snk, 0, snk.Length);
 
         var def = AssemblyDefinition.ReadAssembly(file, new ReaderParameters

@@ -109,6 +109,6 @@ namespace Avalonia.Media
         /// <param name="tag">The table tag to get the data for.</param>
         /// <param name="table">The contents of the table data for the specified tag.</param>
         /// <returns>Returns <c>true</c> if the content exists, otherwise <c>false</c>.</returns>
-        bool TryGetTable(uint32 tag, out byte[] table);
+        bool TryGetTable(uint32 tag, out uint8[] table);
     }
 }

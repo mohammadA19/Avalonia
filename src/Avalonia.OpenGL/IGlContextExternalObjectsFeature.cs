@@ -19,8 +19,8 @@ public interface IGlContextExternalObjectsFeature
     IGlExternalImageTexture ImportImage(IPlatformHandle handle, PlatformGraphicsExternalImageProperties properties);
     IGlExternalSemaphore ImportSemaphore(IPlatformHandle handle);
     CompositionGpuImportedImageSynchronizationCapabilities GetSynchronizationCapabilities(string imageHandleType);
-    public byte[]? DeviceLuid { get; }
-    public byte[]? DeviceUuid { get; }
+    public uint8[]? DeviceLuid { get; }
+    public uint8[]? DeviceUuid { get; }
 }
 
 public interface IGlExternalSemaphore : IDisposable

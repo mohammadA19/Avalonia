@@ -41,11 +41,11 @@ unsafe class VulkanContent : IDisposable
         var name = typeof(VulkanContent).Assembly.GetManifestResourceNames().First(x => x.Contains("teapot.bin"));
         using (var sr = new BinaryReader(typeof(VulkanContent).Assembly.GetManifestResourceStream(name)!))
         {
-            var buf = new byte[sr.ReadInt32()];
+            var buf = new uint8[sr.ReadInt32()];
             sr.Read(buf, 0, buf.Length);
             var points = new float[buf.Length / 4];
             Buffer.BlockCopy(buf, 0, points, 0, buf.Length);
-            buf = new byte[sr.ReadInt32()];
+            buf = new uint8[sr.ReadInt32()];
             sr.Read(buf, 0, buf.Length);
             _indices = new ushort[buf.Length / 2];
             Buffer.BlockCopy(buf, 0, _indices, 0, buf.Length);
@@ -84,7 +84,7 @@ unsafe class VulkanContent : IDisposable
         var vertShaderData = GetShader(false);
         var fragShaderData = GetShader(true);
 
-        fixed (byte* ptr = vertShaderData)
+        fixed (uint8* ptr = vertShaderData)
         {
             var shaderCreateInfo = new ShaderModuleCreateInfo()
             {
@@ -96,7 +96,7 @@ unsafe class VulkanContent : IDisposable
             api.CreateShaderModule(device, shaderCreateInfo, null, out _vertShader);
         }
 
-        fixed (byte* ptr = fragShaderData)
+        fixed (uint8* ptr = fragShaderData)
         {
             var shaderCreateInfo = new ShaderModuleCreateInfo()
             {
@@ -111,7 +111,7 @@ unsafe class VulkanContent : IDisposable
         CreateBuffers();
     }
 
-    private byte[] GetShader(bool fragment)
+    private uint8[] GetShader(bool fragment)
     {
         var name = typeof(VulkanContent).Assembly.GetManifestResourceNames()
             .First(x => x.Contains((fragment ? "frag" : "vert") + ".spirv"));
@@ -501,14 +501,14 @@ unsafe class VulkanContent : IDisposable
             SType = StructureType.PipelineShaderStageCreateInfo,
             Stage = ShaderStageFlags.VertexBit,
             Module = _vertShader,
-            PName = (byte*)pname,
+            PName = (uint8*)pname,
         };
         var fragShaderStageInfo = new PipelineShaderStageCreateInfo()
         {
             SType = StructureType.PipelineShaderStageCreateInfo,
             Stage = ShaderStageFlags.FragmentBit,
             Module = _fragShader,
-            PName = (byte*)pname,
+            PName = (uint8*)pname,
         };
 
         var stages = new[] { vertShaderStageInfo, fragShaderStageInfo };

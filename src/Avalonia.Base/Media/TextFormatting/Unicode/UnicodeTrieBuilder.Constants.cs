@@ -71,10 +71,10 @@ namespace Avalonia.Media.TextFormatting.Unicode
         // Count the lengths of both BMP pieces. 2080=0x820
         const int32 INDEX_2_BMP_LENGTH = LSCP_INDEX_2_OFFSET + LSCP_INDEX_2_LENGTH;
 
-        // The 2-byte UTF-8 version of the index-2 table follows at offset 2080=0x820.
+        // The 2-uint8 UTF-8 version of the index-2 table follows at offset 2080=0x820.
         // Length 32=0x20 for lead bytes C0..DF, regardless of SHIFT_2.
         const int32 UTF8_2B_INDEX_2_OFFSET = INDEX_2_BMP_LENGTH;
-        const int32 UTF8_2B_INDEX_2_LENGTH = 0x800 >> 6;  // U+0800 is the first code point after 2-byte UTF-8
+        const int32 UTF8_2B_INDEX_2_LENGTH = 0x800 >> 6;  // U+0800 is the first code point after 2-uint8 UTF-8
 
         // The index-1 table, only used for supplementary code points, at offset 2112=0x840.
         // Variable length, for code points up to highStart, where the last single-value range starts.
@@ -100,14 +100,14 @@ namespace Avalonia.Media.TextFormatting.Unicode
 
         // The null data block.
         // Length 64=0x40 even if DATA_BLOCK_LENGTH is smaller,
-        // to work with 6-bit trail bytes from 2-byte UTF-8.
+        // to work with 6-bit trail bytes from 2-uint8 UTF-8.
         const int32 DATA_NULL_OFFSET = DATA_START_OFFSET;
 
         // The start of allocated data blocks.
         const int32 NEW_DATA_START_OFFSET = DATA_NULL_OFFSET + 0x40;
 
         // The start of data blocks for U+0800 and above.
-        // Below, compaction uses a block length of 64 for 2-byte UTF-8.
+        // Below, compaction uses a block length of 64 for 2-uint8 UTF-8.
         // From here on, compaction uses DATA_BLOCK_LENGTH.
         // Data values for 0x780 code points beyond ASCII.
         const int32 DATA_0800_OFFSET = NEW_DATA_START_OFFSET + 0x780;
@@ -131,7 +131,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         const int32 MAX_DATA_LENGTH_BUILDTIME = 0x110000 + 0x40 + 0x40 + 0x400;
 
         // At build time, leave a gap in the index-2 table,
-        // at least as long as the maximum lengths of the 2-byte UTF-8 index-2 table
+        // at least as long as the maximum lengths of the 2-uint8 UTF-8 index-2 table
         // and the supplementary index-1 table.
         // Round up to INDEX_2_BLOCK_LENGTH for proper compacting.
         const int32 INDEX_GAP_OFFSET = INDEX_2_BMP_LENGTH;

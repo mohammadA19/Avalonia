@@ -34,7 +34,7 @@ internal class CompositionDrawListVisual : CompositionContainerVisual
 
     private protected override void SerializeChangesCore(BatchStreamWriter writer)
     {
-        writer.Write((byte)(_drawListChanged ? 1 : 0));
+        writer.Write((uint8)(_drawListChanged ? 1 : 0));
         if (_drawListChanged)
         {
             writer.WriteObject(DrawList?.Server);

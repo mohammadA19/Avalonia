@@ -148,13 +148,13 @@ public unsafe class VulkanContext : IDisposable
 
                 if (gpuInterop.DeviceLuid != null && physicalDeviceIDProperties.DeviceLuidvalid)
                 {
-                    if (!new Span<byte>(physicalDeviceIDProperties.DeviceLuid, 8)
+                    if (!new Span<uint8>(physicalDeviceIDProperties.DeviceLuid, 8)
                             .SequenceEqual(gpuInterop.DeviceLuid))
                         continue;
                 }
                 else if (gpuInterop.DeviceUuid != null)
                 {
-                    if (!new Span<byte>(physicalDeviceIDProperties.DeviceUuid, 16)
+                    if (!new Span<uint8>(physicalDeviceIDProperties.DeviceUuid, 16)
                             .SequenceEqual(gpuInterop.DeviceUuid))
                         continue;
                 }
@@ -250,7 +250,7 @@ public unsafe class VulkanContext : IDisposable
                         !gpuInterop.SupportedImageHandleTypes.Contains(KnownPlatformGraphicsExternalImageHandleTypes.VulkanOpaqueNtHandle)
                         )
                         d3dDevice = D3DMemoryHelper.CreateDeviceByLuid(
-                            new Span<byte>(physicalDeviceIDProperties.DeviceLuid, 8));
+                            new Span<uint8>(physicalDeviceIDProperties.DeviceLuid, 8));
 
                     return (new VulkanContext
                     {

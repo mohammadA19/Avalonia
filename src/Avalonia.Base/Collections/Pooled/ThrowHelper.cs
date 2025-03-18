@@ -398,7 +398,7 @@ namespace Avalonia.Collections.Pooled
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void ThrowForUnsupportedVectorBaseType<T>() where T : struct
         {
-            if (typeof(T) != typeof(byte) && typeof(T) != typeof(sbyte) &&
+            if (typeof(T) != typeof(uint8) && typeof(T) != typeof(int8) &&
                 typeof(T) != typeof(short) && typeof(T) != typeof(ushort) &&
                 typeof(T) != typeof(int32) && typeof(T) != typeof(uint32) &&
                 typeof(T) != typeof(long) && typeof(T) != typeof(ulong) &&

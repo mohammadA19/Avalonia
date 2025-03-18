@@ -12,7 +12,7 @@ namespace Avalonia.Media.Fonts.Tables
         internal const string TableName = "OS/2";
         internal static OpenTypeTag Tag = OpenTypeTag.Parse(TableName);
   
-        private readonly byte[] panose;
+        private readonly uint8[] panose;
         private readonly short capHeight;
         private readonly short familyClass;
         private readonly short heightX;
@@ -48,7 +48,7 @@ namespace Avalonia.Media.Fonts.Tables
             short strikeoutSize,
             short strikeoutPosition,
             short familyClass,
-            byte[] panose,
+            uint8[] panose,
             uint32 unicodeRange1,
             uint32 unicodeRange2,
             uint32 unicodeRange3,
@@ -328,7 +328,7 @@ namespace Avalonia.Media.Fonts.Tables
             short strikeoutSize = reader.ReadInt16();
             short strikeoutPosition = reader.ReadInt16();
             short familyClass = reader.ReadInt16();
-            byte[] panose = reader.ReadUInt8Array(10);
+            uint8[] panose = reader.ReadUInt8Array(10);
             uint32 unicodeRange1 = reader.ReadUInt32(); // Bits 0–31
             uint32 unicodeRange2 = reader.ReadUInt32(); // Bits 32–63
             uint32 unicodeRange3 = reader.ReadUInt32(); // Bits 64–95

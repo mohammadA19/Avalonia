@@ -384,12 +384,12 @@ namespace Avalonia.Win32.Input
             return (keyData & extendedMask) != 0;
         }
 
-        private static byte GetScanCode(int32 keyData)
+        private static uint8 GetScanCode(int32 keyData)
         {
             // Bits from 16 to 23 represent scan code.
             const int32 scanCodeMask = 0xFF0000;
 
-            return (byte)((keyData & scanCodeMask) >> 16);
+            return (uint8)((keyData & scanCodeMask) >> 16);
         }
 
         private static int32 GetVirtualKey(int32 virtualKey, int32 keyData)
@@ -504,7 +504,7 @@ namespace Avalonia.Win32.Input
             const int32 bufferSize = 4;
             const uint32 doNotChangeKeyboardState = 1U << 2;
 
-            fixed (byte* keyStates = stackalloc byte[256])
+            fixed (uint8* keyStates = stackalloc uint8[256])
             fixed (char* buffer = stackalloc char[bufferSize])
             {
                 GetKeyboardState(keyStates);

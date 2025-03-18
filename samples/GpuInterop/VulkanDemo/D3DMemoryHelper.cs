@@ -11,10 +11,10 @@ namespace GpuInterop.VulkanDemo;
 
 public class D3DMemoryHelper
 {
-    public static D3DDevice CreateDeviceByLuid(Span<byte> luid)
+    public static D3DDevice CreateDeviceByLuid(Span<uint8> luid)
     {
         var factory = new DxgiFactory1();
-        var longLuid = MemoryMarshal.Cast<byte, long>(luid)[0];
+        var longLuid = MemoryMarshal.Cast<uint8, long>(luid)[0];
         for (var c = 0; c < factory.GetAdapterCount1(); c++)
         {
             using var adapter = factory.GetAdapter1(c);

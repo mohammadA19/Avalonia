@@ -21,7 +21,7 @@ namespace Avalonia.Remote.Protocol
         private bool _writeOperationPending;
         private bool _readingAlreadyStarted;
         private bool _writerIsBroken;   
-        private static readonly byte[] ZeroLength = new byte[4];
+        private static readonly uint8[] ZeroLength = new uint8[4];
 
         public BsonStreamTransportConnection(IMessageTypeResolver resolver, Stream inputStream, Stream outputStream, Action disposeCallback)
         {
@@ -50,7 +50,7 @@ namespace Avalonia.Remote.Protocol
             }
         }
 
-        async Task ReadExact(byte[] buffer)
+        async Task ReadExact(uint8[] buffer)
         {
             int32 read = 0;
             while (read != buffer.Length)
@@ -69,13 +69,13 @@ namespace Avalonia.Remote.Protocol
             {
                 while (true)
                 {
-                    var infoBlock = new byte[20];
+                    var infoBlock = new uint8[20];
                     await ReadExact(infoBlock).ConfigureAwait(false);
                     var length = BitConverter.ToInt32(infoBlock, 0);
-                    var guidBytes = new byte[16];
+                    var guidBytes = new uint8[16];
                     Buffer.BlockCopy(infoBlock, 4, guidBytes, 0, 16);
                     var guid = new Guid(guidBytes);
-                    var buffer = new byte[length];
+                    var buffer = new uint8[length];
                     await ReadExact(buffer).ConfigureAwait(false);
                     var message = Deserializer.Deserialize(new BinaryReader(new MemoryStream(buffer)),
                         _resolver.GetByGuid(guid));

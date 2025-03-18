@@ -60,7 +60,7 @@
             var cultureInfo = textRun.Properties.CultureInfo;
 
             var shaperOptions = new TextShaperOptions(glyphTypeface, textRun.Properties.FontFeatures,
-                fontRenderingEmSize, (sbyte)flowDirection, cultureInfo);
+                fontRenderingEmSize, (int8)flowDirection, cultureInfo);
 
             var shapedBuffer = textShaper.ShapeText(textRun.Text, shaperOptions);
 

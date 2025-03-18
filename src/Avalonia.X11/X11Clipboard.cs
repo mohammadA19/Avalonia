@@ -140,7 +140,7 @@ namespace Avalonia.X11
                 {
                     var objValue = _storedDataObject.Get(atomName);
                     
-                    if(!(objValue is byte[] bytes))
+                    if(!(objValue is uint8[] bytes))
                     {
                         if (objValue is string s)
                             bytes = Encoding.UTF8.GetBytes(s);
@@ -188,7 +188,7 @@ namespace Avalonia.X11
                     }
                     else if ((textEnc = GetStringEncoding(actualTypeAtom)) != null)
                     {
-                        var text = textEnc.GetString((byte*)prop.ToPointer(), nitems.ToInt32());
+                        var text = textEnc.GetString((uint8*)prop.ToPointer(), nitems.ToInt32());
                         _requestedDataTcs?.TrySetResult(text);
                     }
                     else
@@ -200,7 +200,7 @@ namespace Avalonia.X11
                         }
                         else
                         {
-                            var data = new byte[(int32)nitems * (actualFormat / 8)];
+                            var data = new uint8[(int32)nitems * (actualFormat / 8)];
                             Marshal.Copy(prop, data, 0, data.Length);
                             _requestedDataTcs?.TrySetResult(data);
                         }

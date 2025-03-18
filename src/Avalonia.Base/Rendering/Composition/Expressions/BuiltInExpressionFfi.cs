@@ -129,10 +129,10 @@ namespace Avalonia.Rendering.Composition.Expressions
                 },
                 {
                     "ColorRGB", (float a, float r, float g, float b) => Avalonia.Media.Color.FromArgb(
-                        (byte) MathUtilities.Clamp(a, 0, 255),
-                        (byte) MathUtilities.Clamp(r, 0, 255),
-                        (byte) MathUtilities.Clamp(g, 0, 255),
-                        (byte) MathUtilities.Clamp(b, 0, 255)
+                        (uint8) MathUtilities.Clamp(a, 0, 255),
+                        (uint8) MathUtilities.Clamp(r, 0, 255),
+                        (uint8) MathUtilities.Clamp(g, 0, 255),
+                        (uint8) MathUtilities.Clamp(b, 0, 255)
                     )
                 },
 

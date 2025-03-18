@@ -58,8 +58,8 @@ internal class GlSkiaExternalObjectsFeature : IExternalObjectsRenderInterfaceCon
     public CompositionGpuImportedImageSynchronizationCapabilities GetSynchronizationCapabilities(string imageHandleType)
         => _feature?.GetSynchronizationCapabilities(imageHandleType) ?? default;
 
-    public byte[]? DeviceUuid => _feature?.DeviceUuid;
-    public byte[]? DeviceLuid => _feature?.DeviceLuid;
+    public uint8[]? DeviceUuid => _feature?.DeviceUuid;
+    public uint8[]? DeviceLuid => _feature?.DeviceLuid;
 }
 
 internal class GlSkiaImportedSemaphore : IPlatformRenderInterfaceImportedSemaphore

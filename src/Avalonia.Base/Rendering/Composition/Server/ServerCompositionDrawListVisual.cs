@@ -31,7 +31,7 @@ internal class ServerCompositionDrawListVisual : ServerCompositionContainerVisua
 
     protected override void DeserializeChangesCore(BatchStreamReader reader, TimeSpan committedAt)
     {
-        if (reader.Read<byte>() == 1)
+        if (reader.Read<uint8>() == 1)
         {
             _renderCommands?.Dispose();
             _renderCommands = reader.ReadObject<ServerCompositionRenderData?>();

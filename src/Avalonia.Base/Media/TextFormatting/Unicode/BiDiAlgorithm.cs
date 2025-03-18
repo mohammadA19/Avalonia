@@ -85,17 +85,17 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <summary>
         /// A slice of the resolved levels
         /// </summary>
-        private ArraySlice<sbyte> _resolvedLevels;
+        private ArraySlice<int8> _resolvedLevels;
 
         /// <summary>
         /// The buffer underlying resolvedLevels
         /// </summary>
-        private ArrayBuilder<sbyte> _resolvedLevelsBuffer;
+        private ArrayBuilder<int8> _resolvedLevelsBuffer;
 
         /// <summary>
         /// The resolve paragraph embedding level
         /// </summary>
-        private sbyte _paragraphEmbeddingLevel;
+        private int8 _paragraphEmbeddingLevel;
 
         /// <summary>
         /// The status stack used during resolution of explicit
@@ -155,7 +155,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// A mapped slice of the run levels for the isolating run currently
         /// being processed
         /// </summary>
-        private MappedArraySlice<sbyte> _runLevels;
+        private MappedArraySlice<int8> _runLevels;
 
         /// <summary>
         /// A mapped slice of the paired bracket types of the isolating
@@ -195,7 +195,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <summary>
         /// Gets the resolved levels.
         /// </summary>
-        public ArraySlice<sbyte> ResolvedLevels => _resolvedLevels;
+        public ArraySlice<int8> ResolvedLevels => _resolvedLevels;
 
         /// <summary>
         /// Gets the resolved paragraph embedding level
@@ -224,11 +224,11 @@ namespace Avalonia.Media.TextFormatting.Unicode
             ArraySlice<BidiClass> types,
             ArraySlice<BidiPairedBracketType> pairedBracketTypes,
             ArraySlice<int32> pairedBracketValues,
-            sbyte paragraphEmbeddingLevel,
+            int8 paragraphEmbeddingLevel,
             bool? hasBrackets,
             bool? hasEmbeddings,
             bool? hasIsolates,
-            ArraySlice<sbyte>? outLevels)
+            ArraySlice<int8>? outLevels)
         {
             // Reset state
             Reset();
@@ -304,7 +304,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// </summary>
         /// <param name="data">The data to be evaluated</param>
         /// <returns>The resolved embedding level</returns>
-        public sbyte ResolveEmbeddingLevel(ArraySlice<BidiClass> data)
+        public int8 ResolveEmbeddingLevel(ArraySlice<BidiClass> data)
         {
             // P2
             for (var i = 0; i < data.Length; ++i)
@@ -438,7 +438,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                     case BidiClass.RightToLeftEmbedding:
                     {
                         // Rule X2
-                        var newLevel = (sbyte)((_statusStack.Peek().EmbeddingLevel + 1) | 1);
+                        var newLevel = (int8)((_statusStack.Peek().EmbeddingLevel + 1) | 1);
                         if (newLevel <= maxStackDepth && overflowIsolateCount == 0 && overflowEmbeddingCount == 0)
                         {
                             _statusStack.Push(new Status(newLevel, BidiClass.OtherNeutral, false));
@@ -455,7 +455,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                     case BidiClass.LeftToRightEmbedding:
                     {
                         // Rule X3
-                        var newLevel = (sbyte)((_statusStack.Peek().EmbeddingLevel + 2) & ~1);
+                        var newLevel = (int8)((_statusStack.Peek().EmbeddingLevel + 2) & ~1);
                         if (newLevel < maxStackDepth && overflowIsolateCount == 0 && overflowEmbeddingCount == 0)
                         {
                             _statusStack.Push(new Status(newLevel, BidiClass.OtherNeutral, false));
@@ -472,7 +472,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                     case BidiClass.RightToLeftOverride:
                     {
                         // Rule X4
-                        var newLevel = (sbyte)((_statusStack.Peek().EmbeddingLevel + 1) | 1);
+                        var newLevel = (int8)((_statusStack.Peek().EmbeddingLevel + 1) | 1);
                         if (newLevel <= maxStackDepth && overflowIsolateCount == 0 && overflowEmbeddingCount == 0)
                         {
                             _statusStack.Push(new Status(newLevel, BidiClass.RightToLeft, false));
@@ -489,7 +489,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                     case BidiClass.LeftToRightOverride:
                     {
                         // Rule X5
-                        var newLevel = (sbyte)((_statusStack.Peek().EmbeddingLevel + 2) & ~1);
+                        var newLevel = (int8)((_statusStack.Peek().EmbeddingLevel + 2) & ~1);
                         if (newLevel <= maxStackDepth && overflowIsolateCount == 0 && overflowEmbeddingCount == 0)
                         {
                             _statusStack.Push(new Status(newLevel, BidiClass.LeftToRight, false));
@@ -539,14 +539,14 @@ namespace Avalonia.Media.TextFormatting.Unicode
                         }
 
                         // Work out new level
-                        sbyte newLevel;
+                        int8 newLevel;
                         if (resolvedIsolate == BidiClass.RightToLeftIsolate)
                         {
-                            newLevel = (sbyte)((tos.EmbeddingLevel + 1) | 1);
+                            newLevel = (int8)((tos.EmbeddingLevel + 1) | 1);
                         }
                         else
                         {
-                            newLevel = (sbyte)((tos.EmbeddingLevel + 2) & ~1);
+                            newLevel = (int8)((tos.EmbeddingLevel + 2) & ~1);
                         }
 
                         // Valid?
@@ -859,7 +859,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             var isolatedRunMapping = _isolatedRunMapping.AsSlice();
             _runResolvedClasses = new MappedArraySlice<BidiClass>(_workingClasses, isolatedRunMapping);
             _runOriginalClasses = new MappedArraySlice<BidiClass>(_originalClasses, isolatedRunMapping);
-            _runLevels = new MappedArraySlice<sbyte>(_resolvedLevels, isolatedRunMapping);
+            _runLevels = new MappedArraySlice<int8>(_resolvedLevels, isolatedRunMapping);
             if (_hasBrackets)
             {
                 _runBiDiPairedBracketTypes = new MappedArraySlice<BidiPairedBracketType>(_pairedBracketTypes, isolatedRunMapping);
@@ -1697,14 +1697,14 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// </summary>
         private readonly struct Status
         {
-            public Status(sbyte embeddingLevel, BidiClass overrideStatus, bool isolateStatus)
+            public Status(int8 embeddingLevel, BidiClass overrideStatus, bool isolateStatus)
             {
                 EmbeddingLevel = embeddingLevel;
                 OverrideStatus = overrideStatus;
                 IsolateStatus = isolateStatus;
             }
 
-            public sbyte EmbeddingLevel { get; }
+            public int8 EmbeddingLevel { get; }
 
             public BidiClass OverrideStatus { get; }
 

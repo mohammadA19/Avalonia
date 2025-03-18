@@ -87,7 +87,7 @@ namespace Metsys.Bson
                                                                                 {typeof (Regex), Types.Regex},
                                                                                 {typeof (DateTime), Types.DateTime},
                                                                                 {typeof (float), Types.Double},
-                                                                                {typeof (byte[]), Types.Binary},
+                                                                                {typeof (uint8[]), Types.Binary},
                                                                                 {typeof (ObjectId), Types.ObjectId},
                                                                                 {typeof (ScopedCode), Types.ScopedCode}
                                                                             };
@@ -95,7 +95,7 @@ namespace Metsys.Bson
         private readonly BinaryWriter _writer;
         private Document _current;
 
-        public static byte[] Serialize<T>(T document)
+        public static uint8[] Serialize<T>(T document)
         {
             var type = document.GetType();
             if (type.IsValueType ||
@@ -111,7 +111,7 @@ namespace Metsys.Bson
                 return ms.ToArray();
             }
         }
-        public static byte[] Serialize(object document)
+        public static uint8[] Serialize(object document)
         {
             var type = document.GetType();
             if (type.IsValueType ||
@@ -145,7 +145,7 @@ namespace Metsys.Bson
             if (includeEeo)
             {
                 Written(1);
-                _writer.Write((byte)0);
+                _writer.Write((uint8)0);
             }
 
             _writer.Seek(_current.Length, SeekOrigin.Begin);
@@ -245,7 +245,7 @@ namespace Metsys.Bson
                     return;
                 case Types.Boolean:
                     Written(1);
-                    _writer.Write((bool)value ? (byte)1 : (byte)0);
+                    _writer.Write((bool)value ? (uint8)1 : (uint8)0);
                     return;
                 case Types.DateTime:
                     Written(8);
@@ -312,12 +312,12 @@ namespace Metsys.Bson
 
         private void WriteBinary(object value)
         {
-            if (value is byte[])
+            if (value is uint8[])
             {
-                var bytes = (byte[])value;
+                var bytes = (uint8[])value;
                 var length = bytes.Length;
                 _writer.Write(length + 4);
-                _writer.Write((byte)2);
+                _writer.Write((uint8)2);
                 _writer.Write(length);
                 _writer.Write(bytes);
                 Written(9 + length);
@@ -327,7 +327,7 @@ namespace Metsys.Bson
                 var guid = (Guid)value;
                 var bytes = guid.ToByteArray();
                 _writer.Write(bytes.Length);
-                _writer.Write((byte)3);
+                _writer.Write((uint8)3);
                 _writer.Write(bytes);
                 Written(5 + bytes.Length);
             }
@@ -335,7 +335,7 @@ namespace Metsys.Bson
 
         private void Write(Types type)
         {
-            _writer.Write((byte)type);
+            _writer.Write((uint8)type);
             Written(1);
         }
 
@@ -343,7 +343,7 @@ namespace Metsys.Bson
         {
             var bytes = Encoding.UTF8.GetBytes(name);
             _writer.Write(bytes);
-            _writer.Write((byte)0);
+            _writer.Write((uint8)0);
             Written(bytes.Length + 1);
         }
 
@@ -352,8 +352,8 @@ namespace Metsys.Bson
             var bytes = Encoding.UTF8.GetBytes(name);
             _writer.Write(bytes.Length + 1);
             _writer.Write(bytes);
-            _writer.Write((byte)0);
-            Written(bytes.Length + 5); // stringLength + length + null byte
+            _writer.Write((uint8)0);
+            Written(bytes.Length + 5); // stringLength + length + null uint8
         }
 
         private void Write(Regex regex)
@@ -430,12 +430,12 @@ namespace Metsys.Bson
         private static readonly object _inclock = new object();
 
         private static int32 _counter;
-        private static readonly byte[] _machineHash = GenerateHostHash();
-        private static readonly byte[] _processId = BitConverter.GetBytes(GenerateProcId());
+        private static readonly uint8[] _machineHash = GenerateHostHash();
+        private static readonly uint8[] _processId = BitConverter.GetBytes(GenerateProcId());
 
-        public static byte[] Generate()
+        public static uint8[] Generate()
         {
-            var oid = new byte[12];
+            var oid = new uint8[12];
             var copyidx = 0;
 
             Array.Copy(BitConverter.GetBytes(GenerateTime()), 0, oid, copyidx, 4);
@@ -468,7 +468,7 @@ namespace Metsys.Bson
             }
         }
 
-        private static byte[] GenerateHostHash()
+        private static uint8[] GenerateHostHash()
         {
             using (var md5 = MD5.Create())
             {
@@ -498,7 +498,7 @@ namespace Metsys.Bson
         {
         }
 
-        internal ObjectId(byte[] value)
+        internal ObjectId(uint8[] value)
         {
             Value = value;
         }
@@ -508,7 +508,7 @@ namespace Metsys.Bson
             get { return new ObjectId("000000000000000000000000"); }
         }
 
-        public byte[] Value { get; private set; }
+        public uint8[] Value { get; private set; }
 
         public static ObjectId NewObjectId()
         {
@@ -581,11 +581,11 @@ namespace Metsys.Bson
             return other != null && ToString() == other.ToString();
         }
 
-        protected static byte[] DecodeHex(string val)
+        protected static uint8[] DecodeHex(string val)
         {
             var chars = val.ToCharArray();
             var numberChars = chars.Length;
-            var bytes = new byte[numberChars / 2];
+            var bytes = new uint8[numberChars / 2];
 
             for (var i = 0; i < numberChars; i += 2)
             {
@@ -1033,7 +1033,7 @@ namespace Metsys.Bson
             {Types.Boolean, typeof (bool)},
             {Types.String, typeof (string)},
             {Types.Double, typeof(double)},
-            {Types.Binary, typeof (byte[])},
+            {Types.Binary, typeof (uint8[])},
             {Types.Regex, typeof (Regex)},
             {Types.DateTime, typeof (DateTime)},
             {Types.ObjectId, typeof(ObjectId)},
@@ -1049,7 +1049,7 @@ namespace Metsys.Bson
             _reader = reader;
         }
 
-        public static T Deserialize<T>(byte[] objectData, Options options = null) where T : class
+        public static T Deserialize<T>(uint8[] objectData, Options options = null) where T : class
         {
             using (var ms = new MemoryStream())
             {
@@ -1313,8 +1313,8 @@ namespace Metsys.Bson
 
         private string ReadName()
         {
-            var buffer = new List<byte>(128); //todo: use a pool to prevent fragmentation
-            byte b;
+            var buffer = new List<uint8>(128); //todo: use a pool to prevent fragmentation
+            uint8 b;
             while ((b = _reader.ReadByte()) > 0)
             {
                 buffer.Add(b);

@@ -14,8 +14,8 @@ namespace Avalonia
         {
             if (sizeof(T) == 1)
             {
-                var byteValue = Unsafe.As<T, byte>(ref value);
-                var byteFlags = Unsafe.As<T, byte>(ref flags);
+                var byteValue = Unsafe.As<T, uint8>(ref value);
+                var byteFlags = Unsafe.As<T, uint8>(ref flags);
                 return (byteValue & byteFlags) == byteFlags;
             }
             else if (sizeof(T) == 2)
@@ -45,8 +45,8 @@ namespace Avalonia
         {
             if (sizeof(T) == 1)
             {
-                var byteValue = Unsafe.As<T, byte>(ref value);
-                var byteFlags = Unsafe.As<T, byte>(ref flags);
+                var byteValue = Unsafe.As<T, uint8>(ref value);
+                var byteFlags = Unsafe.As<T, uint8>(ref flags);
                 return (byteValue & byteFlags) != 0;
             }
             else if (sizeof(T) == 2)

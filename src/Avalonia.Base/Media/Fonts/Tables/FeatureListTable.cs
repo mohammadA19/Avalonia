@@ -102,7 +102,7 @@ namespace Avalonia.Media.Fonts.Tables
                 // +----------+---------------+--------------------------------------------------------+
                 // | Type     | Name          | Description                                            |
                 // +==========+===============+========================================================+
-                // | Tag      | featureTag    | 4-byte feature identification tag                      |
+                // | Tag      | featureTag    | 4-uint8 feature identification tag                      |
                 // +----------+---------------+--------------------------------------------------------+
                 // | Offset16 | featureOffset | Offset to Feature table, from beginning of FeatureList |
                 // +----------+---------------+--------------------------------------------------------+

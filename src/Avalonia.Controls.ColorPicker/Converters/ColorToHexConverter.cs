@@ -200,19 +200,19 @@ namespace Avalonia.Controls.Converters
                 {
                     // #RRGGBBAA
                     color = new Color(
-                        a: (byte)(parsed & 0xFF),
-                        r: (byte)((parsed >> 24) & 0xFF),
-                        g: (byte)((parsed >> 16) & 0xFF),
-                        b: (byte)((parsed >> 8) & 0xFF));
+                        a: (uint8)(parsed & 0xFF),
+                        r: (uint8)((parsed >> 24) & 0xFF),
+                        g: (uint8)((parsed >> 16) & 0xFF),
+                        b: (uint8)((parsed >> 8) & 0xFF));
                 }
                 else
                 {
                     // #AARRGGBB
                     color = new Color(
-                        a: (byte)((parsed >> 24) & 0xFF),
-                        r: (byte)((parsed >> 16) & 0xFF),
-                        g: (byte)((parsed >> 8) & 0xFF),
-                        b: (byte)(parsed & 0xFF));
+                        a: (uint8)((parsed >> 24) & 0xFF),
+                        r: (uint8)((parsed >> 16) & 0xFF),
+                        g: (uint8)((parsed >> 8) & 0xFF),
+                        b: (uint8)(parsed & 0xFF));
                 }
 
                 return true;

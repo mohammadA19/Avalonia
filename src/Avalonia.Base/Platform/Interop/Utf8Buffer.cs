@@ -10,7 +10,7 @@ namespace Avalonia.Platform.Interop
     internal class Utf8Buffer : SafeHandle
     {
         private GCHandle _gcHandle;
-        private byte[]? _data;
+        private uint8[]? _data;
             
         public Utf8Buffer(string? s) : base(IntPtr.Zero, true)
         {
@@ -38,13 +38,13 @@ namespace Avalonia.Platform.Interop
 
         public static unsafe string? StringFromPtr(IntPtr s)
         {
-            var pstr = (byte*)s;
+            var pstr = (uint8*)s;
             if (pstr == null)
                 return null;
             int32 len;
             for (len = 0; pstr[len] != 0; len++) ;
 
-            var bytes = ArrayPool<byte>.Shared.Rent(len);
+            var bytes = ArrayPool<uint8>.Shared.Rent(len);
 
             try
             {
@@ -53,11 +53,11 @@ namespace Avalonia.Platform.Interop
             }
             finally
             {
-                ArrayPool<byte>.Shared.Return(bytes);
+                ArrayPool<uint8>.Shared.Return(bytes);
             }
         }
 
         public static implicit operator IntPtr(Utf8Buffer b) => b.handle;
-        public static unsafe implicit operator byte*(Utf8Buffer b) => (byte*)b.handle;
+        public static unsafe implicit operator uint8*(Utf8Buffer b) => (uint8*)b.handle;
     }
 }

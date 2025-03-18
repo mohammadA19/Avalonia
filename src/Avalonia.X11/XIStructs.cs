@@ -71,14 +71,14 @@ namespace Avalonia.X11
     internal unsafe struct XIButtonState
     {
         public int32 MaskLen;
-        public byte* Mask;
+        public uint8* Mask;
     };
 
     [StructLayout(LayoutKind.Sequential)]
     internal unsafe struct XIValuatorState
     {
         public int32 MaskLen;
-        public byte* Mask;
+        public uint8* Mask;
         public double* Values;
     };
 

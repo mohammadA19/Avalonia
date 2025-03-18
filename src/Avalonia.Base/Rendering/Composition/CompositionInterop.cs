@@ -49,8 +49,8 @@ internal class CompositionInterop : ICompositionGpuInterop
     }
 
     public bool IsLost { get; }
-    public byte[]? DeviceLuid { get; set; }
-    public byte[]? DeviceUuid { get; set; }
+    public uint8[]? DeviceLuid { get; set; }
+    public uint8[]? DeviceUuid { get; set; }
 }
 
 abstract class CompositionGpuImportedObjectBase : ICompositionGpuImportedObject

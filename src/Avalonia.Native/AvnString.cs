@@ -9,7 +9,7 @@ namespace Avalonia.Native.Interop
     partial interface IAvnString
     {
         public string String { get; }
-        public byte[] Bytes { get; }
+        public uint8[] Bytes { get; }
     }
 
     partial interface IAvnStringArray
@@ -25,7 +25,7 @@ namespace Avalonia.Native.Interop
         public AvnString(string s) => String = s;
 
         public string String { get; }
-        public byte[] Bytes => Encoding.UTF8.GetBytes(String);
+        public uint8[] Bytes => Encoding.UTF8.GetBytes(String);
         
         public unsafe void* Pointer()
         {
@@ -56,7 +56,7 @@ namespace Avalonia.Native.Interop
             {
                 _nativeLen = Encoding.UTF8.GetByteCount(String);
                 _native = Marshal.AllocHGlobal(_nativeLen + 1);
-                var ptr = (byte*)_native.ToPointer();
+                var ptr = (uint8*)_native.ToPointer();
                 fixed (char* chars = String)
                     Encoding.UTF8.GetBytes(chars, String.Length, ptr, _nativeLen);
                 ptr[_nativeLen] = 0;
@@ -92,7 +92,7 @@ namespace Avalonia.Native.Interop.Impl
     unsafe partial class __MicroComIAvnStringProxy
     {
         private string _managed;
-        private byte[] _bytes;
+        private uint8[] _bytes;
 
         public string String
         {
@@ -103,20 +103,20 @@ namespace Avalonia.Native.Interop.Impl
                     var ptr = Pointer();
                     if (ptr == null)
                         return null;
-                    _managed = System.Text.Encoding.UTF8.GetString((byte*)ptr, Length());
+                    _managed = System.Text.Encoding.UTF8.GetString((uint8*)ptr, Length());
                 }
 
                 return _managed;
             }
         }
 
-        public byte[] Bytes
+        public uint8[] Bytes
         {
             get
             {
                 if (_bytes == null)
                 {
-                    _bytes = new byte[Length()];
+                    _bytes = new uint8[Length()];
                     Marshal.Copy(new IntPtr(Pointer()), _bytes, 0, _bytes.Length);
                 }
 

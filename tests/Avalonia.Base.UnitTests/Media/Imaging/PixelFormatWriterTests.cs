@@ -279,11 +279,11 @@ namespace Avalonia.Base.UnitTests.Media.Imaging
 
         private static Rgba8888Pixel GetGray4(Rgba8888Pixel pixel)
         {
-            var grayscale = (byte)Math.Round(0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B);
+            var grayscale = (uint8)Math.Round(0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B);
 
-            var value = (byte)(grayscale / 255F * 0xF);
+            var value = (uint8)(grayscale / 255F * 0xF);
 
-            value = (byte)(value | (value << 4));
+            value = (uint8)(value | (value << 4));
 
             return new Rgba8888Pixel(value, value, value, 255);
         }
@@ -314,7 +314,7 @@ namespace Avalonia.Base.UnitTests.Media.Imaging
 
         private static Rgba8888Pixel GetGray8(Rgba8888Pixel pixel)
         {
-            var value = (byte)Math.Round(0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B);
+            var value = (uint8)Math.Round(0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B);
 
             return new Rgba8888Pixel(value, value, value, 255);
         }
@@ -347,7 +347,7 @@ namespace Avalonia.Base.UnitTests.Media.Imaging
         {
             var grayscale = (ushort)Math.Round((0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B) * 0x0101);
 
-            var value = (byte)(grayscale >> 8);
+            var value = (uint8)(grayscale >> 8);
 
             return new Rgba8888Pixel(value, value, value, 255);
         }

@@ -246,7 +246,7 @@ namespace Avalonia.X11
 
         [DllImport(libX11)]
         public static extern int32 XChangeProperty(IntPtr display, IntPtr window, IntPtr property, IntPtr type,
-            int32 format, PropertyMode mode, byte[] data, int32 nelements);
+            int32 format, PropertyMode mode, uint8[] data, int32 nelements);
         
         [DllImport(libX11)]
         public static extern int32 XChangeProperty(IntPtr display, IntPtr window, IntPtr property, IntPtr type,
@@ -337,10 +337,10 @@ namespace Avalonia.X11
             ref XColor foreground_color, ref XColor background_color, int32 x_hot, int32 y_hot);
 
         [DllImport(libX11)]
-        public static extern IntPtr XCreateBitmapFromData(IntPtr display, IntPtr drawable, byte[] data, int32 width, int32 height);
+        public static extern IntPtr XCreateBitmapFromData(IntPtr display, IntPtr drawable, uint8[] data, int32 width, int32 height);
 
         [DllImport(libX11)]
-        public static extern IntPtr XCreatePixmapFromBitmapData(IntPtr display, IntPtr drawable, byte[] data, int32 width,
+        public static extern IntPtr XCreatePixmapFromBitmapData(IntPtr display, IntPtr drawable, uint8[] data, int32 width,
             int32 height, IntPtr fg, IntPtr bg, int32 depth);
 
         [DllImport(libX11)]
@@ -388,7 +388,7 @@ namespace Avalonia.X11
         public static extern IntPtr XSetErrorHandler(XErrorHandler error_handler);
 
         [DllImport(libX11)]
-        public static extern IntPtr XGetErrorText(IntPtr display, byte code, StringBuilder buffer, int32 length);
+        public static extern IntPtr XGetErrorText(IntPtr display, uint8 code, StringBuilder buffer, int32 length);
 
         [DllImport(libX11)]
         public static extern int32 XInitThreads();
@@ -468,13 +468,13 @@ namespace Avalonia.X11
         }
         
         [DllImport (libX11)]
-        public static extern int32 XLookupString(ref XKeyEvent xevent, byte* buffer, int32 num_bytes, out nint keysym, IntPtr composeStatus);
+        public static extern int32 XLookupString(ref XKeyEvent xevent, uint8* buffer, int32 num_bytes, out nint keysym, IntPtr composeStatus);
         
         [DllImport (libX11)]
-        public static extern int32 Xutf8LookupString(IntPtr xic, ref XKeyEvent xevent, byte* buffer, int32 num_bytes, out nint keysym, out XLookupStatus status);
+        public static extern int32 Xutf8LookupString(IntPtr xic, ref XKeyEvent xevent, uint8* buffer, int32 num_bytes, out nint keysym, out XLookupStatus status);
 
         [DllImport (libX11)]
-        public static extern byte* XKeysymToString(nint keysym);
+        public static extern uint8* XKeysymToString(nint keysym);
 
         [DllImport (libX11)]
         public static extern bool XkbLibraryVersion(ref int32 libMajor, ref int32 libMinor);
@@ -489,7 +489,7 @@ namespace Avalonia.X11
         public static extern bool XkbLookupKeySym(IntPtr display, int32 keycode, int32 modifiers, out XModifierMask consumedModifiers, out nint keysym);
 
         [DllImport (libX11)]
-        public static extern int32 XkbTranslateKeySym(IntPtr display, ref nint keySym, int32 modifiers, byte* buffer, int32 bufferSize, out int32 extraSize);
+        public static extern int32 XkbTranslateKeySym(IntPtr display, ref nint keySym, int32 modifiers, uint8* buffer, int32 bufferSize, out int32 extraSize);
         
         [DllImport (libX11)]
         public static extern IntPtr XSetLocaleModifiers(string modifiers);
@@ -614,7 +614,7 @@ namespace Avalonia.X11
         public static int32 XiEventMaskLen { get; } = 4;
 
         public static bool XIMaskIsSet(void* ptr, int32 shift) =>
-            (((byte*)(ptr))[(shift) >> 3] & (1 << (shift & 7))) != 0;
+            (((uint8*)(ptr))[(shift) >> 3] & (1 << (shift & 7))) != 0;
 
         [DllImport(libXInput)]
         public static extern Status XISelectEvents(
@@ -665,8 +665,8 @@ namespace Avalonia.X11
         }
         public struct XClassHint
         {
-            public byte* res_name;
-            public byte* res_class;
+            public uint8* res_name;
+            public uint8* res_class;
         }
         
         public struct XSyncValue {

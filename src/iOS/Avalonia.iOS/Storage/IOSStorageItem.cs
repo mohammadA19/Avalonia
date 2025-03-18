@@ -151,7 +151,7 @@ internal abstract class IOSStorageItem : IStorageBookmarkItem
                 return Task.FromResult<string?>(null);
             }
 
-            var bytes = new Span<byte>((void*)newBookmark.Bytes, (int32)newBookmark.Length);
+            var bytes = new Span<uint8>((void*)newBookmark.Bytes, (int32)newBookmark.Length);
             return Task.FromResult<string?>(
                 StorageBookmarkHelper.EncodeBookmark(IOSStorageProvider.PlatformKey, bytes));
         }

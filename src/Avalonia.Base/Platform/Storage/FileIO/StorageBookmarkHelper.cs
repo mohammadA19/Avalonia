@@ -20,14 +20,14 @@ namespace Avalonia.Platform.Storage.FileIO;
 internal static class StorageBookmarkHelper
 {
     private const int32 HeaderLength = 16;
-    private static ReadOnlySpan<byte> AvaHeaderPrefix => "ava.v1."u8;
-    private static ReadOnlySpan<byte> FakeBclBookmarkPlatform => "bcl"u8;
+    private static ReadOnlySpan<uint8> AvaHeaderPrefix => "ava.v1."u8;
+    private static ReadOnlySpan<uint8> FakeBclBookmarkPlatform => "bcl"u8;
 
     [return: NotNullIfNotNull(nameof(nativeBookmark))]
-    public static string? EncodeBookmark(ReadOnlySpan<byte> platform, string? nativeBookmark) =>
+    public static string? EncodeBookmark(ReadOnlySpan<uint8> platform, string? nativeBookmark) =>
         nativeBookmark is null ? null : EncodeBookmark(platform, Encoding.UTF8.GetBytes(nativeBookmark));
 
-    public static string? EncodeBookmark(ReadOnlySpan<byte> platform, ReadOnlySpan<byte> nativeBookmarkBytes)
+    public static string? EncodeBookmark(ReadOnlySpan<uint8> platform, ReadOnlySpan<uint8> nativeBookmarkBytes)
     {
         if (nativeBookmarkBytes.Length == 0)
         {
@@ -40,7 +40,7 @@ internal static class StorageBookmarkHelper
         }
 
         var arrayLength = HeaderLength + nativeBookmarkBytes.Length;
-        var arrayPool = ArrayPool<byte>.Shared.Rent(arrayLength);
+        var arrayPool = ArrayPool<uint8>.Shared.Rent(arrayLength);
         try
         {
             // Write platform into first 16 bytes.
@@ -60,7 +60,7 @@ internal static class StorageBookmarkHelper
         }
         finally
         {
-            ArrayPool<byte>.Shared.Return(arrayPool);
+            ArrayPool<uint8>.Shared.Return(arrayPool);
         }
     }
 
@@ -71,7 +71,7 @@ internal static class StorageBookmarkHelper
         InvalidPlatform
     }
 
-    public static DecodeResult TryDecodeBookmark(ReadOnlySpan<byte> platform, string? base64bookmark, out byte[]? nativeBookmark)
+    public static DecodeResult TryDecodeBookmark(ReadOnlySpan<uint8> platform, string? base64bookmark, out uint8[]? nativeBookmark)
     {
         if (platform.Length > HeaderLength
             || platform.Length == 0
@@ -82,10 +82,10 @@ internal static class StorageBookmarkHelper
             return DecodeResult.InvalidFormat;
         }
 
-        Span<byte> decodedBookmark;
+        Span<uint8> decodedBookmark;
 #if NET6_0_OR_GREATER
         // Each base64 character represents 6 bits, but to be safe, 
-        var arrayPool = ArrayPool<byte>.Shared.Rent(HeaderLength + base64bookmark.Length * 6);
+        var arrayPool = ArrayPool<uint8>.Shared.Rent(HeaderLength + base64bookmark.Length * 6);
         if (Convert.TryFromBase64Chars(base64bookmark, arrayPool, out int32 bytesWritten))
         {
             decodedBookmark = arrayPool.AsSpan().Slice(0, bytesWritten);
@@ -121,7 +121,7 @@ internal static class StorageBookmarkHelper
         finally
         {
 #if NET6_0_OR_GREATER
-            ArrayPool<byte>.Shared.Return(arrayPool);
+            ArrayPool<uint8>.Shared.Return(arrayPool);
 #endif
         }
     }

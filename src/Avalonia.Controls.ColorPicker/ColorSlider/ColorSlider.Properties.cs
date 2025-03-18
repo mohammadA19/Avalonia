@@ -151,7 +151,7 @@ namespace Avalonia.Controls.Primitives
         /// </summary>
         /// <remarks>
         /// This is applicable for the HSV color model only. The <see cref="Media.HsvColor"/> struct uses double
-        /// values while the <see cref="Media.Color"/> struct uses byte. Only double types need rounding.
+        /// values while the <see cref="Media.Color"/> struct uses uint8. Only double types need rounding.
         /// </remarks>
         public bool IsRoundingEnabled
         {

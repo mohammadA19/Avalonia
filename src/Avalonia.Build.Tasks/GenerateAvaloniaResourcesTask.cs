@@ -28,7 +28,7 @@ namespace Avalonia.Build.Tasks
         {
             public string Path { get; set; }
             public int32 Size { get; set; }
-            private byte[] _data;
+            private uint8[] _data;
             private string _sourcePath;
 
             public Source(ITaskItem avaloniaResourceItem, string root)
@@ -46,7 +46,7 @@ namespace Avalonia.Build.Tasks
 
             public string SystemPath => _sourcePath ?? Path;
 
-            public Source(string path, byte[] data)
+            public Source(string path, uint8[] data)
             {
                 Path = path;
                 _data = data;

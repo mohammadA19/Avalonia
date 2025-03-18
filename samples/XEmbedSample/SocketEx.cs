@@ -31,9 +31,9 @@ public class AvaloniaXEmbedGtkSocket : Gtk.Socket
         base.OnRealized();
         _avaloniaPlug ??= XEmbedPlug.Create();
         _avaloniaPlug.ScaleFactor = ScaleFactor;
-        _avaloniaPlug.BackgroundColor = Avalonia.Media.Color.FromRgb((byte)(_backgroundColor.Red * 255),
-            (byte)(_backgroundColor.Green * 255),
-            (byte)(_backgroundColor.Blue * 255)
+        _avaloniaPlug.BackgroundColor = Avalonia.Media.Color.FromRgb((uint8)(_backgroundColor.Red * 255),
+            (uint8)(_backgroundColor.Green * 255),
+            (uint8)(_backgroundColor.Blue * 255)
         );
         _avaloniaPlug.Content = _content;
         ApplyInteractiveResize();

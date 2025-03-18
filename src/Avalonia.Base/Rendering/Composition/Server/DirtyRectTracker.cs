@@ -50,7 +50,7 @@ internal class DirtyRectTracker : IDirtyRectTracker
     {
         context.DrawRectangle(
             new ImmutableSolidColorBrush(
-                new Color(30, (byte)_random.Next(255), (byte)_random.Next(255), (byte)_random.Next(255))),
+                new Color(30, (uint8)_random.Next(255), (uint8)_random.Next(255), (uint8)_random.Next(255))),
             null, _doubleRect);
     }
 
@@ -96,7 +96,7 @@ internal class RegionDirtyRectTracker : IDirtyRectTracker
     {
         context.DrawRegion(
             new ImmutableSolidColorBrush(
-                new Color(150, (byte)_random.Next(255), (byte)_random.Next(255), (byte)_random.Next(255))),
+                new Color(150, (uint8)_random.Next(255), (uint8)_random.Next(255), (uint8)_random.Next(255))),
             null, _region);
     }
 

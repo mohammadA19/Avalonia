@@ -126,7 +126,7 @@ namespace Avalonia.UnitTests
             return Font.GetHorizontalGlyphAdvances(glyphIndices);
         }
 
-        public bool TryGetTable(uint32 tag, out byte[] table)
+        public bool TryGetTable(uint32 tag, out uint8[] table)
         {
             table = null;
             var blob = Face.ReferenceTable(tag);

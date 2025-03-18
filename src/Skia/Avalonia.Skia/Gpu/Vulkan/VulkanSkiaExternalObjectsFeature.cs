@@ -116,8 +116,8 @@ internal class VulkanSkiaExternalObjectsFeature : IExternalObjectsRenderInterfac
     public CompositionGpuImportedImageSynchronizationCapabilities
         GetSynchronizationCapabilities(string imageHandleType) => _feature.GetSynchronizationCapabilities(imageHandleType);
 
-    public byte[]? DeviceUuid => _feature.DeviceUuid;
-    public byte[]? DeviceLuid => _feature.DeviceLuid;
+    public uint8[]? DeviceUuid => _feature.DeviceUuid;
+    public uint8[]? DeviceLuid => _feature.DeviceLuid;
     
     public IReadOnlyList<string> SupportedImageHandleTypes => _feature.SupportedImageHandleTypes;
     public IReadOnlyList<string> SupportedSemaphoreTypes => _feature.SupportedSemaphoreTypes;

@@ -142,7 +142,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             }
 
             // Preallocate and reset data for U+0080..U+07ff,
-            // for 2-byte UTF-8 which will be compacted in 64-blocks
+            // for 2-uint8 UTF-8 which will be compacted in 64-blocks
             // even if DATA_BLOCK_LENGTH is smaller.
             for (i = 0x80; i < 0x800; i += DATA_BLOCK_LENGTH) {
                 Set(i, _initialValue);
@@ -242,7 +242,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                     if (overwrite && (block >= DATA_0800_OFFSET))
                     {
                         // We overwrite all values, and it's not a
-                        // protected (ASCII-linear or 2-byte UTF-8) block:
+                        // protected (ASCII-linear or 2-uint8 UTF-8) block:
                         // replace with the repeatBlock.
                         setRepeatBlock = true;
                     }
@@ -347,7 +347,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             // are indexLength and dataLength within limits?
             if ((allIndexesLength > MAX_INDEX_LENGTH) || // for unshifted indexLength
               ((dataMove + _dataNullOffset) > 0xffff) || // for unshifted dataNullOffset
-              ((dataMove + DATA_0800_OFFSET) > 0xffff) || // for unshifted 2-byte UTF-8 index-2 values
+              ((dataMove + DATA_0800_OFFSET) > 0xffff) || // for unshifted 2-uint8 UTF-8 index-2 values
               ((dataMove + _dataLength) > MAX_DATA_LENGTH_RUNTIME))
             { // for shiftedDataLength
                 throw new InvalidOperationException("Trie data is too large.");
@@ -364,7 +364,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 data[destIdx++] = (uint32)((_index2[i] + dataMove) >> INDEX_SHIFT);
             }
 
-            // write UTF-8 2-byte index-2 values, not right-shifted
+            // write UTF-8 2-uint8 index-2 values, not right-shifted
             for (i = 0; i < 0xc2 - 0xc0; i++)
             { // C0..C1
                 data[destIdx++] = (uint32)(dataMove + BAD_UTF8_DATA_OFFSET);
@@ -706,7 +706,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 start += DATA_BLOCK_LENGTH;
             }
 
-            // Start with a block length of 64 for 2-byte UTF-8,
+            // Start with a block length of 64 for 2-uint8 UTF-8,
             // then switch to DATA_BLOCK_LENGTH.
             var blockLength = 64;
             var blockCount = blockLength >> SHIFT_2;

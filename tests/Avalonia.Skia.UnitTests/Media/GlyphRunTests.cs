@@ -13,7 +13,7 @@ namespace Avalonia.Skia.UnitTests.Media
         [InlineData("ABC012345", 0)] //LeftToRight
         [InlineData("זה כיף סתם לשמוע איך תנצח קרפד עץ טוב בגן", 1)] //RightToLeft
         [Theory]
-        public void Should_Get_Next_CharacterHit(string text, sbyte direction)
+        public void Should_Get_Next_CharacterHit(string text, int8 direction)
         {
             using (Start())
             {
@@ -54,7 +54,7 @@ namespace Avalonia.Skia.UnitTests.Media
         [InlineData("ABC012345", 0)] //LeftToRight
         [InlineData("זה כיף סתם לשמוע איך תנצח קרפד עץ טוב בגן", 1)] //RightToLeft
         [Theory]
-        public void Should_Get_Previous_CharacterHit(string text, sbyte direction)
+        public void Should_Get_Previous_CharacterHit(string text, int8 direction)
         {
             using (Start())
             {
@@ -97,7 +97,7 @@ namespace Avalonia.Skia.UnitTests.Media
         [InlineData("ABC012345", 0)] //LeftToRight
         [InlineData("זה כיף סתם לשמוע איך תנצח קרפד עץ טוב בגן", 1)] //RightToLeft
         [Theory]
-        public void Should_Get_CharacterHit_From_Distance(string text, sbyte direction)
+        public void Should_Get_CharacterHit_From_Distance(string text, int8 direction)
         {
             using (Start())
             {

@@ -128,7 +128,7 @@ namespace Avalonia.FreeDesktop
             var b = value.GetItem(2).GetDouble();
             if (r is < 0 or > 1 || g is < 0 or > 1 || b is < 0 or > 1)
                 return null;
-            return Color.FromRgb((byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
+            return Color.FromRgb((uint8)(r * 255), (uint8)(g * 255), (uint8)(b * 255));
         }
     }
 }

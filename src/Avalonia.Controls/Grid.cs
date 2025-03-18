@@ -2799,7 +2799,7 @@ namespace Avalonia.Controls
         /// LayoutTimeSizeType is used internally and reflects layout-time size type.
         /// </summary>
         [Flags]
-        internal enum LayoutTimeSizeType : byte
+        internal enum LayoutTimeSizeType : uint8
         {
             None = 0x00,
             Pixel = 0x01,

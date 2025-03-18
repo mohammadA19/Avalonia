@@ -61,10 +61,10 @@ internal partial class X11Screens
                 out IntPtr prop);
             if (actualType != x11.Atoms.XA_INTEGER)
                 return null;
-            if (actualFormat != 8) // Expecting an byte array
+            if (actualFormat != 8) // Expecting an uint8 array
                 return null;
 
-            var edid = new byte[bytesAfter];
+            var edid = new uint8[bytesAfter];
             Marshal.Copy(prop, edid, 0, bytesAfter);
             XFree(prop);
             XFree(new IntPtr(properties));

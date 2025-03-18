@@ -97,7 +97,7 @@ namespace Avalonia.Visuals.UnitTests.Media.TextFormatting
                                     continue;
                                 }
 
-                                sbyte paragraphEmbeddingLevel;
+                                int8 paragraphEmbeddingLevel;
 
                                 switch (bit)
                                 {

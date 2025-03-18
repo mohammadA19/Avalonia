@@ -136,11 +136,11 @@ internal class OpenGlContent
         var name = typeof(OpenGlPage).Assembly.GetManifestResourceNames().First(x => x.Contains("teapot.bin"));
         using (var sr = new BinaryReader(typeof(OpenGlPage).Assembly.GetManifestResourceStream(name)!))
         {
-            var buf = new byte[sr.ReadInt32()];
+            var buf = new uint8[sr.ReadInt32()];
             sr.Read(buf, 0, buf.Length);
             var points = new float[buf.Length / 4];
             Buffer.BlockCopy(buf, 0, points, 0, buf.Length);
-            buf = new byte[sr.ReadInt32()];
+            buf = new uint8[sr.ReadInt32()];
             sr.Read(buf, 0, buf.Length);
             _indices = new ushort[buf.Length / 2];
             Buffer.BlockCopy(buf, 0, _indices, 0, buf.Length);

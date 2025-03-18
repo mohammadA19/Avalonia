@@ -360,7 +360,7 @@ namespace Avalonia.SourceGenerator.CompositionGenerator
                     AddValue(prop.Name + "Animated");
             }
 
-            var baseType = count <= 8 ? "byte" : count <= 16 ? "ushort" : count <= 32 ? "uint32" : "ulong";
+            var baseType = count <= 8 ? "uint8" : count <= 16 ? "ushort" : count <= 32 ? "uint32" : "ulong";
             return changedFieldsEnum.AddBaseListTypes(SimpleBaseType(ParseTypeName(baseType)))
                 .AddAttributeLists(AttributeList(SingletonSeparatedList(Attribute(IdentifierName("System.Flags")))));
         }

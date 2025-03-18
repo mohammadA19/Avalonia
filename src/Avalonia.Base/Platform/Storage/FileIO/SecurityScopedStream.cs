@@ -34,33 +34,33 @@ internal sealed class SecurityScopedStream(FileStream _stream, IDisposable _secu
     public override int32 ReadByte() =>
         _stream.ReadByte();
 
-    public override int32 Read(byte[] buffer, int32 offset, int32 count) =>
+    public override int32 Read(uint8[] buffer, int32 offset, int32 count) =>
         _stream.Read(buffer, offset, count);
 
-    public override Task<int32> ReadAsync(byte[] buffer, int32 offset, int32 count, CancellationToken cancellationToken) =>
+    public override Task<int32> ReadAsync(uint8[] buffer, int32 offset, int32 count, CancellationToken cancellationToken) =>
         _stream.ReadAsync(buffer, offset, count, cancellationToken);
 
 #if NET6_0_OR_GREATER
-    public override int32 Read(Span<byte> buffer) => _stream.Read(buffer);
+    public override int32 Read(Span<uint8> buffer) => _stream.Read(buffer);
 
-    public override ValueTask<int32> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default) =>
+    public override ValueTask<int32> ReadAsync(Memory<uint8> buffer, CancellationToken cancellationToken = default) =>
         _stream.ReadAsync(buffer, cancellationToken);
 #endif
 
-    public override void Write(byte[] buffer, int32 offset, int32 count) =>
+    public override void Write(uint8[] buffer, int32 offset, int32 count) =>
         _stream.Write(buffer, offset, count);
 
-    public override Task WriteAsync(byte[] buffer, int32 offset, int32 count, CancellationToken cancellationToken) =>
+    public override Task WriteAsync(uint8[] buffer, int32 offset, int32 count, CancellationToken cancellationToken) =>
         _stream.WriteAsync(buffer, offset, count, cancellationToken);
 
 #if NET6_0_OR_GREATER
-    public override void Write(ReadOnlySpan<byte> buffer) => _stream.Write(buffer);
+    public override void Write(ReadOnlySpan<uint8> buffer) => _stream.Write(buffer);
 
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default) =>
+    public override ValueTask WriteAsync(ReadOnlyMemory<uint8> buffer, CancellationToken cancellationToken = default) =>
         _stream.WriteAsync(buffer, cancellationToken);
 #endif
 
-    public override void WriteByte(byte value) => _stream.WriteByte(value);
+    public override void WriteByte(uint8 value) => _stream.WriteByte(value);
 
     public override long Seek(long offset, SeekOrigin origin) =>
         _stream.Seek(offset, origin);
@@ -75,12 +75,12 @@ internal sealed class SecurityScopedStream(FileStream _stream, IDisposable _secu
     public override Task CopyToAsync(Stream destination, int32 bufferSize, CancellationToken cancellationToken) =>
         _stream.CopyToAsync(destination, bufferSize, cancellationToken);
 
-    public override IAsyncResult BeginRead(byte[] buffer, int32 offset, int32 count, AsyncCallback? callback, object? state) =>
+    public override IAsyncResult BeginRead(uint8[] buffer, int32 offset, int32 count, AsyncCallback? callback, object? state) =>
         _stream.BeginRead(buffer, offset, count, callback, state);
 
     public override int32 EndRead(IAsyncResult asyncResult) => _stream.EndRead(asyncResult);
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int32 offset, int32 count, AsyncCallback? callback, object? state) =>
+    public override IAsyncResult BeginWrite(uint8[] buffer, int32 offset, int32 count, AsyncCallback? callback, object? state) =>
         _stream.BeginWrite(buffer, offset, count, callback, state);
 
     public override void EndWrite(IAsyncResult asyncResult) => _stream.EndWrite(asyncResult);

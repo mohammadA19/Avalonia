@@ -59,12 +59,12 @@ public interface ICompositionGpuInterop
     /// <summary>
     /// The LUID of the graphics adapter used by the compositor
     /// </summary>
-    public byte[]? DeviceLuid { get; set; }
+    public uint8[]? DeviceLuid { get; set; }
     
     /// <summary>
     /// The UUID of the graphics adapter used by the compositor
     /// </summary>
-    public byte[]? DeviceUuid { get; set; }
+    public uint8[]? DeviceUuid { get; set; }
 }
 
 [Flags]

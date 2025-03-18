@@ -62,7 +62,7 @@ namespace Avalonia.X11
                 return;
             }
 
-            byte[] errorBuf = new byte[255];
+            uint8[] errorBuf = new uint8[255];
             IntPtr clientIdRet = IntPtr.Zero;
             var smcConn = SMLib.SmcOpenConnection(null,
                 IntPtr.Zero, 1, 0,

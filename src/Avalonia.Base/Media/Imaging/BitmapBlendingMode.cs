@@ -4,7 +4,7 @@ namespace Avalonia.Media.Imaging
     /// <summary>
     /// Controls the way the bitmaps are drawn together.
     /// </summary>
-    public enum BitmapBlendingMode : byte
+    public enum BitmapBlendingMode : uint8
     {
         Unspecified,
 

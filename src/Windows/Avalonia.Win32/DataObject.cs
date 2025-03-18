@@ -21,7 +21,7 @@ namespace Avalonia.Win32
     internal sealed class DataObject : CallbackBase, IDataObject, Win32Com.IDataObject
     {
         // Compatibility with WinForms + WPF...
-        internal static readonly byte[] SerializedObjectGUID = new Guid("FD9EA796-3B13-4370-A679-56106BB288FB").ToByteArray();
+        internal static readonly uint8[] SerializedObjectGUID = new Guid("FD9EA796-3B13-4370-A679-56106BB288FB").ToByteArray();
 
         private class FormatEnumerator : CallbackBase, Win32Com.IEnumFORMATETC
         {
@@ -263,7 +263,7 @@ namespace Avalonia.Win32
             if (data is Stream stream)
             {
                 var length = (int32)(stream.Length - stream.Position);
-                var buffer = ArrayPool<byte>.Shared.Rent(length);
+                var buffer = ArrayPool<uint8>.Shared.Rent(length);
 
                 try
                 {
@@ -272,19 +272,19 @@ namespace Avalonia.Win32
                 }
                 finally
                 {
-                    ArrayPool<byte>.Shared.Return(buffer);
+                    ArrayPool<uint8>.Shared.Return(buffer);
                 }
             }
-            if (data is IEnumerable<byte> bytes)
+            if (data is IEnumerable<uint8> bytes)
             {
-                var byteArr = bytes as byte[] ?? bytes.ToArray();
+                var byteArr = bytes as uint8[] ?? bytes.ToArray();
                 return WriteBytesToHGlobal(ref hGlobal, byteArr);
             }
             return WriteBytesToHGlobal(ref hGlobal, SerializeObject(data));
         }
 
         [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "We still use BinaryFormatter for WinForms dragndrop compatability")]
-        private static byte[] SerializeObject(object data)
+        private static uint8[] SerializeObject(object data)
         {
             using (var ms = new MemoryStream())
             {
@@ -296,7 +296,7 @@ namespace Avalonia.Win32
             }
         }
 
-        private static unsafe uint32 WriteBytesToHGlobal(ref IntPtr hGlobal, ReadOnlySpan<byte> data)
+        private static unsafe uint32 WriteBytesToHGlobal(ref IntPtr hGlobal, ReadOnlySpan<uint8> data)
         {
             int32 required = data.Length;
             if (hGlobal == IntPtr.Zero)
@@ -311,7 +311,7 @@ namespace Avalonia.Win32
 
             try
             {
-                data.CopyTo(new Span<byte>((void*)ptr, data.Length));
+                data.CopyTo(new Span<uint8>((void*)ptr, data.Length));
                 return unchecked((int32)UnmanagedMethods.HRESULT.S_OK);
             }
             finally

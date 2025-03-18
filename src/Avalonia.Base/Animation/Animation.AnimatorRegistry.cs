@@ -34,7 +34,7 @@ partial class Animation
             (prop =>(typeof(double).IsAssignableFrom(prop.PropertyType) && typeof(Transform).IsAssignableFrom(prop.OwnerType)),
                 typeof(TransformAnimator), () => new TransformAnimator()),
             (prop => typeof(bool).IsAssignableFrom(prop.PropertyType), typeof(BoolAnimator), () => new BoolAnimator()),
-            (prop => typeof(byte).IsAssignableFrom(prop.PropertyType), typeof(ByteAnimator), () => new ByteAnimator()),
+            (prop => typeof(uint8).IsAssignableFrom(prop.PropertyType), typeof(ByteAnimator), () => new ByteAnimator()),
             (prop => typeof(Int16).IsAssignableFrom(prop.PropertyType), typeof(Int16Animator), () => new Int16Animator()),
             (prop => typeof(Int32).IsAssignableFrom(prop.PropertyType), typeof(Int32Animator), () => new Int32Animator()),
             (prop => typeof(Int64).IsAssignableFrom(prop.PropertyType), typeof(Int64Animator), () => new Int64Animator()), 

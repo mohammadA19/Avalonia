@@ -9,17 +9,17 @@ namespace Avalonia.Vulkan.Interop;
 internal unsafe class Utf8BufferArray : IDisposable
 {
     private readonly List<Utf8Buffer> _buffers;
-    private byte** _bufferArray;
+    private uint8** _bufferArray;
 
     public Utf8BufferArray(IEnumerable<string> strings)
     {
         _buffers = strings.Select(x => new Utf8Buffer(x)).ToList();
-        _bufferArray = (byte**)Marshal.AllocHGlobal(_buffers.Count * IntPtr.Size);
+        _bufferArray = (uint8**)Marshal.AllocHGlobal(_buffers.Count * IntPtr.Size);
         for (var c = 0; c < _buffers.Count; c++)
             _bufferArray[c] = _buffers[c];
     }
 
-    public static unsafe implicit operator byte**(Utf8BufferArray a) => a._bufferArray;
+    public static unsafe implicit operator uint8**(Utf8BufferArray a) => a._bufferArray;
 
     public int32 Count => _buffers.Count;
     public uint32 UCount => (uint32)Count;

@@ -19,7 +19,7 @@ internal class SlicedStream : Stream
     {
     }
 
-    public override int32 Read(byte[] buffer, int32 offset, int32 count)
+    public override int32 Read(uint8[] buffer, int32 offset, int32 count)
     {
         return _baseStream.Read(buffer, offset, (int32)Math.Min(count, Length - Position));
     }
@@ -37,7 +37,7 @@ internal class SlicedStream : Stream
 
     public override void SetLength(long value) => throw new NotSupportedException();
 
-    public override void Write(byte[] buffer, int32 offset, int32 count) => throw new NotSupportedException();
+    public override void Write(uint8[] buffer, int32 offset, int32 count) => throw new NotSupportedException();
 
     public override bool CanRead => true;
     public override bool CanSeek => _baseStream.CanRead;

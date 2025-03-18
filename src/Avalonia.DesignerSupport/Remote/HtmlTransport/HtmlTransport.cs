@@ -19,7 +19,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
     {
         private readonly IAvaloniaRemoteTransportConnection _signalTransport;
         private readonly SimpleWebSocketHttpServer _simpleServer;
-        private readonly Dictionary<string, byte[]> _resources;
+        private readonly Dictionary<string, uint8[]> _resources;
         private SimpleWebSocket _pendingSocket;
         private bool _disposed;
         private object _lock = new object();
@@ -36,7 +36,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
             ["html"] = "text/html", ["htm"] = "text/html", ["js"] = "text/javascript", ["css"] = "text/css"
         };
 
-        private static readonly byte[] NotFound = Encoding.UTF8.GetBytes("404 - Not Found");
+        private static readonly uint8[] NotFound = Encoding.UTF8.GetBytes("404 - Not Found");
         
 
         public HtmlWebSocketTransport(IAvaloniaRemoteTransportConnection signalTransport, Uri listenUri)

@@ -3,7 +3,7 @@ using Avalonia.Data;
 
 namespace Avalonia.PropertyStore
 {
-    internal enum FramePriority : sbyte
+    internal enum FramePriority : int8
     {
         Animation,
         AnimationTemplatedParentTheme,

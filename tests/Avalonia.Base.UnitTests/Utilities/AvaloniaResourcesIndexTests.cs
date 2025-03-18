@@ -33,7 +33,7 @@ public class AvaloniaResourcesIndexTests
         var index = AvaloniaResourcesIndexReaderWriter.ReadIndex(memoryStream);
         var resourcesBasePosition = memoryStream.Position;
 
-        Span<byte> buffer = stackalloc byte[index[0].Size];
+        Span<uint8> buffer = stackalloc uint8[index[0].Size];
 
         Assert.Equal("foo.xaml", index[0].Path);
         Assert.Equal(0, index[0].Offset);

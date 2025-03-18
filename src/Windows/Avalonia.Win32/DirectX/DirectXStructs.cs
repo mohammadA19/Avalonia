@@ -104,7 +104,7 @@ namespace Avalonia.Win32.DirectX
     internal unsafe struct DXGI_MAPPED_RECT
     {
         public int32 Pitch;
-        public byte* pBits;
+        public uint8* pBits;
     }
 
     internal struct DXGI_MODE_DESC

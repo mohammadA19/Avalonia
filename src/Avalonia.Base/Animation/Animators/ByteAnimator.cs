@@ -3,19 +3,19 @@
 namespace Avalonia.Animation.Animators
 {
     /// <summary>
-    /// Animator that handles <see cref="byte"/> properties.
+    /// Animator that handles <see cref="uint8"/> properties.
     /// </summary>
-    internal class ByteAnimator : Animator<byte>
+    internal class ByteAnimator : Animator<uint8>
     {
-        const double maxVal = (double)byte.MaxValue;
+        const double maxVal = (double)uint8.MaxValue;
 
         /// <inheritdoc/>
-        public override byte Interpolate(double progress, byte oldValue, byte newValue)
+        public override uint8 Interpolate(double progress, uint8 oldValue, uint8 newValue)
         {
             var normOV = oldValue / maxVal;
             var normNV = newValue / maxVal;
             var deltaV = normNV - normOV;
-            return (byte)Math.Round(maxVal * ((deltaV * progress) + normOV));
+            return (uint8)Math.Round(maxVal * ((deltaV * progress) + normOV));
         }
     }
 }

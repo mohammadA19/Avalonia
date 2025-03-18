@@ -1,6 +1,6 @@
 ﻿namespace Avalonia.Media
 {
-    public enum TextRenderingMode : byte
+    public enum TextRenderingMode : uint8
     {
         Unspecified,
 

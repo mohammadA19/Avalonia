@@ -150,12 +150,12 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
                 writer.WriteLine("    internal static class BreakPairTable");
                 writer.WriteLine("    {");
 
-                writer.WriteLine("        private static readonly byte[][] s_breakPairTable = ");
+                writer.WriteLine("        private static readonly uint8[][] s_breakPairTable = ");
                 writer.WriteLine("            {");
 
                 for (var i = 1; i < rows.Count; i++)
                 {
-                    writer.Write("             new byte[] {");
+                    writer.Write("             new uint8[] {");
 
                     writer.Write($"{GetBreakPairType(rows[i][1])}");
 
@@ -182,7 +182,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
                 writer.WriteLine();
 
-                writer.WriteLine("    internal enum PairBreakType : byte");
+                writer.WriteLine("    internal enum PairBreakType : uint8");
                 writer.WriteLine("    {");
                 writer.WriteLine("        DI = 0, // Direct break opportunity");
                 writer.WriteLine("        IN = 1, // Indirect break opportunity");
@@ -198,13 +198,13 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             return rows[0].Where(x => !string.IsNullOrEmpty(x)).ToList();
         }
 
-        public const byte DI_BRK = 0; // Direct break opportunity
-        public const byte IN_BRK = 1; // Indirect break opportunity
-        public const byte CI_BRK = 2; // Indirect break opportunity for combining marks
-        public const byte CP_BRK = 3; // Prohibited break for combining marks
-        public const byte PR_BRK = 4; // Prohibited break
+        public const uint8 DI_BRK = 0; // Direct break opportunity
+        public const uint8 IN_BRK = 1; // Indirect break opportunity
+        public const uint8 CI_BRK = 2; // Indirect break opportunity for combining marks
+        public const uint8 CP_BRK = 3; // Prohibited break for combining marks
+        public const uint8 PR_BRK = 4; // Prohibited break
 
-        private static byte GetBreakPairType(string type)
+        private static uint8 GetBreakPairType(string type)
         {
             switch (type)
             {
@@ -219,7 +219,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
                 case "^":
                     return PR_BRK;
                 default:
-                    return byte.MaxValue;
+                    return uint8.MaxValue;
             }
         }
 

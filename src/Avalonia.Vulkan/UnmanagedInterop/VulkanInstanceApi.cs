@@ -29,7 +29,7 @@ internal unsafe partial class VulkanInstanceApi
         out VkPhysicalDeviceProperties pProperties);
 
     [GetProcAddress("vkEnumerateDeviceExtensionProperties")]
-    public partial VkResult EnumerateDeviceExtensionProperties(VkPhysicalDevice physicalDevice, byte* pLayerName,
+    public partial VkResult EnumerateDeviceExtensionProperties(VkPhysicalDevice physicalDevice, uint8* pLayerName,
         ref uint32_t pPropertyCount, VkExtensionProperties* pProperties);
 
     [GetProcAddress("vkGetPhysicalDeviceSurfaceSupportKHR")]

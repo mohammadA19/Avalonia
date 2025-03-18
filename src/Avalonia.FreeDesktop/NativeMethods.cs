@@ -8,8 +8,8 @@ namespace Avalonia.FreeDesktop
     internal static class NativeMethods
     {
         [DllImport("libc", SetLastError = true)]
-        private static extern long readlink([MarshalAs(UnmanagedType.LPArray)] byte[] filename,
-                                            [MarshalAs(UnmanagedType.LPArray)] byte[] buffer,
+        private static extern long readlink([MarshalAs(UnmanagedType.LPArray)] uint8[] filename,
+                                            [MarshalAs(UnmanagedType.LPArray)] uint8[] buffer,
                                             long len);
 
         public static string ReadLink(string path)
@@ -17,8 +17,8 @@ namespace Avalonia.FreeDesktop
             var symlinkSize = Encoding.UTF8.GetByteCount(path);
             const int32 BufferSize = 4097; // PATH_MAX is (usually?) 4096, but we need to know if the result was truncated
 
-            var symlink = ArrayPool<byte>.Shared.Rent(symlinkSize + 1);
-            var buffer = ArrayPool<byte>.Shared.Rent(BufferSize);
+            var symlink = ArrayPool<uint8>.Shared.Rent(symlinkSize + 1);
+            var buffer = ArrayPool<uint8>.Shared.Rent(BufferSize);
 
             try
             {
@@ -32,8 +32,8 @@ namespace Avalonia.FreeDesktop
             }
             finally
             {
-                ArrayPool<byte>.Shared.Return(symlink);
-                ArrayPool<byte>.Shared.Return(buffer);
+                ArrayPool<uint8>.Shared.Return(symlink);
+                ArrayPool<uint8>.Shared.Return(buffer);
             }
         }
     }

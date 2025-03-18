@@ -111,10 +111,10 @@ namespace Avalonia.Vulkan.UnmanagedInterop
 
     unsafe struct VkLayerProperties
     {
-        public fixed byte layerName[256];
+        public fixed uint8 layerName[256];
         public uint32_t specVersion;
         public uint32_t implementationVersion;
-        public fixed byte description[256];
+        public fixed uint8 description[256];
     }
 
     unsafe struct VkDebugUtilsLabelEXT
@@ -174,18 +174,18 @@ namespace Avalonia.Vulkan.UnmanagedInterop
         public int32 flags;
         public VkApplicationInfo* pApplicationInfo;
         public uint32_t enabledLayerCount;
-        public byte** ppEnabledLayerNames;
+        public uint8** ppEnabledLayerNames;
         public uint32_t enabledExtensionCount;
-        public byte** ppEnabledExtensionNames;
+        public uint8** ppEnabledExtensionNames;
     }
 
     unsafe struct VkApplicationInfo
     {
         public VkStructureType sType;
         public void* pNext;
-        public byte* pApplicationName;
+        public uint8* pApplicationName;
         public uint32_t applicationVersion;
-        public byte* pEngineName;
+        public uint8* pEngineName;
         public uint32_t engineVersion;
         public uint32_t apiVersion;
     }
@@ -206,7 +206,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
         public uint32_t vendorID;
         public uint32_t deviceID;
         public VkPhysicalDeviceType deviceType;
-        public fixed byte deviceName[256];
+        public fixed uint8 deviceName[256];
         public fixed uint8_t pipelineCacheUUID[16];
         public VkPhysicalDeviceLimits limits;
         public VkPhysicalDeviceSparseProperties sparseProperties;
@@ -340,7 +340,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
 
     internal unsafe struct VkExtensionProperties
     {
-        public fixed byte extensionName[256];
+        public fixed uint8 extensionName[256];
         public uint32_t specVersion;
     }
 
@@ -383,9 +383,9 @@ namespace Avalonia.Vulkan.UnmanagedInterop
         public uint32_t queueCreateInfoCount;
         public VkDeviceQueueCreateInfo* pQueueCreateInfos;
         public uint32_t enabledLayerCount;
-        public byte** ppEnabledLayerNames;
+        public uint8** ppEnabledLayerNames;
         public uint32_t enabledExtensionCount;
-        public byte** ppEnabledExtensionNames;
+        public uint8** ppEnabledExtensionNames;
         public IntPtr pEnabledFeatures;
     }
 

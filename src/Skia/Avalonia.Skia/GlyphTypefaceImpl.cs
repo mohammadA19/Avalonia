@@ -357,7 +357,7 @@ namespace Avalonia.Skia
             GC.SuppressFinalize(this);
         }
 
-        public bool TryGetTable(uint32 tag, out byte[] table)
+        public bool TryGetTable(uint32 tag, out uint8[] table)
         {
             return _typeface.TryGetTableData(tag, out table);
         }
@@ -368,7 +368,7 @@ namespace Avalonia.Skia
             {
                 var asset = _typeface.OpenStream();
                 var size = asset.Length;
-                var buffer = new byte[size];
+                var buffer = new uint8[size];
 
                 asset.Read(buffer, size);
 

@@ -20,9 +20,9 @@ namespace Avalonia.Media.TextFormatting.Unicode
         private ArrayBuilder<int32> _pairedBracketValues;
         private ArrayBuilder<BidiClass> _savedClasses;
         private ArrayBuilder<BidiPairedBracketType> _savedPairedBracketTypes;
-        private ArrayBuilder<sbyte> _tempLevelBuffer;
+        private ArrayBuilder<int8> _tempLevelBuffer;
 
-        public sbyte ParagraphEmbeddingLevel { get; set; }
+        public int8 ParagraphEmbeddingLevel { get; set; }
 
         public bool? HasBrackets { get; private set; }
 
@@ -179,7 +179,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// </summary>
         /// <param name="length">Length of the required ExpandableBuffer</param>
         /// <returns>An uninitialized level ExpandableBuffer</returns>
-        public ArraySlice<sbyte> GetTempLevelBuffer(int32 length)
+        public ArraySlice<int8> GetTempLevelBuffer(int32 length)
         {
             _tempLevelBuffer.Clear();
 

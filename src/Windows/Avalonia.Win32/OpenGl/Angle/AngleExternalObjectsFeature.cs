@@ -99,8 +99,8 @@ internal class AngleExternalObjectsFeature : IGlContextExternalObjectsFeature, I
         return default;
     }
 
-    public byte[]? DeviceLuid { get; }
-    public byte[]? DeviceUuid => null;
+    public uint8[]? DeviceLuid { get; }
+    public uint8[]? DeviceUuid => null;
 
     public void Dispose()
     {

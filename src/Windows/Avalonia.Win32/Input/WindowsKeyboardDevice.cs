@@ -12,7 +12,7 @@ namespace Avalonia.Win32.Input
         {
             get
             {
-                fixed (byte* keyStates = stackalloc byte[256])
+                fixed (uint8* keyStates = stackalloc uint8[256])
                 {
                     GetKeyboardState(keyStates);
 

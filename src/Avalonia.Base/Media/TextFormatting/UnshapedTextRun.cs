@@ -7,7 +7,7 @@ namespace Avalonia.Media.TextFormatting
     /// </summary>
     public sealed class UnshapedTextRun : TextRun
     {
-        public UnshapedTextRun(ReadOnlyMemory<char> text, TextRunProperties properties, sbyte biDiLevel)
+        public UnshapedTextRun(ReadOnlyMemory<char> text, TextRunProperties properties, int8 biDiLevel)
         {
             Text = text;
             Properties = properties;
@@ -21,6 +21,6 @@ namespace Avalonia.Media.TextFormatting
 
         public override TextRunProperties Properties { get; }
 
-        public sbyte BidiLevel { get; }
+        public int8 BidiLevel { get; }
     }
 }

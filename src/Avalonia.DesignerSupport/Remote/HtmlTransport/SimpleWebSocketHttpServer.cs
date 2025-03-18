@@ -35,8 +35,8 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
             bool error = true;
             async Task<string> ReadLineAsync()
             {
-                var readBuffer = new byte[1];
-                var lineBuffer = new byte[1024];
+                var readBuffer = new uint8[1];
+                var lineBuffer = new uint8[1024];
                 for (var c = 0; c < 1024; c++)
                 {
                     if (await stream.ReadAsync(readBuffer, 0, 1) == 0)
@@ -144,7 +144,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
             }
         }
 
-        public async Task RespondAsync(int32 code, byte[] data, string contentType)
+        public async Task RespondAsync(int32 code, uint8[] data, string contentType)
         {
             var headers = Encoding.UTF8.GetBytes(FormattableString.Invariant($"HTTP/1.1 {code} {(HttpStatusCode)code}\r\nConnection: close\r\nContent-Type: {contentType}\r\nContent-Length: {data.Length}\r\n\r\n"));
             await _stream.WriteAsync(headers, 0, headers.Length);
@@ -254,13 +254,13 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
         [StructLayout(LayoutKind.Explicit)]
         struct WebSocketHeader
         {
-            [FieldOffset(0)] public byte Mask;
-            [FieldOffset(1)] public byte Length8;
+            [FieldOffset(0)] public uint8 Mask;
+            [FieldOffset(1)] public uint8 Length8;
             [FieldOffset(2)] public ushort Length16;
             [FieldOffset(2)] public ulong Length64;
         }
 
-        readonly byte[] _sendHeaderBuffer = new byte[10];
+        readonly uint8[] _sendHeaderBuffer = new uint8[10];
         readonly MemoryStream _receiveFrameStream = new MemoryStream();
         readonly MemoryStream _receiveMessageStream = new MemoryStream();
         private FrameType _currentMessageFrameType;
@@ -291,13 +291,13 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
             var data = Encoding.UTF8.GetBytes(text);
             return SendMessage(true, data);
         }
-        public Task SendMessage(bool isText, byte[] data) => SendMessage(isText, data, 0, data.Length);
+        public Task SendMessage(bool isText, uint8[] data) => SendMessage(isText, data, 0, data.Length);
 
 
-        public Task SendMessage(bool isText, byte[] data, int32 offset, int32 length) 
+        public Task SendMessage(bool isText, uint8[] data, int32 offset, int32 length) 
             => SendFrame(isText ? FrameType.Text : FrameType.Binary, data, offset, length);
 
-        async Task SendFrame(FrameType type, byte[] data, int32 offset, int32 length)
+        async Task SendFrame(FrameType type, uint8[] data, int32 offset, int32 length)
         {
             using (var l = await _sendLock.LockAsync())
             {
@@ -307,7 +307,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
                 if (data.Length <= 125)
                 {
                     headerLength = WebsocketInitialHeaderLength;
-                    header.Length8 = (byte) length;
+                    header.Length8 = (uint8) length;
                 }
                 else if (length <= 0xffff)
                 {
@@ -323,8 +323,8 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
                     header.Length64 = (ulong) IPAddress.HostToNetworkOrder((long) length);
                 }
 
-                const byte endOfMessageBit = (byte)1u << 7;
-                header.Mask = (byte) (endOfMessageBit | ((byte) type & 0xf));
+                const uint8 endOfMessageBit = (uint8)1u << 7;
+                header.Mask = (uint8) (endOfMessageBit | ((uint8) type & 0xf));
                 CopyHeaderToBuffer(header, _sendHeaderBuffer, headerLength);
 
                 await _stream.WriteAsync(_sendHeaderBuffer, 0, headerLength);
@@ -332,18 +332,18 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
             }
         }
 
-        private static unsafe void CopyHeaderToBuffer(WebSocketHeader source, byte[] destination, int32 headerLength)
+        private static unsafe void CopyHeaderToBuffer(WebSocketHeader source, uint8[] destination, int32 headerLength)
             => Marshal.Copy(new IntPtr(&source), destination, 0, headerLength);
 
         struct Frame
         {
-            public byte[] Data;
+            public uint8[] Data;
             public bool EndOfMessage;
             public FrameType FrameType;
         }
 
-        byte[] _recvHeaderBuffer = new byte[8];
-        byte[] _maskBuffer = new byte[4];
+        uint8[] _recvHeaderBuffer = new uint8[8];
+        uint8[] _maskBuffer = new uint8[4];
         async Task<Frame> ReadFrame()
         {
             _receiveFrameStream.Position = 0;
@@ -374,7 +374,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
             var data = _receiveFrameStream.ToArray();
             if(masked)
                 for (var c = 0; c < data.Length; c++)
-                    data[c] = (byte) (data[c] ^ _maskBuffer[c % 4]);
+                    data[c] = (uint8) (data[c] ^ _maskBuffer[c % 4]);
 
             return new Frame
             {
@@ -432,7 +432,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
         }
 
 
-        byte[] _readExactBuffer = new byte[4096];
+        uint8[] _readExactBuffer = new uint8[4096];
         async Task ReadExact(Stream from, MemoryStream to, int32 length)
         {
             while (length>0)
@@ -446,7 +446,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
             }
         }
 
-        async Task ReadExact(Stream from, byte[] to, int32 offset, int32 length)
+        async Task ReadExact(Stream from, uint8[] to, int32 offset, int32 length)
         {
             while (length > 0)
             {
@@ -462,7 +462,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
     public class SimpleWebSocketMessage
     {
         public bool IsText { get; set; }
-        public byte[] Data { get; set; }
+        public uint8[] Data { get; set; }
 
         public string AsString()
         {

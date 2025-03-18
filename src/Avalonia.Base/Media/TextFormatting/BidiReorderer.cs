@@ -30,7 +30,7 @@ namespace Avalonia.Media.TextFormatting
 
             try
             {
-                sbyte? previousLevel = null;
+                int8? previousLevel = null;
 
                 _runs.Add(textRuns.Length);
 
@@ -74,8 +74,8 @@ namespace Avalonia.Media.TextFormatting
                 // From the highest level found in the text to the lowest odd level on each line, including intermediate levels
                 // not actually present in the text, reverse any contiguous sequence of characters that are at that level or higher.
                 // https://unicode.org/reports/tr9/#L2
-                sbyte max = 0;
-                var min = sbyte.MaxValue;
+                int8 max = 0;
+                var min = int8.MaxValue;
 
                 for (var i = 0; i < textRuns.Length; i++)
                 {
@@ -158,14 +158,14 @@ namespace Avalonia.Media.TextFormatting
             }
         }
 
-        private static sbyte GetRunBidiLevel(TextRun run, FlowDirection flowDirection, sbyte? previousLevel)
+        private static int8 GetRunBidiLevel(TextRun run, FlowDirection flowDirection, int8? previousLevel)
         {
             if (run is ShapedTextRun shapedTextRun)
             {
                 return shapedTextRun.BidiLevel;
             }
 
-            var defaultLevel = (sbyte)(flowDirection == FlowDirection.LeftToRight ? 0 : 1);
+            var defaultLevel = (int8)(flowDirection == FlowDirection.LeftToRight ? 0 : 1);
 
             if (run is TextEndOfLine)
             {
@@ -276,7 +276,7 @@ namespace Avalonia.Media.TextFormatting
 
         private struct BidiRange
         {
-            public BidiRange(sbyte level, int32 leftRunIndex, int32 rightRunIndex, int32 previousRangeIndex)
+            public BidiRange(int8 level, int32 leftRunIndex, int32 rightRunIndex, int32 previousRangeIndex)
             {
                 Level = level;
                 LeftRunIndex = leftRunIndex;
@@ -284,7 +284,7 @@ namespace Avalonia.Media.TextFormatting
                 PreviousRangeIndex = previousRangeIndex;
             }
 
-            public sbyte Level { get; set; }
+            public int8 Level { get; set; }
 
             public int32 LeftRunIndex { get; set; }
 
@@ -296,7 +296,7 @@ namespace Avalonia.Media.TextFormatting
 
     internal struct OrderedBidiRun
     {
-        public OrderedBidiRun(int32 runIndex, TextRun run, sbyte level)
+        public OrderedBidiRun(int32 runIndex, TextRun run, int8 level)
         {
             RunIndex = runIndex;
             Run = run;
@@ -306,7 +306,7 @@ namespace Avalonia.Media.TextFormatting
 
         public int32 RunIndex { get; }
 
-        public sbyte Level { get; }
+        public int8 Level { get; }
 
         public TextRun Run { get; }
 

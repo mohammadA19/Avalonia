@@ -39,7 +39,7 @@ partial class DrawingContextImpl
             var alpha = drop.Color.A * drop.Opacity;
             if (!_useOpacitySaveLayer)
                 alpha *= _currentOpacity;
-            var color = new SKColor(drop.Color.R, drop.Color.G, drop.Color.B, (byte)Math.Max(0, Math.Min(255, alpha)));
+            var color = new SKColor(drop.Color.R, drop.Color.G, drop.Color.B, (uint8)Math.Max(0, Math.Min(255, alpha)));
 
             return SKImageFilter.CreateDropShadow((float)drop.OffsetX, (float)drop.OffsetY, sigma, sigma, color);
         }

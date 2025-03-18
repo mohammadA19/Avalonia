@@ -85,7 +85,7 @@ namespace Avalonia.Rendering.Composition.Transport
 
         public void Serialize(BatchStreamWriter writer)
         {
-            writer.Write((byte)(_changed ? 1 : 0));
+            writer.Write((uint8)(_changed ? 1 : 0));
             if (_changed)
             {
                 writer.Write(_list.Count);

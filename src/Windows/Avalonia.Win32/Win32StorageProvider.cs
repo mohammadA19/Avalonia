@@ -220,7 +220,7 @@ namespace Avalonia.Win32
             return default;
         }
 
-        private static byte[] FiltersToPointer(IReadOnlyList<FilePickerFileType>? filters, out int32 length)
+        private static uint8[] FiltersToPointer(IReadOnlyList<FilePickerFileType>? filters, out int32 length)
         {
             if (filters == null || filters.Count == 0)
             {
@@ -231,7 +231,7 @@ namespace Avalonia.Win32
             }
 
             var size = Marshal.SizeOf<UnmanagedMethods.COMDLG_FILTERSPEC>();
-            var resultArr = new byte[size * filters.Count];
+            var resultArr = new uint8[size * filters.Count];
 
             for (int32 i = 0; i < filters.Count; i++)
             {

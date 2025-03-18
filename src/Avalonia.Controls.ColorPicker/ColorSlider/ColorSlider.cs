@@ -117,7 +117,7 @@ namespace Avalonia.Controls.Primitives
             if (pixelWidth != 0 && pixelHeight != 0)
             {
                 // siteToCapacity = true, because CreateComponentBitmapAsync sets bytes via indexer over pre-allocated buffer. 
-                using var bgraPixelData = new PooledList<byte>(pixelWidth * pixelHeight * 4, ClearMode.Never, true);
+                using var bgraPixelData = new PooledList<uint8>(pixelWidth * pixelHeight * 4, ClearMode.Never, true);
                 await ColorPickerHelpers.CreateComponentBitmapAsync(
                     bgraPixelData,
                     pixelWidth,
@@ -270,7 +270,7 @@ namespace Avalonia.Controls.Primitives
             {
                 var baseRgbColor = Color;
 
-                byte componentValue = Convert.ToByte(MathUtilities.Clamp(sliderPercent * 255, 0, 255));
+                uint8 componentValue = Convert.ToByte(MathUtilities.Clamp(sliderPercent * 255, 0, 255));
 
                 switch (component)
                 {

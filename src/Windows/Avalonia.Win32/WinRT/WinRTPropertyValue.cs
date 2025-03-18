@@ -28,7 +28,7 @@ namespace Avalonia.Win32.WinRT
 
         public PropertyType Type { get; }
         public int32 IsNumericScalar { get; }
-        public byte UInt8 { get; }
+        public uint8 UInt8 { get; }
         public short Int16 { get; }
         public ushort UInt16 { get; }
         public int32 Int32 { get; }
@@ -54,7 +54,7 @@ namespace Avalonia.Win32.WinRT
 
         public unsafe void GetRect(void* value) => throw NotImplemented;
 
-        public unsafe byte* GetUInt8Array(uint32* __valueSize) => throw NotImplemented;
+        public unsafe uint8* GetUInt8Array(uint32* __valueSize) => throw NotImplemented;
 
         public unsafe short* GetInt16Array(uint32* __valueSize) => throw NotImplemented;
 

@@ -12,7 +12,7 @@ internal static unsafe class PixelFormatWriter
 {
     public unsafe struct Rgb24PixelFormatWriter : IPixelFormatWriter
     {
-        private byte* _address;
+        private uint8* _address;
         public void WriteNext(Rgba8888Pixel pixel)
         {
             var addr = _address;
@@ -24,12 +24,12 @@ internal static unsafe class PixelFormatWriter
             _address += 3;
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Rgb32PixelFormatWriter : IPixelFormatWriter
     {
-        private byte* _address;
+        private uint8* _address;
         public void WriteNext(Rgba8888Pixel pixel)
         {
             var address = _address;
@@ -42,7 +42,7 @@ internal static unsafe class PixelFormatWriter
             _address += 4;
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Rgba64PixelFormatWriter : IPixelFormatWriter
@@ -77,7 +77,7 @@ internal static unsafe class PixelFormatWriter
 
     public unsafe struct Bgra8888PixelFormatWriter : IPixelFormatWriter
     {
-        private byte* _address;
+        private uint8* _address;
         public void WriteNext(Rgba8888Pixel pixel)
         {
             var addr = _address;
@@ -90,12 +90,12 @@ internal static unsafe class PixelFormatWriter
             _address += 4;
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Bgr24PixelFormatWriter : IPixelFormatWriter
     {
-        private byte* _address;
+        private uint8* _address;
         public void WriteNext(Rgba8888Pixel pixel)
         {
             var addr = _address;
@@ -107,12 +107,12 @@ internal static unsafe class PixelFormatWriter
             _address += 3;
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Bgr32PixelFormatWriter : IPixelFormatWriter
     {
-        private byte* _address;
+        private uint8* _address;
         public void WriteNext(Rgba8888Pixel pixel)
         {
             var address = _address;
@@ -125,12 +125,12 @@ internal static unsafe class PixelFormatWriter
             _address += 4;
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Bgra32PixelFormatWriter : IPixelFormatWriter
     {
-        private byte* _address;
+        private uint8* _address;
         public void WriteNext(Rgba8888Pixel pixel)
         {
             var addr = _address;
@@ -143,7 +143,7 @@ internal static unsafe class PixelFormatWriter
             _address += 4;
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Bgr565PixelFormatWriter : IPixelFormatWriter
@@ -215,7 +215,7 @@ internal static unsafe class PixelFormatWriter
     public unsafe struct BlackWhitePixelFormatWriter : IPixelFormatWriter
     {
         private int32 _bit;
-        private byte* _address;
+        private uint8* _address;
 
         public void WriteNext(Rgba8888Pixel pixel)
         {
@@ -228,7 +228,7 @@ internal static unsafe class PixelFormatWriter
             var shift = 7 - _bit;
             var mask = 1 << shift;
 
-            *addr = (byte)((*addr & ~mask) | value << shift);
+            *addr = (uint8)((*addr & ~mask) | value << shift);
 
             _bit++;
 
@@ -240,20 +240,20 @@ internal static unsafe class PixelFormatWriter
             }
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Gray2PixelFormatWriter : IPixelFormatWriter
     {
         private int32 _bit;
-        private byte* _address;
+        private uint8* _address;
 
         public void WriteNext(Rgba8888Pixel pixel)
         {
             var addr = _address;
             var value = 0;
 
-            var grayscale = (byte)Math.Round(0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B);
+            var grayscale = (uint8)Math.Round(0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B);
 
             if (grayscale > 0 && grayscale <= 0x55)
             {
@@ -277,7 +277,7 @@ internal static unsafe class PixelFormatWriter
             var shift = 6 - _bit;
             var mask = 3 << shift;
 
-            *addr = (byte)((*addr & ~mask) | value << shift);
+            *addr = (uint8)((*addr & ~mask) | value << shift);
 
             _bit += 2;
 
@@ -288,26 +288,26 @@ internal static unsafe class PixelFormatWriter
             }
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Gray4PixelFormatWriter : IPixelFormatWriter
     {
         private int32 _bit;
-        private byte* _address;
+        private uint8* _address;
 
         public void WriteNext(Rgba8888Pixel pixel)
         {
             var addr = _address;
 
-            var grayscale = (byte)Math.Round(0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B);
+            var grayscale = (uint8)Math.Round(0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B);
 
-            var value = (byte)(grayscale / 255F * 0xF);
+            var value = (uint8)(grayscale / 255F * 0xF);
 
             var shift = 4 - _bit;
             var mask = 0xF << shift;
 
-            *addr = (byte)((*addr & ~mask) | value << shift);
+            *addr = (uint8)((*addr & ~mask) | value << shift);
 
             _bit += 4;
 
@@ -318,25 +318,25 @@ internal static unsafe class PixelFormatWriter
             }
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Gray8PixelFormatWriter : IPixelFormatWriter
     {
-        private byte* _address;
+        private uint8* _address;
 
         public void WriteNext(Rgba8888Pixel pixel)
         {
             var addr = _address;
 
-            var grayscale = (byte)Math.Round(0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B);
+            var grayscale = (uint8)Math.Round(0.299F * pixel.R + 0.587F * pixel.G + 0.114F * pixel.B);
 
             *addr = grayscale;
 
             _address++;
         }
 
-        public void Reset(IntPtr address) => _address = (byte*)address;
+        public void Reset(IntPtr address) => _address = (uint8*)address;
     }
 
     public unsafe struct Gray16PixelFormatWriter : IPixelFormatWriter
@@ -406,9 +406,9 @@ internal static unsafe class PixelFormatWriter
 
         return new Rgba8888Pixel
         {
-            R = (byte)(pixel.R * factor),
-            G = (byte)(pixel.G * factor),
-            B = (byte)(pixel.B * factor),
+            R = (uint8)(pixel.R * factor),
+            G = (uint8)(pixel.G * factor),
+            B = (uint8)(pixel.B * factor),
             A = pixel.A
         };
     }
@@ -419,9 +419,9 @@ internal static unsafe class PixelFormatWriter
 
         return new Rgba8888Pixel
         {
-            R = (byte)(pixel.R * factor),
-            G = (byte)(pixel.G * factor),
-            B = (byte)(pixel.B * factor),
+            R = (uint8)(pixel.R * factor),
+            G = (uint8)(pixel.G * factor),
+            B = (uint8)(pixel.B * factor),
             A = pixel.A
         };
     }

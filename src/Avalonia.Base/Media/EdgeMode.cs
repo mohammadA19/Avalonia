@@ -1,6 +1,6 @@
 ﻿namespace Avalonia.Media
 {
-    public enum EdgeMode : byte
+    public enum EdgeMode : uint8
     {
         Unspecified,
 

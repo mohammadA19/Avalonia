@@ -148,7 +148,7 @@ namespace Avalonia.Media
             // Update tintColor's alpha with the combined opacity value
             double tintOpacityModifier = GetTintOpacityModifier(tintColor);
 
-            return new Color((byte)(255 * ((255.0 / tintColor.A) * tintOpacity) * tintOpacityModifier), tintColor.R, tintColor.G, tintColor.B);
+            return new Color((uint8)(255 * ((255.0 / tintColor.A) * tintOpacity) * tintOpacityModifier), tintColor.R, tintColor.G, tintColor.B);
         }
 
         private static double GetTintOpacityModifier(Color tintColor)
@@ -213,7 +213,7 @@ namespace Avalonia.Media
             return GetLuminosityColor(luminosityOpacity);
         }
 
-        private static byte Trim(double value)
+        private static uint8 Trim(double value)
         {
             value = Math.Min(Math.Floor(value * 256), 255);
 
@@ -226,7 +226,7 @@ namespace Avalonia.Media
                 return 255;
             }
 
-            return (byte)value;
+            return (uint8)value;
         }
 
         private static float RGBMax(Color color)
@@ -261,7 +261,7 @@ namespace Avalonia.Media
             var luminosityColor = new Color(255, Trim(lightness), Trim(lightness), Trim(lightness));
 
             var compensationMultiplier = 1 - PlatformTransparencyCompensationLevel;
-            return new Color((byte)(255 * Math.Max(Math.Min(PlatformTransparencyCompensationLevel + ((luminosityOpacity ?? 1) * compensationMultiplier), 1.0), 0.0)), luminosityColor.R, luminosityColor.G, luminosityColor.B);
+            return new Color((uint8)(255 * Math.Max(Math.Min(PlatformTransparencyCompensationLevel + ((luminosityOpacity ?? 1) * compensationMultiplier), 1.0), 0.0)), luminosityColor.R, luminosityColor.G, luminosityColor.B);
         }
 
         /// <summary>

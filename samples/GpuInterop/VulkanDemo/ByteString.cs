@@ -19,20 +19,20 @@ unsafe class ByteString : IDisposable
         Marshal.FreeHGlobal(Pointer);
     }
 
-    public static implicit operator byte*(ByteString h) => (byte*)h.Pointer;
+    public static implicit operator uint8*(ByteString h) => (uint8*)h.Pointer;
 }
     
 unsafe class ByteStringList : IDisposable
 {
     private List<ByteString> _inner;
-    private byte** _ptr;
+    private uint8** _ptr;
 
     public ByteStringList(IEnumerable<string> items)
     {
         _inner = items.Select(x => new ByteString(x)).ToList();
-        _ptr = (byte**)Marshal.AllocHGlobal(IntPtr.Size * _inner.Count + 1);
+        _ptr = (uint8**)Marshal.AllocHGlobal(IntPtr.Size * _inner.Count + 1);
         for (var c = 0; c < _inner.Count; c++)
-            _ptr[c] = (byte*)_inner[c].Pointer;
+            _ptr[c] = (uint8*)_inner[c].Pointer;
     }
 
     public int32 Count => _inner.Count;
@@ -43,5 +43,5 @@ unsafe class ByteStringList : IDisposable
         Marshal.FreeHGlobal(new IntPtr(_ptr));
     }
 
-    public static implicit operator byte**(ByteStringList h) => h._ptr;
+    public static implicit operator uint8**(ByteStringList h) => h._ptr;
 }

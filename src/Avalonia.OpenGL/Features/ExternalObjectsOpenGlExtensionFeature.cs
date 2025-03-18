@@ -53,10 +53,10 @@ unsafe partial class ExternalObjectsInterface
     
     
     [GetProcAddress("glGetUnsignedBytei_vEXT", true)]
-    public partial void GetUnsignedBytei_vEXT(int32 target, uint32 index, byte* data);
+    public partial void GetUnsignedBytei_vEXT(int32 target, uint32 index, uint8* data);
     
     [GetProcAddress("glGetUnsignedBytevEXT", true)]
-    public partial void GetUnsignedBytevEXT(int32 target, byte* data);
+    public partial void GetUnsignedBytevEXT(int32 target, uint8* data);
 }
 
 public class ExternalObjectsOpenGlExtensionFeature : IGlContextExternalObjectsFeature
@@ -95,8 +95,8 @@ public class ExternalObjectsOpenGlExtensionFeature : IGlContextExternalObjectsFe
             _context.GlInterface.GetIntegerv(GL_NUM_DEVICE_UUIDS_EXT, out var numUiids);
             if (numUiids > 0)
             {
-                DeviceUuid = new byte[16];
-                fixed (byte* pUuid = DeviceUuid)
+                DeviceUuid = new uint8[16];
+                fixed (uint8* pUuid = DeviceUuid)
                     _ext.GetUnsignedBytei_vEXT(GL_DEVICE_UUID_EXT, 0, pUuid);
             }
         }
@@ -105,8 +105,8 @@ public class ExternalObjectsOpenGlExtensionFeature : IGlContextExternalObjectsFe
         {
             if (extensions.Contains("GL_EXT_memory_object_win32") || extensions.Contains("GL_EXT_semaphore_win32"))
             {
-                DeviceLuid = new byte[8];
-                fixed (byte* pLuid = DeviceLuid)
+                DeviceLuid = new uint8[8];
+                fixed (uint8* pLuid = DeviceLuid)
                     _ext.GetUnsignedBytevEXT(GL_DEVICE_LUID_EXT, pLuid);
             }
         }
@@ -209,8 +209,8 @@ public class ExternalObjectsOpenGlExtensionFeature : IGlContextExternalObjectsFe
         return default;
     }
 
-    public byte[]? DeviceLuid { get; }
-    public byte[]? DeviceUuid { get; }
+    public uint8[]? DeviceLuid { get; }
+    public uint8[]? DeviceUuid { get; }
 
     private unsafe class ExternalSemaphore : IGlExternalSemaphore
     {

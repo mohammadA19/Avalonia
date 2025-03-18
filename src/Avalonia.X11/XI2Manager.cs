@@ -434,7 +434,7 @@ namespace Avalonia.X11
         public bool Emulated { get; set; }
         public Dictionary<int32, double> Valuators { get; }
 
-        public static RawInputModifiers ParseButtonState(int32 len, byte* buttons)
+        public static RawInputModifiers ParseButtonState(int32 len, uint8* buttons)
         {
             RawInputModifiers rv = default;
             if (len > 0)

@@ -108,7 +108,7 @@ namespace Avalonia.LinuxFramebuffer
     [StructLayout(LayoutKind.Sequential)]
     unsafe struct fb_fix_screeninfo
     {
-        public fixed byte id[16]; /* identification string eg "TT Builtin" */
+        public fixed uint8 id[16]; /* identification string eg "TT Builtin" */
 
         public IntPtr smem_start; /* Start of frame buffer mem */
 
@@ -225,7 +225,7 @@ namespace Avalonia.LinuxFramebuffer
     unsafe struct fd_set
     {
         public int32 count;
-        public fixed byte fds [256];
+        public fixed uint8 fds [256];
     }
 
     enum AxisEventCode

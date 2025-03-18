@@ -261,9 +261,9 @@ public partial class CompositionPage : UserControl
 
                 _ellipses.Add((new Point(posX, posY), pointSize / 2, new ImmutableSolidColorBrush(Color.FromArgb(
                     255,
-                    (byte)(255 - 255 * colorStage),
-                    (byte)(255 * Math.Abs(0.5 - colorStage) * 2),
-                    (byte)(255 * colorStage)
+                    (uint8)(255 - 255 * colorStage),
+                    (uint8)(255 * Math.Abs(0.5 - colorStage) * 2),
+                    (uint8)(255 * colorStage)
                 ), opacity)));
             }
         }

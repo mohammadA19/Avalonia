@@ -446,10 +446,10 @@ namespace Avalonia.Media
             if (chroma == 0)
             {
                 return Color.FromArgb(
-                    (byte)Math.Round(alpha * 255),
-                    (byte)Math.Round(min * 255),
-                    (byte)Math.Round(min * 255),
-                    (byte)Math.Round(min * 255));
+                    (uint8)Math.Round(alpha * 255),
+                    (uint8)Math.Round(min * 255),
+                    (uint8)Math.Round(min * 255),
+                    (uint8)Math.Round(min * 255));
             }
 
             // If the chroma is not zero, then we need to continue.  The first step is to figure out
@@ -519,10 +519,10 @@ namespace Avalonia.Media
             }
 
             return new Color(
-                (byte)Math.Round(alpha * 255),
-                (byte)Math.Round(r * 255),
-                (byte)Math.Round(g * 255),
-                (byte)Math.Round(b * 255));
+                (uint8)Math.Round(alpha * 255),
+                (uint8)Math.Round(r * 255),
+                (uint8)Math.Round(g * 255),
+                (uint8)Math.Round(b * 255));
         }
 
         /// <summary>

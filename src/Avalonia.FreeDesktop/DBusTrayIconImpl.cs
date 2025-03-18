@@ -13,7 +13,7 @@ namespace Avalonia.FreeDesktop
     internal class DBusTrayIconImpl : ITrayIconImpl
     {
         private static int32 s_trayIconInstanceId;
-        public static readonly (int32, int32, byte[]) EmptyPixmap = (1, 1, [255, 0, 0, 0]);
+        public static readonly (int32, int32, uint8[]) EmptyPixmap = (1, 1, [255, 0, 0, 0]);
 
         private readonly Connection? _connection;
         private readonly OrgFreedesktopDBusProxy? _dBus;
@@ -22,7 +22,7 @@ namespace Avalonia.FreeDesktop
         private readonly PathHandler _pathHandler = new("/StatusNotifierItem");
         private readonly StatusNotifierItemDbusObj? _statusNotifierItemDbusObj;
         private OrgKdeStatusNotifierWatcherProxy? _statusNotifierWatcher;
-        private (int32, int32, byte[]) _icon;
+        private (int32, int32, uint8[]) _icon;
 
         private string? _sysTrayServiceName;
         private string? _tooltipText;
@@ -161,15 +161,15 @@ namespace Avalonia.FreeDesktop
 
             var pixLength = w * h;
             var pixByteArrayCounter = 0;
-            var pixByteArray = new byte[w * h * 4];
+            var pixByteArray = new uint8[w * h * 4];
 
             for (var i = 0; i < pixLength; i++)
             {
                 var rawPixel = x11iconData[i + 2];
-                pixByteArray[pixByteArrayCounter++] = (byte)((rawPixel & 0xFF000000) >> 24);
-                pixByteArray[pixByteArrayCounter++] = (byte)((rawPixel & 0xFF0000) >> 16);
-                pixByteArray[pixByteArrayCounter++] = (byte)((rawPixel & 0xFF00) >> 8);
-                pixByteArray[pixByteArrayCounter++] = (byte)(rawPixel & 0xFF);
+                pixByteArray[pixByteArrayCounter++] = (uint8)((rawPixel & 0xFF000000) >> 24);
+                pixByteArray[pixByteArrayCounter++] = (uint8)((rawPixel & 0xFF0000) >> 16);
+                pixByteArray[pixByteArrayCounter++] = (uint8)((rawPixel & 0xFF00) >> 8);
+                pixByteArray[pixByteArrayCounter++] = (uint8)(rawPixel & 0xFF);
             }
 
             _icon = (w, h, pixByteArray);
@@ -247,7 +247,7 @@ namespace Avalonia.FreeDesktop
             EmitNewStatus(Status);
         }
 
-        public void SetIcon((int32, int32, byte[]) dbusPixmap)
+        public void SetIcon((int32, int32, uint8[]) dbusPixmap)
         {
             IconPixmap = [dbusPixmap];
             InvalidateAll();

@@ -28,22 +28,22 @@ namespace Avalonia.Media
         /// <summary>
         /// Gets the Alpha component of the color.
         /// </summary>
-        public byte A { get; }
+        public uint8 A { get; }
 
         /// <summary>
         /// Gets the Red component of the color.
         /// </summary>
-        public byte R { get; }
+        public uint8 R { get; }
 
         /// <summary>
         /// Gets the Green component of the color.
         /// </summary>
-        public byte G { get; }
+        public uint8 G { get; }
 
         /// <summary>
         /// Gets the Blue component of the color.
         /// </summary>
-        public byte B { get; }
+        public uint8 B { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Color"/> struct.
@@ -52,7 +52,7 @@ namespace Avalonia.Media
         /// <param name="r">The red component.</param>
         /// <param name="g">The green component.</param>
         /// <param name="b">The blue component.</param>
-        public Color(byte a, byte r, byte g, byte b)
+        public Color(uint8 a, uint8 r, uint8 g, uint8 b)
         {
             A = a;
             R = r;
@@ -68,7 +68,7 @@ namespace Avalonia.Media
         /// <param name="g">The green component.</param>
         /// <param name="b">The blue component.</param>
         /// <returns>The color.</returns>
-        public static Color FromArgb(byte a, byte r, byte g, byte b)
+        public static Color FromArgb(uint8 a, uint8 r, uint8 g, uint8 b)
         {
             return new Color(a, r, g, b);
         }
@@ -80,7 +80,7 @@ namespace Avalonia.Media
         /// <param name="g">The green component.</param>
         /// <param name="b">The blue component.</param>
         /// <returns>The color.</returns>
-        public static Color FromRgb(byte r, byte g, byte b)
+        public static Color FromRgb(uint8 r, uint8 g, uint8 b)
         {
             return new Color(0xff, r, g, b);
         }
@@ -93,10 +93,10 @@ namespace Avalonia.Media
         public static Color FromUInt32(uint32 value)
         {
             return new Color(
-                (byte)((value >> 24) & 0xff),
-                (byte)((value >> 16) & 0xff),
-                (byte)((value >> 8) & 0xff),
-                (byte)(value & 0xff)
+                (uint8)((value >> 24) & 0xff),
+                (uint8)((value >> 16) & 0xff),
+                (uint8)((value >> 8) & 0xff),
+                (uint8)(value & 0xff)
             );
         }
 
@@ -370,9 +370,9 @@ namespace Avalonia.Media
 
             if (components.Length == 3) // RGB
             {
-                if (InternalTryParseByte(components[0].AsSpan(), out byte red) &&
-                    InternalTryParseByte(components[1].AsSpan(), out byte green) &&
-                    InternalTryParseByte(components[2].AsSpan(), out byte blue))
+                if (InternalTryParseByte(components[0].AsSpan(), out uint8 red) &&
+                    InternalTryParseByte(components[1].AsSpan(), out uint8 green) &&
+                    InternalTryParseByte(components[2].AsSpan(), out uint8 blue))
                 {
                     color = new Color(0xFF, red, green, blue);
                     return true;
@@ -380,18 +380,18 @@ namespace Avalonia.Media
             }
             else if (components.Length == 4) // RGBA
             {
-                if (InternalTryParseByte(components[0].AsSpan(), out byte red) &&
-                    InternalTryParseByte(components[1].AsSpan(), out byte green) &&
-                    InternalTryParseByte(components[2].AsSpan(), out byte blue) &&
+                if (InternalTryParseByte(components[0].AsSpan(), out uint8 red) &&
+                    InternalTryParseByte(components[1].AsSpan(), out uint8 green) &&
+                    InternalTryParseByte(components[2].AsSpan(), out uint8 blue) &&
                     InternalTryParseDouble(components[3].AsSpan(), out double alpha))
                 {
-                    color = new Color((byte)Math.Round(alpha * 255.0), red, green, blue);
+                    color = new Color((uint8)Math.Round(alpha * 255.0), red, green, blue);
                     return true;
                 }
             }
 
-            // Local function to specially parse a byte value with an optional percentage sign
-            bool InternalTryParseByte(ReadOnlySpan<char> inString, out byte outByte)
+            // Local function to specially parse a uint8 value with an optional percentage sign
+            bool InternalTryParseByte(ReadOnlySpan<char> inString, out uint8 outByte)
             {
                 // The percent sign, if it exists, must be at the end of the number
                 int32 percentIndex = inString.IndexOf("%".AsSpan(), StringComparison.Ordinal);
@@ -401,7 +401,7 @@ namespace Avalonia.Media
                     var result = inString.Slice(0, percentIndex).TryParseDouble(NumberStyles.Number, CultureInfo.InvariantCulture,
                         out double percentage);
 
-                    outByte = (byte)Math.Round((percentage / 100.0) * 255.0);
+                    outByte = (uint8)Math.Round((percentage / 100.0) * 255.0);
                     return result;
                 }
                 else
@@ -531,10 +531,10 @@ namespace Avalonia.Media
         /// <param name="alpha">The Alpha component.</param>
         /// <returns>A new <see cref="HslColor"/> equivalent to the given RGBA values.</returns>
         public static HslColor ToHsl(
-            byte red,
-            byte green,
-            byte blue,
-            byte alpha = 0xFF)
+            uint8 red,
+            uint8 green,
+            uint8 blue,
+            uint8 alpha = 0xFF)
         {
             // Normalize RGBA components into the 0..1 range
             return Color.ToHsl(
@@ -605,10 +605,10 @@ namespace Avalonia.Media
         /// <param name="alpha">The Alpha component.</param>
         /// <returns>A new <see cref="HsvColor"/> equivalent to the given RGBA values.</returns>
         public static HsvColor ToHsv(
-            byte red,
-            byte green,
-            byte blue,
-            byte alpha = 0xFF)
+            uint8 red,
+            uint8 green,
+            uint8 blue,
+            uint8 alpha = 0xFF)
         {
             // Normalize RGBA components into the 0..1 range
             return Color.ToHsv(

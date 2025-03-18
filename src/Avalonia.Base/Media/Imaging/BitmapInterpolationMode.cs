@@ -3,7 +3,7 @@
     /// <summary>
     /// Controls the performance and quality of bitmap scaling.
     /// </summary>
-    public enum BitmapInterpolationMode : byte
+    public enum BitmapInterpolationMode : uint8
     {
         Unspecified,
 

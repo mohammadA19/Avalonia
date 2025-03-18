@@ -17,7 +17,7 @@ namespace Avalonia.Android.Platform.Storage;
 
 internal class AndroidStorageProvider : IStorageProvider
 {
-    public static ReadOnlySpan<byte> AndroidKey => "android"u8;
+    public static ReadOnlySpan<uint8> AndroidKey => "android"u8;
     private readonly Activity _activity;
 
     public AndroidStorageProvider(Activity activity)

@@ -48,7 +48,7 @@ namespace Avalonia.Media.TextFormatting
         /// Gets a list of <see cref="UnshapedTextRun"/>.
         /// </summary>
         /// <returns>The shapeable text characters.</returns>
-        internal void GetShapeableCharacters(ReadOnlyMemory<char> text, sbyte biDiLevel,
+        internal void GetShapeableCharacters(ReadOnlyMemory<char> text, int8 biDiLevel,
             FontManager fontManager, ref TextRunProperties? previousProperties, RentedList<TextRun> results)
         {
             var properties = Properties;
@@ -75,7 +75,7 @@ namespace Avalonia.Media.TextFormatting
         /// <param name="previousProperties"></param>
         /// <returns>A list of shapeable text runs.</returns>
         private static UnshapedTextRun CreateShapeableRun(ReadOnlyMemory<char> text,
-            TextRunProperties defaultProperties, sbyte biDiLevel, FontManager fontManager,
+            TextRunProperties defaultProperties, int8 biDiLevel, FontManager fontManager,
             ref TextRunProperties? previousProperties)
         {
             var defaultTypeface = defaultProperties.Typeface;

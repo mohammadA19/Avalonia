@@ -20,7 +20,7 @@ namespace Avalonia.Controls.Primitives.Converters
         /// <summary>
         /// Gets or sets the alpha channel threshold below which a default color is used instead of black/white.
         /// </summary>
-        public byte AlphaThreshold { get; set; } = 128;
+        public uint8 AlphaThreshold { get; set; } = 128;
 
         /// <inheritdoc/>
         public object? Convert(
