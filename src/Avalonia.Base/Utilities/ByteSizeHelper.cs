@@ -20,7 +20,7 @@ namespace Avalonia.Utilities
             "YB" 
         };
 
-        public static string ToString(ulong bytes, bool separate)
+        public static string ToString(uint64 bytes, bool separate)
         {
             if (bytes == 0)
             {

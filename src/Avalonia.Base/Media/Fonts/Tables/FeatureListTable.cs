@@ -80,7 +80,7 @@ namespace Avalonia.Media.Fonts.Tables
             return Load(reader, featureListOffset);
         }
 
-        private static FeatureListTable Load(BigEndianBinaryReader reader, long offset)
+        private static FeatureListTable Load(BigEndianBinaryReader reader, int64 offset)
         {
             // FeatureList
             // +---------------+------------------------------+-----------------------------------------------------------------------------------------------------------------+

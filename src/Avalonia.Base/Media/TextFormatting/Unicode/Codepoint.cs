@@ -126,7 +126,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                const ulong whiteSpaceMask =
+                const uint64 whiteSpaceMask =
                     (1UL << (int32)GeneralCategory.Control) |
                     (1UL << (int32)GeneralCategory.NonspacingMark) |
                     (1UL << (int32)GeneralCategory.Format) |

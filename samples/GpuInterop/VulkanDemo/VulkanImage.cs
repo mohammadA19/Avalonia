@@ -34,15 +34,15 @@ public unsafe class VulkanImage : IDisposable
         internal Format Format { get; }
         internal ImageAspectFlags AspectFlags { get; }
         
-        public ulong Handle => InternalHandle.Handle;
-        public ulong ViewHandle => _imageView.Handle;
+        public uint64 Handle => InternalHandle.Handle;
+        public uint64 ViewHandle => _imageView.Handle;
         public uint32 UsageFlags => (uint32) _imageUsageFlags;
-        public ulong MemoryHandle => _imageMemory.Handle;
+        public uint64 MemoryHandle => _imageMemory.Handle;
         public DeviceMemory DeviceMemory => _imageMemory;
         public uint32 MipLevels { get; }
         public Vk Api { get; }
         public PixelSize Size { get; }
-        public ulong MemorySize { get; }
+        public uint64 MemorySize { get; }
         public uint32 CurrentLayout => (uint32) _currentLayout;
 
         public VulkanImage(VulkanContext vk, uint32 format, PixelSize size,

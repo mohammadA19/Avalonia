@@ -14,7 +14,7 @@ internal unsafe class Interop
     internal static NativeHandle kCFRunLoopDefaultMode = CFString.CreateNative("kCFRunLoopDefaultMode");
 
     [Flags]
-    internal enum CFOptionFlags : ulong
+    internal enum CFOptionFlags : uint64
     {
         kCFRunLoopBeforeSources = (1UL << 2),
         kCFRunLoopAfterWaiting = (1UL << 6),

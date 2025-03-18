@@ -12,7 +12,7 @@ partial class AndroidVulkanInterface
 
     [GetProcAddress("vkCreateAndroidSurfaceKHR")]
     public partial int32 vkCreateAndroidSurfaceKHR(IntPtr instance, ref VkAndroidSurfaceCreateInfoKHR pCreateInfo,
-            IntPtr pAllocator, out ulong pSurface);
+            IntPtr pAllocator, out uint64 pSurface);
 }
 
 struct VkAndroidSurfaceCreateInfoKHR

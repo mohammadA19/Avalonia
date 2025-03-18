@@ -19,14 +19,14 @@ internal static unsafe class Glib
     private static extern void g_object_ref(IntPtr instance);
 
     [DllImport(GObjectName)]
-    private static extern ulong g_signal_connect_object(IntPtr instance, Utf8Buffer signal,
+    private static extern uint64 g_signal_connect_object(IntPtr instance, Utf8Buffer signal,
         IntPtr handler, IntPtr userData, int32 flags);
 
     [DllImport(GObjectName)]
     private static extern void g_object_unref(IntPtr instance);
 
     [DllImport(GObjectName)]
-    private static extern ulong g_signal_handler_disconnect(IntPtr instance, ulong connectionId);
+    private static extern uint64 g_signal_handler_disconnect(IntPtr instance, uint64 connectionId);
 
     public const int32 G_PRIORITY_HIGH = -100; 
     public const int32 G_PRIORITY_DEFAULT = 0; 
@@ -131,9 +131,9 @@ internal static unsafe class Glib
     {
         private readonly IntPtr _instance;
         private GCHandle _handle;
-        private readonly ulong _id;
+        private readonly uint64 _id;
 
-        public ConnectedSignal(IntPtr instance, GCHandle handle, ulong id)
+        public ConnectedSignal(IntPtr instance, GCHandle handle, uint64 id)
         {
             _instance = instance;
             g_object_ref(instance);

@@ -257,7 +257,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
             [FieldOffset(0)] public uint8 Mask;
             [FieldOffset(1)] public uint8 Length8;
             [FieldOffset(2)] public uint16 Length16;
-            [FieldOffset(2)] public ulong Length64;
+            [FieldOffset(2)] public uint64 Length64;
         }
 
         readonly uint8[] _sendHeaderBuffer = new uint8[10];
@@ -320,7 +320,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
                 {
                     headerLength = WebsocketLen64Length;
                     header.Length8 = WebsocketLen64Code;
-                    header.Length64 = (ulong) IPAddress.HostToNetworkOrder((long) length);
+                    header.Length64 = (uint64) IPAddress.HostToNetworkOrder((int64) length);
                 }
 
                 const uint8 endOfMessageBit = (uint8)1u << 7;
@@ -365,7 +365,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
             else
             {
                 await ReadExact(_stream, _recvHeaderBuffer, 0, 8);
-                length = (int32) (ulong) IPAddress.NetworkToHostOrder((long) BitConverter.ToUInt64(_recvHeaderBuffer, 0));
+                length = (int32) (uint64) IPAddress.NetworkToHostOrder((int64) BitConverter.ToUInt64(_recvHeaderBuffer, 0));
             }
 
             if (masked)

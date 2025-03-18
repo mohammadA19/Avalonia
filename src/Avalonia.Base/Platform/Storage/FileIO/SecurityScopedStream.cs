@@ -17,9 +17,9 @@ internal sealed class SecurityScopedStream(FileStream _stream, IDisposable _secu
 
     public override bool CanWrite => _stream.CanWrite;
 
-    public override long Length => _stream.Length;
+    public override int64 Length => _stream.Length;
 
-    public override long Position
+    public override int64 Position
     {
         get => _stream.Position;
         set => _stream.Position = value;
@@ -62,10 +62,10 @@ internal sealed class SecurityScopedStream(FileStream _stream, IDisposable _secu
 
     public override void WriteByte(uint8 value) => _stream.WriteByte(value);
 
-    public override long Seek(long offset, SeekOrigin origin) =>
+    public override int64 Seek(int64 offset, SeekOrigin origin) =>
         _stream.Seek(offset, origin);
 
-    public override void SetLength(long value) =>
+    public override void SetLength(int64 value) =>
         _stream.SetLength(value);
 
 #if NET6_0_OR_GREATER

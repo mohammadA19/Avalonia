@@ -85,7 +85,7 @@ internal partial class MediaContext : ICompositorScheduler
         // Sometimes our animation, layout and render passes might be taking more than a frame to complete
         // which can cause a "freeze"-like state when UI is being updated, but input is never being processed
         // So here we inject an operation with Input priority to check if Input wasn't being processed
-        // for a long time. If that's the case the next rendering operation will be scheduled to happen after all pending input
+        // for a int64 time. If that's the case the next rendering operation will be scheduled to happen after all pending input
         
         var priority = DispatcherPriority.Render;
         

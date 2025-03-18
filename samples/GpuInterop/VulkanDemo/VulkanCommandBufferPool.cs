@@ -116,7 +116,7 @@ namespace Avalonia.Vulkan
 
             public unsafe void Dispose()
             {
-                _api.WaitForFences(_device, 1, _fence, true, ulong.MaxValue);
+                _api.WaitForFences(_device, 1, _fence, true, uint64.MaxValue);
                 lock (_commandBufferPool._lock)
                 {
                     _api.FreeCommandBuffers(_device, _commandBufferPool._commandPool, 1, InternalHandle);
@@ -157,8 +157,8 @@ namespace Avalonia.Vulkan
 
             public class KeyedMutexSubmitInfo
             {
-                public ulong? AcquireKey { get; set; }
-                public ulong? ReleaseKey { get; set; }
+                public uint64? AcquireKey { get; set; }
+                public uint64? ReleaseKey { get; set; }
                 public DeviceMemory DeviceMemory { get; set; }
             }
             
@@ -175,7 +175,7 @@ namespace Avalonia.Vulkan
                     fence = _fence;
 
 
-                ulong acquireKey = keyedMutex?.AcquireKey ?? 0, releaseKey = keyedMutex?.ReleaseKey ?? 0;
+                uint64 acquireKey = keyedMutex?.AcquireKey ?? 0, releaseKey = keyedMutex?.ReleaseKey ?? 0;
                 DeviceMemory devMem = keyedMutex?.DeviceMemory ?? default;
                 uint32 timeout = uint32.MaxValue;
                 Win32KeyedMutexAcquireReleaseInfoKHR mutex = default;

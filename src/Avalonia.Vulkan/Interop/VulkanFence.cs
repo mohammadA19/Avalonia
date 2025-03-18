@@ -32,7 +32,7 @@ internal struct VulkanFence : IDisposable
 
     public bool IsSignaled => _context.DeviceApi.GetFenceStatus(_context.DeviceHandle, _handle) == VkResult.VK_SUCCESS;
     
-    public unsafe void Wait(ulong timeout = ulong.MaxValue)
+    public unsafe void Wait(uint64 timeout = uint64.MaxValue)
     {
         VkFence fence = _handle;
         _context.DeviceApi.WaitForFences(_context.DeviceHandle, 1, &fence, 1, timeout).ThrowOnError("vkWaitForFences");

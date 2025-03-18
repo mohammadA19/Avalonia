@@ -46,8 +46,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Avalonia.X11 {
 	//
-	// In the structures below, fields of type long are mapped to IntPtr.
-	// This will work on all platforms where sizeof(long)==sizeof(void*), which
+	// In the structures below, fields of type int64 are mapped to IntPtr.
+	// This will work on all platforms where sizeof(int64)==sizeof(void*), which
 	// is almost all platforms except WIN64.
 	//
 
@@ -1781,9 +1781,9 @@ namespace Avalonia.X11 {
         public int32 depth; /* depth of image */
         public int32 bytes_per_line; /* accelerator to next scanline */
         public int32 bits_per_pixel; /* bits per pixel (ZPixmap) */
-        public ulong red_mask; /* bits in z arrangement */
-        public ulong green_mask;
-        public ulong blue_mask;
+        public uint64 red_mask; /* bits in z arrangement */
+        public uint64 green_mask;
+        public uint64 blue_mask;
         private fixed uint8 funcs[128];
     }
     

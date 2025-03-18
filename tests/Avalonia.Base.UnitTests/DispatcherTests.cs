@@ -26,15 +26,15 @@ public partial class DispatcherTests
 
         public event Action Signaled;
         public event Action Timer;
-        public long? NextTimer { get; private set; }
+        public int64? NextTimer { get; private set; }
         public bool AskedForSignal { get; private set; }
         
-        public void UpdateTimer(long? dueTimeInTicks)
+        public void UpdateTimer(int64? dueTimeInTicks)
         {
             NextTimer = dueTimeInTicks;
         }
 
-        public long Now { get; set; }
+        public int64 Now { get; set; }
 
         public void ExecuteSignal()
         {

@@ -94,7 +94,7 @@ namespace Avalonia.Controls.Remote.Server
             }
 
             /// <remarks>The returned message must NOT be kept around, as it contains a shared buffer.</remarks>
-            public FrameMessage ToMessage(long sequenceId)
+            public FrameMessage ToMessage(int64 sequenceId)
             {
                 lock (_dataLock)
                     _status = FrameStatus.CopiedToMessage;

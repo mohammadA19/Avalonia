@@ -38,7 +38,7 @@ namespace Avalonia.Media.Fonts.Tables
             _leaveOpen = leaveOpen;
         }
 
-        private long StartOfStream { get; }
+        private int64 StartOfStream { get; }
 
         /// <summary>
         /// Gets the underlying stream of the EndianBinaryReader.
@@ -50,7 +50,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// </summary>
         /// <param name="offset">Offset to seek to.</param>
         /// <param name="origin">Origin of seek operation. If SeekOrigin.Begin, the offset will be set to the start of stream position.</param>
-        public void Seek(long offset, SeekOrigin origin)
+        public void Seek(int64 offset, SeekOrigin origin)
         {
             // If SeekOrigin.Begin, the offset will be set to the start of stream position.
             if (origin == SeekOrigin.Begin)
@@ -140,7 +140,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// 8 bytes are read.
         /// </summary>
         /// <returns>The 64-bit integer read.</returns>
-        public long ReadInt64()
+        public int64 ReadInt64()
         {
             ReadInternal(_buffer, 8);
 
@@ -350,7 +350,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// <summary>
         /// Reads the uint32 string.
         /// </summary>
-        /// <returns>a 4 character long UTF8 encoded string.</returns>
+        /// <returns>a 4 character int64 UTF8 encoded string.</returns>
         public string ReadTag()
         {
             ReadInternal(_buffer, 4);

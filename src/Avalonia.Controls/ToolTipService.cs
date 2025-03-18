@@ -14,10 +14,10 @@ namespace Avalonia.Controls
         private readonly IDisposable _subscriptions;
 
         private Control? _tipControl;
-        private long _lastTipCloseTime;
+        private int64 _lastTipCloseTime;
         private DispatcherTimer? _timer;
-        private ulong _lastTipEventTime;
-        private ulong _lastWindowEventTime;
+        private uint64 _lastTipEventTime;
+        private uint64 _lastWindowEventTime;
 
         public ToolTipService(IInputManager inputManager)
         {

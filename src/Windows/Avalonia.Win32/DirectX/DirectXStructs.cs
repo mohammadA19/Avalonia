@@ -49,7 +49,7 @@ namespace Avalonia.Win32.DirectX
 
         public nuint SharedSystemMemory;
 
-        public ulong AdapterLuid;
+        public uint64 AdapterLuid;
     }
 
     internal unsafe struct DXGI_ADAPTER_DESC1
@@ -70,7 +70,7 @@ namespace Avalonia.Win32.DirectX
 
         public nuint SharedSystemMemory;
 
-        public ulong AdapterLuid;
+        public uint64 AdapterLuid;
 
         public uint32 Flags;
     }
@@ -83,9 +83,9 @@ namespace Avalonia.Win32.DirectX
 
         public uint32 SyncRefreshCount;
 
-        public ulong SyncQPCTime;
+        public uint64 SyncQPCTime;
 
-        public ulong SyncGPUTime;
+        public uint64 SyncGPUTime;
     }
 
     internal unsafe struct DXGI_GAMMA_CONTROL_CAPABILITIES

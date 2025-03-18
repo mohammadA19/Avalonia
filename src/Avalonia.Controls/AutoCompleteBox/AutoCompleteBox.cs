@@ -1576,10 +1576,10 @@ namespace Avalonia.Controls
         /// the drop-down portion of the AutoCompleteBox, to signal the control
         /// that you are done with the population process.
         /// Typically, you use PopulateComplete when the population process
-        /// is a long-running process and you want to cancel built-in filtering
+        /// is a int64-running process and you want to cancel built-in filtering
         ///  of the ItemsSource items. In this case, you can handle the
         /// Populated event and set PopulatingEventArgs.Cancel to true.
-        /// When the long-running process has completed you call
+        /// When the int64-running process has completed you call
         /// PopulateComplete to indicate the drop-down is populated.
         /// </remarks>
         public void PopulateComplete()

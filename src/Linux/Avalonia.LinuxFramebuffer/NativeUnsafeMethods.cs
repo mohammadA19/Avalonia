@@ -210,12 +210,12 @@ namespace Avalonia.LinuxFramebuffer
         public EvKey Key => (EvKey)_code;
         public AbsAxis Axis => (AbsAxis)_code;
 
-        public ulong Timestamp
+        public uint64 Timestamp
         {
             get
             {
-                var ms = (ulong)timeval2.ToInt64() / 1000;
-                var s = (ulong)timeval1.ToInt64() * 1000;
+                var ms = (uint64)timeval2.ToInt64() / 1000;
+                var s = (uint64)timeval1.ToInt64() * 1000;
                 return s + ms;
             }
         }
@@ -301,7 +301,7 @@ namespace Avalonia.LinuxFramebuffer
         [FieldOffset(0)]
         public uint32 u32;
         [FieldOffset(0)]
-        public ulong u64;
+        public uint64 u64;
     }
 
     [StructLayout(LayoutKind.Sequential)]

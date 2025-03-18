@@ -38,7 +38,7 @@ internal class Win32DispatcherImpl : IControlledDispatcherImpl
 
     public void FireTimer() => Timer?.Invoke();
 
-    public void UpdateTimer(long? dueTimeInMs)
+    public void UpdateTimer(int64? dueTimeInMs)
     {
         if (dueTimeInMs == null)
         {
@@ -117,5 +117,5 @@ internal class Win32DispatcherImpl : IControlledDispatcherImpl
         }
     }
 
-    public long Now => _clock.ElapsedMilliseconds;
+    public int64 Now => _clock.ElapsedMilliseconds;
 }

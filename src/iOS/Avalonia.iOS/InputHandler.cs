@@ -18,8 +18,8 @@ internal sealed class InputHandler
     private readonly TouchDevice _touchDevice = new();
     private readonly MouseDevice _mouseDevice = new();
     private readonly PenDevice _penDevice = new(releasePointerOnPenUp: true);
-    private static long _nextTouchPointId = 1;
-    private readonly Dictionary<UITouch, long> _knownTouches = new();
+    private static int64 _nextTouchPointId = 1;
+    private readonly Dictionary<UITouch, int64> _knownTouches = new();
 
     public InputHandler(AvaloniaView view, ITopLevelImpl tl)
     {
@@ -27,7 +27,7 @@ internal sealed class InputHandler
         _tl = tl;
     }
 
-    private static ulong Ts(UIEvent? evt) => evt is null ? 0 : (ulong)(evt.Timestamp * 1000);
+    private static uint64 Ts(UIEvent? evt) => evt is null ? 0 : (uint64)(evt.Timestamp * 1000);
     private IInputRoot Root => _view.InputRoot;
 
     public void Handle(NSSet touches, UIEvent? evt)

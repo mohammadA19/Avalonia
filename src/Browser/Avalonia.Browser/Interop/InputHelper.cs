@@ -48,25 +48,25 @@ internal static partial class InputHelper
         RedirectInputAsync(topLevelId, t => t.InputHandler.TextInputMethod.OnCompositionEnd(data));
 
     [JSExport]
-    public static Task OnPointerMove(int32 topLevelId, string pointerType, [JSMarshalAs<JSType.Number>] long pointerId,
+    public static Task OnPointerMove(int32 topLevelId, string pointerType, [JSMarshalAs<JSType.Number>] int64 pointerId,
         double offsetX, double offsetY, double pressure, double tiltX, double tiltY, double twist, int32 modifier, JSObject argsObj) =>
         RedirectInputAsync(topLevelId, t => t.InputHandler
             .OnPointerMove(pointerType, pointerId, offsetX, offsetY, pressure, tiltX, tiltY, twist, modifier, argsObj));
 
     [JSExport]
-    public static Task OnPointerDown(int32 topLevelId, string pointerType, [JSMarshalAs<JSType.Number>] long pointerId, int32 buttons,
+    public static Task OnPointerDown(int32 topLevelId, string pointerType, [JSMarshalAs<JSType.Number>] int64 pointerId, int32 buttons,
         double offsetX, double offsetY, double pressure, double tiltX, double tiltY, double twist, int32 modifier) =>
         RedirectInputAsync(topLevelId, t => t.InputHandler
             .OnPointerDown(pointerType, pointerId, buttons, offsetX, offsetY, pressure, tiltX, tiltY, twist, modifier));
 
     [JSExport]
-    public static Task OnPointerUp(int32 topLevelId, string pointerType, [JSMarshalAs<JSType.Number>] long pointerId, int32 buttons,
+    public static Task OnPointerUp(int32 topLevelId, string pointerType, [JSMarshalAs<JSType.Number>] int64 pointerId, int32 buttons,
         double offsetX, double offsetY, double pressure, double tiltX, double tiltY, double twist, int32 modifier) =>
         RedirectInputAsync(topLevelId, t => t.InputHandler
             .OnPointerUp(pointerType, pointerId, buttons, offsetX, offsetY, pressure, tiltX, tiltY, twist, modifier));
 
     [JSExport]
-    public static Task OnPointerCancel(int32 topLevelId, string pointerType, [JSMarshalAs<JSType.Number>] long pointerId,
+    public static Task OnPointerCancel(int32 topLevelId, string pointerType, [JSMarshalAs<JSType.Number>] int64 pointerId,
         double offsetX, double offsetY, double pressure, double tiltX, double tiltY, double twist, int32 modifier) =>
         RedirectInputAsync(topLevelId, t => t.InputHandler
             .OnPointerCancel(pointerType, pointerId, offsetX, offsetY, pressure, tiltX, tiltY, twist, modifier));
@@ -122,9 +122,9 @@ internal static partial class InputHelper
 
     [JSImport("InputHelper.setPointerCapture", AvaloniaModule.MainModuleName)]
     public static partial void
-        SetPointerCapture(JSObject containerElement, [JSMarshalAs<JSType.Number>] long pointerId);
+        SetPointerCapture(JSObject containerElement, [JSMarshalAs<JSType.Number>] int64 pointerId);
 
     [JSImport("InputHelper.releasePointerCapture", AvaloniaModule.MainModuleName)]
     public static partial void ReleasePointerCapture(JSObject containerElement,
-        [JSMarshalAs<JSType.Number>] long pointerId);
+        [JSMarshalAs<JSType.Number>] int64 pointerId);
 }

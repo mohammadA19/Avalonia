@@ -18,7 +18,7 @@ namespace Avalonia.Native
     {
         private IAvnClipboard? _native;
         private IDataObject? _savedDataObject;
-        private long _lastClearChangeCount;
+        private int64 _lastClearChangeCount;
 
         // TODO hide native types behind IAvnClipboard abstraction, so managed side won't depend on macOS.
         private const string NSPasteboardTypeString = "public.utf8-plain-text";

@@ -438,7 +438,7 @@ namespace Avalonia.Android.Platform.SkiaPlatform
         {
             if(Input != null)
             {
-                var args = new RawTextInputEventArgs(AndroidKeyboardDevice.Instance!, (ulong)DateTime.Now.Ticks, InputRoot!, text);
+                var args = new RawTextInputEventArgs(AndroidKeyboardDevice.Instance!, (uint64)DateTime.Now.Ticks, InputRoot!, text);
 
                 Input(args);
             }

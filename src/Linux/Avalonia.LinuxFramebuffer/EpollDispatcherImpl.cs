@@ -19,7 +19,7 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
         [FieldOffset(0)] public IntPtr ptr;
         [FieldOffset(0)] public int32 fd;
         [FieldOffset(0)] public uint32 u32;
-        [FieldOffset(0)] public ulong u64;
+        [FieldOffset(0)] public uint64 u64;
     }
 
     private const int32 CLOCK_MONOTONIC = 1;
@@ -179,7 +179,7 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
             epoll_wait(_epoll, &ev, 1, (int32)-1);
 
             // Drain the signaled pipe
-            long buf = 0;
+            int64 buf = 0;
             while (read(_sigread, &buf, new IntPtr(8)).ToInt64() > 0)
             {
             }
@@ -223,7 +223,7 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
     public event Action? Signaled;
     public event Action? Timer;
 
-    public void UpdateTimer(long? dueTimeInMs)
+    public void UpdateTimer(int64? dueTimeInMs)
     {
         _nextTimer = dueTimeInMs == null ? null : TimeSpan.FromMilliseconds(dueTimeInMs.Value);
         if (_nextTimer != null)
@@ -231,7 +231,7 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
     }
 
 
-    public long Now => _clock.ElapsedMilliseconds;
+    public int64 Now => _clock.ElapsedMilliseconds;
     public bool CanQueryPendingInput => true;
 
     public bool HasPendingInput => _inputProvider.HasInput;

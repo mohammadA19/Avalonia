@@ -318,7 +318,7 @@ namespace Avalonia.Controls.Primitives
             if (args is RawPointerEventArgs pArgs && pArgs.Type == RawPointerEventType.Move)
             {
                 // In ShowMode = TransientWithDismissOnPointerMoveAway, the Flyout is kept
-                // shown as long as the pointer is within a certain px distance from the
+                // shown as int64 as the pointer is within a certain px distance from the
                 // flyout itself. I'm not sure what WinUI uses, but I'm defaulting to 
                 // 100px, which seems about right
                 // enlargedPopupRect is the Flyout bounds enlarged 100px
@@ -346,7 +346,7 @@ namespace Avalonia.Controls.Primitives
 
                 if (Popup?.Host is PopupRoot && pArgs.Root is Visual eventRoot)
                 {
-                    // As long as the pointer stays within the enlargedPopupRect
+                    // As int64 as the pointer stays within the enlargedPopupRect
                     // the flyout stays open. If it leaves, close it
                     // Despite working in screen coordinates, leaving the TopLevel
                     // window will not close this (as pointer events stop), which 

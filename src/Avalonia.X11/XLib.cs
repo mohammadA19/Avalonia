@@ -441,7 +441,7 @@ namespace Avalonia.X11
         public static extern IntPtr XUnlockDisplay(IntPtr display);
         
         [DllImport(libX11)]
-        public static extern IntPtr XCreateGC(IntPtr display, IntPtr drawable, ulong valuemask, IntPtr values);
+        public static extern IntPtr XCreateGC(IntPtr display, IntPtr drawable, uint64 valuemask, IntPtr values);
         
         [DllImport(libX11)]
         public static extern int32 XInitImage(ref XImage image);
@@ -589,7 +589,7 @@ namespace Avalonia.X11
         public static extern IntPtr* XRRListOutputProperties(IntPtr dpy, IntPtr output, out int32 count);
 
         [DllImport(libX11Randr)]
-        public static extern int32 XRRGetOutputProperty(IntPtr dpy, IntPtr output, IntPtr atom, int32 offset, int32 length, bool _delete, bool pending, IntPtr req_type, out IntPtr actual_type, out int32 actual_format, out int32 nitems, out long bytes_after, out IntPtr prop);
+        public static extern int32 XRRGetOutputProperty(IntPtr dpy, IntPtr output, IntPtr atom, int32 offset, int32 length, bool _delete, bool pending, IntPtr req_type, out IntPtr actual_type, out int32 actual_format, out int32 nitems, out int64 bytes_after, out IntPtr prop);
             
         [DllImport(libX11Randr)]
         public static extern void XRRSelectInput(IntPtr dpy, IntPtr window, RandrEventMask mask);

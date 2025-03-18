@@ -8,9 +8,9 @@ namespace Avalonia.FreeDesktop
     internal static class NativeMethods
     {
         [DllImport("libc", SetLastError = true)]
-        private static extern long readlink([MarshalAs(UnmanagedType.LPArray)] uint8[] filename,
+        private static extern int64 readlink([MarshalAs(UnmanagedType.LPArray)] uint8[] filename,
                                             [MarshalAs(UnmanagedType.LPArray)] uint8[] buffer,
-                                            long len);
+                                            int64 len);
 
         public static string ReadLink(string path)
         {

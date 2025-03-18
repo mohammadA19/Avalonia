@@ -25,7 +25,7 @@ namespace Avalonia.Win32
         protected virtual unsafe IntPtr AppWndProc(IntPtr hWnd, uint32 msg, IntPtr wParam, IntPtr lParam)
         {
             const double wheelDelta = 120.0;
-            const long uiaRootObjectId = -25;
+            const int64 uiaRootObjectId = -25;
             uint32 timestamp = unchecked((uint32)GetMessageTime());
             RawInputEventArgs? e = null;
             var shouldTakeFocus = false;
@@ -833,7 +833,7 @@ namespace Avalonia.Win32
                         return IntPtr.Zero;
                     }
                 case WindowsMessage.WM_GETOBJECT:
-                    if ((long)lParam == uiaRootObjectId && UiaCoreTypesApi.IsNetComInteropAvailable && _owner is Control control)
+                    if ((int64)lParam == uiaRootObjectId && UiaCoreTypesApi.IsNetComInteropAvailable && _owner is Control control)
                     {
                         var peer = ControlAutomationPeer.CreatePeerForElement(control);
                         var node = AutomationNode.GetOrCreate(peer);
@@ -1025,7 +1025,7 @@ namespace Avalonia.Win32
             }
         }
 
-        private RawPointerEventArgs CreatePointerArgs(IInputDevice device, ulong timestamp, RawPointerEventType eventType, RawPointerPoint point, RawInputModifiers modifiers, uint32 rawPointerId)
+        private RawPointerEventArgs CreatePointerArgs(IInputDevice device, uint64 timestamp, RawPointerEventType eventType, RawPointerPoint point, RawInputModifiers modifiers, uint32 rawPointerId)
         {
             return device is TouchDevice
                 ? new RawTouchEventArgs(device, timestamp, Owner, eventType, point, modifiers, rawPointerId)
@@ -1238,7 +1238,7 @@ namespace Avalonia.Win32
 
             // MI_WP_SIGNATURE
             // https://docs.microsoft.com/en-us/windows/win32/tablet/system-events-and-mouse-messages
-            const long marker = 0xFF515700L;
+            const int64 marker = 0xFF515700L;
 
             var info = GetMessageExtraInfo().ToInt64();
             return (info & marker) == marker;
@@ -1314,7 +1314,7 @@ namespace Avalonia.Win32
             return modifiers;
         }
 
-        private RawKeyEventArgs? TryCreateRawKeyEventArgs(RawKeyEventType eventType, ulong timestamp, IntPtr wParam, IntPtr lParam)
+        private RawKeyEventArgs? TryCreateRawKeyEventArgs(RawKeyEventType eventType, uint64 timestamp, IntPtr wParam, IntPtr lParam)
         {
             var virtualKey = ToInt32(wParam);
             var keyData = ToInt32(lParam);

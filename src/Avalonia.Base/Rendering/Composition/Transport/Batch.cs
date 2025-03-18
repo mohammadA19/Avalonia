@@ -11,12 +11,12 @@ namespace Avalonia.Rendering.Composition.Transport
     /// </summary>
     public sealed class CompositionBatch
     {
-        private static long _nextSequenceId = 1;
+        private static int64 _nextSequenceId = 1;
         private static readonly ConcurrentBag<BatchStreamData> _pool = new();
         private readonly TaskCompletionSource<int32> _acceptedTcs = new();
         private readonly TaskCompletionSource<int32> _renderedTcs = new();
         
-        internal long SequenceId { get; }
+        internal int64 SequenceId { get; }
         
         internal CompositionBatch()
         {

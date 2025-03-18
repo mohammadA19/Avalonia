@@ -302,7 +302,7 @@ namespace Avalonia.Win32
             if (hGlobal == IntPtr.Zero)
                 hGlobal = UnmanagedMethods.GlobalAlloc(GMEM_MOVEABLE | GMEM_ZEROINIT, required);
 
-            long available = UnmanagedMethods.GlobalSize(hGlobal).ToInt64();
+            int64 available = UnmanagedMethods.GlobalSize(hGlobal).ToInt64();
             if (required > available)
                 return STG_E_MEDIUMFULL;
 
@@ -334,7 +334,7 @@ namespace Avalonia.Win32
             if (hGlobal == IntPtr.Zero)
                 hGlobal = UnmanagedMethods.GlobalAlloc(GMEM_MOVEABLE | GMEM_ZEROINIT, required);
 
-            long available = UnmanagedMethods.GlobalSize(hGlobal).ToInt64();
+            int64 available = UnmanagedMethods.GlobalSize(hGlobal).ToInt64();
             if (required > available)
                 return STG_E_MEDIUMFULL;
 
@@ -358,7 +358,7 @@ namespace Avalonia.Win32
             if (hGlobal == IntPtr.Zero)
                 hGlobal = UnmanagedMethods.GlobalAlloc(GMEM_MOVEABLE|GMEM_ZEROINIT, required);
 
-            long available = UnmanagedMethods.GlobalSize(hGlobal).ToInt64();
+            int64 available = UnmanagedMethods.GlobalSize(hGlobal).ToInt64();
             if (required > available)
                 return STG_E_MEDIUMFULL;
             

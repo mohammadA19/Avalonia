@@ -253,7 +253,7 @@ namespace Avalonia.Native
             return base.TryGetFeature(featureType);
         }
 
-        public void GetWindowsZOrder(Span<Window> windows, Span<long> zOrder)
+        public void GetWindowsZOrder(Span<Window> windows, Span<int64> zOrder)
         {
             for (int32 i = 0; i < windows.Length; i++)
             {

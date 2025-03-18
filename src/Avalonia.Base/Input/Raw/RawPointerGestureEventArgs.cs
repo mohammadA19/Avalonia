@@ -7,7 +7,7 @@ namespace Avalonia.Input.Raw
     {
         public RawPointerGestureEventArgs(
             IInputDevice device,
-            ulong timestamp,
+            uint64 timestamp,
             IInputRoot root,
             RawPointerEventType gestureType,
             Point position,

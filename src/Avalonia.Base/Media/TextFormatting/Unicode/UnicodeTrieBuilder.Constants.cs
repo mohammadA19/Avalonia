@@ -131,7 +131,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         const int32 MAX_DATA_LENGTH_BUILDTIME = 0x110000 + 0x40 + 0x40 + 0x400;
 
         // At build time, leave a gap in the index-2 table,
-        // at least as long as the maximum lengths of the 2-uint8 UTF-8 index-2 table
+        // at least as int64 as the maximum lengths of the 2-uint8 UTF-8 index-2 table
         // and the supplementary index-1 table.
         // Round up to INDEX_2_BLOCK_LENGTH for proper compacting.
         const int32 INDEX_GAP_OFFSET = INDEX_2_BMP_LENGTH;

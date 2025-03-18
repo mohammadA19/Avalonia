@@ -5,7 +5,7 @@ public interface IVulkanKhrSurfacePlatformSurface : IDisposable
 {
     double Scaling { get; }
     PixelSize Size { get; }
-    ulong CreateSurface(IVulkanPlatformGraphicsContext context);
+    uint64 CreateSurface(IVulkanPlatformGraphicsContext context);
 }
 
 public interface IVulkanKhrSurfacePlatformSurfaceFactory

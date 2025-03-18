@@ -8,9 +8,9 @@ namespace Avalonia.Dialogs.Internal
     {
         public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is long size && size > 0)
+            if (value is int64 size && size > 0)
             {
-                return Avalonia.Utilities.ByteSizeHelper.ToString((ulong)size, true);
+                return Avalonia.Utilities.ByteSizeHelper.ToString((uint64)size, true);
             }
 
             return "";

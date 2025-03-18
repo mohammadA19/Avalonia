@@ -11,7 +11,7 @@ namespace Avalonia.Input
 
         [Unstable("This constructor might be removed in 12.0.")]
         public PointerDeltaEventArgs(RoutedEvent routedEvent, object? source, 
-            IPointer pointer, Visual rootVisual, Point rootVisualPosition, ulong timestamp,
+            IPointer pointer, Visual rootVisual, Point rootVisualPosition, uint64 timestamp,
             PointerPointProperties properties, KeyModifiers modifiers, Vector delta) 
             : base(routedEvent, source, pointer, rootVisual, rootVisualPosition,
                 timestamp, properties, modifiers)

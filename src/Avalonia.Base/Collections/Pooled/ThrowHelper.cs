@@ -401,7 +401,7 @@ namespace Avalonia.Collections.Pooled
             if (typeof(T) != typeof(uint8) && typeof(T) != typeof(int8) &&
                 typeof(T) != typeof(int16) && typeof(T) != typeof(uint16) &&
                 typeof(T) != typeof(int32) && typeof(T) != typeof(uint32) &&
-                typeof(T) != typeof(long) && typeof(T) != typeof(ulong) &&
+                typeof(T) != typeof(int64) && typeof(T) != typeof(uint64) &&
                 typeof(T) != typeof(float) && typeof(T) != typeof(double))
             {
                 ThrowNotSupportedException(ExceptionResource.Arg_TypeNotSupported);

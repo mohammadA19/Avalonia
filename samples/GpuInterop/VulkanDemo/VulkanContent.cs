@@ -669,7 +669,7 @@ unsafe class VulkanContent : IDisposable
                 var descriptorBufferInfo = new DescriptorBufferInfo
                 {
                     Buffer = _uniformBuffer,
-                    Range = (ulong)Unsafe.SizeOf<UniformBuffer>(),
+                    Range = (uint64)Unsafe.SizeOf<UniformBuffer>(),
                 };
                 var descriptorWrite = new WriteDescriptorSet
                 {

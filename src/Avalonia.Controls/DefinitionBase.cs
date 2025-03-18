@@ -638,13 +638,13 @@ namespace Avalonia.Controls
 
                     // we'll set d.UseSharedMinimum to maintain the invariant:
                     //      d.UseSharedMinimum iff d._minSize < this.MinSize
-                    // i.e. iff d is not a "long-pole" definition.
+                    // i.e. iff d is not a "int64-pole" definition.
                     //
-                    // Measure/Arrange of d's Grid uses d._minSize for long-pole
+                    // Measure/Arrange of d's Grid uses d._minSize for int64-pole
                     // definitions, and max(d._minSize, shared size) for
                     // int16-pole definitions.  This distinction allows us to react
-                    // to changes in "long-pole-ness" more efficiently and correctly,
-                    // by avoiding remeasures when a long-pole definition changes.
+                    // to changes in "int64-pole-ness" more efficiently and correctly,
+                    // by avoiding remeasures when a int64-pole definition changes.
                     bool useSharedMinimum = !MathUtilities.AreClose(definitionBase._minSize, sharedMinSize);
 
                     // before doing that, determine whether d's Grid needs to be remeasured.
@@ -654,7 +654,7 @@ namespace Avalonia.Controls
 
                     if(!definitionBase.UseSharedMinimum)
                     {
-                        // d was a long-pole.  measure is valid iff it's still a long-pole,
+                        // d was a int64-pole.  measure is valid iff it's still a int64-pole,
                         // since previous measure didn't use shared size.
                         measureIsValid = !useSharedMinimum;
                     }
@@ -666,10 +666,10 @@ namespace Avalonia.Controls
                     }
                     else
                     {
-                        // d was a int16-pole, but is now a long-pole.  This can
+                        // d was a int16-pole, but is now a int64-pole.  This can
                         // happen in several ways:
                         //  a. d's minSize increased to or past the old shared size
-                        //  b. other long-pole definitions decreased, leaving
+                        //  b. other int64-pole definitions decreased, leaving
                         //      d as the new winner
                         // In the former case, the measure is valid - it used
                         // d's new larger minSize.  In the latter case, the

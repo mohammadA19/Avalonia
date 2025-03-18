@@ -195,11 +195,11 @@ internal abstract class JSStorageItem : IStorageBookmarkItem
     public async Task<StorageItemProperties> GetBasicPropertiesAsync()
     {
         using var properties = await StorageHelper.GetProperties(FileHandle);
-        var size = (long?)properties?.GetPropertyAsDouble("Size");
-        var lastModified = (long?)properties?.GetPropertyAsDouble("LastModified");
+        var size = (int64?)properties?.GetPropertyAsDouble("Size");
+        var lastModified = (int64?)properties?.GetPropertyAsDouble("LastModified");
 
         return new StorageItemProperties(
-            (ulong?)size,
+            (uint64?)size,
             dateCreated: null,
             dateModified: lastModified > 0 ? DateTimeOffset.FromUnixTimeMilliseconds(lastModified.Value) : null);
     }
@@ -292,7 +292,7 @@ internal class JSStorageFile : JSStorageItem, IStorageBookmarkFile
         {
             using var properties = await StorageHelper.GetProperties(FileHandle);
             var streamWriter = await StorageHelper.OpenWrite(FileHandle);
-            var size = (long?)properties?.GetPropertyAsDouble("Size") ?? 0;
+            var size = (int64?)properties?.GetPropertyAsDouble("Size") ?? 0;
 
             return new WriteableStream(streamWriter, size);
         }

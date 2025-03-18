@@ -50,9 +50,9 @@ namespace Avalonia.LinuxFramebuffer.Output
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public unsafe delegate void DrmEventSequenceHandlerDelegate(int32 fd,
-            ulong sequence,
-            ulong ns,
-            ulong user_data);
+            uint64 sequence,
+            uint64 ns,
+            uint64 user_data);
 
         [StructLayout(LayoutKind.Sequential)]
         public struct DrmEventContext
@@ -125,7 +125,7 @@ namespace Avalonia.LinuxFramebuffer.Output
 
             public int32 count_props;
             public uint32 *props; // List of property ids 
-            public ulong *prop_values; // List of property values 
+            public uint64 *prop_values; // List of property values 
 
             public int32 count_encoders;
             public uint32 *encoders; //List of encoder ids
@@ -282,9 +282,9 @@ namespace Avalonia.LinuxFramebuffer.Output
             [FieldOffset(0)]
             public uint32 u32;
             [FieldOffset(0)]
-            public long s64;
+            public int64 s64;
             [FieldOffset(0)]
-            public ulong u64;
+            public uint64 u64;
         }
         
         [DllImport(libgbm, SetLastError = true)]

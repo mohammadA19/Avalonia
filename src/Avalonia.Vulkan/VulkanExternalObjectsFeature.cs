@@ -186,7 +186,7 @@ internal unsafe class VulkanExternalObjectsFeature : IVulkanContextExternalObjec
             _sem = null;
         }
 
-        public ulong Handle => Sem.Handle.Handle;
+        public uint64 Handle => Sem.Handle.Handle;
 
         void SubmitSemaphore(VulkanSemaphore? wait, VulkanSemaphore? signal)
         {
@@ -261,7 +261,7 @@ internal unsafe class VulkanExternalObjectsFeature : IVulkanContextExternalObjec
             this.CurrentLayout = VkImageLayout.VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
         }
 
-        protected override VkDeviceMemory CreateMemory(VkImage image, ulong size, uint32 memoryTypeBits)
+        protected override VkDeviceMemory CreateMemory(VkImage image, uint64 size, uint32 memoryTypeBits)
         {
             var handle = _importHandle;
 

@@ -51,7 +51,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool IsBreakClass(LineBreakClass cls)
         {
-            const ulong mask =
+            const uint64 mask =
                 (1UL << (int32)LineBreakClass.MandatoryBreak) |
                 (1UL << (int32)LineBreakClass.LineFeed) |
                 (1UL << (int32)LineBreakClass.CarriageReturn) |
@@ -1461,7 +1461,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 // NS       CJ          Any
                 var cls = cp.LineBreakClass;
 
-                const ulong specialMask =
+                const uint64 specialMask =
                     (1UL << (int32)LineBreakClass.Ambiguous) |
                     (1UL << (int32)LineBreakClass.Surrogate) |
                     (1UL << (int32)LineBreakClass.Unknown) |

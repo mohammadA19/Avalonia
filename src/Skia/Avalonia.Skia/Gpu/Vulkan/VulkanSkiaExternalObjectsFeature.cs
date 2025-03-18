@@ -80,7 +80,7 @@ internal class VulkanSkiaExternalObjectsFeature : IExternalObjectsRenderInterfac
             {
                 CurrentQueueFamily = _gpu.Vulkan.Device.GraphicsQueueFamilyIndex,
                 Format = info.Format,
-                Image = (ulong)info.Handle,
+                Image = (uint64)info.Handle,
                 ImageLayout = info.Layout,
                 ImageTiling = info.Tiling,
                 ImageUsageFlags = info.UsageFlags,
@@ -89,7 +89,7 @@ internal class VulkanSkiaExternalObjectsFeature : IExternalObjectsRenderInterfac
                 Protected = info.IsProtected,
                 Alloc = new GRVkAlloc
                 {
-                    Memory = (ulong)info.MemoryHandle,
+                    Memory = (uint64)info.MemoryHandle,
                     Size = info.MemorySize
                 }
             };

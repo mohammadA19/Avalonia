@@ -36,7 +36,7 @@ namespace Avalonia.Android.Platform.Specific.Helpers
                 return null;
             }
 
-            var eventTime = (ulong)e.EventTime;
+            var eventTime = (uint64)e.EventTime;
             var inputRoot = _view.InputRoot;
             if (inputRoot is null)
                 return false; // too early to handle events.

@@ -21,7 +21,7 @@ public interface IVulkanContextExternalObjectsFeature
 [Unstable]
 public interface IVulkanExternalSemaphore : IDisposable
 {
-    ulong Handle { get; }
+    uint64 Handle { get; }
     void SubmitWaitSemaphore();
     void SubmitSignalSemaphore();
 }

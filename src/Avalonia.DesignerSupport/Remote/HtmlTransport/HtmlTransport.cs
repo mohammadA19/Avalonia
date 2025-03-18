@@ -303,7 +303,7 @@ namespace Avalonia.DesignerSupport.Remote.HtmlTransport
             var key = parts[0];
             if (key.Equals("frame-received", StringComparison.OrdinalIgnoreCase))
             {
-                return new FrameReceivedMessage { SequenceId = long.Parse(parts[1]) };
+                return new FrameReceivedMessage { SequenceId = int64.Parse(parts[1]) };
             }
             else if (key.Equals("pointer-released", StringComparison.OrdinalIgnoreCase))
             {

@@ -92,9 +92,9 @@ public partial class Dispatcher
             remove { }
         }
 
-        public long Now => 0;
+        public int64 Now => 0;
 
-        public void UpdateTimer(long? dueTimeInMs)
+        public void UpdateTimer(int64? dueTimeInMs)
         {
         }
     }
@@ -151,7 +151,7 @@ public partial class Dispatcher
 
     void ExecuteJobsCore(bool fromExplicitBackgroundProcessingCallback)
     {
-        long? backgroundJobExecutionStartedAt = null;
+        int64? backgroundJobExecutionStartedAt = null;
         while (true)
         {
             DispatcherOperation? job;

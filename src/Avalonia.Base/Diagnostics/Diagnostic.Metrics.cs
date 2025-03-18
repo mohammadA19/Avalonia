@@ -72,7 +72,7 @@ internal static partial class Diagnostic
     internal readonly ref struct HistogramReportDisposable
     {
         private readonly Histogram<double> _histogram;
-        private readonly long _timestamp;
+        private readonly int64 _timestamp;
 
         public HistogramReportDisposable(Histogram<double> histogram)
         {

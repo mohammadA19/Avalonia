@@ -7,8 +7,8 @@ namespace Avalonia.UnitTests
     public class TouchTestHelper
     {
         private readonly Pointer _pointer = new Pointer(Pointer.GetNextFreeId(), PointerType.Touch, true);
-        private ulong _nextStamp = 1;
-        private ulong Timestamp() => _nextStamp++;
+        private uint64 _nextStamp = 1;
+        private uint64 Timestamp() => _nextStamp++;
         public IInputElement Captured => _pointer.Captured;
 
         public void Down(Interactive target, Point position = default, KeyModifiers modifiers = default)

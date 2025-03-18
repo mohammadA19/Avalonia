@@ -14,8 +14,8 @@ namespace Avalonia.Animation
     {
         private T _lastInterpValue;
         private T _firstKFValue;
-        private ulong? _iterationCount;
-        private ulong _currentIteration;
+        private uint64? _iterationCount;
+        private uint64 _currentIteration;
         private bool _gotFirstKFValue;
         private bool _playbackReversed;
         private FillMode _fillMode;
@@ -167,7 +167,7 @@ namespace Avalonia.Animation
             var opsTime = indexTime - initDelay;
             var playbackTime = opsTime % iterationTime;
 
-            _currentIteration = (ulong)(opsTime / iterationTime);
+            _currentIteration = (uint64)(opsTime / iterationTime);
 
             // Stop animation when the current iteration is beyond the iteration count or
             // when the duration is set to zero while animating and snap to the last iterated value.

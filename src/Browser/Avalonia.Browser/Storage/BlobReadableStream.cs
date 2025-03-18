@@ -10,8 +10,8 @@ namespace Avalonia.Browser.Storage;
 internal class BlobReadableStream : Stream
 {
     private JSObject? _jSReference;
-    private long _position;
-    private readonly long _length;
+    private int64 _position;
+    private readonly int64 _length;
 
     public BlobReadableStream(JSObject jsStreamReference)
     {
@@ -28,9 +28,9 @@ internal class BlobReadableStream : Stream
 
     public override bool CanWrite => false;
 
-    public override long Length => _length;
+    public override int64 Length => _length;
 
-    public override long Position
+    public override int64 Position
     {
         get => _position;
         set => throw new NotSupportedException();
@@ -38,7 +38,7 @@ internal class BlobReadableStream : Stream
 
     public override void Flush() { }
 
-    public override long Seek(long offset, SeekOrigin origin)
+    public override int64 Seek(int64 offset, SeekOrigin origin)
     {
         return _position = origin switch
         {
@@ -48,7 +48,7 @@ internal class BlobReadableStream : Stream
         };
     }
 
-    public override void SetLength(long value)
+    public override void SetLength(int64 value)
         => throw new NotSupportedException();
 
     public override void Write(uint8[] buffer, int32 offset, int32 count)

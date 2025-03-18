@@ -87,7 +87,7 @@ namespace Avalonia.Android
             Looper.Loop();
         }
 
-        public void DoFrame(long frameTimeNanos)
+        public void DoFrame(int64 frameTimeNanos)
         {
             _tick?.Invoke(TimeSpan.FromTicks(frameTimeNanos / 100));
 

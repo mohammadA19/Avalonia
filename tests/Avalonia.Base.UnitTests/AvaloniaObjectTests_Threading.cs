@@ -160,8 +160,8 @@ namespace Avalonia.Base.UnitTests
 #pragma warning disable 67
             public event Action Signaled;
             public event Action Timer;
-            public long Now => 0;
-            public void UpdateTimer(long? dueTimeInMs)
+            public int64 Now => 0;
+            public void UpdateTimer(int64? dueTimeInMs)
             {
                 throw new NotImplementedException();
             }

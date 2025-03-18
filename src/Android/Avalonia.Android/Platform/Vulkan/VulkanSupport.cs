@@ -42,7 +42,7 @@ namespace Avalonia.Android.Platform.Vulkan
 
             public double Scaling => _handle.Scaling;
             public PixelSize Size => _handle.Size;
-            public ulong CreateSurface(IVulkanPlatformGraphicsContext context) =>
+            public uint64 CreateSurface(IVulkanPlatformGraphicsContext context) =>
                 CreateAndroidSurface(_handle.Handle, context.Instance);
 
             public void Dispose()
@@ -51,7 +51,7 @@ namespace Avalonia.Android.Platform.Vulkan
             }
         }
 
-        private static ulong CreateAndroidSurface(nint handle, IVulkanInstance instance)
+        private static uint64 CreateAndroidSurface(nint handle, IVulkanInstance instance)
         {
             if(handle == IntPtr.Zero)
                 throw new ArgumentException("Surface handle can't be 0x0", nameof(handle));

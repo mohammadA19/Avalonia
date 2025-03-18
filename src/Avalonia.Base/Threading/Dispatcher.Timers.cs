@@ -7,15 +7,15 @@ namespace Avalonia.Threading;
 public partial class Dispatcher
 {
     private readonly List<DispatcherTimer> _timers = new();
-    private long _timersVersion;
+    private int64 _timersVersion;
     private bool _dueTimeFound;
-    private long _dueTimeInMs;
+    private int64 _dueTimeInMs;
 
-    private long? _dueTimeForTimers;
-    private long? _dueTimeForBackgroundProcessing;
-    private long? _osTimerSetTo;
+    private int64? _dueTimeForTimers;
+    private int64? _dueTimeForBackgroundProcessing;
+    private int64? _osTimerSetTo;
 
-    internal long Now => _impl.Now;
+    internal int64 Now => _impl.Now;
 
     private void UpdateOSTimer()
     {
@@ -42,7 +42,7 @@ public partial class Dispatcher
             if (!_hasShutdownFinished) // Dispatcher thread, does not technically need the lock to read
             {
                 bool oldDueTimeFound = _dueTimeFound;
-                long oldDueTimeInTicks = _dueTimeInMs;
+                int64 oldDueTimeInTicks = _dueTimeInMs;
                 _dueTimeFound = false;
                 _dueTimeInMs = 0;
 
@@ -133,11 +133,11 @@ public partial class Dispatcher
     
     internal void PromoteTimers()
     {
-        long currentTimeInTicks = Now;
+        int64 currentTimeInTicks = Now;
         try
         {
             List<DispatcherTimer>? timers = null;
-            long timersVersion = 0;
+            int64 timersVersion = 0;
 
             lock (InstanceLock)
             {

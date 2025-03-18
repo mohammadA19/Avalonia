@@ -66,7 +66,7 @@ namespace Avalonia.LinuxFramebuffer.Input.EvDev
             }
         }
 
-        void RaiseEvent(RawPointerEventType type, ulong timestamp)
+        void RaiseEvent(RawPointerEventType type, uint64 timestamp)
         {
             var point = new Point(_currentX, _currentY);
 

@@ -38,18 +38,18 @@ internal struct ComVariant : IDisposable
         [FieldOffset(0)] public int8 _i1;
         [FieldOffset(0)] public int16 _i2;
         [FieldOffset(0)] public int32 _i4;
-        [FieldOffset(0)] public long _i8;
+        [FieldOffset(0)] public int64 _i8;
         [FieldOffset(0)] public uint8 _ui1;
         [FieldOffset(0)] public uint16 _ui2;
         [FieldOffset(0)] public uint32 _ui4;
-        [FieldOffset(0)] public ulong _ui8;
+        [FieldOffset(0)] public uint64 _ui8;
         [FieldOffset(0)] public int32 _int;
         [FieldOffset(0)] public uint32 _uint;
         [FieldOffset(0)] public int16 _bool;
         [FieldOffset(0)] public int32 _error;
         [FieldOffset(0)] public float _r4;
         [FieldOffset(0)] public double _r8;
-        [FieldOffset(0)] public long _cy;
+        [FieldOffset(0)] public int64 _cy;
         [FieldOffset(0)] public double _date;
         [FieldOffset(0)] public IntPtr _bstr;
         [FieldOffset(0)] public IntPtr _unknown;
@@ -171,15 +171,15 @@ internal struct ComVariant : IDisposable
             variant.VarType = VarEnum.VT_UI4;
             variant._typeUnion._unionTypes._ui4 = (uint32)value;
         }
-        else if (value is long)
+        else if (value is int64)
         {
             variant.VarType = VarEnum.VT_I8;
-            variant._typeUnion._unionTypes._i8 = (long)value;
+            variant._typeUnion._unionTypes._i8 = (int64)value;
         }
-        else if (value is ulong)
+        else if (value is uint64)
         {
             variant.VarType = VarEnum.VT_UI8;
-            variant._typeUnion._unionTypes._ui8 = (ulong)value;
+            variant._typeUnion._unionTypes._ui8 = (uint64)value;
         }
         else if (value is IEnumerable list && SafeArrayRef.TryCreate(list, out var array, out var arrayEnum))
         {
@@ -249,13 +249,13 @@ internal struct ComVariant : IDisposable
                 VarEnum.VT_I1 => SafeArrayRef.ToArray<int8>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_I2 => SafeArrayRef.ToArray<int16>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_I4 => SafeArrayRef.ToArray<int32>(_typeUnion._unionTypes.parray),
-                VarEnum.VT_I8 => SafeArrayRef.ToArray<long>(_typeUnion._unionTypes.parray),
+                VarEnum.VT_I8 => SafeArrayRef.ToArray<int64>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_INT => SafeArrayRef.ToArray<int32>(_typeUnion._unionTypes.parray),
                 // unsigned integer
                 VarEnum.VT_UI1 => SafeArrayRef.ToArray<uint8>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_UI2 => SafeArrayRef.ToArray<uint16>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_UI4 => SafeArrayRef.ToArray<uint32>(_typeUnion._unionTypes.parray),
-                VarEnum.VT_UI8 => SafeArrayRef.ToArray<ulong>(_typeUnion._unionTypes.parray),
+                VarEnum.VT_UI8 => SafeArrayRef.ToArray<uint64>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_UINT => SafeArrayRef.ToArray<uint32>(_typeUnion._unionTypes.parray),
                 // floating
                 VarEnum.VT_R4 => SafeArrayRef.ToArray<float>(_typeUnion._unionTypes.parray),

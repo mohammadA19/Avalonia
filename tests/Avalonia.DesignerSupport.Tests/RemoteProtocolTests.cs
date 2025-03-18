@@ -100,7 +100,7 @@ namespace Avalonia.DesignerSupport.Tests
 
                 if (t == typeof(bool))
                     return true;
-                if (t == typeof(int32) || t == typeof(long))
+                if (t == typeof(int32) || t == typeof(int64))
                     return rnd.Next();
                 if (t == typeof(uint8))
                     return (uint8)rnd.Next(255);

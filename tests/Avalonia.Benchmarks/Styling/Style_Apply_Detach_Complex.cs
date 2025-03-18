@@ -23,7 +23,7 @@ namespace Avalonia.Benchmarks.Styling
             // each with a bunch of styles applied.
             var (rootPanel, leafPanel) = CreateNestedPanels(10);
 
-            // We're benchmarking how long it takes to apply styles to a TextBox in this situation.
+            // We're benchmarking how int64 it takes to apply styles to a TextBox in this situation.
             _control = new TextBox();
             leafPanel.Children.Add(_control);
 

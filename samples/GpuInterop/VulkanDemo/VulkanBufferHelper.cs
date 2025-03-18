@@ -21,7 +21,7 @@ static class VulkanBufferHelper
         var bufferInfo = new BufferCreateInfo()
         {
             SType = StructureType.BufferCreateInfo,
-            Size = (ulong)size,
+            Size = (uint64)size,
             Usage = bufferUsageFlags,
             SharingMode = SharingMode.Exclusive
         };
@@ -55,7 +55,7 @@ static class VulkanBufferHelper
 
         var size = data.Length * Unsafe.SizeOf<T>();
         void* pointer = null;
-        api.MapMemory(device, memory, 0, (ulong)size, 0, ref pointer);
+        api.MapMemory(device, memory, 0, (uint64)size, 0, ref pointer);
 
         data.CopyTo(new Span<T>(pointer, size));
         

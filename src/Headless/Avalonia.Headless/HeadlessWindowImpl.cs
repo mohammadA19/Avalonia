@@ -239,7 +239,7 @@ namespace Avalonia.Headless
             }
         }
 
-        private ulong Timestamp => (ulong)_st.ElapsedMilliseconds;
+        private uint64 Timestamp => (uint64)_st.ElapsedMilliseconds;
 
         // TODO: Hook recent Popup changes. 
         IPopupPositioner IPopupImpl.PopupPositioner => null!;
@@ -435,7 +435,7 @@ namespace Avalonia.Headless
             
         }
 
-        public void GetWindowsZOrder(Span<Window> windows, Span<long> zOrder)
+        public void GetWindowsZOrder(Span<Window> windows, Span<int64> zOrder)
         {
             for (int32 i = 0; i < windows.Length; ++i)
             {

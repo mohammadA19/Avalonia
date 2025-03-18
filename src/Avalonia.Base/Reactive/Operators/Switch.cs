@@ -29,7 +29,7 @@ internal sealed class Switch<TSource> : IObservable<TSource>
 
         private IDisposable? _innerSerialDisposable;
         private bool _isStopped;
-        private ulong _latest;
+        private uint64 _latest;
         private bool _hasLatest;
 
         protected override void Dispose(bool disposing)
@@ -44,7 +44,7 @@ internal sealed class Switch<TSource> : IObservable<TSource>
 
         public override void OnNext(IObservable<TSource> value)
         {
-            ulong id;
+            uint64 id;
 
             lock (_gate)
             {
@@ -84,9 +84,9 @@ internal sealed class Switch<TSource> : IObservable<TSource>
         private sealed class InnerObserver : IObserver<TSource>, IDisposable
         {
             private readonly _ _parent;
-            private readonly ulong _id;
+            private readonly uint64 _id;
 
-            public InnerObserver(_ parent, ulong id)
+            public InnerObserver(_ parent, uint64 id)
             {
                 _parent = parent;
                 _id = id;

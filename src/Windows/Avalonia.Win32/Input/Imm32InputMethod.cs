@@ -422,10 +422,10 @@ namespace Avalonia.Win32.Input
         {
             if (_parent?.Input != null)
             {
-                _parent.Input(new RawKeyEventArgs(KeyboardDevice.Instance!, (ulong)DateTime.Now.Ticks, _parent.Owner,
+                _parent.Input(new RawKeyEventArgs(KeyboardDevice.Instance!, (uint64)DateTime.Now.Ticks, _parent.Owner,
                 RawKeyEventType.KeyDown, key, RawInputModifiers.None, physicalKey, null));
 
-                _parent.Input(new RawKeyEventArgs(KeyboardDevice.Instance!, (ulong)DateTime.Now.Ticks, _parent.Owner,
+                _parent.Input(new RawKeyEventArgs(KeyboardDevice.Instance!, (uint64)DateTime.Now.Ticks, _parent.Owner,
                 RawKeyEventType.KeyUp, key, RawInputModifiers.None, physicalKey, null));
 
             }

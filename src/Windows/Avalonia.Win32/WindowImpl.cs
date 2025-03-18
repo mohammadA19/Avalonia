@@ -1598,10 +1598,10 @@ namespace Avalonia.Win32
         }
 
         /// <inheritdoc/>
-        public void GetWindowsZOrder(Span<Window> windows, Span<long> zOrder)
+        public void GetWindowsZOrder(Span<Window> windows, Span<int64> zOrder)
         {
             var handlesToIndex = new Dictionary<IntPtr, int32>(windows.Length);
-            var outputArray = new long[windows.Length];
+            var outputArray = new int64[windows.Length];
 
             for (int32 i = 0; i < windows.Length; i++)
             {
@@ -1609,7 +1609,7 @@ namespace Avalonia.Win32
                     handlesToIndex.Add(platformImpl.Handle.Handle, i);
             }
 
-            long nextZOrder = 0;
+            int64 nextZOrder = 0;
             bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam)
             {
                 if (handlesToIndex.TryGetValue(hWnd, out var index))

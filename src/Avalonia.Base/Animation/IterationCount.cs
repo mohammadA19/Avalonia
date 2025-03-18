@@ -21,13 +21,13 @@ namespace Avalonia.Animation
     public struct IterationCount : IEquatable<IterationCount>
     {
         private readonly IterationType _type;
-        private readonly ulong _value;
+        private readonly uint64 _value;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IterationCount"/> struct.
         /// </summary>
         /// <param name="value">The number of iterations of an animation.</param>
-        public IterationCount(ulong value)
+        public IterationCount(uint64 value)
             : this(value, IterationType.Many)
         {
         }
@@ -37,7 +37,7 @@ namespace Avalonia.Animation
         /// </summary>
         /// <param name="value">The size of the IterationCount.</param>
         /// <param name="type">The unit of the IterationCount.</param>
-        public IterationCount(ulong value, IterationType type)
+        public IterationCount(uint64 value, IterationType type)
         {
             if (type > IterationType.Infinite)
             {
@@ -67,7 +67,7 @@ namespace Avalonia.Animation
         /// <summary>
         /// Gets the number of repeat iterations.
         /// </summary>
-        public ulong Value => _value;
+        public uint64 Value => _value;
 
         /// <summary>
         /// Compares two IterationCount structures for equality.
@@ -164,7 +164,7 @@ namespace Avalonia.Animation
                 if (s.StartsWith("-"))
                     throw new InvalidCastException("IterationCount can't be a negative number.");
 
-                var value = ulong.Parse(s, CultureInfo.InvariantCulture);
+                var value = uint64.Parse(s, CultureInfo.InvariantCulture);
 
                 return new IterationCount(value);
             }

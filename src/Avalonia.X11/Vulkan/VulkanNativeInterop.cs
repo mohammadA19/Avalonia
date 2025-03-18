@@ -15,7 +15,7 @@ partial class X11VulkanInterface
 
     [GetProcAddress("vkCreateXlibSurfaceKHR")]
     public partial int32 vkCreateXlibSurfaceKHR(IntPtr instance, ref VkXlibSurfaceCreateInfoKHR pCreateInfo,
-        IntPtr pAllocator, out ulong pSurface);
+        IntPtr pAllocator, out uint64 pSurface);
 }
 
 struct VkXlibSurfaceCreateInfoKHR

@@ -17,11 +17,11 @@ namespace Avalonia.Input
     [PrivateApi]
     public class PenDevice : IPenDevice, IDisposable
     {
-        private readonly Dictionary<long, Pointer> _pointers = new();
+        private readonly Dictionary<int64, Pointer> _pointers = new();
         private readonly bool _releasePointerOnPenUp;
         private int32 _clickCount;
         private Rect _lastClickRect;
-        private ulong _lastClickTime;
+        private uint64 _lastClickTime;
         private MouseButton _lastMouseDownButton;
 
         private bool _disposed;
@@ -96,7 +96,7 @@ namespace Avalonia.Input
             }
         }
 
-        private bool PenDown(Pointer pointer, ulong timestamp,
+        private bool PenDown(Pointer pointer, uint64 timestamp,
             IInputElement root, Point p, PointerPointProperties properties,
             KeyModifiers inputModifiers, IInputElement? hitTest)
         {
@@ -131,7 +131,7 @@ namespace Avalonia.Input
             return false;
         }
 
-        private static bool PenMove(Pointer pointer, ulong timestamp,
+        private static bool PenMove(Pointer pointer, uint64 timestamp,
             IInputRoot root, Point p, PointerPointProperties properties,
             KeyModifiers inputModifiers, IInputElement? hitTest,
             Lazy<IReadOnlyList<RawPointerPoint>?>? intermediatePoints)
@@ -153,7 +153,7 @@ namespace Avalonia.Input
             return false;
         }
 
-        private bool PenUp(Pointer pointer, ulong timestamp,
+        private bool PenUp(Pointer pointer, uint64 timestamp,
             IInputElement root, Point p, PointerPointProperties properties,
             KeyModifiers inputModifiers, IInputElement? hitTest)
         {

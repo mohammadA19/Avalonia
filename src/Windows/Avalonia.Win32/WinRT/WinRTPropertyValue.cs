@@ -33,8 +33,8 @@ namespace Avalonia.Win32.WinRT
         public uint16 UInt16 { get; }
         public int32 Int32 { get; }
         public uint32 UInt32 { get; }
-        public long Int64 { get; }
-        public ulong UInt64 { get; }
+        public int64 Int64 { get; }
+        public uint64 UInt64 { get; }
         public float Single { get; }
         public double Double { get; }
         public char Char16 { get; }
@@ -67,9 +67,9 @@ namespace Avalonia.Win32.WinRT
 
         public unsafe uint32* GetUInt32Array(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe long* GetInt64Array(uint32* __valueSize) => throw NotImplemented;
+        public unsafe int64* GetInt64Array(uint32* __valueSize) => throw NotImplemented;
 
-        public unsafe ulong* GetUInt64Array(uint32* __valueSize) => throw NotImplemented;
+        public unsafe uint64* GetUInt64Array(uint32* __valueSize) => throw NotImplemented;
 
         public unsafe float* GetSingleArray(uint32* __valueSize)
         {

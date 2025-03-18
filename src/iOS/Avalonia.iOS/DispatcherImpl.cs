@@ -71,7 +71,7 @@ internal class DispatcherImpl : IDispatcherImplWithExplicitBackgroundProcessing
         }
     }
 
-    public void UpdateTimer(long? dueTimeInMs)
+    public void UpdateTimer(int64? dueTimeInMs)
     {
         var ms = dueTimeInMs == null ? -1 : (int32)Math.Min(int32.MaxValue - 10, Math.Max(1, dueTimeInMs.Value - Now));
         var interval = ms < 0 ? DistantFutureInterval : ((double)ms / 1000);
@@ -79,7 +79,7 @@ internal class DispatcherImpl : IDispatcherImplWithExplicitBackgroundProcessing
         Interop.CFRunLoopTimerSetNextFireDate(_timer, Interop.CFAbsoluteTimeGetCurrent() + interval);
     }
 
-    public long Now => _clock.ElapsedMilliseconds;
+    public int64 Now => _clock.ElapsedMilliseconds;
 
     public unsafe void RequestBackgroundProcessing()
     {

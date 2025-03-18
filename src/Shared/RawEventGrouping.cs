@@ -91,7 +91,7 @@ internal class RawEventGrouper : IDisposable
 {
     private readonly Action<RawInputEventArgs> _eventCallback;
     private readonly IRawEventGrouperDispatchQueue _queue;
-    private readonly Dictionary<long, RawPointerEventArgs> _lastTouchPoints = new();
+    private readonly Dictionary<int64, RawPointerEventArgs> _lastTouchPoints = new();
     private RawInputEventArgs? _lastEvent;
     private Action<RawInputEventArgs> _dispatch;
     private bool _disposed;

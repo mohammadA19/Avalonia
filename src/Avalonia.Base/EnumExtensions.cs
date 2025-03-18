@@ -32,8 +32,8 @@ namespace Avalonia
             }
             else if (sizeof(T) == 8)
             {
-                var longValue = Unsafe.As<T, long>(ref value);
-                var longFlags = Unsafe.As<T, long>(ref flags);
+                var longValue = Unsafe.As<T, int64>(ref value);
+                var longFlags = Unsafe.As<T, int64>(ref flags);
                 return (longValue & longFlags) == longFlags;
             }
             else
@@ -63,8 +63,8 @@ namespace Avalonia
             }
             else if (sizeof(T) == 8)
             {
-                var longValue = Unsafe.As<T, long>(ref value);
-                var longFlags = Unsafe.As<T, long>(ref flags);
+                var longValue = Unsafe.As<T, int64>(ref value);
+                var longFlags = Unsafe.As<T, int64>(ref flags);
                 return (longValue & longFlags) != 0;
             }
             else

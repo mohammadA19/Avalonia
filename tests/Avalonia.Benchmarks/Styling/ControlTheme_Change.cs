@@ -26,7 +26,7 @@ namespace Avalonia.Benchmarks.Styling
             // each with a bunch of styles applied.
             var (rootPanel, leafPanel) = CreateNestedPanels(10);
 
-            // We're benchmarking how long it takes to switch control theme on a TextBox in this
+            // We're benchmarking how int64 it takes to switch control theme on a TextBox in this
             // situation.
             var baseTheme = (ControlTheme)Application.Current.FindResource(typeof(TextBox)) ??
                 throw new Exception("Base TextBox theme not found.");

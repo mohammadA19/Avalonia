@@ -10,7 +10,7 @@ namespace IntegrationTestApp
         private static extern IntPtr GetHandle(string name);
         
         [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_msgSend")]
-        private static extern long Int64_objc_msgSend(IntPtr receiver, IntPtr selector);
+        private static extern int64 Int64_objc_msgSend(IntPtr receiver, IntPtr selector);
 
         private static readonly IntPtr s_orderedIndexSelector;
 
@@ -19,7 +19,7 @@ namespace IntegrationTestApp
             s_orderedIndexSelector = GetHandle("orderedIndex");;
         }
         
-        public static long GetOrderedIndex(Window window)
+        public static int64 GetOrderedIndex(Window window)
         {
             return Int64_objc_msgSend(window.PlatformImpl!.Handle!.Handle, s_orderedIndexSelector);
         }

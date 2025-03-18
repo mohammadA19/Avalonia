@@ -47,32 +47,32 @@ namespace Avalonia.Vulkan.UnmanagedInterop
 
     struct VkSwapchainKHR
     {
-        public ulong Handle;
+        public uint64 Handle;
     }
 
     struct VkSemaphore
     {
-        public ulong Handle;
+        public uint64 Handle;
     }
 
     struct VkFence
     {
-        public ulong Handle;
+        public uint64 Handle;
     }
 
     struct VkImage
     {
-        public ulong Handle;
+        public uint64 Handle;
     }
     
     struct VkImageView
     {
-        public ulong Handle;
+        public uint64 Handle;
     }
     
     struct VkDeviceMemory
     {
-        public ulong Handle;
+        public uint64 Handle;
     }
 
     struct VkQueue
@@ -86,7 +86,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
 
     struct VkCommandPool
     {
-        public ulong Handle;
+        public uint64 Handle;
     }
     
     struct VkCommandBuffer
@@ -96,9 +96,9 @@ namespace Avalonia.Vulkan.UnmanagedInterop
 
     struct VkSurfaceKHR
     {
-        public ulong Handle;
+        public uint64 Handle;
 
-        public VkSurfaceKHR(ulong handle)
+        public VkSurfaceKHR(uint64 handle)
         {
             Handle = handle;
         }
@@ -130,7 +130,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
         public VkStructureType sType;
         public IntPtr pNext;
         public VkObjectType objectType;
-        public ulong objectHandle;
+        public uint64 objectHandle;
         public IntPtr pObjectName;
     }
 

@@ -563,7 +563,7 @@ namespace Avalonia.X11
                             : ev.ButtonEvent.button == 6
                                 ? new Vector(1, 0)
                                 : new Vector(-1, 0);
-                    ScheduleInput(new RawMouseWheelEventArgs(_mouse, (ulong)ev.ButtonEvent.time.ToInt64(),
+                    ScheduleInput(new RawMouseWheelEventArgs(_mouse, (uint64)ev.ButtonEvent.time.ToInt64(),
                         _inputRoot, new Point(ev.ButtonEvent.x, ev.ButtonEvent.y), delta,
                         TranslateModifiers(ev.ButtonEvent.state)), ref ev);
                 }
@@ -921,7 +921,7 @@ namespace Avalonia.X11
             if (_inputRoot is null)
                 return;
             var mev = new RawPointerEventArgs(
-                _mouse, (ulong)ev.ButtonEvent.time.ToInt64(), _inputRoot,
+                _mouse, (uint64)ev.ButtonEvent.time.ToInt64(), _inputRoot,
                 type, new Point(ev.ButtonEvent.x, ev.ButtonEvent.y), TranslateModifiers(mods));
             ScheduleInput(mev, ref ev);
         }
@@ -1402,7 +1402,7 @@ namespace Avalonia.X11
             }
 
             var flags = hints.flags.ToInt64();
-            flags |= (long)XWMHintsFlags.InputHint;
+            flags |= (int64)XWMHintsFlags.InputHint;
             hints.flags = (IntPtr)flags;
             hints.input = !_disabled ? 1 : 0;
 
@@ -1540,7 +1540,7 @@ namespace Avalonia.X11
         }
 
         /// <inheritdoc/>
-        public void GetWindowsZOrder(Span<Window> windows, Span<long> outputZOrder)
+        public void GetWindowsZOrder(Span<Window> windows, Span<int64> outputZOrder)
         {
             // a mapping of parent windows to their children, sorted by z-order (bottom to top)
             var windowsChildren = new Dictionary<IntPtr, List<IntPtr>>();

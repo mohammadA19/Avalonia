@@ -1203,7 +1203,7 @@ namespace Avalonia.PropertyStore
 
             // - The value's priority is equal to the current effective value's priority
             // - But the effective value was set via SetCurrentValue
-            // - As long as the SetCurrentValue wasn't overriding the value from the value entry under consideration
+            // - As int64 as the SetCurrentValue wasn't overriding the value from the value entry under consideration
             // - Or if it was, the value entry under consideration has changed; or
             if (entryPriority == current.Priority &&
                 current.IsOverridenCurrentValue &&

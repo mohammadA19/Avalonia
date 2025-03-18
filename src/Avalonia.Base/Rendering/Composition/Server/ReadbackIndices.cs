@@ -11,8 +11,8 @@ namespace Avalonia.Rendering.Composition.Server
         public int32 ReadIndex { get; private set; } = 0;
         public int32 WriteIndex { get; private set; } = 1;
         public int32 WrittenIndex { get; private set; } = 0;
-        public ulong ReadRevision { get; private set; }
-        public ulong LastWrittenRevision { get; private set; }
+        public uint64 ReadRevision { get; private set; }
+        public uint64 LastWrittenRevision { get; private set; }
         
         public void NextRead()
         {
@@ -26,7 +26,7 @@ namespace Avalonia.Rendering.Composition.Server
             }
         }
 
-        public void CompleteWrite(ulong writtenRevision)
+        public void CompleteWrite(uint64 writtenRevision)
         {
             lock (_lock)
             {

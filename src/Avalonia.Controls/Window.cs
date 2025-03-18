@@ -863,11 +863,11 @@ namespace Avalonia.Controls
                 throw new InvalidOperationException("Window.PlatformImpl is null");
 
 #if NET5_0_OR_GREATER
-            Span<long> zOrder = stackalloc long[windows.Length];
+            Span<int64> zOrder = stackalloc int64[windows.Length];
             platformImpl.GetWindowsZOrder(windows, zOrder);
             zOrder.Sort(windows.AsSpan());
 #else
-            long[] zOrder = new long[windows.Length];
+            int64[] zOrder = new int64[windows.Length];
             platformImpl.GetWindowsZOrder(windows, zOrder);
             Array.Sort(zOrder, windows);
 #endif

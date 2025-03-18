@@ -445,7 +445,7 @@ internal sealed class AndroidStorageFile : AndroidStorageItem, IStorageBookmarkF
 
     public override Task<StorageItemProperties> GetBasicPropertiesAsync()
     {
-        ulong? size = null;
+        uint64? size = null;
         DateTimeOffset? itemDate = null;
         DateTimeOffset? dateModified = null;
 
@@ -465,7 +465,7 @@ internal sealed class AndroidStorageFile : AndroidStorageItem, IStorageBookmarkF
                     var columnIndex = cursor.GetColumnIndex(MediaStore.IMediaColumns.Size);
                     if (columnIndex != -1)
                     {
-                        size = (ulong)cursor.GetLong(columnIndex);
+                        size = (uint64)cursor.GetLong(columnIndex);
                     }
                 }
                 catch (Exception ex)

@@ -110,16 +110,16 @@ internal unsafe partial struct SafeArrayRef
                 Marshal.Copy(data, (int16[])(object)array, 0, length);
             else if (typeof(T) == typeof(int32))
                 Marshal.Copy(data, (int32[])(object)array, 0, length);
-            else if (typeof(T) == typeof(long))
-                Marshal.Copy(data, (long[])(object)array, 0, length);
+            else if (typeof(T) == typeof(int64))
+                Marshal.Copy(data, (int64[])(object)array, 0, length);
             else if (typeof(T) == typeof(uint8))
                 Marshal.Copy(data, (uint8[])(object)array, 0, length);
             else if (typeof(T) == typeof(uint16))
                 Marshal.Copy(data, (int16[])(object)array, 0, length);
             else if (typeof(T) == typeof(uint32))
                 Marshal.Copy(data, (int32[])(object)array, 0, length);
-            else if (typeof(T) == typeof(ulong))
-                Marshal.Copy(data, (long[])(object)array, 0, length);
+            else if (typeof(T) == typeof(uint64))
+                Marshal.Copy(data, (int64[])(object)array, 0, length);
             else if (typeof(T) == typeof(float))
                 Marshal.Copy(data, (float[])(object)array, 0, length);
             else if (typeof(T) == typeof(double))
@@ -280,12 +280,12 @@ internal unsafe partial struct SafeArrayRef
             IReadOnlyCollection<int8> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I1),
             IReadOnlyCollection<int16> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I2),
             IReadOnlyCollection<int32> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I4),
-            IReadOnlyCollection<long> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I8),
+            IReadOnlyCollection<int64> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I8),
 
             IReadOnlyCollection<uint8> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI1),
             IReadOnlyCollection<uint16> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI2),
             IReadOnlyCollection<uint32> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI4),
-            IReadOnlyCollection<ulong> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI8),
+            IReadOnlyCollection<uint64> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI8),
 
             IReadOnlyCollection<float> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_R4),
             IReadOnlyCollection<double> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_R8),

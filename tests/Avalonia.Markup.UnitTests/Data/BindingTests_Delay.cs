@@ -151,7 +151,7 @@ public class BindingTests_Delay : IDisposable
         Assert.Equal("bar", _target.Text);
     }
 
-    private void SetTimeAndExecuteTimers(long time)
+    private void SetTimeAndExecuteTimers(int64 time)
     {
         _dispatcher.Now = time;
         _dispatcher.RaiseTimerEvent();
@@ -160,14 +160,14 @@ public class BindingTests_Delay : IDisposable
     private class ManualTimerDispatcher : IDispatcherImpl
     {
         public bool CurrentThreadIsLoopThread => true;
-        public long Now { get; set; }
+        public int64 Now { get; set; }
 
         public event Action? Signaled;
         public event Action? Timer;
 
         public void Signal() { Signaled?.Invoke(); }
 
-        public void UpdateTimer(long? dueTimeInMs) { }
+        public void UpdateTimer(int64? dueTimeInMs) { }
 
         public void RaiseTimerEvent() => Timer?.Invoke();
     }

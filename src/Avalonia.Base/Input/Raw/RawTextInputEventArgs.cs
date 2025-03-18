@@ -7,7 +7,7 @@ namespace Avalonia.Input.Raw
     {
         public RawTextInputEventArgs(
             IKeyboardDevice device,
-            ulong timestamp,
+            uint64 timestamp,
             IInputRoot root,
             string text)
             : base(device, timestamp, root)

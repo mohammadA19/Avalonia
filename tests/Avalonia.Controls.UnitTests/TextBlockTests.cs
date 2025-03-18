@@ -56,7 +56,7 @@ namespace Avalonia.Controls.UnitTests
             {
                 var textBlock = new TextBlock
                 {
-                    Text = "Hello&#10;שלום&#10;Really really really really long line",
+                    Text = "Hello&#10;שלום&#10;Really really really really int64 line",
                     HorizontalAlignment = HorizontalAlignment.Center,
                     TextAlignment = TextAlignment.DetectFromContent,
                     TextWrapping = TextWrapping.Wrap

@@ -218,7 +218,7 @@ namespace Avalonia.Input.UnitTests
             return unitTestApp;
         }
         
-        private static void SendXTouchContactsWithIds(IInputManager inputManager, TouchDevice device, IInputRoot root, RawPointerEventType type, params long[] touchPointIds)
+        private static void SendXTouchContactsWithIds(IInputManager inputManager, TouchDevice device, IInputRoot root, RawPointerEventType type, params int64[] touchPointIds)
         {
             for (int32 i = 0; i < touchPointIds.Length; i++)
             {
@@ -234,7 +234,7 @@ namespace Avalonia.Input.UnitTests
         }
 
 
-        private static void TapOnce(IInputManager inputManager, TouchDevice device, IInputRoot root, ulong timestamp = 0, long touchPointId = 0)
+        private static void TapOnce(IInputManager inputManager, TouchDevice device, IInputRoot root, uint64 timestamp = 0, int64 touchPointId = 0)
         {
             inputManager.ProcessInput(new RawPointerEventArgs(device, timestamp,
                                                root,

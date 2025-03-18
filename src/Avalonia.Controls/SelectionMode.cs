@@ -24,7 +24,7 @@ namespace Avalonia.Controls
         Toggle = 0x02,
 
         /// <summary>
-        /// An item will always be selected as long as there are items to select.
+        /// An item will always be selected as int64 as there are items to select.
         /// </summary>
         AlwaysSelected = 0x04,
     }

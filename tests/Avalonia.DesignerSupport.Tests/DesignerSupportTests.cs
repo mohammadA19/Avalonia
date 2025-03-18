@@ -78,7 +78,7 @@ namespace Avalonia.DesignerSupport.Tests
             Assert.True(File.Exists(assemblyPath), "File.Exists(assemblyPath)");
 
             var sessionId = Guid.NewGuid();
-            long handle = 0;
+            int64 handle = 0;
             bool success = false;
             string error = null;
 
@@ -124,7 +124,7 @@ namespace Avalonia.DesignerSupport.Tests
                         else
                             success = true;
                         if (method == "win32")
-                            handle = result.Handle != null ? long.Parse(result.Handle) : 0;
+                            handle = result.Handle != null ? int64.Parse(result.Handle) : 0;
                         resultMessageReceivedToken.Cancel();
                         conn.Dispose();
                     }

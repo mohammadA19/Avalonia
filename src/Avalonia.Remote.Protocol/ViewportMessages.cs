@@ -47,14 +47,14 @@
     [AvaloniaRemoteMessageGuid("68014F8A-289D-4851-8D34-5367EDA7F827")]
     public class FrameReceivedMessage
     {
-        public long SequenceId { get; set; }
+        public int64 SequenceId { get; set; }
     }
 
 
     [AvaloniaRemoteMessageGuid("F58313EE-FE69-4536-819D-F52EDF201A0E")]
     public class FrameMessage
     {
-        public long SequenceId { get; set; }
+        public int64 SequenceId { get; set; }
         public PixelFormat Format { get; set; }
         public uint8[] Data { get; set; }
         public int32 Width { get; set; }

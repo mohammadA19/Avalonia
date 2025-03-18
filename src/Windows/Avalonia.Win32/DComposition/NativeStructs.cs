@@ -12,9 +12,9 @@ internal struct DXGI_RATIONAL
 [StructLayout(LayoutKind.Sequential)]
 internal struct DCOMPOSITION_FRAME_STATISTICS
 {
-    public long lastFrameTime;
+    public int64 lastFrameTime;
     public DXGI_RATIONAL currentCompositionRate;
-    public long currentTime;
-    public long timeFrequency;
-    public long nextEstimatedFrameTime;
+    public int64 currentTime;
+    public int64 timeFrequency;
+    public int64 nextEstimatedFrameTime;
 }

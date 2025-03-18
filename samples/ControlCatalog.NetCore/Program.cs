@@ -95,7 +95,7 @@ namespace ControlCatalog.NetCore
                                 await Task.Delay(50);
                             }
 
-                            void FormatMem(string metric, long bytes)
+                            void FormatMem(string metric, int64 bytes)
                             {
                                 Console.WriteLine(metric + ": " + bytes / 1024 / 1024 + "MB");
                             }

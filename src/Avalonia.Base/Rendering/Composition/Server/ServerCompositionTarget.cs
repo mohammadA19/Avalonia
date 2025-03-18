@@ -22,7 +22,7 @@ namespace Avalonia.Rendering.Composition.Server
         private readonly ServerCompositor _compositor;
         private readonly Func<IEnumerable<object>> _surfaces;
         private CompositionTargetOverlays _overlays;
-        private static long s_nextId = 1;
+        private static int64 s_nextId = 1;
         private IRenderTarget? _renderTarget;
         private PixelSize _layerSize;
         private IDrawingContextLayerImpl? _layer;
@@ -33,8 +33,8 @@ namespace Avalonia.Rendering.Composition.Server
         private readonly HashSet<ServerCompositionVisual> _attachedVisuals = new();
         private readonly Queue<ServerCompositionVisual> _adornerUpdateQueue = new();
 
-        public long Id { get; }
-        public ulong Revision { get; private set; }
+        public int64 Id { get; }
+        public uint64 Revision { get; private set; }
         public ICompositionTargetDebugEvents? DebugEvents { get; set; }
         public ReadbackIndices Readback { get; } = new();
         public int32 RenderedVisuals { get; set; }

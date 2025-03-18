@@ -19,9 +19,9 @@ namespace Avalonia.Skia
     /// </summary>
     internal class PlatformRenderInterface : IPlatformRenderInterface
     {
-        private readonly long? _maxResourceBytes;
+        private readonly int64? _maxResourceBytes;
 
-        public PlatformRenderInterface(long? maxResourceBytes = null)
+        public PlatformRenderInterface(int64? maxResourceBytes = null)
         {
             _maxResourceBytes = maxResourceBytes;
             DefaultPixelFormat = SKImageInfo.PlatformColorType.ToPixelFormat();

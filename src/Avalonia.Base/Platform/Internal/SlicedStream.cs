@@ -24,7 +24,7 @@ internal class SlicedStream : Stream
         return _baseStream.Read(buffer, offset, (int32)Math.Min(count, Length - Position));
     }
 
-    public override long Seek(long offset, SeekOrigin origin)
+    public override int64 Seek(int64 offset, SeekOrigin origin)
     {
         if (origin == SeekOrigin.Begin)
             Position = offset;
@@ -35,15 +35,15 @@ internal class SlicedStream : Stream
         return Position;
     }
 
-    public override void SetLength(long value) => throw new NotSupportedException();
+    public override void SetLength(int64 value) => throw new NotSupportedException();
 
     public override void Write(uint8[] buffer, int32 offset, int32 count) => throw new NotSupportedException();
 
     public override bool CanRead => true;
     public override bool CanSeek => _baseStream.CanRead;
     public override bool CanWrite => false;
-    public override long Length { get; }
-    public override long Position
+    public override int64 Length { get; }
+    public override int64 Position
     {
         get => _baseStream.Position - _from;
         set => _baseStream.Position = value + _from;

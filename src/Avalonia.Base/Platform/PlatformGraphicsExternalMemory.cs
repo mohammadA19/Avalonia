@@ -5,8 +5,8 @@ public record struct PlatformGraphicsExternalImageProperties
     public int32 Width { get; set; }
     public int32 Height { get; set; }
     public PlatformGraphicsExternalImageFormat Format { get; set; }
-    public ulong MemorySize { get; set; }
-    public ulong MemoryOffset { get; set; }
+    public uint64 MemorySize { get; set; }
+    public uint64 MemoryOffset { get; set; }
     public bool TopLeftOrigin { get; set; }
 }
 

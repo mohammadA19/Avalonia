@@ -37,7 +37,7 @@ public class AvaloniaXEmbedGtkSocket : Gtk.Socket
         );
         _avaloniaPlug.Content = _content;
         ApplyInteractiveResize();
-        AddId((ulong)_avaloniaPlug.Handle);
+        AddId((uint64)_avaloniaPlug.Handle);
     }
 
     void ApplyInteractiveResize()

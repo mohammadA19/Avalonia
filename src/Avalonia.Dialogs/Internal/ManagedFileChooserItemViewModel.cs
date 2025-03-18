@@ -8,7 +8,7 @@ namespace Avalonia.Dialogs.Internal
         private string? _path;
         private DateTime _modified;
         private string? _type;
-        private long _size;
+        private int64 _size;
         private ManagedFileChooserItemType _itemType;
 
         public string? DisplayName
@@ -35,7 +35,7 @@ namespace Avalonia.Dialogs.Internal
             set => this.RaiseAndSetIfChanged(ref _type, value);
         }
 
-        public long Size
+        public int64 Size
         {
             get => _size;
             set => this.RaiseAndSetIfChanged(ref _size, value);

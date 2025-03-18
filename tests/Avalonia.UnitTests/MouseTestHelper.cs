@@ -7,8 +7,8 @@ namespace Avalonia.UnitTests
     public class MouseTestHelper
     {
         private readonly Pointer _pointer = new Pointer(Pointer.GetNextFreeId(), PointerType.Mouse, true);
-        private ulong _nextStamp = 1;
-        private ulong Timestamp() => _nextStamp++;
+        private uint64 _nextStamp = 1;
+        private uint64 Timestamp() => _nextStamp++;
 
         private RawInputModifiers _pressedButtons;
         public IInputElement Captured => _pointer.Captured;

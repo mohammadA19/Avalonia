@@ -13,7 +13,7 @@ internal class SkiaMetalGpu : ISkiaGpu, ISkiaGpuWithPlatformGraphicsContext
     private GRContext? _context;
     private readonly IMetalDevice _device;
 
-    public SkiaMetalGpu(IMetalDevice device, long? maxResourceBytes)
+    public SkiaMetalGpu(IMetalDevice device, int64? maxResourceBytes)
     {
         _context = _api.CreateContext(device.Device, device.CommandQueue,
             new GRContextOptions() { AvoidStencilBuffers = true });

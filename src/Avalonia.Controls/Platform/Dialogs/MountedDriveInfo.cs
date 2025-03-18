@@ -11,7 +11,7 @@ namespace Avalonia.Controls.Platform
     {
         public string? VolumeLabel { get; set; }
         public string? VolumePath { get; set; }
-        public ulong VolumeSizeBytes { get; set; }
+        public uint64 VolumeSizeBytes { get; set; }
 
         public bool Equals(MountedVolumeInfo? other)
         {

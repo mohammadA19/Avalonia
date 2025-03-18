@@ -21,11 +21,11 @@ namespace Avalonia.Input
     [PrivateApi]
     public class TouchDevice : IPointerDevice, IDisposable
     {
-        private readonly Dictionary<long, Pointer> _pointers = new Dictionary<long, Pointer>();
+        private readonly Dictionary<int64, Pointer> _pointers = new Dictionary<int64, Pointer>();
         private bool _disposed;
         private int32 _clickCount;
         private Rect _lastClickRect;
-        private ulong _lastClickTime;
+        private uint64 _lastClickTime;
 
         static RawInputModifiers GetModifiers(RawInputModifiers modifiers, bool isLeftButtonDown)
         {

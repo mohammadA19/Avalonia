@@ -19,7 +19,7 @@ namespace Avalonia.Input
             object? source,
             IPointer pointer,
             Visual? rootVisual, Point rootVisualPosition,
-            ulong timestamp,
+            uint64 timestamp,
             PointerPointProperties properties,
             KeyModifiers modifiers)
            : base(routedEvent)
@@ -37,7 +37,7 @@ namespace Avalonia.Input
             object? source,
             IPointer pointer,
             Visual? rootVisual, Point rootVisualPosition,
-            ulong timestamp,
+            uint64 timestamp,
             PointerPointProperties properties,
             KeyModifiers modifiers,
             Lazy<IReadOnlyList<RawPointerPoint>?>? previousPoints)
@@ -56,7 +56,7 @@ namespace Avalonia.Input
         /// <summary>
         /// Gets the time when the input occurred.
         /// </summary>
-        public ulong Timestamp { get; }
+        public uint64 Timestamp { get; }
 
         internal bool IsGestureRecognitionSkipped
         {
@@ -165,7 +165,7 @@ namespace Avalonia.Input
             object source,
             IPointer pointer,
             Visual rootVisual, Point rootVisualPosition,
-            ulong timestamp,
+            uint64 timestamp,
             PointerPointProperties properties,
             KeyModifiers modifiers,
             int32 clickCount = 1)
@@ -183,7 +183,7 @@ namespace Avalonia.Input
         [Unstable("This constructor might be removed in 12.0. For unit testing, consider using IHeadlessWindow mouse methods.")]
         public PointerReleasedEventArgs(
             object source, IPointer pointer,
-            Visual rootVisual, Point rootVisualPosition, ulong timestamp,
+            Visual rootVisual, Point rootVisualPosition, uint64 timestamp,
             PointerPointProperties properties, KeyModifiers modifiers,
             MouseButton initialPressMouseButton)
             : base(InputElement.PointerReleasedEvent, source, pointer, rootVisual, rootVisualPosition,

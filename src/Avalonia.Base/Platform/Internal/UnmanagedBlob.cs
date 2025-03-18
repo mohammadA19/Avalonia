@@ -124,7 +124,7 @@ internal class UnmanagedBlob : IDisposable
         else
         {
             var rv = mmap(IntPtr.Zero, new IntPtr(size), 3, 0x22, -1, IntPtr.Zero);
-            if (rv.ToInt64() == -1 || (ulong)rv.ToInt64() == 0xffffffff)
+            if (rv.ToInt64() == -1 || (uint64)rv.ToInt64() == 0xffffffff)
             {
 #if NET6_0_OR_GREATER
                 var errno = Marshal.GetLastSystemError();

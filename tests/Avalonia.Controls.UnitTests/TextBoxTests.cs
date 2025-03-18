@@ -1378,7 +1378,7 @@ namespace Avalonia.Controls.UnitTests
 
                 // See GH #6024 for a bit more insight on when Undo/Redo snapshots are taken:
                 // - Every 'Space', but only when space is handled in OnKeyDown - Spaces in TextInput event won't work
-                // - Every 7 chars in a long word
+                // - Every 7 chars in a int64 word
                 RaiseTextEvent(tb, "ABC");
                 RaiseKeyEvent(tb, Key.Space, KeyModifiers.None);
                 RaiseTextEvent(tb, "DEF");

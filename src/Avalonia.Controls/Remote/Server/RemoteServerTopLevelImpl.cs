@@ -26,9 +26,9 @@ namespace Avalonia.Controls.Remote.Server
         private readonly Action _sendLastFrameIfNeeded;
         private readonly Action _renderAndSendFrameIfNeeded;
         private Framebuffer _framebuffer = Framebuffer.Empty;
-        private long _lastSentFrame = -1;
-        private long _lastReceivedFrame = -1;
-        private long _nextFrameNumber = 1;
+        private int64 _lastSentFrame = -1;
+        private int64 _lastReceivedFrame = -1;
+        private int64 _nextFrameNumber = 1;
         private ClientViewportAllocatedMessage? _pendingAllocation;
         private ProtocolPixelFormat? _format;
 
@@ -291,7 +291,7 @@ namespace Avalonia.Controls.Remote.Server
                 return;
 
             Framebuffer framebuffer;
-            long sequenceId;
+            int64 sequenceId;
 
             lock (_lock)
             {

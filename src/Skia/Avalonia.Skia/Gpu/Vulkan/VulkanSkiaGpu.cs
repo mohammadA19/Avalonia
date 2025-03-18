@@ -13,7 +13,7 @@ internal class VulkanSkiaGpu : ISkiaGpuWithPlatformGraphicsContext
     public IVulkanPlatformGraphicsContext Vulkan { get; private set; }
     public GRContext GrContext { get; private set; }
 
-    public VulkanSkiaGpu(IVulkanPlatformGraphicsContext vulkan, long? maxResourceBytes)
+    public VulkanSkiaGpu(IVulkanPlatformGraphicsContext vulkan, int64? maxResourceBytes)
     {
         Vulkan = vulkan;
         var device = vulkan.Device;

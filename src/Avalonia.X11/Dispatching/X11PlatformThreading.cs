@@ -25,7 +25,7 @@ namespace Avalonia.X11
             [FieldOffset(0)]
             public uint32 u32;
             [FieldOffset(0)]
-            public ulong u64;
+            public uint64 u64;
         }
 
         private const int32 EPOLLIN = 1;
@@ -66,7 +66,7 @@ namespace Avalonia.X11
         private object _lock = new object();
         private bool _signaled;
         private bool _wakeupRequested;
-        private long? _nextTimer;
+        private int64? _nextTimer;
         private int32 _epoll;
         private Stopwatch _clock = Stopwatch.StartNew();
         private readonly X11EventDispatcher _x11Events;
@@ -189,7 +189,7 @@ namespace Avalonia.X11
         public event Action? Signaled;
         public event Action? Timer;
 
-        public void UpdateTimer(long? dueTimeInMs)
+        public void UpdateTimer(int64? dueTimeInMs)
         {
             _nextTimer = dueTimeInMs;
             if (_nextTimer != null)
@@ -197,7 +197,7 @@ namespace Avalonia.X11
         }
 
 
-        public long Now => _clock.ElapsedMilliseconds;
+        public int64 Now => _clock.ElapsedMilliseconds;
         public bool CanQueryPendingInput => true;
 
         public bool HasPendingInput => _platform.EventGrouperDispatchQueue.HasJobs || _x11Events.IsPending;

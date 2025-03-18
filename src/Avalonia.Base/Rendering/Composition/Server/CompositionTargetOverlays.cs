@@ -14,7 +14,7 @@ internal class CompositionTargetOverlays
     private FrameTimeGraph? _updateTimeGraph;
     private FrameTimeGraph? _layoutTimeGraph;
     private Rect? _oldFpsCounterRect;
-    private long _updateStarted;
+    private int64 _updateStarted;
     private readonly ServerCompositionTarget _target;
     private readonly DiagnosticTextRenderer? _diagnosticTextRenderer;
 
@@ -113,10 +113,10 @@ internal class CompositionTargetOverlays
     {
         if (DebugOverlays.HasFlag(RendererDebugOverlays.Fps))
         {
-            var nativeMem = ByteSizeHelper.ToString((ulong)(
+            var nativeMem = ByteSizeHelper.ToString((uint64)(
                 (_target.Compositor.BatchMemoryPool.CurrentUsage + _target.Compositor.BatchMemoryPool.CurrentPool) *
                 _target.Compositor.BatchMemoryPool.BufferSize), false);
-            var managedMem = ByteSizeHelper.ToString((ulong)(
+            var managedMem = ByteSizeHelper.ToString((uint64)(
                 (_target.Compositor.BatchObjectPool.CurrentUsage + _target.Compositor.BatchObjectPool.CurrentPool) *
                 _target.Compositor.BatchObjectPool.ArraySize *
                 IntPtr.Size), false);

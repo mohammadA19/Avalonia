@@ -164,7 +164,7 @@ internal class TopLevelImpl : ITopLevelImpl, IFramebufferPlatformSurface
         return _inputRoot is Control c ? ControlAutomationPeer.CreatePeerForElement(c) : null;
     }
 
-    public bool RawTextInputEvent(ulong timeStamp, string text)
+    public bool RawTextInputEvent(uint64 timeStamp, string text)
     {
         if (_inputRoot is null)
             return false;
@@ -185,7 +185,7 @@ internal class TopLevelImpl : ITopLevelImpl, IFramebufferPlatformSurface
 
     public bool RawKeyEvent(
         AvnRawKeyEventType type,
-        ulong timeStamp,
+        uint64 timeStamp,
         AvnInputModifiers modifiers,
         AvnKey key,
         AvnPhysicalKey physicalKey,
@@ -216,7 +216,7 @@ internal class TopLevelImpl : ITopLevelImpl, IFramebufferPlatformSurface
         return args.Handled;
     }
 
-    public void RawMouseEvent(AvnRawMouseEventType type, AvnPointerDeviceType deviceType, ulong timeStamp, AvnInputModifiers modifiers, AvnPoint point, AvnVector delta, float pressure, float xTilt, float yTilt)
+    public void RawMouseEvent(AvnRawMouseEventType type, AvnPointerDeviceType deviceType, uint64 timeStamp, AvnInputModifiers modifiers, AvnPoint point, AvnVector delta, float pressure, float xTilt, float yTilt)
     {
         if (_inputRoot is null)
             return;
@@ -445,17 +445,17 @@ internal class TopLevelImpl : ITopLevelImpl, IFramebufferPlatformSurface
             _parent.Resized?.Invoke(s, (WindowResizeReason)reason);
         }
 
-        void IAvnTopLevelEvents.RawMouseEvent(AvnRawMouseEventType type, AvnPointerDeviceType pointerDeviceType, ulong timeStamp, AvnInputModifiers modifiers, AvnPoint point, AvnVector delta, float pressure, float xTilt, float yTilt)
+        void IAvnTopLevelEvents.RawMouseEvent(AvnRawMouseEventType type, AvnPointerDeviceType pointerDeviceType, uint64 timeStamp, AvnInputModifiers modifiers, AvnPoint point, AvnVector delta, float pressure, float xTilt, float yTilt)
         {
             _parent.RawMouseEvent(type, pointerDeviceType, timeStamp, modifiers, point, delta, pressure, xTilt, yTilt);
         }
 
-        int32 IAvnTopLevelEvents.RawKeyEvent(AvnRawKeyEventType type, ulong timeStamp, AvnInputModifiers modifiers, AvnKey key, AvnPhysicalKey physicalKey, string keySymbol)
+        int32 IAvnTopLevelEvents.RawKeyEvent(AvnRawKeyEventType type, uint64 timeStamp, AvnInputModifiers modifiers, AvnKey key, AvnPhysicalKey physicalKey, string keySymbol)
         {
             return _parent.RawKeyEvent(type, timeStamp, modifiers, key, physicalKey, keySymbol).AsComBool();
         }
 
-        int32 IAvnTopLevelEvents.RawTextInputEvent(ulong timeStamp, string text)
+        int32 IAvnTopLevelEvents.RawTextInputEvent(uint64 timeStamp, string text)
         {
             return _parent.RawTextInputEvent(timeStamp, text).AsComBool();
         }

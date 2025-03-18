@@ -6,9 +6,9 @@ namespace Avalonia.Browser
 {
     internal class BrowserMouseDevice : MouseDevice
     {
-        internal long PointerId { get; }
+        internal int64 PointerId { get; }
 
-        public BrowserMouseDevice(long pointerId, JSObject container) : base( new BrowserMousePointer(pointerId, container))
+        public BrowserMouseDevice(int64 pointerId, JSObject container) : base( new BrowserMousePointer(pointerId, container))
         {
             PointerId = pointerId;
         }
@@ -16,9 +16,9 @@ namespace Avalonia.Browser
         internal class BrowserMousePointer : Pointer
         {
             private readonly JSObject _container;
-            private readonly long _pointerId;
+            private readonly int64 _pointerId;
 
-            internal BrowserMousePointer(long pointerId, JSObject container) : base(GetNextFreeId(),PointerType.Mouse, true)
+            internal BrowserMousePointer(int64 pointerId, JSObject container) : base(GetNextFreeId(),PointerType.Mouse, true)
             {
                 _pointerId = pointerId;
                 _container = container;

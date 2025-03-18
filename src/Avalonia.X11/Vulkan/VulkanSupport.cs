@@ -66,18 +66,18 @@ internal class VulkanSupport
 
         public double Scaling => _handle.Scaling;
         public PixelSize Size => _handle.Size;
-        public ulong CreateSurface(IVulkanPlatformGraphicsContext context) =>
+        public uint64 CreateSurface(IVulkanPlatformGraphicsContext context) =>
             CreateXlibSurface(_display, _handle.Handle, context.Instance);
     }
 
-    private static ulong CreateDummySurface(IntPtr display, IVulkanInstance instance)
+    private static uint64 CreateDummySurface(IntPtr display, IVulkanInstance instance)
     {
         var surf = CreateXlibSurface(display, s_offscreenWindow, instance);
         XLib.XSync(display, true);
         return surf;
     }
 
-    private static ulong CreateXlibSurface(IntPtr display, IntPtr window, IVulkanInstance instance)
+    private static uint64 CreateXlibSurface(IntPtr display, IntPtr window, IVulkanInstance instance)
     {
         var vulkanXlib = new X11VulkanInterface(instance);
         var createInfo = new VkXlibSurfaceCreateInfoKHR

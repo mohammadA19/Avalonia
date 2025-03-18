@@ -8,7 +8,7 @@ namespace Avalonia.Platform.Storage;
 public class StorageItemProperties
 {
     public StorageItemProperties(
-        ulong? size = null,
+        uint64? size = null,
         DateTimeOffset? dateCreated = null,
         DateTimeOffset? dateModified = null)
     {
@@ -23,7 +23,7 @@ public class StorageItemProperties
     /// <remarks>
     /// Can be null if property is not available.
     /// </remarks>
-    public ulong? Size { get; }
+    public uint64? Size { get; }
 
     /// <summary>
     /// Gets the date and time that the current folder was created.

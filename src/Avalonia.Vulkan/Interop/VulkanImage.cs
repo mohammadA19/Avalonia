@@ -20,7 +20,7 @@ internal class VulkanImageBase : IDisposable
     internal VkImageAspectFlags AspectFlags { get; private set; }
     public uint32 MipLevels { get; private set; }
     public PixelSize Size { get; }
-    public ulong MemorySize { get; private set; }
+    public uint64 MemorySize { get; private set; }
     public VkImageLayout CurrentLayout { get; protected set; }
     public VkDeviceMemory MemoryHandle => _imageMemory;
 
@@ -45,8 +45,8 @@ internal class VulkanImageBase : IDisposable
     public struct MemoryImportInfo
     {
         public IntPtr Next;
-        public ulong MemorySize;
-        public ulong MemoryOffset;
+        public uint64 MemorySize;
+        public uint64 MemoryOffset;
     }
     
     public VulkanImageBase(IVulkanPlatformGraphicsContext context,
@@ -64,7 +64,7 @@ internal class VulkanImageBase : IDisposable
                            | VkImageUsageFlags.VK_IMAGE_USAGE_SAMPLED_BIT;
     }
 
-    protected virtual VkDeviceMemory CreateMemory(VkImage image, ulong size, uint32 memoryTypeBits)
+    protected virtual VkDeviceMemory CreateMemory(VkImage image, uint64 size, uint32 memoryTypeBits)
     {
         var memoryAllocateInfo = new VkMemoryAllocateInfo
         {

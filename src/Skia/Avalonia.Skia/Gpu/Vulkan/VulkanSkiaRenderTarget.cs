@@ -41,7 +41,7 @@ class VulkanSkiaRenderTarget : ISkiaGpuRenderTarget
             {
                 CurrentQueueFamily = _gpu.Vulkan.Device.GraphicsQueueFamilyIndex,
                 Format = sessionImageInfo.Format,
-                Image = (ulong)sessionImageInfo.Handle,
+                Image = (uint64)sessionImageInfo.Handle,
                 ImageLayout = sessionImageInfo.Layout,
                 ImageTiling = sessionImageInfo.Tiling,
                 ImageUsageFlags = sessionImageInfo.UsageFlags,
@@ -50,7 +50,7 @@ class VulkanSkiaRenderTarget : ISkiaGpuRenderTarget
                 Protected = sessionImageInfo.IsProtected,
                 Alloc = new GRVkAlloc
                 {
-                    Memory = (ulong)sessionImageInfo.MemoryHandle,
+                    Memory = (uint64)sessionImageInfo.MemoryHandle,
                     Size = sessionImageInfo.MemorySize
                 }
             };

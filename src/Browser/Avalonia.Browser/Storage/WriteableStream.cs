@@ -13,9 +13,9 @@ internal sealed class WriteableStream : Stream
     private JSObject? _jSReference;
 
     // Unfortunatelly we can't read current length/position, so we need to keep it C#-side only.
-    private long _length, _position;
+    private int64 _length, _position;
 
-    internal WriteableStream(JSObject jSReference, long initialLength)
+    internal WriteableStream(JSObject jSReference, int64 initialLength)
     {
         _jSReference = jSReference;
         _length = initialLength;
@@ -29,9 +29,9 @@ internal sealed class WriteableStream : Stream
 
     public override bool CanWrite => true;
 
-    public override long Length => _length;
+    public override int64 Length => _length;
 
-    public override long Position
+    public override int64 Position
     {
         get => _position;
         set => Seek(_position, SeekOrigin.Begin);
@@ -47,7 +47,7 @@ internal sealed class WriteableStream : Stream
         throw new NotSupportedException();
     }
 
-    public override long Seek(long offset, SeekOrigin origin)
+    public override int64 Seek(int64 offset, SeekOrigin origin)
     {
         var position = origin switch
         {
@@ -59,7 +59,7 @@ internal sealed class WriteableStream : Stream
         return position;
     }
 
-    public override void SetLength(long value)
+    public override void SetLength(int64 value)
     {
         _length = value;
 

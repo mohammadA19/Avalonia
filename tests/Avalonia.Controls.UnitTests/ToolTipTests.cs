@@ -404,7 +404,7 @@ namespace Avalonia.Controls.UnitTests
             var mouseEnter = SetupWindowAndGetMouseEnterAction(panel);
             
             mouseEnter(other);
-            Assert.False(ToolTip.GetIsOpen(other)); // long delay
+            Assert.False(ToolTip.GetIsOpen(other)); // int64 delay
 
             mouseEnter(target);
             AssertToolTipOpen(target); // no delay
@@ -521,7 +521,7 @@ namespace Avalonia.Controls.UnitTests
                 AssertToolTipOpen(target);
 
                 var topLevel = TopLevel.GetTopLevel(target);
-                topLevel.PlatformImpl.Input(new RawPointerEventArgs(s_mouseDevice, (ulong)DateTime.Now.Ticks, topLevel, 
+                topLevel.PlatformImpl.Input(new RawPointerEventArgs(s_mouseDevice, (uint64)DateTime.Now.Ticks, topLevel, 
                     RawPointerEventType.LeaveWindow, default(RawPointerPoint), RawInputModifiers.None));
 
                 Assert.False(ToolTip.GetIsOpen(target));
@@ -575,7 +575,7 @@ namespace Avalonia.Controls.UnitTests
                     .Returns(control);
 
                 var root = (IInputRoot)control?.VisualRoot ?? window;
-                var timestamp = (ulong)DateTime.Now.Ticks;
+                var timestamp = (uint64)DateTime.Now.Ticks;
 
                 windowImpl.Object.Input(new RawPointerEventArgs(s_mouseDevice, timestamp, root,
                         RawPointerEventType.Move, point, RawInputModifiers.None));

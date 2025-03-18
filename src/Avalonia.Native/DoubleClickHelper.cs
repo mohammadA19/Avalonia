@@ -7,10 +7,10 @@ namespace Avalonia.Native
     {
         private int32 _clickCount;
         private Rect _lastClickRect;
-        private ulong _lastClickTime;
+        private uint64 _lastClickTime;
 
         public bool IsDoubleClick(
-            ulong timestamp,
+            uint64 timestamp,
             Point p)
         {
             var settings = AvaloniaLocator.Current.GetService<IPlatformSettings>();

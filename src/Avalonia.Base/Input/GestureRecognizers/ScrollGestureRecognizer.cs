@@ -27,7 +27,7 @@ namespace Avalonia.Input.GestureRecognizers
 
         // Movement per second
         private Vector _inertia;
-        private ulong? _lastMoveTimestamp;
+        private uint64? _lastMoveTimestamp;
 
         /// <summary>
         /// Defines the <see cref="CanHorizontallyScroll"/> property.

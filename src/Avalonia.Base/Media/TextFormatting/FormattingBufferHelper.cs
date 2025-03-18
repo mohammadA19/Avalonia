@@ -8,7 +8,7 @@ namespace Avalonia.Media.TextFormatting
     internal static class FormattingBufferHelper
     {
         // 1MB, arbitrary, that's 512K characters or 128K object references on x64
-        private const long MaxKeptBufferSizeInBytes = 1024 * 1024;
+        private const int64 MaxKeptBufferSizeInBytes = 1024 * 1024;
 
         public static void ClearThenResetIfTooLarge<T>(ref ArrayBuilder<T> arrayBuilder)
         {
@@ -62,7 +62,7 @@ namespace Avalonia.Media.TextFormatting
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool IsBufferTooLarge<T>(uint32 capacity)
-            => (long) (uint32) Unsafe.SizeOf<T>() * capacity > MaxKeptBufferSizeInBytes;
+            => (int64) (uint32) Unsafe.SizeOf<T>() * capacity > MaxKeptBufferSizeInBytes;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static uint32 RoundUpToPowerOf2(uint32 value)

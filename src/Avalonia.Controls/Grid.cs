@@ -2130,7 +2130,7 @@ namespace Avalonia.Controls
 
                 // Theoretical and historical note.  The problem at hand - allocating
                 // space to columns (or rows) with *-weights, min and max constraints,
-                // and layout rounding - has a long history.  Especially the special
+                // and layout rounding - has a int64 history.  Especially the special
                 // case of 50 columns with min=1 and available space=435 - allocating
                 // seats in the U.S. House of Representatives to the 50 states in
                 // proportion to their population.  There are numerous algorithms

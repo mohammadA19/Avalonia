@@ -57,7 +57,7 @@ internal class DispatcherImpl : IControlledDispatcherImpl, IDispatcherImplWithEx
 
     public void Signal() => _native.Signal();
 
-    public void UpdateTimer(long? dueTimeInMs)
+    public void UpdateTimer(int64? dueTimeInMs)
     {
         var ms = dueTimeInMs == null ? -1 : (int32)Math.Min(int32.MaxValue - 10, Math.Max(1, dueTimeInMs.Value - Now));
         _native.UpdateTimer(ms);
@@ -113,7 +113,7 @@ internal class DispatcherImpl : IControlledDispatcherImpl, IDispatcherImplWithEx
         }
     }
 
-    public long Now => _clock.ElapsedMilliseconds;
+    public int64 Now => _clock.ElapsedMilliseconds;
 
     public void PropagateCallbackException(ExceptionDispatchInfo capture)
     {

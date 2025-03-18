@@ -176,7 +176,7 @@ namespace Avalonia.DesignerSupport.Remote
         {
         }
 
-        public void GetWindowsZOrder(Span<Window> windows, Span<long> zOrder) => throw new NotSupportedException();
+        public void GetWindowsZOrder(Span<Window> windows, Span<int64> zOrder) => throw new NotSupportedException();
 
         public IPopupPositioner PopupPositioner { get; }
 

@@ -21,7 +21,7 @@ namespace Avalonia.Input.Raw
         /// <param name="device">The associated device.</param>
         /// <param name="timestamp">The event timestamp.</param>
         /// <param name="root">The root from which the event originates.</param>
-        public RawInputEventArgs(IInputDevice device, ulong timestamp, IInputRoot root)
+        public RawInputEventArgs(IInputDevice device, uint64 timestamp, IInputRoot root)
         {
             Device = device ?? throw new ArgumentNullException(nameof(device));
             Timestamp = timestamp;
@@ -51,6 +51,6 @@ namespace Avalonia.Input.Raw
         /// <summary>
         /// Gets the timestamp associated with the event.
         /// </summary>
-        public ulong Timestamp { get; set; }
+        public uint64 Timestamp { get; set; }
     }
 }

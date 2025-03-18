@@ -46,7 +46,7 @@ internal class BrowserInputHandler
     public BrowserTextInputMethod TextInputMethod { get; }
     public BrowserInputPane InputPane { get; }
     
-    public ulong Timestamp => (ulong)_sw.ElapsedMilliseconds;
+    public uint64 Timestamp => (uint64)_sw.ElapsedMilliseconds;
 
     internal void SetInputRoot(IInputRoot inputRoot)
     {
@@ -63,7 +63,7 @@ internal class BrowserInputHandler
         Twist = (float)twist
     };
 
-    public bool OnPointerMove(string pointerType, long pointerId, double offsetX, double offsetY,
+    public bool OnPointerMove(string pointerType, int64 pointerId, double offsetX, double offsetY,
         double pressure, double tiltX, double tiltY, double twist, int32 modifier, JSObject argsObj)
     {
         var point = CreateRawPointer(offsetX, offsetY, pressure, tiltX, tiltY, twist);
@@ -105,7 +105,7 @@ internal class BrowserInputHandler
             coalescedEvents);
     }
 
-    public bool OnPointerDown(string pointerType, long pointerId, int32 buttons, double offsetX, double offsetY,
+    public bool OnPointerDown(string pointerType, int64 pointerId, int32 buttons, double offsetX, double offsetY,
         double pressure, double tiltX, double tiltY, double twist, int32 modifier)
     {
         var type = pointerType switch
@@ -127,7 +127,7 @@ internal class BrowserInputHandler
         return RawPointerEvent(type, pointerType, point, (RawInputModifiers)modifier, pointerId);
     }
 
-    public bool OnPointerUp(string pointerType, long pointerId, int32 buttons, double offsetX, double offsetY,
+    public bool OnPointerUp(string pointerType, int64 pointerId, int32 buttons, double offsetX, double offsetY,
         double pressure, double tiltX, double tiltY, double twist, int32 modifier)
     {
         var type = pointerType switch
@@ -149,7 +149,7 @@ internal class BrowserInputHandler
         return RawPointerEvent(type, pointerType, point, (RawInputModifiers)modifier, pointerId);
     }
 
-    public bool OnPointerCancel(string pointerType, long pointerId, double offsetX, double offsetY,
+    public bool OnPointerCancel(string pointerType, int64 pointerId, double offsetX, double offsetY,
         double pressure, double tiltX, double tiltY, double twist, int32 modifier)
     {
         if (pointerType == "touch")
@@ -245,7 +245,7 @@ internal class BrowserInputHandler
 
     private bool RawPointerEvent(
         RawPointerEventType eventType, string pointerType,
-        RawPointerPoint p, RawInputModifiers modifiers, long touchPointId,
+        RawPointerPoint p, RawInputModifiers modifiers, int64 touchPointId,
         Lazy<IReadOnlyList<RawPointerPoint>?>? intermediatePoints = null)
     {
         if (_inputRoot is not null)
@@ -269,7 +269,7 @@ internal class BrowserInputHandler
         return false;
     }
 
-    private IPointerDevice GetPointerDevice(string pointerType, long pointerId)
+    private IPointerDevice GetPointerDevice(string pointerType, int64 pointerId)
     {
         if (pointerType == "touch")
             return _touchDevice;

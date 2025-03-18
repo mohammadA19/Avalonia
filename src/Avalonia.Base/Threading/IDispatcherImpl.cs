@@ -15,8 +15,8 @@ public interface IDispatcherImpl
     void Signal();
     event Action? Signaled;
     event Action? Timer;
-    long Now { get; }
-    void UpdateTimer(long? dueTimeInMs);
+    int64 Now { get; }
+    void UpdateTimer(int64? dueTimeInMs);
 }
 
 [PrivateApi]
@@ -59,8 +59,8 @@ internal class LegacyDispatcherImpl : IDispatcherImpl
 
     public event Action? Signaled;
     public event Action? Timer;
-    public long Now => _clock.ElapsedMilliseconds;
-    public void UpdateTimer(long? dueTimeInMs)
+    public int64 Now => _clock.ElapsedMilliseconds;
+    public void UpdateTimer(int64? dueTimeInMs)
     {
         _timer?.Dispose();
         _timer = null;
@@ -103,9 +103,9 @@ internal sealed class NullDispatcherImpl : IDispatcherImpl
         remove { }
     }
 
-    public long Now => 0;
+    public int64 Now => 0;
 
-    public void UpdateTimer(long? dueTimeInMs)
+    public void UpdateTimer(int64? dueTimeInMs)
     {
         
     }

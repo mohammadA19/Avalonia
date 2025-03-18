@@ -961,7 +961,7 @@ namespace Avalonia.Win32.Interop
             POINTER_FLAG_HASTRANSFORM = 0x00400000
         }
 
-        public enum PointerButtonChangeType : ulong
+        public enum PointerButtonChangeType : uint64
         {
             POINTER_CHANGE_NONE,
             POINTER_CHANGE_FIRSTBUTTON_DOWN,
@@ -1061,7 +1061,7 @@ namespace Avalonia.Win32.Interop
             public uint32 historyCount;
             public int32 inputData;
             public ModifierKeys dwKeyStates;
-            public ulong PerformanceCount;
+            public uint64 PerformanceCount;
             public PointerButtonChangeType ButtonChangeType;
         }
 
@@ -1621,7 +1621,7 @@ namespace Avalonia.Win32.Interop
         public static extern bool SetProcessDpiAwarenessContext(IntPtr dpiAWarenessContext);
 
         [DllImport("shcore.dll")]
-        public static extern long GetDpiForMonitor(IntPtr hmonitor, MONITOR_DPI_TYPE dpiType, out uint32 dpiX, out uint32 dpiY);
+        public static extern int64 GetDpiForMonitor(IntPtr hmonitor, MONITOR_DPI_TYPE dpiType, out uint32 dpiX, out uint32 dpiY);
 
         [DllImport("gdi32.dll")]
         public static extern int32 GetDeviceCaps(IntPtr hdc, DEVICECAP nIndex);
@@ -2003,7 +2003,7 @@ namespace Avalonia.Win32.Interop
         {
             unchecked
             {
-                return (uint32)((ulong)HKL & 0xffff);
+                return (uint32)((uint64)HKL & 0xffff);
             }
         }
 
@@ -2019,11 +2019,11 @@ namespace Avalonia.Win32.Interop
         public const int32 CFS_RECT = 0x0001;
 
         // lParam for WM_IME_SETCONTEXT
-        public const long ISC_SHOWUICANDIDATEWINDOW = 0x00000001;
-        public const long ISC_SHOWUICOMPOSITIONWINDOW = 0x80000000;
-        public const long ISC_SHOWUIGUIDELINE = 0x40000000;
-        public const long ISC_SHOWUIALLCANDIDATEWINDOW = 0x0000000F;
-        public const long ISC_SHOWUIALL = 0xC000000F;
+        public const int64 ISC_SHOWUICANDIDATEWINDOW = 0x00000001;
+        public const int64 ISC_SHOWUICOMPOSITIONWINDOW = 0x80000000;
+        public const int64 ISC_SHOWUIGUIDELINE = 0x40000000;
+        public const int64 ISC_SHOWUIALLCANDIDATEWINDOW = 0x0000000F;
+        public const int64 ISC_SHOWUIALL = 0xC000000F;
 
         public const int32 NI_COMPOSITIONSTR = 21;
         public const int32 CPS_COMPLETE = 1;

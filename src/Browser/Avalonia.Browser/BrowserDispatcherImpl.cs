@@ -33,7 +33,7 @@ internal class BrowserDispatcherImpl : IDispatcherImpl
 
     public bool CurrentThreadIsLoopThread => Thread.CurrentThread == _thread;
 
-    public long Now => _clock.ElapsedMilliseconds;
+    public int64 Now => _clock.ElapsedMilliseconds;
 
     public event Action? Signaled;
     public event Action? Timer;
@@ -48,7 +48,7 @@ internal class BrowserDispatcherImpl : IDispatcherImpl
         TimerHelper.SetTimeout(interval);
     }
 
-    public void UpdateTimer(long? dueTimeInMs)
+    public void UpdateTimer(int64? dueTimeInMs)
     {
         if (_timerId is { } timerId)
         {

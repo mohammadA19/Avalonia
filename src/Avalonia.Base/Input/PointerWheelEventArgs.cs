@@ -11,7 +11,7 @@ namespace Avalonia.Input
 
         [Unstable("This constructor might be removed in 12.0. For unit testing, consider using IHeadlessWindow.MouseWheel.")]
         public PointerWheelEventArgs(object source, IPointer pointer, Visual rootVisual,
-            Point rootVisualPosition, ulong timestamp,
+            Point rootVisualPosition, uint64 timestamp,
             PointerPointProperties properties, KeyModifiers modifiers, Vector delta)
             : base(InputElement.PointerWheelChangedEvent, source, pointer, rootVisual, rootVisualPosition,
                 timestamp, properties, modifiers)

@@ -1301,7 +1301,7 @@ namespace Avalonia.Controls.UnitTests
             {
 
                 Pointer _pointer = new Pointer(Pointer.GetNextFreeId(), PointerType.Touch, true);
-                ulong nextStamp = 1;
+                uint64 nextStamp = 1;
 
                 var items = Enumerable.Range(0, 10).Select(x => $"Item {x}").ToArray();
                 var target = new ListBox

@@ -79,7 +79,7 @@ namespace Metsys.Bson
         private static readonly IDictionary<Type, Types> _typeMap = new Dictionary<Type, Types>
                                                                             {
                                                                                 {typeof (int32), Types.Int32},
-                                                                                {typeof (long), Types.Int64},
+                                                                                {typeof (int64), Types.Int64},
                                                                                 {typeof (bool), Types.Boolean},
                                                                                 {typeof (string), Types.String},
                                                                                 {typeof (double), Types.Double},
@@ -226,7 +226,7 @@ namespace Metsys.Bson
                     return;
                 case Types.Int64:
                     Written(8);
-                    _writer.Write((long)value);
+                    _writer.Write((int64)value);
                     return;
                 case Types.String:
                     Write((string)value);
@@ -249,7 +249,7 @@ namespace Metsys.Bson
                     return;
                 case Types.DateTime:
                     Written(8);
-                    _writer.Write((long)((DateTime)value).ToUniversalTime().Subtract(Helper.Epoch).TotalMilliseconds);
+                    _writer.Write((int64)((DateTime)value).ToUniversalTime().Subtract(Helper.Epoch).TotalMilliseconds);
                     return;
                 case Types.Binary:
                     WriteBinary(value);
@@ -1029,7 +1029,7 @@ namespace Metsys.Bson
         private readonly static IDictionary<Types, Type> _typeMap = new Dictionary<Types, Type>
         {
             {Types.Int32, typeof(int32)},
-            {Types.Int64, typeof (long)},
+            {Types.Int64, typeof (int64)},
             {Types.Boolean, typeof (bool)},
             {Types.String, typeof (string)},
             {Types.Double, typeof(double)},
@@ -1128,7 +1128,7 @@ namespace Metsys.Bson
             if (type == typeof(int32))
             {
                 var val = ReadInt(storedType);
-                return options.LongIntegers ? (object)(long)val : (object)val;
+                return options.LongIntegers ? (object)(int64)val : (object)val;
             }
             if (type.IsEnum)
             {
@@ -1162,7 +1162,7 @@ namespace Metsys.Bson
                 Read(12);
                 return new ObjectId(_reader.ReadBytes(12));
             }
-            if (type == typeof(long))
+            if (type == typeof(int64))
             {
                 return ReadLong(storedType);
             }
@@ -1351,7 +1351,7 @@ namespace Metsys.Bson
             }
         }
 
-        private long ReadLong(Types storedType)
+        private int64 ReadLong(Types storedType)
         {
             switch (storedType)
             {
@@ -1363,7 +1363,7 @@ namespace Metsys.Bson
                     return _reader.ReadInt64();
                 case Types.Double:
                     Read(8);
-                    return (long)_reader.ReadDouble();
+                    return (int64)_reader.ReadDouble();
                 default:
                     throw new BsonException("Could not create an int64 from " + storedType);
             }

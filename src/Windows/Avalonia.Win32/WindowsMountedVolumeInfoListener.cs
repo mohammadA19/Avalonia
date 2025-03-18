@@ -47,7 +47,7 @@ namespace Avalonia.Win32
                                     VolumeLabel = string.IsNullOrEmpty(p.VolumeLabel.Trim()) ? p.RootDirectory.FullName
                                                                                              : $"{p.VolumeLabel} ({p.Name})",
                                     VolumePath = p.RootDirectory.FullName,
-                                    VolumeSizeBytes = (ulong)p.TotalSize
+                                    VolumeSizeBytes = (uint64)p.TotalSize
                                 })
                                 .ToArray();
 

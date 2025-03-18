@@ -49,11 +49,11 @@ internal class VulkanSupport
 
         public double Scaling => _handle.Scaling;
         public PixelSize Size => _handle.Size;
-        public ulong CreateSurface(IVulkanPlatformGraphicsContext context) =>
+        public uint64 CreateSurface(IVulkanPlatformGraphicsContext context) =>
             CreateHwndSurface(_handle.Handle, context.Instance);
     }
 
-    private static ulong CreateHwndSurface(IntPtr window, IVulkanInstance instance)
+    private static uint64 CreateHwndSurface(IntPtr window, IVulkanInstance instance)
     {
         var vulkanWin32 = new Win32VulkanInterface(instance);
         var createInfo = new VkWin32SurfaceCreateInfoKHR()

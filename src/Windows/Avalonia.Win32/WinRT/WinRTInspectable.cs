@@ -15,7 +15,7 @@ namespace Avalonia.Win32.WinRT
             
         }
 
-        public unsafe void GetIids(ulong* iidCount, Guid** iids)
+        public unsafe void GetIids(uint64* iidCount, Guid** iids)
         {
             var interfaces = GetType().GetInterfaces().Where(typeof(IUnknown).IsAssignableFrom)
                 .Select(MicroComRuntime.GetGuidFor).ToArray();
@@ -23,7 +23,7 @@ namespace Avalonia.Win32.WinRT
             for (var c = 0; c < interfaces.Length; c++)
                 mem[c] = interfaces[c];
             *iids = mem;
-            *iidCount = (ulong) interfaces.Length;
+            *iidCount = (uint64) interfaces.Length;
         }
 
         public IntPtr RuntimeClassName => NativeWinRTMethods.WindowsCreateString(GetType().FullName!);

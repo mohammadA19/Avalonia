@@ -152,7 +152,7 @@ namespace Avalonia.Controls.Primitives
         }
         
         /// <summary>
-        /// Gets a value that determines how long will be the hide delay after user stops interacting with the scrollbar.
+        /// Gets a value that determines how int64 will be the hide delay after user stops interacting with the scrollbar.
         /// </summary>
         public TimeSpan HideDelay
         {
@@ -161,7 +161,7 @@ namespace Avalonia.Controls.Primitives
         }
         
         /// <summary>
-        /// Gets a value that determines how long will be the show delay when user starts interacting with the scrollbar.
+        /// Gets a value that determines how int64 will be the show delay when user starts interacting with the scrollbar.
         /// </summary>
         public TimeSpan ShowDelay
         {

@@ -20,7 +20,7 @@ namespace Avalonia.Input
     {
         private int32 _clickCount;
         private Rect _lastClickRect;
-        private ulong _lastClickTime;
+        private uint64 _lastClickTime;
 
         private readonly Pointer _pointer;
         private bool _disposed;
@@ -117,7 +117,7 @@ namespace Avalonia.Input
             return new PointerPointProperties(args.InputModifiers, args.Type.ToUpdateKind());
         }
 
-        private bool MouseDown(IMouseDevice device, ulong timestamp, IInputElement root, Point p,
+        private bool MouseDown(IMouseDevice device, uint64 timestamp, IInputElement root, Point p,
             PointerPointProperties properties,
             KeyModifiers inputModifiers, IInputElement? hitTest)
         {
@@ -156,7 +156,7 @@ namespace Avalonia.Input
             return false;
         }
 
-        private bool MouseMove(IMouseDevice device, ulong timestamp, IInputRoot root, Point p,
+        private bool MouseMove(IMouseDevice device, uint64 timestamp, IInputRoot root, Point p,
             PointerPointProperties properties, KeyModifiers inputModifiers, Lazy<IReadOnlyList<RawPointerPoint>?>? intermediatePoints,
             IInputElement? hitTest)
         {
@@ -181,7 +181,7 @@ namespace Avalonia.Input
             return false;
         }
 
-        private bool MouseUp(IMouseDevice device, ulong timestamp, IInputRoot root, Point p, PointerPointProperties props,
+        private bool MouseUp(IMouseDevice device, uint64 timestamp, IInputRoot root, Point p, PointerPointProperties props,
             KeyModifiers inputModifiers, IInputElement? hitTest)
         {
             device = device ?? throw new ArgumentNullException(nameof(device));
@@ -214,7 +214,7 @@ namespace Avalonia.Input
             return false;
         }
 
-        private bool MouseWheel(IMouseDevice device, ulong timestamp, IInputRoot root, Point p,
+        private bool MouseWheel(IMouseDevice device, uint64 timestamp, IInputRoot root, Point p,
             PointerPointProperties props,
             Vector delta, KeyModifiers inputModifiers, IInputElement? hitTest)
         {
@@ -235,7 +235,7 @@ namespace Avalonia.Input
             return false;
         }
         
-        private bool GestureMagnify(IMouseDevice device, ulong timestamp, IInputRoot root, Point p,
+        private bool GestureMagnify(IMouseDevice device, uint64 timestamp, IInputRoot root, Point p,
             PointerPointProperties props, Vector delta, KeyModifiers inputModifiers, IInputElement? hitTest)
         {
             device = device ?? throw new ArgumentNullException(nameof(device));
@@ -255,7 +255,7 @@ namespace Avalonia.Input
             return false;
         }
         
-        private bool GestureRotate(IMouseDevice device, ulong timestamp, IInputRoot root, Point p,
+        private bool GestureRotate(IMouseDevice device, uint64 timestamp, IInputRoot root, Point p,
             PointerPointProperties props, Vector delta, KeyModifiers inputModifiers, IInputElement? hitTest)
         {
             device = device ?? throw new ArgumentNullException(nameof(device));
@@ -275,7 +275,7 @@ namespace Avalonia.Input
             return false;
         }
         
-        private bool GestureSwipe(IMouseDevice device, ulong timestamp, IInputRoot root, Point p,
+        private bool GestureSwipe(IMouseDevice device, uint64 timestamp, IInputRoot root, Point p,
             PointerPointProperties props, Vector delta, KeyModifiers inputModifiers, IInputElement? hitTest)
         {
             device = device ?? throw new ArgumentNullException(nameof(device));

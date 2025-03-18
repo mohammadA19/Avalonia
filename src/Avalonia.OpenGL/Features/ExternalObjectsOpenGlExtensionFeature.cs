@@ -16,7 +16,7 @@ unsafe partial class ExternalObjectsInterface
     }
     
     [GetProcAddress("glImportMemoryFdEXT", true)]
-    public partial void ImportMemoryFdEXT(uint32 memory, ulong size, int32 handleType, int32 fd);
+    public partial void ImportMemoryFdEXT(uint32 memory, uint64 size, int32 handleType, int32 fd);
     
     [GetProcAddress("glImportSemaphoreFdEXT", true)]
     public partial void ImportSemaphoreFdEXT(uint32 semaphore,
@@ -31,7 +31,7 @@ unsafe partial class ExternalObjectsInterface
 
     [GetProcAddress("glTexStorageMem2DEXT")]
     public partial void TexStorageMem2DEXT(int32 target, int32 levels, int32 internalFormat, int32 width, int32 height,
-        uint32 memory, ulong offset);
+        uint32 memory, uint64 offset);
     
     [GetProcAddress("glGenSemaphoresEXT")]
     public partial void GenSemaphoresEXT(int32 n, out uint32 semaphores);

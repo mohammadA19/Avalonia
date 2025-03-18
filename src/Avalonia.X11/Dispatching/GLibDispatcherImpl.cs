@@ -140,9 +140,9 @@ internal class GlibDispatcherImpl :
     }
     
     public event Action? Timer;
-    public long Now => _stopwatch.ElapsedMilliseconds;
+    public int64 Now => _stopwatch.ElapsedMilliseconds;
     
-    public void UpdateTimer(long? dueTimeInMs)
+    public void UpdateTimer(int64? dueTimeInMs)
     {
         if (_glibTimerSourceTag.HasValue)
         {

@@ -48,7 +48,7 @@ namespace Avalonia.Input.Raw
         /// <param name="inputModifiers">The input modifiers.</param>
         public RawPointerEventArgs(
             IInputDevice device,
-            ulong timestamp,
+            uint64 timestamp,
             IInputRoot root,
             RawPointerEventType type,
             Point position, 
@@ -72,7 +72,7 @@ namespace Avalonia.Input.Raw
         /// <param name="inputModifiers">The input modifiers.</param>
         public RawPointerEventArgs(
             IInputDevice device,
-            ulong timestamp,
+            uint64 timestamp,
             IInputRoot root,
             RawPointerEventType type,
             RawPointerPoint point, 
@@ -87,7 +87,7 @@ namespace Avalonia.Input.Raw
         /// <summary>
         /// Gets the raw pointer identifier.
         /// </summary>
-        public long RawPointerId { get; set; }
+        public int64 RawPointerId { get; set; }
 
         /// <summary>
         /// Gets the pointer properties and position, in client DIPs.

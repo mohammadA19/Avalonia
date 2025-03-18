@@ -13,12 +13,12 @@ internal class BclMountedVolumeInfoProvider : IMountedVolumeInfoProvider
         foreach (var drive in DriveInfo.GetDrives())
         {
             string directory;
-            ulong totalSize;
+            uint64 totalSize;
             try
             {
                 if (!drive.IsReady)
                     continue;
-                totalSize = (ulong)drive.TotalSize;
+                totalSize = (uint64)drive.TotalSize;
                 directory = drive.RootDirectory.FullName;
 
                 _ = new DirectoryInfo(directory).EnumerateFileSystemInfos();

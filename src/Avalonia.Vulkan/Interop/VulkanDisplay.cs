@@ -231,7 +231,7 @@ internal class VulkanDisplay : IDisposable
             var acquireResult = _context.DeviceApi.AcquireNextImageKHR(
                 _context.DeviceHandle,
                 _swapchain,
-                ulong.MaxValue,
+                uint64.MaxValue,
                 _semaphorePair.ImageAvailableSemaphore.Handle,
                 default, out _nextImage);
             if (acquireResult is VkResult.VK_ERROR_OUT_OF_DATE_KHR or VkResult.VK_SUBOPTIMAL_KHR)

@@ -263,8 +263,8 @@ namespace Avalonia.Rendering.Composition.Server
         public struct ReadbackData
         {
             public Matrix Matrix;
-            public ulong Revision;
-            public long TargetId;
+            public uint64 Revision;
+            public int64 TargetId;
             public bool Visible;
         }
 

@@ -21,7 +21,7 @@ namespace Avalonia.Skia
         private bool? _canCreateSurfaces;
         private readonly IExternalObjectsRenderInterfaceContextFeature? _externalObjectsFeature;
 
-        public GlSkiaGpu(IGlContext context, long? maxResourceBytes)
+        public GlSkiaGpu(IGlContext context, int64? maxResourceBytes)
         {
             _glContext = context;
             using (_glContext.EnsureCurrent())

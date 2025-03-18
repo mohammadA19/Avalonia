@@ -128,7 +128,7 @@ namespace Avalonia.Input
         }
 
         private void ClearPointerOver(IPointer pointer, IInputRoot root,
-            ulong timestamp, Point? position, PointerPointProperties properties, KeyModifiers inputModifiers)
+            uint64 timestamp, Point? position, PointerPointProperties properties, KeyModifiers inputModifiers)
         {
             var element = root.PointerOverElement;
             if (element is null)
@@ -188,7 +188,7 @@ namespace Avalonia.Input
         }
 
         private void SetPointerOver(IPointer pointer, IInputRoot root, IInputElement? element,
-            ulong timestamp, Point position, PointerPointProperties properties, KeyModifiers inputModifiers)
+            uint64 timestamp, Point position, PointerPointProperties properties, KeyModifiers inputModifiers)
         {
             var pointerOverElement = root.PointerOverElement;
             var screenPosition = ((Visual)root).PointToScreen(position);
@@ -210,7 +210,7 @@ namespace Avalonia.Input
         }
 
         private void SetPointerOverToElement(IPointer pointer, IInputRoot root, IInputElement element,
-            ulong timestamp, Point position, PointerPointProperties properties, KeyModifiers inputModifiers)
+            uint64 timestamp, Point position, PointerPointProperties properties, KeyModifiers inputModifiers)
         {
             IInputElement? branch = null;
 

@@ -24,7 +24,7 @@ namespace Avalonia.Rendering.Composition.Server
         private readonly Queue<CompositionBatch> _batches = new Queue<CompositionBatch>();
         private readonly Queue<Action> _receivedJobQueue = new();
         private readonly Queue<Action> _receivedPostTargetJobQueue = new();
-        public long LastBatchId { get; private set; }
+        public int64 LastBatchId { get; private set; }
         public Stopwatch Clock { get; } = Stopwatch.StartNew();
         public TimeSpan ServerNow { get; private set; }
         private readonly List<ServerCompositionTarget> _activeTargets = new();

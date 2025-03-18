@@ -77,7 +77,7 @@ namespace Avalonia.X11
             {
                 (_ime, _imeControl) = ime.Value;
                 _imeControl.Commit += s =>
-                    ScheduleInput(new RawTextInputEventArgs(_keyboard, (ulong)_x11.LastActivityTimestamp.ToInt64(),
+                    ScheduleInput(new RawTextInputEventArgs(_keyboard, (uint64)_x11.LastActivityTimestamp.ToInt64(),
                         InputRoot, s));
                 _imeControl.ForwardKey += OnImeControlForwardKey;
             }
@@ -90,7 +90,7 @@ namespace Avalonia.X11
 
             ScheduleInput(new RawKeyEventArgs(
                 _keyboard,
-                (ulong)_x11.LastActivityTimestamp.ToInt64(),
+                (uint64)_x11.LastActivityTimestamp.ToInt64(),
                 InputRoot,
                 forwardedKey.Type,
                 X11KeyTransform.KeyFromX11Key(x11Key),
@@ -106,7 +106,7 @@ namespace Avalonia.X11
             var physicalKey = X11KeyTransform.PhysicalKeyFromScanCode(ev.KeyEvent.keycode);
             var (x11Key, key, symbol) = LookupKey(ref ev.KeyEvent, physicalKey);
             var modifiers = TranslateModifiers(ev.KeyEvent.state);
-            var timestamp = (ulong)ev.KeyEvent.time.ToInt64();
+            var timestamp = (uint64)ev.KeyEvent.time.ToInt64();
 
             var args = ev.type == XEventName.KeyPress ?
                 new RawKeyEventArgsWithText(
@@ -347,7 +347,7 @@ namespace Avalonia.X11
         {
             public RawKeyEventArgsWithText(
                 IKeyboardDevice device,
-                ulong timestamp,
+                uint64 timestamp,
                 IInputRoot root,
                 RawKeyEventType type,
                 Key key,

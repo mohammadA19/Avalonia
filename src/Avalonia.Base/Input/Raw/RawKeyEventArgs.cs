@@ -15,7 +15,7 @@ namespace Avalonia.Input.Raw
         [Obsolete("Use the overload that takes a physical key and key symbol instead.")]
         public RawKeyEventArgs(
             IKeyboardDevice device,
-            ulong timestamp,
+            uint64 timestamp,
             IInputRoot root,
             RawKeyEventType type,
             Key key,
@@ -29,7 +29,7 @@ namespace Avalonia.Input.Raw
 
         public RawKeyEventArgs(
             IInputDevice device,
-            ulong timestamp,
+            uint64 timestamp,
             IInputRoot root,
             RawKeyEventType type,
             Key key,
@@ -40,7 +40,7 @@ namespace Avalonia.Input.Raw
 
         public RawKeyEventArgs(
             IInputDevice device,
-            ulong timestamp,
+            uint64 timestamp,
             IInputRoot root,
             RawKeyEventType type,
             Key key,

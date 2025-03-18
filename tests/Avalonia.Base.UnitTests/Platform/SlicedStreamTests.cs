@@ -11,11 +11,11 @@ public class SlicedStreamTests
     [InlineData(2, SeekOrigin.Current, 22, 17, 24)]
     [InlineData(-2, SeekOrigin.End, 22, 40, 47)]
     public void Seek_Works(
-        long offset,
+        int64 offset,
         SeekOrigin origin,
-        long startingUnderlyingPosition,
-        long expectedPosition,
-        long expectedUnderlyingPosition)
+        int64 startingUnderlyingPosition,
+        int64 expectedPosition,
+        int64 expectedUnderlyingPosition)
     {
         var memoryStream = new MemoryStream(new uint8[1024]);
         var slicedStream = new SlicedStream(memoryStream, 7, 42);

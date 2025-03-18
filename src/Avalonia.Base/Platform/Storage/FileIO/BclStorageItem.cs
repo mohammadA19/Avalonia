@@ -81,7 +81,7 @@ internal abstract class BclStorageItem(FileSystemInfo fileSystemInfo) : IStorage
         if (fileSystemInfo.Exists)
         {
             return new StorageItemProperties(
-                fileSystemInfo is FileInfo fileInfo ? (ulong)fileInfo.Length : 0,
+                fileSystemInfo is FileInfo fileInfo ? (uint64)fileInfo.Length : 0,
                 fileSystemInfo.CreationTimeUtc,
                 fileSystemInfo.LastAccessTimeUtc);
         }

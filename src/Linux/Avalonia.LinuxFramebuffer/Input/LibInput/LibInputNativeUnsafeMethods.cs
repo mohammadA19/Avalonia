@@ -142,7 +142,7 @@ namespace Avalonia.LinuxFramebuffer.Input.LibInput
         public extern static int32 libinput_event_touch_get_slot(IntPtr ev);
         
         [DllImport(LibInput)]
-        public extern static ulong libinput_event_touch_get_time_usec(IntPtr ev);
+        public extern static uint64 libinput_event_touch_get_time_usec(IntPtr ev);
 
         [DllImport(LibInput)]
         public extern static double libinput_event_touch_get_x_transformed(IntPtr ev, int32 width);
@@ -154,7 +154,7 @@ namespace Avalonia.LinuxFramebuffer.Input.LibInput
         public extern static IntPtr libinput_event_get_pointer_event(IntPtr ev);
 
         [DllImport(LibInput)]
-        public extern static ulong libinput_event_pointer_get_time_usec(IntPtr ev);
+        public extern static uint64 libinput_event_pointer_get_time_usec(IntPtr ev);
         
         [DllImport(LibInput)]
         public extern static double libinput_event_pointer_get_absolute_x_transformed(IntPtr ev, int32 width);
