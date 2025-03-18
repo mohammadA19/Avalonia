@@ -18,7 +18,7 @@ namespace Avalonia.Native;
 
 internal class StorageProviderApi(IAvnStorageProvider native, bool sandboxEnabled) : IStorageProviderFactory, IDisposable
 {
-    private readonly Dictionary<string, int> _openScopes = new();
+    private readonly Dictionary<string, int32> _openScopes = new();
     private readonly IAvnStorageProvider _native = native;
 
     public IStorageProvider CreateProvider(TopLevel topLevel)
@@ -76,7 +76,7 @@ internal class StorageProviderApi(IAvnStorageProvider native, bool sandboxEnable
             }
         });
 
-        static int AddUse(StorageProviderApi api, string uriString)
+        static int32 AddUse(StorageProviderApi api, string uriString)
         {
             lock (api)
             {
@@ -85,7 +85,7 @@ internal class StorageProviderApi(IAvnStorageProvider native, bool sandboxEnable
                 return useValue;
             }
         }
-        static int RemoveUse(StorageProviderApi api, string uriString)
+        static int32 RemoveUse(StorageProviderApi api, string uriString)
         {
             lock (api)
             {
@@ -223,36 +223,36 @@ internal class StorageProviderApi(IAvnStorageProvider native, bool sandboxEnable
     {
         private readonly List<IDisposable> _disposables = new();
 
-        public int Count => types?.Count ?? 0;
+        public int32 Count => types?.Count ?? 0;
 
-        public int IsDefaultType(int index) => (defaultExtension is not null &&
+        public int32 IsDefaultType(int32 index) => (defaultExtension is not null &&
             types![index].TryGetExtensions()?.Any(defaultExtension.EndsWith) == true).AsComBool();
 
-        public int IsAnyType(int index) =>
+        public int32 IsAnyType(int32 index) =>
             (types![index].Patterns?.Contains("*.*") == true || types[index].MimeTypes?.Contains("*.*") == true)
             .AsComBool();
 
-        public IAvnString GetName(int index)
+        public IAvnString GetName(int32 index)
         {
             return EnsureDisposable(types![index].Name.ToAvnString());
         }
 
-        public IAvnStringArray GetPatterns(int index)
+        public IAvnStringArray GetPatterns(int32 index)
         {
             return EnsureDisposable(new AvnStringArray(types![index].Patterns ?? Array.Empty<string>()));
         }
 
-        public IAvnStringArray GetExtensions(int index)
+        public IAvnStringArray GetExtensions(int32 index)
         {
             return EnsureDisposable(new AvnStringArray(types![index].TryGetExtensions() ?? Array.Empty<string>()));
         }
 
-        public IAvnStringArray GetMimeTypes(int index)
+        public IAvnStringArray GetMimeTypes(int32 index)
         {
             return EnsureDisposable(new AvnStringArray(types![index].MimeTypes ?? Array.Empty<string>()));
         }
 
-        public IAvnStringArray GetAppleUniformTypeIdentifiers(int index)
+        public IAvnStringArray GetAppleUniformTypeIdentifiers(int32 index)
         {
             return EnsureDisposable(new AvnStringArray(types![index].AppleUniformTypeIdentifiers ?? Array.Empty<string>()));
         }

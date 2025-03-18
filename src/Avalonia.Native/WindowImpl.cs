@@ -46,7 +46,7 @@ namespace Avalonia.Native
                 _parent = parent;
             }
 
-            int IAvnWindowEvents.Closing()
+            int32 IAvnWindowEvents.Closing()
             {
                 if (_parent.Closing != null)
                 {
@@ -255,7 +255,7 @@ namespace Avalonia.Native
 
         public void GetWindowsZOrder(Span<Window> windows, Span<long> zOrder)
         {
-            for (int i = 0; i < windows.Length; i++)
+            for (int32 i = 0; i < windows.Length; i++)
             {
                 zOrder[i] = (windows[i].PlatformImpl as WindowImpl)?.ZOrder?.ToInt64() ?? 0;
             }

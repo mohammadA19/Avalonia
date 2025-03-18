@@ -9,7 +9,7 @@ namespace Avalonia.Controls
     public class RefreshCompletionDeferral
     {
         private Action _deferredAction;
-        private int _deferCount;
+        private int32 _deferCount;
 
         public RefreshCompletionDeferral(Action deferredAction)
         {

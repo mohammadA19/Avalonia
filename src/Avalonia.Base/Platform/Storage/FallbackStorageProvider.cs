@@ -10,7 +10,7 @@ internal class FallbackStorageProvider : IStorageProvider
 {
     private readonly Func<Task<IStorageProvider?>>[] _factories;
     private readonly List<IStorageProvider> _providers = new();
-    private int _nextProviderFactory = 0;
+    private int32 _nextProviderFactory = 0;
     
     public FallbackStorageProvider(Func<Task<IStorageProvider?>>[] factories)
     {

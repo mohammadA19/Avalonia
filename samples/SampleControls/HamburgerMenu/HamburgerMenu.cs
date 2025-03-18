@@ -27,10 +27,10 @@ namespace ControlSamples
             set => SetValue(ContentBackgroundProperty, value);
         }
 
-        public static readonly StyledProperty<int> ExpandedModeThresholdWidthProperty =
-            AvaloniaProperty.Register<HamburgerMenu, int>(nameof(ExpandedModeThresholdWidth), 1008);
+        public static readonly StyledProperty<int32> ExpandedModeThresholdWidthProperty =
+            AvaloniaProperty.Register<HamburgerMenu, int32>(nameof(ExpandedModeThresholdWidth), 1008);
 
-        public int ExpandedModeThresholdWidth
+        public int32 ExpandedModeThresholdWidth
         {
             get => GetValue(ExpandedModeThresholdWidthProperty);
             set => SetValue(ExpandedModeThresholdWidthProperty, value);

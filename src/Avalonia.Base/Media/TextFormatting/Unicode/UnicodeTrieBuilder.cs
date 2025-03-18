@@ -25,25 +25,25 @@ namespace Avalonia.Media.TextFormatting.Unicode
     {
         private readonly uint _initialValue;
         private readonly uint _errorValue;
-        private readonly int[] _index1;
-        private readonly int[] _index2;
-        private int _highStart;
+        private readonly int32[] _index1;
+        private readonly int32[] _index2;
+        private int32 _highStart;
         private uint[] _data;
-        private int _dataCapacity;
-        private int _firstFreeBlock;
+        private int32 _dataCapacity;
+        private int32 _firstFreeBlock;
         private bool _isCompacted;
-        private readonly int[] _map;
-        private int _dataNullOffset;
-        private int _dataLength;
-        private int _index2NullOffset;
-        private int _index2Length;
+        private readonly int32[] _map;
+        private int32 _dataNullOffset;
+        private int32 _dataLength;
+        private int32 _index2NullOffset;
+        private int32 _index2Length;
 
         public UnicodeTrieBuilder(uint initialValue = 0, uint errorValue = 0)
         {
             _initialValue = initialValue;
             _errorValue = errorValue;
-            _index1 = new int[INDEX_1_LENGTH];
-            _index2 = new int[MAX_INDEX_2_LENGTH];
+            _index1 = new int32[INDEX_1_LENGTH];
+            _index2 = new int32[MAX_INDEX_2_LENGTH];
             _highStart = 0x110000;
 
             _data = new uint[INITIAL_DATA_LENGTH];
@@ -65,9 +65,9 @@ namespace Avalonia.Media.TextFormatting.Unicode
             //
             // Map of adjusted indexes, used in compactData() and compactIndex2().
             // Maps from original indexes to new ones.
-            _map = new int[MAX_DATA_LENGTH_BUILDTIME >> SHIFT_2];
+            _map = new int32[MAX_DATA_LENGTH_BUILDTIME >> SHIFT_2];
 
-            int i;
+            int32 i;
             for (i = 0; i < 0x80; i++)
             {
                 _data[i] = _initialValue;
@@ -87,7 +87,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             _dataLength = NEW_DATA_START_OFFSET;
 
             // set the index-2 indexes for the 2=0x80>>SHIFT_2 ASCII data blocks
-            int j;
+            int32 j;
             i = 0;
             for (j = 0; j < 0x80; j += DATA_BLOCK_LENGTH) {
                 _index2[i] = j;
@@ -150,7 +150,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
 
         }
 
-        public UnicodeTrieBuilder Set(int codePoint, uint value)
+        public UnicodeTrieBuilder Set(int32 codePoint, uint value)
         {
             if ((codePoint < 0) || (codePoint > 0x10ffff))
             {
@@ -167,7 +167,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return this;
         }
 
-        public UnicodeTrieBuilder SetRange(int start, int end, uint value, bool overwrite = true)
+        public UnicodeTrieBuilder SetRange(int32 start, int32 end, uint value, bool overwrite = true)
         {
 
             if ((start > 0x10ffff) || (end > 0x10ffff) || (start > end))
@@ -211,7 +211,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             limit &= ~DATA_MASK;
 
             // iterate over all-value blocks
-            int repeatBlock;
+            int32 repeatBlock;
             if (value == _initialValue)
             {
                 repeatBlock = _dataNullOffset;
@@ -299,7 +299,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return this;
         }
 
-        public uint Get(int c, bool fromLSCP = true)
+        public uint Get(int32 c, bool fromLSCP = true)
         {
             if ((c < 0) || (c > 0x10ffff))
             {
@@ -311,7 +311,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 return _data[_dataLength - DATA_GRANULARITY];
             }
 
-            int i2;
+            int32 i2;
             if (((c >= 0xd800) && (c < 0xdc00)) && fromLSCP)
             {
                 i2 = (LSCP_INDEX_2_OFFSET - (0xd800 >> SHIFT_2)) + (c >> SHIFT_2);
@@ -327,7 +327,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
 
         public UnicodeTrie Freeze()
         {
-            int allIndexesLength, i;
+            int32 allIndexesLength, i;
             if (!_isCompacted)
             {
                 Compact();
@@ -403,9 +403,9 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return new UnicodeTrie(data, _highStart, _errorValue);
         }
 
-        private bool IsInNullBlock(int c, bool forLSCP)
+        private bool IsInNullBlock(int32 c, bool forLSCP)
         {
-            int i2;
+            int32 i2;
             if (((c & 0xfffffc00) == 0xd800) && forLSCP)
             {
                 i2 = (LSCP_INDEX_2_OFFSET - (0xd800 >> SHIFT_2)) + (c >> SHIFT_2);
@@ -419,7 +419,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return block == _dataNullOffset;
         }
 
-        private int AllocIndex2Block()
+        private int32 AllocIndex2Block()
         {
             var newBlock = _index2Length;
             var newTop = newBlock + INDEX_2_BLOCK_LENGTH;
@@ -437,7 +437,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return newBlock;
         }
 
-        private int GetIndex2Block(int c, bool forLSCP)
+        private int32 GetIndex2Block(int32 c, bool forLSCP)
         {
             if ((c >= 0xd800) && (c < 0xdc00) && forLSCP)
             {
@@ -455,14 +455,14 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return i2;
         }
 
-        private bool IsWritableBlock(int block)
+        private bool IsWritableBlock(int32 block)
         {
             return (block != _dataNullOffset) && (_map[block >> SHIFT_2] == 1);
         }
 
-        private int AllocDataBlock(int copyBlock)
+        private int32 AllocDataBlock(int32 copyBlock)
         {
-            int newBlock;
+            int32 newBlock;
             if (_firstFreeBlock != 0)
             {
                 // get the first free block
@@ -477,7 +477,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 if (newTop > _dataCapacity)
                 {
                     // out of memory in the data array
-                    int capacity;
+                    int32 capacity;
                     if (_dataCapacity < MEDIUM_DATA_LENGTH)
                     {
                         capacity = MEDIUM_DATA_LENGTH;
@@ -509,14 +509,14 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return newBlock;
         }
 
-        private void ReleaseDataBlock(int block)
+        private void ReleaseDataBlock(int32 block)
         {
             // put this block at the front of the free-block chain
             _map[block >> SHIFT_2] = -_firstFreeBlock;
             _firstFreeBlock = block;
         }
 
-        private void SetIndex2Entry(int i2, int block)
+        private void SetIndex2Entry(int32 i2, int32 block)
         {
             ++_map[block >> SHIFT_2];  // increment first, in case block == oldBlock!
             var oldBlock = _index2[i2];
@@ -528,7 +528,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             _index2[i2] = block;
         }
 
-        private int GetDataBlock(int c, bool forLSCP)
+        private int32 GetDataBlock(int32 c, bool forLSCP)
         {
             var i2 = GetIndex2Block(c, forLSCP);
             i2 += (c >> SHIFT_2) & INDEX_2_MASK;
@@ -545,9 +545,9 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return newBlock;
         }
 
-        private void FillBlock(int block, int start, int limit, uint value, uint initialValue, bool overwrite)
+        private void FillBlock(int32 block, int32 start, int32 limit, uint value, uint initialValue, bool overwrite)
         {
-            int i;
+            int32 i;
             if (overwrite)
             {
                 for (i = block + start; i < block + limit; i++)
@@ -567,7 +567,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             }
         }
 
-        private void WriteBlock(int block, uint value)
+        private void WriteBlock(int32 block, uint value)
         {
             var limit = block + DATA_BLOCK_LENGTH;
             while (block < limit)
@@ -576,9 +576,9 @@ namespace Avalonia.Media.TextFormatting.Unicode
             }
         }
 
-        private int FindHighStart(uint highValue)
+        private int32 FindHighStart(uint highValue)
         {
-            int prevBlock, prevI2Block;
+            int32 prevBlock, prevI2Block;
             
             // set variables for previous range
             if (highValue == _initialValue)
@@ -592,7 +592,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 prevBlock = -1;
             }
 
-            int prev = 0x110000;
+            int32 prev = 0x110000;
 
             // enumerate index-2 blocks
             var i1 = INDEX_1_LENGTH;
@@ -662,7 +662,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return 0;
         }
 
-        private int FindSameDataBlock(int dataLength, int otherBlock, int blockLength)
+        private int32 FindSameDataBlock(int32 dataLength, int32 otherBlock, int32 blockLength)
         {
             // ensure that we do not even partially get past dataLength
             dataLength -= blockLength;
@@ -679,7 +679,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return -1;
         }
 
-        private int FindSameIndex2Block(int index2Length, int otherBlock) {
+        private int32 FindSameIndex2Block(int32 index2Length, int32 otherBlock) {
             // ensure that we do not even partially get past index2Length
             index2Length -= INDEX_2_BLOCK_LENGTH;
             for (var block = 0; block <= index2Length; block++)
@@ -716,7 +716,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 // start: index of first entry of current block
                 // newStart: index where the current block is to be moved
                 //           (right after current end of already-compacted data)
-                int mapIndex, movedStart;
+                int32 mapIndex, movedStart;
                 if (start == DATA_0800_OFFSET)
                 {
                     blockLength = DATA_BLOCK_LENGTH;
@@ -838,7 +838,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 //           (right after current end of already-compacted data)
 
                 // search for an identical block
-                int movedStart;
+                int32 movedStart;
                 if ((movedStart = FindSameIndex2Block(newStart, start)) >= 0)
                 {
                     // found an identical block, set the other block's index value for the current block
@@ -942,7 +942,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             _isCompacted = true;
         }
 
-        private static bool EqualSequence(IReadOnlyList<uint> a, int s, int t, int length)
+        private static bool EqualSequence(IReadOnlyList<uint> a, int32 s, int32 t, int32 length)
         {
             for (var i = 0; i < length; i++)
             {
@@ -955,7 +955,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return true;
         }
 
-        private static bool EqualSequence(IReadOnlyList<int> a, int s, int t, int length)
+        private static bool EqualSequence(IReadOnlyList<int32> a, int32 s, int32 t, int32 length)
         {
             for (var i = 0; i < length; i++)
             {

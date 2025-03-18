@@ -551,7 +551,7 @@ namespace Avalonia.Controls.UnitTests
             return new KeyEventArgs { RoutedEvent = InputElement.KeyUpEvent, Key = key, Source = source };
         }
 
-        private void RaisePointerPressed(Button button, int clickCount, MouseButton mouseButton, Point position)
+        private void RaisePointerPressed(Button button, int32 clickCount, MouseButton mouseButton, Point position)
         {
             _helper.Down(button, mouseButton, position, clickCount: clickCount);
         }

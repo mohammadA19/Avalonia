@@ -49,13 +49,13 @@ public class X11AtomsGenerator : IIncrementalGenerator
                 classBuilder.Pad(2).Append("var atomNames = new string[").Append(fields.Count).AppendLine("] {");
 
 
-                for (int c = 0; c < fields.Count; c++)
+                for (int32 c = 0; c < fields.Count; c++)
                     classBuilder.Pad(3).Append("\"").Append(fields[c].Name).AppendLine("\",");
                 classBuilder.Pad(2).AppendLine("};");
                 
                 classBuilder.Pad(2).AppendLine("XInternAtoms(display, atomNames, atomNames.Length, true, atoms);");
 
-                for (int c = 0; c < fields.Count; c++)
+                for (int32 c = 0; c < fields.Count; c++)
                     classBuilder.Pad(2).Append("InitAtom(ref ").Append(fields[c].Name).Append(", \"")
                         .Append(fields[c].Name).Append("\", atoms[").Append(c).AppendLine("]);");
 

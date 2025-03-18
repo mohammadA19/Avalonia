@@ -7,7 +7,7 @@ namespace PInvoke;
 public partial class MainWindow : Window
 {
     [DllImport(@"libhello")]
-    extern static int add(int a, int b);
+    extern static int32 add(int32 a, int32 b);
 
     public MainWindow()
     {

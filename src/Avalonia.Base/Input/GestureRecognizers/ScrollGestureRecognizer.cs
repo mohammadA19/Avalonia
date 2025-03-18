@@ -14,13 +14,13 @@ namespace Avalonia.Input.GestureRecognizers
         private bool _canHorizontallyScroll;
         private bool _canVerticallyScroll;
         private bool _isScrollInertiaEnabled;
-        private readonly static int s_defaultScrollStartDistance = (int)((AvaloniaLocator.Current?.GetService<IPlatformSettings>()?.GetTapSize(PointerType.Touch).Height ?? 10) / 2);
-        private int _scrollStartDistance = s_defaultScrollStartDistance;
+        private readonly static int32 s_defaultScrollStartDistance = (int32)((AvaloniaLocator.Current?.GetService<IPlatformSettings>()?.GetTapSize(PointerType.Touch).Height ?? 10) / 2);
+        private int32 _scrollStartDistance = s_defaultScrollStartDistance;
 
         private bool _scrolling;
         private Point _trackedRootPoint;
         private IPointer? _tracking;
-        private int _gestureId;
+        private int32 _gestureId;
         private Point _pointerPressedPoint;
         private VelocityTracker? _velocityTracker;
         private Visual? _rootTarget;
@@ -53,8 +53,8 @@ namespace Avalonia.Input.GestureRecognizers
         /// <summary>
         /// Defines the <see cref="ScrollStartDistance"/> property.
         /// </summary>
-        public static readonly DirectProperty<ScrollGestureRecognizer, int> ScrollStartDistanceProperty =
-            AvaloniaProperty.RegisterDirect<ScrollGestureRecognizer, int>(nameof(ScrollStartDistance),
+        public static readonly DirectProperty<ScrollGestureRecognizer, int32> ScrollStartDistanceProperty =
+            AvaloniaProperty.RegisterDirect<ScrollGestureRecognizer, int32>(nameof(ScrollStartDistance),
                 o => o.ScrollStartDistance, (o, v) => o.ScrollStartDistance = v,
                 unsetValue: s_defaultScrollStartDistance);
 
@@ -88,7 +88,7 @@ namespace Avalonia.Input.GestureRecognizers
         /// <summary>
         /// Gets or sets a value indicating the distance the pointer moves before scrolling is started
         /// </summary>
-        public int ScrollStartDistance
+        public int32 ScrollStartDistance
         {
             get => _scrollStartDistance;
             set => SetAndRaise(ScrollStartDistanceProperty, ref _scrollStartDistance, value);

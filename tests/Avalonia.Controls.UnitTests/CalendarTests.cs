@@ -152,7 +152,7 @@ namespace Avalonia.Controls.UnitTests
         /// <summary>
         /// The number of times the SelectedDatesChanged event has been fired.
         /// </summary>
-        private int _selectedDatesChangedCount;
+        private int32 _selectedDatesChangedCount;
 
         /// <summary>
         /// Handle the SelectedDatesChanged event.

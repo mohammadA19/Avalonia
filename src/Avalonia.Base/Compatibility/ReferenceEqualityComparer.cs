@@ -15,7 +15,7 @@ internal sealed class ReferenceEqualityComparer : IEqualityComparer<object?>, IE
     public new bool Equals(object? x, object? y)
         => ReferenceEquals(x, y);
 
-    public int GetHashCode(object? obj)
+    public int32 GetHashCode(object? obj)
         => RuntimeHelpers.GetHashCode(obj);
 }
 

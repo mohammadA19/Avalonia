@@ -4,9 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace Avalonia.Utilities;
 
-internal struct RefCountingSmallDictionary<TKey> : IEnumerable<KeyValuePair<TKey, int>> where TKey : class
+internal struct RefCountingSmallDictionary<TKey> : IEnumerable<KeyValuePair<TKey, int32>> where TKey : class
 {
-    private InlineDictionary<TKey, int> _counts;
+    private InlineDictionary<TKey, int32> _counts;
 
     public bool Add(TKey key)
     {
@@ -46,9 +46,9 @@ internal struct RefCountingSmallDictionary<TKey> : IEnumerable<KeyValuePair<TKey
         return false;
     }
 
-    public InlineDictionary<TKey, int>.Enumerator GetEnumerator() => _counts.GetEnumerator();
+    public InlineDictionary<TKey, int32>.Enumerator GetEnumerator() => _counts.GetEnumerator();
 
-    IEnumerator<KeyValuePair<TKey, int>> IEnumerable<KeyValuePair<TKey, int>>.GetEnumerator() => GetEnumerator();
+    IEnumerator<KeyValuePair<TKey, int32>> IEnumerable<KeyValuePair<TKey, int32>>.GetEnumerator() => GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

@@ -15,7 +15,7 @@ namespace Avalonia.Rendering
     [PrivateApi]
     public class DefaultRenderTimer : IRenderTimer
     {
-        private int _subscriberCount;
+        private int32 _subscriberCount;
         private Action<TimeSpan>? _tick;
         private IDisposable? _subscription;
 
@@ -25,7 +25,7 @@ namespace Avalonia.Rendering
         /// <param name="framesPerSecond">
         /// The number of frames per second at which the loop should run.
         /// </param>
-        public DefaultRenderTimer(int framesPerSecond)
+        public DefaultRenderTimer(int32 framesPerSecond)
         {
             FramesPerSecond = framesPerSecond;
         }
@@ -33,7 +33,7 @@ namespace Avalonia.Rendering
         /// <summary>
         /// Gets the number of frames per second at which the loop runs.
         /// </summary>
-        public int FramesPerSecond { get; }
+        public int32 FramesPerSecond { get; }
 
         /// <inheritdoc/>
         public event Action<TimeSpan> Tick

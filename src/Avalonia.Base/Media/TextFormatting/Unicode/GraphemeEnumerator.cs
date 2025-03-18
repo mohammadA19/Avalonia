@@ -10,8 +10,8 @@ namespace Avalonia.Media.TextFormatting.Unicode
     public ref struct GraphemeEnumerator
     {
         private readonly ReadOnlySpan<char> _text;
-        private int _currentCodeUnitOffset;
-        private int _codeUnitLengthOfCurrentCodepoint;
+        private int32 _currentCodeUnitOffset;
+        private int32 _codeUnitLengthOfCurrentCodepoint;
         private Codepoint _currentCodepoint;
 
         /// <summary>
@@ -72,11 +72,11 @@ namespace Avalonia.Media.TextFormatting.Unicode
             if (_currentCodeUnitOffset > startOffset)
             {
                 const uint controlCrLfMask =
-                    (1U << (int)GraphemeBreakClass.Control) |
-                    (1U << (int)GraphemeBreakClass.CR) |
-                    (1U << (int)GraphemeBreakClass.LF);
+                    (1U << (int32)GraphemeBreakClass.Control) |
+                    (1U << (int32)GraphemeBreakClass.CR) |
+                    (1U << (int32)GraphemeBreakClass.LF);
 
-                if (((1U << (int)_currentType) & controlCrLfMask) != 0U)
+                if (((1U << (int32)_currentType) & controlCrLfMask) != 0U)
                 {
                     goto Return;
                 }
@@ -199,12 +199,12 @@ namespace Avalonia.Media.TextFormatting.Unicode
             }
 
             const uint gb9Mask =
-                (1U << (int)GraphemeBreakClass.Extend) |
-                (1U << (int)GraphemeBreakClass.ZWJ) |
-                (1U << (int)GraphemeBreakClass.SpacingMark);
+                (1U << (int32)GraphemeBreakClass.Extend) |
+                (1U << (int32)GraphemeBreakClass.ZWJ) |
+                (1U << (int32)GraphemeBreakClass.SpacingMark);
 
             // rules GB9, GB9a
-            while (((1U << (int)_currentType) & gb9Mask) != 0U)
+            while (((1U << (int32)_currentType) & gb9Mask) != 0U)
             {
                 ReadNextCodepoint();
             }

@@ -67,7 +67,7 @@ public class KeyboardNavigationTests_XY : ScopedTestBase
     [InlineData(4, NavigationDirection.Up, 1)]
     [InlineData(4, NavigationDirection.Left, 3)]
     [InlineData(4, NavigationDirection.Right, 2)]
-    public void Projection_Focus_Depending_On_Direction(int from, NavigationDirection direction, int to)
+    public void Projection_Focus_Depending_On_Direction(int32 from, NavigationDirection direction, int32 to)
     {
         using var _ = UnitTestApplication.Start(TestServices.FocusableWindow);
         
@@ -107,7 +107,7 @@ public class KeyboardNavigationTests_XY : ScopedTestBase
     [InlineData(4, NavigationDirection.Up, 3)]
     [InlineData(4, NavigationDirection.Left, 3)]
     [InlineData(4, NavigationDirection.Right, 2)]
-    public void RectilinearDistance_Focus_Depending_On_Direction(int from, NavigationDirection direction, int to)
+    public void RectilinearDistance_Focus_Depending_On_Direction(int32 from, NavigationDirection direction, int32 to)
     {
         using var _ = UnitTestApplication.Start(TestServices.FocusableWindow);
         
@@ -147,7 +147,7 @@ public class KeyboardNavigationTests_XY : ScopedTestBase
     [InlineData(4, NavigationDirection.Up, 3)]
     [InlineData(4, NavigationDirection.Left, 3)]
     [InlineData(4, NavigationDirection.Right, 2)]
-    public void NavigationDirectionDistance_Focus_Depending_On_Direction(int from, NavigationDirection direction, int to)
+    public void NavigationDirectionDistance_Focus_Depending_On_Direction(int32 from, NavigationDirection direction, int32 to)
     {
         using var _ = UnitTestApplication.Start(TestServices.FocusableWindow);
         

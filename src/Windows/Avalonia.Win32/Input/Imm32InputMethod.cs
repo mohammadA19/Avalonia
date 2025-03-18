@@ -22,7 +22,7 @@ namespace Avalonia.Win32.Input
         private Imm32CaretManager _caretManager;
 
         private ushort _langId;
-        private const int CaretMargin = 1;
+        private const int32 CaretMargin = 1;
 
         private bool _ignoreComposition;
 
@@ -209,7 +209,7 @@ namespace Avalonia.Win32.Input
             var p1 = rect.TopLeft;
             var p2 = rect.BottomRight;
             var s = _parent?.DesktopScaling ?? 1;
-            var (x1, y1, x2, y2) = ((int) (p1.X * s), (int) (p1.Y * s), (int) (p2.X * s), (int) (p2.Y * s));
+            var (x1, y1, x2, y2) = ((int32) (p1.X * s), (int32) (p1.Y * s), (int32) (p2.X * s), (int32) (p2.Y * s));
 
             if (!ShowCompositionWindow && _langId == LANG_ZH)
             {
@@ -272,7 +272,7 @@ namespace Avalonia.Win32.Input
             ImmSetCandidateWindow(himc, ref excludeRectangle);
         }
 
-        private static void ConfigureCompositionWindow(int x1, int y1, IntPtr himc, int height)
+        private static void ConfigureCompositionWindow(int32 x1, int32 y1, IntPtr himc, int32 height)
         {
             var compForm = new COMPOSITIONFORM
             {
@@ -410,12 +410,12 @@ namespace Avalonia.Win32.Input
             }
         }
 
-        private static int ToInt32(IntPtr ptr)
+        private static int32 ToInt32(IntPtr ptr)
         {
             if (IntPtr.Size == 4)
                 return ptr.ToInt32();
 
-            return (int)(ptr.ToInt64() & 0xffffffff);
+            return (int32)(ptr.ToInt64() & 0xffffffff);
         }
 
         private void KeyPress(Key key, PhysicalKey physicalKey)

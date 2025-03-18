@@ -16,9 +16,9 @@ internal class FpsCounter
     private readonly Stopwatch _stopwatch = Stopwatch.StartNew();
     private readonly DiagnosticTextRenderer _textRenderer;
 
-    private int _framesThisSecond;
-    private int _totalFrames;
-    private int _fps;
+    private int32 _framesThisSecond;
+    private int32 _totalFrames;
+    private int32 _fps;
     private TimeSpan _lastFpsUpdate;
 
     public FpsCounter(DiagnosticTextRenderer textRenderer)
@@ -37,7 +37,7 @@ internal class FpsCounter
 
         if (elapsed.TotalSeconds > 1)
         {
-            _fps = (int)(_framesThisSecond / elapsed.TotalSeconds);
+            _fps = (int32)(_framesThisSecond / elapsed.TotalSeconds);
             _framesThisSecond = 0;
             _lastFpsUpdate = now;
         }

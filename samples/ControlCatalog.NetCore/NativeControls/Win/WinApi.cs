@@ -29,7 +29,7 @@ internal unsafe class WinApi
     [StructLayout(LayoutKind.Sequential)]
     public struct INITCOMMONCONTROLSEX
     {
-        public int dwSize;
+        public int32 dwSize;
         public uint dwICC;
     }
 
@@ -48,14 +48,14 @@ internal unsafe class WinApi
 
     [DllImport("user32.dll", SetLastError = true)]
     public static extern IntPtr CreateWindowEx(
-        int dwExStyle,
+        int32 dwExStyle,
         string lpClassName,
         string lpWindowName,
         uint dwStyle,
-        int x,
-        int y,
-        int nWidth,
-        int nHeight,
+        int32 x,
+        int32 y,
+        int32 nWidth,
+        int32 nHeight,
         IntPtr hWndParent,
         IntPtr hMenu,
         IntPtr hInstance,
@@ -69,5 +69,5 @@ internal unsafe class WinApi
     }
 
     [DllImport("user32.dll", CharSet = CharSet.Unicode, EntryPoint = "SendMessageW")]
-    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, ref SETTEXTEX wParam, byte[] lParam);
+    public static extern IntPtr SendMessage(IntPtr hWnd, int32 Msg, ref SETTEXTEX wParam, byte[] lParam);
 }

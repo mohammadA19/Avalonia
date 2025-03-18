@@ -98,7 +98,7 @@ internal static class Observable
         return new CombineLatest<TInput, TInput[]>(inputs, items => items);
     }
 
-    public static IObservable<T> Skip<T>(this IObservable<T> source, int skipCount)
+    public static IObservable<T> Skip<T>(this IObservable<T> source, int32 skipCount)
     {
         if (skipCount <= 0)
         {
@@ -123,7 +123,7 @@ internal static class Observable
         });
     }
     
-    public static IObservable<T> Take<T>(this IObservable<T> source, int takeCount)
+    public static IObservable<T> Take<T>(this IObservable<T> source, int32 takeCount)
     {
         if (takeCount <= 0)
         {

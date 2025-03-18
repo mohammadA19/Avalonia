@@ -36,7 +36,7 @@ class Template
 
         public bool Contains(ItemTypeName item) => _list.Contains(item);
 
-        public void CopyTo(ItemTypeName[] array, int arrayIndex) => _list.CopyTo(array, arrayIndex);
+        public void CopyTo(ItemTypeName[] array, int32 arrayIndex) => _list.CopyTo(array, arrayIndex);
 
         public bool Remove(ItemTypeName item)
         {
@@ -46,27 +46,27 @@ class Template
             return removed;
         }
 
-        public int Count => _list.Count;
+        public int32 Count => _list.Count;
 
         public bool IsReadOnly => _list.IsReadOnly;
 
-        public int IndexOf(ItemTypeName item) => _list.IndexOf(item);
+        public int32 IndexOf(ItemTypeName item) => _list.IndexOf(item);
 
-        public void Insert(int index, ItemTypeName item)
+        public void Insert(int32 index, ItemTypeName item)
         {
             OnBeforeAdded(item);
             _list.Insert(index, item);
             OnAdded(item);
         }
 
-        public void RemoveAt(int index)
+        public void RemoveAt(int32 index)
         {
             var item = _list[index];
             _list.RemoveAt(index);
             OnRemoved(item);
         }
 
-        public ItemTypeName this[int index]
+        public ItemTypeName this[int32 index]
         {
             get => _list[index];
             set

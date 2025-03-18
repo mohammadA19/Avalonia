@@ -29,17 +29,17 @@ namespace Avalonia.UnitTests
             Metrics = new FontMetrics
             {
                 DesignEmHeight = (short)scale,
-                Ascent = (int)(metrics.GetXVariation(OpenTypeMetricsTag.HorizontalAscender) / defaultFontRenderingEmSize * scale),
-                Descent = (int)(metrics.GetXVariation(OpenTypeMetricsTag.HorizontalDescender) / defaultFontRenderingEmSize * scale),
-                LineGap = (int)(metrics.GetXVariation(OpenTypeMetricsTag.HorizontalLineGap) / defaultFontRenderingEmSize * scale),
+                Ascent = (int32)(metrics.GetXVariation(OpenTypeMetricsTag.HorizontalAscender) / defaultFontRenderingEmSize * scale),
+                Descent = (int32)(metrics.GetXVariation(OpenTypeMetricsTag.HorizontalDescender) / defaultFontRenderingEmSize * scale),
+                LineGap = (int32)(metrics.GetXVariation(OpenTypeMetricsTag.HorizontalLineGap) / defaultFontRenderingEmSize * scale),
 
-                UnderlinePosition = (int)(metrics.GetXVariation(OpenTypeMetricsTag.UnderlineOffset) / defaultFontRenderingEmSize * scale),
+                UnderlinePosition = (int32)(metrics.GetXVariation(OpenTypeMetricsTag.UnderlineOffset) / defaultFontRenderingEmSize * scale),
 
-                UnderlineThickness = (int)(metrics.GetXVariation(OpenTypeMetricsTag.UnderlineSize) / defaultFontRenderingEmSize * scale),
+                UnderlineThickness = (int32)(metrics.GetXVariation(OpenTypeMetricsTag.UnderlineSize) / defaultFontRenderingEmSize * scale),
 
-                StrikethroughPosition = (int)(metrics.GetXVariation(OpenTypeMetricsTag.StrikeoutOffset) / defaultFontRenderingEmSize * scale),
+                StrikethroughPosition = (int32)(metrics.GetXVariation(OpenTypeMetricsTag.StrikeoutOffset) / defaultFontRenderingEmSize * scale),
 
-                StrikethroughThickness = (int)(metrics.GetXVariation(OpenTypeMetricsTag.StrikeoutSize) / defaultFontRenderingEmSize * scale),
+                StrikethroughThickness = (int32)(metrics.GetXVariation(OpenTypeMetricsTag.StrikeoutSize) / defaultFontRenderingEmSize * scale),
 
                 IsFixedPitch = GetGlyphAdvance(GetGlyph('a')) == GetGlyphAdvance(GetGlyph('b'))
             };           
@@ -53,7 +53,7 @@ namespace Avalonia.UnitTests
 
         public Font Font { get; }
 
-        public int GlyphCount { get; set; }
+        public int32 GlyphCount { get; set; }
 
         public FontSimulations FontSimulations { get; }
 
@@ -108,13 +108,13 @@ namespace Avalonia.UnitTests
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int GetGlyphAdvance(ushort glyph)
+        public int32 GetGlyphAdvance(ushort glyph)
         {
             return Font.GetHorizontalGlyphAdvance(glyph);
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
+        public int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
         {
             var glyphIndices = new uint[glyphs.Length];
 

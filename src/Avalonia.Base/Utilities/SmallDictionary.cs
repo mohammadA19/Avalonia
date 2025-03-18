@@ -221,7 +221,7 @@ internal struct InlineDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, 
         if (_data is KeyValuePair[] arr)
         {
             // Try to find the element and look for the first free slot while we are at it
-            int free = -1;
+            int32 free = -1;
             for (var c = 0; c < arr.Length; c++)
             {
                 if (arr[c].Key == key)
@@ -313,7 +313,7 @@ internal struct InlineDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, 
         private Dictionary<TKey, TValue>.Enumerator _inner;
         private readonly KeyValuePair[]? _arr;
         private KeyValuePair<TKey, TValue> _first;
-        private int _index;
+        private int32 _index;
         private readonly Type _type;
         enum Type
         {

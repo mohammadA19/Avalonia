@@ -82,10 +82,10 @@ namespace Avalonia.Win32
 
                 var atom = UnmanagedMethods.RegisterClassEx(ref wndClassEx);
                 Handle = UnmanagedMethods.CreateWindowEx(
-                    layered ? (int)UnmanagedMethods.WindowStyles.WS_EX_LAYERED : 0,
+                    layered ? (int32)UnmanagedMethods.WindowStyles.WS_EX_LAYERED : 0,
                     atom,
                     null,
-                    (int)UnmanagedMethods.WindowStyles.WS_CHILD,
+                    (int32)UnmanagedMethods.WindowStyles.WS_CHILD,
                     0,
                     0,
                     640,
@@ -187,7 +187,7 @@ namespace Avalonia.Win32
                     return;
                 size *= _attachedTo.Window.RenderScaling;
                 UnmanagedMethods.MoveWindow(_child.Handle, 0, 0,
-                    Math.Max(1, (int)size.Width), Math.Max(1, (int)size.Height), false);
+                    Math.Max(1, (int32)size.Width), Math.Max(1, (int32)size.Height), false);
             }
             
             public unsafe void ShowInBounds(Rect bounds)
@@ -196,8 +196,8 @@ namespace Avalonia.Win32
                 if (_attachedTo == null)
                     throw new InvalidOperationException("The control isn't currently attached to a toplevel");
                 bounds *= _attachedTo.Window.RenderScaling;
-                var pixelRect = new PixelRect((int)bounds.X, (int)bounds.Y, Math.Max(1, (int)bounds.Width),
-                    Math.Max(1, (int)bounds.Height));
+                var pixelRect = new PixelRect((int32)bounds.X, (int32)bounds.Y, Math.Max(1, (int32)bounds.Width),
+                    Math.Max(1, (int32)bounds.Height));
 
                 if (_child is not null)
                 {

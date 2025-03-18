@@ -13,10 +13,10 @@ public sealed class ThreadProxyRenderTimer : IRenderTimer
     private readonly Thread _timerThread;
     private readonly AutoResetEvent _autoResetEvent;
     private Action<TimeSpan>? _tick;
-    private int _subscriberCount;
+    private int32 _subscriberCount;
     private bool _registered;
 
-    public ThreadProxyRenderTimer(IRenderTimer inner, int maxStackSize = 1 * 1024 * 1024)
+    public ThreadProxyRenderTimer(IRenderTimer inner, int32 maxStackSize = 1 * 1024 * 1024)
     {
         _inner = inner;
         _stopwatch = new Stopwatch();

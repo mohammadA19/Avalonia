@@ -40,7 +40,7 @@ internal abstract class CollectionNodeBase : ExpressionNode,
     }
 
     protected abstract bool ShouldUpdate(object? sender, PropertyChangedEventArgs e);
-    protected abstract int? TryGetFirstArgumentAsInt();
+    protected abstract int32? TryGetFirstArgumentAsInt();
     protected abstract void UpdateValue(object? source);
 
     private bool ShouldUpdate(object? sender, NotifyCollectionChangedEventArgs e)
@@ -48,7 +48,7 @@ internal abstract class CollectionNodeBase : ExpressionNode,
         if (sender != Source)
             return false;
 
-        if (sender is IList && TryGetFirstArgumentAsInt() is int index)
+        if (sender is IList && TryGetFirstArgumentAsInt() is int32 index)
         {
             return e.Action switch
             {

@@ -11,7 +11,7 @@ static class Helpers
             SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions |
             SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier);
 
-    public static StringBuilder Pad(this StringBuilder sb, int count) => sb.Append(' ', count * 4);
+    public static StringBuilder Pad(this StringBuilder sb, int32 count) => sb.Append(' ', count * 4);
 
     public static string GetFullyQualifiedName(this ISymbol symbol)
     {

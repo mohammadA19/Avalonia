@@ -47,7 +47,7 @@ public class XEmbedPlug : IDisposable
         {
             _backgroundColor = value;
             XLib.XSetWindowBackground(_x11.Display, Handle, new IntPtr(
-                (int)(value.ToUInt32() | 0xff000000)));
+                (int32)(value.ToUInt32() | 0xff000000)));
             XLib.XFlush(_x11.Display);
         }
     }

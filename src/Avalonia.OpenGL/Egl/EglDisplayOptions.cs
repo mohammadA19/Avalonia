@@ -24,7 +24,7 @@ public class EglContextOptions
 
 public class EglDisplayCreationOptions : EglDisplayOptions
 {
-    public int? PlatformType { get; set; }
+    public int32? PlatformType { get; set; }
     public IntPtr PlatformDisplay { get; set; }
-    public int[]? PlatformDisplayAttrs { get; set; }
+    public int32[]? PlatformDisplayAttrs { get; set; }
 }

@@ -73,7 +73,7 @@ namespace ControlCatalog.Pages
             var activeScreen = screens.ScreenFromTopLevel(topLevel);
             double maxBottom = 0;
 
-            for (int i = 0; i<screens.ScreenCount; i++ )
+            for (int32 i = 0; i<screens.ScreenCount; i++ )
             {
                 var screen = screens.All[i];
 
@@ -109,7 +109,7 @@ namespace ControlCatalog.Pages
 
             double currentHeight = maxBottom;
 
-            for(int i = 0; i< screens.ScreenCount; i++)
+            for(int32 i = 0; i< screens.ScreenCount; i++)
             {
                 var screen = screens.All[i];
 

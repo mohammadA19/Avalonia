@@ -128,7 +128,7 @@ namespace Avalonia.Rendering.Composition.Server
 
         void ReadDisposeJobs(BatchStreamReader reader)
         {
-            var count = reader.Read<int>();
+            var count = reader.Read<int32>();
             while (count > 0)
             {
                 (reader.ReadObject() as IDisposable)?.Dispose();

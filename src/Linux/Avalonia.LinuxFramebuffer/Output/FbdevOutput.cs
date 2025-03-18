@@ -10,7 +10,7 @@ namespace Avalonia.LinuxFramebuffer
 {
     public sealed unsafe class FbdevOutput : IFramebufferPlatformSurface, IDisposable, IOutputBackend
     {
-        private int _fd;
+        private int32 _fd;
         private fb_fix_screeninfo _fixedInfo;
         private fb_var_screeninfo _varInfo;
         private IntPtr _mappedLength;
@@ -103,7 +103,7 @@ namespace Avalonia.LinuxFramebuffer
                 throw new Exception($"Unable to mmap {_mappedLength} bytes, error {Marshal.GetLastWin32Error()}");
             fixed (fb_fix_screeninfo* pnfo = &_fixedInfo)
             {
-                int idlen;
+                int32 idlen;
                 for (idlen = 0; idlen < 16 && pnfo->id[idlen] != 0; idlen++) ;
                 Id = Encoding.ASCII.GetString(pnfo->id, idlen);
             }
@@ -158,7 +158,7 @@ namespace Avalonia.LinuxFramebuffer
                 fb_var_screeninfo nfo;
                 if (-1 == NativeUnsafeMethods.ioctl(_fd, FbIoCtl.FBIOGET_VSCREENINFO, &nfo))
                     throw new Exception("FBIOGET_VSCREENINFO error: " + Marshal.GetLastWin32Error());
-                return new PixelSize((int)nfo.xres, (int)nfo.yres);
+                return new PixelSize((int32)nfo.xres, (int32)nfo.yres);
             }
         }
 

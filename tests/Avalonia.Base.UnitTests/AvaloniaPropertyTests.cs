@@ -246,7 +246,7 @@ namespace Avalonia.Base.UnitTests
                     enableDataValidation: false,
                     notifying: FooNotifying);
 
-            public int NotifyCount { get; private set; }
+            public int32 NotifyCount { get; private set; }
 
             private static void FooNotifying(AvaloniaObject o, bool n)
             {

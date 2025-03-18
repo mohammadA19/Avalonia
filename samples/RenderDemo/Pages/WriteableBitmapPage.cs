@@ -42,11 +42,11 @@ namespace RenderDemo.Pages
             {
                 using (var fb = bitmap.Lock())
                 {
-                    var data = new int[fb.Size.Width * fb.Size.Height];
+                    var data = new int32[fb.Size.Width * fb.Size.Height];
 
-                    for (int y = 0; y < fb.Size.Height; y++)
+                    for (int32 y = 0; y < fb.Size.Height; y++)
                     {
-                        for (int x = 0; x < fb.Size.Width; x++)
+                        for (int32 x = 0; x < fb.Size.Width; x++)
                         {
                             var color = new Color(fillAlpha, 0, 255, 0);
 
@@ -59,7 +59,7 @@ namespace RenderDemo.Pages
                                 color = new Color(fillAlpha, r, g, b);
                             }
 
-                            data[y * fb.Size.Width + x] = (int) color.ToUInt32();
+                            data[y * fb.Size.Width + x] = (int32) color.ToUInt32();
                         }
                     }
 

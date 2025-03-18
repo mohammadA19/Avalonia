@@ -123,7 +123,7 @@ namespace Avalonia.iOS.Eagl
 
         public GlVersion Version => EaglPlatformGraphics.GlVersion;
         public GlInterface GlInterface { get; }
-        public int SampleCount
+        public int32 SampleCount
         {
             get
             {
@@ -131,7 +131,7 @@ namespace Avalonia.iOS.Eagl
                 return samples;
             }
         }
-        public int StencilSize
+        public int32 StencilSize
         {
             get
             {

@@ -81,7 +81,7 @@ namespace Avalonia.Skia
         /// <param name="height">Height.</param>
         /// <param name="format">Format.</param>
         /// <returns></returns>
-        private static SKSurface? CreateSurface(GRContext? gpu, int width, int height, PixelFormat? format)
+        private static SKSurface? CreateSurface(GRContext? gpu, int32 width, int32 height, PixelFormat? format)
         {
             var imageInfo = MakeImageInfo(width, height, format);
             if (gpu != null)
@@ -123,10 +123,10 @@ namespace Avalonia.Skia
         /// <inheritdoc />
         public PixelSize PixelSize { get; }
 
-        public int Version { get; private set; } = 1;
+        public int32 Version { get; private set; } = 1;
 
         /// <inheritdoc />
-        public void Save(string fileName, int? quality = null)
+        public void Save(string fileName, int32? quality = null)
         {
             using (var image = SnapshotImage())
             {
@@ -135,7 +135,7 @@ namespace Avalonia.Skia
         }
 
         /// <inheritdoc />
-        public void Save(Stream stream, int? quality = null)
+        public void Save(Stream stream, int32? quality = null)
         {
             using (var image = SnapshotImage())
             {
@@ -186,7 +186,7 @@ namespace Avalonia.Skia
         /// <param name="height">Height.</param>
         /// <param name="format">Format.</param>
         /// <returns></returns>
-        private static SKImageInfo MakeImageInfo(int width, int height, PixelFormat? format)
+        private static SKImageInfo MakeImageInfo(int32 width, int32 height, PixelFormat? format)
         {
             var colorType = PixelFormatHelper.ResolveColorType(format);
 
@@ -201,12 +201,12 @@ namespace Avalonia.Skia
             /// <summary>
             /// Width of a render target.
             /// </summary>
-            public int Width;
+            public int32 Width;
 
             /// <summary>
             /// Height of a render target.
             /// </summary>
-            public int Height;
+            public int32 Height;
 
             /// <summary>
             /// Dpi used when rendering to a surface.

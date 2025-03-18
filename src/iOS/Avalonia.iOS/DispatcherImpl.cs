@@ -73,7 +73,7 @@ internal class DispatcherImpl : IDispatcherImplWithExplicitBackgroundProcessing
 
     public void UpdateTimer(long? dueTimeInMs)
     {
-        var ms = dueTimeInMs == null ? -1 : (int)Math.Min(int.MaxValue - 10, Math.Max(1, dueTimeInMs.Value - Now));
+        var ms = dueTimeInMs == null ? -1 : (int32)Math.Min(int32.MaxValue - 10, Math.Max(1, dueTimeInMs.Value - Now));
         var interval = ms < 0 ? DistantFutureInterval : ((double)ms / 1000);
         Interop.CFRunLoopTimerSetTolerance(_timer, 0);
         Interop.CFRunLoopTimerSetNextFireDate(_timer, Interop.CFAbsoluteTimeGetCurrent() + interval);

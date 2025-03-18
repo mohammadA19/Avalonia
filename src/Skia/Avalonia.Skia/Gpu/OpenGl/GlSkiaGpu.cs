@@ -128,7 +128,7 @@ namespace Avalonia.Skia
             using (context.EnsureCurrent())
             {
                 var gl = context.GlInterface;
-                gl.GetIntegerv(GL_TEXTURE_BINDING_2D, out int oldTexture);
+                gl.GetIntegerv(GL_TEXTURE_BINDING_2D, out int32 oldTexture);
                 var tex = gl.GenTexture();
 
                 var format = context.Version.Type == GlProfileType.OpenGLES && context.Version.Major == 2

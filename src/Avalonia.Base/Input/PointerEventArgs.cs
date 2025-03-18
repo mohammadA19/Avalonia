@@ -168,14 +168,14 @@ namespace Avalonia.Input
             ulong timestamp,
             PointerPointProperties properties,
             KeyModifiers modifiers,
-            int clickCount = 1)
+            int32 clickCount = 1)
             : base(InputElement.PointerPressedEvent, source, pointer, rootVisual, rootVisualPosition,
                 timestamp, properties, modifiers)
         {
             ClickCount = clickCount;
         }
 
-        public int ClickCount { get; }
+        public int32 ClickCount { get; }
     }
 
     public class PointerReleasedEventArgs : PointerEventArgs

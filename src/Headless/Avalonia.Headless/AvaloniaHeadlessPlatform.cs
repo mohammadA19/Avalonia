@@ -18,7 +18,7 @@ namespace Avalonia.Headless
 
         private class RenderTimer : DefaultRenderTimer
         {
-            private readonly int _framesPerSecond;
+            private readonly int32 _framesPerSecond;
             private Action? _forceTick; 
             protected override IDisposable StartCore(Action<TimeSpan> tick)
             {
@@ -40,7 +40,7 @@ namespace Avalonia.Headless
                 });
             }
 
-            public RenderTimer(int framesPerSecond) : base(framesPerSecond)
+            public RenderTimer(int32 framesPerSecond) : base(framesPerSecond)
             {
                 _framesPerSecond = framesPerSecond;
             }
@@ -88,7 +88,7 @@ namespace Avalonia.Headless
         /// Use this method before calling <see cref="HeadlessWindowExtensions.GetLastRenderedFrame"/>. 
         /// </summary>
         /// <param name="count">Count of frames to be ticked on the timer.</param>
-        public static void ForceRenderTimerTick(int count = 1)
+        public static void ForceRenderTimerTick(int32 count = 1)
         {
             var timer = AvaloniaLocator.Current.GetService<IRenderTimer>() as RenderTimer;
             for (var c = 0; c < count; c++)

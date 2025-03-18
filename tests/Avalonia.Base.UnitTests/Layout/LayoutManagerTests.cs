@@ -301,8 +301,8 @@ namespace Avalonia.Base.UnitTests.Layout
             root.LayoutManager.ExecuteInitialLayoutPass();
             control.Measured = false;
 
-            int cnt = 0;
-            int maxcnt = 100;
+            int32 cnt = 0;
+            int32 maxcnt = 100;
             control.DoMeasureOverride = (l, s) =>
             {
                 //emulate a problem in the logic of a control that triggers
@@ -332,8 +332,8 @@ namespace Avalonia.Base.UnitTests.Layout
             root.LayoutManager.ExecuteInitialLayoutPass();
             control.Arranged = false;
 
-            int cnt = 0;
-            int maxcnt = 100;
+            int32 cnt = 0;
+            int32 maxcnt = 100;
             control.DoArrangeOverride = (l, s) =>
             {
                 //emulate a problem in the logic of a control that triggers
@@ -468,7 +468,7 @@ namespace Avalonia.Base.UnitTests.Layout
             var control = new LayoutTestControl();
             var root = new LayoutTestRoot { Child = control };
 
-            int layoutCount = 0;
+            int32 layoutCount = 0;
             root.LayoutUpdated += (_, _) => layoutCount++;
 
             root.LayoutManager.InvalidateArrange(control);

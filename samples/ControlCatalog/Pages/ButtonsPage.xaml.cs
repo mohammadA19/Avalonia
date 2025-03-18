@@ -5,7 +5,7 @@ namespace ControlCatalog.Pages
 {
     public class ButtonsPage : UserControl
     {
-        private int repeatButtonClickCount = 0;
+        private int32 repeatButtonClickCount = 0;
 
         public ButtonsPage()
         {

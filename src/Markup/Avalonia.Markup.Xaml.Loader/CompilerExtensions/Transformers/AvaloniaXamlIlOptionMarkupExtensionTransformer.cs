@@ -342,7 +342,7 @@ internal class AvaloniaXamlIlOptionMarkupExtensionTransformer : IXamlAstTransfor
         public IXamlType DeclaringType { get; }
         public IXamlMethod MakeGenericMethod(IReadOnlyList<IXamlType> typeArguments) => throw new NotImplementedException();
         public IReadOnlyList<IXamlCustomAttribute> CustomAttributes => [];
-        public IXamlParameterInfo GetParameterInfo(int index) => new AnonymousParameterInfo(Parameters[index], index);
+        public IXamlParameterInfo GetParameterInfo(int32 index) => new AnonymousParameterInfo(Parameters[index], index);
         public IReadOnlyList<IXamlType> GenericParameters => [];
         public IReadOnlyList<IXamlType> GenericArguments => [];
 

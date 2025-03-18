@@ -77,7 +77,7 @@ namespace Avalonia.Threading
 #if !NET6_0_OR_GREATER
         [PrePrepareMethod]
 #endif
-        public override int Wait(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
+        public override int32 Wait(IntPtr[] waitHandles, bool waitAll, int32 millisecondsTimeout)
         {
             if (
                 _nonPumpingHelper != null

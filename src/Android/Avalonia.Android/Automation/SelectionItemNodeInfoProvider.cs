@@ -8,12 +8,12 @@ namespace Avalonia.Android.Automation
 {
     internal class SelectionItemNodeInfoProvider : NodeInfoProvider<ISelectionItemProvider>
     {
-        public SelectionItemNodeInfoProvider(ExploreByTouchHelper owner, AutomationPeer peer, int virtualViewId) : 
+        public SelectionItemNodeInfoProvider(ExploreByTouchHelper owner, AutomationPeer peer, int32 virtualViewId) : 
             base(owner, peer, virtualViewId)
         {
         }
 
-        public override bool PerformNodeAction(int action, Bundle? arguments)
+        public override bool PerformNodeAction(int32 action, Bundle? arguments)
         {
             ISelectionItemProvider provider = GetProvider();
             switch (action)

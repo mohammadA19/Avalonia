@@ -22,7 +22,7 @@ namespace Avalonia.OpenGL.Angle
         }
         
         [GetProcAddress("eglCreateDeviceANGLE", true)]
-        public partial IntPtr CreateDeviceANGLE(int deviceType, IntPtr nativeDevice, int[]? attribs);
+        public partial IntPtr CreateDeviceANGLE(int32 deviceType, IntPtr nativeDevice, int32[]? attribs);
 
         [GetProcAddress("eglReleaseDeviceANGLE", true)]
         public partial void ReleaseDeviceANGLE(IntPtr device);

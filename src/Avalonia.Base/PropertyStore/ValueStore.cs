@@ -16,12 +16,12 @@ namespace Avalonia.PropertyStore
     internal class ValueStore : IBindingExpressionSink
     {
         private readonly List<ValueFrame> _frames = new();
-        private Dictionary<int, IDisposable>? _localValueBindings;
+        private Dictionary<int32, IDisposable>? _localValueBindings;
         private AvaloniaPropertyDictionary<EffectiveValue> _effectiveValues;
-        private int _inheritedValueCount;
-        private int _isEvaluating;
-        private int _frameGeneration;
-        private int _styling;
+        private int32 _inheritedValueCount;
+        private int32 _isEvaluating;
+        private int32 _frameGeneration;
+        private int32 _styling;
 
         public ValueStore(AvaloniaObject owner) => Owner = owner;
 
@@ -904,7 +904,7 @@ namespace Avalonia.PropertyStore
             return new ValueStoreDiagnostic(frames);
 		}
 
-        private int InsertFrame(ValueFrame frame)
+        private int32 InsertFrame(ValueFrame frame)
         {
             Debug.Assert(!_frames.Contains(frame));
 
@@ -918,7 +918,7 @@ namespace Avalonia.PropertyStore
         private ImmediateValueFrame GetOrCreateImmediateValueFrame(
             AvaloniaProperty property,
             BindingPriority priority,
-            out int frameIndex)
+            out int32 frameIndex)
         {
             Debug.Assert(priority != BindingPriority.LocalValue);
 
@@ -960,7 +960,7 @@ namespace Avalonia.PropertyStore
             effectiveValue.SetAndRaise(this, entry, priority);
         }
 
-        private void RemoveEffectiveValue(AvaloniaProperty property, int index)
+        private void RemoveEffectiveValue(AvaloniaProperty property, int32 index)
         {
             _effectiveValues.RemoveAt(index);
             if (property.Inherits && --_inheritedValueCount == 0)
@@ -1246,7 +1246,7 @@ namespace Avalonia.PropertyStore
             }
         }
 
-        private int BinarySearchFrame(FramePriority priority)
+        private int32 BinarySearchFrame(FramePriority priority)
         {
             var lo = 0;
             var hi = _frames.Count - 1;

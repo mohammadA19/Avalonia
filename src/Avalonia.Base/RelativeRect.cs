@@ -129,11 +129,11 @@ namespace Avalonia
         /// Gets a hashcode for a <see cref="RelativeRect"/>.
         /// </summary>
         /// <returns>A hash code.</returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
-                return ((int)Unit * 397) ^ Rect.GetHashCode();
+                return ((int32)Unit * 397) ^ Rect.GetHashCode();
             }
         }
 

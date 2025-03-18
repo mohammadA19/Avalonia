@@ -6,21 +6,21 @@ using Tizen.System;
 
 namespace Avalonia.Tizen;
 
-internal class NuiScreens : ScreensBase<int, SingleTizenScreen>
+internal class NuiScreens : ScreensBase<int32, SingleTizenScreen>
 {
     // See https://github.com/dotnet/maui/blob/8.0.70/src/Essentials/src/DeviceDisplay/DeviceDisplay.tizen.cs
     internal const float BaseLogicalDpi = 160.0f;
 
     internal static DeviceOrientation LastDeviceOrientation { get; private set; }
 
-    internal static int DisplayWidth =>
-        Information.TryGetValue<int>("http://tizen.org/feature/screen.width", out var value) ? value : 0;
+    internal static int32 DisplayWidth =>
+        Information.TryGetValue<int32>("http://tizen.org/feature/screen.width", out var value) ? value : 0;
 
-    internal static int DisplayHeight =>
-        Information.TryGetValue<int>("http://tizen.org/feature/screen.height", out var value) ? value : 0;
+    internal static int32 DisplayHeight =>
+        Information.TryGetValue<int32>("http://tizen.org/feature/screen.height", out var value) ? value : 0;
 
-    internal static int DisplayDpi => TizenRuntimePlatform.Info.Value.IsTV ? 72 :
-        Information.TryGetValue<int>("http://tizen.org/feature/screen.dpi", out var value) ? value : 72;
+    internal static int32 DisplayDpi => TizenRuntimePlatform.Info.Value.IsTV ? 72 :
+        Information.TryGetValue<int32>("http://tizen.org/feature/screen.dpi", out var value) ? value : 72;
 
     public NuiScreens()
     {
@@ -31,11 +31,11 @@ internal class NuiScreens : ScreensBase<int, SingleTizenScreen>
         };
     }
 
-    protected override int GetScreenCount() => 1;
+    protected override int32 GetScreenCount() => 1;
 
-    protected override IReadOnlyList<int> GetAllScreenKeys() => [1];
+    protected override IReadOnlyList<int32> GetAllScreenKeys() => [1];
 
-    protected override SingleTizenScreen CreateScreenFromKey(int key)
+    protected override SingleTizenScreen CreateScreenFromKey(int32 key)
     {
         var screen = new SingleTizenScreen(key);
         screen.Refresh();
@@ -45,7 +45,7 @@ internal class NuiScreens : ScreensBase<int, SingleTizenScreen>
     protected override void ScreenChanged(SingleTizenScreen screen) => screen.Refresh();
 }
 
-internal class SingleTizenScreen(int index) : PlatformScreen(new PlatformHandle(new IntPtr(index), nameof(SingleTizenScreen)))
+internal class SingleTizenScreen(int32 index) : PlatformScreen(new PlatformHandle(new IntPtr(index), nameof(SingleTizenScreen)))
 {
     public void Refresh()
     {

@@ -11,7 +11,7 @@ namespace Avalonia.Controls.Utils
     /// </summary>
     internal class RealizedStackElements
     {
-        private int _firstIndex;
+        private int32 _firstIndex;
         private List<Control?>? _elements;
         private List<double>? _sizes;
         private double _startU;
@@ -20,17 +20,17 @@ namespace Avalonia.Controls.Utils
         /// <summary>
         /// Gets the number of realized elements.
         /// </summary>
-        public int Count => _elements?.Count ?? 0;
+        public int32 Count => _elements?.Count ?? 0;
 
         /// <summary>
         /// Gets the index of the first realized element, or -1 if no elements are realized.
         /// </summary>
-        public int FirstIndex => _elements?.Count > 0 ? _firstIndex : -1;
+        public int32 FirstIndex => _elements?.Count > 0 ? _firstIndex : -1;
 
         /// <summary>
         /// Gets the index of the last realized element, or -1 if no elements are realized.
         /// </summary>
-        public int LastIndex => _elements?.Count > 0 ? _firstIndex + _elements.Count - 1 : -1;
+        public int32 LastIndex => _elements?.Count > 0 ? _firstIndex + _elements.Count - 1 : -1;
 
         /// <summary>
         /// Gets the elements.
@@ -55,7 +55,7 @@ namespace Avalonia.Controls.Utils
         /// <param name="element">The element.</param>
         /// <param name="u">The position of the element on the primary axis.</param>
         /// <param name="sizeU">The size of the element on the primary axis.</param>
-        public void Add(int index, Control element, double u, double sizeU)
+        public void Add(int32 index, Control element, double u, double sizeU)
         {
             if (index < 0)
                 throw new ArgumentOutOfRangeException(nameof(index));
@@ -93,7 +93,7 @@ namespace Avalonia.Controls.Utils
         /// </summary>
         /// <param name="index">The index in the source collection of the element to get.</param>
         /// <returns>The element if realized; otherwise null.</returns>
-        public Control? GetElement(int index)
+        public Control? GetElement(int32 index)
         {
             var i = index - FirstIndex;
             if (i >= 0 && i < _elements?.Count)
@@ -107,7 +107,7 @@ namespace Avalonia.Controls.Utils
         /// <returns>
         /// The position of the element, or NaN if the element is not realized.
         /// </returns>
-        public double GetElementU(int index)
+        public double GetElementU(int32 index)
         {
             if (index < FirstIndex || _sizes is null)
                 return double.NaN;
@@ -130,9 +130,9 @@ namespace Avalonia.Controls.Utils
         /// </summary>
         /// <param name="element">The element.</param>
         /// <returns>The index or -1 if the element is not present in the collection.</returns>
-        public int GetIndex(Control element)
+        public int32 GetIndex(Control element)
         {
-            return _elements?.IndexOf(element) is int index && index >= 0 ? index + FirstIndex : -1;
+            return _elements?.IndexOf(element) is int32 index && index >= 0 ? index + FirstIndex : -1;
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Avalonia.Controls.Utils
         /// <param name="index">The index in the source collection of the insert.</param>
         /// <param name="count">The number of items inserted.</param>
         /// <param name="updateElementIndex">A method used to update the element indexes.</param>
-        public void ItemsInserted(int index, int count, Action<Control, int, int> updateElementIndex)
+        public void ItemsInserted(int32 index, int32 count, Action<Control, int32, int32> updateElementIndex)
         {
             if (index < 0)
                 throw new ArgumentOutOfRangeException(nameof(index));
@@ -191,9 +191,9 @@ namespace Avalonia.Controls.Utils
         /// <param name="updateElementIndex">A method used to update the element indexes.</param>
         /// <param name="recycleElement">A method used to recycle elements.</param>
         public void ItemsRemoved(
-            int index,
-            int count,
-            Action<Control, int, int> updateElementIndex,
+            int32 index,
+            int32 count,
+            Action<Control, int32, int32> updateElementIndex,
             Action<Control> recycleElement)
         {
             if (index < 0)
@@ -267,7 +267,7 @@ namespace Avalonia.Controls.Utils
         /// <param name="index">The index in the source collection of the remove.</param>
         /// <param name="count">The number of items removed.</param>
         /// <param name="recycleElement">A method used to recycle elements.</param>
-        public void ItemsReplaced(int index, int count, Action<Control> recycleElement)
+        public void ItemsReplaced(int32 index, int32 count, Action<Control> recycleElement)
         {
             if (index < 0)
                 throw new ArgumentOutOfRangeException(nameof(index));
@@ -321,7 +321,7 @@ namespace Avalonia.Controls.Utils
         /// </summary>
         /// <param name="index">The index in the source collection of new first element.</param>
         /// <param name="recycleElement">A method used to recycle elements.</param>
-        public void RecycleElementsBefore(int index, Action<Control, int> recycleElement)
+        public void RecycleElementsBefore(int32 index, Action<Control, int32> recycleElement)
         {
             if (index <= FirstIndex || _elements is null || _elements.Count == 0)
                 return;
@@ -354,7 +354,7 @@ namespace Avalonia.Controls.Utils
         /// </summary>
         /// <param name="index">The index in the source collection of new last element.</param>
         /// <param name="recycleElement">A method used to recycle elements.</param>
-        public void RecycleElementsAfter(int index, Action<Control, int> recycleElement)
+        public void RecycleElementsAfter(int32 index, Action<Control, int32> recycleElement)
         {
             if (index >= LastIndex || _elements is null || _elements.Count == 0)
                 return;
@@ -386,7 +386,7 @@ namespace Avalonia.Controls.Utils
         /// Recycles all realized elements.
         /// </summary>
         /// <param name="recycleElement">A method used to recycle elements.</param>
-        public void RecycleAllElements(Action<Control, int> recycleElement)
+        public void RecycleAllElements(Action<Control, int32> recycleElement)
         {
             if (_elements is null || _elements.Count == 0)
                 return;

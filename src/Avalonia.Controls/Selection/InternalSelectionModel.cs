@@ -12,7 +12,7 @@ namespace Avalonia.Controls.Selection
     internal class InternalSelectionModel : SelectionModel<object?>
     {
         private IList? _writableSelectedItems;
-        private int _ignoreModelChanges;
+        private int32 _ignoreModelChanges;
         private bool _ignoreSelectedItemsChanges;
         private bool _skipSyncFromSelectedItems;
         private bool _isResetting;
@@ -334,7 +334,7 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        private static int IndexOf(object? source, object? item)
+        private static int32 IndexOf(object? source, object? item)
         {
             if (source is IList l)
             {

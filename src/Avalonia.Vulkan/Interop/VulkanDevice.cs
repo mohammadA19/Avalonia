@@ -16,7 +16,7 @@ internal partial class VulkanDevice : IVulkanDevice
     private readonly uint _graphicsQueueIndex;
     private readonly object _lock = new();
     private Thread? _lockedByThread;
-    private int _lockCount;
+    private int32 _lockCount;
 
     private VulkanDevice(VulkanInstanceApi instanceApi, VkDevice handle, VkPhysicalDevice physicalDeviceHandle,
         VkQueue mainQueue, uint graphicsQueueIndex, string[] enabledExtensions)

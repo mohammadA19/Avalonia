@@ -12,8 +12,8 @@ namespace Avalonia.FreeDesktop
 {
     internal class DBusTrayIconImpl : ITrayIconImpl
     {
-        private static int s_trayIconInstanceId;
-        public static readonly (int, int, byte[]) EmptyPixmap = (1, 1, [255, 0, 0, 0]);
+        private static int32 s_trayIconInstanceId;
+        public static readonly (int32, int32, byte[]) EmptyPixmap = (1, 1, [255, 0, 0, 0]);
 
         private readonly Connection? _connection;
         private readonly OrgFreedesktopDBusProxy? _dBus;
@@ -22,7 +22,7 @@ namespace Avalonia.FreeDesktop
         private readonly PathHandler _pathHandler = new("/StatusNotifierItem");
         private readonly StatusNotifierItemDbusObj? _statusNotifierItemDbusObj;
         private OrgKdeStatusNotifierWatcherProxy? _statusNotifierWatcher;
-        private (int, int, byte[]) _icon;
+        private (int32, int32, byte[]) _icon;
 
         private string? _sysTrayServiceName;
         private string? _tooltipText;
@@ -156,8 +156,8 @@ namespace Avalonia.FreeDesktop
             if (x11iconData.Length == 0)
                 return;
 
-            var w = (int)x11iconData[0];
-            var h = (int)x11iconData[1];
+            var w = (int32)x11iconData[0];
+            var h = (int32)x11iconData[1];
 
             var pixLength = w * h;
             var pixByteArrayCounter = 0;
@@ -225,17 +225,17 @@ namespace Avalonia.FreeDesktop
 
         public event Action? ActivationDelegate;
 
-        protected override ValueTask OnContextMenuAsync(Message message, int x, int y) => new();
+        protected override ValueTask OnContextMenuAsync(Message message, int32 x, int32 y) => new();
 
-        protected override ValueTask OnActivateAsync(Message message, int x, int y)
+        protected override ValueTask OnActivateAsync(Message message, int32 x, int32 y)
         {
             ActivationDelegate?.Invoke();
             return new ValueTask();
         }
 
-        protected override ValueTask OnSecondaryActivateAsync(Message message, int x, int y) => new();
+        protected override ValueTask OnSecondaryActivateAsync(Message message, int32 x, int32 y) => new();
 
-        protected override ValueTask OnScrollAsync(Message message, int delta, string orientation) => new();
+        protected override ValueTask OnScrollAsync(Message message, int32 delta, string orientation) => new();
 
         public void InvalidateAll()
         {
@@ -247,7 +247,7 @@ namespace Avalonia.FreeDesktop
             EmitNewStatus(Status);
         }
 
-        public void SetIcon((int, int, byte[]) dbusPixmap)
+        public void SetIcon((int32, int32, byte[]) dbusPixmap)
         {
             IconPixmap = [dbusPixmap];
             InvalidateAll();

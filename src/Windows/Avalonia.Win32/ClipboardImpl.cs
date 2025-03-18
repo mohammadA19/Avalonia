@@ -13,8 +13,8 @@ namespace Avalonia.Win32
 {
     internal class ClipboardImpl : IClipboard
     {
-        private const int OleRetryCount = 10;
-        private const int OleRetryDelay = 100;
+        private const int32 OleRetryCount = 10;
+        private const int32 OleRetryDelay = 100;
 
         private DataObject? _lastStoredDataObject;
         // We can't currently rely on GetNativeIntPtr due to a bug in MicroCom 0.11, so we store the raw CCW reference instead
@@ -26,7 +26,7 @@ namespace Avalonia.Win32
         /// <remarks>
         /// This is mitigation for clipboard listener issues.
         /// </remarks>
-        private const int OleFlushDelay = 10;
+        private const int32 OleFlushDelay = 10;
 
         private static async Task<IDisposable> OpenClipboard()
         {
@@ -185,7 +185,7 @@ namespace Avalonia.Win32
 
             // Retry OLE operations several times as mitigation for clipboard locking issues in TS sessions.
 
-            int i = OleRetryCount;
+            int32 i = OleRetryCount;
 
             while (true)
             {

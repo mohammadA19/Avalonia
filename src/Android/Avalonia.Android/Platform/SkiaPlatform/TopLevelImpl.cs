@@ -233,7 +233,7 @@ namespace Avalonia.Android.Platform.SkiaPlatform
                 return res ?? baseResult;
             }
 
-            void ISurfaceHolderCallback.SurfaceChanged(ISurfaceHolder holder, Format format, int width, int height)
+            void ISurfaceHolderCallback.SurfaceChanged(ISurfaceHolder holder, Format format, int32 width, int32 height)
             {
                 var newSize = new PixelSize(width, height).ToSize(_tl.RenderScaling);
 
@@ -420,7 +420,7 @@ namespace Avalonia.Android.Platform.SkiaPlatform
             return false;
         }
 
-        private static void SetBlurBehind(AvaloniaMainActivity activity, int radius)
+        private static void SetBlurBehind(AvaloniaMainActivity activity, int32 radius)
         {
             if (radius == 0)
                 activity.Window?.ClearFlags(WindowManagerFlags.BlurBehind);

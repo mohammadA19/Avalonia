@@ -4,7 +4,7 @@ namespace Avalonia.Media.TextFormatting.Unicode;
 
 internal class Utf16Utils
 {
-    public static int CharacterOffsetToStringOffset(string s, int off, bool throwOnOutOfRange)
+    public static int32 CharacterOffsetToStringOffset(string s, int32 off, bool throwOnOutOfRange)
     {
         if (off == 0)
             return 0;

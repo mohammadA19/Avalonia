@@ -126,7 +126,7 @@ public unsafe class VulkanContext : IDisposable
 
             uint count = 0;
             api.EnumeratePhysicalDevices(vkInstance, ref count, null).ThrowOnError();
-            var physicalDevices = stackalloc PhysicalDevice[(int)count];
+            var physicalDevices = stackalloc PhysicalDevice[(int32)count];
             api.EnumeratePhysicalDevices(vkInstance, ref count, physicalDevices)
                 .ThrowOnError();
 
@@ -166,7 +166,7 @@ public unsafe class VulkanContext : IDisposable
 
                 uint queueFamilyCount = 0;
                 api.GetPhysicalDeviceQueueFamilyProperties(physicalDevice, ref queueFamilyCount, null);
-                var familyProperties = stackalloc QueueFamilyProperties[(int)queueFamilyCount];
+                var familyProperties = stackalloc QueueFamilyProperties[(int32)queueFamilyCount];
                 api.GetPhysicalDeviceQueueFamilyProperties(physicalDevice, ref queueFamilyCount, familyProperties);
                 for (uint queueFamilyIndex = 0; queueFamilyIndex < queueFamilyCount; queueFamilyIndex++)
                 {
@@ -175,7 +175,7 @@ public unsafe class VulkanContext : IDisposable
                         continue;
 
 
-                    var queuePriorities = stackalloc float[(int)family.QueueCount];
+                    var queuePriorities = stackalloc float[(int32)family.QueueCount];
 
                     for (var i = 0; i < family.QueueCount; i++)
                         queuePriorities[i] = 1f;

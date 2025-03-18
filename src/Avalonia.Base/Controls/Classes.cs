@@ -43,7 +43,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets the number of listeners subscribed to this collection for unit testing purposes.
         /// </summary>
-        internal int ListenerCount => _listeners?.Count ?? 0;
+        internal int32 ListenerCount => _listeners?.Count ?? 0;
 
         /// <summary>
         /// Parses a classes string.
@@ -125,7 +125,7 @@ namespace Avalonia.Controls
         /// beginning with a ':' character) use the protected <see cref="StyledElement.PseudoClasses"/>
         /// property.
         /// </remarks>
-        public override void Insert(int index, string name)
+        public override void Insert(int32 index, string name)
         {
             ThrowIfPseudoclass(name, "added");
 
@@ -146,7 +146,7 @@ namespace Avalonia.Controls
         /// beginning with a ':' character) use the protected <see cref="StyledElement.PseudoClasses"/>
         /// property.
         /// </remarks>
-        public override void InsertRange(int index, IEnumerable<string> names)
+        public override void InsertRange(int32 index, IEnumerable<string> names)
         {
             List<string>? toInsert = null;
 
@@ -229,7 +229,7 @@ namespace Avalonia.Controls
         /// beginning with a ':' character) use the protected <see cref="StyledElement.PseudoClasses"/>
         /// property.
         /// </remarks>
-        public override void RemoveAt(int index)
+        public override void RemoveAt(int32 index)
         {
             var name = this[index];
             ThrowIfPseudoclass(name, "removed");
@@ -242,7 +242,7 @@ namespace Avalonia.Controls
         /// </summary>
         /// <param name="index">The first index to remove.</param>
         /// <param name="count">The number of items to remove.</param>
-        public override void RemoveRange(int index, int count)
+        public override void RemoveRange(int32 index, int32 count)
         {
             base.RemoveRange(index, count);
             NotifyChanged();

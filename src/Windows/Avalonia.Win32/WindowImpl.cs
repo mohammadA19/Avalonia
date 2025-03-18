@@ -37,7 +37,7 @@ namespace Avalonia.Win32
         private static readonly List<WindowImpl> s_instances = new();
 
         private static readonly IntPtr s_defaultCursor = LoadCursor(
-            IntPtr.Zero, new IntPtr((int)UnmanagedMethods.Cursor.IDC_ARROW));
+            IntPtr.Zero, new IntPtr((int32)UnmanagedMethods.Cursor.IDC_ARROW));
 
         private static readonly Dictionary<WindowEdge, HitTestValues> s_edgeLookup =
             new()
@@ -109,7 +109,7 @@ namespace Avalonia.Win32
         private WindowTransparencyLevel _transparencyLevel;
         private readonly WindowTransparencyLevel _defaultTransparencyLevel;
 
-        private const int MaxPointerHistorySize = 512;
+        private const int32 MaxPointerHistorySize = 512;
         private static readonly PooledList<RawPointerPoint> s_intermediatePointsPooledList = new();
         private static POINTER_TOUCH_INFO[]? s_historyTouchInfos;
         private static POINTER_PEN_INFO[]? s_historyPenInfos;
@@ -498,7 +498,7 @@ namespace Avalonia.Win32
             // It's not necessary on older versions and it's not necessary with Mica brush.
 
             var pvUseBackdropBrush = useHostBackdropBrush ? 1 : 0;
-            var result = DwmSetWindowAttribute(_hwnd, (int)DwmWindowAttribute.DWMWA_USE_HOSTBACKDROPBRUSH, &pvUseBackdropBrush, sizeof(int));
+            var result = DwmSetWindowAttribute(_hwnd, (int32)DwmWindowAttribute.DWMWA_USE_HOSTBACKDROPBRUSH, &pvUseBackdropBrush, sizeof(int32));
             return result == 0;
         }
 
@@ -557,8 +557,8 @@ namespace Avalonia.Win32
 
         public void Resize(Size value, WindowResizeReason reason)
         {
-            int requestedClientWidth = (int)(value.Width * RenderScaling);
-            int requestedClientHeight = (int)(value.Height * RenderScaling);
+            int32 requestedClientWidth = (int32)(value.Width * RenderScaling);
+            int32 requestedClientHeight = (int32)(value.Height * RenderScaling);
 
             GetClientRect(_hwnd, out var currentClientRect);
             if (currentClientRect.Width == requestedClientWidth && currentClientRect.Height == requestedClientHeight)
@@ -656,10 +656,10 @@ namespace Avalonia.Win32
             var scaling = RenderScaling;
             var r = new RECT
             {
-                left = (int)Math.Floor(rect.X * scaling),
-                top = (int)Math.Floor(rect.Y * scaling),
-                right = (int)Math.Ceiling(rect.Right * scaling),
-                bottom = (int)Math.Ceiling(rect.Bottom * scaling),
+                left = (int32)Math.Floor(rect.X * scaling),
+                top = (int32)Math.Floor(rect.Y * scaling),
+                right = (int32)Math.Ceiling(rect.Right * scaling),
+                bottom = (int32)Math.Ceiling(rect.Bottom * scaling),
             };
 
             InvalidateRect(_hwnd, ref r, false);
@@ -694,7 +694,7 @@ namespace Avalonia.Win32
         public PixelPoint PointToScreen(Point point)
         {
             point *= RenderScaling;
-            var p = new POINT { X = (int)point.X, Y = (int)point.Y };
+            var p = new POINT { X = (int32)point.X, Y = (int32)point.Y };
             ClientToScreen(_hwnd, ref p);
             return new PixelPoint(p.X, p.Y);
         }
@@ -743,7 +743,7 @@ namespace Avalonia.Win32
             // Just ignore any WM_DPICHANGED while we're setting the parent as this shouldn't
             // change the DPI anyway.
             _ignoreDpiChanges = true;
-            SetWindowLongPtr(_hwnd, (int)WindowLongParam.GWL_HWNDPARENT, parentHwnd);
+            SetWindowLongPtr(_hwnd, (int32)WindowLongParam.GWL_HWNDPARENT, parentHwnd);
             _ignoreDpiChanges = false;
 
             // Windows doesn't seem to respect the HWND_TOPMOST flag of a window when showing an owned window for the first time.
@@ -765,8 +765,8 @@ namespace Avalonia.Win32
                     // and WM_LBUTTONUP return value just signify whether the WndProc handled the
                     // message or not, so they are not interesting
 
-                    SendMessage(_hwnd, (int)WindowsMessage.WM_SYSCOMMAND, (IntPtr)SC_MOUSEMOVE, IntPtr.Zero);
-                    SendMessage(_hwnd, (int)WindowsMessage.WM_LBUTTONUP, IntPtr.Zero, IntPtr.Zero);
+                    SendMessage(_hwnd, (int32)WindowsMessage.WM_SYSCOMMAND, (IntPtr)SC_MOUSEMOVE, IntPtr.Zero);
+                    SendMessage(_hwnd, (int32)WindowsMessage.WM_LBUTTONUP, IntPtr.Zero, IntPtr.Zero);
                 }
                 else
                 {
@@ -783,8 +783,8 @@ namespace Avalonia.Win32
                 _managedDrag.BeginResizeDrag(edge, ScreenToClient(MouseDevice.Position.ToPoint(_scaling)));
 #else
                 e.Pointer.Capture(null);
-                DefWindowProc(_hwnd, (int)WindowsMessage.WM_NCLBUTTONDOWN,
-                    new IntPtr((int)s_edgeLookup[edge]), IntPtr.Zero);
+                DefWindowProc(_hwnd, (int32)WindowsMessage.WM_NCLBUTTONDOWN,
+                    new IntPtr((int32)s_edgeLookup[edge]), IntPtr.Zero);
 #endif
             }
         }
@@ -849,8 +849,8 @@ namespace Avalonia.Win32
 
         private void RefreshIcon()
         {
-            SendMessage(_hwnd, (int)WindowsMessage.WM_SETICON, (nint)Icons.ICON_SMALL, LoadIcon(Icons.ICON_SMALL, _dpi)?.Handle ?? default);
-            SendMessage(_hwnd, (int)WindowsMessage.WM_SETICON, (nint)Icons.ICON_BIG, LoadIcon(Icons.ICON_BIG, _dpi)?.Handle ?? default);
+            SendMessage(_hwnd, (int32)WindowsMessage.WM_SETICON, (nint)Icons.ICON_SMALL, LoadIcon(Icons.ICON_SMALL, _dpi)?.Handle ?? default);
+            SendMessage(_hwnd, (int32)WindowsMessage.WM_SETICON, (nint)Icons.ICON_BIG, LoadIcon(Icons.ICON_BIG, _dpi)?.Handle ?? default);
 
             TaskBarList.SetOverlayIcon(_hwnd, default, null); // This will prompt the taskbar to redraw the icon
         }
@@ -917,9 +917,9 @@ namespace Avalonia.Win32
                 var pvUseBackdropBrush = themeVariant == PlatformThemeVariant.Dark ? 1 : 0;
                 DwmSetWindowAttribute(
                     _hwnd,
-                    (int)DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE,
+                    (int32)DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE,
                         &pvUseBackdropBrush,
-                        sizeof(int));
+                        sizeof(int32));
                 if (TransparencyLevel == WindowTransparencyLevel.Mica)
                 {
                     SetTransparencyMica();
@@ -930,10 +930,10 @@ namespace Avalonia.Win32
         protected virtual IntPtr CreateWindowOverride(ushort atom)
         {
             return CreateWindowEx(
-                UseRedirectionBitmap ? 0 : (int)WindowStyles.WS_EX_NOREDIRECTIONBITMAP,
+                UseRedirectionBitmap ? 0 : (int32)WindowStyles.WS_EX_NOREDIRECTIONBITMAP,
                 atom,
                 null,
-                (int)WindowStyles.WS_OVERLAPPEDWINDOW | (int)WindowStyles.WS_CLIPCHILDREN,
+                (int32)WindowStyles.WS_OVERLAPPEDWINDOW | (int32)WindowStyles.WS_CLIPCHILDREN,
                 CW_USEDEFAULT,
                 CW_USEDEFAULT,
                 CW_USEDEFAULT,
@@ -960,7 +960,7 @@ namespace Avalonia.Win32
             var wndClassEx = new WNDCLASSEX
             {
                 cbSize = Marshal.SizeOf<WNDCLASSEX>(),
-                style = (int)windowClassStyle,
+                style = (int32)windowClassStyle,
                 lpfnWndProc = _wndProcDelegate,
                 hInstance = GetModuleHandle(null),
                 hCursor = s_defaultCursor,
@@ -1119,7 +1119,7 @@ namespace Avalonia.Win32
 
             if (_extendTitleBarHint != -1)
             {
-                borderCaptionThickness.top = (int)(_extendTitleBarHint * RenderScaling);
+                borderCaptionThickness.top = (int32)(_extendTitleBarHint * RenderScaling);
             }
 
             margins.cyTopHeight = _extendChromeHints.HasAllFlags(ExtendClientAreaChromeHints.SystemChrome) && !_extendChromeHints.HasAllFlags(ExtendClientAreaChromeHints.PreferSystemChrome) ? borderCaptionThickness.top : defaultMargin;
@@ -1159,8 +1159,8 @@ namespace Avalonia.Win32
 
                 unsafe
                 {
-                    int cornerPreference = (int)DwmWindowCornerPreference.DWMWCP_ROUND;
-                    DwmSetWindowAttribute(_hwnd, (int)DwmWindowAttribute.DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPreference, sizeof(int));
+                    int32 cornerPreference = (int32)DwmWindowCornerPreference.DWMWCP_ROUND;
+                    DwmSetWindowAttribute(_hwnd, (int32)DwmWindowAttribute.DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPreference, sizeof(int32));
                 }
             }
             else
@@ -1173,8 +1173,8 @@ namespace Avalonia.Win32
 
                 unsafe
                 {
-                    int cornerPreference = (int)DwmWindowCornerPreference.DWMWCP_DEFAULT;
-                    DwmSetWindowAttribute(_hwnd, (int)DwmWindowAttribute.DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPreference, sizeof(int));
+                    int32 cornerPreference = (int32)DwmWindowCornerPreference.DWMWCP_DEFAULT;
+                    DwmSetWindowAttribute(_hwnd, (int32)DwmWindowAttribute.DWMWA_WINDOW_CORNER_PREFERENCE, &cornerPreference, sizeof(int32));
                 }
             }
 
@@ -1300,7 +1300,7 @@ namespace Avalonia.Win32
                 var y = workingArea.Y;
                 var cx = workingArea.Width;
                 var cy = workingArea.Height;
-                var style = (WindowStyles)GetWindowLong(_hwnd, (int)WindowLongParam.GWL_STYLE);
+                var style = (WindowStyles)GetWindowLong(_hwnd, (int32)WindowLongParam.GWL_STYLE);
 
                 if (!style.HasFlag(WindowStyles.WS_THICKFRAME))
                 {
@@ -1309,9 +1309,9 @@ namespace Avalonia.Win32
                     // NO BORDERS, meaning that the window is placed wrong when we have CanResize
                     // == false. Account for this here.
                     var borderThickness = BorderThickness;
-                    x -= (int)borderThickness.Left;
-                    cx += (int)borderThickness.Left + (int)borderThickness.Right;
-                    cy += (int)borderThickness.Bottom;
+                    x -= (int32)borderThickness.Left;
+                    cx += (int32)borderThickness.Left + (int32)borderThickness.Right;
+                    cy += (int32)borderThickness.Bottom;
                 }
 
                 SetWindowPos(_hwnd, WindowPosZOrder.HWND_NOTOPMOST, x, y, cx, cy, SetWindowPosFlags.SWP_SHOWWINDOW | SetWindowPosFlags.SWP_FRAMECHANGED);
@@ -1331,7 +1331,7 @@ namespace Avalonia.Win32
             }
             else
             {
-                return (WindowStyles)GetWindowLong(_hwnd, (int)WindowLongParam.GWL_STYLE);
+                return (WindowStyles)GetWindowLong(_hwnd, (int32)WindowLongParam.GWL_STYLE);
             }
         }
 
@@ -1343,7 +1343,7 @@ namespace Avalonia.Win32
             }
             else
             {
-                return (WindowStyles)GetWindowLong(_hwnd, (int)WindowLongParam.GWL_EXSTYLE);
+                return (WindowStyles)GetWindowLong(_hwnd, (int32)WindowLongParam.GWL_EXSTYLE);
             }
         }
 
@@ -1356,7 +1356,7 @@ namespace Avalonia.Win32
 
             if (!_isFullScreenActive)
             {
-                SetWindowLong(_hwnd, (int)WindowLongParam.GWL_STYLE, (uint)style);
+                SetWindowLong(_hwnd, (int32)WindowLongParam.GWL_STYLE, (uint)style);
             }
         }
 
@@ -1369,7 +1369,7 @@ namespace Avalonia.Win32
 
             if (!_isFullScreenActive)
             {
-                SetWindowLong(_hwnd, (int)WindowLongParam.GWL_EXSTYLE, (uint)style);
+                SetWindowLong(_hwnd, (int32)WindowLongParam.GWL_EXSTYLE, (uint)style);
             }
         }
 
@@ -1414,7 +1414,7 @@ namespace Avalonia.Win32
                         // To hide a non-owned window's taskbar icon we need to parent it to a hidden window.
                         if (_parent is null)
                         {
-                            SetWindowLongPtr(_hwnd, (int)WindowLongParam.GWL_HWNDPARENT, OffscreenParentWindow.Handle);
+                            SetWindowLongPtr(_hwnd, (int32)WindowLongParam.GWL_HWNDPARENT, OffscreenParentWindow.Handle);
                             _hiddenWindowIsParent = true;
                         }
 
@@ -1515,11 +1515,11 @@ namespace Avalonia.Win32
                 ShowWindow(WindowState, false);
         }
 
-        private const int MF_BYCOMMAND = 0x0;
-        private const int MF_ENABLED = 0x0;
-        private const int MF_GRAYED = 0x1;
-        private const int MF_DISABLED = 0x2;
-        private const int SC_CLOSE = 0xF060;
+        private const int32 MF_BYCOMMAND = 0x0;
+        private const int32 MF_ENABLED = 0x0;
+        private const int32 MF_GRAYED = 0x1;
+        private const int32 MF_DISABLED = 0x2;
+        private const int32 SC_CLOSE = 0xF060;
 
         private static void DisableCloseButton(IntPtr hwnd)
         {
@@ -1553,7 +1553,7 @@ namespace Avalonia.Win32
 #if USE_MANAGED_DRAG
         private Point ScreenToClient(Point point)
         {
-            var p = new UnmanagedMethods.POINT { X = (int)point.X, Y = (int)point.Y };
+            var p = new UnmanagedMethods.POINT { X = (int32)point.X, Y = (int32)point.Y };
             UnmanagedMethods.ScreenToClient(_hwnd, ref p);
             return new Point(p.X, p.Y);
         }
@@ -1600,10 +1600,10 @@ namespace Avalonia.Win32
         /// <inheritdoc/>
         public void GetWindowsZOrder(Span<Window> windows, Span<long> zOrder)
         {
-            var handlesToIndex = new Dictionary<IntPtr, int>(windows.Length);
+            var handlesToIndex = new Dictionary<IntPtr, int32>(windows.Length);
             var outputArray = new long[windows.Length];
 
-            for (int i = 0; i < windows.Length; i++)
+            for (int32 i = 0; i < windows.Length; i++)
             {
                 if (windows[i].PlatformImpl is WindowImpl platformImpl)
                     handlesToIndex.Add(platformImpl.Handle.Handle, i);
@@ -1623,7 +1623,7 @@ namespace Avalonia.Win32
 
             EnumChildWindows(IntPtr.Zero, EnumWindowsProc, IntPtr.Zero);
 
-            for (int i = 0; i < windows.Length; i++)
+            for (int32 i = 0; i < windows.Length; i++)
             {
                 zOrder[i] = outputArray[i];
             }

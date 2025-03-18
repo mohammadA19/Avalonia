@@ -18,7 +18,7 @@ internal class BindingPathFromExpressionBuilder : ExpressionVisitor
     private readonly LambdaExpression _rootExpression;
     private readonly StringBuilder _path = new();
     private Expression? _head;
-    private int _negationCount;
+    private int32 _negationCount;
     private TypeResolver? _resolver;
 
     public BindingPathFromExpressionBuilder(LambdaExpression expression)
@@ -99,7 +99,7 @@ internal class BindingPathFromExpressionBuilder : ExpressionVisitor
         else if (method.Name == MultiDimensionalArrayGetterMethodName &&
                  node.Object is not null)
         {
-            var indexes = string.Join(',', node.Arguments.Select(GetValue<int>));
+            var indexes = string.Join(',', node.Arguments.Select(GetValue<int32>));
             return Add(node.Object, node, $"[{indexes}]");
         }
         else if (method.Name.StartsWith(StreamBindingExtensions.StreamBindingName) &&

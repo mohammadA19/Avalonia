@@ -72,8 +72,8 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="CaretIndex"/> property
         /// </summary>
-        public static readonly StyledProperty<int> CaretIndexProperty =
-            AvaloniaProperty.Register<TextBox, int>(nameof(CaretIndex),
+        public static readonly StyledProperty<int32> CaretIndexProperty =
+            AvaloniaProperty.Register<TextBox, int32>(nameof(CaretIndex),
                 coerce: CoerceCaretIndex);
 
         /// <summary>
@@ -115,34 +115,34 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="SelectionStart"/> property
         /// </summary>
-        public static readonly StyledProperty<int> SelectionStartProperty =
-            AvaloniaProperty.Register<TextBox, int>(nameof(SelectionStart),
+        public static readonly StyledProperty<int32> SelectionStartProperty =
+            AvaloniaProperty.Register<TextBox, int32>(nameof(SelectionStart),
                 coerce: CoerceCaretIndex);
 
         /// <summary>
         /// Defines the <see cref="SelectionEnd"/> property
         /// </summary>
-        public static readonly StyledProperty<int> SelectionEndProperty =
-            AvaloniaProperty.Register<TextBox, int>(nameof(SelectionEnd),
+        public static readonly StyledProperty<int32> SelectionEndProperty =
+            AvaloniaProperty.Register<TextBox, int32>(nameof(SelectionEnd),
                 coerce: CoerceCaretIndex);
 
         /// <summary>
         /// Defines the <see cref="MaxLength"/> property
         /// </summary>
-        public static readonly StyledProperty<int> MaxLengthProperty =
-            AvaloniaProperty.Register<TextBox, int>(nameof(MaxLength));
+        public static readonly StyledProperty<int32> MaxLengthProperty =
+            AvaloniaProperty.Register<TextBox, int32>(nameof(MaxLength));
 
         /// <summary>
         /// Defines the <see cref="MaxLines"/> property
         /// </summary>
-        public static readonly StyledProperty<int> MaxLinesProperty =
-            AvaloniaProperty.Register<TextBox, int>(nameof(MaxLines));
+        public static readonly StyledProperty<int32> MaxLinesProperty =
+            AvaloniaProperty.Register<TextBox, int32>(nameof(MaxLines));
 
         /// <summary>
         /// Defines the <see cref="MinLines"/> property
         /// </summary>
-        public static readonly StyledProperty<int> MinLinesProperty =
-            AvaloniaProperty.Register<TextBox, int>(nameof(MinLines));
+        public static readonly StyledProperty<int32> MinLinesProperty =
+            AvaloniaProperty.Register<TextBox, int32>(nameof(MinLines));
 
         /// <summary>
         /// Defines the <see cref="Text"/> property
@@ -257,8 +257,8 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="UndoLimit"/> property
         /// </summary>
-        public static readonly StyledProperty<int> UndoLimitProperty =
-            AvaloniaProperty.Register<TextBox, int>(nameof(UndoLimit), UndoRedoHelper<UndoRedoState>.DefaultUndoLimit);
+        public static readonly StyledProperty<int32> UndoLimitProperty =
+            AvaloniaProperty.Register<TextBox, int32>(nameof(UndoLimit), UndoRedoHelper<UndoRedoState>.DefaultUndoLimit);
 
         /// <summary>
         /// Defines the <see cref="CanUndo"/> property
@@ -314,9 +314,9 @@ namespace Avalonia.Controls
         {
             public string? Text { get; }
 
-            public int CaretPosition { get; }
+            public int32 CaretPosition { get; }
 
-            public UndoRedoState(string? text, int caretPosition)
+            public UndoRedoState(string? text, int32 caretPosition)
             {
                 Text = text;
                 CaretPosition = caretPosition;
@@ -326,7 +326,7 @@ namespace Avalonia.Controls
 
             public override bool Equals(object? obj) => obj is UndoRedoState other && Equals(other);
 
-            public override int GetHashCode() => Text?.GetHashCode() ?? 0;
+            public override int32 GetHashCode() => Text?.GetHashCode() ?? 0;
         }
 
         private TextPresenter? _presenter;
@@ -341,13 +341,13 @@ namespace Avalonia.Controls
         private bool _canUndo;
         private bool _canRedo;
 
-        private int _wordSelectionStart = -1;
-        private int _selectedTextChangesMadeSinceLastUndoSnapshot;
+        private int32 _wordSelectionStart = -1;
+        private int32 _selectedTextChangesMadeSinceLastUndoSnapshot;
         private bool _hasDoneSnapshotOnce;
         private static bool _isHolding;
-        private int _currentClickCount;
+        private int32 _currentClickCount;
         private bool _isDoubleTapped;
-        private const int _maxCharsBeforeUndoSnapshot = 7;
+        private const int32 _maxCharsBeforeUndoSnapshot = 7;
 
         static TextBox()
         {
@@ -425,7 +425,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the index of the text caret
         /// </summary>
-        public int CaretIndex
+        public int32 CaretIndex
         {
             get => GetValue(CaretIndexProperty);
             set => SetValue(CaretIndexProperty, value);
@@ -439,7 +439,7 @@ namespace Avalonia.Controls
 
             using var _ = _imClient.BeginChange();
 
-            var newValue = e.GetNewValue<int>();
+            var newValue = e.GetNewValue<int32>();
             SetCurrentValue(SelectionStartProperty, newValue);
             SetCurrentValue(SelectionEndProperty, newValue);
 
@@ -501,7 +501,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the starting position of the text selected in the TextBox
         /// </summary>
-        public int SelectionStart
+        public int32 SelectionStart
         {
             get => GetValue(SelectionStartProperty);
             set => SetValue(SelectionStartProperty, value);
@@ -511,7 +511,7 @@ namespace Avalonia.Controls
         {
             UpdateCommandStates();
 
-            var value = e.GetNewValue<int>();
+            var value = e.GetNewValue<int32>();
             if (SelectionEnd == value && CaretIndex != value)
             {
                 SetCurrentValue(CaretIndexProperty, value);
@@ -525,7 +525,7 @@ namespace Avalonia.Controls
         /// When the SelectionEnd is equal to <see cref="SelectionStart"/>, there is no 
         /// selected text and it marks the caret position
         /// </remarks>
-        public int SelectionEnd
+        public int32 SelectionEnd
         {
             get => GetValue(SelectionEndProperty);
             set => SetValue(SelectionEndProperty, value);
@@ -535,7 +535,7 @@ namespace Avalonia.Controls
         {
             UpdateCommandStates();
 
-            var value = e.GetNewValue<int>();
+            var value = e.GetNewValue<int32>();
             if (SelectionStart == value && CaretIndex != value)
             {
                 SetCurrentValue(CaretIndexProperty, value);
@@ -546,7 +546,7 @@ namespace Avalonia.Controls
         /// Gets or sets the maximum number of characters that the <see cref="TextBox"/> can accept.
         /// This constraint only applies for manually entered (user-inputted) text.
         /// </summary>
-        public int MaxLength
+        public int32 MaxLength
         {
             get => GetValue(MaxLengthProperty);
             set => SetValue(MaxLengthProperty, value);
@@ -555,7 +555,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the maximum number of visible lines to size to.
         /// </summary>
-        public int MaxLines
+        public int32 MaxLines
         {
             get => GetValue(MaxLinesProperty);
             set => SetValue(MaxLinesProperty, value);
@@ -564,7 +564,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the minimum number of visible lines to size to.
         /// </summary>
-        public int MinLines
+        public int32 MinLines
         {
             get => GetValue(MinLinesProperty);
             set => SetValue(MinLinesProperty, value);
@@ -789,13 +789,13 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the maximum number of items that can reside in the Undo stack
         /// </summary>
-        public int UndoLimit
+        public int32 UndoLimit
         {
             get => GetValue(UndoLimitProperty);
             set => SetValue(UndoLimitProperty, value);
         }
 
-        private void OnUndoLimitChanged(int newValue)
+        private void OnUndoLimitChanged(int32 newValue)
         {
             _undoRedoHelper.Limit = newValue;
 
@@ -834,7 +834,7 @@ namespace Avalonia.Controls
         /// The value returned is the number of lines in the entire TextBox, regardless of how many are
         /// currently in view.
         /// </remarks>
-        public int GetLineCount()
+        public int32 GetLineCount()
         {
             return this._presenter?.TextLayout.TextLines.Count ?? -1;
         }
@@ -1002,7 +1002,7 @@ namespace Avalonia.Controls
             }
             else if (change.Property == UndoLimitProperty)
             {
-                OnUndoLimitChanged(change.GetNewValue<int>());
+                OnUndoLimitChanged(change.GetNewValue<int32>());
             }
             else if (change.Property == IsUndoEnabledProperty && change.GetNewValue<bool>() == false)
             {
@@ -1785,7 +1785,7 @@ namespace Avalonia.Controls
             }
         }
 
-        private void UpdateWordSelectionRange(int caretIndex, ref int selectionStart, ref int selectionEnd)
+        private void UpdateWordSelectionRange(int32 caretIndex, ref int32 selectionStart, ref int32 selectionEnd)
         {
             var text = Text;
 
@@ -1931,7 +1931,7 @@ namespace Avalonia.Controls
             }
         }
 
-        internal static int CoerceCaretIndex(AvaloniaObject sender, int value)
+        internal static int32 CoerceCaretIndex(AvaloniaObject sender, int32 value)
         {
             var text = sender.GetValue(TextProperty); // method also used by TextPresenter and SelectableTextBlock
 
@@ -1964,7 +1964,7 @@ namespace Avalonia.Controls
         /// </summary>
         public void Clear() => SetCurrentValue(TextProperty, string.Empty);
 
-        private void MoveHorizontal(int direction, bool wholeWord, bool isSelecting, bool moveCaretPosition)
+        private void MoveHorizontal(int32 direction, bool wholeWord, bool isSelecting, bool moveCaretPosition)
         {
             if (_presenter == null)
             {
@@ -2009,7 +2009,7 @@ namespace Avalonia.Controls
             }
             else
             {
-                int offset;
+                int32 offset;
 
                 if (direction > 0)
                 {
@@ -2122,7 +2122,7 @@ namespace Avalonia.Controls
         /// </summary>
         /// <param name="lineIndex">The line index to scroll to.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="lineIndex"/> is less than zero. -or - <paramref name="lineIndex"/> is larger than or equal to the line count.</exception>
-        public void ScrollToLine(int lineIndex)
+        public void ScrollToLine(int32 lineIndex)
         {
             if (_presenter is null)
             {
@@ -2150,7 +2150,7 @@ namespace Avalonia.Controls
             SetCurrentValue(SelectionEndProperty, Text?.Length ?? 0);
         }
 
-        private (int start, int end) GetSelectionRange()
+        private (int32 start, int32 end) GetSelectionRange()
         {
             var selectionStart = SelectionStart;
             var selectionEnd = SelectionEnd;
@@ -2437,14 +2437,14 @@ namespace Avalonia.Controls
 
         private class LineTextSource : ITextSource
         {
-            private readonly int _lines;
+            private readonly int32 _lines;
 
-            public LineTextSource(int lines)
+            public LineTextSource(int32 lines)
             {
                 _lines = lines;
             }
 
-            public TextRun? GetTextRun(int textSourceIndex)
+            public TextRun? GetTextRun(int32 textSourceIndex)
             {
                 if (textSourceIndex >= _lines)
                 {

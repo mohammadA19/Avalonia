@@ -11,8 +11,8 @@ namespace Avalonia.Markup.Xaml.UnitTests.Xaml
             AvaloniaProperty.Register<NonControl, string>(nameof(String));
 
         //No getter or setter Avalonia property
-        public static readonly StyledProperty<int> FooProperty =
-            AvaloniaProperty.Register<NonControl, int>("Foo");
+        public static readonly StyledProperty<int32> FooProperty =
+            AvaloniaProperty.Register<NonControl, int32>("Foo");
 
         //getter only Avalonia property
         public static readonly StyledProperty<string> BarProperty =

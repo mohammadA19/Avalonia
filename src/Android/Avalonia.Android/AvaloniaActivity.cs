@@ -27,8 +27,8 @@ public class AvaloniaActivity : AppCompatActivity, IAvaloniaActivity
     private bool _contentViewSet;
     internal AvaloniaView? _view;
 
-    public Action<int, Result, Intent?>? ActivityResult { get; set; }
-    public Action<int, string[], Permission[]>? RequestPermissionsResult { get; set; }
+    public Action<int32, Result, Intent?>? ActivityResult { get; set; }
+    public Action<int32, string[], Permission[]>? RequestPermissionsResult { get; set; }
 
     public event EventHandler<AndroidBackRequestedEventArgs>? BackRequested;
 
@@ -156,7 +156,7 @@ public class AvaloniaActivity : AppCompatActivity, IAvaloniaActivity
         base.OnDestroy();
     }
 
-    protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent? data)
+    protected override void OnActivityResult(int32 requestCode, [GeneratedEnum] Result resultCode, Intent? data)
     {
         base.OnActivityResult(requestCode, resultCode, data);
 
@@ -164,7 +164,7 @@ public class AvaloniaActivity : AppCompatActivity, IAvaloniaActivity
     }
 
     [SupportedOSPlatform("android23.0")]
-    public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+    public override void OnRequestPermissionsResult(int32 requestCode, string[] permissions, Permission[] grantResults)
     {
         base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 

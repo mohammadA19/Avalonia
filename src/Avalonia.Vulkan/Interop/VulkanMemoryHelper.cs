@@ -5,7 +5,7 @@ namespace Avalonia.Vulkan.Interop;
 
 internal static class VulkanMemoryHelper
 {
-    internal static int FindSuitableMemoryTypeIndex(IVulkanPlatformGraphicsContext context, uint memoryTypeBits,
+    internal static int32 FindSuitableMemoryTypeIndex(IVulkanPlatformGraphicsContext context, uint memoryTypeBits,
         VkMemoryPropertyFlags flags)
     {
         context.InstanceApi.GetPhysicalDeviceMemoryProperties(context.PhysicalDeviceHandle,

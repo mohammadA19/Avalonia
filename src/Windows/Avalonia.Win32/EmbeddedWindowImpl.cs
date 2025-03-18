@@ -22,7 +22,7 @@ namespace Avalonia.Win32
                 0,
                 atom,
                 null,
-                (int)UnmanagedMethods.WindowStyles.WS_CHILD,
+                (int32)UnmanagedMethods.WindowStyles.WS_CHILD,
                 0,
                 0,
                 640,

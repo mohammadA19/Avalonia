@@ -7,8 +7,8 @@ namespace BindingDemo.ViewModels
 {
     public class IndeiErrorViewModel : ViewModelBase, INotifyDataErrorInfo
     {
-        private int _maximum = 10;
-        private int _value;
+        private int32 _maximum = 10;
+        private int32 _value;
         private string _valueError;
 
         public IndeiErrorViewModel()
@@ -22,13 +22,13 @@ namespace BindingDemo.ViewModels
             get { throw new NotImplementedException(); }
         }
 
-        public int Maximum
+        public int32 Maximum
         {
             get { return _maximum; }
             set { this.RaiseAndSetIfChanged(ref _maximum, value); }
         }
 
-        public int Value
+        public int32 Value
         {
             get { return _value; }
             set { this.RaiseAndSetIfChanged(ref _value, value); }

@@ -27,7 +27,7 @@ namespace Avalonia.Media.TextFormatting
                 return;
             }
 
-            var breakOportunities = new Queue<int>();
+            var breakOportunities = new Queue<int32>();
 
             var currentPosition = textLine.FirstTextSourceIndex;
 

@@ -76,7 +76,7 @@ partial class BrowserWebGlRenderTarget : BrowserRenderTarget, IGlPlatformSurface
             var s = _target._sizeGetter();
             _target.UpdateSize(s.Size);
             var restoreContext = _target.GlContext.EnsureCurrent();
-            _target.GlContext.GlInterface.BindFramebuffer(GlConsts.GL_FRAMEBUFFER, (int)_target._glInfo.FboId);
+            _target.GlContext.GlInterface.BindFramebuffer(GlConsts.GL_FRAMEBUFFER, (int32)_target._glInfo.FboId);
             return new GlSession(_target.GlContext, s.Size, s.Scaling, restoreContext);
         }
     }
@@ -91,18 +91,18 @@ partial class BrowserWebGlRenderTarget : BrowserRenderTarget, IGlPlatformSurface
 partial class WebGlContext : IGlContext, Avalonia.Skia.IGlSkiaSpecificOptionsFeature
 {
     [JSImport("WebGlRenderTarget.getCurrentContext", AvaloniaModule.MainModuleName)]
-    private static partial int GetCurrentContext();
+    private static partial int32 GetCurrentContext();
 
     [JSImport("WebGlRenderTarget.makeContextCurrent", AvaloniaModule.MainModuleName)]
-    private static partial bool MakeContextCurrent(int context);
+    private static partial bool MakeContextCurrent(int32 context);
 
     [LibraryImport("libSkiaSharp", EntryPoint = "eglGetProcAddress", StringMarshalling = StringMarshalling.Utf8)]
     private static partial IntPtr eglGetProcAddress(string name);
 
-    private int _contextId;
+    private int32 _contextId;
     private readonly Thread _thread;
 
-    public WebGlContext(int contextId, GlVersion version, int sampleCount, int stencilSize)
+    public WebGlContext(int32 contextId, GlVersion version, int32 sampleCount, int32 stencilSize)
     {
         Version = version;
         SampleCount = sampleCount;
@@ -130,9 +130,9 @@ partial class WebGlContext : IGlContext, Avalonia.Skia.IGlSkiaSpecificOptionsFea
 
     class RestoreContext : IDisposable
     {
-        private int? _contextId;
+        private int32? _contextId;
 
-        public RestoreContext(int contextId)
+        public RestoreContext(int32 contextId)
         {
             _contextId = contextId;
         }
@@ -165,8 +165,8 @@ partial class WebGlContext : IGlContext, Avalonia.Skia.IGlSkiaSpecificOptionsFea
     public bool IsLost => false;
     public GlVersion Version { get; }
     public GlInterface GlInterface { get; }
-    public int SampleCount { get; }
-    public int StencilSize { get; }
+    public int32 SampleCount { get; }
+    public int32 StencilSize { get; }
 
 
     public bool IsSharedWith(IGlContext context) => false;

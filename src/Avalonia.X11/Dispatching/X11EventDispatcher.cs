@@ -10,7 +10,7 @@ internal class X11EventDispatcher
     private readonly IntPtr _display;
 
     public delegate void EventHandler(ref XEvent xev);
-    public int Fd { get; }
+    public int32 Fd { get; }
     private readonly Dictionary<IntPtr, EventHandler> _eventHandlers;
 
     public X11EventDispatcher(AvaloniaX11Platform platform)

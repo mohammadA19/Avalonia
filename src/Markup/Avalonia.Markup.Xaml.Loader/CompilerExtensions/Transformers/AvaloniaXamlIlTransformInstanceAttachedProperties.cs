@@ -183,7 +183,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions.Transformers
                 public IReadOnlyList<IXamlType> Parameters { get; }
 
                 public IReadOnlyList<IXamlCustomAttribute> CustomAttributes => DeclaringType.CustomAttributes;
-                public IXamlParameterInfo GetParameterInfo(int index) => new AnonymousParameterInfo(Parameters[index], index);
+                public IXamlParameterInfo GetParameterInfo(int32 index) => new AnonymousParameterInfo(Parameters[index], index);
                 public IReadOnlyList<IXamlType> GenericParameters => [];
                 public IReadOnlyList<IXamlType> GenericArguments => [];
 

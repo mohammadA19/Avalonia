@@ -32,7 +32,7 @@ namespace Avalonia.Direct2D1.Media
             return fontFamilies;
         }
 
-        public bool TryMatchCharacter(int codepoint, FontStyle fontStyle,
+        public bool TryMatchCharacter(int32 codepoint, FontStyle fontStyle,
             FontWeight fontWeight, FontStretch fontStretch, CultureInfo culture, out Typeface typeface)
         {
             var familyCount = Direct2D1FontCollectionCache.InstalledFontCollection.FontFamilyCount;

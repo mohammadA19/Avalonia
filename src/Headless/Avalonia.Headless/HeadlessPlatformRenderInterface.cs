@@ -88,13 +88,13 @@ namespace Avalonia.Headless
             return new HeadlessBitmapStub(new Size(1, 1), new Vector(96, 96));
         }
 
-        public IWriteableBitmapImpl LoadWriteableBitmapToWidth(Stream stream, int width,
+        public IWriteableBitmapImpl LoadWriteableBitmapToWidth(Stream stream, int32 width,
             BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new HeadlessBitmapStub(new Size(1, 1), new Vector(96, 96));
         }
 
-        public IWriteableBitmapImpl LoadWriteableBitmapToHeight(Stream stream, int height,
+        public IWriteableBitmapImpl LoadWriteableBitmapToHeight(Stream stream, int32 height,
             BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new HeadlessBitmapStub(new Size(1, 1), new Vector(96, 96));
@@ -110,17 +110,17 @@ namespace Avalonia.Headless
             return new HeadlessBitmapStub(new Size(1, 1), new Vector(96, 96));
         }
 
-        public IBitmapImpl LoadBitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int stride)
+        public IBitmapImpl LoadBitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int32 stride)
         {
             return new HeadlessBitmapStub(new Size(1, 1), new Vector(96, 96));
         }        
 
-        public IBitmapImpl LoadBitmapToWidth(Stream stream, int width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
+        public IBitmapImpl LoadBitmapToWidth(Stream stream, int32 width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new HeadlessBitmapStub(new Size(width, width), new Vector(96, 96));
         }
 
-        public IBitmapImpl LoadBitmapToHeight(Stream stream, int height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
+        public IBitmapImpl LoadBitmapToHeight(Stream stream, int32 height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new HeadlessBitmapStub(new Size(height, height), new Vector(96, 96));
         }
@@ -352,7 +352,7 @@ namespace Avalonia.Headless
                 {
                     // Use the algorithm from https://www.blackpawn.com/texts/pointinpoly/default.html
                     // to determine if the point is in the geometry (since it will always be convex in this situation)
-                    for (int i = 0; i < points.Count; i++)
+                    for (int32 i = 0; i < points.Count; i++)
                     {
                         var a = points[i];
                         var b = points[(i + 1) % points.Count];
@@ -388,7 +388,7 @@ namespace Avalonia.Headless
                 Size = size;
                 Dpi = dpi;
                 var pixel = Size * (Dpi / 96);
-                PixelSize = new PixelSize(Math.Max(1, (int)pixel.Width), Math.Max(1, (int)pixel.Height));
+                PixelSize = new PixelSize(Math.Max(1, (int32)pixel.Width), Math.Max(1, (int32)pixel.Height));
             }
 
             public HeadlessBitmapStub(PixelSize size, Vector dpi)
@@ -421,14 +421,14 @@ namespace Avalonia.Headless
             public PixelSize PixelSize { get; }
             public PixelFormat? Format { get; }
             public AlphaFormat? AlphaFormat { get; }
-            public int Version { get; set; }
+            public int32 Version { get; set; }
 
-            public void Save(string fileName, int? quality = null)
+            public void Save(string fileName, int32? quality = null)
             {
 
             }
 
-            public void Save(Stream stream, int? quality = null)
+            public void Save(Stream stream, int32? quality = null)
             {
 
             }

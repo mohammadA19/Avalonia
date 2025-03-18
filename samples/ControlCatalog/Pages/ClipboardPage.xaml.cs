@@ -85,7 +85,7 @@ namespace ControlCatalog.Pages
                 List<string> invalidFile = new(filesPath.Length);
                 List<IStorageFile> files = new(filesPath.Length);
 
-                for (int i = 0; i < filesPath.Length; i++)
+                for (int32 i = 0; i < filesPath.Length; i++)
                 {
                     var file = await storageProvider.TryGetFileFromPathAsync(filesPath[i]);
                     if (file is null)

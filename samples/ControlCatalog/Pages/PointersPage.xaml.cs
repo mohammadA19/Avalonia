@@ -37,7 +37,7 @@ public class PointersPage : UserControl
             textBlock.Text = @$"Type: {e.Pointer.Type}
 Captured: {e.Pointer.Captured == sender}
 PointerId: {e.Pointer.Id}
-Position: {(int)position.X} {(int)position.Y}";
+Position: {(int32)position.X} {(int32)position.Y}";
             e.Handled = true;
         }
     }

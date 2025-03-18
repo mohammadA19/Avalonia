@@ -37,9 +37,9 @@ namespace Avalonia.Base.UnitTests.Data.Core.Plugins
 
         public class Data : NotifyingBase
         {
-            private int _mustBePositive;
+            private int32 _mustBePositive;
 
-            public int MustBePositive
+            public int32 MustBePositive
             {
                 get { return _mustBePositive; }
                 set

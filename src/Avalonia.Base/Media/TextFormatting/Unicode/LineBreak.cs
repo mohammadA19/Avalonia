@@ -32,7 +32,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="positionMeasure">The code point index to measure to</param>
         /// <param name="positionWrap">The code point index to actually break the line at</param>
         /// <param name="required">True if this is a required line break; otherwise false</param>
-        public LineBreak(int positionMeasure, int positionWrap, bool required = false)
+        public LineBreak(int32 positionMeasure, int32 positionWrap, bool required = false)
         {
             PositionMeasure = positionMeasure;
             PositionWrap = positionWrap;
@@ -45,7 +45,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <remarks>
         /// This doesn't include trailing whitespace
         /// </remarks>
-        public int PositionMeasure { get; }
+        public int32 PositionMeasure { get; }
 
         /// <summary>
         /// The break position, after any trailing whitespace
@@ -53,7 +53,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <remarks>
         /// This includes trailing whitespace
         /// </remarks>
-        public int PositionWrap { get; }
+        public int32 PositionWrap { get; }
 
         /// <summary>
         /// True if there should be a forced line break here

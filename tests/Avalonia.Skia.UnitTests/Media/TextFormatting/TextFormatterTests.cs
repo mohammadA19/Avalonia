@@ -88,7 +88,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
                 };
             }
 
-            public TextRun GetTextRun(int textSourceIndex)
+            public TextRun GetTextRun(int32 textSourceIndex)
             {
                 foreach (var run in _textRuns)
                 {
@@ -108,7 +108,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
                     Length = DefaultTextSourceLength;
                 }
 
-                public override int Length { get; }
+                public override int32 Length { get; }
             }
         }
 
@@ -297,7 +297,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
         [InlineData("👍b", 2)]
         [InlineData("a👍b", 3)]
         [InlineData("a👍子b", 4)]
-        public void Should_Produce_Unique_Runs(string text, int numberOfRuns)
+        public void Should_Produce_Unique_Runs(string text, int32 numberOfRuns)
         {
             using (Start())
             {
@@ -368,7 +368,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
         [InlineData("𐐷𐐷𐐷𐐷𐐷", 10, 1)]
         [InlineData("01234 56789 01234 56789", 6, 4)]
         [Theory]
-        public void Should_Wrap_With_Overflow(string text, int expectedCharactersPerLine, int expectedNumberOfLines)
+        public void Should_Wrap_With_Overflow(string text, int32 expectedCharactersPerLine, int32 expectedNumberOfLines)
         {
             using (Start())
             {
@@ -453,13 +453,13 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
             , "Noto Sans", 40)]
         [InlineData("01234 56789 01234 56789", "Noto Mono", 7)]
         [Theory]
-        public void Should_Wrap(string text, string familyName, int numberOfCharactersPerLine)
+        public void Should_Wrap(string text, string familyName, int32 numberOfCharactersPerLine)
         {
             using (Start())
             {
                 var lineBreaker = new LineBreakEnumerator(text);
 
-                var expected = new List<int>();
+                var expected = new List<int32>();
 
                 while (lineBreaker.MoveNext(out var lineBreak))
                 {
@@ -929,7 +929,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
 
                 Assert.NotNull(textLine);
 
-                void VerifyHit(int offset)
+                void VerifyHit(int32 offset)
                 {
                     var glyphCenter = textLine.GetTextBounds(offset, 1)[0].Rectangle.Center;
                     var hit = textLine.GetCharacterHitFromDistance(glyphCenter.X);
@@ -1099,7 +1099,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
                 _defaultProperties = defaultProperties;
             }
 
-            public TextRun? GetTextRun(int textSourceIndex)
+            public TextRun? GetTextRun(int32 textSourceIndex)
             {
                 if (textSourceIndex > _text.Length)
                 {
@@ -1119,7 +1119,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
 
         private class EmptyTextSource : ITextSource
         {
-            public TextRun? GetTextRun(int textSourceIndex)
+            public TextRun? GetTextRun(int32 textSourceIndex)
             {
                 return null;
             }
@@ -1127,7 +1127,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
 
         private class EndOfLineTextSource : ITextSource
         {
-            public TextRun GetTextRun(int textSourceIndex)
+            public TextRun GetTextRun(int32 textSourceIndex)
             {
                 return new TextEndOfLine();
             }
@@ -1142,7 +1142,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
                 _text = text;
             }
 
-            public TextRun? GetTextRun(int textSourceIndex)
+            public TextRun? GetTextRun(int32 textSourceIndex)
             {
                 if (textSourceIndex >= _text.Length + TextRun.DefaultTextSourceLength + _text.Length)
                 {
@@ -1172,7 +1172,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
                 _runs = runs.ToList();
             }
             
-            public TextRun? GetTextRun(int textSourceIndex)
+            public TextRun? GetTextRun(int32 textSourceIndex)
             {
                 var off = 0;
                 for (var c = 0; c < _runs.Count; c++)
@@ -1217,11 +1217,11 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
         
         private class InvisibleRun : TextRun
         {
-            public InvisibleRun(int length)
+            public InvisibleRun(int32 length)
             {
                 Length = length;
             }
-            public override int Length { get; }
+            public override int32 Length { get; }
         }
 
         public static IDisposable Start()

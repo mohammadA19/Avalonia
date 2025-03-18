@@ -70,7 +70,7 @@ namespace Avalonia.Base.UnitTests
             bool handled = false;
             var source = new EventSource();
             AddCollectableSubscriber(source, "Event", () => handled = true);
-            for (int c = 0; c < 10; c++)
+            for (int32 c = 0; c < 10; c++)
             {
                 GC.Collect();
                 GC.Collect(3, GCCollectionMode.Forced, true);

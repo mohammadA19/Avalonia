@@ -20,7 +20,7 @@ namespace Avalonia.OpenGL.Egl
         private readonly object _lock;
 
         internal EglContext(EglDisplay display, EglInterface egl, EglContext? sharedWith, IntPtr ctx, EglSurface? offscreenSurface,
-            GlVersion version, int sampleCount, int stencilSize, Action? disposeCallback,
+            GlVersion version, int32 sampleCount, int32 stencilSize, Action? disposeCallback,
             Dictionary<Type, Func<EglContext, object>> features)
         {
             _disp = display;
@@ -45,8 +45,8 @@ namespace Avalonia.OpenGL.Egl
         public EglSurface? OffscreenSurface { get; }
         public GlVersion Version { get; }
         public GlInterface GlInterface { get; }
-        public int SampleCount { get; }
-        public int StencilSize { get; }
+        public int32 SampleCount { get; }
+        public int32 StencilSize { get; }
         public EglDisplay Display => _disp;
         public EglInterface EglInterface => _egl;
 

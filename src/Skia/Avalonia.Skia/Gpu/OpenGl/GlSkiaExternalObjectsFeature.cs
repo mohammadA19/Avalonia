@@ -108,7 +108,7 @@ internal class GlSkiaImportedImage : IPlatformRenderInterfaceImportedImage
             _ => SKColorType.Rgba8888
         };
 
-    SKSurface? TryCreateSurface(int textureId, int format, int width, int height, bool topLeft)
+    SKSurface? TryCreateSurface(int32 textureId, int32 format, int32 width, int32 height, bool topLeft)
     {
         var origin = topLeft ? GRSurfaceOrigin.TopLeft : GRSurfaceOrigin.BottomLeft; 
         using var texture = new GRBackendTexture(width, height, false,

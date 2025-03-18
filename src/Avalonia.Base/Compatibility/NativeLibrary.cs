@@ -62,7 +62,7 @@ namespace Avalonia.Compatibility
         private static Func<Exception?>? DlError;
 
         [DllImport("libc")]
-        static extern int uname(IntPtr buf);
+        static extern int32 uname(IntPtr buf);
 
         static class Win32Imports
         {
@@ -83,7 +83,7 @@ namespace Avalonia.Compatibility
         static class LinuxImports
         {
             [DllImport("libdl.so.2")]
-            private static extern IntPtr dlopen(string path, int flags);
+            private static extern IntPtr dlopen(string path, int32 flags);
 
             [DllImport("libdl.so.2")]
             private static extern IntPtr dlsym(IntPtr handle, string symbol);
@@ -102,7 +102,7 @@ namespace Avalonia.Compatibility
         static class OsXImports
         {
             [DllImport("/usr/lib/libSystem.dylib")]
-            private static extern IntPtr dlopen(string path, int flags);
+            private static extern IntPtr dlopen(string path, int32 flags);
 
             [DllImport("/usr/lib/libSystem.dylib")]
             private static extern IntPtr dlsym(IntPtr handle, string symbol);

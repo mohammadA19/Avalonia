@@ -52,7 +52,7 @@ public class Rotate3DTransition: PageSlide
         var depthSetter = new Setter {Property = Rotate3DTransform.DepthProperty, Value = Depth ?? center};
         var centerZSetter = new Setter {Property = Rotate3DTransform.CenterZProperty, Value = -center / 2};
 
-        KeyFrame CreateKeyFrame(double cue, double rotation, int zIndex, bool isVisible = true) => 
+        KeyFrame CreateKeyFrame(double cue, double rotation, int32 zIndex, bool isVisible = true) => 
             new() {
                 Setters =
                 {

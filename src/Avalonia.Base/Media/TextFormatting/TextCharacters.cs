@@ -35,7 +35,7 @@ namespace Avalonia.Media.TextFormatting
         }
 
         /// <inheritdoc />
-        public override int Length
+        public override int32 Length
             => Text.Length;
 
         /// <inheritdoc />
@@ -176,7 +176,7 @@ namespace Avalonia.Media.TextFormatting
             ReadOnlySpan<char> text,
             IGlyphTypeface glyphTypeface,
             IGlyphTypeface? defaultGlyphTypeface,
-            out int length)
+            out int32 length)
         {
             length = 0;
             var script = Script.Unknown;

@@ -11,7 +11,7 @@ namespace Avalonia.Base.UnitTests.Data.Core
         private EventHandler<DataErrorsChangedEventArgs> _errorsChanged;
 
         public abstract bool HasErrors { get; }
-        public int ErrorsChangedSubscriptionCount { get; private set; }
+        public int32 ErrorsChangedSubscriptionCount { get; private set; }
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged
         {

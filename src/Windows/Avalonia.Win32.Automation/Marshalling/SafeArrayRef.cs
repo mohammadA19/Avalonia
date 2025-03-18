@@ -49,7 +49,7 @@ internal unsafe partial struct SafeArrayRef
         internal uint cElements;
 
         /// <summary>The lower bound of the dimension.</summary>
-        internal int lLbound;
+        internal int32 lLbound;
     }
 
     internal struct VariableLengthInlineArray<T>
@@ -57,7 +57,7 @@ internal unsafe partial struct SafeArrayRef
     {
         internal T e0;
 
-        internal ref T this[int index]
+        internal ref T this[int32 index]
         {
             [UnscopedRef]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -66,7 +66,7 @@ internal unsafe partial struct SafeArrayRef
 
         [UnscopedRef]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal Span<T> AsSpan(int length)
+        internal Span<T> AsSpan(int32 length)
         {
             return MemoryMarshal.CreateSpan(ref this.e0, length);
         }
@@ -108,8 +108,8 @@ internal unsafe partial struct SafeArrayRef
                 Marshal.Copy(data, (byte[])(object)array, 0, length);
             else if (typeof(T) == typeof(short))
                 Marshal.Copy(data, (short[])(object)array, 0, length);
-            else if (typeof(T) == typeof(int))
-                Marshal.Copy(data, (int[])(object)array, 0, length);
+            else if (typeof(T) == typeof(int32))
+                Marshal.Copy(data, (int32[])(object)array, 0, length);
             else if (typeof(T) == typeof(long))
                 Marshal.Copy(data, (long[])(object)array, 0, length);
             else if (typeof(T) == typeof(byte))
@@ -117,7 +117,7 @@ internal unsafe partial struct SafeArrayRef
             else if (typeof(T) == typeof(ushort))
                 Marshal.Copy(data, (short[])(object)array, 0, length);
             else if (typeof(T) == typeof(uint))
-                Marshal.Copy(data, (int[])(object)array, 0, length);
+                Marshal.Copy(data, (int32[])(object)array, 0, length);
             else if (typeof(T) == typeof(ulong))
                 Marshal.Copy(data, (long[])(object)array, 0, length);
             else if (typeof(T) == typeof(float))
@@ -141,7 +141,7 @@ internal unsafe partial struct SafeArrayRef
             {
                 var pointers = new IntPtr[length];
                 Marshal.Copy(data, pointers, 0, array.Length);
-                for (int i = 0; i < pointers.Length; i++)
+                for (int32 i = 0; i < pointers.Length; i++)
                 {
                     if (ComWrappers.TryGetObject(pointers[i], out var instance))
                     {
@@ -201,7 +201,7 @@ internal unsafe partial struct SafeArrayRef
             try
             {
                 // We assume it has the same length.
-                var output = new Span<T>(safearray->pvData, (int)safearray->rgsabound[0].cElements);
+                var output = new Span<T>(safearray->pvData, (int32)safearray->rgsabound[0].cElements);
                 span.CopyTo(output);
             }
             finally
@@ -221,7 +221,7 @@ internal unsafe partial struct SafeArrayRef
             var pointers = ArrayPool<IntPtr>.Shared.Rent(strings.Count);
             try
             {
-                for (int i = 0; i < strings.Count; i++)
+                for (int32 i = 0; i < strings.Count; i++)
                 {
                     pointers[i] = Marshal.StringToBSTR(strings[i]);
                 }
@@ -240,7 +240,7 @@ internal unsafe partial struct SafeArrayRef
             var shorts = ArrayPool<short>.Shared.Rent(bools.Count);
             try
             {
-                for (int i = 0; i < bools.Count; i++)
+                for (int32 i = 0; i < bools.Count; i++)
                 {
                     shorts[i] = bools[i] ? ComVariant.VARIANT_TRUE : ComVariant.VARIANT_FALSE;
                 }
@@ -259,7 +259,7 @@ internal unsafe partial struct SafeArrayRef
             var pointers = ArrayPool<IntPtr>.Shared.Rent(objects.Count);
             try
             {
-                for (int i = 0; i < objects.Count; i++)
+                for (int32 i = 0; i < objects.Count; i++)
                 {
                     if (ComWrappers.TryGetComInstance(objects[i], out var pointer))
                     {
@@ -279,7 +279,7 @@ internal unsafe partial struct SafeArrayRef
         {
             IReadOnlyCollection<sbyte> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I1),
             IReadOnlyCollection<short> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I2),
-            IReadOnlyCollection<int> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I4),
+            IReadOnlyCollection<int32> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I4),
             IReadOnlyCollection<long> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_I8),
 
             IReadOnlyCollection<byte> ints => CreateFromCollection(ints, varEnum = VarEnum.VT_UI1),
@@ -313,12 +313,12 @@ internal unsafe partial struct SafeArrayRef
 
     [LibraryImport("oleaut32.dll")]
     [PreserveSig]
-    private static unsafe partial int SafeArrayLock(SAFEARRAY* array);
+    private static unsafe partial int32 SafeArrayLock(SAFEARRAY* array);
 
     [LibraryImport("oleaut32.dll")]
     private static unsafe partial void SafeArrayUnlock(SAFEARRAY* array);
 
-    private static TRes AccessData<TRes>(SafeArrayRef safearray, Func<IntPtr, int, TRes> accessor)
+    private static TRes AccessData<TRes>(SafeArrayRef safearray, Func<IntPtr, int32, TRes> accessor)
     {
         var lockResult = SafeArrayLock(safearray._ptr);
         if (lockResult != 0)
@@ -332,7 +332,7 @@ internal unsafe partial struct SafeArrayRef
         {
             var data = safearray._ptr->pvData;
             var length= safearray._ptr->rgsabound[0].cElements;
-            return accessor(new IntPtr(data), (int)length);
+            return accessor(new IntPtr(data), (int32)length);
         }
         finally
         {

@@ -8,7 +8,7 @@ namespace Avalonia.Utilities;
 /// <summary>
 /// Maintains a set of objects with reference counts
 /// </summary>
-internal class RefTrackingDictionary<TKey> : Dictionary<TKey, int> where TKey : class
+internal class RefTrackingDictionary<TKey> : Dictionary<TKey, int32> where TKey : class
 {
     /// <summary>
     /// Increase reference count for a key by 1.

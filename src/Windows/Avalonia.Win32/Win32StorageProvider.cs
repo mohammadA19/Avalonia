@@ -170,7 +170,7 @@ namespace Avalonia.Win32
                         var count = shellItemArray.Count;
 
                         var results = new List<TStorageItem>();
-                        for (int i = 0; i < count; i++)
+                        for (int32 i = 0; i < count; i++)
                         {
                             var shellItem = shellItemArray.GetItemAt(i);
                             if (GetParsingName(shellItem) is { } selected)
@@ -220,7 +220,7 @@ namespace Avalonia.Win32
             return default;
         }
 
-        private static byte[] FiltersToPointer(IReadOnlyList<FilePickerFileType>? filters, out int length)
+        private static byte[] FiltersToPointer(IReadOnlyList<FilePickerFileType>? filters, out int32 length)
         {
             if (filters == null || filters.Count == 0)
             {
@@ -233,7 +233,7 @@ namespace Avalonia.Win32
             var size = Marshal.SizeOf<UnmanagedMethods.COMDLG_FILTERSPEC>();
             var resultArr = new byte[size * filters.Count];
 
-            for (int i = 0; i < filters.Count; i++)
+            for (int32 i = 0; i < filters.Count; i++)
             {
                 var filter = filters[i];
                 if (filter.Patterns is null || filter.Patterns.Count == 0)

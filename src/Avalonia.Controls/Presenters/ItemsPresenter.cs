@@ -124,7 +124,7 @@ namespace Avalonia.Controls.Presenters
             _logicalScrollable?.GetControlInDirection(direction, from);
         void ILogicalScrollable.RaiseScrollInvalidated(EventArgs e) => _scrollInvalidated?.Invoke(this, e);
 
-        internal void ScrollIntoView(int index)
+        internal void ScrollIntoView(int32 index)
         {
             if (Panel is VirtualizingPanel v)
                 v.ScrollIntoView(index);
@@ -183,7 +183,7 @@ namespace Avalonia.Controls.Presenters
             _generator = new(this);
         }
 
-        internal Control? ContainerFromIndex(int index)
+        internal Control? ContainerFromIndex(int32 index)
         {
             if (Panel is VirtualizingPanel v)
                 return v.ContainerFromIndex(index);
@@ -212,14 +212,14 @@ namespace Avalonia.Controls.Presenters
                    cc.Content?.ToString()?.StartsWith(textSearchTerm, StringComparison.OrdinalIgnoreCase) == true;
         }
         
-        internal int GetIndexFromTextSearch(string textSearch)
+        internal int32 GetIndexFromTextSearch(string textSearch)
         {
             if (Panel is VirtualizingPanel v)
                 return v.GetIndexFromTextSearch(textSearch);
             return GetIndexFromTextSearch(ItemsControl?.Items, textSearch);
         }
 
-        internal static int GetIndexFromTextSearch(IReadOnlyList<object?>? items, string textSearchTerm)
+        internal static int32 GetIndexFromTextSearch(IReadOnlyList<object?>? items, string textSearchTerm)
         {
             if (items is null)
                 return -1;
@@ -235,7 +235,7 @@ namespace Avalonia.Controls.Presenters
             return -1;
         }
 
-        internal int IndexFromContainer(Control container)
+        internal int32 IndexFromContainer(Control container)
         {
             if (Panel is VirtualizingPanel v)
                 return v.IndexFromContainer(container);

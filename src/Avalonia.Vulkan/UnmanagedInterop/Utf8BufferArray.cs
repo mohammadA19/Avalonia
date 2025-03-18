@@ -21,7 +21,7 @@ internal unsafe class Utf8BufferArray : IDisposable
 
     public static unsafe implicit operator byte**(Utf8BufferArray a) => a._bufferArray;
 
-    public int Count => _buffers.Count;
+    public int32 Count => _buffers.Count;
     public uint UCount => (uint)Count;
 
     public void Dispose() => Dispose(true);

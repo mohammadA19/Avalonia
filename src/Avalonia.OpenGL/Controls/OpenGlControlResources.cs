@@ -10,8 +10,8 @@ namespace Avalonia.OpenGL.Controls;
 
 internal class OpenGlControlBaseResources : IAsyncDisposable
 {
-    private int _depthBuffer;
-    public int Fbo { get; private set; }
+    private int32 _depthBuffer;
+    public int32 Fbo { get; private set; }
     private PixelSize _depthBufferSize;
     public CompositionDrawingSurface Surface { get; }
     private readonly CompositionOpenGlSwapchain _swapchain;
@@ -107,7 +107,7 @@ internal class OpenGlControlBaseResources : IAsyncDisposable
             var status = gl.CheckFramebufferStatus(GL_FRAMEBUFFER);
             if (status != GL_FRAMEBUFFER_COMPLETE)
             {
-                int code = gl.GetError();
+                int32 code = gl.GetError();
                 Logger.TryGet(LogEventLevel.Error, "OpenGL")?.Log("OpenGlControlBase",
                     "Unable to configure OpenGL FBO: {code}", code);
                 throw OpenGlException.GetFormattedException("Unable to configure OpenGL FBO", code);

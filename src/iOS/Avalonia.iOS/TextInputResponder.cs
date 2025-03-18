@@ -29,10 +29,10 @@ partial class AvaloniaView
         {
             private UITextPosition? _start;
             private UITextPosition? _end;
-            public int StartIndex { get; }
-            public int EndIndex { get; }
+            public int32 StartIndex { get; }
+            public int32 EndIndex { get; }
 
-            public AvaloniaTextRange(int startIndex, int endIndex)
+            public AvaloniaTextRange(int32 startIndex, int32 endIndex)
             {
                 if (startIndex < 0)
                     throw new ArgumentOutOfRangeException(nameof(startIndex));
@@ -56,14 +56,14 @@ partial class AvaloniaView
 
         private class AvaloniaTextPosition : UITextPosition, INSCopying
         {
-            public AvaloniaTextPosition(int index)
+            public AvaloniaTextPosition(int32 index)
             {
                 if (index < 0)
                     throw new ArgumentOutOfRangeException(nameof(index));
                 Index = index;
             }
 
-            public int Index { get; }
+            public int32 Index { get; }
             public NSObject Copy(NSZone? zone) => new AvaloniaTextPosition(Index);
         }
 
@@ -87,7 +87,7 @@ partial class AvaloniaView
         public override UIResponder NextResponder { get; }
 
         private readonly TextInputMethodClient _client;
-        private int _inSurroundingTextUpdateEvent;
+        private int32 _inSurroundingTextUpdateEvent;
         private readonly UITextPosition _beginningOfDocument = new AvaloniaTextPosition(0);
         private readonly UITextInputStringTokenizer _tokenizer;
         private bool _isInUpdate;
@@ -289,18 +289,18 @@ partial class AvaloniaView
         {
             var pos = (AvaloniaTextPosition)fromPosition;
             Logger.TryGet(LogEventLevel.Debug, ImeLog)
-                ?.Log(null, "IUIKeyInput.GetPosition {start} {offset}", pos.Index, (int)offset);
+                ?.Log(null, "IUIKeyInput.GetPosition {start} {offset}", pos.Index, (int32)offset);
 
             var res = GetPositionCore(pos, offset);
             Logger.TryGet(LogEventLevel.Debug, ImeLog)
-                ?.Log(null, $"res: " + (res == null ? "null" : (int)res.Index));
+                ?.Log(null, $"res: " + (res == null ? "null" : (int32)res.Index));
             return res!;
         }
 
         private AvaloniaTextPosition? GetPositionCore(AvaloniaTextPosition pos, nint offset)
         {
 
-            var end = pos.Index + (int)offset;
+            var end = pos.Index + (int32)offset;
             if (end < 0)
                 return null!;
             if (end > DocumentLength)
@@ -313,11 +313,11 @@ partial class AvaloniaView
         {
             var pos = (AvaloniaTextPosition)fromPosition;
             Logger.TryGet(LogEventLevel.Debug, ImeLog)
-                ?.Log(null, "IUIKeyInput.GetPosition {start} {direction} {offset}", pos.Index, inDirection, (int)offset);
+                ?.Log(null, "IUIKeyInput.GetPosition {start} {direction} {offset}", pos.Index, inDirection, (int32)offset);
 
             var res = GetPositionCore(pos, inDirection, offset);
             Logger.TryGet(LogEventLevel.Debug, ImeLog)
-                ?.Log(null, $"res: " + (res == null ? "null" : (int)res.Index));
+                ?.Log(null, $"res: " + (res == null ? "null" : (int32)res.Index));
             return res!;
         }
 
@@ -330,11 +330,11 @@ partial class AvaloniaView
             switch (inDirection)
             {
                 case UITextLayoutDirection.Left:
-                    newPosition -= (int)offset;
+                    newPosition -= (int32)offset;
                     break;
 
                 case UITextLayoutDirection.Right:
-                    newPosition += (int)offset;
+                    newPosition += (int32)offset;
                     break;
             }
 
@@ -495,7 +495,7 @@ partial class AvaloniaView
 
         UITextPosition IUITextInput.BeginningOfDocument => _beginningOfDocument;
 
-        private int DocumentLength => (_client.SurroundingText?.Length ?? 0) + (_markedText?.Length ?? 0);
+        private int32 DocumentLength => (_client.SurroundingText?.Length ?? 0) + (_markedText?.Length ?? 0);
         UITextPosition IUITextInput.EndOfDocument => new AvaloniaTextPosition(DocumentLength);
 
         UITextRange IUITextInput.MarkedTextRange

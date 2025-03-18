@@ -114,15 +114,15 @@ namespace Avalonia.OpenGL.Egl
             }
         }
 
-        public unsafe EglSurface CreatePBufferFromClientBuffer(int bufferType, IntPtr handle, int[] attribs)
+        public unsafe EglSurface CreatePBufferFromClientBuffer(int32 bufferType, IntPtr handle, int32[] attribs)
         {
-            fixed (int* attrs = attribs)
+            fixed (int32* attrs = attribs)
             {
                 return CreatePBufferFromClientBuffer(bufferType, handle, attrs);
             }
         }
         
-        public unsafe EglSurface CreatePBufferFromClientBuffer (int bufferType, IntPtr handle, int* attribs)
+        public unsafe EglSurface CreatePBufferFromClientBuffer (int32 bufferType, IntPtr handle, int32* attribs)
         {
             using (Lock())
             {

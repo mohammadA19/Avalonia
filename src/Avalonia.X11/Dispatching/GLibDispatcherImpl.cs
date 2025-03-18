@@ -153,7 +153,7 @@ internal class GlibDispatcherImpl :
         if (dueTimeInMs == null)
             return;
 
-        var interval = (uint)Math.Max(0, (int)Math.Min(int.MaxValue, dueTimeInMs.Value - Now));
+        var interval = (uint)Math.Max(0, (int32)Math.Min(int32.MaxValue, dueTimeInMs.Value - Now));
         _glibTimerSourceTag = g_timeout_add_once(interval, TimerCallback);
     }
     
@@ -178,7 +178,7 @@ internal class GlibDispatcherImpl :
     public bool CanQueryPendingInput => false;
     public bool HasPendingInput => _platform.EventGrouperDispatchQueue.HasJobs || _x11Events.IsPending;
     
-    private bool X11SourceCallback(int i, GIOCondition gioCondition)
+    private bool X11SourceCallback(int32 i, GIOCondition gioCondition)
     {
         CheckSignaled();
         var token = _runLoopStack.Count > 0 ? _runLoopStack.Peek().Cancelled : CancellationToken.None;

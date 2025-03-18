@@ -45,7 +45,7 @@ namespace Avalonia.Native
             _native = factory(events);
         }
 
-        protected override unsafe int GetScreenCount() => _native.GetScreenIds(null);
+        protected override unsafe int32 GetScreenCount() => _native.GetScreenIds(null);
 
         protected override unsafe IReadOnlyList<uint> GetAllScreenKeys()
         {

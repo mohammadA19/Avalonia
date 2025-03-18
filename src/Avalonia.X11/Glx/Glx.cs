@@ -29,13 +29,13 @@ namespace Avalonia.X11.Glx
         public partial IntPtr GetCurrentReadDrawable();
         
         [GetProcAddress("glXCreatePbuffer")]
-        public partial IntPtr CreatePbuffer(IntPtr dpy, IntPtr fbc, int[] attrib_list);
+        public partial IntPtr CreatePbuffer(IntPtr dpy, IntPtr fbc, int32[] attrib_list);
         
         [GetProcAddress("glXDestroyPbuffer")]
         public partial IntPtr DestroyPbuffer(IntPtr dpy, IntPtr fb);
         
         [GetProcAddress("glXChooseVisual")]
-        public partial  XVisualInfo* ChooseVisual(IntPtr dpy, int screen, int[] attribList);
+        public partial  XVisualInfo* ChooseVisual(IntPtr dpy, int32 screen, int32[] attribList);
         
         
         [GetProcAddress("glXCreateContext")]
@@ -44,7 +44,7 @@ namespace Avalonia.X11.Glx
 
         [GetProcAddress("glXCreateContextAttribsARB")]
         public partial IntPtr CreateContextAttribsARB(IntPtr dpy, IntPtr fbconfig, IntPtr shareList,
-            bool direct, int[] attribs);
+            bool direct, int32[] attribs);
         
 
         [DllImport(libGL, EntryPoint = "glXGetProcAddress")]
@@ -56,10 +56,10 @@ namespace Avalonia.X11.Glx
         
         
         [GetProcAddress("glXChooseFBConfig")]
-        public partial  IntPtr* ChooseFBConfig(IntPtr dpy,  int screen,  int[] attrib_list,  out int nelements);
+        public partial  IntPtr* ChooseFBConfig(IntPtr dpy,  int32 screen,  int32[] attrib_list,  out int32 nelements);
         
         
-        public  IntPtr* ChooseFbConfig(IntPtr dpy, int screen, IEnumerable<int> attribs, out int nelements)
+        public  IntPtr* ChooseFbConfig(IntPtr dpy, int32 screen, IEnumerable<int32> attribs, out int32 nelements)
         {
             var arr = attribs.Concat(new[]{0}).ToArray();
             return ChooseFBConfig(dpy, screen, arr, out nelements);
@@ -70,7 +70,7 @@ namespace Avalonia.X11.Glx
         
         
         [GetProcAddress("glXGetFBConfigAttrib")]
-        public partial  int GetFBConfigAttrib(IntPtr dpy, IntPtr config, int attribute, out int value);
+        public partial  int32 GetFBConfigAttrib(IntPtr dpy, IntPtr config, int32 attribute, out int32 value);
         
         
         [GetProcAddress("glXSwapBuffers")]
@@ -86,11 +86,11 @@ namespace Avalonia.X11.Glx
         
 
         [GetProcAddress("glGetError")]
-        public partial int GlGetError();
+        public partial int32 GlGetError();
 
         
         [GetProcAddress("glXQueryExtensionsString")]
-        public partial IntPtr QueryExtensionsString(IntPtr display, int screen);
+        public partial IntPtr QueryExtensionsString(IntPtr display, int32 screen);
 
         public GlxInterface()
         {

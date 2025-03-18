@@ -19,9 +19,9 @@ namespace Avalonia.Markup.UnitTests.Parsers
         {
             public void MethodWithoutReturn() { }
 
-            public int MethodWithReturn() => 0;
+            public int32 MethodWithReturn() => 0;
 
-            public int MethodWithReturnAndParameter(object i) => (int)i;
+            public int32 MethodWithReturnAndParameter(object i) => (int32)i;
 
             public static void StaticMethod() { }
         }
@@ -40,8 +40,8 @@ namespace Avalonia.Markup.UnitTests.Parsers
 
         [Theory]
         [InlineData(nameof(TestObject.MethodWithoutReturn), typeof(Action))]
-        [InlineData(nameof(TestObject.MethodWithReturn), typeof(Func<int>))]
-        [InlineData(nameof(TestObject.MethodWithReturnAndParameter), typeof(Func<object, int>))]
+        [InlineData(nameof(TestObject.MethodWithReturn), typeof(Func<int32>))]
+        [InlineData(nameof(TestObject.MethodWithReturnAndParameter), typeof(Func<object, int32>))]
         [InlineData(nameof(TestObject.StaticMethod), typeof(Action))]
         public async Task Should_Get_Method_WithCorrectDelegateType(string methodName, Type expectedType)
         {
@@ -61,7 +61,7 @@ namespace Avalonia.Markup.UnitTests.Parsers
             var observer = Build(data, nameof(TestObject.MethodWithReturnAndParameter));
             var result = await observer.Take(1);
 
-            var callback = (Func<object, int>)result;
+            var callback = (Func<object, int32>)result;
 
             Assert.Equal(1, callback(1));
 

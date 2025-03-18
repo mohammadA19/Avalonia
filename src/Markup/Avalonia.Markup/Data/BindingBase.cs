@@ -39,7 +39,7 @@ namespace Avalonia.Data
         /// or <see cref="BindingExpressionBase.UpdateSource"/>. Nor is there a delay when 
         /// <see cref="BindingMode.OneWayToSource"/> is active and a new source object is provided.
         /// </remarks>
-        public int Delay { get; set; }
+        public int32 Delay { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="IValueConverter"/> to use.

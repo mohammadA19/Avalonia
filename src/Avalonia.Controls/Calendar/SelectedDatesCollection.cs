@@ -65,7 +65,7 @@ namespace Avalonia.Controls.Primitives
             // Descending order or Ascending order based on this value, we add 
             // the days in the range either in Ascending order or in Descending
             // order
-            int increment = (DateTime.Compare(end, start) >= 0) ? 1 : -1;
+            int32 increment = (DateTime.Compare(end, start) >= 0) ? 1 : -1;
 
             _addedItems.Clear();
 
@@ -167,7 +167,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// This implementation raises the CollectionChanged event.
         /// </remarks>
-        protected override void InsertItem(int index, DateTime item)
+        protected override void InsertItem(int32 index, DateTime item)
         {
             EnsureValidThread();
 
@@ -201,7 +201,7 @@ namespace Avalonia.Controls.Primitives
 
                             InvokeCollectionChanged(_owner.RemovedItems, addedItems);
                             _owner.RemovedItems.Clear();
-                            int monthDifference = DateTimeHelper.CompareYearMonth(item, _owner.DisplayDateInternal);
+                            int32 monthDifference = DateTimeHelper.CompareYearMonth(item, _owner.DisplayDateInternal);
 
                             if (monthDifference < 2 && monthDifference > -2)
                             {
@@ -230,7 +230,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// This implementation raises the CollectionChanged event.
         /// </remarks>
-        protected override void RemoveItem(int index)
+        protected override void RemoveItem(int32 index)
         {
             EnsureValidThread();
 
@@ -242,7 +242,7 @@ namespace Avalonia.Controls.Primitives
             {
                 Collection<DateTime> addedItems = new Collection<DateTime>();
                 Collection<DateTime> removedItems = new Collection<DateTime>();
-                int monthDifference = DateTimeHelper.CompareYearMonth(this[index], _owner.DisplayDateInternal);
+                int32 monthDifference = DateTimeHelper.CompareYearMonth(this[index], _owner.DisplayDateInternal);
 
                 removedItems.Add(this[index]);
                 base.RemoveItem(index);
@@ -281,7 +281,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// This implementation raises the CollectionChanged event.
         /// </remarks>
-        protected override void SetItem(int index, DateTime item)
+        protected override void SetItem(int32 index, DateTime item)
         {
             EnsureValidThread();
 
@@ -309,7 +309,7 @@ namespace Avalonia.Controls.Primitives
                         }
                         InvokeCollectionChanged(removedItems, addedItems);
 
-                        int monthDifference = DateTimeHelper.CompareYearMonth(item, _owner.DisplayDateInternal);
+                        int32 monthDifference = DateTimeHelper.CompareYearMonth(item, _owner.DisplayDateInternal);
 
                         if (monthDifference < 2 && monthDifference > -2)
                         {

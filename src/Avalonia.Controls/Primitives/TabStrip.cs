@@ -16,12 +16,12 @@ namespace Avalonia.Controls.Primitives
             ItemsPanelProperty.OverrideDefaultValue<TabStrip>(DefaultPanel);
         }
 
-        protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+        protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
         {
             return new TabStripItem();
         }
 
-        protected internal override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
+        protected internal override bool NeedsContainerOverride(object? item, int32 index, out object? recycleKey)
         {
             return NeedsContainer<TabStripItem>(item, out recycleKey);
         }

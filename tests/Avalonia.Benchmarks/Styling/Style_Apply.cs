@@ -22,11 +22,11 @@ namespace Avalonia.Benchmarks.Styling
         }
 
         [Params(1, 5, 50)]
-        public int MatchingStyles { get; set; }
+        public int32 MatchingStyles { get; set; }
 
 
         [Params(1, 5, 50)]
-        public int NonMatchingStyles { get; set; }
+        public int32 NonMatchingStyles { get; set; }
 
         [GlobalSetup]
         public void Setup()

@@ -16,9 +16,9 @@ namespace Avalonia.ReactiveUI
         /// To prevent this we are limiting amount of reentrant calls to <see cref="Schedule{TState}"/> before we will
         /// schedule on a dispatcher anyway.
         /// </summary>
-        private const int MaxReentrantSchedules = 32;
+        private const int32 MaxReentrantSchedules = 32;
 
-        private int _reentrancyGuard;
+        private int32 _reentrancyGuard;
 
         /// <summary>
         /// The instance of the <see cref="AvaloniaScheduler"/>.

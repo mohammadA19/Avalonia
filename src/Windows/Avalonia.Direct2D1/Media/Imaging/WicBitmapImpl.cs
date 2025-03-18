@@ -105,7 +105,7 @@ namespace Avalonia.Direct2D1.Media
             Dpi = dpi;
         }
 
-        public WicBitmapImpl(APixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int stride)
+        public WicBitmapImpl(APixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int32 stride)
         {
             WicImpl = new Bitmap(Direct2D1Platform.ImagingFactory, size.Width, size.Height, format.ToWic(alphaFormat), BitmapCreateCacheOption.CacheOnDemand);
             WicImpl.SetResolution(dpi.X, dpi.Y);
@@ -125,7 +125,7 @@ namespace Avalonia.Direct2D1.Media
             }
         }
 
-        public WicBitmapImpl(Stream stream, int decodeSize, bool horizontal, Avalonia.Media.Imaging.BitmapInterpolationMode interpolationMode)
+        public WicBitmapImpl(Stream stream, int32 decodeSize, bool horizontal, Avalonia.Media.Imaging.BitmapInterpolationMode interpolationMode)
         {
             _decoder = new BitmapDecoder(Direct2D1Platform.ImagingFactory, stream, DecodeOptions.CacheOnLoad);
 
@@ -138,11 +138,11 @@ namespace Avalonia.Direct2D1.Media
 
             if (horizontal)
             {
-                desired = new PixelSize(decodeSize, (int)(realScale * decodeSize));
+                desired = new PixelSize(decodeSize, (int32)(realScale * decodeSize));
             }
             else
             {
-                desired = new PixelSize((int)(realScale * decodeSize), decodeSize);
+                desired = new PixelSize((int32)(realScale * decodeSize), decodeSize);
             }
 
             if (frame.Size.Width != desired.Width || frame.Size.Height != desired.Height)
@@ -230,7 +230,7 @@ namespace Avalonia.Direct2D1.Media
             return new OptionalDispose<D2DBitmap>(d2dBitmap, true);
         }
 
-        public override void Save(Stream stream, int? quality = null)
+        public override void Save(Stream stream, int32? quality = null)
         {
             using (var encoder = new PngBitmapEncoder(Direct2D1Platform.ImagingFactory, stream))
             using (var frame = new BitmapFrameEncode(encoder))
@@ -264,7 +264,7 @@ namespace Avalonia.Direct2D1.Media
 
             public IntPtr Address => _lock.Data.DataPointer;
             public PixelSize Size => _lock.Size.ToAvalonia();
-            public int RowBytes => _lock.Stride;
+            public int32 RowBytes => _lock.Stride;
             public Vector Dpi => _parent.Dpi;
             public APixelFormat Format => _format;
 

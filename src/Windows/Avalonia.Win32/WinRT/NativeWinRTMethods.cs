@@ -11,7 +11,7 @@ namespace Avalonia.Win32.WinRT
             PreserveSig = false)]
         internal static extern unsafe IntPtr WindowsCreateString(
             [MarshalAs(UnmanagedType.LPWStr)] string sourceString,
-            int length);
+            int32 length);
 
         internal static IntPtr WindowsCreateString(string sourceString) 
             => WindowsCreateString(sourceString, sourceString.Length);
@@ -36,7 +36,7 @@ namespace Avalonia.Win32.WinRT
         }
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        delegate int GetActivationFactoryDelegate(IntPtr classId, out IntPtr ppv);
+        delegate int32 GetActivationFactoryDelegate(IntPtr classId, out IntPtr ppv);
         
         internal static T CreateInstance<T>(string fullName) where T : IUnknown
         {
@@ -75,7 +75,7 @@ namespace Avalonia.Win32.WinRT
         [StructLayout(LayoutKind.Sequential)]
         internal struct DispatcherQueueOptions
         {
-            public int dwSize;
+            public int32 dwSize;
 
             [MarshalAs(UnmanagedType.I4)]
             public DISPATCHERQUEUE_THREAD_TYPE threadType;
@@ -142,7 +142,7 @@ namespace Avalonia.Win32.WinRT
 
                 uint length;
                 var buffer = NativeWinRTMethods.WindowsGetStringRawBuffer(_s, &length);
-                return new string(buffer, 0, (int) length);
+                return new string(buffer, 0, (int32) length);
             }
         }
         

@@ -34,7 +34,7 @@ namespace Avalonia.Platform
         /// <returns>
         ///     <c>True</c>, if the <see cref="IFontManagerImpl"/> could match the character to specified parameters, <c>False</c> otherwise.
         /// </returns>
-        bool TryMatchCharacter(int codepoint, FontStyle fontStyle,
+        bool TryMatchCharacter(int32 codepoint, FontStyle fontStyle,
             FontWeight fontWeight, FontStretch fontStretch, CultureInfo? culture, out Typeface typeface);
 
         /// <summary>

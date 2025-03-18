@@ -38,8 +38,8 @@ public interface IGlExternalImageTexture : IDisposable
 {
     void AcquireKeyedMutex(uint key);
     void ReleaseKeyedMutex(uint key);
-    int TextureId { get; }
-    int InternalFormat { get; }
+    int32 TextureId { get; }
+    int32 InternalFormat { get; }
     
     PlatformGraphicsExternalImageProperties Properties { get; }
 }

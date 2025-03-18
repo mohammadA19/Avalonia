@@ -10,7 +10,7 @@ namespace Avalonia.Rendering.Composition.Drawing;
 internal class CompositorRefCountableResource<T> where T : SimpleServerObject
 {
     public T Value { get; private set; }
-    public int RefCount { get; private set; }
+    public int32 RefCount { get; private set; }
 
     public CompositorRefCountableResource(T value)
     {

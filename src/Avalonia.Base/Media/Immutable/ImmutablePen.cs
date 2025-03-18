@@ -108,7 +108,7 @@ namespace Avalonia.Media.Immutable
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             return (Brush, Thickness, DashStyle, LineCap, LineJoin, MiterLimit).GetHashCode();
         }

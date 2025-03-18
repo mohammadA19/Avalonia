@@ -45,7 +45,7 @@ namespace Avalonia.Markup.UnitTests.Parsers
         [Fact]
         public async Task Should_Get_UnsetValue_For_Invalid_Dictionary_Index()
         {
-            var data = new { Foo = new Dictionary<int, string> { { 1, "foo" } } };
+            var data = new { Foo = new Dictionary<int32, string> { { 1, "foo" } } };
             var target = BuildAsObservable(data, "Foo[invalid]");
             var result = await target.Take(1);
 
@@ -298,7 +298,7 @@ namespace Avalonia.Markup.UnitTests.Parsers
         {
             var data = new
             {
-                Foo = new Dictionary<string, int>
+                Foo = new Dictionary<string, int32>
                 {
                     {"foo", 1 }
                 }
@@ -320,7 +320,7 @@ namespace Avalonia.Markup.UnitTests.Parsers
         {
             var data = new
             {
-                Foo = new Dictionary<string, int>
+                Foo = new Dictionary<string, int32>
                 {
                     {"foo", 1 }
                 }

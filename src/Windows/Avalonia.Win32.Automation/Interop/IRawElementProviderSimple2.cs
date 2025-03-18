@@ -17,9 +17,9 @@ internal partial interface IRawElementProviderSimple2 : IRawElementProviderSimpl
     // See https://learn.microsoft.com/en-us/dotnet/standard/native-interop/comwrappers-source-generation#derived-interfaces
     new ProviderOptions GetProviderOptions();
     [return: MarshalAs(UnmanagedType.Interface)]
-    new object? GetPatternProvider(int patternId);
+    new object? GetPatternProvider(int32 patternId);
     [return: MarshalAs(UnmanagedType.Struct)]
-    new object? GetPropertyValue(int propertyId);
+    new object? GetPropertyValue(int32 propertyId);
     new IRawElementProviderSimple? GetHostRawElementProvider();
 #endif
     void ShowContextMenu();

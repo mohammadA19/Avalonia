@@ -164,7 +164,7 @@ namespace Avalonia.Controls
         /// Gets a hash code for the GridLength.
         /// </summary>
         /// <returns>The hash code.</returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             return _value.GetHashCode() ^ _type.GetHashCode();
         }

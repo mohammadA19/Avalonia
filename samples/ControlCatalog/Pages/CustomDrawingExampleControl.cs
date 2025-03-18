@@ -154,7 +154,7 @@ namespace ControlCatalog.Pages
             context.DrawEllipse(Brushes.Gray, _pen, cursorInWorldPoint, 20.0d, 20.0d);
             
 
-            for (int i = 0; i < 10; i++)
+            for (int32 i = 0; i < 10; i++)
             {
                 double orbitRadius = i * 100 + 200;
                 var orbitInput = ((_timeKeeper.Elapsed.TotalMilliseconds + 987654d) / orbitRadius) / 10.0d;

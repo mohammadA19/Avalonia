@@ -5,14 +5,14 @@ namespace Avalonia.Benchmarks
 {
     internal class ControlHierarchyCreator
     {
-        public static List<Control> CreateChildren(List<Control> controls, Panel parent, int childCount, int innerCount, int iterations)
+        public static List<Control> CreateChildren(List<Control> controls, Panel parent, int32 childCount, int32 innerCount, int32 iterations)
         {
             for (var i = 0; i < childCount; ++i)
             {
                 var control = new StackPanel();
                 parent.Children.Add(control);
 
-                for (int j = 0; j < innerCount; ++j)
+                for (int32 j = 0; j < innerCount; ++j)
                 {
                     var child = new Button() { Width = 100, Height = 50 };
 

@@ -15,7 +15,7 @@ public class LoadedTests
         Control.ResetLoadedQueueForUnitTests();
         using (UnitTestApplication.Start(TestServices.StyledWindow))
         {
-            int loadedCount = 0, unloadedCount = 0;
+            int32 loadedCount = 0, unloadedCount = 0;
             var target = new Window();
 
             target.Loaded += (_, _) => loadedCount++;
@@ -46,7 +46,7 @@ public class LoadedTests
         Control.ResetLoadedQueueForUnitTests();
         using (UnitTestApplication.Start(TestServices.StyledWindow))
         {
-            int loadedCount = 0, unloadedCount = 0;
+            int32 loadedCount = 0, unloadedCount = 0;
             var window = new Window();
             window.Show();
 

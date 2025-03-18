@@ -115,7 +115,7 @@ namespace Avalonia.Rendering.Composition
         internal PropertySetSnapshot Snapshot() =>
             SnapshotCore(1);
         
-        private PropertySetSnapshot SnapshotCore(int allowedNestingLevel)
+        private PropertySetSnapshot SnapshotCore(int32 allowedNestingLevel)
         {
             var dic = new Dictionary<string, PropertySetSnapshot.Value>(_objects.Count + _variants.Count);
             foreach (var o in _objects)

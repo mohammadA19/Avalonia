@@ -107,7 +107,7 @@ namespace Avalonia.Input
         /// <summary>
         /// Defines the <see cref="TabIndex"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> TabIndexProperty =
+        public static readonly StyledProperty<int32> TabIndexProperty =
             KeyboardNavigation.TabIndexProperty.AddOwner<InputElement>();
 
         /// <summary>
@@ -478,7 +478,7 @@ namespace Avalonia.Input
         /// Gets or sets a value that determines the order in which elements receive focus when the
         /// user navigates through controls by pressing the Tab key.
         /// </summary>
-        public int TabIndex
+        public int32 TabIndex
         {
             get => GetValue(TabIndexProperty);
             set => SetValue(TabIndexProperty, value);
@@ -740,7 +740,7 @@ namespace Avalonia.Input
             var children = VisualChildren;
 
             // ReSharper disable once ForCanBeConvertedToForeach
-            for (int i = 0; i < children.Count; ++i)
+            for (int32 i = 0; i < children.Count; ++i)
             {
                 var child = children[i] as InputElement;
 

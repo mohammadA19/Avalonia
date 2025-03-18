@@ -29,7 +29,7 @@ namespace Avalonia.Win32
 
             if (_extendTitleBarHint >= 0)
             {
-                borderThickness.top = (int)(_extendedMargins.Top * RenderScaling);
+                borderThickness.top = (int32)(_extendedMargins.Top * RenderScaling);
             }
 
             // Determine if the hit test is for resizing. Default middle (1,1).

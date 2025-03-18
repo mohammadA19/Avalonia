@@ -23,7 +23,7 @@ namespace ControlCatalog.NetCore
         private static bool s_useFramebuffer;
         
         [STAThread]
-        static int Main(string[] args)
+        static int32 Main(string[] args)
         {
             if (args.Contains("--fbdev"))
             {

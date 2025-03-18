@@ -78,7 +78,7 @@ public class D3D11SwapchainImage : ISwapchainImage
 
     public void BeginDraw()
     {
-        _mutex.Acquire(0, int.MaxValue);
+        _mutex.Acquire(0, int32.MaxValue);
     }
 
     public void Present()

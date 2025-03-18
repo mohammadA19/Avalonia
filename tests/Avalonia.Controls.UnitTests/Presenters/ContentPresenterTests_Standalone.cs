@@ -216,7 +216,7 @@ namespace Avalonia.Controls.UnitTests.Presenters
                 DataTemplates =
                 {
                     new FuncDataTemplate<string>((x, _) => textBlock),
-                    new FuncDataTemplate<int>((x, _) => new Canvas()),
+                    new FuncDataTemplate<int32>((x, _) => new Canvas()),
                 },
             };
 
@@ -305,7 +305,7 @@ namespace Avalonia.Controls.UnitTests.Presenters
         {
             var target = new ContentPresenter
             {
-                ContentTemplate = new FuncDataTemplate<int>(_ => true, (_, __) => new TextBlock
+                ContentTemplate = new FuncDataTemplate<int32>(_ => true, (_, __) => new TextBlock
                 {
                     Text = "Hello World"
                 }),
@@ -322,7 +322,7 @@ namespace Avalonia.Controls.UnitTests.Presenters
         {
             var target = new ContentPresenter
             {
-                ContentTemplate = new FuncDataTemplate<int?>(_ => true, (_, __) => new TextBlock
+                ContentTemplate = new FuncDataTemplate<int32?>(_ => true, (_, __) => new TextBlock
                 {
                     Text = "Hello World"
                 }),

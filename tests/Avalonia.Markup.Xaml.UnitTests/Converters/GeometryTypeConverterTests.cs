@@ -20,7 +20,7 @@ namespace Avalonia.Markup.Xaml.UnitTests.Converters
 
         public class IntDataViewModel
         {
-            public int PathData { get; set; }
+            public int32 PathData { get; set; }
         }
 
 

@@ -10,7 +10,7 @@ namespace Avalonia.Controls.Primitives
 {
     internal class TextSelectionHandleCanvas : Canvas
     {
-        private const int ContextMenuPadding = 16;
+        private const int32 ContextMenuPadding = 16;
 
         private readonly TextSelectionHandle _caretHandle;
         private readonly TextSelectionHandle _startHandle;

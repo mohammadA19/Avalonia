@@ -228,7 +228,7 @@ namespace Avalonia.Controls.Converters
                 var extendedLength = 2 * input.Length;
                 Span<char> extended = stackalloc char[extendedLength];
 
-                for (int i = 0; i < input.Length; i++)
+                for (int32 i = 0; i < input.Length; i++)
                 {
                     extended[2 * i + 0] = input[i];
                     extended[2 * i + 1] = input[i];

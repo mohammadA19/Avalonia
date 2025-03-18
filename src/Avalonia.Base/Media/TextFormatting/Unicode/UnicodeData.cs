@@ -7,27 +7,27 @@ namespace Avalonia.Media.TextFormatting.Unicode
     /// </summary>
     internal static class UnicodeData
     {
-        internal const int CATEGORY_BITS = 6;
-        internal const int SCRIPT_BITS = 8;
-        internal const int LINEBREAK_BITS = 6;
+        internal const int32 CATEGORY_BITS = 6;
+        internal const int32 SCRIPT_BITS = 8;
+        internal const int32 LINEBREAK_BITS = 6;
 
-        internal const int BIDIPAIREDBRACKED_BITS = 16;
-        internal const int BIDIPAIREDBRACKEDTYPE_BITS = 2;
-        internal const int BIDICLASS_BITS = 5;
+        internal const int32 BIDIPAIREDBRACKED_BITS = 16;
+        internal const int32 BIDIPAIREDBRACKEDTYPE_BITS = 2;
+        internal const int32 BIDICLASS_BITS = 5;
 
-        internal const int SCRIPT_SHIFT = CATEGORY_BITS;
-        internal const int LINEBREAK_SHIFT = CATEGORY_BITS + SCRIPT_BITS;
+        internal const int32 SCRIPT_SHIFT = CATEGORY_BITS;
+        internal const int32 LINEBREAK_SHIFT = CATEGORY_BITS + SCRIPT_BITS;
 
-        internal const int BIDIPAIREDBRACKEDTYPE_SHIFT = BIDIPAIREDBRACKED_BITS;
-        internal const int BIDICLASS_SHIFT = BIDIPAIREDBRACKED_BITS + BIDIPAIREDBRACKEDTYPE_BITS;
+        internal const int32 BIDIPAIREDBRACKEDTYPE_SHIFT = BIDIPAIREDBRACKED_BITS;
+        internal const int32 BIDICLASS_SHIFT = BIDIPAIREDBRACKED_BITS + BIDIPAIREDBRACKEDTYPE_BITS;
 
-        internal const int CATEGORY_MASK = (1 << CATEGORY_BITS) - 1;
-        internal const int SCRIPT_MASK = (1 << SCRIPT_BITS) - 1;
-        internal const int LINEBREAK_MASK = (1 << LINEBREAK_BITS) - 1;
+        internal const int32 CATEGORY_MASK = (1 << CATEGORY_BITS) - 1;
+        internal const int32 SCRIPT_MASK = (1 << SCRIPT_BITS) - 1;
+        internal const int32 LINEBREAK_MASK = (1 << LINEBREAK_BITS) - 1;
 
-        internal const int BIDIPAIREDBRACKED_MASK = (1 << BIDIPAIREDBRACKED_BITS) - 1;
-        internal const int BIDIPAIREDBRACKEDTYPE_MASK = (1 << BIDIPAIREDBRACKEDTYPE_BITS) - 1;
-        internal const int BIDICLASS_MASK = (1 << BIDICLASS_BITS) - 1;
+        internal const int32 BIDIPAIREDBRACKED_MASK = (1 << BIDIPAIREDBRACKED_BITS) - 1;
+        internal const int32 BIDIPAIREDBRACKEDTYPE_MASK = (1 << BIDIPAIREDBRACKEDTYPE_BITS) - 1;
+        internal const int32 BIDICLASS_MASK = (1 << BIDICLASS_BITS) - 1;
 
         /// <summary>
         /// Gets the <see cref="GeneralCategory"/> for a Unicode codepoint.

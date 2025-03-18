@@ -521,7 +521,7 @@ namespace Avalonia.Base.UnitTests.Animation
         [InlineData(1, 2, 0)]
         [InlineData(2, 0, 1)]
         [InlineData(2, 1, 0)]
-        public void KeyFrames_Order_Does_Not_Matter(int index0, int index1, int index2)
+        public void KeyFrames_Order_Does_Not_Matter(int32 index0, int32 index1, int32 index2)
         {
             static KeyFrame CreateKeyFrame(double width, double cue)
                 => new()
@@ -608,7 +608,7 @@ namespace Avalonia.Base.UnitTests.Animation
         {
             public double LastProgress { get; set; } = double.NaN;
 
-            public int CallCount { get; set; }
+            public int32 CallCount { get; set; }
 
             public override double Interpolate(double progress, double oldValue, double newValue)
             {

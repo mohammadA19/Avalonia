@@ -8,12 +8,12 @@ internal ref struct LogicalTextRunEnumerator
     private readonly IReadOnlyList<TextRun>? _textRuns;
     private readonly IReadOnlyList<IndexedTextRun>? _indexedTextRuns;
 
-    private readonly int _step;
-    private readonly int _end;
+    private readonly int32 _step;
+    private readonly int32 _end;
 
-    private int _index;
+    private int32 _index;
 
-    public int Count { get; }
+    public int32 Count { get; }
 
     public LogicalTextRunEnumerator(TextLine line, bool backward = false)
     {

@@ -29,14 +29,14 @@ namespace XEmbedSample;
 public unsafe class HarfbuzzWorkaround
 {
     [DllImport("libc")]
-    static extern int dlinfo(IntPtr handle, int request, IntPtr info);
+    static extern int32 dlinfo(IntPtr handle, int32 request, IntPtr info);
 
     [DllImport("libc")]
-    static extern IntPtr dlopen(string filename, int flags);
+    static extern IntPtr dlopen(string filename, int32 flags);
 
-    private const int RTLD_DI_ORIGIN = 6;
-    private const int RTLD_NOW = 2;
-    private const int RTLD_DEEPBIND = 8;
+    private const int32 RTLD_DI_ORIGIN = 6;
+    private const int32 RTLD_NOW = 2;
+    private const int32 RTLD_DEEPBIND = 8;
     
     public static void Apply()
     {

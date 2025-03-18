@@ -53,7 +53,7 @@ namespace Avalonia.Data
         public bool Equals(Optional<T> other) => this == other;
 
         /// <inheritdoc/>
-        public override int GetHashCode() => HasValue ? _value?.GetHashCode() ?? 0 : 0;
+        public override int32 GetHashCode() => HasValue ? _value?.GetHashCode() ?? 0 : 0;
 
         /// <summary>
         /// Casts the value (if any) to an <see cref="object"/>.

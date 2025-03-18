@@ -64,7 +64,7 @@ namespace Avalonia.Win32.Automation.Interop
 
     internal static partial class UiaCoreProviderApi
     {
-        public const int UIA_E_ELEMENTNOTENABLED = unchecked((int)0x80040200);
+        public const int32 UIA_E_ELEMENTNOTENABLED = unchecked((int32)0x80040200);
 
 #if NET7_0_OR_GREATER
         [LibraryImport("UIAutomationCore.dll", StringMarshalling = StringMarshalling.Utf8)]
@@ -75,19 +75,19 @@ namespace Avalonia.Win32.Automation.Interop
         public static partial IntPtr UiaReturnRawElementProvider(IntPtr hwnd, IntPtr wParam, IntPtr lParam, IRawElementProviderSimple? el);
 
         [LibraryImport("UIAutomationCore.dll", StringMarshalling = StringMarshalling.Utf8)]
-        public static partial int UiaHostProviderFromHwnd(IntPtr hwnd, [MarshalAs(UnmanagedType.Interface)] out IRawElementProviderSimple provider);
+        public static partial int32 UiaHostProviderFromHwnd(IntPtr hwnd, [MarshalAs(UnmanagedType.Interface)] out IRawElementProviderSimple provider);
 
         [LibraryImport("UIAutomationCore.dll", StringMarshalling = StringMarshalling.Utf8)]
-        public static partial int UiaRaiseAutomationEvent(IRawElementProviderSimple? provider, int id);
+        public static partial int32 UiaRaiseAutomationEvent(IRawElementProviderSimple? provider, int32 id);
 
         [LibraryImport("UIAutomationCore.dll", StringMarshalling = StringMarshalling.Utf8)]
-        public static partial int UiaRaiseAutomationPropertyChangedEvent(IRawElementProviderSimple? provider, int id, [MarshalUsing(typeof(ComVariantMarshaller))] object? oldValue, [MarshalUsing(typeof(ComVariantMarshaller))] object? newValue);
+        public static partial int32 UiaRaiseAutomationPropertyChangedEvent(IRawElementProviderSimple? provider, int32 id, [MarshalUsing(typeof(ComVariantMarshaller))] object? oldValue, [MarshalUsing(typeof(ComVariantMarshaller))] object? newValue);
 
         [LibraryImport("UIAutomationCore.dll", StringMarshalling = StringMarshalling.Utf8)]
-        public static partial int UiaRaiseStructureChangedEvent(IRawElementProviderSimple? provider, StructureChangeType structureChangeType, int[]? runtimeId, int runtimeIdLen);
+        public static partial int32 UiaRaiseStructureChangedEvent(IRawElementProviderSimple? provider, StructureChangeType structureChangeType, int32[]? runtimeId, int32 runtimeIdLen);
 
         [LibraryImport("UIAutomationCore.dll", StringMarshalling = StringMarshalling.Utf8)]
-        public static partial int UiaDisconnectProvider(IRawElementProviderSimple? provider);
+        public static partial int32 UiaDisconnectProvider(IRawElementProviderSimple? provider);
 #else
         [DllImport("UIAutomationCore.dll", CharSet = CharSet.Unicode)]
         public static extern bool UiaClientsAreListening();
@@ -97,22 +97,22 @@ namespace Avalonia.Win32.Automation.Interop
             IRawElementProviderSimple? el);
 
         [DllImport("UIAutomationCore.dll", CharSet = CharSet.Unicode)]
-        public static extern int UiaHostProviderFromHwnd(IntPtr hwnd,
+        public static extern int32 UiaHostProviderFromHwnd(IntPtr hwnd,
             [MarshalAs(UnmanagedType.Interface)] out IRawElementProviderSimple provider);
 
         [DllImport("UIAutomationCore.dll", CharSet = CharSet.Unicode)]
-        public static extern int UiaRaiseAutomationEvent(IRawElementProviderSimple? provider, int id);
+        public static extern int32 UiaRaiseAutomationEvent(IRawElementProviderSimple? provider, int32 id);
 
         [DllImport("UIAutomationCore.dll", CharSet = CharSet.Unicode)]
-        public static extern int UiaRaiseAutomationPropertyChangedEvent(IRawElementProviderSimple? provider, int id,
+        public static extern int32 UiaRaiseAutomationPropertyChangedEvent(IRawElementProviderSimple? provider, int32 id,
             object? oldValue, object? newValue);
 
         [DllImport("UIAutomationCore.dll", CharSet = CharSet.Unicode)]
-        public static extern int UiaRaiseStructureChangedEvent(IRawElementProviderSimple? provider,
-            StructureChangeType structureChangeType, int[]? runtimeId, int runtimeIdLen);
+        public static extern int32 UiaRaiseStructureChangedEvent(IRawElementProviderSimple? provider,
+            StructureChangeType structureChangeType, int32[]? runtimeId, int32 runtimeIdLen);
 
         [DllImport("UIAutomationCore.dll", CharSet = CharSet.Unicode)]
-        public static extern int UiaDisconnectProvider(IRawElementProviderSimple? provider);
+        public static extern int32 UiaDisconnectProvider(IRawElementProviderSimple? provider);
 #endif
     }
 }

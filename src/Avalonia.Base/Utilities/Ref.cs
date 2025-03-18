@@ -32,7 +32,7 @@ namespace Avalonia.Utilities
         /// <summary>
         /// The current refcount of the object tracked in this reference. For debugging/unit test use only.
         /// </summary>
-        int RefCount { get; }
+        int32 RefCount { get; }
     }
 
     
@@ -53,7 +53,7 @@ namespace Avalonia.Utilities
         class RefCounter
         {
             private IDisposable? _item;
-            private volatile int _refs;
+            private volatile int32 _refs;
 
             public RefCounter(IDisposable item)
             {
@@ -99,7 +99,7 @@ namespace Avalonia.Utilities
                 }
             }
 
-            internal int RefCount => _refs;
+            internal int32 RefCount => _refs;
         }
 
         class Ref<T> : CriticalFinalizerObject, IRef<T> where T : class
@@ -172,7 +172,7 @@ namespace Avalonia.Utilities
                 }
             }
 
-            public int RefCount => _counter.RefCount;
+            public int32 RefCount => _counter.RefCount;
         }
     }
 

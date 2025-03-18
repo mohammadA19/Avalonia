@@ -12,19 +12,19 @@ namespace Avalonia
         /// <summary>
         /// The X vector.
         /// </summary>
-        private readonly int _x;
+        private readonly int32 _x;
 
         /// <summary>
         /// The Y vector.
         /// </summary>
-        private readonly int _y;
+        private readonly int32 _y;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PixelVector"/> structure.
         /// </summary>
         /// <param name="x">The X vector.</param>
         /// <param name="y">The Y vector.</param>
-        public PixelVector(int x, int y)
+        public PixelVector(int32 x, int32 y)
         {
             _x = x;
             _y = y;
@@ -33,12 +33,12 @@ namespace Avalonia
         /// <summary>
         /// Gets the X vector.
         /// </summary>
-        public int X => _x;
+        public int32 X => _x;
 
         /// <summary>
         /// Gets the Y vector.
         /// </summary>
-        public int Y => _y;
+        public int32 Y => _y;
 
         /// <summary>
         /// Converts the <see cref="PixelVector"/> to a <see cref="PixelPoint"/>.
@@ -55,7 +55,7 @@ namespace Avalonia
         /// <param name="a">First vector</param>
         /// <param name="b">Second vector</param>
         /// <returns>The dot product</returns>
-        public static int operator *(PixelVector a, PixelVector b)
+        public static int32 operator *(PixelVector a, PixelVector b)
         {
             return a.X * b.X + a.Y * b.Y;
         }
@@ -66,7 +66,7 @@ namespace Avalonia
         /// <param name="vector">The vector</param>
         /// <param name="scale">The scaling factor.</param>
         /// <returns>The scaled vector.</returns>
-        public static PixelVector operator *(PixelVector vector, int scale)
+        public static PixelVector operator *(PixelVector vector, int32 scale)
         {
             return new PixelVector(vector._x * scale, vector._y * scale);
         }
@@ -77,7 +77,7 @@ namespace Avalonia
         /// <param name="vector">The vector</param>
         /// <param name="scale">The divisor.</param>
         /// <returns>The scaled vector.</returns>
-        public static PixelVector operator /(PixelVector vector, int scale)
+        public static PixelVector operator /(PixelVector vector, int32 scale)
         {
             return new PixelVector(vector._x / scale, vector._y / scale);
         }
@@ -148,7 +148,7 @@ namespace Avalonia
             return obj is PixelVector vector && Equals(vector);
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
@@ -180,7 +180,7 @@ namespace Avalonia
         /// </summary>
         /// <param name="x">The X coordinate.</param>
         /// <returns>The new vector.</returns>
-        public PixelVector WithX(int x)
+        public PixelVector WithX(int32 x)
         {
             return new PixelVector(x, _y);
         }
@@ -190,7 +190,7 @@ namespace Avalonia
         /// </summary>
         /// <param name="y">The Y coordinate.</param>
         /// <returns>The new vector.</returns>
-        public PixelVector WithY(int y)
+        public PixelVector WithY(int32 y)
         {
             return new PixelVector(_x, y);
         }

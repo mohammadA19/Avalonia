@@ -10,7 +10,7 @@ namespace Avalonia.Media.TextFormatting
     /// </summary>
     public sealed class TextLeadingPrefixCharacterEllipsis : TextCollapsingProperties
     {
-        private readonly int _prefixLength;
+        private readonly int32 _prefixLength;
 
         /// <summary>
         /// Construct a text trailing word ellipsis collapsing properties.
@@ -22,7 +22,7 @@ namespace Avalonia.Media.TextFormatting
         /// <param name="flowDirection">the flow direction of the collapes line.</param>
         public TextLeadingPrefixCharacterEllipsis(
             string ellipsis,
-            int prefixLength,
+            int32 prefixLength,
             double width,
             TextRunProperties textRunProperties,
             FlowDirection flowDirection)

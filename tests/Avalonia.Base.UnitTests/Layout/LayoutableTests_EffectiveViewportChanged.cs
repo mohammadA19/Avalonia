@@ -509,15 +509,15 @@ namespace Avalonia.Base.UnitTests.Layout
 
         private static void AssertArePixelEqual(Rect expected, Rect actual)
         {
-            var expectedRounded = new Rect((int)expected.X, (int)expected.Y, (int)expected.Width, (int)expected.Height);
-            var actualRounded = new Rect((int)actual.X, (int)actual.Y, (int)actual.Width, (int)actual.Height);
+            var expectedRounded = new Rect((int32)expected.X, (int32)expected.Y, (int32)expected.Width, (int32)expected.Height);
+            var actualRounded = new Rect((int32)actual.X, (int32)actual.Y, (int32)actual.Width, (int32)actual.Height);
             Assert.Equal(expectedRounded, actualRounded);
         }
 
         private class TestCanvas : Canvas
         {
-            public int MeasureCount { get; private set; }
-            public int ArrangeCount { get; private set; }
+            public int32 MeasureCount { get; private set; }
+            public int32 ArrangeCount { get; private set; }
 
             protected override Size MeasureOverride(Size availableSize)
             {

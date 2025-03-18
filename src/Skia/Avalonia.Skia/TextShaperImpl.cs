@@ -14,7 +14,7 @@ namespace Avalonia.Skia
 {
     internal class TextShaperImpl : ITextShaperImpl
     {
-        private static readonly ConcurrentDictionary<int, Language> s_cachedLanguage = new();
+        private static readonly ConcurrentDictionary<int32, Language> s_cachedLanguage = new();
 
         public ShapedBuffer ShapeText(ReadOnlyMemory<char> text, TextShaperOptions options)
         {
@@ -67,7 +67,7 @@ namespace Avalonia.Skia
 
                     var glyphIndex = (ushort)sourceInfo.Codepoint;
 
-                    var glyphCluster = (int)sourceInfo.Cluster;
+                    var glyphCluster = (int32)sourceInfo.Cluster;
 
                     var glyphAdvance = GetGlyphAdvance(glyphPositions, i, textScale) + options.LetterSpacing;
 
@@ -137,7 +137,7 @@ namespace Avalonia.Skia
             }
         }
 
-        private static Vector GetGlyphOffset(ReadOnlySpan<GlyphPosition> glyphPositions, int index, double textScale)
+        private static Vector GetGlyphOffset(ReadOnlySpan<GlyphPosition> glyphPositions, int32 index, double textScale)
         {
             var position = glyphPositions[index];
 
@@ -148,14 +148,14 @@ namespace Avalonia.Skia
             return new Vector(offsetX, offsetY);
         }
 
-        private static double GetGlyphAdvance(ReadOnlySpan<GlyphPosition> glyphPositions, int index, double textScale)
+        private static double GetGlyphAdvance(ReadOnlySpan<GlyphPosition> glyphPositions, int32 index, double textScale)
         {
             // Depends on direction of layout
             // glyphPositions[index].YAdvance * textScale;
             return glyphPositions[index].XAdvance * textScale;
         }
 
-        private static ReadOnlyMemory<char> GetContainingMemory(ReadOnlyMemory<char> memory, out int start, out int length)
+        private static ReadOnlyMemory<char> GetContainingMemory(ReadOnlyMemory<char> memory, out int32 start, out int32 length)
         {
             if (MemoryMarshal.TryGetString(memory, out var containingString, out start, out length))
             {

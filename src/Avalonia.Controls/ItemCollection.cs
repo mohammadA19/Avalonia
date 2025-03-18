@@ -23,7 +23,7 @@ namespace Avalonia.Controls
         {
         }
 
-        public new object? this[int index]
+        public new object? this[int32 index]
         {
             get => base[index];
             set => WritableSource[index] = value;
@@ -44,7 +44,7 @@ namespace Avalonia.Controls
         /// <exception cref="InvalidOperationException">
         /// The collection is in ItemsSource mode.
         /// </exception>
-        public int Add(object? value) => WritableSource.Add(value);
+        public int32 Add(object? value) => WritableSource.Add(value);
 
         /// <summary>
         /// Clears the collection and releases the references on all items currently in the
@@ -63,7 +63,7 @@ namespace Avalonia.Controls
         /// <exception cref="InvalidOperationException">
         /// The collection is in ItemsSource mode.
         /// </exception>
-        public void Insert(int index, object? value) => WritableSource.Insert(index, value);
+        public void Insert(int32 index, object? value) => WritableSource.Insert(index, value);
 
         /// <summary>
         /// Removes the item at the specified index of the collection or view.
@@ -72,7 +72,7 @@ namespace Avalonia.Controls
         /// <exception cref="InvalidOperationException">
         /// The collection is in ItemsSource mode.
         /// </exception>
-        public void RemoveAt(int index) => WritableSource.RemoveAt(index);
+        public void RemoveAt(int32 index) => WritableSource.RemoveAt(index);
 
         /// <summary>
         /// Removes the specified item reference from the collection or view.
@@ -89,10 +89,10 @@ namespace Avalonia.Controls
             return Count < c;
         }
 
-        int IList.Add(object? value) => Add(value);
+        int32 IList.Add(object? value) => Add(value);
         void IList.Clear() => Clear();
-        void IList.Insert(int index, object? value) => Insert(index, value);
-        void IList.RemoveAt(int index) => RemoveAt(index);
+        void IList.Insert(int32 index, object? value) => Insert(index, value);
+        void IList.RemoveAt(int32 index) => RemoveAt(index);
 
         private IList WritableSource
         {

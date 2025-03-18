@@ -21,16 +21,16 @@ namespace Avalonia.X11
             [FieldOffset(0)]
             public IntPtr ptr;
             [FieldOffset(0)]
-            public int fd;
+            public int32 fd;
             [FieldOffset(0)]
             public uint u32;
             [FieldOffset(0)]
             public ulong u64;
         }
 
-        private const int EPOLLIN = 1;
-        private const int EPOLL_CTL_ADD = 1;
-        private const int O_NONBLOCK = 2048;
+        private const int32 EPOLLIN = 1;
+        private const int32 EPOLL_CTL_ADD = 1;
+        private const int32 O_NONBLOCK = 2048;
         
         [StructLayout(LayoutKind.Sequential)]
         private struct epoll_event
@@ -40,21 +40,21 @@ namespace Avalonia.X11
         }
         
         [DllImport("libc")]
-        private extern static int epoll_create1(int size);
+        private extern static int32 epoll_create1(int32 size);
 
         [DllImport("libc")]
-        private extern static int epoll_ctl(int epfd, int op, int fd, ref epoll_event __event);
+        private extern static int32 epoll_ctl(int32 epfd, int32 op, int32 fd, ref epoll_event __event);
 
         [DllImport("libc")]
-        private extern static int epoll_wait(int epfd, epoll_event* events, int maxevents, int timeout);
+        private extern static int32 epoll_wait(int32 epfd, epoll_event* events, int32 maxevents, int32 timeout);
 
         [DllImport("libc")]
-        private extern static int pipe2(int* fds, int flags);
+        private extern static int32 pipe2(int32* fds, int32 flags);
         [DllImport("libc")]
-        private extern static IntPtr write(int fd, void* buf, IntPtr count);
+        private extern static IntPtr write(int32 fd, void* buf, IntPtr count);
         
         [DllImport("libc")]
-        private extern static IntPtr read(int fd, void* buf, IntPtr count);
+        private extern static IntPtr read(int32 fd, void* buf, IntPtr count);
 
         private enum EventCodes
         {
@@ -62,12 +62,12 @@ namespace Avalonia.X11
             Signal =2
         }
 
-        private int _sigread, _sigwrite;
+        private int32 _sigread, _sigwrite;
         private object _lock = new object();
         private bool _signaled;
         private bool _wakeupRequested;
         private long? _nextTimer;
-        private int _epoll;
+        private int32 _epoll;
         private Stopwatch _clock = Stopwatch.StartNew();
         private readonly X11EventDispatcher _x11Events;
 
@@ -78,7 +78,7 @@ namespace Avalonia.X11
             var ev = new epoll_event()
             {
                 events = EPOLLIN,
-                data = {u32 = (int)EventCodes.X11}
+                data = {u32 = (int32)EventCodes.X11}
             };
             _epoll = epoll_create1(0);
             if (_epoll == -1)
@@ -87,7 +87,7 @@ namespace Avalonia.X11
             if (epoll_ctl(_epoll, EPOLL_CTL_ADD, _x11Events.Fd, ref ev) == -1)
                 throw new X11Exception("Unable to attach X11 connection handle to epoll");
 
-            var fds = stackalloc int[2];
+            var fds = stackalloc int32[2];
             pipe2(fds, O_NONBLOCK);
             _sigread = fds[0];
             _sigwrite = fds[1];
@@ -95,7 +95,7 @@ namespace Avalonia.X11
             ev = new epoll_event
             {
                 events = EPOLLIN,
-                data = {u32 = (int)EventCodes.Signal}
+                data = {u32 = (int32)EventCodes.Signal}
             };
             if (epoll_ctl(_epoll, EPOLL_CTL_ADD, _sigread, ref ev) == -1)
                 throw new X11Exception("Unable to attach signal pipe to epoll");
@@ -136,11 +136,11 @@ namespace Avalonia.X11
                     if (_nextTimer < now)
                         continue;
                     
-                    var timeout = _nextTimer == null ? (int)-1 : Math.Max(1, _nextTimer.Value - now);
-                    epoll_wait(_epoll, &ev, 1, (int)Math.Min(int.MaxValue, timeout));
+                    var timeout = _nextTimer == null ? (int32)-1 : Math.Max(1, _nextTimer.Value - now);
+                    epoll_wait(_epoll, &ev, 1, (int32)Math.Min(int32.MaxValue, timeout));
                     
                     // Drain the signaled pipe
-                    int buf = 0;
+                    int32 buf = 0;
                     while (read(_sigread, &buf, new IntPtr(4)).ToInt64() > 0)
                     {
                     }
@@ -168,7 +168,7 @@ namespace Avalonia.X11
                 if(_wakeupRequested)
                     return;
                 _wakeupRequested = true;
-                int buf = 0;
+                int32 buf = 0;
                 write(_sigwrite, &buf, new IntPtr(1));
             }
         }

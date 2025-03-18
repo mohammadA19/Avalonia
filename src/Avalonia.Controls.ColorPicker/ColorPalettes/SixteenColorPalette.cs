@@ -51,19 +51,19 @@ namespace Avalonia.Controls
         };
 
         /// <inheritdoc/>
-        public int ColorCount
+        public int32 ColorCount
         {
             get => colorChart.GetLength(0);
         }
 
         /// <inheritdoc/>
-        public int ShadeCount
+        public int32 ShadeCount
         {
             get => colorChart.GetLength(1);
         }
 
         /// <inheritdoc/>
-        public Color GetColor(int colorIndex, int shadeIndex)
+        public Color GetColor(int32 colorIndex, int32 shadeIndex)
         {
             return colorChart[
                 MathUtilities.Clamp(colorIndex, 0, colorChart.GetLength(0) - 1),

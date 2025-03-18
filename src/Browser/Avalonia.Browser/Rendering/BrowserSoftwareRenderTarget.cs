@@ -60,7 +60,7 @@ partial class BrowserSoftwareRenderTarget : BrowserRenderTarget, IFramebufferPla
     }
 
     [JSImport("SoftwareRenderTarget.staticPutPixelData", AvaloniaModule.MainModuleName)]
-    public static partial void PutPixelData(JSObject js, int address, int size, int width, int height);
+    public static partial void PutPixelData(JSObject js, int32 address, int32 size, int32 width, int32 height);
     
     private void Blit(RetainedFramebuffer fb)
     {

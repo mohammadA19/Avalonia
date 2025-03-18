@@ -26,7 +26,7 @@ namespace Avalonia.Platform
     {
         internal PixelFormatEnum FormatEnum;
 
-        public int BitsPerPixel
+        public int32 BitsPerPixel
         {
             get
             {

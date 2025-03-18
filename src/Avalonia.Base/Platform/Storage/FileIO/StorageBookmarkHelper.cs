@@ -19,7 +19,7 @@ namespace Avalonia.Platform.Storage.FileIO;
 /// </remarks>
 internal static class StorageBookmarkHelper
 {
-    private const int HeaderLength = 16;
+    private const int32 HeaderLength = 16;
     private static ReadOnlySpan<byte> AvaHeaderPrefix => "ava.v1."u8;
     private static ReadOnlySpan<byte> FakeBclBookmarkPlatform => "bcl"u8;
 
@@ -86,7 +86,7 @@ internal static class StorageBookmarkHelper
 #if NET6_0_OR_GREATER
         // Each base64 character represents 6 bits, but to be safe, 
         var arrayPool = ArrayPool<byte>.Shared.Rent(HeaderLength + base64bookmark.Length * 6);
-        if (Convert.TryFromBase64Chars(base64bookmark, arrayPool, out int bytesWritten))
+        if (Convert.TryFromBase64Chars(base64bookmark, arrayPool, out int32 bytesWritten))
         {
             decodedBookmark = arrayPool.AsSpan().Slice(0, bytesWritten);
         }

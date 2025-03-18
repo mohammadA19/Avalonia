@@ -59,7 +59,7 @@ internal class VulkanDisplay : IDisposable
                 surface.Handle, ref presentModesCount, null)
             .ThrowOnError("vkGetPhysicalDeviceSurfacePresentModesKHR");
 
-        var modes = new VkPresentModeKHR[(int)presentModesCount];
+        var modes = new VkPresentModeKHR[(int32)presentModesCount];
         fixed (VkPresentModeKHR* pModes = modes)
             context.InstanceApi.GetPhysicalDeviceSurfacePresentModesKHR(context.PhysicalDeviceHandle,
                     surface.Handle, ref presentModesCount, pModes)
@@ -158,7 +158,7 @@ internal class VulkanDisplay : IDisposable
     private unsafe void CreateSwapchainImages()
     {
         DestroyCurrentImageViews();
-        Size = new PixelSize((int)_swapchainExtent.width, (int)_swapchainExtent.height);
+        Size = new PixelSize((int32)_swapchainExtent.width, (int32)_swapchainExtent.height);
         uint imageCount = 0;
         _context.DeviceApi.GetSwapchainImagesKHR(_context.DeviceHandle, _swapchain, ref imageCount, null)
             .ThrowOnError("vkGetSwapchainImagesKHR");

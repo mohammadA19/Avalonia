@@ -402,7 +402,7 @@ namespace Avalonia
         /// Returns the hash code for this instance.
         /// </summary>
         /// <returns>The hash code.</returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             return (_m11, _m12, _m13, _m21, _m22, _m23, _m31, _m32, _m33).GetHashCode();
         }

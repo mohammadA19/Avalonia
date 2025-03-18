@@ -200,12 +200,12 @@ namespace Avalonia.Controls
             UpdateFlowDirection();
         }
 
-        protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+        protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
         {
             return new ComboBoxItem();
         }
 
-        protected internal override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
+        protected internal override bool NeedsContainerOverride(object? item, int32 index, out object? recycleKey)
         {
             return NeedsContainer<ComboBoxItem>(item, out recycleKey);
         }
@@ -517,13 +517,13 @@ namespace Avalonia.Controls
         private bool SelectNext() => MoveSelection(SelectedIndex, 1, WrapSelection);
         private bool SelectPrevious() => MoveSelection(SelectedIndex, -1, WrapSelection);
 
-        private bool MoveSelection(int startIndex, int step, bool wrap)
+        private bool MoveSelection(int32 startIndex, int32 step, bool wrap)
         {
             static bool IsSelectable(object? o) => (o as AvaloniaObject)?.GetValue(IsEnabledProperty) ?? true;
 
             var count = ItemCount;
 
-            for (int i = startIndex + step; i != startIndex; i += step)
+            for (int32 i = startIndex + step; i != startIndex; i += step)
             {
                 if (i < 0 || i >= count)
                 {

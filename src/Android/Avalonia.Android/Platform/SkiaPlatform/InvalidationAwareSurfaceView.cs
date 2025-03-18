@@ -62,7 +62,7 @@ namespace Avalonia.Android
             _isDisposed = true;
         }
 
-        public void SurfaceChanged(ISurfaceHolder holder, Format format, int width, int height)
+        public void SurfaceChanged(ISurfaceHolder holder, Format format, int32 width, int32 height)
         {
             _isSurfaceValid = true;
             Log.Info("AVALONIA", "Surface Changed");

@@ -26,7 +26,7 @@ namespace Avalonia.Win32.DirectX
 
         public bool Equals(HANDLE other) => ((nuint)(Value)).Equals((nuint)(other.Value));
 
-        public override int GetHashCode() => ((nuint)(Value)).GetHashCode();
+        public override int32 GetHashCode() => ((nuint)(Value)).GetHashCode();
 
         public override string ToString() => ((IntPtr)Value).ToString();
     }
@@ -90,7 +90,7 @@ namespace Avalonia.Win32.DirectX
 
     internal unsafe struct DXGI_GAMMA_CONTROL_CAPABILITIES
     {
-        public int ScaleAndOffsetSupported;
+        public int32 ScaleAndOffsetSupported;
 
         public float MaxConvertedValue;
 
@@ -103,7 +103,7 @@ namespace Avalonia.Win32.DirectX
 
     internal unsafe struct DXGI_MAPPED_RECT
     {
-        public int Pitch;
+        public int32 Pitch;
         public byte* pBits;
     }
 
@@ -123,7 +123,7 @@ namespace Avalonia.Win32.DirectX
 
         internal RECT DesktopCoordinates;
 
-        internal int AttachedToDesktop; // BOOL maps to int. If we use the CLR 'bool' type here, the struct becomes non-blittable. See #9599
+        internal int32 AttachedToDesktop; // BOOL maps to int32. If we use the CLR 'bool' type here, the struct becomes non-blittable. See #9599
 
         internal DXGI_MODE_ROTATION Rotation;
 
@@ -191,7 +191,7 @@ namespace Avalonia.Win32.DirectX
         public uint BufferUsage;
         public ushort BufferCount;
         public IntPtr OutputWindow;
-        public int Windowed;
+        public int32 Windowed;
         public DXGI_SWAP_EFFECT SwapEffect;
         public ushort Flags;
     }
@@ -201,7 +201,7 @@ namespace Avalonia.Win32.DirectX
         public uint Width;
         public uint Height;
         public DXGI_FORMAT Format;
-        public int Stereo; // BOOL maps to int. If we use the CLR 'bool' type here, the struct becomes non-blittable. See #9599
+        public int32 Stereo; // BOOL maps to int32. If we use the CLR 'bool' type here, the struct becomes non-blittable. See #9599
         public DXGI_SAMPLE_DESC SampleDesc;
         public uint BufferUsage;
         public uint BufferCount;
@@ -219,7 +219,7 @@ namespace Avalonia.Win32.DirectX
 
         public DXGI_MODE_SCALING Scaling;
 
-        public int Windowed;
+        public int32 Windowed;
     }
 
     internal struct D3D11_TEXTURE2D_DESC

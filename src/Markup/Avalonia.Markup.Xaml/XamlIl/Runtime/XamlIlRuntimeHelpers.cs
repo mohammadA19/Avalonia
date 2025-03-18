@@ -432,7 +432,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.Runtime
                 public IReadOnlyList<object> DirectParentsStack
                     => this;
 
-                public int Count
+                public int32 Count
                     => 1;
 
                 public IEnumerator<object> GetEnumerator()
@@ -441,7 +441,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.Runtime
                 IEnumerator IEnumerable.GetEnumerator()
                     => GetEnumerator();
 
-                public object this[int index]
+                public object this[int32 index]
                 {
                     get
                     {

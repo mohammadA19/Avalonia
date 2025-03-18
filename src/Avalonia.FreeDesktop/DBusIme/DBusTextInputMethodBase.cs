@@ -218,7 +218,7 @@ namespace Avalonia.FreeDesktop.DBusIme
 
         protected virtual Task SetCapabilitiesCore(bool supportsPreedit, bool supportsSurroundingText) => Task.CompletedTask;
         protected abstract Task ResetContextCore();
-        protected abstract Task<bool> HandleKeyCore(RawKeyEventArgs args, int keyVal, int keyCode);
+        protected abstract Task<bool> HandleKeyCore(RawKeyEventArgs args, int32 keyVal, int32 keyCode);
 
         private void UpdateActive()
         {
@@ -263,7 +263,7 @@ namespace Avalonia.FreeDesktop.DBusIme
 
         bool IX11InputMethodControl.IsEnabled => IsConnected && _imeActive == true;
 
-        async ValueTask<bool> IX11InputMethodControl.HandleEventAsync(RawKeyEventArgs args, int keyVal, int keyCode)
+        async ValueTask<bool> IX11InputMethodControl.HandleEventAsync(RawKeyEventArgs args, int32 keyVal, int32 keyCode)
         {
             try
             {

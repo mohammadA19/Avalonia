@@ -60,7 +60,7 @@ namespace Avalonia.Direct2D1.Media
 
         private Blob GetTable(Face face, Tag tag)
         {
-            var dwTag = (int)SwapBytes(tag);
+            var dwTag = (int32)SwapBytes(tag);
 
             if (FontFace.TryGetFontTable(dwTag, out var tableData, out _))
             {
@@ -87,7 +87,7 @@ namespace Avalonia.Direct2D1.Media
 
         public FontMetrics Metrics { get; }
 
-        public int GlyphCount { get; set; }
+        public int32 GlyphCount { get; set; }
 
         public FontSimulations FontSimulations => FontSimulations.None;
 
@@ -134,13 +134,13 @@ namespace Avalonia.Direct2D1.Media
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int GetGlyphAdvance(ushort glyph)
+        public int32 GetGlyphAdvance(ushort glyph)
         {
             return Font.GetHorizontalGlyphAdvance(glyph);
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
+        public int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
         {
             var glyphIndices = new uint[glyphs.Length];
 

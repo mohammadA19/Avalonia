@@ -20,7 +20,7 @@ namespace Avalonia.Benchmarks.Base
         }
 
         [Params(1, 2, 10, 50, 100, 200)]
-        public int Depth { get; set; }
+        public int32 Depth { get; set; }
 
         [GlobalSetup]
         public void Setup()
@@ -49,7 +49,7 @@ namespace Avalonia.Benchmarks.Base
         }
 
         [Benchmark]
-        public int GetInheritedValues()
+        public int32 GetInheritedValues()
         {
             var target = _target;
             var result = 0;

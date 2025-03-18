@@ -19,7 +19,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines see <see cref="TextBox.CaretIndex"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> CaretIndexProperty =
+        public static readonly StyledProperty<int32> CaretIndexProperty =
             TextBox.CaretIndexProperty.AddOwner<AutoCompleteBox>(new(
                 defaultValue: 0,
                 defaultBindingMode:BindingMode.TwoWay));
@@ -31,8 +31,8 @@ namespace Avalonia.Controls
         /// Identifies the <see cref="MinimumPrefixLength" /> property.
         /// </summary>
         /// <value>The identifier for the <see cref="MinimumPrefixLength" /> property.</value>
-        public static readonly StyledProperty<int> MinimumPrefixLengthProperty =
-            AvaloniaProperty.Register<AutoCompleteBox, int>(
+        public static readonly StyledProperty<int32> MinimumPrefixLengthProperty =
+            AvaloniaProperty.Register<AutoCompleteBox, int32>(
                 nameof(MinimumPrefixLength), 1,
                 validate: IsValidMinimumPrefixLength);
 
@@ -170,7 +170,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="MaxLength"/> property
         /// </summary>
-        public static readonly StyledProperty<int> MaxLengthProperty =
+        public static readonly StyledProperty<int32> MaxLengthProperty =
             TextBox.MaxLengthProperty.AddOwner<AutoCompleteBox>();
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the caret index
         /// </summary>
-        public int CaretIndex
+        public int32 CaretIndex
         {
             get => GetValue(CaretIndexProperty);
             set => SetValue(CaretIndexProperty, value);
@@ -209,7 +209,7 @@ namespace Avalonia.Controls
         /// setting MinimumPrefixLength to value that is too large will
         /// prevent the AutoCompleteBox from providing possible matches as well.
         /// </remarks>
-        public int MinimumPrefixLength
+        public int32 MinimumPrefixLength
         {
             get => GetValue(MinimumPrefixLengthProperty);
             set => SetValue(MinimumPrefixLengthProperty, value);
@@ -489,7 +489,7 @@ namespace Avalonia.Controls
         /// Gets or sets the maximum number of characters that the <see cref="AutoCompleteBox"/> can accept.
         /// This constraint only applies for manually entered (user-inputted) text.
         /// </summary>
-        public int MaxLength
+        public int32 MaxLength
         {
             get => GetValue(MaxLengthProperty);
             set => SetValue(MaxLengthProperty, value);

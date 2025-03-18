@@ -33,7 +33,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions.Transformers
                 AvaloniaXamlIlDataContextTypeMetadataNode? inferredDataContextTypeNode = null;
                 AvaloniaXamlIlDataContextTypeMetadataNode? directiveDataContextTypeNode = null;
 
-                for (int i = 0; i < on.Children.Count; ++i)
+                for (int32 i = 0; i < on.Children.Count; ++i)
                 {
                     var child = on.Children[i];
                     if (child is XamlAstXmlDirective directive)

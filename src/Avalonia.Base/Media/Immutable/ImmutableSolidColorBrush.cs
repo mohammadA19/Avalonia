@@ -70,7 +70,7 @@ namespace Avalonia.Media.Immutable
             return obj is ImmutableSolidColorBrush other && Equals(other);
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {

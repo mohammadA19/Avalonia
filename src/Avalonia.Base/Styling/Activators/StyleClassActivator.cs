@@ -20,8 +20,8 @@ namespace Avalonia.Styling.Activators
 
         public static bool AreClassesMatching(IReadOnlyList<string> classes, IList<string> toMatch)
         {
-            int remainingMatches = toMatch.Count;
-            int classesCount = classes.Count;
+            int32 remainingMatches = toMatch.Count;
+            int32 classesCount = classes.Count;
 
             // Early bail out - we can't match if control does not have enough classes.
             if (classesCount < remainingMatches)

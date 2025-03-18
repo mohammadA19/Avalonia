@@ -9,8 +9,8 @@ namespace Avalonia.OpenGL
     {
         GlVersion Version { get; }
         GlInterface GlInterface { get; }
-        int SampleCount { get; }
-        int StencilSize { get; }
+        int32 SampleCount { get; }
+        int32 StencilSize { get; }
         IDisposable MakeCurrent();
         bool IsSharedWith(IGlContext context);
         bool CanCreateSharedContext { get; }

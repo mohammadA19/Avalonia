@@ -30,7 +30,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// The number of days per week.
         /// </summary>
-        private const int NumberOfDaysPerWeek = 7;
+        private const int32 NumberOfDaysPerWeek = 7;
 
         private const string PART_ElementHeaderButton = "PART_HeaderButton";
         private const string PART_ElementPreviousButton = "PART_PreviousButton";
@@ -171,7 +171,7 @@ namespace Avalonia.Controls.Primitives
                 var childCount = Calendar.RowsPerMonth + Calendar.RowsPerMonth * Calendar.ColumnsPerMonth;
                 using var children = new PooledList<Control>(childCount);
 
-                for (int i = 0; i < Calendar.ColumnsPerMonth; i++)
+                for (int32 i = 0; i < Calendar.ColumnsPerMonth; i++)
                 {
                     if (DayTitleTemplate?.Build() is Control cell)
                     {
@@ -187,9 +187,9 @@ namespace Avalonia.Controls.Primitives
                 EventHandler<PointerEventArgs> cellMouseEntered = Cell_MouseEntered;
                 EventHandler<RoutedEventArgs> cellClick = Cell_Click;
 
-                for (int i = 1; i < Calendar.RowsPerMonth; i++)
+                for (int32 i = 1; i < Calendar.RowsPerMonth; i++)
                 {
-                    for (int j = 0; j < Calendar.ColumnsPerMonth; j++)
+                    for (int32 j = 0; j < Calendar.ColumnsPerMonth; j++)
                     {
                         var cell = new CalendarDayButton();
 
@@ -219,9 +219,9 @@ namespace Avalonia.Controls.Primitives
                 EventHandler<PointerReleasedEventArgs> monthCalendarButtonMouseUp = Month_CalendarButtonMouseUp;
                 EventHandler<PointerEventArgs> monthMouseEntered = Month_MouseEntered;
 
-                for (int i = 0; i < Calendar.RowsPerYear; i++)
+                for (int32 i = 0; i < Calendar.RowsPerYear; i++)
                 {
-                    for (int j = 0; j < Calendar.ColumnsPerYear; j++)
+                    for (int32 j = 0; j < Calendar.ColumnsPerYear; j++)
                     {
                         var month = new CalendarButton();
 
@@ -301,26 +301,26 @@ namespace Avalonia.Controls.Primitives
 
         private void SetDayTitles()
         {
-            for (int childIndex = 0; childIndex < Calendar.ColumnsPerMonth; childIndex++)
+            for (int32 childIndex = 0; childIndex < Calendar.ColumnsPerMonth; childIndex++)
             {
                 var daytitle = MonthView!.Children[childIndex];
                 if (Owner != null)
                 {
-                    daytitle.DataContext = DateTimeHelper.GetCurrentDateFormat().ShortestDayNames[(childIndex + (int)Owner.FirstDayOfWeek) % NumberOfDaysPerWeek];
+                    daytitle.DataContext = DateTimeHelper.GetCurrentDateFormat().ShortestDayNames[(childIndex + (int32)Owner.FirstDayOfWeek) % NumberOfDaysPerWeek];
                 }
                 else
                 {
-                    daytitle.DataContext = DateTimeHelper.GetCurrentDateFormat().ShortestDayNames[(childIndex + (int)DateTimeHelper.GetCurrentDateFormat().FirstDayOfWeek) % NumberOfDaysPerWeek];
+                    daytitle.DataContext = DateTimeHelper.GetCurrentDateFormat().ShortestDayNames[(childIndex + (int32)DateTimeHelper.GetCurrentDateFormat().FirstDayOfWeek) % NumberOfDaysPerWeek];
                 }
             }
         }
         /// <summary>
         /// How many days of the previous month need to be displayed.
         /// </summary>
-        private int PreviousMonthDays(DateTime firstOfMonth)
+        private int32 PreviousMonthDays(DateTime firstOfMonth)
         {
             DayOfWeek day = _calendar.GetDayOfWeek(firstOfMonth);
-            int i;
+            int32 i;
 
             if (Owner != null)
             {
@@ -473,7 +473,7 @@ namespace Avalonia.Controls.Primitives
         }
         private void SetCalendarDayButtons(DateTime firstDayOfMonth)
         {
-            int lastMonthToDisplay = PreviousMonthDays(firstDayOfMonth);
+            int32 lastMonthToDisplay = PreviousMonthDays(firstDayOfMonth);
             DateTime dateToAdd;
 
             if (DateTimeHelper.CompareYearMonth(firstDayOfMonth, DateTime.MinValue) > 0)
@@ -493,9 +493,9 @@ namespace Avalonia.Controls.Primitives
                 Owner.HoverStartIndex = null;
             }
 
-            int count = Calendar.RowsPerMonth * Calendar.ColumnsPerMonth;
+            int32 count = Calendar.RowsPerMonth * Calendar.ColumnsPerMonth;
 
-            for (int childIndex = Calendar.ColumnsPerMonth; childIndex < count; childIndex++)
+            for (int32 childIndex = Calendar.ColumnsPerMonth; childIndex < count; childIndex++)
             {
                 CalendarDayButton childButton = (CalendarDayButton)MonthView!.Children[childIndex];
 
@@ -531,7 +531,7 @@ namespace Avalonia.Controls.Primitives
                     // DisplayDate is equal to the DateTime.MaxValue, so there
                     // are no trailing days
                     childIndex++;
-                    for (int i = childIndex; i < count; i++)
+                    for (int32 i = childIndex; i < count; i++)
                     {
                         childButton = (CalendarDayButton)MonthView.Children[i];
                         // button needs a content to occupy the necessary space
@@ -621,7 +621,7 @@ namespace Avalonia.Controls.Primitives
 
         private void SetMonthButtonsForYearMode()
         {
-            int count = 0;
+            int32 count = 0;
             foreach (object child in YearView!.Children)
             {
                 CalendarButton childButton = (CalendarButton)child;
@@ -677,8 +677,8 @@ namespace Avalonia.Controls.Primitives
                 selectedYear = DateTime.Today;
             }
 
-            int decade = DateTimeHelper.DecadeOfDate(selectedYear);
-            int decadeEnd = DateTimeHelper.EndOfDecade(selectedYear);
+            int32 decade = DateTimeHelper.DecadeOfDate(selectedYear);
+            int32 decadeEnd = DateTimeHelper.EndOfDecade(selectedYear);
 
             SetDecadeModeHeaderButton(decade, decadeEnd);
             SetDecadeModePreviousButton(decade);
@@ -708,10 +708,10 @@ namespace Avalonia.Controls.Primitives
             }
         }
 
-        private void SetYearButtons(int decade, int decadeEnd)
+        private void SetYearButtons(int32 decade, int32 decadeEnd)
         {
-            int year;
-            int count = -1;
+            int32 year;
+            int32 count = -1;
             foreach (var child in YearView!.Children)
             {
                 CalendarButton childButton = (CalendarButton)child;
@@ -763,7 +763,7 @@ namespace Avalonia.Controls.Primitives
                 count++;
             }
         }
-        private void SetDecadeModeHeaderButton(int decade, int decadeEnd)
+        private void SetDecadeModeHeaderButton(int32 decade, int32 decadeEnd)
         {
             if (HeaderButton != null)
             {
@@ -771,14 +771,14 @@ namespace Avalonia.Controls.Primitives
                 HeaderButton.IsEnabled = false;
             }
         }
-        private void SetDecadeModeNextButton(int decadeEnd)
+        private void SetDecadeModeNextButton(int32 decadeEnd)
         {
             if (Owner != null && NextButton != null)
             {
                 NextButton.IsEnabled = (Owner.DisplayDateRangeEnd.Year > decadeEnd);
             }
         }
-        private void SetDecadeModePreviousButton(int decade)
+        private void SetDecadeModePreviousButton(int32 decade)
         {
             if (Owner != null && PreviousButton != null)
             {

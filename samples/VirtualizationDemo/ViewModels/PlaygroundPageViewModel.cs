@@ -11,7 +11,7 @@ namespace VirtualizationDemo.ViewModels;
 public class PlaygroundPageViewModel : ViewModelBase
 {
     private SelectionMode _selectionMode = SelectionMode.Multiple;
-    private int _scrollToIndex = 500;
+    private int32 _scrollToIndex = 500;
     private string? _newItemHeader = "New Item 1";
 
     public PlaygroundPageViewModel()
@@ -48,7 +48,7 @@ public class PlaygroundPageViewModel : ViewModelBase
         set => RaiseAndSetIfChanged(ref _selectionMode, value);
     }
 
-    public int ScrollToIndex
+    public int32 ScrollToIndex
     {
         get => _scrollToIndex;
         set => RaiseAndSetIfChanged(ref _scrollToIndex, value);

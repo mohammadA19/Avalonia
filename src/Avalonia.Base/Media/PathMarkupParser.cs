@@ -473,7 +473,7 @@ namespace Avalonia.Media
             }
 
             var valid = false;
-            int i = 0;
+            int32 i = 0;
             if (remaining[i] == '-')
             {
                 i++;
@@ -525,7 +525,7 @@ namespace Avalonia.Media
 
         private static ReadOnlySpan<char> SkipWhitespace(ReadOnlySpan<char> span)
         {
-            int i = 0;
+            int32 i = 0;
             for (; i < span.Length && char.IsWhiteSpace(span[i]); i++) ;
             return span.Slice(i);
         }

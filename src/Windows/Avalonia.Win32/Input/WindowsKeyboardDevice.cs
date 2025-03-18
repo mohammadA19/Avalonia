@@ -18,22 +18,22 @@ namespace Avalonia.Win32.Input
 
                     var result = RawInputModifiers.None;
 
-                    if (((keyStates[(int)VK_LMENU] | keyStates[(int)VK_RMENU]) & 0x80) != 0)
+                    if (((keyStates[(int32)VK_LMENU] | keyStates[(int32)VK_RMENU]) & 0x80) != 0)
                     {
                         result |= RawInputModifiers.Alt;
                     }
 
-                    if (((keyStates[(int)VK_LCONTROL] | keyStates[(int)VK_RCONTROL]) & 0x80) != 0)
+                    if (((keyStates[(int32)VK_LCONTROL] | keyStates[(int32)VK_RCONTROL]) & 0x80) != 0)
                     {
                         result |= RawInputModifiers.Control;
                     }
 
-                    if (((keyStates[(int)VK_LSHIFT] | keyStates[(int)VK_RSHIFT]) & 0x80) != 0)
+                    if (((keyStates[(int32)VK_LSHIFT] | keyStates[(int32)VK_RSHIFT]) & 0x80) != 0)
                     {
                         result |= RawInputModifiers.Shift;
                     }
 
-                    if (((keyStates[(int)VK_LWIN] | keyStates[(int)VK_RWIN]) & 0x80) != 0)
+                    if (((keyStates[(int32)VK_LWIN] | keyStates[(int32)VK_RWIN]) & 0x80) != 0)
                     {
                         result |= RawInputModifiers.Meta;
                     }

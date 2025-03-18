@@ -313,7 +313,7 @@ namespace Avalonia.Base.UnitTests
         [InlineData(new[] { 3, 1, 2 }, true, true, false, true, true, false, true)]
         [InlineData(new[] { 3, 2, 1 }, true, true, false, true, true, false, true)]
 
-        public void IsEffectivelyVisible_Propagates_To_Visual_Children(int[] assignOrder, bool rootV, bool child1V,
+        public void IsEffectivelyVisible_Propagates_To_Visual_Children(int32[] assignOrder, bool rootV, bool child1V,
             bool child2V, bool rootExpected, bool child1Expected, bool child2Expected, bool initialSetToFalse = false)
         {
             using var app = UnitTestApplication.Start();

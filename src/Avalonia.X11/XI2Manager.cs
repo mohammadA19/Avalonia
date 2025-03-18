@@ -32,7 +32,7 @@ namespace Avalonia.X11
 
         private class DeviceInfo
         {
-            public int Id { get; }
+            public int32 Id { get; }
             public XIValuatorClassInfo[] Valuators { get; private set; } = [];
             public XIScrollClassInfo[] Scrollers { get; private set; } = [];
             public DeviceInfo(XIDeviceInfo info)
@@ -41,12 +41,12 @@ namespace Avalonia.X11
                 UpdateCore(info.Classes, info.NumClasses);
             }
 
-            public virtual void Update(XIAnyClassInfo** classes, int num)
+            public virtual void Update(XIAnyClassInfo** classes, int32 num)
             {
                 UpdateCore(classes, num);
             }
 
-            private void UpdateCore(XIAnyClassInfo** classes, int num)
+            private void UpdateCore(XIAnyClassInfo** classes, int32 num)
             {
                 var valuators = new List<XIValuatorClassInfo>();
                 var scrollers = new List<XIScrollClassInfo>();
@@ -62,7 +62,7 @@ namespace Avalonia.X11
                 Scrollers = scrollers.ToArray();
             }
 
-            public void UpdateValuators(Dictionary<int, double> valuators)
+            public void UpdateValuators(Dictionary<int32, double> valuators)
             {
                 foreach (var v in valuators)
                 {
@@ -113,7 +113,7 @@ namespace Avalonia.X11
                 }
             }
 
-            public override void Update(XIAnyClassInfo** classes, int num)
+            public override void Update(XIAnyClassInfo** classes, int32 num)
             {
                 base.Update(classes, num);
                 UpdateKnownValuator();
@@ -158,7 +158,7 @@ namespace Avalonia.X11
             var x11 = platform.Info;
 
             var devices = (XIDeviceInfo*) XIQueryDevice(x11.Display,
-                (int)XiPredefinedDeviceId.XIAllMasterDevices, out int num);
+                (int32)XiPredefinedDeviceId.XIAllMasterDevices, out int32 num);
 
             PointerDeviceInfo? pointerDevice = null;
 
@@ -177,7 +177,7 @@ namespace Avalonia.X11
             var status = XiSelectEvents(
                 x11.Display,
                 x11.RootWindow,
-                new Dictionary<int, List<XiEventType>> { [pointerDevice.Id] = [XiEventType.XI_DeviceChanged] });
+                new Dictionary<int32, List<XiEventType>> { [pointerDevice.Id] = [XiEventType.XI_DeviceChanged] });
 
             if (status != Status.Success)
                 return null;
@@ -202,7 +202,7 @@ namespace Avalonia.X11
                 events.AddRange(MultiTouchEventTypes);
 
             XiSelectEvents(_x11.Display, xid,
-                new Dictionary<int, List<XiEventType>> {[_pointerDevice.Id] = events});
+                new Dictionary<int32, List<XiEventType>> {[_pointerDevice.Id] = events});
                 
             // We are taking over mouse input handling from here
             return XEventMask.PointerMotionMask
@@ -302,7 +302,7 @@ namespace Avalonia.X11
                     PixelRect screenBounds = default;
                     if (ev.Valuators.TryGetValue(touchMajorXIValuatorClassInfo.Number, out var touchMajorValue))
                     {
-                        var pixelPoint = new PixelPoint((int)ev.RootPosition.X, (int)ev.RootPosition.Y);
+                        var pixelPoint = new PixelPoint((int32)ev.RootPosition.X, (int32)ev.RootPosition.Y);
                         var screen = _platform.Screens.ScreenFromPoint(pixelPoint);
                         if (screen?.Bounds is { } screenBoundsFromPoint)
                         {
@@ -429,12 +429,12 @@ namespace Avalonia.X11
         public ulong Timestamp { get; }
         public Point Position { get; }
         public Point RootPosition { get; }
-        public int Button { get; set; }
-        public int Detail { get; set; }
+        public int32 Button { get; set; }
+        public int32 Detail { get; set; }
         public bool Emulated { get; set; }
-        public Dictionary<int, double> Valuators { get; }
+        public Dictionary<int32, double> Valuators { get; }
 
-        public static RawInputModifiers ParseButtonState(int len, byte* buttons)
+        public static RawInputModifiers ParseButtonState(int32 len, byte* buttons)
         {
             RawInputModifiers rv = default;
             if (len > 0)
@@ -472,7 +472,7 @@ namespace Avalonia.X11
 
             Modifiers |= ParseButtonState(ev->buttons.MaskLen, ev->buttons.Mask);
 
-            Valuators = new Dictionary<int, double>();
+            Valuators = new Dictionary<int32, double>();
             Position = new Point(ev->event_x, ev->event_y);
             RootPosition = new Point(ev->root_x, ev->root_y);
             var values = ev->valuators.Values;

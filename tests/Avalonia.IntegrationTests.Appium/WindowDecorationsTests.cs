@@ -61,7 +61,7 @@ public class WindowDecorationsTests : TestBase, IDisposable
     [InlineData(-1)]
     [InlineData(25)]
     [InlineData(50)]
-    public void Should_Apply_Client_Chrome(int titleBarHeight)
+    public void Should_Apply_Client_Chrome(int32 titleBarHeight)
     {
         SetParameters(true, false, true, false, titleBarHeight);
 
@@ -86,7 +86,7 @@ public class WindowDecorationsTests : TestBase, IDisposable
     [InlineData(-1)]
     [InlineData(25)]
     [InlineData(50)]
-    public void Should_Apply_System_Chrome(int titleBarHeight)
+    public void Should_Apply_System_Chrome(int32 titleBarHeight)
     {
         SetParameters(true, true, false, false, titleBarHeight);
 
@@ -111,7 +111,7 @@ public class WindowDecorationsTests : TestBase, IDisposable
     [InlineData(-1)]
     [InlineData(25)]
     [InlineData(50)]
-    public void Should_Apply_Client_Chrome_On_New_Window(int titleBarHeight)
+    public void Should_Apply_Client_Chrome_On_New_Window(int32 titleBarHeight)
     {
         SetParameters(true, false, true, false, titleBarHeight);
 
@@ -131,7 +131,7 @@ public class WindowDecorationsTests : TestBase, IDisposable
     [InlineData(-1)]
     [InlineData(25)]
     [InlineData(50)]
-    public void Should_Apply_System_Chrome_On_New_Window(int titleBarHeight)
+    public void Should_Apply_System_Chrome_On_New_Window(int32 titleBarHeight)
     {
         SetParameters(true, true, false, false, titleBarHeight);
 
@@ -147,7 +147,7 @@ public class WindowDecorationsTests : TestBase, IDisposable
         }
     }
 
-    private void AssertClientChrome(WindowChrome systemChrome, WindowChrome clientChrome, int titleBarHeight)
+    private void AssertClientChrome(WindowChrome systemChrome, WindowChrome clientChrome, int32 titleBarHeight)
     {
         // Ignore windows, it always reports full sized and enabled buttons and title bar. Just drawn behind.
         if (!OperatingSystem.IsWindows())
@@ -194,7 +194,7 @@ public class WindowDecorationsTests : TestBase, IDisposable
         bool forceSystemChrome,
         bool preferSystemChrome,
         bool macOsThickSystemChrome,
-        int titleBarHeight)
+        int32 titleBarHeight)
     {
         var extendClientAreaCheckBox = Session.FindElementByAccessibilityId("WindowExtendClientAreaToDecorationsHint");
         var forceSystemChromeCheckBox = Session.FindElementByAccessibilityId("WindowForceSystemChrome");

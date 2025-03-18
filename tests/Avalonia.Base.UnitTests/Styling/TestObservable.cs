@@ -5,7 +5,7 @@ namespace Avalonia.Base.UnitTests.Styling
 {
     public class TestObservable : IObservable<bool>
     {
-        public int SubscribedCount { get; private set; }
+        public int32 SubscribedCount { get; private set; }
 
         public IDisposable Subscribe(IObserver<bool> observer)
         {

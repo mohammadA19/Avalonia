@@ -65,7 +65,7 @@ namespace RenderDemo.ViewModels
 
         private async Task ResizeWindowAsync()
         {
-            for (int i = 0; i < 30; i++)
+            for (int32 i = 0; i < 30; i++)
             {
                 Width += 10;
                 Height += 5;
@@ -74,7 +74,7 @@ namespace RenderDemo.ViewModels
 
             await Task.Delay(10);
 
-            for (int i = 0; i < 30; i++)
+            for (int32 i = 0; i < 30; i++)
             {
                 Width -= 10;
                 Height -= 5;

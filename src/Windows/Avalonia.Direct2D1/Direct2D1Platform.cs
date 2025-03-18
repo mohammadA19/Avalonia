@@ -204,7 +204,7 @@ namespace Avalonia.Direct2D1
                 var glyphInfos = glyphRun.GlyphInfos;
                 var glyphs = new short[glyphInfos.Count];
 
-                for (int i = 0; i < glyphInfos.Count; i++)
+                for (int32 i = 0; i < glyphInfos.Count; i++)
                 {
                     glyphs[i] = (short)glyphInfos[i].GlyphIndex;
                 }
@@ -244,13 +244,13 @@ namespace Avalonia.Direct2D1
             return new WicBitmapImpl(stream);
         }
 
-        public IWriteableBitmapImpl LoadWriteableBitmapToWidth(Stream stream, int width,
+        public IWriteableBitmapImpl LoadWriteableBitmapToWidth(Stream stream, int32 width,
             BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new WriteableWicBitmapImpl(stream, width, true, interpolationMode);
         }
 
-        public IWriteableBitmapImpl LoadWriteableBitmapToHeight(Stream stream, int height,
+        public IWriteableBitmapImpl LoadWriteableBitmapToHeight(Stream stream, int32 height,
             BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new WriteableWicBitmapImpl(stream, height, false, interpolationMode);
@@ -267,13 +267,13 @@ namespace Avalonia.Direct2D1
         }
 
         /// <inheritdoc />
-        public IBitmapImpl LoadBitmapToWidth(Stream stream, int width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
+        public IBitmapImpl LoadBitmapToWidth(Stream stream, int32 width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new WicBitmapImpl(stream, width, true, interpolationMode);
         }
 
         /// <inheritdoc />
-        public IBitmapImpl LoadBitmapToHeight(Stream stream, int height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
+        public IBitmapImpl LoadBitmapToHeight(Stream stream, int32 height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new WicBitmapImpl(stream, height, false, interpolationMode);
         }
@@ -286,7 +286,7 @@ namespace Avalonia.Direct2D1
         }
 
         /// <inheritdoc />
-        public IBitmapImpl LoadBitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int stride)
+        public IBitmapImpl LoadBitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int32 stride)
         {
             return new WicBitmapImpl(format, alphaFormat, data, size, dpi, stride);
         }

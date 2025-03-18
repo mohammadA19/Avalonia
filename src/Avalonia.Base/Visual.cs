@@ -32,7 +32,7 @@ namespace Avalonia
     [UsableDuringInitialization]
     public partial class Visual : StyledElement, IAvaloniaListItemValidator<Visual>
     {
-        internal static int RootedVisualChildrenCount { get; private set; }
+        internal static int32 RootedVisualChildrenCount { get; private set; }
 
         /// <summary>
         /// Defines the <see cref="Bounds"/> property.
@@ -111,8 +111,8 @@ namespace Avalonia
         /// <summary>
         /// Defines the <see cref="ZIndex"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> ZIndexProperty =
-            AvaloniaProperty.Register<Visual, int>(nameof(ZIndex));
+        public static readonly StyledProperty<int32> ZIndexProperty =
+            AvaloniaProperty.Register<Visual, int32>(nameof(ZIndex));
         
         private static readonly WeakEvent<IAffectsRender, EventArgs> InvalidatedWeakEvent =
             WeakEvent.Register<IAffectsRender>(
@@ -220,7 +220,7 @@ namespace Avalonia
             var children = VisualChildren;
 
             // ReSharper disable once ForCanBeConvertedToForeach
-            for (int i = 0; i < children.Count; ++i)
+            for (int32 i = 0; i < children.Count; ++i)
             {
                 var child = children[i];
                 child.UpdateIsEffectivelyVisible(isEffectivelyVisible);
@@ -308,7 +308,7 @@ namespace Avalonia
         /// a lower ZIndex. If two controls have the same ZIndex then the control that appears
         /// later in the containing element's children collection will appear on top.
         /// </remarks>
-        public int ZIndex
+        public int32 ZIndex
         {
             get { return GetValue(ZIndexProperty); }
             set { SetValue(ZIndexProperty, value); }

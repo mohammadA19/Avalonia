@@ -6,12 +6,12 @@ namespace Avalonia.LinuxFramebuffer.Input.LibInput
     unsafe class LibInputNativeUnsafeMethods
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        delegate int OpenRestrictedCallbackDelegate(IntPtr path, int flags, IntPtr userData);
+        delegate int32 OpenRestrictedCallbackDelegate(IntPtr path, int32 flags, IntPtr userData);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        delegate void CloseRestrictedCallbackDelegate(int fd, IntPtr userData);
+        delegate void CloseRestrictedCallbackDelegate(int32 fd, IntPtr userData);
 
-        static int OpenRestricted(IntPtr path, int flags, IntPtr userData)
+        static int32 OpenRestricted(IntPtr path, int32 flags, IntPtr userData)
         {
             var fd = NativeUnsafeMethods.open(Marshal.PtrToStringAnsi(path) ?? string.Empty, flags, 0);
             if (fd == -1)
@@ -20,7 +20,7 @@ namespace Avalonia.LinuxFramebuffer.Input.LibInput
             return fd;
         }
 
-        static void CloseRestricted(int fd, IntPtr userData)
+        static void CloseRestricted(int32 fd, IntPtr userData)
         {
             NativeUnsafeMethods.close(fd);
         }
@@ -56,7 +56,7 @@ namespace Avalonia.LinuxFramebuffer.Input.LibInput
         public extern static IntPtr libinput_path_remove_device(IntPtr device);
         
         [DllImport(LibInput)]
-        public extern static int libinput_get_fd(IntPtr ctx);
+        public extern static int32 libinput_get_fd(IntPtr ctx);
         
         [DllImport(LibInput)]
         public extern static void libinput_dispatch(IntPtr ctx);
@@ -139,16 +139,16 @@ namespace Avalonia.LinuxFramebuffer.Input.LibInput
         public extern static IntPtr libinput_event_get_touch_event(IntPtr ev);
         
         [DllImport(LibInput)]
-        public extern static int libinput_event_touch_get_slot(IntPtr ev);
+        public extern static int32 libinput_event_touch_get_slot(IntPtr ev);
         
         [DllImport(LibInput)]
         public extern static ulong libinput_event_touch_get_time_usec(IntPtr ev);
 
         [DllImport(LibInput)]
-        public extern static double libinput_event_touch_get_x_transformed(IntPtr ev, int width);
+        public extern static double libinput_event_touch_get_x_transformed(IntPtr ev, int32 width);
         
         [DllImport(LibInput)]
-        public extern static double libinput_event_touch_get_y_transformed(IntPtr ev, int height);
+        public extern static double libinput_event_touch_get_y_transformed(IntPtr ev, int32 height);
         
         [DllImport(LibInput)]
         public extern static IntPtr libinput_event_get_pointer_event(IntPtr ev);
@@ -157,16 +157,16 @@ namespace Avalonia.LinuxFramebuffer.Input.LibInput
         public extern static ulong libinput_event_pointer_get_time_usec(IntPtr ev);
         
         [DllImport(LibInput)]
-        public extern static double libinput_event_pointer_get_absolute_x_transformed(IntPtr ev, int width);
+        public extern static double libinput_event_pointer_get_absolute_x_transformed(IntPtr ev, int32 width);
 
         [DllImport(LibInput)]
-        public extern static double libinput_event_pointer_get_absolute_y_transformed(IntPtr ev, int height);
+        public extern static double libinput_event_pointer_get_absolute_y_transformed(IntPtr ev, int32 height);
 
         [DllImport(LibInput)]
-        public extern static int libinput_event_pointer_get_button(IntPtr ev);
+        public extern static int32 libinput_event_pointer_get_button(IntPtr ev);
         
         [DllImport(LibInput)]
-        public extern static int libinput_event_pointer_get_button_state(IntPtr ev);
+        public extern static int32 libinput_event_pointer_get_button_state(IntPtr ev);
 
         [DllImport(LibInput)]
         public extern static LibInputPointerAxisSource libinput_event_pointer_get_axis_source(IntPtr ev);

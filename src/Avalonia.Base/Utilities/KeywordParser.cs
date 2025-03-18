@@ -12,7 +12,7 @@ namespace Avalonia.Utilities
             return (CheckKeywordInternal(ref r, keyword) >= 0);
         }
         
-        static int CheckKeywordInternal(this ref CharacterReader r, string keyword)
+        static int32 CheckKeywordInternal(this ref CharacterReader r, string keyword)
         {
             var ws = r.PeekWhitespace();
 

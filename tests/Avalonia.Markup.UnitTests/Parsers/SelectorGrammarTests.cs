@@ -296,7 +296,7 @@ namespace Avalonia.Markup.UnitTests.Parsers
         [InlineData(":nth-child(n-5)", 1, -5)]
         [InlineData(":nth-child( 2n + 1 )", 2, 1)]
         [InlineData(":nth-child( 2n - 1 )", 2, -1)]
-        public void NthChild_Variations(string input, int step, int offset)
+        public void NthChild_Variations(string input, int32 step, int32 offset)
         {
             var result = SelectorGrammar.Parse(input);
 
@@ -325,7 +325,7 @@ namespace Avalonia.Markup.UnitTests.Parsers
         [InlineData(":nth-last-child(n-5)", 1, -5)]
         [InlineData(":nth-last-child( 2n + 1 )", 2, 1)]
         [InlineData(":nth-last-child( 2n - 1 )", 2, -1)]
-        public void NthLastChild_Variations(string input, int step, int offset)
+        public void NthLastChild_Variations(string input, int32 step, int32 offset)
         {
             var result = SelectorGrammar.Parse(input);
 
@@ -370,7 +370,7 @@ namespace Avalonia.Markup.UnitTests.Parsers
                     new SelectorGrammar.OfTypeSyntax { TypeName = "Button" },
                     new SelectorGrammar.NthChildSyntax()
                     {
-                        Step = int.MaxValue,
+                        Step = int32.MaxValue,
                         Offset = 0
                     }
                 },

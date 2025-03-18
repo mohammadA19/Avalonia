@@ -8,8 +8,8 @@ namespace Avalonia.Controls.PullToRefresh
 {
     internal class ScrollViewerIRefreshInfoProviderAdapter
     {
-        private const int MaxSearchDepth = 10;
-        private const int InitialOffsetThreshold = 1;
+        private const int32 MaxSearchDepth = 10;
+        private const int32 InitialOffsetThreshold = 1;
 
         private PullDirection _refreshPullDirection;
         private ScrollViewer? _scrollViewer;
@@ -31,7 +31,7 @@ namespace Avalonia.Controls.PullToRefresh
             }
             else
             {
-                int depth = 0;
+                int32 depth = 0;
                 while (depth < MaxSearchDepth)
                 {
                     var scroll = AdaptFromTreeRecursiveHelper(root, depth);
@@ -45,7 +45,7 @@ namespace Avalonia.Controls.PullToRefresh
                 }
             }
 
-            ScrollViewer? AdaptFromTreeRecursiveHelper(Visual root, int depth)
+            ScrollViewer? AdaptFromTreeRecursiveHelper(Visual root, int32 depth)
             {
                 if (depth == 0)
                 {

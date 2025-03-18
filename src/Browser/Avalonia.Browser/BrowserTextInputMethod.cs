@@ -70,7 +70,7 @@ internal class BrowserTextInputMethod(
     public void SetCursorRect(Rect rect)
     {
         InputHelper.FocusElement(_inputElement);
-        InputHelper.SetBounds(_inputElement, (int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height,
+        InputHelper.SetBounds(_inputElement, (int32)rect.X, (int32)rect.Y, (int32)rect.Width, (int32)rect.Height,
             _client?.Selection.End ?? 0);
         InputHelper.FocusElement(_inputElement);
     }
@@ -85,7 +85,7 @@ internal class BrowserTextInputMethod(
         InputHelper.SetSurroundingText(_inputElement, "", 0, 0);
     }
 
-    public void OnBeforeInput(string inputType, int start, int end)
+    public void OnBeforeInput(string inputType, int32 start, int32 end)
     {
         if (inputType != "deleteByComposition")
         {

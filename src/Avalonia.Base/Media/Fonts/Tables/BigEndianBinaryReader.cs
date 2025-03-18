@@ -108,7 +108,7 @@ namespace Avalonia.Media.Fonts.Tables
 
         public short ReadFWORD() => ReadInt16();
 
-        public short[] ReadFWORDArray(int length) => ReadInt16Array(length);
+        public short[] ReadFWORDArray(int32 length) => ReadInt16Array(length);
 
         public ushort ReadUFWORD() => ReadUInt16();
 
@@ -128,7 +128,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// for this reader. 4 bytes are read.
         /// </summary>
         /// <returns>The 32-bit integer read</returns>
-        public int ReadInt32()
+        public int32 ReadInt32()
         {
             ReadInternal(_buffer, 4);
 
@@ -180,10 +180,10 @@ namespace Avalonia.Media.Fonts.Tables
         /// <returns>
         /// The 16-bit unsigned integer read.
         /// </returns>
-        public ushort[] ReadUInt16Array(int length)
+        public ushort[] ReadUInt16Array(int32 length)
         {
             ushort[] data = new ushort[length];
-            for (int i = 0; i < length; i++)
+            for (int32 i = 0; i < length; i++)
             {
                 data[i] = ReadUInt16();
             }
@@ -197,7 +197,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// <param name="buffer">The buffer to read to.</param>
         public void ReadUInt16Array(Span<ushort> buffer)
         {
-            for (int i = 0; i < buffer.Length; i++)
+            for (int32 i = 0; i < buffer.Length; i++)
             {
                 buffer[i] = ReadUInt16();
             }
@@ -210,10 +210,10 @@ namespace Avalonia.Media.Fonts.Tables
         /// <returns>
         /// The 32-bit unsigned integer read.
         /// </returns>
-        public uint[] ReadUInt32Array(int length)
+        public uint[] ReadUInt32Array(int32 length)
         {
             uint[] data = new uint[length];
-            for (int i = 0; i < length; i++)
+            for (int32 i = 0; i < length; i++)
             {
                 data[i] = ReadUInt32();
             }
@@ -221,7 +221,7 @@ namespace Avalonia.Media.Fonts.Tables
             return data;
         }
 
-        public byte[] ReadUInt8Array(int length)
+        public byte[] ReadUInt8Array(int32 length)
         {
             byte[] data = new byte[length];
 
@@ -237,10 +237,10 @@ namespace Avalonia.Media.Fonts.Tables
         /// <returns>
         /// The 16-bit signed integer read.
         /// </returns>
-        public short[] ReadInt16Array(int length)
+        public short[] ReadInt16Array(int32 length)
         {
             short[] data = new short[length];
-            for (int i = 0; i < length; i++)
+            for (int32 i = 0; i < length; i++)
             {
                 data[i] = ReadInt16();
             }
@@ -254,7 +254,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// <param name="buffer">The buffer to read to.</param>
         public void ReadInt16Array(Span<short> buffer)
         {
-            for (int i = 0; i < buffer.Length; i++)
+            for (int32 i = 0; i < buffer.Length; i++)
             {
                 buffer[i] = ReadInt16();
             }
@@ -276,7 +276,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// for this reader. 3 bytes are read.
         /// </summary>
         /// <returns>The 24-bit unsigned integer read.</returns>
-        public int ReadUInt24()
+        public int32 ReadUInt24()
         {
             byte highByte = ReadByte();
             return (highByte << 16) | ReadUInt16();
@@ -308,13 +308,13 @@ namespace Avalonia.Media.Fonts.Tables
         /// </summary>
         /// <param name="count">The number of bytes to read.</param>
         /// <returns>The bytes read.</returns>
-        public byte[] ReadBytes(int count)
+        public byte[] ReadBytes(int32 count)
         {
             byte[] ret = new byte[count];
-            int index = 0;
+            int32 index = 0;
             while (index < count)
             {
-                int read = BaseStream.Read(ret, index, count - index);
+                int32 read = BaseStream.Read(ret, index, count - index);
 
                 // Stream has finished half way through. That's fine, return what we've got.
                 if (read == 0)
@@ -340,7 +340,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// <returns>
         /// The string read from the stream.
         /// </returns>
-        public string ReadString(int bytesToRead, Encoding encoding)
+        public string ReadString(int32 bytesToRead, Encoding encoding)
         {
             byte[] data = new byte[bytesToRead];
             ReadInternal(data, bytesToRead);
@@ -364,7 +364,7 @@ namespace Avalonia.Media.Fonts.Tables
         /// <param name="size">The offset size in bytes.</param>
         /// <returns>The 32-bit signed integer representing the offset.</returns>
         /// <exception cref="InvalidOperationException">Size is not in range.</exception>
-        public int ReadOffset(int size)
+        public int32 ReadOffset(int32 size)
             => size switch
             {
                 1 => ReadByte(),
@@ -380,13 +380,13 @@ namespace Avalonia.Media.Fonts.Tables
         /// </summary>
         /// <param name="data">Buffer to read into.</param>
         /// <param name="size">Number of bytes to read.</param>
-        private void ReadInternal(byte[] data, int size)
+        private void ReadInternal(byte[] data, int32 size)
         {
-            int index = 0;
+            int32 index = 0;
 
             while (index < size)
             {
-                int read = BaseStream.Read(data, index, size - index);
+                int32 read = BaseStream.Read(data, index, size - index);
                 if (read == 0)
                 {
                     throw new EndOfStreamException($"End of stream reached with {size - index} byte{(size - index == 1 ? "s" : string.Empty)} left to read.");

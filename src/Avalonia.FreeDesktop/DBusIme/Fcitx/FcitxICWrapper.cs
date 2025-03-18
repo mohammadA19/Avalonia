@@ -26,12 +26,12 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
 
         public Task ResetAsync() => _old?.ResetAsync() ?? _modern?.ResetAsync() ?? Task.CompletedTask;
 
-        public Task SetCursorRectAsync(int x, int y, int w, int h) =>
+        public Task SetCursorRectAsync(int32 x, int32 y, int32 w, int32 h) =>
             _old?.SetCursorRectAsync(x, y, w, h) ?? _modern?.SetCursorRectAsync(x, y, w, h) ?? Task.CompletedTask;
 
         public Task DestroyICAsync() => _old?.DestroyICAsync() ?? _modern?.DestroyICAsync() ?? Task.CompletedTask;
 
-        public async Task<bool> ProcessKeyEventAsync(uint keyVal, uint keyCode, uint state, int type, uint time)
+        public async Task<bool> ProcessKeyEventAsync(uint keyVal, uint keyCode, uint state, int32 type, uint time)
         {
             if (_old is not null)
                 return await _old.ProcessKeyEventAsync(keyVal, keyCode, state, type, time) != 0;
@@ -43,13 +43,13 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
             ?? _modern?.WatchCommitStringAsync(handler)
             ?? new ValueTask<IDisposable>(Disposable.Empty);
 
-        public ValueTask<IDisposable> WatchForwardKeyAsync(Action<Exception?, (uint keyval, uint state, int type)> handler) =>
+        public ValueTask<IDisposable> WatchForwardKeyAsync(Action<Exception?, (uint keyval, uint state, int32 type)> handler) =>
             _old?.WatchForwardKeyAsync(handler)
             ?? _modern?.WatchForwardKeyAsync((e, ev) => handler.Invoke(e, (ev.Keyval, ev.State, ev.Type ? 1 : 0)))
             ?? new ValueTask<IDisposable>(Disposable.Empty);
 
         public ValueTask<IDisposable> WatchUpdateFormattedPreeditAsync(
-            Action<Exception?, ((string?, int)[]? str, int cursorpos)> handler) =>
+            Action<Exception?, ((string?, int32)[]? str, int32 cursorpos)> handler) =>
             _old?.WatchUpdateFormattedPreeditAsync(handler!)
             ?? _modern?.WatchUpdateFormattedPreeditAsync(handler!)
             ?? new ValueTask<IDisposable>(Disposable.Empty);

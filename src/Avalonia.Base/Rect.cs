@@ -343,11 +343,11 @@ namespace Avalonia
         /// Returns the hash code for this instance.
         /// </summary>
         /// <returns>The hash code.</returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
-                int hash = 17;
+                int32 hash = 17;
                 hash = (hash * 23) + X.GetHashCode();
                 hash = (hash * 23) + Y.GetHashCode();
                 hash = (hash * 23) + Width.GetHashCode();

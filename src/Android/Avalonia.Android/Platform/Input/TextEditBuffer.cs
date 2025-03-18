@@ -99,7 +99,7 @@ namespace Avalonia.Android.Platform.Input
             Text = new SpannableString(Text)
         };
 
-        internal void Remove(int index, int length)
+        internal void Remove(int32 index, int32 length)
         {
             if (_textInputMethod.Client is { } client)
             {
@@ -109,7 +109,7 @@ namespace Avalonia.Android.Platform.Input
             }
         }
 
-        internal void Replace(int start, int end, string text)
+        internal void Replace(int32 start, int32 end, string text)
         {
             if (_textInputMethod.Client is { } client)
             {

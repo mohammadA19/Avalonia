@@ -12,9 +12,9 @@ namespace Avalonia.Threading
         /// <summary>
         /// The integer value of the priority
         /// </summary>
-        public int Value { get; }
+        public int32 Value { get; }
 
-        private DispatcherPriority(int value)
+        private DispatcherPriority(int32 value)
         {
             Value = value;
         }
@@ -132,16 +132,16 @@ namespace Avalonia.Threading
         public static readonly DispatcherPriority MaxValue = Send;
 
         // Note: unlike ctor this one is validating
-        public static DispatcherPriority FromValue(int value)
+        public static DispatcherPriority FromValue(int32 value)
         {
             if (value < MinValue.Value || value > MaxValue.Value)
                 throw new ArgumentOutOfRangeException(nameof(value));
             return new DispatcherPriority(value);
         }
 
-        public static implicit operator int(DispatcherPriority priority) => priority.Value;
+        public static implicit operator int32(DispatcherPriority priority) => priority.Value;
 
-        public static implicit operator DispatcherPriority(int value) => FromValue(value);
+        public static implicit operator DispatcherPriority(int32 value) => FromValue(value);
 
         /// <inheritdoc />
         public bool Equals(DispatcherPriority other) => Value == other.Value;
@@ -150,7 +150,7 @@ namespace Avalonia.Threading
         public override bool Equals(object? obj) => obj is DispatcherPriority other && Equals(other);
 
         /// <inheritdoc />
-        public override int GetHashCode() => Value.GetHashCode();
+        public override int32 GetHashCode() => Value.GetHashCode();
 
         public static bool operator ==(DispatcherPriority left, DispatcherPriority right) => left.Value == right.Value;
 
@@ -165,7 +165,7 @@ namespace Avalonia.Threading
         public static bool operator >=(DispatcherPriority left, DispatcherPriority right) => left.Value >= right.Value;
 
         /// <inheritdoc />
-        public int CompareTo(DispatcherPriority other) => Value.CompareTo(other.Value);
+        public int32 CompareTo(DispatcherPriority other) => Value.CompareTo(other.Value);
 
         public static void Validate(DispatcherPriority priority, string parameterName)
         {

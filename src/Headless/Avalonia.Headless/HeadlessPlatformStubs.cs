@@ -97,7 +97,7 @@ namespace Avalonia.Headless
             StrikethroughThickness = 1
         };
 
-        public int GlyphCount => 1337;
+        public int32 GlyphCount => 1337;
 
         public FontSimulations FontSimulations => FontSimulations.None;
 
@@ -125,14 +125,14 @@ namespace Avalonia.Headless
             return true;
         }
 
-        public int GetGlyphAdvance(ushort glyph)
+        public int32 GetGlyphAdvance(ushort glyph)
         {
             return 8;
         }
 
-        public int[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
+        public int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
         {
-            var advances = new int[glyphs.Length];
+            var advances = new int32[glyphs.Length];
 
             for (var i = 0; i < advances.Length; i++)
             {
@@ -205,7 +205,7 @@ namespace Avalonia.Headless
             _defaultFamilyName = defaultFamilyName;
         }
 
-        public int TryCreateGlyphTypefaceCount { get; private set; }
+        public int32 TryCreateGlyphTypefaceCount { get; private set; }
 
         public string GetDefaultFontFamilyName()
         {
@@ -217,7 +217,7 @@ namespace Avalonia.Headless
             return new[] { _defaultFamilyName };
         }
 
-        public bool TryMatchCharacter(int codepoint, FontStyle fontStyle, FontWeight fontWeight,
+        public bool TryMatchCharacter(int32 codepoint, FontStyle fontStyle, FontWeight fontWeight,
             FontStretch fontStretch,
             CultureInfo? culture, out Typeface fontKey)
         {
@@ -266,7 +266,7 @@ namespace Avalonia.Headless
             _defaultFamilyName = defaultFamilyName;
         }
 
-        public int TryCreateGlyphTypefaceCount { get; private set; }
+        public int32 TryCreateGlyphTypefaceCount { get; private set; }
 
         public string GetDefaultFontFamilyName()
         {
@@ -278,7 +278,7 @@ namespace Avalonia.Headless
             return _installedFontFamilyNames;
         }
 
-        public bool TryMatchCharacter(int codepoint, FontStyle fontStyle, FontWeight fontWeight,
+        public bool TryMatchCharacter(int32 codepoint, FontStyle fontStyle, FontWeight fontWeight,
             FontStretch fontStretch,
             CultureInfo? culture, out Typeface fontKey)
         {
@@ -337,15 +337,15 @@ namespace Avalonia.Headless
         }
     }
 
-    internal class HeadlessScreensStub : ScreensBase<int, PlatformScreen>
+    internal class HeadlessScreensStub : ScreensBase<int32, PlatformScreen>
     {
-        protected override IReadOnlyList<int> GetAllScreenKeys() => new[] { 1 };
+        protected override IReadOnlyList<int32> GetAllScreenKeys() => new[] { 1 };
 
-        protected override PlatformScreen CreateScreenFromKey(int key) => new PlatformScreenStub(key);
+        protected override PlatformScreen CreateScreenFromKey(int32 key) => new PlatformScreenStub(key);
 
         private class PlatformScreenStub : PlatformScreen
         {
-            public PlatformScreenStub(int key) : base(new PlatformHandle((nint)key, nameof(HeadlessScreensStub)))
+            public PlatformScreenStub(int32 key) : base(new PlatformHandle((nint)key, nameof(HeadlessScreensStub)))
             {
                 Scaling = 1;
                 Bounds = WorkingArea = new PixelRect(0, 0, 1920, 1280);
@@ -356,7 +356,7 @@ namespace Avalonia.Headless
 
     internal static class TextTestHelper
     {
-        public static int GetStartCharIndex(ReadOnlyMemory<char> text)
+        public static int32 GetStartCharIndex(ReadOnlyMemory<char> text)
         {
             if (!MemoryMarshal.TryGetString(text, out _, out var start, out _))
                 throw new InvalidOperationException("text memory should have been a string");

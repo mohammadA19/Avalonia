@@ -32,11 +32,11 @@ internal class AssemblyResourceDescriptor : IAssetDescriptor
         
 internal class AvaloniaResourceDescriptor : IAssetDescriptor
 {
-    private readonly int _offset;
-    private readonly int _length;
+    private readonly int32 _offset;
+    private readonly int32 _length;
     public Assembly Assembly { get; }
 
-    public AvaloniaResourceDescriptor(Assembly asm, int offset, int length)
+    public AvaloniaResourceDescriptor(Assembly asm, int32 offset, int32 length)
     {
         _offset = offset;
         _length = length;

@@ -17,8 +17,8 @@ internal static class StringBuilderCache
     // The value 360 was chosen in discussion with performance experts as a compromise between using
     // as little memory per thread as possible and still covering a large part of short-lived
     // StringBuilder creations on the startup path of VS designers.
-    internal const int MaxBuilderSize = 360;
-    private const int DefaultCapacity = 16; // == StringBuilder.DefaultCapacity
+    internal const int32 MaxBuilderSize = 360;
+    private const int32 DefaultCapacity = 16; // == StringBuilder.DefaultCapacity
 
     // WARNING: We allow diagnostic tools to directly inspect this member (t_cachedInstance).
     // See https://github.com/dotnet/corert/blob/master/Documentation/design-docs/diagnostics/diagnostics-tools-contract.md for more details.
@@ -29,7 +29,7 @@ internal static class StringBuilderCache
 
     /// <summary>Get a StringBuilder for the specified capacity.</summary>
     /// <remarks>If a StringBuilder of an appropriate size is cached, it will be returned and the cache emptied.</remarks>
-    public static StringBuilder Acquire(int capacity = DefaultCapacity)
+    public static StringBuilder Acquire(int32 capacity = DefaultCapacity)
     {
         if (capacity <= MaxBuilderSize)
         {

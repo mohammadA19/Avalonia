@@ -414,7 +414,7 @@ namespace Avalonia.Controls.UnitTests.Presenters
                 Width = 100,
             };
 
-            for(int i = 0; i < 100; i++)
+            for(int32 i = 0; i < 100; i++)
             {
                 // border position will be (0,60)
                 var child = i == 3 ? border : new Border
@@ -458,7 +458,7 @@ namespace Avalonia.Controls.UnitTests.Presenters
                 Width = 100,
             };
 
-            for(int i = 0; i < 100; i++)
+            for(int32 i = 0; i < 100; i++)
             {
                 // border position will be (0,60)
                 var child = i == 3 ? border : new Border
@@ -510,7 +510,7 @@ namespace Avalonia.Controls.UnitTests.Presenters
                 Width = 100,
             };
 
-            for (int i = 0; i < 100; i++)
+            for (int32 i = 0; i < 100; i++)
             {
                 // border position will be (0,60)
                 var child = i == 3 ? border : new Border
@@ -556,7 +556,7 @@ namespace Avalonia.Controls.UnitTests.Presenters
                 Width = 100,
             };
 
-            for (int i = 0; i < 100; i++)
+            for (int32 i = 0; i < 100; i++)
             {
                 // border position will be (0,180)
                 var child = i == 9 ? border : new Border

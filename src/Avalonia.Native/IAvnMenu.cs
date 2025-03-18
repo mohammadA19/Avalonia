@@ -103,7 +103,7 @@ namespace Avalonia.Native.Interop.Impl
             item.Dispose();
         }
 
-        private void MoveExistingTo(int index, __MicroComIAvnMenuItemProxy item)
+        private void MoveExistingTo(int32 index, __MicroComIAvnMenuItemProxy item)
         {
             _menuItems.Remove(item);
             _menuItems.Insert(index, item);
@@ -112,7 +112,7 @@ namespace Avalonia.Native.Interop.Impl
             InsertItem(index, item);
         }
 
-        private __MicroComIAvnMenuItemProxy CreateNewAt(IAvaloniaNativeFactory factory, int index, NativeMenuItemBase item)
+        private __MicroComIAvnMenuItemProxy CreateNewAt(IAvaloniaNativeFactory factory, int32 index, NativeMenuItemBase item)
         {
             var result = CreateNew(factory, item);
 
@@ -164,7 +164,7 @@ namespace Avalonia.Native.Interop.Impl
                 throw new ArgumentException("The menu being updated does not match.", nameof(menu));
             }
 
-            for (int i = 0; i < menu.Items.Count; i++)
+            for (int32 i = 0; i < menu.Items.Count; i++)
             {
                 __MicroComIAvnMenuItemProxy nativeItem;
 

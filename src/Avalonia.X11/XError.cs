@@ -7,7 +7,7 @@ namespace Avalonia.X11
         private static readonly XErrorHandler s_errorHandlerDelegate = Handler;
         public static XErrorEvent LastError;
 
-        private static int Handler(IntPtr display, ref XErrorEvent error)
+        private static int32 Handler(IntPtr display, ref XErrorEvent error)
         {
             LastError = error;
             return 0;

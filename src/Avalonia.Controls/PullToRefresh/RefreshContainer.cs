@@ -12,7 +12,7 @@ namespace Avalonia.Controls
     /// </summary>
     public class RefreshContainer : ContentControl
     {
-        internal const int DefaultPullDimensionSize = 100;
+        internal const int32 DefaultPullDimensionSize = 100;
 
         private bool _hasDefaultRefreshInfoProviderAdapter;
 

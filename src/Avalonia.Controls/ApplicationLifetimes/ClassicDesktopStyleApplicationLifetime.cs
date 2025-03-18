@@ -14,7 +14,7 @@ namespace Avalonia.Controls.ApplicationLifetimes
 {
     public class ClassicDesktopStyleApplicationLifetime : IClassicDesktopStyleApplicationLifetime, IDisposable
     {
-        private int _exitCode;
+        private int32 _exitCode;
         private CancellationTokenSource? _cts;
         private bool _isShuttingDown;
         private readonly AvaloniaList<Window> _windows = new();
@@ -57,12 +57,12 @@ namespace Avalonia.Controls.ApplicationLifetimes
                 TryShutdown();
         }
 
-        public void Shutdown(int exitCode = 0)
+        public void Shutdown(int32 exitCode = 0)
         {
             DoShutdown(new ShutdownRequestedEventArgs(), true, true, exitCode);
         }
 
-        public bool TryShutdown(int exitCode = 0)
+        public bool TryShutdown(int32 exitCode = 0)
         {
             return DoShutdown(new ShutdownRequestedEventArgs(), true, false, exitCode);
         }
@@ -115,7 +115,7 @@ namespace Avalonia.Controls.ApplicationLifetimes
                 lifetimeEvents.ShutdownRequested += OnShutdownRequested;
         }
 
-        public int Start(string[] args)
+        public int32 Start(string[] args)
         {
             return StartCore(args);
         }
@@ -124,12 +124,12 @@ namespace Avalonia.Controls.ApplicationLifetimes
         /// Since the lifetime must be set up/prepared with 'args' before executing Start(), an overload with no parameters seems more suitable for integrating with some lifetime manager providers, such as MS HostApplicationBuilder.
         /// </summary>
         /// <returns>exit code</returns>
-        public int Start()
+        public int32 Start()
         {
             return StartCore(Args ?? Array.Empty<string>());
         }
 
-        internal int StartCore(string[] args)
+        internal int32 StartCore(string[] args)
         {
             SetupCore(args);
 
@@ -161,7 +161,7 @@ namespace Avalonia.Controls.ApplicationLifetimes
             ShutdownRequestedEventArgs e,
             bool isProgrammatic,
             bool force = false,
-            int exitCode = 0)
+            int32 exitCode = 0)
         {
             if (!force)
             {
@@ -268,7 +268,7 @@ namespace Avalonia
         /// <param name="args">Startup arguments.</param>
         /// <param name="lifetimeBuilder">Lifetime builder to modify the lifetime before application started.</param>
         /// <returns>Exit code.</returns>
-        public static int StartWithClassicDesktopLifetime(
+        public static int32 StartWithClassicDesktopLifetime(
             this AppBuilder builder, string[] args,
             Action<IClassicDesktopStyleApplicationLifetime>? lifetimeBuilder = null)
         {
@@ -284,7 +284,7 @@ namespace Avalonia
         /// <param name="args">Startup arguments.</param>
         /// <param name="shutdownMode">Lifetime shutdown mode.</param>
         /// <returns>Exit code.</returns>
-        public static int StartWithClassicDesktopLifetime(
+        public static int32 StartWithClassicDesktopLifetime(
             this AppBuilder builder, string[] args, ShutdownMode shutdownMode)
         {
             var lifetime = PrepareLifetime(builder, args, l => l.ShutdownMode = shutdownMode);

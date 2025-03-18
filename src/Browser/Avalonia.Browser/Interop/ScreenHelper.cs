@@ -37,5 +37,5 @@ internal static partial class ScreenHelper
     public static partial bool IsPrimary(JSObject screen);
 
     [JSImport("ScreenHelper.getCurrentOrientation", AvaloniaModule.MainModuleName)]
-    public static partial int GetCurrentOrientation(JSObject screen);
+    public static partial int32 GetCurrentOrientation(JSObject screen);
 }

@@ -16,7 +16,7 @@ namespace Avalonia.Media
     {
         public const double DefaultRealToIdeal = 28800.0 / 96;
         public const double DefaultIdealToReal = 1 / DefaultRealToIdeal;
-        public const int IdealInfiniteWidth = 0x3FFFFFFE;
+        public const int32 IdealInfiniteWidth = 0x3FFFFFFE;
         public const double RealInfiniteWidth = IdealInfiniteWidth * DefaultIdealToReal;
 
         public const double GreatestMultiplierOfEm = 100;
@@ -33,7 +33,7 @@ namespace Avalonia.Media
         private double _maxTextWidth = double.PositiveInfinity;
         private double[]? _maxTextWidths;
         private double _maxTextHeight = double.PositiveInfinity;
-        private int _maxLineCount = int.MaxValue;
+        private int32 _maxLineCount = int32.MaxValue;
         private TextTrimming _trimming = TextTrimming.WordEllipsis;
 
         // text source callbacks
@@ -117,13 +117,13 @@ namespace Avalonia.Media
 
         private static void ValidateFlowDirection(FlowDirection flowDirection, string parameterName)
         {
-            if ((int)flowDirection < 0 || (int)flowDirection > (int)FlowDirection.RightToLeft)
+            if ((int32)flowDirection < 0 || (int32)flowDirection > (int32)FlowDirection.RightToLeft)
             {
-                throw new InvalidEnumArgumentException(parameterName, (int)flowDirection, typeof(FlowDirection));
+                throw new InvalidEnumArgumentException(parameterName, (int32)flowDirection, typeof(FlowDirection));
             }
         }
 
-        private int ValidateRange(int startIndex, int count)
+        private int32 ValidateRange(int32 startIndex, int32 count)
         {
             if (startIndex < 0 || startIndex > _text.Length)
             {
@@ -160,7 +160,7 @@ namespace Avalonia.Media
         /// <param name="foregroundBrush">Foreground brush</param>
         /// <param name="startIndex">The start index of initial character to apply the change to.</param>
         /// <param name="count">The number of characters the change should be applied to.</param>
-        public void SetForegroundBrush(IBrush? foregroundBrush, int startIndex, int count)
+        public void SetForegroundBrush(IBrush? foregroundBrush, int32 startIndex, int32 count)
         {
             var limit = ValidateRange(startIndex, count);
             for (var i = startIndex; i < limit;)
@@ -214,7 +214,7 @@ namespace Avalonia.Media
         /// <param name="fontFeatures">Feature collection</param>
         /// <param name="startIndex">The start index of initial character to apply the change to.</param>
         /// <param name="count">The number of characters the change should be applied to.</param>
-        public void SetFontFeatures(FontFeatureCollection? fontFeatures, int startIndex, int count)
+        public void SetFontFeatures(FontFeatureCollection? fontFeatures, int32 startIndex, int32 count)
         {
             var limit = ValidateRange(startIndex, count);
             for (var i = startIndex; i < limit;)
@@ -270,7 +270,7 @@ namespace Avalonia.Media
         /// <param name="fontFamily">Font family name</param>
         /// <param name="startIndex">The start index of initial character to apply the change to.</param>
         /// <param name="count">The number of characters the change should be applied to.</param>
-        public void SetFontFamily(string fontFamily, int startIndex, int count)
+        public void SetFontFamily(string fontFamily, int32 startIndex, int32 count)
         {
             if (fontFamily == null)
             {
@@ -295,7 +295,7 @@ namespace Avalonia.Media
         /// <param name="fontFamily">Font family</param>
         /// <param name="startIndex">The start index of initial character to apply the change to.</param>
         /// <param name="count">The number of characters the change should be applied to.</param>
-        public void SetFontFamily(FontFamily fontFamily, int startIndex, int count)
+        public void SetFontFamily(FontFamily fontFamily, int32 startIndex, int32 count)
         {
             if (fontFamily == null)
             {
@@ -361,7 +361,7 @@ namespace Avalonia.Media
         /// <param name="emSize">Font em size</param>
         /// <param name="startIndex">The start index of initial character to apply the change to.</param>
         /// <param name="count">The number of characters the change should be applied to.</param>
-        public void SetFontSize(double emSize, int startIndex, int count)
+        public void SetFontSize(double emSize, int32 startIndex, int32 count)
         {
             ValidateFontSize(emSize);
 
@@ -420,7 +420,7 @@ namespace Avalonia.Media
         /// <param name="culture">The new culture for the text object.</param>
         /// <param name="startIndex">The start index of initial character to apply the change to.</param>
         /// <param name="count">The number of characters the change should be applied to.</param>
-        public void SetCulture(CultureInfo culture, int startIndex, int count)
+        public void SetCulture(CultureInfo culture, int32 startIndex, int32 count)
         {
             if (culture is null)
             {
@@ -483,7 +483,7 @@ namespace Avalonia.Media
         /// <param name="weight">Font weight</param>
         /// <param name="startIndex">The start index of initial character to apply the change to.</param>
         /// <param name="count">The number of characters the change should be applied to.</param>
-        public void SetFontWeight(FontWeight weight, int startIndex, int count)
+        public void SetFontWeight(FontWeight weight, int32 startIndex, int32 count)
         {
             var limit = ValidateRange(startIndex, count);
 
@@ -541,7 +541,7 @@ namespace Avalonia.Media
         /// <param name="style">Font style</param>
         /// <param name="startIndex">The start index of initial character to apply the change to.</param>
         /// <param name="count">The number of characters the change should be applied to.</param>
-        public void SetFontStyle(FontStyle style, int startIndex, int count)
+        public void SetFontStyle(FontStyle style, int32 startIndex, int32 count)
         {
             var limit = ValidateRange(startIndex, count);
             for (var i = startIndex; i < limit;)
@@ -599,7 +599,7 @@ namespace Avalonia.Media
         /// <param name="typeface">Typeface</param>
         /// <param name="startIndex">The start index of initial character to apply the change to.</param>
         /// <param name="count">The number of characters the change should be applied to.</param>
-        public void SetFontTypeface(Typeface typeface, int startIndex, int count)
+        public void SetFontTypeface(Typeface typeface, int32 startIndex, int32 count)
         {
             var limit = ValidateRange(startIndex, count);
 
@@ -657,7 +657,7 @@ namespace Avalonia.Media
         /// <param name="textDecorations">Text decorations</param>
         /// <param name="startIndex">The start index of initial character to apply the change to.</param>
         /// <param name="count">The number of characters the change should be applied to.</param>
-        public void SetTextDecorations(TextDecorationCollection textDecorations, int startIndex, int count)
+        public void SetTextDecorations(TextDecorationCollection textDecorations, int32 startIndex, int32 count)
         {
             var limit = ValidateRange(startIndex, count);
 
@@ -706,7 +706,7 @@ namespace Avalonia.Media
         /// </summary>
         private struct LineEnumerator : IEnumerator, IDisposable
         {
-            private int _lineCount;
+            private int32 _lineCount;
             private double _totalHeight;
             private TextLine? _nextLine;
             private readonly TextFormatter _formatter;
@@ -718,8 +718,8 @@ namespace Avalonia.Media
 
             // line break before _currentLine, needed in case we have to reformat it with collapsing symbol
             private TextLineBreak? _previousLineBreak;
-            private int _position;
-            private int _length;
+            private int32 _position;
+            private int32 _length;
 
             internal LineEnumerator(FormattedText text)
             {
@@ -744,13 +744,13 @@ namespace Avalonia.Media
                 _nextLine = null;
             }
 
-            public int Position 
+            public int32 Position 
             { 
                 get => _position; 
                 private set => _position = value;
             }
 
-            public int Length 
+            public int32 Length 
             { 
                 get => _length; 
                 private set => _length = value; 
@@ -777,7 +777,7 @@ namespace Avalonia.Media
                 }
             }
 
-            private double MaxLineLength(int line)
+            private double MaxLineLength(int32 line)
             {
                 if (_that._maxTextWidths == null)
                     return _that._maxTextWidth;
@@ -917,7 +917,7 @@ namespace Avalonia.Media
             /// <summary>
             /// Wrapper of TextFormatter.FormatLine that auto-collapses the line if needed.
             /// </summary>
-            private TextLine? FormatLine(ITextSource textSource, int textSourcePosition, double maxLineLength, TextParagraphProperties paraProps, TextLineBreak? lineBreak)
+            private TextLine? FormatLine(ITextSource textSource, int32 textSourcePosition, double maxLineLength, TextParagraphProperties paraProps, TextLineBreak? lineBreak)
             {
                 var line = _formatter.FormatLine(
                     textSource,
@@ -1169,7 +1169,7 @@ namespace Avalonia.Media
         /// whichever occurs first.
         /// Use the Trimming property to control how the omission of text is indicated
         /// </summary>
-        public int MaxLineCount
+        public int32 MaxLineCount
         {
             set
             {
@@ -1397,7 +1397,7 @@ namespace Avalonia.Media
         /// <param name="startIndex">The start index of initial character the bounds should be obtained for.</param>
         /// <param name="count">The number of characters the bounds should be obtained for.</param>
         /// <returns>Geometry that surrounds the specified character range.</returns>
-        public Geometry? BuildHighlightGeometry(Point origin, int startIndex, int count)
+        public Geometry? BuildHighlightGeometry(Point origin, int32 startIndex, int32 count)
         {
             ValidateRange(startIndex, count);
 
@@ -1411,8 +1411,8 @@ namespace Avalonia.Media
                 {
                     var currentLine = enumerator.Current!;
 
-                    int x0 = Math.Max(enumerator.Position, startIndex);
-                    int x1 = Math.Min(enumerator.Position + enumerator.Length, startIndex + count);
+                    int32 x0 = Math.Max(enumerator.Position, startIndex);
+                    int32 x1 = Math.Min(enumerator.Position + enumerator.Length, startIndex + count);
 
                     // check if this line is intersects with the specified character range
                     if (x0 < x1)
@@ -1681,7 +1681,7 @@ namespace Avalonia.Media
             }
 
             /// <inheritdoc/>
-            public TextRun GetTextRun(int textSourceCharacterIndex)
+            public TextRun GetTextRun(int32 textSourceCharacterIndex)
             {
                 if (textSourceCharacterIndex >= _that._text.Length)
                 {

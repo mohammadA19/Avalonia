@@ -21,8 +21,8 @@ public partial class LibInputBackend
         switch (type)
         {
             case LibInputEventType.LIBINPUT_EVENT_POINTER_MOTION_ABSOLUTE:
-                _mousePosition = new Point(libinput_event_pointer_get_absolute_x_transformed(pev, (int)info.Width),
-                    libinput_event_pointer_get_absolute_y_transformed(pev, (int)info.Height));
+                _mousePosition = new Point(libinput_event_pointer_get_absolute_x_transformed(pev, (int32)info.Width),
+                    libinput_event_pointer_get_absolute_y_transformed(pev, (int32)info.Height));
                 ScheduleInput(new RawPointerEventArgs(_mouse, ts, InputRoot, RawPointerEventType.Move, _mousePosition,
                     modifiers));
                 break;

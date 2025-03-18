@@ -12,7 +12,7 @@ namespace Avalonia.Markup.Xaml.UnitTests.MarkupExtensions;
 public class OptionsMarkupExtensionTests : XamlTestBase
 {
     public static Func<object, bool> RaisedOption;
-    public static int? ObjectsCreated;
+    public static int32? ObjectsCreated;
 
     [Fact]
     public void Resolve_Default_Value()
@@ -547,7 +547,7 @@ public class OptionsMarkupExtensionNoServiceProvider
     [MarkupExtensionDefaultOption]
     public object Default { get; set; }
 
-    public static bool ShouldProvideOption(int option)
+    public static bool ShouldProvideOption(int32 option)
     {
         return OptionsMarkupExtensionTests.RaisedOption(option);
     }
@@ -570,9 +570,9 @@ public class OptionsMarkupExtensionWithProperty
     [MarkupExtensionOption(5)]
     public bool OptionA { get; set; }
 
-    public int Property { get; set; }
+    public int32 Property { get; set; }
 
-    public bool ShouldProvideOption(int option) => option == Property;
+    public bool ShouldProvideOption(int32 option) => option == Property;
 
     public object ProvideValue() { throw null; }
 }

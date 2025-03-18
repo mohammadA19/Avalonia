@@ -42,7 +42,7 @@ namespace Avalonia.Visuals.UnitTests.Media.TextFormatting
                         var lineNumber = 0;
 
                         // Process each line
-                        int[] levels = null;
+                        int32[] levels = null;
 
                         while (!reader.EndOfStream)
                         {
@@ -72,7 +72,7 @@ namespace Avalonia.Visuals.UnitTests.Media.TextFormatting
                                             return -1;
                                         }
 
-                                        return int.Parse(x);
+                                        return int32.Parse(x);
 
                                     }).ToArray();
                                 }

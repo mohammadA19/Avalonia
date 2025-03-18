@@ -21,7 +21,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
 {
     internal static class BinaryReaderExtensions
     {
-        public static int ReadInt32BE(this BinaryReader reader)
+        public static int32 ReadInt32BE(this BinaryReader reader)
         {
             var bytes = reader.ReadBytes(4);
 
@@ -45,7 +45,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return BitConverter.ToUInt32(bytes, 0);
         }
 
-        public static void WriteBE(this BinaryWriter writer, int value)
+        public static void WriteBE(this BinaryWriter writer, int32 value)
         {
             var bytes = BitConverter.GetBytes(value);
 

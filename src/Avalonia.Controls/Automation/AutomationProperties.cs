@@ -32,8 +32,8 @@ namespace Avalonia.Automation
 
     public static class AutomationProperties
     {
-        internal const int AutomationPositionInSetDefault = -1;
-        internal const int AutomationSizeOfSetDefault = -1;
+        internal const int32 AutomationPositionInSetDefault = -1;
+        internal const int32 AutomationSizeOfSetDefault = -1;
 
         /// <summary>
         /// Defines the AutomationProperties.AcceleratorKey attached property.
@@ -218,8 +218,8 @@ namespace Avalonia.Automation
         /// of elements which are considered to be siblings. PositionInSet works in coordination
         /// with the SizeOfSet property to describe the ordinal location in the set.
         /// </remarks>
-        public static readonly AttachedProperty<int> PositionInSetProperty =
-            AvaloniaProperty.RegisterAttached<StyledElement, int>(
+        public static readonly AttachedProperty<int32> PositionInSetProperty =
+            AvaloniaProperty.RegisterAttached<StyledElement, int32>(
                 "PositionInSet",
                 typeof(AutomationProperties),
                 AutomationPositionInSetDefault);
@@ -234,8 +234,8 @@ namespace Avalonia.Automation
         /// that are considered to be siblings. SizeOfSet works in coordination with the PositionInSet
         /// property to describe the count of items in the set.
         /// </remarks>
-        public static readonly AttachedProperty<int> SizeOfSetProperty =
-            AvaloniaProperty.RegisterAttached<StyledElement, int>(
+        public static readonly AttachedProperty<int32> SizeOfSetProperty =
+            AvaloniaProperty.RegisterAttached<StyledElement, int32>(
                 "SizeOfSet",
                 typeof(AutomationProperties),
                 AutomationSizeOfSetDefault);
@@ -513,7 +513,7 @@ namespace Avalonia.Automation
         /// <summary>
         /// Helper for setting the value of the <see cref="PositionInSetProperty"/> on a StyledElement. 
         /// </summary>
-        public static void SetPositionInSet(StyledElement element, int value)
+        public static void SetPositionInSet(StyledElement element, int32 value)
         {
             _ = element ?? throw new ArgumentNullException(nameof(element));
             element.SetValue(PositionInSetProperty, value);
@@ -522,7 +522,7 @@ namespace Avalonia.Automation
         /// <summary>
         /// Helper for reading the value of the <see cref="PositionInSetProperty"/> on a StyledElement.
         /// </summary>
-        public static int GetPositionInSet(StyledElement element)
+        public static int32 GetPositionInSet(StyledElement element)
         {
             _ = element ?? throw new ArgumentNullException(nameof(element));
             return element.GetValue(PositionInSetProperty);
@@ -531,7 +531,7 @@ namespace Avalonia.Automation
         /// <summary>
         /// Helper for setting the value of the <see cref="SizeOfSetProperty"/> on a StyledElement. 
         /// </summary>
-        public static void SetSizeOfSet(StyledElement element, int value)
+        public static void SetSizeOfSet(StyledElement element, int32 value)
         {
             _ = element ?? throw new ArgumentNullException(nameof(element));
             element.SetValue(SizeOfSetProperty, value);
@@ -540,7 +540,7 @@ namespace Avalonia.Automation
         /// <summary>
         /// Helper for reading the value of the <see cref="SizeOfSetProperty"/> on a StyledElement.
         /// </summary>
-        public static int GetSizeOfSet(StyledElement element)
+        public static int32 GetSizeOfSet(StyledElement element)
         {
             _ = element ?? throw new ArgumentNullException(nameof(element));
             return element.GetValue(SizeOfSetProperty);

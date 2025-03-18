@@ -9,13 +9,13 @@ namespace Avalonia.Rendering
     public class SleepLoopRenderTimer : IRenderTimer
     {
         private Action<TimeSpan>? _tick;
-        private int _count;
+        private int32 _count;
         private readonly object _lock = new object();
         private bool _running;
         private readonly Stopwatch _st = Stopwatch.StartNew();
         private readonly TimeSpan _timeBetweenTicks;
 
-        public SleepLoopRenderTimer(int fps)
+        public SleepLoopRenderTimer(int32 fps)
         {
             _timeBetweenTicks = TimeSpan.FromSeconds(1d / fps);
         }

@@ -18,7 +18,7 @@ namespace ControlCatalog.Pages
             InitializeComponent();
             _dropState = this.Get<TextBlock>("DropState");
 
-            int textCount = 0;
+            int32 textCount = 0;
 
             SetupDnd(
                 "Text",

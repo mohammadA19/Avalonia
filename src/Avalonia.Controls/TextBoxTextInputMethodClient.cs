@@ -156,7 +156,7 @@ namespace Avalonia.Controls
 
         public override void SetPreeditText(string? preeditText) => SetPreeditText(preeditText, null);
 
-        public override void SetPreeditText(string? preeditText, int? cursorPos)
+        public override void SetPreeditText(string? preeditText, int32? cursorPos)
         {
             if (_presenter == null || _parent == null)
             {

@@ -44,7 +44,7 @@ namespace Avalonia.Markup.Xaml.UnitTests.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is int i)
+            if (value is int32 i)
             {
                 if (i > 0)
                 {

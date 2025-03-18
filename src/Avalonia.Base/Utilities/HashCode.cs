@@ -53,7 +53,7 @@ internal unsafe struct HashCode
         RotateLeft(v1, 1) + RotateLeft(v2, 7) + RotateLeft(v3, 12) + RotateLeft(v4, 18);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint RotateLeft(uint value, int offset) =>
+    private static uint RotateLeft(uint value, int32 offset) =>
         (value << offset) | (value >> (32 - offset));
 
     private static uint MixEmptyState() =>
@@ -76,7 +76,7 @@ internal unsafe struct HashCode
     public void Add<T>(T value) =>
         Add(value?.GetHashCode() ?? 0);
 
-    private void Add(int value)
+    private void Add(int32 value)
     {
         uint val = (uint)value;
 
@@ -105,7 +105,7 @@ internal unsafe struct HashCode
         }
     }
 
-    public int ToHashCode()
+    public int32 ToHashCode()
     {
         // Storing the value of _length locally shaves of quite a few bytes
         // in the resulting machine code.
@@ -143,7 +143,7 @@ internal unsafe struct HashCode
         }
 
         hash = MixFinal(hash);
-        return (int)hash;
+        return (int32)hash;
     }
 }
 #endif

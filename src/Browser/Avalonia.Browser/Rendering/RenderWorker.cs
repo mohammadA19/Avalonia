@@ -13,12 +13,12 @@ namespace Avalonia.Browser.Rendering;
 internal partial class RenderWorker
 {
     [DllImport("*")]
-    private static extern int pthread_self();
+    private static extern int32 pthread_self();
 
     [JSImport("WebRenderTargetRegistry.initializeWorker", AvaloniaModule.MainModuleName)]
     private static partial void InitializeRenderTargets(); 
     
-    internal static int WorkerThreadId;
+    internal static int32 WorkerThreadId;
     
     public static Task InitializeAsync()
     {

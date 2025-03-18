@@ -150,7 +150,7 @@ namespace Avalonia.Rendering.Composition.Expressions
             // a*b+c [a,b,c] [*,+], call with (0, 2)
             // ToExpression(a*b) + ToExpression(c)
             // a+b*c -> ToExpression(a) + ToExpression(b*c)
-            Expression ToExpression(int from, int to)
+            Expression ToExpression(int32 from, int32 to)
             {
                 if (to - from == 0)
                     return _expressions[from];

@@ -32,8 +32,8 @@ namespace Avalonia.Collections.Pooled
     internal class PooledList<T> : IList<T>, IReadOnlyPooledList<T>, IList, IDisposable, IDeserializationCallback
     {
         // internal constant copied from Array.MaxArrayLength
-        private const int MaxArrayLength = 0x7FEFFFFF;
-        private const int DefaultCapacity = 4;
+        private const int32 MaxArrayLength = 0x7FEFFFFF;
+        private const int32 DefaultCapacity = 4;
         private static readonly T[] s_emptyArray = Array.Empty<T>();
 
         [NonSerialized]
@@ -42,8 +42,8 @@ namespace Avalonia.Collections.Pooled
         private object? _syncRoot;
 
         private T[] _items; // Do not rename (binary serialization)
-        private int _size; // Do not rename (binary serialization)
-        private int _version; // Do not rename (binary serialization)
+        private int32 _size; // Do not rename (binary serialization)
+        private int32 _version; // Do not rename (binary serialization)
         private readonly bool _clearOnFree;
 
         #region Constructors
@@ -90,56 +90,56 @@ namespace Avalonia.Collections.Pooled
         /// initially empty, but will have room for the given number of elements
         /// before any reallocations are required.
         /// </summary>
-        public PooledList(int capacity) : this(capacity, ClearMode.Auto, ArrayPool<T>.Shared) { }
+        public PooledList(int32 capacity) : this(capacity, ClearMode.Auto, ArrayPool<T>.Shared) { }
 
         /// <summary>
         /// Constructs a List with a given initial capacity. The list is
         /// initially empty, but will have room for the given number of elements
         /// before any reallocations are required.
         /// </summary>
-        public PooledList(int capacity, bool sizeToCapacity) : this(capacity, ClearMode.Auto, ArrayPool<T>.Shared, sizeToCapacity) { }
+        public PooledList(int32 capacity, bool sizeToCapacity) : this(capacity, ClearMode.Auto, ArrayPool<T>.Shared, sizeToCapacity) { }
 
         /// <summary>
         /// Constructs a List with a given initial capacity. The list is
         /// initially empty, but will have room for the given number of elements
         /// before any reallocations are required.
         /// </summary>
-        public PooledList(int capacity, ClearMode clearMode) : this(capacity, clearMode, ArrayPool<T>.Shared) { }
+        public PooledList(int32 capacity, ClearMode clearMode) : this(capacity, clearMode, ArrayPool<T>.Shared) { }
 
         /// <summary>
         /// Constructs a List with a given initial capacity. The list is
         /// initially empty, but will have room for the given number of elements
         /// before any reallocations are required.
         /// </summary>
-        public PooledList(int capacity, ClearMode clearMode, bool sizeToCapacity) : this(capacity, clearMode, ArrayPool<T>.Shared, sizeToCapacity) { }
+        public PooledList(int32 capacity, ClearMode clearMode, bool sizeToCapacity) : this(capacity, clearMode, ArrayPool<T>.Shared, sizeToCapacity) { }
 
         /// <summary>
         /// Constructs a List with a given initial capacity. The list is
         /// initially empty, but will have room for the given number of elements
         /// before any reallocations are required.
         /// </summary>
-        public PooledList(int capacity, ArrayPool<T> customPool) : this(capacity, ClearMode.Auto, customPool) { }
+        public PooledList(int32 capacity, ArrayPool<T> customPool) : this(capacity, ClearMode.Auto, customPool) { }
 
         /// <summary>
         /// Constructs a List with a given initial capacity. The list is
         /// initially empty, but will have room for the given number of elements
         /// before any reallocations are required.
         /// </summary>
-        public PooledList(int capacity, ArrayPool<T> customPool, bool sizeToCapacity) : this(capacity, ClearMode.Auto, customPool, sizeToCapacity) { }
+        public PooledList(int32 capacity, ArrayPool<T> customPool, bool sizeToCapacity) : this(capacity, ClearMode.Auto, customPool, sizeToCapacity) { }
 
         /// <summary>
         /// Constructs a List with a given initial capacity. The list is
         /// initially empty, but will have room for the given number of elements
         /// before any reallocations are required.
         /// </summary>
-        public PooledList(int capacity, ClearMode clearMode, ArrayPool<T> customPool) : this(capacity, clearMode, customPool, false) { }
+        public PooledList(int32 capacity, ClearMode clearMode, ArrayPool<T> customPool) : this(capacity, clearMode, customPool, false) { }
 
         /// <summary>
         /// Constructs a List with a given initial capacity. The list is
         /// initially empty, but will have room for the given number of elements
         /// before any reallocations are required.
         /// </summary>
-        public PooledList(int capacity, ClearMode clearMode, ArrayPool<T> customPool, bool sizeToCapacity)
+        public PooledList(int32 capacity, ClearMode clearMode, ArrayPool<T> customPool, bool sizeToCapacity)
         {
             if (capacity < 0)
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
@@ -225,7 +225,7 @@ namespace Avalonia.Collections.Pooled
             _pool = customPool ?? ArrayPool<T>.Shared;
             _clearOnFree = ShouldClear(clearMode);
 
-            int count = span.Length;
+            int32 count = span.Length;
             if (count == 0)
             {
                 _items = s_emptyArray;
@@ -276,7 +276,7 @@ namespace Avalonia.Collections.Pooled
                     break;
 
                 case ICollection<T> c:
-                    int count = c.Count;
+                    int32 count = c.Count;
                     if (count == 0)
                     {
                         _items = s_emptyArray;
@@ -317,7 +317,7 @@ namespace Avalonia.Collections.Pooled
         /// Memory of the list is reallocated to the given capacity.
         /// Note that the return value for this property may be larger than the property was set to.
         /// </summary>
-        public int Capacity
+        public int32 Capacity
         {
             get => _items.Length;
             set
@@ -351,7 +351,7 @@ namespace Avalonia.Collections.Pooled
         /// <summary>
         /// Read-only property describing how many elements are in the List.
         /// </summary>
-        public int Count => _size;
+        public int32 Count => _size;
 
         /// <summary>
         /// Returns the ClearMode behavior for the collection, denoting whether values are
@@ -365,7 +365,7 @@ namespace Avalonia.Collections.Pooled
 
         bool IList.IsReadOnly => false;
 
-        int ICollection.Count => _size;
+        int32 ICollection.Count => _size;
 
         bool ICollection.IsSynchronized => false;
 
@@ -385,7 +385,7 @@ namespace Avalonia.Collections.Pooled
         /// <summary>
         /// Gets or sets the element at the given index.
         /// </summary>
-        public T this[int index]
+        public T this[int32 index]
         {
             get
             {
@@ -415,7 +415,7 @@ namespace Avalonia.Collections.Pooled
             return ((value is T) || (value == null && default(T) == null));
         }
 
-        object? IList.this[int index]
+        object? IList.this[int32 index]
         {
             get
             {
@@ -445,7 +445,7 @@ namespace Avalonia.Collections.Pooled
         public void Add(T item)
         {
             _version++;
-            int size = _size;
+            int32 size = _size;
             if ((uint)size < (uint)_items.Length)
             {
                 _size = size + 1;
@@ -461,13 +461,13 @@ namespace Avalonia.Collections.Pooled
         [MethodImpl(MethodImplOptions.NoInlining)]
         private void AddWithResize(T item)
         {
-            int size = _size;
+            int32 size = _size;
             EnsureCapacity(size + 1);
             _size = size + 1;
             _items[size] = item;
         }
 
-        int IList.Add(object? item)
+        int32 IList.Add(object? item)
         {
             ThrowHelper.IfNullAndNullsAreIllegalThenThrow<T>(item, ExceptionArgument.item);
 
@@ -519,7 +519,7 @@ namespace Avalonia.Collections.Pooled
         /// of the collection.
         /// </summary>
         /// <param name="count">The number of items to add.</param>
-        public Span<T> AddSpan(int count)
+        public Span<T> AddSpan(int32 count)
             => InsertSpan(_size, count);
 
         public ReadOnlyCollection<T> AsReadOnly()
@@ -550,7 +550,7 @@ namespace Avalonia.Collections.Pooled
         /// the search value should be inserted into the list in order for the list
         /// to remain sorted.
         /// </para></remarks>
-        public int BinarySearch(int index, int count, T item, IComparer<T>? comparer)
+        public int32 BinarySearch(int32 index, int32 count, T item, IComparer<T>? comparer)
         {
             if (index < 0)
                 ThrowHelper.ThrowIndexArgumentOutOfRange_NeedNonNegNumException();
@@ -567,7 +567,7 @@ namespace Avalonia.Collections.Pooled
         /// algorithm. If the item implements <see cref="IComparable{T}"/>
         /// then that is used for comparison, otherwise <see cref="Comparer{T}.Default"/> is used.
         /// </summary>
-        public int BinarySearch(T item)
+        public int32 BinarySearch(T item)
             => BinarySearch(0, Count, item, null);
 
         /// <summary>
@@ -575,7 +575,7 @@ namespace Avalonia.Collections.Pooled
         /// algorithm. If the item implements <see cref="IComparable{T}"/>
         /// then that is used for comparison, otherwise <see cref="Comparer{T}.Default"/> is used.
         /// </summary>
-        public int BinarySearch(T item, IComparer<T> comparer)
+        public int32 BinarySearch(T item, IComparer<T> comparer)
             => BinarySearch(0, Count, item, comparer);
 
         /// <summary>
@@ -585,7 +585,7 @@ namespace Avalonia.Collections.Pooled
         public void Clear()
         {
             _version++;
-            int size = _size;
+            int32 size = _size;
             _size = 0;
 
             if (size > 0 && _clearOnFree)
@@ -630,7 +630,7 @@ namespace Avalonia.Collections.Pooled
             }
 
             var list = new PooledList<TOutput>(_size);
-            for (int i = 0; i < _size; i++)
+            for (int32 i = 0; i < _size; i++)
             {
                 list._items[i] = converter(_items[i]);
             }
@@ -649,14 +649,14 @@ namespace Avalonia.Collections.Pooled
             Span.CopyTo(span);
         }
 
-        void ICollection<T>.CopyTo(T[] array, int arrayIndex)
+        void ICollection<T>.CopyTo(T[] array, int32 arrayIndex)
         {
             Array.Copy(_items, 0, array, arrayIndex, _size);
         }
 
         // Copies this List into array, which must be of a 
         // compatible array type.  
-        void ICollection.CopyTo(Array array, int arrayIndex)
+        void ICollection.CopyTo(Array array, int32 arrayIndex)
         {
             _ = array ?? throw new ArgumentNullException(nameof(array));
 
@@ -681,11 +681,11 @@ namespace Avalonia.Collections.Pooled
         /// capacity is increased to twice the current capacity or to min,
         /// whichever is larger.
         /// </summary>
-        private void EnsureCapacity(int min)
+        private void EnsureCapacity(int32 min)
         {
             if (_items.Length < min)
             {
-                int newCapacity = _items.Length == 0 ? DefaultCapacity : _items.Length * 2;
+                int32 newCapacity = _items.Length == 0 ? DefaultCapacity : _items.Length * 2;
                 // Allow the list to grow to maximum possible capacity (~2G elements) before encountering overflow.
                 // Note that this check works even when _items.Length overflowed thanks to the (uint) cast
                 if ((uint)newCapacity > MaxArrayLength)
@@ -704,7 +704,7 @@ namespace Avalonia.Collections.Pooled
             if (match == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
 
-            for (int i = 0; i < _size; i++)
+            for (int32 i = 0; i < _size; i++)
             {
                 if (match(_items[i]))
                 {
@@ -723,7 +723,7 @@ namespace Avalonia.Collections.Pooled
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
 
             var list = new PooledList<T>();
-            for (int i = 0; i < _size; i++)
+            for (int32 i = 0; i < _size; i++)
             {
                 if (match(_items[i]))
                 {
@@ -733,13 +733,13 @@ namespace Avalonia.Collections.Pooled
             return list;
         }
 
-        public int FindIndex(Func<T, bool> match)
+        public int32 FindIndex(Func<T, bool> match)
             => FindIndex(0, _size, match);
 
-        public int FindIndex(int startIndex, Func<T, bool> match)
+        public int32 FindIndex(int32 startIndex, Func<T, bool> match)
             => FindIndex(startIndex, _size - startIndex, match);
 
-        public int FindIndex(int startIndex, int count, Func<T, bool> match)
+        public int32 FindIndex(int32 startIndex, int32 count, Func<T, bool> match)
         {
             if ((uint)startIndex > (uint)_size)
                 ThrowHelper.ThrowStartIndexArgumentOutOfRange_ArgumentOutOfRange_Index();
@@ -750,8 +750,8 @@ namespace Avalonia.Collections.Pooled
             if (match is null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
 
-            int endIndex = startIndex + count;
-            for (int i = startIndex; i < endIndex; i++)
+            int32 endIndex = startIndex + count;
+            for (int32 i = startIndex; i < endIndex; i++)
             {
                 if (match(_items[i]))
                     return i;
@@ -766,7 +766,7 @@ namespace Avalonia.Collections.Pooled
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
-            for (int i = _size - 1; i >= 0; i--)
+            for (int32 i = _size - 1; i >= 0; i--)
             {
                 if (match(_items[i]))
                 {
@@ -779,13 +779,13 @@ namespace Avalonia.Collections.Pooled
             return false;
         }
 
-        public int FindLastIndex(Func<T, bool> match)
+        public int32 FindLastIndex(Func<T, bool> match)
             => FindLastIndex(_size - 1, _size, match);
 
-        public int FindLastIndex(int startIndex, Func<T, bool> match)
+        public int32 FindLastIndex(int32 startIndex, Func<T, bool> match)
             => FindLastIndex(startIndex, startIndex + 1, match);
 
-        public int FindLastIndex(int startIndex, int count, Func<T, bool> match)
+        public int32 FindLastIndex(int32 startIndex, int32 count, Func<T, bool> match)
         {
             if (match == null)
             {
@@ -815,8 +815,8 @@ namespace Avalonia.Collections.Pooled
                 ThrowHelper.ThrowCountArgumentOutOfRange_ArgumentOutOfRange_Count();
             }
 
-            int endIndex = startIndex - count;
-            for (int i = startIndex; i > endIndex; i--)
+            int32 endIndex = startIndex - count;
+            for (int32 i = startIndex; i > endIndex; i--)
             {
                 if (match(_items[i]))
                 {
@@ -833,8 +833,8 @@ namespace Avalonia.Collections.Pooled
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.action);
             }
 
-            int version = _version;
-            for (int i = 0; i < _size; i++)
+            int32 version = _version;
+            for (int32 i = 0; i < _size; i++)
             {
                 if (version != _version)
                 {
@@ -865,7 +865,7 @@ namespace Avalonia.Collections.Pooled
         /// <summary>
         /// Equivalent to PooledList.Span.Slice(index, count).
         /// </summary>
-        public Span<T> GetRange(int index, int count)
+        public Span<T> GetRange(int32 index, int32 count)
         {
             if (index < 0)
             {
@@ -889,10 +889,10 @@ namespace Avalonia.Collections.Pooled
         /// Returns the index of the first occurrence of a given value in
         /// this list. The list is searched forwards from beginning to end.
         /// </summary>
-        public int IndexOf(T item)
+        public int32 IndexOf(T item)
             => Array.IndexOf(_items, item, 0, _size);
 
-        int IList.IndexOf(object? item)
+        int32 IList.IndexOf(object? item)
         {
             if (IsCompatibleObject(item))
             {
@@ -906,7 +906,7 @@ namespace Avalonia.Collections.Pooled
         /// this list. The list is searched forwards, starting at index
         /// index and ending at count number of elements. 
         /// </summary>
-        public int IndexOf(T item, int index)
+        public int32 IndexOf(T item, int32 index)
         {
             if (index > _size)
                 ThrowHelper.ThrowArgumentOutOfRange_IndexException();
@@ -918,7 +918,7 @@ namespace Avalonia.Collections.Pooled
         /// this list. The list is searched forwards, starting at index
         /// index and upto count number of elements. 
         /// </summary>
-        public int IndexOf(T item, int index, int count)
+        public int32 IndexOf(T item, int32 index, int32 count)
         {
             if (index > _size)
                 ThrowHelper.ThrowArgumentOutOfRange_IndexException();
@@ -934,7 +934,7 @@ namespace Avalonia.Collections.Pooled
         /// is increased by one. If required, the capacity of the list is doubled
         /// before inserting the new element.
         /// </summary>
-        public void Insert(int index, T item)
+        public void Insert(int32 index, T item)
         {
             // Note that insertions at the end are legal.
             if ((uint)index > (uint)_size)
@@ -953,7 +953,7 @@ namespace Avalonia.Collections.Pooled
             _version++;
         }
 
-        void IList.Insert(int index, object? item)
+        void IList.Insert(int32 index, object? item)
         {
             ThrowHelper.IfNullAndNullsAreIllegalThenThrow<T>(item, ExceptionArgument.item);
 
@@ -973,7 +973,7 @@ namespace Avalonia.Collections.Pooled
         /// capacity or the new size, whichever is larger.  Ranges may be added
         /// to the end of the list by setting index to the List's size.
         /// </summary>
-        public void InsertRange(int index, IEnumerable<T> collection)
+        public void InsertRange(int32 index, IEnumerable<T> collection)
         {
             if ((uint)index > (uint)_size)
             {
@@ -987,7 +987,7 @@ namespace Avalonia.Collections.Pooled
                     break;
 
                 case ICollection<T> c:
-                    int count = c.Count;
+                    int32 count = c.Count;
                     if (count > 0)
                     {
                         EnsureCapacity(_size + count);
@@ -1032,7 +1032,7 @@ namespace Avalonia.Collections.Pooled
         /// capacity or the new size, whichever is larger.  Ranges may be added
         /// to the end of the list by setting index to the List's size.
         /// </summary>
-        public void InsertRange(int index, ReadOnlySpan<T> span)
+        public void InsertRange(int32 index, ReadOnlySpan<T> span)
         {
             var newSpan = InsertSpan(index, span.Length, false);
             span.CopyTo(newSpan);
@@ -1044,7 +1044,7 @@ namespace Avalonia.Collections.Pooled
         /// capacity or the new size, whichever is larger.  Ranges may be added
         /// to the end of the list by setting index to the List's size.
         /// </summary>
-        public void InsertRange(int index, T[] array)
+        public void InsertRange(int32 index, T[] array)
         {
             if (array is null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
@@ -1057,10 +1057,10 @@ namespace Avalonia.Collections.Pooled
         /// the set of items to be added, allowing direct writes to that section
         /// of the collection.
         /// </summary>
-        public Span<T> InsertSpan(int index, int count)
+        public Span<T> InsertSpan(int32 index, int32 count)
             => InsertSpan(index, count, true);
 
-        private Span<T> InsertSpan(int index, int count, bool clearOutput)
+        private Span<T> InsertSpan(int32 index, int32 count, bool clearOutput)
         {
             EnsureCapacity(_size + count);
 
@@ -1087,7 +1087,7 @@ namespace Avalonia.Collections.Pooled
         /// this list. The list is searched backwards, starting at the end 
         /// and ending at the first element in the list.
         /// </summary>
-        public int LastIndexOf(T item)
+        public int32 LastIndexOf(T item)
         {
             if (_size == 0)
             {  // Special case for empty list
@@ -1104,7 +1104,7 @@ namespace Avalonia.Collections.Pooled
         /// this list. The list is searched backwards, starting at index
         /// index and ending at the first element in the list.
         /// </summary>
-        public int LastIndexOf(T item, int index)
+        public int32 LastIndexOf(T item, int32 index)
         {
             if (index >= _size)
                 ThrowHelper.ThrowArgumentOutOfRange_IndexException();
@@ -1116,7 +1116,7 @@ namespace Avalonia.Collections.Pooled
         /// this list. The list is searched backwards, starting at index
         /// index and upto count elements
         /// </summary>
-        public int LastIndexOf(T item, int index, int count)
+        public int32 LastIndexOf(T item, int32 index, int32 count)
         {
             if (Count != 0 && index < 0)
             {
@@ -1151,7 +1151,7 @@ namespace Avalonia.Collections.Pooled
         // decreased by one.
         public bool Remove(T item)
         {
-            int index = IndexOf(item);
+            int32 index = IndexOf(item);
             if (index >= 0)
             {
                 RemoveAt(index);
@@ -1173,12 +1173,12 @@ namespace Avalonia.Collections.Pooled
         /// This method removes all items which match the predicate.
         /// The complexity is O(n).
         /// </summary>
-        public int RemoveAll(Func<T, bool> match)
+        public int32 RemoveAll(Func<T, bool> match)
         {
             if (match == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
 
-            int freeIndex = 0;   // the first free slot in items array
+            int32 freeIndex = 0;   // the first free slot in items array
 
             // Find the first item which needs to be removed.
             while (freeIndex < _size && !match(_items[freeIndex]))
@@ -1186,7 +1186,7 @@ namespace Avalonia.Collections.Pooled
             if (freeIndex >= _size)
                 return 0;
 
-            int current = freeIndex + 1;
+            int32 current = freeIndex + 1;
             while (current < _size)
             {
                 // Find the first item which needs to be kept.
@@ -1206,7 +1206,7 @@ namespace Avalonia.Collections.Pooled
                 Array.Clear(_items, freeIndex, _size - freeIndex);
             }
 
-            int result = _size - freeIndex;
+            int32 result = _size - freeIndex;
             _size = freeIndex;
             _version++;
             return result;
@@ -1216,7 +1216,7 @@ namespace Avalonia.Collections.Pooled
         /// Removes the element at the given index. The size of the list is
         /// decreased by one.
         /// </summary>
-        public void RemoveAt(int index)
+        public void RemoveAt(int32 index)
         {
             if ((uint)index >= (uint)_size)
                 ThrowHelper.ThrowArgumentOutOfRange_IndexException();
@@ -1238,7 +1238,7 @@ namespace Avalonia.Collections.Pooled
         /// <summary>
         /// Removes a range of elements from this list.
         /// </summary>
-        public void RemoveRange(int index, int count)
+        public void RemoveRange(int32 index, int32 count)
         {
             if (index < 0)
                 ThrowHelper.ThrowIndexArgumentOutOfRange_NeedNonNegNumException();
@@ -1279,7 +1279,7 @@ namespace Avalonia.Collections.Pooled
         /// which was previously located at index i will now be located at
         /// index + (index + count - i - 1).
         /// </summary>
-        public void Reverse(int index, int count)
+        public void Reverse(int32 index, int32 count)
         {
             if (index < 0)
                 ThrowHelper.ThrowIndexArgumentOutOfRange_NeedNonNegNumException();
@@ -1321,7 +1321,7 @@ namespace Avalonia.Collections.Pooled
         /// 
         /// This method uses the Array.Sort method to sort the elements.
         /// </summary>
-        public void Sort(int index, int count, IComparer<T>? comparer)
+        public void Sort(int32 index, int32 count, IComparer<T>? comparer)
         {
             if (index < 0)
                 ThrowHelper.ThrowIndexArgumentOutOfRange_NeedNonNegNumException();
@@ -1339,7 +1339,7 @@ namespace Avalonia.Collections.Pooled
             _version++;
         }
 
-        public void Sort(Func<T?, T?, int> comparison)
+        public void Sort(Func<T?, T?, int32> comparison)
         {
             if (comparison == null)
             {
@@ -1383,7 +1383,7 @@ namespace Avalonia.Collections.Pooled
         /// </summary>
         public void TrimExcess()
         {
-            int threshold = (int)(_items.Length * 0.9);
+            int32 threshold = (int32)(_items.Length * 0.9);
             if (_size < threshold)
             {
                 Capacity = _size;
@@ -1397,7 +1397,7 @@ namespace Avalonia.Collections.Pooled
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
             }
 
-            for (int i = 0; i < _size; i++)
+            for (int32 i = 0; i < _size; i++)
             {
                 if (!match(_items[i]))
                 {
@@ -1456,8 +1456,8 @@ namespace Avalonia.Collections.Pooled
         public struct Enumerator : IEnumerator<T>, IEnumerator
         {
             private readonly PooledList<T> _list;
-            private int _index;
-            private readonly int _version;
+            private int32 _index;
+            private readonly int32 _version;
             private T? _current;
 
             internal Enumerator(PooledList<T> list)
@@ -1525,14 +1525,14 @@ namespace Avalonia.Collections.Pooled
 
         private readonly struct Comparer : IComparer<T>
         {
-            private readonly Func<T?, T?, int> _comparison;
+            private readonly Func<T?, T?, int32> _comparison;
 
-            public Comparer(Func<T?, T?, int> comparison)
+            public Comparer(Func<T?, T?, int32> comparison)
             {
                 _comparison = comparison;
             }
 
-            public int Compare(T? x, T? y) => _comparison(x, y);
+            public int32 Compare(T? x, T? y) => _comparison(x, y);
         }
     }
 }

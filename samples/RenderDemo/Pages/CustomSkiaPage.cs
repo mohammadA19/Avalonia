@@ -68,7 +68,7 @@ namespace RenderDemo.Pages
                         (float)(Bounds.Width / 2 + Math.Cos(St.Elapsed.TotalSeconds) * Bounds.Width / 4),
                         (float)(Bounds.Height / 2 + Math.Sin(St.Elapsed.TotalSeconds) * Bounds.Height / 4));
                     using (var sweep =
-                        SKShader.CreateSweepGradient(new SKPoint((int)Bounds.Width / 2, (int)Bounds.Height / 2), colors,
+                        SKShader.CreateSweepGradient(new SKPoint((int32)Bounds.Width / 2, (int32)Bounds.Height / 2), colors,
                             null)) 
                     using(var turbulence = SKShader.CreatePerlinNoiseFractalNoise(0.05f, 0.05f, 4, 0))
                     using(var shader = SKShader.CreateCompose(sweep, turbulence, SKBlendMode.SrcATop))
@@ -98,9 +98,9 @@ namespace RenderDemo.Pages
                     canvas.Restore();
                 }
             }    
-            static int Animate(int d, int from, int to)
+            static int32 Animate(int32 d, int32 from, int32 to)
             {
-                var ms = (int)(St.ElapsedMilliseconds / d);
+                var ms = (int32)(St.ElapsedMilliseconds / d);
                 var diff = to - from;
                 var range = diff * 2;
                 var v = ms % range;

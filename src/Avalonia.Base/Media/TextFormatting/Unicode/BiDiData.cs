@@ -17,7 +17,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         private bool _hasCleanState = true;
         private ArrayBuilder<BidiClass> _classes;
         private ArrayBuilder<BidiPairedBracketType> _pairedBracketTypes;
-        private ArrayBuilder<int> _pairedBracketValues;
+        private ArrayBuilder<int32> _pairedBracketValues;
         private ArrayBuilder<BidiClass> _savedClasses;
         private ArrayBuilder<BidiPairedBracketType> _savedPairedBracketTypes;
         private ArrayBuilder<sbyte> _tempLevelBuffer;
@@ -33,7 +33,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <summary>
         /// Gets the length of the data held by the BidiData
         /// </summary>
-        public int Length { get; private set; }
+        public int32 Length { get; private set; }
 
         /// <summary>
         /// Gets the bidi character type of each code point
@@ -55,7 +55,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// matching.  Also, bracket code points are mapped
         /// to their canonical equivalents
         /// </remarks>
-        public ArraySlice<int> PairedBracketValues { get; private set; }
+        public ArraySlice<int32> PairedBracketValues { get; private set; }
 
         /// <summary>
         /// Appends text to the bidi data.
@@ -72,20 +72,20 @@ namespace Avalonia.Media.TextFormatting.Unicode
             // Resolve the BidiCharacterType, paired bracket type and paired
             // bracket values for all code points
 
-            int i = Length;
+            int32 i = Length;
 
             const uint embeddingMask =
-                (1U << (int)BidiClass.LeftToRightEmbedding) |
-                (1U << (int)BidiClass.LeftToRightOverride) |
-                (1U << (int)BidiClass.RightToLeftEmbedding) |
-                (1U << (int)BidiClass.RightToLeftOverride) |
-                (1U << (int)BidiClass.PopDirectionalFormat);
+                (1U << (int32)BidiClass.LeftToRightEmbedding) |
+                (1U << (int32)BidiClass.LeftToRightOverride) |
+                (1U << (int32)BidiClass.RightToLeftEmbedding) |
+                (1U << (int32)BidiClass.RightToLeftOverride) |
+                (1U << (int32)BidiClass.PopDirectionalFormat);
 
             const uint isolateMask =
-                (1U << (int)BidiClass.LeftToRightIsolate) |
-                (1U << (int)BidiClass.RightToLeftIsolate) |
-                (1U << (int)BidiClass.FirstStrongIsolate) |
-                (1U << (int)BidiClass.PopDirectionalIsolate);
+                (1U << (int32)BidiClass.LeftToRightIsolate) |
+                (1U << (int32)BidiClass.RightToLeftIsolate) |
+                (1U << (int32)BidiClass.FirstStrongIsolate) |
+                (1U << (int32)BidiClass.PopDirectionalIsolate);
 
             var codePointEnumerator = new CodepointEnumerator(text);
 
@@ -96,7 +96,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
 
                 _classes[i] = dir;
 
-                var dirBit = 1U << (int)dir;
+                var dirBit = 1U << (int32)dir;
 
                 if (!HasEmbeddings.HasValue && (dirBit & embeddingMask) != 0U)
                 {
@@ -118,13 +118,13 @@ namespace Avalonia.Media.TextFormatting.Unicode
                     // Opening bracket types can never have a null pairing.
                     codepoint.TryGetPairedBracket(out var paired);
 
-                    _pairedBracketValues[i] = (int)Codepoint.GetCanonicalType(paired).Value;
+                    _pairedBracketValues[i] = (int32)Codepoint.GetCanonicalType(paired).Value;
 
                     HasBrackets = true;
                 }
                 else if (pbt == BidiPairedBracketType.Close)
                 {
-                    _pairedBracketValues[i] = (int)Codepoint.GetCanonicalType(codepoint).Value;
+                    _pairedBracketValues[i] = (int32)Codepoint.GetCanonicalType(codepoint).Value;
 
                     HasBrackets = true;
                 }
@@ -179,7 +179,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// </summary>
         /// <param name="length">Length of the required ExpandableBuffer</param>
         /// <returns>An uninitialized level ExpandableBuffer</returns>
-        public ArraySlice<sbyte> GetTempLevelBuffer(int length)
+        public ArraySlice<sbyte> GetTempLevelBuffer(int32 length)
         {
             _tempLevelBuffer.Clear();
 

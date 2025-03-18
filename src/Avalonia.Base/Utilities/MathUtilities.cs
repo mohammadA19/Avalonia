@@ -278,7 +278,7 @@ namespace Avalonia.Utilities
         /// <param name="min">The minimum value.</param>
         /// <param name="max">The maximum value.</param>
         /// <returns>The clamped value.</returns>
-        public static int Clamp(int val, int min, int max)
+        public static int32 Clamp(int32 val, int32 min, int32 max)
         {
             if (min > max)
             {
@@ -365,7 +365,7 @@ namespace Avalonia.Utilities
         }
         
 #if !BUILDTASK
-        internal static int WhichPolygonSideIntersects(
+        internal static int32 WhichPolygonSideIntersects(
             uint cPoly,
             ReadOnlySpan<Vector> pPtPoly,
             Vector ptCurrent,
@@ -412,7 +412,7 @@ namespace Avalonia.Utilities
         {
             for (var i = 0; i < cPolyA; i++)
             {
-                var vecEdge = pPtPolyA[(int)((i + 1) % cPolyA)] - pPtPolyA[i];
+                var vecEdge = pPtPolyA[(int32)((i + 1) % cPolyA)] - pPtPolyA[i];
                 if (WhichPolygonSideIntersects(cPolyB, pPtPolyB, pPtPolyA[i], vecEdge) < 0)
                 {
                     return false;
@@ -421,7 +421,7 @@ namespace Avalonia.Utilities
 
             for (var i = 0; i < cPolyB; i++)
             {
-                var vecEdge = pPtPolyB[(int)((i + 1) % cPolyB)] - pPtPolyB[i];
+                var vecEdge = pPtPolyB[(int32)((i + 1) % cPolyB)] - pPtPolyB[i];
                 if (WhichPolygonSideIntersects(cPolyA, pPtPolyA, pPtPolyB[i], vecEdge) < 0)
                 {
                     return false;
@@ -439,7 +439,7 @@ namespace Avalonia.Utilities
         {
             for (var i = 0; i < cPolyB; i++)
             {
-                var vecEdge = pPtPolyB[(i + 1) % (int)cPolyB] - pPtPolyB[i];
+                var vecEdge = pPtPolyB[(i + 1) % (int32)cPolyB] - pPtPolyB[i];
                 if (WhichPolygonSideIntersects(cPolyA, pPtPolyA, pPtPolyB[i], vecEdge) <= 0)
                 {
                     // The whole of the polygon is entirely on the outside of the edge,

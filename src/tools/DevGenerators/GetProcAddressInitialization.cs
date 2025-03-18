@@ -37,9 +37,9 @@ public class GetProcAddressInitializationGenerator : IIncrementalGenerator
             foreach (var typeGroup in methods.GroupBy<IMethodSymbol,ISymbol>(f => f.ContainingType, SymbolEqualityComparer.Default))
             {
                 var nextContext = 0;
-                var contexts = new Dictionary<string, int>();
+                var contexts = new Dictionary<string, int32>();
 
-                string GetContextNameFromIndex(int c) => "context" + (c == 0 ? "" : c);
+                string GetContextNameFromIndex(int32 c) => "context" + (c == 0 ? "" : c);
                 string GetContextName(string type)
                 {
                     if (contexts.TryGetValue(type, out var idx))
@@ -312,7 +312,7 @@ public class GetProcAddressInitializationGenerator : IIncrementalGenerator
         else if (refKind != RefKind.None)
             return MapToNative(type, RefKind.None) + "*";
         if (IsBool(type))
-            return "int";
+            return "int32";
         return type.GetFullyQualifiedName();
     }
 
@@ -331,7 +331,7 @@ public class GetProcAddressInitializationGenerator : IIncrementalGenerator
             .Append("(");
 
 
-        int arg = 0;
+        int32 arg = 0;
 
         void AppendArgCore(StringBuilder builder, string a, bool isFirstArg)
         {

@@ -9,7 +9,7 @@ internal partial class ServerCompositionTarget
 {
     public readonly IDirtyRectTracker DirtyRects;
 
-    static int Clamp0(int value, int max) => Math.Max(Math.Min(value, max), 0);
+    static int32 Clamp0(int32 value, int32 max) => Math.Max(Math.Min(value, max), 0);
     
     public void AddDirtyRect(LtrbRect rect)
     {

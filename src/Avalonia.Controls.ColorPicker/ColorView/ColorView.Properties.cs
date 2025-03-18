@@ -159,48 +159,48 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="MaxHue"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MaxHueProperty =
-            AvaloniaProperty.Register<ColorView, int>(
+        public static readonly StyledProperty<int32> MaxHueProperty =
+            AvaloniaProperty.Register<ColorView, int32>(
                 nameof(MaxHue),
                 359);
 
         /// <summary>
         /// Defines the <see cref="MaxSaturation"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MaxSaturationProperty =
-            AvaloniaProperty.Register<ColorView, int>(
+        public static readonly StyledProperty<int32> MaxSaturationProperty =
+            AvaloniaProperty.Register<ColorView, int32>(
                 nameof(MaxSaturation),
                 100);
 
         /// <summary>
         /// Defines the <see cref="MaxValue"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MaxValueProperty =
-            AvaloniaProperty.Register<ColorView, int>(
+        public static readonly StyledProperty<int32> MaxValueProperty =
+            AvaloniaProperty.Register<ColorView, int32>(
                 nameof(MaxValue),
                 100);
 
         /// <summary>
         /// Defines the <see cref="MinHue"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MinHueProperty =
-            AvaloniaProperty.Register<ColorView, int>(
+        public static readonly StyledProperty<int32> MinHueProperty =
+            AvaloniaProperty.Register<ColorView, int32>(
                 nameof(MinHue),
                 0);
 
         /// <summary>
         /// Defines the <see cref="MinSaturation"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MinSaturationProperty =
-            AvaloniaProperty.Register<ColorView, int>(
+        public static readonly StyledProperty<int32> MinSaturationProperty =
+            AvaloniaProperty.Register<ColorView, int32>(
                 nameof(MinSaturation),
                 0);
 
         /// <summary>
         /// Defines the <see cref="MinValue"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MinValueProperty =
-            AvaloniaProperty.Register<ColorView, int>(
+        public static readonly StyledProperty<int32> MinValueProperty =
+            AvaloniaProperty.Register<ColorView, int32>(
                 nameof(MinValue),
                 0);
 
@@ -215,8 +215,8 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="PaletteColumnCount"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> PaletteColumnCountProperty =
-            AvaloniaProperty.Register<ColorView, int>(
+        public static readonly StyledProperty<int32> PaletteColumnCountProperty =
+            AvaloniaProperty.Register<ColorView, int32>(
                 nameof(PaletteColumnCount),
                 4);
 
@@ -231,10 +231,10 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="SelectedIndex"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> SelectedIndexProperty =
-            AvaloniaProperty.Register<ColorView, int>(
+        public static readonly StyledProperty<int32> SelectedIndexProperty =
+            AvaloniaProperty.Register<ColorView, int32>(
                 nameof(SelectedIndex),
-                (int)ColorViewTab.Spectrum);
+                (int32)ColorViewTab.Spectrum);
 
         /// <inheritdoc cref="ColorSpectrum.Color"/>
         public Color Color
@@ -414,42 +414,42 @@ namespace Avalonia.Controls
         }
 
         /// <inheritdoc cref="ColorSpectrum.MaxHue"/>
-        public int MaxHue
+        public int32 MaxHue
         {
             get => GetValue(MaxHueProperty);
             set => SetValue(MaxHueProperty, value);
         }
 
         /// <inheritdoc cref="ColorSpectrum.MaxSaturation"/>
-        public int MaxSaturation
+        public int32 MaxSaturation
         {
             get => GetValue(MaxSaturationProperty);
             set => SetValue(MaxSaturationProperty, value);
         }
 
         /// <inheritdoc cref="ColorSpectrum.MaxValue"/>
-        public int MaxValue
+        public int32 MaxValue
         {
             get => GetValue(MaxValueProperty);
             set => SetValue(MaxValueProperty, value);
         }
 
         /// <inheritdoc cref="ColorSpectrum.MinHue"/>
-        public int MinHue
+        public int32 MinHue
         {
             get => GetValue(MinHueProperty);
             set => SetValue(MinHueProperty, value);
         }
 
         /// <inheritdoc cref="ColorSpectrum.MinSaturation"/>
-        public int MinSaturation
+        public int32 MinSaturation
         {
             get => GetValue(MinSaturationProperty);
             set => SetValue(MinSaturationProperty, value);
         }
 
         /// <inheritdoc cref="ColorSpectrum.MinValue"/>
-        public int MinValue
+        public int32 MinValue
         {
             get => GetValue(MinValueProperty);
             set => SetValue(MinValueProperty, value);
@@ -482,7 +482,7 @@ namespace Avalonia.Controls
         /// Also note that this property is what should be bound in the control template.
         /// <see cref="Palette"/> is too high-level to use on its own.
         /// </remarks>
-        public int PaletteColumnCount
+        public int32 PaletteColumnCount
         {
             get => GetValue(PaletteColumnCountProperty);
             set => SetValue(PaletteColumnCountProperty, value);
@@ -508,9 +508,9 @@ namespace Avalonia.Controls
         /// When using the default control theme, this property is designed to be used with the
         /// <see cref="ColorViewTab"/> enum. The <see cref="ColorViewTab"/> enum defines the
         /// index values of each of the three standard tabs.
-        /// Use like `SelectedIndex = (int)ColorViewTab.Palette`.
+        /// Use like `SelectedIndex = (int32)ColorViewTab.Palette`.
         /// </remarks>
-        public int SelectedIndex
+        public int32 SelectedIndex
         {
             get => GetValue(SelectedIndexProperty);
             set => SetValue(SelectedIndexProperty, value);

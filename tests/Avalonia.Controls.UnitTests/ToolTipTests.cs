@@ -393,7 +393,7 @@ namespace Avalonia.Controls.UnitTests
             var other = new Decorator()
             {
                 [ToolTip.TipProperty] = "Tip",
-                [ToolTip.ShowDelayProperty] = (int) TimeSpan.FromHours(1).TotalMilliseconds,
+                [ToolTip.ShowDelayProperty] = (int32) TimeSpan.FromHours(1).TotalMilliseconds,
             };
 
             var panel = new StackPanel
@@ -551,7 +551,7 @@ namespace Avalonia.Controls.UnitTests
             Assert.True(windowContent.IsMeasureValid);
             Assert.True(windowContent.IsVisible);
 
-            var controlIds = new Dictionary<Control, int>();
+            var controlIds = new Dictionary<Control, int32>();
             IInputRoot lastRoot = null;
 
             return control =>
@@ -564,11 +564,11 @@ namespace Avalonia.Controls.UnitTests
                 }
                 else
                 {
-                    if (!controlIds.TryGetValue(control, out int id))
+                    if (!controlIds.TryGetValue(control, out int32 id))
                     {
                         id = controlIds[control] = controlIds.Count;
                     }
-                    point = new Point(id, int.MaxValue);
+                    point = new Point(id, int32.MaxValue);
                 }
 
                 hitTesterMock.Setup(m => m.HitTestFirst(point, window, It.IsAny<Func<Visual, bool>>()))

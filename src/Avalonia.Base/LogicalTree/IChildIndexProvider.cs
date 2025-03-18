@@ -16,13 +16,13 @@ namespace Avalonia.LogicalTree
         /// </summary>
         /// <param name="child">Logical child.</param>
         /// <returns>Index or -1 if child was not found.</returns>
-        int GetChildIndex(ILogical child);
+        int32 GetChildIndex(ILogical child);
 
         /// <summary>
         /// Total children count or null if source is infinite.
         /// Some Avalonia features might not work if <see cref="TryGetTotalCount"/> returns false, for instance: nth-last-child selector.
         /// </summary>
-        bool TryGetTotalCount(out int count);
+        bool TryGetTotalCount(out int32 count);
 
         /// <summary>
         /// Notifies subscriber when a child's index was changed.

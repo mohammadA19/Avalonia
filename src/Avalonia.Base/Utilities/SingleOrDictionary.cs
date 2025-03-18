@@ -100,7 +100,7 @@ namespace Avalonia.Utilities
         private class SingleEnumerator<T> : IEnumerator<T>
         {
             private readonly T value;
-            private int index = -1;
+            private int32 index = -1;
 
             public SingleEnumerator(T value)
             {

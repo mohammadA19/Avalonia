@@ -86,7 +86,7 @@ namespace Avalonia.Controls
 
             if (change.Property == SelectedIndexProperty && _scroller is not null)
             {
-                var value = change.GetNewValue<int>();
+                var value = change.GetNewValue<int32>();
                 _scroller.Offset = new(value, 0);
             }
         }

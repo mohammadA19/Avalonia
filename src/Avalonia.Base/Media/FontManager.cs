@@ -246,7 +246,7 @@ namespace Avalonia.Media
         /// <returns>
         ///     <c>True</c>, if the <see cref="FontManager"/> could match the character to specified parameters, <c>False</c> otherwise.
         /// </returns>
-        public bool TryMatchCharacter(int codepoint, FontStyle fontStyle, FontWeight fontWeight,
+        public bool TryMatchCharacter(int32 codepoint, FontStyle fontStyle, FontWeight fontWeight,
             FontStretch fontStretch, FontFamily? fontFamily, CultureInfo? culture, out Typeface typeface)
         {
             if (_fontFallbacks != null)
@@ -268,7 +268,7 @@ namespace Avalonia.Media
             //Try to match against fallbacks first
             if (fontFamily != null && fontFamily.Key is CompositeFontFamilyKey compositeKey)
             {
-                for (int i = 0; i < compositeKey.Keys.Count; i++)
+                for (int32 i = 0; i < compositeKey.Keys.Count; i++)
                 {
                     var key = compositeKey.Keys[i];
                     var familyName = fontFamily.FamilyNames[i];
@@ -316,7 +316,7 @@ namespace Avalonia.Media
                     fontSimulations |= FontSimulations.Oblique;
                 }
 
-                if ((int)weight >= 600 && glyphTypeface2.Weight < weight)
+                if ((int32)weight >= 600 && glyphTypeface2.Weight < weight)
                 {
                     fontSimulations |= FontSimulations.Bold;
                 }

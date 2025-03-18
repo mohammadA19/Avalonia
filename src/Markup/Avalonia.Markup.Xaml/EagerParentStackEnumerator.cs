@@ -7,7 +7,7 @@ internal struct EagerParentStackEnumerator
 {
     private IAvaloniaXamlIlEagerParentStackProvider? _provider;
     private IReadOnlyList<object>? _currentParentsStack;
-    private int _currentIndex; // only valid when _currentParents isn't null
+    private int32 _currentIndex; // only valid when _currentParents isn't null
 
     public EagerParentStackEnumerator(IAvaloniaXamlIlEagerParentStackProvider? provider)
         => _provider = provider;

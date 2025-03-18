@@ -28,7 +28,7 @@ namespace Avalonia.Controls
         /// </summary>
         public ResourceDictionary(IResourceHost owner) : base(owner) { }
 
-        public int Count => _inner?.Count ?? 0;
+        public int32 Count => _inner?.Count ?? 0;
 
         public object? this[object key]
         {
@@ -280,7 +280,7 @@ namespace Avalonia.Controls
         /// any further expansion of its backing storage.
         /// </summary>
         /// <remarks>This method may have no effect when targeting .NET Standard 2.0.</remarks>
-        public void EnsureCapacity(int capacity)
+        public void EnsureCapacity(int32 capacity)
         {
             if (_inner is null)
             {
@@ -308,7 +308,7 @@ namespace Avalonia.Controls
             return (_inner as ICollection<KeyValuePair<object, object?>>)?.Contains(item) ?? false;
         }
 
-        void ICollection<KeyValuePair<object, object?>>.CopyTo(KeyValuePair<object, object?>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<object, object?>>.CopyTo(KeyValuePair<object, object?>[] array, int32 arrayIndex)
         {
             (_inner as ICollection<KeyValuePair<object, object?>>)?.CopyTo(array, arrayIndex);
         }

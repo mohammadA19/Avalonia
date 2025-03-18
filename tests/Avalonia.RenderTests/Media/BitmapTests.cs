@@ -46,7 +46,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
 
             public PixelSize Size { get; }
 
-            public int RowBytes { get; }
+            public int32 RowBytes { get; }
 
             public void Dispose()
             {
@@ -106,10 +106,10 @@ namespace Avalonia.Direct2D1.RenderTests.Media
             var fmt = new PixelFormat(fmte);
             var writeableBitmap = new WriteableBitmap(new PixelSize(256, 256), new Vector(96, 96), fmt);
 
-            var data = new int[256 * 256];
-            for (int y = 0; y < 256; y++)
-                for (int x = 0; x < 256; x++)
-                    data[y * 256 + x] =(int)((uint)(x + (y << 8)) | 0xFF000000u);
+            var data = new int32[256 * 256];
+            for (int32 y = 0; y < 256; y++)
+                for (int32 x = 0; x < 256; x++)
+                    data[y * 256 + x] =(int32)((uint)(x + (y << 8)) | 0xFF000000u);
 
 
             using (var l = writeableBitmap.Lock())
@@ -130,7 +130,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
         
         struct RawHeader
         {
-            public int Width, Height, Stride;
+            public int32 Width, Height, Stride;
         }
 
         [Theory,

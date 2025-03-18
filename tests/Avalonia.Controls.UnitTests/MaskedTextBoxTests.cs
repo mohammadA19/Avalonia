@@ -804,9 +804,9 @@ namespace Avalonia.Controls.UnitTests
         public async Task MaxLength_Works_Properly(
             string initalText,
             string textInput,
-            int maxLength,
-            int selectionStart,
-            int selectionEnd,
+            int32 maxLength,
+            int32 selectionStart,
+            int32 selectionEnd,
             bool fromClipboard,
             string expected)
         {
@@ -986,10 +986,10 @@ namespace Avalonia.Controls.UnitTests
 
         private class Class1 : NotifyingBase
         {
-            private int _foo;
+            private int32 _foo;
             private string _bar;
 
-            public int Foo
+            public int32 Foo
             {
                 get { return _foo; }
                 set { _foo = value; RaisePropertyChanged(); }

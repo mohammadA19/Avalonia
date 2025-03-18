@@ -24,7 +24,7 @@ namespace ControlCatalog.Pages
 
             if (spinner.Content is TextBlock txtBox)
             {
-                int value = Array.IndexOf(_mountains, txtBox.Text);
+                int32 value = Array.IndexOf(_mountains, txtBox.Text);
                 if (e.Direction == SpinDirection.Increase)
                     value++;
                 else

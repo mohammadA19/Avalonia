@@ -138,7 +138,7 @@ internal class Win32Icon : IDisposable
         if (size.Width < 1 || size.Height < 1)
             throw new ArgumentOutOfRangeException();
 
-        int stride = (size.Width * format.BitsPerPixel + 7) / 8;
+        int32 stride = (size.Width * format.BitsPerPixel + 7) / 8;
         var data = Marshal.AllocHGlobal(size.Height * stride);
         if (data == IntPtr.Zero)
             throw new OutOfMemoryException();
@@ -175,7 +175,7 @@ internal class Win32Icon : IDisposable
     }
 
 
-    private static int s_bitDepth;
+    private static int32 s_bitDepth;
 
     private static PixelSize ReplaceZeroesWithSystemMetrics(PixelSize pixelSize) => new(
         pixelSize.Width == 0 ? UnmanagedMethods.GetSystemMetrics(UnmanagedMethods.SystemMetric.SM_CXICON) : pixelSize.Width,
@@ -260,8 +260,8 @@ internal class Win32Icon : IDisposable
                 }
                 else
                 {
-                    int bestDelta = Math.Abs(bestWidth - size.Width) + Math.Abs(bestHeight - size.Height);
-                    int thisDelta = Math.Abs(entry.bWidth - size.Width) + Math.Abs(entry.bHeight - size.Height);
+                    int32 bestDelta = Math.Abs(bestWidth - size.Width) + Math.Abs(bestHeight - size.Height);
+                    int32 thisDelta = Math.Abs(entry.bWidth - size.Width) + Math.Abs(entry.bHeight - size.Height);
 
                     if ((thisDelta < bestDelta) ||
                         (thisDelta == bestDelta && (iconBitDepth <= s_bitDepth && iconBitDepth > _bestBitDepth ||
@@ -281,7 +281,7 @@ internal class Win32Icon : IDisposable
                 }
             }
 
-            if (_bestImageOffset > int.MaxValue || _bestBytesInRes > int.MaxValue)
+            if (_bestImageOffset > int32.MaxValue || _bestBytesInRes > int32.MaxValue)
             {
                 return default;
             }
@@ -307,7 +307,7 @@ internal class Win32Icon : IDisposable
             if ((_bestImageOffset % IntPtr.Size) != 0)
             {
                 // Beginning of icon's content is misaligned.
-                byte[] alignedBuffer = ArrayPool<byte>.Shared.Rent((int)_bestBytesInRes);
+                byte[] alignedBuffer = ArrayPool<byte>.Shared.Rent((int32)_bestBytesInRes);
                 Array.Copy(iconData, _bestImageOffset, alignedBuffer, 0, _bestBytesInRes);
 
                 try

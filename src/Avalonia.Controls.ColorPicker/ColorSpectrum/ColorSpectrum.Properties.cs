@@ -40,48 +40,48 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Defines the <see cref="MaxHue"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MaxHueProperty =
-            AvaloniaProperty.Register<ColorSpectrum, int>(
+        public static readonly StyledProperty<int32> MaxHueProperty =
+            AvaloniaProperty.Register<ColorSpectrum, int32>(
                 nameof(MaxHue),
                 359);
 
         /// <summary>
         /// Defines the <see cref="MaxSaturation"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MaxSaturationProperty =
-            AvaloniaProperty.Register<ColorSpectrum, int>(
+        public static readonly StyledProperty<int32> MaxSaturationProperty =
+            AvaloniaProperty.Register<ColorSpectrum, int32>(
                 nameof(MaxSaturation),
                 100);
 
         /// <summary>
         /// Defines the <see cref="MaxValue"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MaxValueProperty =
-            AvaloniaProperty.Register<ColorSpectrum, int>(
+        public static readonly StyledProperty<int32> MaxValueProperty =
+            AvaloniaProperty.Register<ColorSpectrum, int32>(
                 nameof(MaxValue),
                 100);
 
         /// <summary>
         /// Defines the <see cref="MinHue"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MinHueProperty =
-            AvaloniaProperty.Register<ColorSpectrum, int>(
+        public static readonly StyledProperty<int32> MinHueProperty =
+            AvaloniaProperty.Register<ColorSpectrum, int32>(
                 nameof(MinHue),
                 0);
 
         /// <summary>
         /// Defines the <see cref="MinSaturation"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MinSaturationProperty =
-            AvaloniaProperty.Register<ColorSpectrum, int>(
+        public static readonly StyledProperty<int32> MinSaturationProperty =
+            AvaloniaProperty.Register<ColorSpectrum, int32>(
                 nameof(MinSaturation),
                 0);
 
         /// <summary>
         /// Defines the <see cref="MinValue"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MinValueProperty =
-            AvaloniaProperty.Register<ColorSpectrum, int>(
+        public static readonly StyledProperty<int32> MinValueProperty =
+            AvaloniaProperty.Register<ColorSpectrum, int32>(
                 nameof(MinValue),
                 0);
 
@@ -147,7 +147,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// Internally, the <see cref="ColorSpectrum"/> uses the HSV color model.
         /// </remarks>
-        public int MaxHue
+        public int32 MaxHue
         {
             get => GetValue(MaxHueProperty);
             set => SetValue(MaxHueProperty, value);
@@ -160,7 +160,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// Internally, the <see cref="ColorSpectrum"/> uses the HSV color model.
         /// </remarks>
-        public int MaxSaturation
+        public int32 MaxSaturation
         {
             get => GetValue(MaxSaturationProperty);
             set => SetValue(MaxSaturationProperty, value);
@@ -173,7 +173,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// Internally, the <see cref="ColorSpectrum"/> uses the HSV color model.
         /// </remarks>
-        public int MaxValue
+        public int32 MaxValue
         {
             get => GetValue(MaxValueProperty);
             set => SetValue(MaxValueProperty, value);
@@ -186,7 +186,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// Internally, the <see cref="ColorSpectrum"/> uses the HSV color model.
         /// </remarks>
-        public int MinHue
+        public int32 MinHue
         {
             get => GetValue(MinHueProperty);
             set => SetValue(MinHueProperty, value);
@@ -199,7 +199,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// Internally, the <see cref="ColorSpectrum"/> uses the HSV color model.
         /// </remarks>
-        public int MinSaturation
+        public int32 MinSaturation
         {
             get => GetValue(MinSaturationProperty);
             set => SetValue(MinSaturationProperty, value);
@@ -212,7 +212,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// Internally, the <see cref="ColorSpectrum"/> uses the HSV color model.
         /// </remarks>
-        public int MinValue
+        public int32 MinValue
         {
             get => GetValue(MinValueProperty);
             set => SetValue(MinValueProperty, value);

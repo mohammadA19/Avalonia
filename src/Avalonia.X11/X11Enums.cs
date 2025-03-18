@@ -7,7 +7,7 @@ namespace Avalonia.X11
     {
         Success = 0, /* everything's okay */
         BadRequest = 1, /* bad request code */
-        BadValue = 2, /* int parameter out of range */
+        BadValue = 2, /* int32 parameter out of range */
         BadWindow = 3, /* parameter not a Window */
         BadPixmap = 4, /* parameter not a Pixmap */
         BadAtom = 5, /* parameter not an Atom */
@@ -38,7 +38,7 @@ namespace Avalonia.X11
     }
 
     [Flags]
-    internal enum XEventMask : int
+    internal enum XEventMask : int32
     {
         NoEventMask = 0,
         KeyPressMask = (1 << 0),

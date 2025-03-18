@@ -100,7 +100,7 @@ namespace Avalonia.Animation.Animators
             var resultCount = Math.Max(oldValue.Count, newValue.Count);
             var stops = new ImmutableGradientStop[resultCount];
 
-            for (int index = 0, oldIndex = 0, newIndex = 0; index < resultCount; index++)
+            for (int32 index = 0, oldIndex = 0, newIndex = 0; index < resultCount; index++)
             {
                 stops[index] = new ImmutableGradientStop(
                     s_doubleAnimator.Interpolate(progress, oldValue[oldIndex].Offset, newValue[newIndex].Offset),
@@ -153,7 +153,7 @@ namespace Avalonia.Animation.Animators
             static IReadOnlyList<ImmutableGradientStop> CreateStopsFromSolidColorBrush(ISolidColorBrush solidColorBrush, IReadOnlyList<IGradientStop> baseStops)
             {
                 var stops = new ImmutableGradientStop[baseStops.Count];
-                for (int index = 0; index < baseStops.Count; index++)
+                for (int32 index = 0; index < baseStops.Count; index++)
                 {
                     stops[index] = new ImmutableGradientStop(baseStops[index].Offset, solidColorBrush.Color);
                 }

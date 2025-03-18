@@ -341,7 +341,7 @@ namespace Avalonia.SourceGenerator.CompositionGenerator
         static EnumDeclarationSyntax GenerateChangedFieldsEnum(GClass cl)
         {
             var changedFieldsEnum = EnumDeclaration(Identifier(ChangedFieldsTypeName(cl)));
-            int count = 0;
+            int32 count = 0;
 
             void AddValue(string name)
             {

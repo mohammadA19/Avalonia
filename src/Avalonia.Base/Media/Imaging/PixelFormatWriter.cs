@@ -162,9 +162,9 @@ internal static unsafe class PixelFormatWriter
 
         private static ushort Pack(Rgba8888Pixel pixel)
         {
-            return (ushort)((((int)Math.Round(pixel.R / 255F * 31F) & 0x1F) << 11)
-                  | (((int)Math.Round(pixel.G / 255F * 63F) & 0x3F) << 5)
-                  | ((int)Math.Round(pixel.B / 255F * 31F) & 0x1F));
+            return (ushort)((((int32)Math.Round(pixel.R / 255F * 31F) & 0x1F) << 11)
+                  | (((int32)Math.Round(pixel.G / 255F * 63F) & 0x3F) << 5)
+                  | ((int32)Math.Round(pixel.B / 255F * 31F) & 0x1F));
         }
     }
 
@@ -185,9 +185,9 @@ internal static unsafe class PixelFormatWriter
         private static ushort Pack(Rgba8888Pixel pixel)
         {
             return (ushort)(
-              (((int)Math.Round(pixel.R / 255F * 31F) & 0x1F) << 10)
-              | (((int)Math.Round(pixel.G / 255F * 31F) & 0x1F) << 5)
-              | (((int)Math.Round(pixel.B / 255F * 31F) & 0x1F) << 0));
+              (((int32)Math.Round(pixel.R / 255F * 31F) & 0x1F) << 10)
+              | (((int32)Math.Round(pixel.G / 255F * 31F) & 0x1F) << 5)
+              | (((int32)Math.Round(pixel.B / 255F * 31F) & 0x1F) << 0));
         }
     }
 
@@ -214,7 +214,7 @@ internal static unsafe class PixelFormatWriter
 
     public unsafe struct BlackWhitePixelFormatWriter : IPixelFormatWriter
     {
-        private int _bit;
+        private int32 _bit;
         private byte* _address;
 
         public void WriteNext(Rgba8888Pixel pixel)
@@ -245,7 +245,7 @@ internal static unsafe class PixelFormatWriter
 
     public unsafe struct Gray2PixelFormatWriter : IPixelFormatWriter
     {
-        private int _bit;
+        private int32 _bit;
         private byte* _address;
 
         public void WriteNext(Rgba8888Pixel pixel)
@@ -293,7 +293,7 @@ internal static unsafe class PixelFormatWriter
 
     public unsafe struct Gray4PixelFormatWriter : IPixelFormatWriter
     {
-        private int _bit;
+        private int32 _bit;
         private byte* _address;
 
         public void WriteNext(Rgba8888Pixel pixel)
@@ -361,7 +361,7 @@ internal static unsafe class PixelFormatWriter
         ReadOnlySpan<Rgba8888Pixel> pixels,
         IntPtr dest,
         PixelSize size,
-        int stride,
+        int32 stride,
         AlphaFormat alphaFormat,
         AlphaFormat srcAlphaFormat) where T : struct, IPixelFormatWriter
     {
@@ -430,7 +430,7 @@ internal static unsafe class PixelFormatWriter
         ReadOnlySpan<Rgba8888Pixel> pixels,
         IntPtr dest,
         PixelSize size,
-        int stride,
+        int32 stride,
         PixelFormat format,
         AlphaFormat alphaFormat,
         AlphaFormat srcAlphaFormat)

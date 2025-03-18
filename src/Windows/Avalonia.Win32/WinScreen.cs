@@ -18,7 +18,7 @@ internal sealed unsafe class WinScreen(IntPtr hMonitor) : PlatformScreen(new Pla
         return method != IntPtr.Zero;
     });
 
-    internal int Frequency { get; private set; }
+    internal int32 Frequency { get; private set; }
 
     public void Refresh()
     {
@@ -39,7 +39,7 @@ internal sealed unsafe class WinScreen(IntPtr hMonitor) : PlatformScreen(new Pla
         PInvoke.EnumDisplaySettings(info.szDevice.ToString(), ENUM_DISPLAY_SETTINGS_MODE.ENUM_CURRENT_SETTINGS,
             ref deviceMode);
 
-        Frequency = (int)deviceMode.dmDisplayFrequency;
+        Frequency = (int32)deviceMode.dmDisplayFrequency;
         CurrentOrientation = deviceMode.Anonymous1.Anonymous2.dmDisplayOrientation switch
         {
             DEVMODE_DISPLAY_ORIENTATION.DMDO_DEFAULT => ScreenOrientation.Landscape,
@@ -60,8 +60,8 @@ internal sealed unsafe class WinScreen(IntPtr hMonitor) : PlatformScreen(new Pla
                     out var numPathInfo, out var numModeInfo) != WIN32_ERROR.NO_ERROR)
                 return null;
 
-            var paths = stackalloc DISPLAYCONFIG_PATH_INFO[(int)numPathInfo];
-            var modes = stackalloc DISPLAYCONFIG_MODE_INFO[(int)numModeInfo];
+            var paths = stackalloc DISPLAYCONFIG_PATH_INFO[(int32)numPathInfo];
+            var modes = stackalloc DISPLAYCONFIG_MODE_INFO[(int32)numModeInfo];
 
             if (PInvoke.QueryDisplayConfig(
                     QUERY_DISPLAY_CONFIG_FLAGS.QDC_ONLY_ACTIVE_PATHS, ref numPathInfo, paths, ref numModeInfo, modes,

@@ -17,7 +17,7 @@ namespace Avalonia.Base.UnitTests.Utilities
             _one = 0.0;
             _zero = 1.0;
 
-            const int N = 10;
+            const int32 N = 10;
             var dxAny = AnyValue / N;
             var dxOne = 1.0 / N;
             var dxZero = _zero / N;

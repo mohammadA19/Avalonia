@@ -246,11 +246,11 @@ namespace Avalonia
         /// Returns a hash code for a <see cref="Thickness"/>.
         /// </summary>
         /// <returns>The hash code.</returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
-                int hash = 17;
+                int32 hash = 17;
                 hash = (hash * 23) + Left.GetHashCode();
                 hash = (hash * 23) + Top.GetHashCode();
                 hash = (hash * 23) + Right.GetHashCode();

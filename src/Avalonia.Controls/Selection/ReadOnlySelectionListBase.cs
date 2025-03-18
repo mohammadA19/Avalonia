@@ -9,10 +9,10 @@ namespace Avalonia.Controls.Selection;
 
 internal abstract class ReadOnlySelectionListBase<T> : IReadOnlyList<T?>, IList, INotifyCollectionChanged
 {
-    public abstract T? this[int index] { get; }
-    public abstract int Count { get; }
+    public abstract T? this[int32 index] { get; }
+    public abstract int32 Count { get; }
 
-    object? IList.this[int index] 
+    object? IList.this[int32 index] 
     { 
         get => this[index];
         set => ThrowReadOnlyException();
@@ -29,22 +29,22 @@ internal abstract class ReadOnlySelectionListBase<T> : IReadOnlyList<T?>, IList,
     public void RaiseCollectionReset() => CollectionChanged?.Invoke(this, EventArgsCache.ResetCollectionChanged);
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-    int IList.Add(object? value) { ThrowReadOnlyException(); return 0; }
+    int32 IList.Add(object? value) { ThrowReadOnlyException(); return 0; }
     void IList.Clear() => ThrowReadOnlyException();
-    void IList.Insert(int index, object? value) => ThrowReadOnlyException();
+    void IList.Insert(int32 index, object? value) => ThrowReadOnlyException();
     void IList.Remove(object? value) => ThrowReadOnlyException();
-    void IList.RemoveAt(int index) => ThrowReadOnlyException();
+    void IList.RemoveAt(int32 index) => ThrowReadOnlyException();
     bool IList.Contains(object? value) => Count != 0 && ((IList)this).IndexOf(value) != -1;
 
-    void ICollection.CopyTo(Array array, int index)
+    void ICollection.CopyTo(Array array, int32 index)
     {
         foreach (var item in this)
             array.SetValue(item, index++);
     }
 
-    int IList.IndexOf(object? value)
+    int32 IList.IndexOf(object? value)
     {
-        for (int i = 0; i < Count; i++)
+        for (int32 i = 0; i < Count; i++)
         {
             if (Equals(this[i], value))
                 return i;

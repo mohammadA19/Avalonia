@@ -253,7 +253,7 @@ namespace Avalonia.Media
         public record struct PushedState : IDisposable
         {
             private readonly DrawingContext _context;
-            private readonly int _level;
+            private readonly int32 _level;
 
             public PushedState(DrawingContext context)
             {

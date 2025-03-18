@@ -14,7 +14,7 @@ namespace Avalonia.Base.UnitTests.Styling
             return Observable.Subscribe(activator.ToObservable(), action);
         }
 
-        public static async Task<bool> Take(this IStyleActivator activator, int value)
+        public static async Task<bool> Take(this IStyleActivator activator, int32 value)
         {
             return await System.Reactive.Linq.Observable.Take(activator.ToObservable(), value);
         }

@@ -61,16 +61,16 @@ internal class CompiledBindingPathFromExpressionBuilder : ExpressionVisitor
         }
         else if (node.Object?.Type.IsArray == true)
         {
-            var indexes = node.Arguments.Select(GetValue<int>).ToArray();
+            var indexes = node.Arguments.Select(GetValue<int32>).ToArray();
             return Add(node.Object, node, x => x.ArrayElement(indexes, node.Type));
         }
         else if (node.Indexer?.GetMethod is not null && 
             node.Arguments.Count == 1 &&
-            node.Arguments[0].Type == typeof(int))
+            node.Arguments[0].Type == typeof(int32))
         {
             var getMethod = node.Indexer.GetMethod;
             var setMethod = node.Indexer.SetMethod;
-            var index = GetValue<int>(node.Arguments[0]);
+            var index = GetValue<int32>(node.Arguments[0]);
             var info = new ClrPropertyInfo(
                 CommonPropertyNames.IndexerName,
                 x => getMethod.Invoke(x, new object[] { index }),
@@ -135,7 +135,7 @@ internal class CompiledBindingPathFromExpressionBuilder : ExpressionVisitor
         else if (method.Name == MultiDimensionalArrayGetterMethodName &&
                  node.Object is not null)
         {
-            var indexes = node.Arguments.Select(GetValue<int>).ToArray();
+            var indexes = node.Arguments.Select(GetValue<int32>).ToArray();
             return Add(node.Object, node, x => x.ArrayElement(indexes, node.Type));
         }
         else if (method.Name.StartsWith(StreamBindingExtensions.StreamBindingName) &&

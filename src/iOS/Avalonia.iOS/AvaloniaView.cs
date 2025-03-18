@@ -203,7 +203,7 @@ namespace Avalonia.iOS
 
             public Point PointToClient(PixelPoint point) => new Point(point.X, point.Y);
 
-            public PixelPoint PointToScreen(Point point) => new PixelPoint((int)point.X, (int)point.Y);
+            public PixelPoint PointToScreen(Point point) => new PixelPoint((int32)point.X, (int32)point.Y);
 
             public void SetCursor(ICursorImpl? cursor)
             {
@@ -373,7 +373,7 @@ namespace Avalonia.iOS
         {
             _topLevelImpl.Resized?.Invoke(_topLevelImpl.ClientSize, WindowResizeReason.Layout);
             var scaling = (double)ContentScaleFactor;
-            _latestLayoutProps = (new PixelSize((int)(Bounds.Width * scaling), (int)(Bounds.Height * scaling)), scaling);
+            _latestLayoutProps = (new PixelSize((int32)(Bounds.Width * scaling), (int32)(Bounds.Height * scaling)), scaling);
             if (_currentRenderTarget is not null)
             {
                 _currentRenderTarget.PendingLayout = _latestLayoutProps;

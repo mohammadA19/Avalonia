@@ -367,10 +367,10 @@ namespace Avalonia.Markup.Parsers
             return syntax;
         }
 
-        private static (int step, int offset) ParseNthChildArguments(ref CharacterReader r)
+        private static (int32 step, int32 offset) ParseNthChildArguments(ref CharacterReader r)
         {
-            int step = 0;
-            int offset = 0;
+            int32 step = 0;
+            int32 offset = 0;
 
             if (r.Peek == 'o')
             {
@@ -442,7 +442,7 @@ namespace Avalonia.Markup.Parsers
 
                     if (r.Peek != ')')
                     {
-                        int sign;
+                        int32 sign;
                         var nextChar = r.Take();
                         if (nextChar == '+')
                         {
@@ -616,8 +616,8 @@ namespace Avalonia.Markup.Parsers
 
         public class NthChildSyntax : ISyntax
         {
-            public int Offset { get; set; }
-            public int Step { get; set; }
+            public int32 Offset { get; set; }
+            public int32 Step { get; set; }
 
             public override bool Equals(object? obj)
             {
@@ -627,8 +627,8 @@ namespace Avalonia.Markup.Parsers
 
         public class NthLastChildSyntax : ISyntax
         {
-            public int Offset { get; set; }
-            public int Step { get; set; }
+            public int32 Offset { get; set; }
+            public int32 Step { get; set; }
 
             public override bool Equals(object? obj)
             {

@@ -122,7 +122,7 @@ namespace Avalonia.Layout
                 var visualChildren = target.VisualChildren;
                 var visualChildrenCount = visualChildren.Count;
 
-                for (int i = 0; i < visualChildrenCount; i++)
+                for (int32 i = 0; i < visualChildrenCount; i++)
                 {
                     Visual child = visualChildren[i];
 

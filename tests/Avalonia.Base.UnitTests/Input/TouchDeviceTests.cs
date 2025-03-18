@@ -62,7 +62,7 @@ namespace Avalonia.Input.UnitTests
         [InlineData(3)]
         [InlineData(4)]
         [InlineData(5)]
-        public void PointerPressed_Counts_Clicks_Correctly(int clickCount)
+        public void PointerPressed_Counts_Clicks_Correctly(int32 clickCount)
         {
             using var app = UnitTestApp(new TimeSpan(200));
             var root = new TestRoot();
@@ -75,7 +75,7 @@ namespace Avalonia.Input.UnitTests
                 pointerPressedClicks = e.ClickCount;
                 pointerPressedExecutedTimes++;
             };
-            for (int i = 0; i < clickCount; i++)
+            for (int32 i = 0; i < clickCount; i++)
             {
                 TapOnce(InputManager.Instance, touchDevice, root, touchPointId: i);
             }
@@ -220,7 +220,7 @@ namespace Avalonia.Input.UnitTests
         
         private static void SendXTouchContactsWithIds(IInputManager inputManager, TouchDevice device, IInputRoot root, RawPointerEventType type, params long[] touchPointIds)
         {
-            for (int i = 0; i < touchPointIds.Length; i++)
+            for (int32 i = 0; i < touchPointIds.Length; i++)
             {
                 inputManager.ProcessInput(new RawPointerEventArgs(device, 0,
                                                               root,

@@ -79,7 +79,7 @@ namespace Avalonia.Benchmarks.Styling
             _app.Dispose();
         }
 
-        private static (Panel, Panel) CreateNestedPanels(int count)
+        private static (Panel, Panel) CreateNestedPanels(int32 count)
         {
             var root = new Panel();
             var last = root;

@@ -477,7 +477,7 @@ public partial class AvaloniaPropertyAnalyzer : DiagnosticAnalyzer
     private class SymbolEqualityComparer<T> : IEqualityComparer<T> where T : ISymbol
     {
         public bool Equals(T x, T y) => SymbolEqualityComparer.Default.Equals(x, y);
-        public int GetHashCode(T obj) => SymbolEqualityComparer.Default.GetHashCode(obj);
+        public int32 GetHashCode(T obj) => SymbolEqualityComparer.Default.GetHashCode(obj);
 
         public static SymbolEqualityComparer<T> Default { get; } = new();
     }

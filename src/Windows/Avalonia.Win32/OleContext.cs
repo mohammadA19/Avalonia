@@ -30,7 +30,7 @@ namespace Avalonia.Win32
 
             if (res != UnmanagedMethods.HRESULT.S_OK &&
                 res != UnmanagedMethods.HRESULT.S_FALSE /*already initialized*/)
-                throw new Win32Exception((int)res, "Failed to initialize OLE");
+                throw new Win32Exception((int32)res, "Failed to initialize OLE");
         }
 
         private static bool IsValidOleThread()

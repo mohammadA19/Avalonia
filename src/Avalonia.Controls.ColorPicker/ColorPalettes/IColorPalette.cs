@@ -14,7 +14,7 @@ namespace Avalonia.Controls
         /// <remarks>
         /// Represents total columns in a table.
         /// </remarks>
-        int ColorCount { get; }
+        int32 ColorCount { get; }
 
         /// <summary>
         /// Gets the total number of shades for each color in this palette.
@@ -23,7 +23,7 @@ namespace Avalonia.Controls
         /// <remarks>
         /// Represents total rows in a table.
         /// </remarks>
-        int ShadeCount { get; }
+        int32 ShadeCount { get; }
 
         /// <summary>
         /// Gets a color in the palette by index.
@@ -33,6 +33,6 @@ namespace Avalonia.Controls
         /// <param name="shadeIndex">The index of the color shade in the palette.
         /// The index must be between zero and <see cref="ShadeCount"/>.</param>
         /// <returns>The color at the specified index or an exception.</returns>
-        Color GetColor(int colorIndex, int shadeIndex);
+        Color GetColor(int32 colorIndex, int32 shadeIndex);
     }
 }

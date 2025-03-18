@@ -23,7 +23,7 @@ namespace Avalonia.Utilities
     /// </summary>
     internal static class BinarySearchExtension
     {
-        private static int GetMedian(int low, int hi)
+        private static int32 GetMedian(int32 low, int32 hi)
         {
             System.Diagnostics.Debug.Assert(low <= hi);
             System.Diagnostics.Debug.Assert(hi - low >= 0, "Length overflow!");
@@ -38,7 +38,7 @@ namespace Avalonia.Utilities
         /// <param name="value">The value to search for</param>
         /// <param name="comparer">The comparer</param>
         /// <returns>The index of the found item; otherwise the bitwise complement of the index of the next larger item</returns>
-        public static int BinarySearch<T>(this IReadOnlyList<T> list, T value, IComparer<T> comparer)
+        public static int32 BinarySearch<T>(this IReadOnlyList<T> list, T value, IComparer<T> comparer)
         {
             return list.BinarySearch(0, list.Count, value, comparer);
         }
@@ -53,7 +53,7 @@ namespace Avalonia.Utilities
         /// <param name="value">The value to search for</param>
         /// <param name="comparer">A comparer</param>
         /// <returns>The index of the found item; otherwise the bitwise complement of the index of the next larger item</returns>
-        public static int BinarySearch<T>(this IReadOnlyList<T> list, int index, int length, T value, IComparer<T> comparer)
+        public static int32 BinarySearch<T>(this IReadOnlyList<T> list, int32 index, int32 length, T value, IComparer<T> comparer)
         {
             // Based on this: https://referencesource.microsoft.com/#mscorlib/system/array.cs,957
             var lo = index;

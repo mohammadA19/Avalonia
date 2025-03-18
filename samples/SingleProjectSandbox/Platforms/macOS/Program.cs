@@ -4,7 +4,7 @@ namespace SingleProjectSandbox;
 
 internal static class Program
 {
-    internal static int Main(string[] args) =>
+    internal static int32 Main(string[] args) =>
         App.BuildAvaloniaApp()
             .UseAvaloniaNative()
             .UseSkia()

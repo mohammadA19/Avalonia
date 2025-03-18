@@ -19,7 +19,7 @@ namespace Avalonia
         /// </summary>
         /// <param name="x">The X co-ordinate.</param>
         /// <param name="y">The Y co-ordinate.</param>
-        public PixelPoint(int x, int y)
+        public PixelPoint(int32 x, int32 y)
         {
             X = x;
             Y = y;
@@ -28,12 +28,12 @@ namespace Avalonia
         /// <summary>
         /// Gets the X co-ordinate.
         /// </summary>
-        public int X { get; }
+        public int32 X { get; }
 
         /// <summary>
         /// Gets the Y co-ordinate.
         /// </summary>
-        public int Y { get; }
+        public int32 Y { get; }
 
         /// <summary>
         /// Checks for equality between two <see cref="PixelPoint"/>s.
@@ -150,11 +150,11 @@ namespace Avalonia
         /// Returns a hash code for a <see cref="PixelPoint"/>.
         /// </summary>
         /// <returns>The hash code.</returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
-                int hash = 17;
+                int32 hash = 17;
                 hash = (hash * 23) + X.GetHashCode();
                 hash = (hash * 23) + Y.GetHashCode();
                 return hash;
@@ -166,14 +166,14 @@ namespace Avalonia
         /// </summary>
         /// <param name="x">The X co-ordinate.</param>
         /// <returns>The new <see cref="PixelPoint"/>.</returns>
-        public PixelPoint WithX(int x) => new PixelPoint(x, Y);
+        public PixelPoint WithX(int32 x) => new PixelPoint(x, Y);
 
         /// <summary>
         /// Returns a new <see cref="PixelPoint"/> with the same X co-ordinate and the specified Y co-ordinate.
         /// </summary>
         /// <param name="y">The Y co-ordinate.</param>
         /// <returns>The new <see cref="PixelPoint"/>.</returns>
-        public PixelPoint WithY(int y) => new PixelPoint(X, y);
+        public PixelPoint WithY(int32 y) => new PixelPoint(X, y);
 
         /// <summary>
         /// Converts the <see cref="PixelPoint"/> to a device-independent <see cref="Point"/> using the
@@ -214,8 +214,8 @@ namespace Avalonia
         /// <param name="scale">The scaling factor.</param>
         /// <returns>The device-independent point.</returns>
         public static PixelPoint FromPoint(Point point, double scale) => new PixelPoint(
-            (int)(point.X * scale),
-            (int)(point.Y * scale));
+            (int32)(point.X * scale),
+            (int32)(point.Y * scale));
 
         /// <summary>
         /// Converts a <see cref="Point"/> to device pixels using the specified scaling factor.
@@ -224,8 +224,8 @@ namespace Avalonia
         /// <param name="scale">The scaling factor.</param>
         /// <returns>The device-independent point.</returns>
         public static PixelPoint FromPoint(Point point, Vector scale) => new PixelPoint(
-            (int)(point.X * scale.X),
-            (int)(point.Y * scale.Y));
+            (int32)(point.X * scale.X),
+            (int32)(point.Y * scale.Y));
 
         /// <summary>
         /// Converts a <see cref="Point"/> to device pixels using the specified dots per inch (DPI).

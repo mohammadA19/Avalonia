@@ -227,10 +227,10 @@ namespace Avalonia.Controls
     [TemplatePart(PART_ElementRoot, typeof(Panel))]
     public class Calendar : TemplatedControl
     {
-        internal const int RowsPerMonth = 7;
-        internal const int ColumnsPerMonth = 7;
-        internal const int RowsPerYear = 3;
-        internal const int ColumnsPerYear = 4;
+        internal const int32 RowsPerMonth = 7;
+        internal const int32 ColumnsPerMonth = 7;
+        internal const int32 RowsPerYear = 3;
+        internal const int32 ColumnsPerYear = 4;
 
         private DateTime _selectedMonth;
         private DateTime _selectedYear;
@@ -333,7 +333,7 @@ namespace Avalonia.Controls
         /// <param name="e">The DependencyPropertyChangedEventArgs.</param>
         private void OnIsTodayHighlightedChanged(AvaloniaPropertyChangedEventArgs e)
         {
-            int i = DateTimeHelper.CompareYearMonth(DisplayDateInternal, DateTime.Today);
+            int32 i = DateTimeHelper.CompareYearMonth(DisplayDateInternal, DateTime.Today);
 
             if (i > -2 && i < 2)
             {
@@ -674,8 +674,8 @@ namespace Avalonia.Controls
             get => _selectedMonth;
             set
             {
-                int monthDifferenceStart = DateTimeHelper.CompareYearMonth(value, DisplayDateRangeStart);
-                int monthDifferenceEnd = DateTimeHelper.CompareYearMonth(value, DisplayDateRangeEnd);
+                int32 monthDifferenceStart = DateTimeHelper.CompareYearMonth(value, DisplayDateRangeStart);
+                int32 monthDifferenceEnd = DateTimeHelper.CompareYearMonth(value, DisplayDateRangeEnd);
 
                 if (monthDifferenceStart >= 0 && monthDifferenceEnd <= 0)
                 {
@@ -977,7 +977,7 @@ namespace Avalonia.Controls
         }
 
         internal DateTime? HoverStart { get; set; }
-        internal int? HoverStartIndex { get; set; }
+        internal int32? HoverStartIndex { get; set; }
         internal DateTime? HoverEndInternal { get; set; }
         internal DateTime? HoverEnd
         {
@@ -988,7 +988,7 @@ namespace Avalonia.Controls
                 LastSelectedDate = value;
             }
         }
-        internal int? HoverEndIndex { get; set; }
+        internal int32? HoverEndIndex { get; set; }
         internal bool HasFocusInternal { get; set; }
         internal bool IsMouseSelection { get; set; }
 
@@ -1004,12 +1004,12 @@ namespace Avalonia.Controls
             CalendarItem? monthControl = MonthControl;
 
             // REMOVE_RTM: should be updated if we support MultiCalendar
-            int count = RowsPerMonth * ColumnsPerMonth;
+            int32 count = RowsPerMonth * ColumnsPerMonth;
             if (monthControl != null)
             {
                 if (monthControl.MonthView != null)
                 {
-                    for (int childIndex = ColumnsPerMonth; childIndex < count; childIndex++)
+                    for (int32 childIndex = ColumnsPerMonth; childIndex < count; childIndex++)
                     {
                         if (monthControl.MonthView.Children[childIndex] is CalendarDayButton b)
                         {
@@ -1062,12 +1062,12 @@ namespace Avalonia.Controls
         internal void ResetStates()
         {
             CalendarItem? monthControl = MonthControl;
-            int count = RowsPerMonth * ColumnsPerMonth;
+            int32 count = RowsPerMonth * ColumnsPerMonth;
             if (monthControl != null)
             {
                 if (monthControl.MonthView != null)
                 {
-                    for (int childIndex = ColumnsPerMonth; childIndex < count; childIndex++)
+                    for (int32 childIndex = ColumnsPerMonth; childIndex < count; childIndex++)
                     {
                         var d = (CalendarDayButton)monthControl.MonthView.Children[childIndex];
                         d.IgnoreMouseOverState();
@@ -1161,7 +1161,7 @@ namespace Avalonia.Controls
             {
                 Debug.Assert(MonthControl is not null);
 
-                int startIndex, endIndex, i;
+                int32 startIndex, endIndex, i;
                 CalendarItem monthControl = MonthControl;
 
                 // This assumes a contiguous set of dates:
@@ -1205,8 +1205,8 @@ namespace Avalonia.Controls
 
                 if (HoverEndIndex != null && HoverStartIndex != null)
                 {
-                    int i;
-                    SortHoverIndexes(out int startIndex, out int endIndex);
+                    int32 i;
+                    SortHoverIndexes(out int32 startIndex, out int32 endIndex);
 
                     if (SelectionMode == CalendarSelectionMode.MultipleRange)
                     {
@@ -1237,7 +1237,7 @@ namespace Avalonia.Controls
                 }
             }
         }
-        internal void SortHoverIndexes(out int startIndex, out int endIndex)
+        internal void SortHoverIndexes(out int32 startIndex, out int32 endIndex)
         {
             Debug.Assert(HoverStart.HasValue);
             Debug.Assert(HoverEnd.HasValue);
@@ -1293,7 +1293,7 @@ namespace Avalonia.Controls
 
                     if (d.HasValue)
                     {
-                        int decade = Math.Max(1, DateTimeHelper.DecadeOfDate(d.Value));
+                        int32 decade = Math.Max(1, DateTimeHelper.DecadeOfDate(d.Value));
                         SelectedYear = new DateTime(decade, 1, 1);
                     }
                     else
@@ -1341,7 +1341,7 @@ namespace Avalonia.Controls
 
                     if (d.HasValue)
                     {
-                        int decade = Math.Max(1, DateTimeHelper.DecadeOfDate(d.Value));
+                        int32 decade = Math.Max(1, DateTimeHelper.DecadeOfDate(d.Value));
                         SelectedYear = new DateTime(decade, 1, 1);
                     }
                     else
@@ -1360,7 +1360,7 @@ namespace Avalonia.Controls
         internal void OnDayClick(DateTime selectedDate)
         {
             Debug.Assert(DisplayMode == CalendarMode.Month, "DisplayMode should be Month!");
-            int i = DateTimeHelper.CompareYearMonth(selectedDate, DisplayDateInternal);
+            int32 i = DateTimeHelper.CompareYearMonth(selectedDate, DisplayDateInternal);
 
             if (SelectionMode == CalendarSelectionMode.None)
             {
@@ -1450,7 +1450,7 @@ namespace Avalonia.Controls
                 SelectedDates.AddRange(HoverStart.Value, HoverEnd.Value);
             }
         }
-        private void ProcessSelection(bool shift, DateTime? lastSelectedDate, int? index)
+        private void ProcessSelection(bool shift, DateTime? lastSelectedDate, int32? index)
         {
             if (SelectionMode == CalendarSelectionMode.None && lastSelectedDate != null)
             {

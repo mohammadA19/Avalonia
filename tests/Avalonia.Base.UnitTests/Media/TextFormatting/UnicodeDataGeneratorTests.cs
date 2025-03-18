@@ -47,9 +47,9 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             UnicodeEnumsGenerator.CreatePropertyValueAliasHelper(unicodeDataEntries, biDiDataEntries);
         }
 
-        private static int GetValue(uint value, int shift, int mask)
+        private static int32 GetValue(uint value, int32 shift, int32 mask)
         {
-            return (int)((value >> shift) & mask);
+            return (int32)((value >> shift) & mask);
         }
     }
 }

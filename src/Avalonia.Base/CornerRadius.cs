@@ -80,7 +80,7 @@ namespace Avalonia
         /// <returns>True if the Object is equal to this corner radius; False otherwise.</returns>
         public override bool Equals(object? obj) => obj is CornerRadius other && Equals(other);
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             return TopLeft.GetHashCode() ^ TopRight.GetHashCode() ^ BottomLeft.GetHashCode() ^ BottomRight.GetHashCode();
         }

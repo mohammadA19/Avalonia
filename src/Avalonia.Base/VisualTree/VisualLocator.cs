@@ -6,7 +6,7 @@ namespace Avalonia.VisualTree
 {
     public class VisualLocator
     {
-        public static IObservable<Visual?> Track(Visual relativeTo, int ancestorLevel, Type? ancestorType = null)
+        public static IObservable<Visual?> Track(Visual relativeTo, int32 ancestorLevel, Type? ancestorType = null)
         {
             return new VisualTracker(relativeTo, ancestorLevel, ancestorType);
         }
@@ -14,10 +14,10 @@ namespace Avalonia.VisualTree
         private class VisualTracker : LightweightObservableBase<Visual?>
         {
             private readonly Visual _relativeTo;
-            private readonly int _ancestorLevel;
+            private readonly int32 _ancestorLevel;
             private readonly Type? _ancestorType;
 
-            public VisualTracker(Visual relativeTo, int ancestorLevel, Type? ancestorType)
+            public VisualTracker(Visual relativeTo, int32 ancestorLevel, Type? ancestorType)
             {
                 _relativeTo = relativeTo;
                 _ancestorLevel = ancestorLevel;

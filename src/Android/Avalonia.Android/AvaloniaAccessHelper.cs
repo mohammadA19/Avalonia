@@ -29,8 +29,8 @@ namespace Avalonia.Android
                 { typeof(IValueProvider).FullName!, (owner, peer, id) => new ValueNodeInfoProvider(owner, peer, id) },
             };
 
-        private readonly Dictionary<int, AutomationPeer> _peers;
-        private readonly Dictionary<AutomationPeer, int> _peerIds;
+        private readonly Dictionary<int32, AutomationPeer> _peers;
+        private readonly Dictionary<AutomationPeer, int32> _peerIds;
 
         private readonly Dictionary<AutomationPeer, HashSet<INodeInfoProvider>> _peerNodeInfoProviders;
 
@@ -43,12 +43,12 @@ namespace Avalonia.Android
             _peerNodeInfoProviders = [];
 
             AutomationPeer rootPeer = ControlAutomationPeer.CreatePeerForElement(view.TopLevel!);
-            GetOrCreateNodeInfoProvidersFromPeer(rootPeer, out int _);
+            GetOrCreateNodeInfoProvidersFromPeer(rootPeer, out int32 _);
 
             _view = view;
         }
 
-        private HashSet<INodeInfoProvider>? GetNodeInfoProvidersFromVirtualViewId(int virtualViewId)
+        private HashSet<INodeInfoProvider>? GetNodeInfoProvidersFromVirtualViewId(int32 virtualViewId)
         {
             if (_peers.TryGetValue(virtualViewId, out AutomationPeer? peer) &&
                 _peerNodeInfoProviders.TryGetValue(peer, out HashSet<INodeInfoProvider>? nodeInfoProviders))
@@ -61,9 +61,9 @@ namespace Avalonia.Android
             }
         }
 
-        private HashSet<INodeInfoProvider> GetOrCreateNodeInfoProvidersFromPeer(AutomationPeer peer, out int virtualViewId)
+        private HashSet<INodeInfoProvider> GetOrCreateNodeInfoProvidersFromPeer(AutomationPeer peer, out int32 virtualViewId)
         {
-            int peerViewId;
+            int32 peerViewId;
             if (_peerNodeInfoProviders.TryGetValue(peer, out HashSet<INodeInfoProvider>? nodeInfoProviders))
             {
                 peerViewId = _peerIds[peer];
@@ -113,14 +113,14 @@ namespace Avalonia.Android
             return nodeInfoProviders;
         }
 
-        protected override int GetVirtualViewAt(float x, float y)
+        protected override int32 GetVirtualViewAt(float x, float y)
         {
-            Point p = _view.TopLevelImpl.PointToClient(new PixelPoint((int)x, (int)y));
+            Point p = _view.TopLevelImpl.PointToClient(new PixelPoint((int32)x, (int32)y));
             IEmbeddedRootProvider? embeddedRootProvider = _peers[0].GetProvider<IEmbeddedRootProvider>();
             AutomationPeer? peer = embeddedRootProvider?.GetPeerFromPoint(p);
             if (peer is not null)
             {
-                GetOrCreateNodeInfoProvidersFromPeer(peer, out int virtualViewId);
+                GetOrCreateNodeInfoProvidersFromPeer(peer, out int32 virtualViewId);
                 return virtualViewId == 0 ? InvalidId : virtualViewId;
             }
             else
@@ -139,19 +139,19 @@ namespace Avalonia.Android
 
             foreach (AutomationPeer peer in _peers[0].GetChildren())
             {
-                GetOrCreateNodeInfoProvidersFromPeer(peer, out int virtualViewId);
+                GetOrCreateNodeInfoProvidersFromPeer(peer, out int32 virtualViewId);
                 virtualViewIds.Add(Integer.ValueOf(virtualViewId));
             }
         }
 
-        protected override bool OnPerformActionForVirtualView(int virtualViewId, int action, Bundle? arguments)
+        protected override bool OnPerformActionForVirtualView(int32 virtualViewId, int32 action, Bundle? arguments)
         {
             return (GetNodeInfoProvidersFromVirtualViewId(virtualViewId) ?? [])
                 .Select(x => x.PerformNodeAction(action, arguments))
                 .Aggregate(false, (a, b) => a | b);
         }
 
-        protected override void OnPopulateNodeForVirtualView(int virtualViewId, AccessibilityNodeInfoCompat nodeInfo)
+        protected override void OnPopulateNodeForVirtualView(int32 virtualViewId, AccessibilityNodeInfoCompat nodeInfo)
         {
             if (!_peers.TryGetValue(virtualViewId, out AutomationPeer? peer))
             {
@@ -161,7 +161,7 @@ namespace Avalonia.Android
             // UI logical structure
             foreach (AutomationPeer child in peer.GetChildren())
             {
-                GetOrCreateNodeInfoProvidersFromPeer(child, out int childId);
+                GetOrCreateNodeInfoProvidersFromPeer(child, out int32 childId);
                 nodeInfo.AddChild(_view, childId);
             }
 
@@ -169,7 +169,7 @@ namespace Avalonia.Android
             AutomationPeer? labeledBy = peer.GetLabeledBy();
             if (labeledBy is not null)
             {
-                GetOrCreateNodeInfoProvidersFromPeer(labeledBy, out int labeledById);
+                GetOrCreateNodeInfoProvidersFromPeer(labeledBy, out int32 labeledById);
                 nodeInfo.SetLabeledBy(_view, labeledById);
             }
 

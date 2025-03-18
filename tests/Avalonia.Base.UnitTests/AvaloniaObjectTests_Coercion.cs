@@ -45,7 +45,7 @@ namespace Avalonia.Base.UnitTests
         public void Coerces_Bound_Value()
         {
             var target = new Class1();
-            var source = new Subject<BindingValue<int>>();
+            var source = new Subject<BindingValue<int32>>();
 
             target.Bind(Class1.FooProperty, source);
             source.OnNext(150);
@@ -155,8 +155,8 @@ namespace Avalonia.Base.UnitTests
         public void Coerced_Value_Can_Be_Restored_From_Previously_Active_Binding()
         {
             var target = new Class1();
-            var source1 = new Subject<BindingValue<int>>();
-            var source2 = new Subject<BindingValue<int>>();
+            var source1 = new Subject<BindingValue<int32>>();
+            var source2 = new Subject<BindingValue<int32>>();
 
             target.Bind(Class1.FooProperty, source1, BindingPriority.Style);
             source1.OnNext(150);
@@ -342,44 +342,44 @@ namespace Avalonia.Base.UnitTests
 
         private class Class1 : AvaloniaObject
         {
-            public static readonly StyledProperty<int> FooProperty =
-                AvaloniaProperty.Register<Class1, int>(
+            public static readonly StyledProperty<int32> FooProperty =
+                AvaloniaProperty.Register<Class1, int32>(
                     "Foo",
                     defaultValue: 11,
                     coerce: CoerceFoo);
 
-            public static readonly AttachedProperty<int> AttachedProperty =
-                AvaloniaProperty.RegisterAttached<Class1, AvaloniaObject, int>(
+            public static readonly AttachedProperty<int32> AttachedProperty =
+                AvaloniaProperty.RegisterAttached<Class1, AvaloniaObject, int32>(
                     "Attached",
                     defaultValue: 11,
                     coerce: CoerceFoo);
 
-            public static readonly StyledProperty<int> InheritedProperty =
-                AvaloniaProperty.RegisterAttached<Class1, Class1, int>(
+            public static readonly StyledProperty<int32> InheritedProperty =
+                AvaloniaProperty.RegisterAttached<Class1, Class1, int32>(
                     "Attached",
                     defaultValue: 11,
                     inherits: true,
                     coerce: CoerceFoo);
 
-            public int Foo
+            public int32 Foo
             {
                 get => GetValue(FooProperty);
                 set => SetValue(FooProperty, value);
             }
 
-            public int Inherited
+            public int32 Inherited
             {
                 get => GetValue(InheritedProperty);
                 set => SetValue(InheritedProperty, value);
             }
 
-            public int MinFoo { get; set; } = 0;
-            public int MaxFoo { get; set; } = 100;
+            public int32 MinFoo { get; set; } = 0;
+            public int32 MaxFoo { get; set; } = 100;
 
-            public List<int> CoerceFooInvocations { get; } = new();
+            public List<int32> CoerceFooInvocations { get; } = new();
             public List<AvaloniaPropertyChangedEventArgs> CoreChanges { get; } = new();
 
-            public static int CoerceFoo(AvaloniaObject instance, int value)
+            public static int32 CoerceFoo(AvaloniaObject instance, int32 value)
             {
                 (instance as Class1)?.CoerceFooInvocations.Add(value);
                 return instance is Class1 o ? 
@@ -395,8 +395,8 @@ namespace Avalonia.Base.UnitTests
 
             private static AvaloniaPropertyChangedEventArgs Clone(AvaloniaPropertyChangedEventArgs change)
             {
-                var e = (AvaloniaPropertyChangedEventArgs<int>)change;
-                return new AvaloniaPropertyChangedEventArgs<int>(
+                var e = (AvaloniaPropertyChangedEventArgs<int32>)change;
+                return new AvaloniaPropertyChangedEventArgs<int32>(
                     change.Sender,
                     e.Property,
                     e.OldValue,
@@ -408,23 +408,23 @@ namespace Avalonia.Base.UnitTests
 
         private class Class2 : AvaloniaObject
         {
-            public static readonly StyledProperty<int> FooProperty =
+            public static readonly StyledProperty<int32> FooProperty =
                 Class1.FooProperty.AddOwner<Class2>();
 
             static Class2()
             {
                 FooProperty.OverrideMetadata<Class2>(
-                    new StyledPropertyMetadata<int>(
+                    new StyledPropertyMetadata<int32>(
                         coerce: CoerceFoo));
             }
 
-            public int Foo
+            public int32 Foo
             {
                 get => GetValue(FooProperty);
                 set => SetValue(FooProperty, value);
             }
 
-            public static int CoerceFoo(AvaloniaObject instance, int value)
+            public static int32 CoerceFoo(AvaloniaObject instance, int32 value)
             {
                 return -value;
             }
@@ -432,20 +432,20 @@ namespace Avalonia.Base.UnitTests
 
         private class Class3: AvaloniaObject
         {
-            public static readonly StyledProperty<int> FooProperty =
-                AvaloniaProperty.Register<Class3, int>(
+            public static readonly StyledProperty<int32> FooProperty =
+                AvaloniaProperty.Register<Class3, int32>(
                     "Foo",
                     defaultValue: 11,
                     coerce: CoerceFoo);
 
-            public int Foo
+            public int32 Foo
             {
                 get => GetValue(FooProperty);
                 set => SetValue(FooProperty, value);
             }
 
 
-            public static int CoerceFoo(AvaloniaObject instance, int value)
+            public static int32 CoerceFoo(AvaloniaObject instance, int32 value)
             {
                 var o = (Class3)instance;
                 return Math.Clamp(value, 50, 100);
@@ -454,22 +454,22 @@ namespace Avalonia.Base.UnitTests
 
         private class Control1 : Control 
         {
-            public static readonly StyledProperty<int> FooProperty =
-                AvaloniaProperty.Register<Control1, int>(
+            public static readonly StyledProperty<int32> FooProperty =
+                AvaloniaProperty.Register<Control1, int32>(
                     "Foo",
                     defaultValue: 11,
                     coerce: CoerceFoo);
 
-            public int Foo
+            public int32 Foo
             {
                 get => GetValue(FooProperty);
                 set => SetValue(FooProperty, value);
             }
 
-            public int MinFoo { get; set; } = 0;
-            public int MaxFoo { get; set; } = 100;
+            public int32 MinFoo { get; set; } = 0;
+            public int32 MaxFoo { get; set; } = 100;
 
-            public static int CoerceFoo(AvaloniaObject instance, int value)
+            public static int32 CoerceFoo(AvaloniaObject instance, int32 value)
             {
                 var o = (Control1)instance;
                 return Math.Clamp(value, o.MinFoo, o.MaxFoo);

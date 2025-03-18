@@ -23,7 +23,7 @@ public class WeakHashListTests
         // Fill array storage.
         var arrMaxSize = WeakHashList<string>.DefaultArraySize;
 
-        for (int i = 0; i < arrMaxSize; i++)
+        for (int32 i = 0; i < arrMaxSize; i++)
         {
             target.Add(i.ToString());
         }
@@ -36,7 +36,7 @@ public class WeakHashListTests
         Assert.False(target.IsEmpty);
 
         // Remove everything, this should still keep an empty dictionary.
-        for (int i = 0; i < arrMaxSize + 1; i++)
+        for (int32 i = 0; i < arrMaxSize + 1; i++)
         {
             target.Remove(i.ToString());
         }
@@ -52,7 +52,7 @@ public class WeakHashListTests
         // Use all slots in array storage.
         var arrMaxSize = WeakHashList<string>.DefaultArraySize;
 
-        for (int i = 0; i < arrMaxSize; i++)
+        for (int32 i = 0; i < arrMaxSize; i++)
         {
             target.Add(i.ToString());
         }

@@ -415,7 +415,7 @@ internal sealed class AndroidStorageFile : AndroidStorageItem, IStorageBookmarkF
             return false;
 
         var value = GetColumnValue(context, uri, DocumentsContract.Document.ColumnFlags);
-        if (!string.IsNullOrEmpty(value) && int.TryParse(value, out var flagsInt))
+        if (!string.IsNullOrEmpty(value) && int32.TryParse(value, out var flagsInt))
         {
             var flags = (DocumentContractFlags)flagsInt;
             return flags.HasFlag(DocumentContractFlags.VirtualDocument);

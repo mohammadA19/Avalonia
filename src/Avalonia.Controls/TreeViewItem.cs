@@ -41,8 +41,8 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="Level"/> property.
         /// </summary>
-        public static readonly DirectProperty<TreeViewItem, int> LevelProperty =
-            AvaloniaProperty.RegisterDirect<TreeViewItem, int>(
+        public static readonly DirectProperty<TreeViewItem, int32> LevelProperty =
+            AvaloniaProperty.RegisterDirect<TreeViewItem, int32>(
                 nameof(Level), o => o.Level);
         
         /// <summary>
@@ -63,7 +63,7 @@ namespace Avalonia.Controls
         private TreeView? _treeView;
         private Control? _header;
         private Control? _headerPresenter;
-        private int _level;
+        private int32 _level;
         private bool _templateApplied;
         private bool _deferredBringIntoViewFlag;
 
@@ -109,7 +109,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets the level/indentation of the item.
         /// </summary>
-        public int Level
+        public int32 Level
         {
             get => _level;
             private set => SetAndRaise(LevelProperty, ref _level, value);
@@ -141,22 +141,22 @@ namespace Avalonia.Controls
             return new TreeViewItemAutomationPeer(this);
         }
 
-        protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+        protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
         {
             return EnsureTreeView().CreateContainerForItemOverride(item, index, recycleKey);
         }
 
-        protected internal override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
+        protected internal override bool NeedsContainerOverride(object? item, int32 index, out object? recycleKey)
         {
             return EnsureTreeView().NeedsContainerOverride(item, index, out recycleKey);
         }
 
-        protected internal override void PrepareContainerForItemOverride(Control container, object? item, int index)
+        protected internal override void PrepareContainerForItemOverride(Control container, object? item, int32 index)
         {
             EnsureTreeView().PrepareContainerForItemOverride(container, item, index);
         }
 
-        protected internal override void ContainerForItemPreparedOverride(Control container, object? item, int index)
+        protected internal override void ContainerForItemPreparedOverride(Control container, object? item, int32 index)
         {
             EnsureTreeView().ContainerForItemPreparedOverride(container, item, index);
         }
@@ -363,7 +363,7 @@ namespace Avalonia.Controls
             }
         }
 
-        private static int CalculateDistanceFromLogicalParent<T>(ILogical? logical, int @default = -1) where T : class
+        private static int32 CalculateDistanceFromLogicalParent<T>(ILogical? logical, int32 @default = -1) where T : class
         {
             var result = 0;
 

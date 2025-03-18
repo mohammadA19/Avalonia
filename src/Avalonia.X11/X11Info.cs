@@ -8,7 +8,7 @@ namespace Avalonia.X11
     {
         public IntPtr Display { get; }
         public IntPtr DeferredDisplay { get; }
-        public int DefaultScreen { get; }
+        public int32 DefaultScreen { get; }
         public IntPtr BlackPixel { get; }
         public IntPtr RootWindow { get; }
         public IntPtr DefaultRootWindow { get; }
@@ -16,14 +16,14 @@ namespace Avalonia.X11
         public X11Atoms Atoms { get; }
         public IntPtr Xim { get; }
         
-        public int RandrEventBase { get; }
-        public int RandrErrorBase { get; }
+        public int32 RandrEventBase { get; }
+        public int32 RandrErrorBase { get; }
         
         public Version? RandrVersion { get; }
         
-        public int XInputOpcode { get; }
-        public int XInputEventBase { get; }
-        public int XInputErrorBase { get; }
+        public int32 XInputOpcode { get; }
+        public int32 XInputEventBase { get; }
+        public int32 XInputErrorBase { get; }
         
         public Version? XInputVersion { get; }
 
@@ -37,7 +37,7 @@ namespace Avalonia.X11
         public bool HasXkb { get; }
 
         [DllImport("libc")]
-        private static extern void setlocale(int type, string s);
+        private static extern void setlocale(int32 type, string s);
 
         public unsafe X11Info(IntPtr display, IntPtr deferredDisplay, bool useXim)
         {
@@ -84,7 +84,7 @@ namespace Avalonia.X11
             
             try
             {
-                if (XRRQueryExtension(display, out int randrEventBase, out var randrErrorBase) != 0)
+                if (XRRQueryExtension(display, out int32 randrEventBase, out var randrErrorBase) != 0)
                 {
                     RandrEventBase = randrEventBase;
                     RandrErrorBase = randrErrorBase;
@@ -102,7 +102,7 @@ namespace Avalonia.X11
                 if (XQueryExtension(display, "XInputExtension",
                         out var xiopcode, out var xievent, out var xierror))
                 {
-                    int major = 2, minor = 2;
+                    int32 major = 2, minor = 2;
                     if (XIQueryVersion(display, ref major, ref minor) == Status.Success)
                     {
                         XInputVersion = new Version(major, minor);

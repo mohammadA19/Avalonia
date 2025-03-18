@@ -20,7 +20,7 @@ internal unsafe partial class VulkanDevice
         if (deviceCount == 0)
             throw new VulkanException("No devices found");
 
-        var devices = stackalloc VkPhysicalDevice[(int)deviceCount];
+        var devices = stackalloc VkPhysicalDevice[(int32)deviceCount];
         api.EnumeratePhysicalDevices(vkInstance, ref deviceCount, devices)
             .ThrowOnError("vkEnumeratePhysicalDevices");
 
@@ -53,7 +53,7 @@ internal unsafe partial class VulkanDevice
 
         var dev = compatibleDevice.Value;
 
-        var queuePriorities = stackalloc float[(int)dev.QueueCount];
+        var queuePriorities = stackalloc float[(int32)dev.QueueCount];
         for (var c = 0; c < dev.QueueCount; c++)
             queuePriorities[c] = 1f;
 
@@ -106,7 +106,7 @@ internal unsafe partial class VulkanDevice
         uint propertyCount = 0;
         instance.EnumerateDeviceExtensionProperties(physicalDevice, null, ref propertyCount, null);
         var extensionProps = new VkExtensionProperties[propertyCount];
-        var extensions = new List<string>((int)propertyCount);
+        var extensions = new List<string>((int32)propertyCount);
         if (propertyCount != 0)
             fixed (VkExtensionProperties* ptr = extensionProps)
             {
@@ -132,7 +132,7 @@ internal unsafe partial class VulkanDevice
         
         uint familyCount = 0;
         instance.GetPhysicalDeviceQueueFamilyProperties(physicalDevice, ref familyCount, null);
-        var familyProperties = stackalloc VkQueueFamilyProperties[(int)familyCount];
+        var familyProperties = stackalloc VkQueueFamilyProperties[(int32)familyCount];
         instance.GetPhysicalDeviceQueueFamilyProperties(physicalDevice, ref familyCount, familyProperties);
         var requredFlags = VkQueueFlags.VK_QUEUE_GRAPHICS_BIT;
         if (options.RequireComputeBit)

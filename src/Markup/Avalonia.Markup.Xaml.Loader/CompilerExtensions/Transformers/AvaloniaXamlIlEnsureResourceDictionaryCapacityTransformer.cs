@@ -80,7 +80,7 @@ internal sealed class AvaloniaXamlIlEnsureResourceDictionaryCapacityTransformer 
     {
         public ResourcesMode Mode { get; }
         public IXamlMethod? ResourcesGetter { get; }
-        public int Count { get; set; }
+        public int32 Count { get; set; }
 
         public ResourcesInfo(ResourcesMode mode, IXamlMethod? resourcesGetter)
         {
@@ -98,10 +98,10 @@ internal sealed class AvaloniaXamlIlEnsureResourceDictionaryCapacityTransformer 
 
     public sealed class EnsureCapacityNode : XamlAstNode, IXamlAstManipulationNode, IXamlAstILEmitableNode
     {
-        private readonly int _capacity;
+        private readonly int32 _capacity;
         private readonly IXamlMethod? _resourcesGetter;
 
-        public EnsureCapacityNode(IXamlLineInfo lineInfo, int capacity, IXamlMethod? resourcesGetter)
+        public EnsureCapacityNode(IXamlLineInfo lineInfo, int32 capacity, IXamlMethod? resourcesGetter)
             : base(lineInfo)
         {
             _capacity = capacity;

@@ -42,7 +42,7 @@ internal sealed class WriteableStream : Stream
         // no-op
     }
 
-    public override int Read(byte[] buffer, int offset, int count)
+    public override int32 Read(byte[] buffer, int32 offset, int32 count)
     {
         throw new NotSupportedException();
     }
@@ -73,7 +73,7 @@ internal sealed class WriteableStream : Stream
         StreamHelper.Truncate(JSReference, value);
     }
 
-    public override void Write(byte[] buffer, int offset, int count)
+    public override void Write(byte[] buffer, int32 offset, int32 count)
     {
         throw new InvalidOperationException("Browser supports only WriteAsync");
     }
@@ -83,12 +83,12 @@ internal sealed class WriteableStream : Stream
         return new ValueTask(WriteAsyncInternal(buffer.ToArray(), 0, buffer.Length, cancellationToken));
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(byte[] buffer, int32 offset, int32 count, CancellationToken cancellationToken)
     {
         return WriteAsyncInternal(buffer, offset, count, cancellationToken);
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginWrite(byte[] buffer, int32 offset, int32 count, AsyncCallback? callback, object? state)
     {
         var task = WriteAsyncInternal(buffer, offset, count, default);
         return TaskToAsyncResult.Begin(task, callback, state);
@@ -99,7 +99,7 @@ internal sealed class WriteableStream : Stream
         TaskToAsyncResult.End(asyncResult);
     }
 
-    private Task WriteAsyncInternal(byte[] buffer, int offset, int count, CancellationToken _)
+    private Task WriteAsyncInternal(byte[] buffer, int32 offset, int32 count, CancellationToken _)
     {
         _position += count;
 

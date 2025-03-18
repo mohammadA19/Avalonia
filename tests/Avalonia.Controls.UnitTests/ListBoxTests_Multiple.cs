@@ -698,7 +698,7 @@ namespace Avalonia.Controls.UnitTests
             });
         }
 
-        private static IEnumerable<int> SelectedContainers(SelectingItemsControl target)
+        private static IEnumerable<int32> SelectedContainers(SelectingItemsControl target)
         {
             return target.Presenter.Panel.Children
                 .Select(x => x.Classes.Contains(":selected") ? target.IndexFromContainer(x) : -1)

@@ -10,7 +10,7 @@ namespace Avalonia.Benchmarks.Base
     public class AvaloniaObject_GetObservable
     {
         private TestClass _target = null!;
-        public static int result;
+        public static int32 result;
 
         public AvaloniaObject_GetObservable()
         {

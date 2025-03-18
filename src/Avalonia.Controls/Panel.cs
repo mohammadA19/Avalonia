@@ -207,13 +207,13 @@ namespace Avalonia.Controls
             panel?.InvalidateMeasure();
         }
 
-        int IChildIndexProvider.GetChildIndex(ILogical child)
+        int32 IChildIndexProvider.GetChildIndex(ILogical child)
         {
             return child is Control control ? Children.IndexOf(control) : -1;
         }
 
         /// <inheritdoc />
-        bool IChildIndexProvider.TryGetTotalCount(out int count)
+        bool IChildIndexProvider.TryGetTotalCount(out int32 count)
         {
             count = Children.Count;
             return true;

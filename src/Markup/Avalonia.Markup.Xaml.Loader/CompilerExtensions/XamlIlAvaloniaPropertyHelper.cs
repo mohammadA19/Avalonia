@@ -277,7 +277,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
             public override bool Equals(object? obj)
                 => Equals(obj as AvaloniaPropertyCustomSetter);
 
-            public override int GetHashCode() 
+            public override int32 GetHashCode() 
                 => AvaloniaProperty.GetHashCode();
         }
 

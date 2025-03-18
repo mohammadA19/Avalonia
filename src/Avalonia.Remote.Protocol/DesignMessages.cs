@@ -52,7 +52,7 @@ namespace Avalonia.Remote.Protocol.Designer
 
         public string ExceptionType { get; set; }
         public string Message { get; set; }
-        public int? LineNumber { get; set; }
-        public int? LinePosition { get; set; }
+        public int32? LineNumber { get; set; }
+        public int32? LinePosition { get; set; }
     }
 }

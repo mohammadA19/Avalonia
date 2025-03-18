@@ -25,7 +25,7 @@ namespace Avalonia.Media
             return obj is BoxShadow other && Equals(other);
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
@@ -42,7 +42,7 @@ namespace Avalonia.Media
 
         struct ArrayReader
         {
-            private int _index;
+            private int32 _index;
             private readonly string[] _arr;
 
             public ArrayReader(string[] arr)

@@ -11,7 +11,7 @@ namespace Avalonia.LinuxFramebuffer.Input.EvDev
     {
         private readonly EvDevDeviceDescription[] _deviceDescriptions;
         private readonly List<EvDevDeviceHandler> _handlers = new List<EvDevDeviceHandler>();
-        private int _epoll;
+        private int32 _epoll;
         private Action<RawInputEventArgs>? _onInput;
         private IInputRoot? _inputRoot;
 
@@ -22,7 +22,7 @@ namespace Avalonia.LinuxFramebuffer.Input.EvDev
         
         unsafe void InputThread()
         {
-            const int MaxEvents = 16;
+            const int32 MaxEvents = 16;
             var events = stackalloc epoll_event[MaxEvents];
             while (true)
             {
@@ -32,7 +32,7 @@ namespace Avalonia.LinuxFramebuffer.Input.EvDev
                     try
                     {
                         var ev = events[c];
-                        var handler = _handlers[(int)ev.data.u32];
+                        var handler = _handlers[(int32)ev.data.u32];
                         handler.HandleEvents();
                     }
                     catch (Exception e)

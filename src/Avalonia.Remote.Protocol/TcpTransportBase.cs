@@ -39,7 +39,7 @@ namespace Avalonia.Remote.Protocol
             }
         }
         
-        public IDisposable Listen(IPAddress address, int port, Action<IAvaloniaRemoteTransportConnection> cb)
+        public IDisposable Listen(IPAddress address, int32 port, Action<IAvaloniaRemoteTransportConnection> cb)
         {
             var server = new TcpListener(address, port);
             async void AcceptNew()
@@ -50,7 +50,7 @@ namespace Avalonia.Remote.Protocol
                     AcceptNew();
                     await Task.Run(async () =>
                     {
-                        var tcs = new TaskCompletionSource<int>();
+                        var tcs = new TaskCompletionSource<int32>();
                         var t = CreateTransport(_resolver, cl.GetStream(), () => tcs.TrySetResult(0));
                         cb(t);
                         await tcs.Task;
@@ -66,7 +66,7 @@ namespace Avalonia.Remote.Protocol
             return new DisposableServer(server);
         }
 
-        public async Task<IAvaloniaRemoteTransportConnection> Connect(IPAddress address, int port)
+        public async Task<IAvaloniaRemoteTransportConnection> Connect(IPAddress address, int32 port)
         {
             var c = new TcpClient();
             await c.ConnectAsync(address, port).ConfigureAwait(false);

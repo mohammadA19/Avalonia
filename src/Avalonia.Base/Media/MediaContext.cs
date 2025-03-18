@@ -185,8 +185,8 @@ internal partial class MediaContext : ICompositorScheduler
     /// </summary>
     private void FireInvokeOnRenderCallbacks()
     {
-        int callbackLoopCount = 0;
-        int count = _invokeOnRenderCallbacks?.Count ?? 0;
+        int32 callbackLoopCount = 0;
+        int32 count = _invokeOnRenderCallbacks?.Count ?? 0;
 
         // This outer loop is to re-run layout in case the app causes a layout to get enqueued in response
         // to a Loaded event. In this case we would like to re-run layout before we allow render.
@@ -201,7 +201,7 @@ internal partial class MediaContext : ICompositorScheduler
                 var callbacks = _invokeOnRenderCallbacks!;
                 _invokeOnRenderCallbacks = null;
 
-                for (int i = 0; i < count; i++) 
+                for (int32 i = 0; i < count; i++) 
                     callbacks[i].Invoke();
                 
                 callbacks.Clear();

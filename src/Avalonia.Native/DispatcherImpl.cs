@@ -59,7 +59,7 @@ internal class DispatcherImpl : IControlledDispatcherImpl, IDispatcherImplWithEx
 
     public void UpdateTimer(long? dueTimeInMs)
     {
-        var ms = dueTimeInMs == null ? -1 : (int)Math.Min(int.MaxValue - 10, Math.Max(1, dueTimeInMs.Value - Now));
+        var ms = dueTimeInMs == null ? -1 : (int32)Math.Min(int32.MaxValue - 10, Math.Max(1, dueTimeInMs.Value - Now));
         _native.UpdateTimer(ms);
     }
 

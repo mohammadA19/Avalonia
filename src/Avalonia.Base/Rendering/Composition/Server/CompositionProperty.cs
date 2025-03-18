@@ -8,7 +8,7 @@ namespace Avalonia.Rendering.Composition.Server;
 
 internal class CompositionProperty
 {
-    private static int s_nextId = 1;
+    private static int32 s_nextId = 1;
     private static readonly object _lock = new();
 
     private static Dictionary<Type, List<CompositionProperty>> s_dynamicRegistry = new();
@@ -20,7 +20,7 @@ internal class CompositionProperty
 
     private static volatile ReadOnlyRegistry? s_ReadOnlyRegistry;
 
-    public CompositionProperty(int id, string name, Type owner, Func<SimpleServerObject, ExpressionVariant>? getVariant)
+    public CompositionProperty(int32 id, string name, Type owner, Func<SimpleServerObject, ExpressionVariant>? getVariant)
     {
         Id = id;
         Name = name;
@@ -28,7 +28,7 @@ internal class CompositionProperty
         GetVariant = getVariant;
     }
 
-    public int Id { get; }
+    public int32 Id { get; }
     public string Name { get;  }
     public Type Owner { get; }
     public Func<SimpleServerObject, ExpressionVariant>? GetVariant { get; }
@@ -103,7 +103,7 @@ internal class CompositionProperty<T> : CompositionProperty
     public Func<SimpleServerObject, T> GetField { get; }
     public Action<SimpleServerObject, T> SetField { get; }
 
-    public CompositionProperty(int id, string name, Type owner,
+    public CompositionProperty(int32 id, string name, Type owner,
         Func<SimpleServerObject, T> getField,
         Action<SimpleServerObject, T> setField,
         Func<SimpleServerObject, ExpressionVariant>? getVariant)

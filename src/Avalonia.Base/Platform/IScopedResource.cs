@@ -10,7 +10,7 @@ public interface IScopedResource<T> : IDisposable
 
 public class ScopedResource<T> : IScopedResource<T>
 {
-    private int _disposed = 0;
+    private int32 _disposed = 0;
     private T _value;
     private Action? _dispose;
     private ScopedResource(T value, Action dispose)

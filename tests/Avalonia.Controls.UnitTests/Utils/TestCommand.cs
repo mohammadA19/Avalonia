@@ -36,7 +36,7 @@ internal class TestCommand : ICommand
         }
     }
 
-    public int SubscriptionCount { get; private set; }
+    public int32 SubscriptionCount { get; private set; }
 
     public event EventHandler CanExecuteChanged
     {

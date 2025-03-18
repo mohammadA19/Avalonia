@@ -5,7 +5,7 @@ namespace Avalonia.Native
 {
     internal class DoubleClickHelper
     {
-        private int _clickCount;
+        private int32 _clickCount;
         private Rect _lastClickRect;
         private ulong _lastClickTime;
 

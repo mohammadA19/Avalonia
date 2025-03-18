@@ -34,7 +34,7 @@ namespace Avalonia.Controls.UnitTests
                 window.ApplyTemplate();
                 ((Control)window.Presenter).ApplyTemplate();
 
-                int openedCount = 0;
+                int32 openedCount = 0;
 
                 sut.Opened += (sender, args) =>
                 {
@@ -137,7 +137,7 @@ namespace Avalonia.Controls.UnitTests
                 window.ApplyTemplate();
                 ((Control)window.Presenter).ApplyTemplate();
 
-                int openedCount = 0;
+                int32 openedCount = 0;
 
                 sut.Opened += (sender, args) =>
                 {
@@ -219,7 +219,7 @@ namespace Avalonia.Controls.UnitTests
 
                 sut.Open(target);
 
-                int closedCount = 0;
+                int32 closedCount = 0;
 
                 sut.Closed += (sender, args) =>
                 {

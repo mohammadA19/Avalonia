@@ -11,14 +11,14 @@ namespace Avalonia
     /// </summary>
     public class AvaloniaPropertyRegistry
     {
-        private readonly Dictionary<int, AvaloniaProperty> _properties =
-            new Dictionary<int, AvaloniaProperty>();
-        private readonly Dictionary<Type, Dictionary<int, AvaloniaProperty>> _registered =
-            new Dictionary<Type, Dictionary<int, AvaloniaProperty>>();
-        private readonly Dictionary<Type, Dictionary<int, AvaloniaProperty>> _attached =
-            new Dictionary<Type, Dictionary<int, AvaloniaProperty>>();
-        private readonly Dictionary<Type, Dictionary<int, AvaloniaProperty>> _direct =
-            new Dictionary<Type, Dictionary<int, AvaloniaProperty>>();
+        private readonly Dictionary<int32, AvaloniaProperty> _properties =
+            new Dictionary<int32, AvaloniaProperty>();
+        private readonly Dictionary<Type, Dictionary<int32, AvaloniaProperty>> _registered =
+            new Dictionary<Type, Dictionary<int32, AvaloniaProperty>>();
+        private readonly Dictionary<Type, Dictionary<int32, AvaloniaProperty>> _attached =
+            new Dictionary<Type, Dictionary<int32, AvaloniaProperty>>();
+        private readonly Dictionary<Type, Dictionary<int32, AvaloniaProperty>> _direct =
+            new Dictionary<Type, Dictionary<int32, AvaloniaProperty>>();
         private readonly Dictionary<Type, List<AvaloniaProperty>> _registeredCache =
             new Dictionary<Type, List<AvaloniaProperty>>();
         private readonly Dictionary<Type, List<AvaloniaProperty>> _attachedCache =
@@ -76,7 +76,7 @@ namespace Avalonia
         {
             dictionary.Remove(type);
         }
-        private void Unregister( Dictionary<Type, Dictionary<int, AvaloniaProperty>> dictionary,Type type)
+        private void Unregister( Dictionary<Type, Dictionary<int32, AvaloniaProperty>> dictionary,Type type)
         {
             foreach (var keyValuePair in dictionary)
             {
@@ -367,7 +367,7 @@ namespace Avalonia
         /// </summary>
         /// <param name="id">The property Id.</param>
         /// <returns>The registered property or null if no matching property found.</returns>
-        internal AvaloniaProperty? FindRegistered(int id)
+        internal AvaloniaProperty? FindRegistered(int32 id)
         {
             return id < _properties.Count ? _properties[id] : null;
         }
@@ -434,7 +434,7 @@ namespace Avalonia
             {
                 if (!_registered.TryGetValue(type, out var inner))
                 {
-                    inner = new Dictionary<int, AvaloniaProperty>();
+                    inner = new Dictionary<int32, AvaloniaProperty>();
                     inner.Add(property.Id, property);
                     _registered.Add(type, inner);
                 }
@@ -447,7 +447,7 @@ namespace Avalonia
                 {
                     if (!_direct.TryGetValue(type, out inner))
                     {
-                        inner = new Dictionary<int, AvaloniaProperty>();
+                        inner = new Dictionary<int32, AvaloniaProperty>();
                         inner.Add(property.Id, property);
                         _direct.Add(type, inner);
                     }
@@ -494,7 +494,7 @@ namespace Avalonia
             {
                 if (!_attached.TryGetValue(type, out var inner))
                 {
-                    inner = new Dictionary<int, AvaloniaProperty>();
+                    inner = new Dictionary<int32, AvaloniaProperty>();
                     inner.Add(property.Id, property);
                     _attached.Add(type, inner);
                 }

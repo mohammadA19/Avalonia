@@ -57,7 +57,7 @@ namespace Avalonia.Utilities
         /// Number of entries in this store
         /// </summary>
         // Number of entries in this store
-        public int Count
+        public int32 Count
         {
             get
             {
@@ -66,7 +66,7 @@ namespace Avalonia.Utilities
         }
 
         // for use only by trusted callers - e.g. FrugalObjectList.Compacter
-        internal void TrustedSetCount(int newCount)
+        internal void TrustedSetCount(int32 newCount)
         {
             _count = newCount;
         }
@@ -74,7 +74,7 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Capacity of this store
         /// </summary>
-        public abstract int Capacity
+        public abstract int32 Capacity
         {
             get;
         }
@@ -96,15 +96,15 @@ namespace Avalonia.Utilities
         /// Returns the index into the store that contains the item.
         /// -1 is returned if the item is not in the store.
         /// </summary>
-        public abstract int IndexOf(T value);
+        public abstract int32 IndexOf(T value);
 
         /// <summary>
         /// Insert item into the store at index, grows if needed
         /// </summary>
-        public abstract void Insert(int index, T value);
+        public abstract void Insert(int32 index, T value);
 
         // Place item into the store at index
-        public abstract void SetAt(int index, T value);
+        public abstract void SetAt(int32 index, T value);
 
         /// <summary>
         /// Removes the item from the store. If the item was not
@@ -115,12 +115,12 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Removes the item from the store
         /// </summary>
-        public abstract void RemoveAt(int index);
+        public abstract void RemoveAt(int32 index);
 
         /// <summary>
         /// Return the item at index in the store
         /// </summary>
-        public abstract T EntryAt(int index);
+        public abstract T EntryAt(int32 index);
 
         /// <summary>
         /// Promotes the values in the current store to the next larger
@@ -137,7 +137,7 @@ namespace Avalonia.Utilities
         /// Copies the entries to the given array starting at the
         /// specified index
         /// </summary>
-        public abstract void CopyTo(T[] array, int index);
+        public abstract void CopyTo(T[] array, int32 index);
 
         /// <summary>
         /// Creates a shallow copy of the  list
@@ -145,9 +145,9 @@ namespace Avalonia.Utilities
         public abstract object Clone();
 
         // The number of items in the list.
-        protected int _count;
+        protected int32 _count;
 
-        public virtual Compacter NewCompacter(int newCount)
+        public virtual Compacter NewCompacter(int32 newCount)
         {
             return new Compacter(this, newCount);
         }
@@ -156,18 +156,18 @@ namespace Avalonia.Utilities
         internal class Compacter
         {
             protected readonly FrugalListBase<T> _store;
-            private readonly int _newCount;
+            private readonly int32 _newCount;
 
-            protected int _validItemCount;
-            protected int _previousEnd;
+            protected int32 _validItemCount;
+            protected int32 _previousEnd;
 
-            public Compacter(FrugalListBase<T> store, int newCount)
+            public Compacter(FrugalListBase<T> store, int32 newCount)
             {
                 _store = store;
                 _newCount = newCount;
             }
 
-            public void Include(int start, int end)
+            public void Include(int32 start, int32 end)
             {
                 Debug.Assert(start >= _previousEnd, "Arguments out of order during Compact");
                 Debug.Assert(_validItemCount + end - start <= _newCount, "Too many items copied during Compact");
@@ -177,7 +177,7 @@ namespace Avalonia.Utilities
                 _previousEnd = end;
             }
 
-            protected virtual void IncludeOverride(int start, int end)
+            protected virtual void IncludeOverride(int32 start, int32 end)
             {
                 // item-by-item move
                 for (var i = start; i < end; ++i)
@@ -191,7 +191,7 @@ namespace Avalonia.Utilities
                 // clear out vacated entries
                 var filler = default(T);
 
-                for (int i = _validItemCount, n = _store._count; i < n; ++i)
+                for (int32 i = _validItemCount, n = _store._count; i < n; ++i)
                 {
                     _store.SetAt(i, filler);
                 }
@@ -208,12 +208,12 @@ namespace Avalonia.Utilities
     /// </summary>
     internal sealed class SingleItemList<T> : FrugalListBase<T>
     {
-        private const int SIZE = 1;
+        private const int32 SIZE = 1;
 
         private T _loneEntry;
 
         // Capacity of this store
-        public override int Capacity
+        public override int32 Capacity
         {
             get
             {
@@ -250,7 +250,7 @@ namespace Avalonia.Utilities
             return _loneEntry.Equals(value);
         }
 
-        public override int IndexOf(T value)
+        public override int32 IndexOf(T value)
         {
             if (_loneEntry.Equals(value))
             {
@@ -259,7 +259,7 @@ namespace Avalonia.Utilities
             return -1;
         }
 
-        public override void Insert(int index, T value)
+        public override void Insert(int32 index, T value)
         {
             // Should only get here if count and index are 0
             if (_count < SIZE && index < SIZE)
@@ -271,7 +271,7 @@ namespace Avalonia.Utilities
             throw new ArgumentOutOfRangeException(nameof(index));
         }
 
-        public override void SetAt(int index, T value)
+        public override void SetAt(int32 index, T value)
         {
             // Overwrite item at index
             _loneEntry = value;
@@ -290,7 +290,7 @@ namespace Avalonia.Utilities
             return false;
         }
 
-        public override void RemoveAt(int index)
+        public override void RemoveAt(int32 index)
         {
             // Wipe out the info at index
             if (0 == index)
@@ -304,7 +304,7 @@ namespace Avalonia.Utilities
             }
         }
 
-        public override T EntryAt(int index)
+        public override T EntryAt(int32 index)
         {
             return _loneEntry;
         }
@@ -337,7 +337,7 @@ namespace Avalonia.Utilities
             return array;
         }
 
-        public override void CopyTo(T[] array, int index)
+        public override void CopyTo(T[] array, int32 index)
         {
             array[index] = _loneEntry;
         }
@@ -349,7 +349,7 @@ namespace Avalonia.Utilities
             return newList;
         }
 
-        private void SetCount(int value)
+        private void SetCount(int32 value)
         {
             if (value >= 0 && value <= SIZE)
             {
@@ -369,14 +369,14 @@ namespace Avalonia.Utilities
     /// </summary>
     internal sealed class ThreeItemList<T> : FrugalListBase<T>
     {
-        private const int SIZE = 3;
+        private const int32 SIZE = 3;
 
         private T _entry0;
         private T _entry1;
         private T _entry2;
 
         // Capacity of this store
-        public override int Capacity
+        public override int32 Capacity
         {
             get
             {
@@ -422,7 +422,7 @@ namespace Avalonia.Utilities
             return -1 != IndexOf(value);
         }
 
-        public override int IndexOf(T value)
+        public override int32 IndexOf(T value)
         {
             if (_entry0.Equals(value))
             {
@@ -444,7 +444,7 @@ namespace Avalonia.Utilities
             return -1;
         }
 
-        public override void Insert(int index, T value)
+        public override void Insert(int32 index, T value)
         {
             // Should only get here if count < SIZE
             if (_count < SIZE)
@@ -476,7 +476,7 @@ namespace Avalonia.Utilities
             throw new ArgumentOutOfRangeException(nameof(index));
         }
 
-        public override void SetAt(int index, T value)
+        public override void SetAt(int32 index, T value)
         {
             // Overwrite item at index
             switch (index)
@@ -524,7 +524,7 @@ namespace Avalonia.Utilities
             return false;
         }
 
-        public override void RemoveAt(int index)
+        public override void RemoveAt(int32 index)
         {
             // Remove entry at index, wipe out the last entry and move
             // all the other entries up.  Because we only have three
@@ -552,7 +552,7 @@ namespace Avalonia.Utilities
             --_count;
         }
 
-        public override T EntryAt(int index)
+        public override T EntryAt(int32 index)
         {
             switch (index)
             {
@@ -663,7 +663,7 @@ namespace Avalonia.Utilities
             return array;
         }
 
-        public override void CopyTo(T[] array, int index)
+        public override void CopyTo(T[] array, int32 index)
         {
             array[index] = _entry0;
             if (_count >= 2)
@@ -683,7 +683,7 @@ namespace Avalonia.Utilities
             return newList;
         }
 
-        private void SetCount(int value)
+        private void SetCount(int32 value)
         {
             if (value >= 0 && value <= SIZE)
             {
@@ -701,7 +701,7 @@ namespace Avalonia.Utilities
     /// </summary>
     internal sealed class SixItemList<T> : FrugalListBase<T>
     {
-        private const int SIZE = 6;
+        private const int32 SIZE = 6;
 
         private T _entry0;
         private T _entry1;
@@ -711,7 +711,7 @@ namespace Avalonia.Utilities
         private T _entry5;
 
         // Capacity of this store
-        public override int Capacity
+        public override int32 Capacity
         {
             get
             {
@@ -772,7 +772,7 @@ namespace Avalonia.Utilities
             return -1 != IndexOf(value);
         }
 
-        public override int IndexOf(T value)
+        public override int32 IndexOf(T value)
         {
             if (_entry0.Equals(value))
             {
@@ -813,7 +813,7 @@ namespace Avalonia.Utilities
             return -1;
         }
 
-        public override void Insert(int index, T value)
+        public override void Insert(int32 index, T value)
         {
             // Should only get here if count is less than SIZE
             if (_count < SIZE)
@@ -868,7 +868,7 @@ namespace Avalonia.Utilities
             throw new ArgumentOutOfRangeException(nameof(index));
         }
 
-        public override void SetAt(int index, T value)
+        public override void SetAt(int32 index, T value)
         {
             // Overwrite item at index
             switch (index)
@@ -953,7 +953,7 @@ namespace Avalonia.Utilities
             return false;
         }
 
-        public override void RemoveAt(int index)
+        public override void RemoveAt(int32 index)
         {
             // Remove entry at index, wipe out the last entry and move
             // all the other entries up. Because we only have six
@@ -1000,7 +1000,7 @@ namespace Avalonia.Utilities
             --_count;
         }
 
-        public override T EntryAt(int index)
+        public override T EntryAt(int32 index)
         {
             switch (index)
             {
@@ -1216,7 +1216,7 @@ namespace Avalonia.Utilities
             return array;
         }
 
-        public override void CopyTo(T[] array, int index)
+        public override void CopyTo(T[] array, int32 index)
         {
             if (_count >= 1)
             {
@@ -1253,7 +1253,7 @@ namespace Avalonia.Utilities
             return newList;
         }
 
-        private void SetCount(int value)
+        private void SetCount(int32 value)
         {
             if (value >= 0 && value <= SIZE)
             {
@@ -1273,9 +1273,9 @@ namespace Avalonia.Utilities
     internal sealed class ArrayItemList<T> : FrugalListBase<T>
     {
         // MINSIZE and GROWTH chosen to minimize memory footprint
-        private const int MINSIZE = 9;
-        private const int GROWTH = 3;
-        private const int LARGEGROWTH = 18;
+        private const int32 MINSIZE = 9;
+        private const int32 GROWTH = 3;
+        private const int32 LARGEGROWTH = 18;
 
         private T[] _entries;
 
@@ -1283,7 +1283,7 @@ namespace Avalonia.Utilities
         {
         }
 
-        public ArrayItemList(int size)
+        public ArrayItemList(int32 size)
         {
             // Make size a multiple of GROWTH
             size += GROWTH - 1;
@@ -1322,7 +1322,7 @@ namespace Avalonia.Utilities
         }
 
         // Capacity of this store
-        public override int Capacity
+        public override int32 Capacity
         {
             get
             {
@@ -1394,7 +1394,7 @@ namespace Avalonia.Utilities
             return -1 != IndexOf(value);
         }
 
-        public override int IndexOf(T value)
+        public override int32 IndexOf(T value)
         {
             for (var index = 0; index < _count; ++index)
             {
@@ -1407,7 +1407,7 @@ namespace Avalonia.Utilities
             return -1;
         }
 
-        public override void Insert(int index, T value)
+        public override void Insert(int32 index, T value)
         {
             if (null != _entries && _count < _entries.Length)
             {
@@ -1425,7 +1425,7 @@ namespace Avalonia.Utilities
             throw new ArgumentOutOfRangeException(nameof(index));
         }
 
-        public override void SetAt(int index, T value)
+        public override void SetAt(int32 index, T value)
         {
             // Overwrite item at index
             _entries[index] = value;
@@ -1445,7 +1445,7 @@ namespace Avalonia.Utilities
             return false;
         }
 
-        public override void RemoveAt(int index)
+        public override void RemoveAt(int32 index)
         {
             // Shift entries down
             var numToCopy = _count - index - 1;
@@ -1461,7 +1461,7 @@ namespace Avalonia.Utilities
             --_count;
         }
 
-        public override T EntryAt(int index)
+        public override T EntryAt(int32 index)
         {
             return _entries[index];
         }
@@ -1569,7 +1569,7 @@ namespace Avalonia.Utilities
             return array;
         }
 
-        public override void CopyTo(T[] array, int index)
+        public override void CopyTo(T[] array, int32 index)
         {
             for (var i = 0; i < _count; ++i)
             {
@@ -1586,7 +1586,7 @@ namespace Avalonia.Utilities
             return newList;
         }
 
-        private void SetCount(int value)
+        private void SetCount(int32 value)
         {
             if (value >= 0 && value <= _entries.Length)
             {
@@ -1598,7 +1598,7 @@ namespace Avalonia.Utilities
             }
         }
 
-        public override Compacter NewCompacter(int newCount)
+        public override Compacter NewCompacter(int32 newCount)
         {
             return new ArrayCompacter(this, newCount);
         }
@@ -1610,7 +1610,7 @@ namespace Avalonia.Utilities
             private readonly T[] _sourceArray;
             private readonly T[] _targetArray;
 
-            public ArrayCompacter(ArrayItemList<T> store, int newCount)
+            public ArrayCompacter(ArrayItemList<T> store, int32 newCount)
                 : base(store, newCount)
             {
                 _sourceArray = store._entries;
@@ -1633,7 +1633,7 @@ namespace Avalonia.Utilities
                 _targetArray = _targetStore._entries;
             }
 
-            protected override void IncludeOverride(int start, int end)
+            protected override void IncludeOverride(int32 start, int32 end)
             {
                 // bulk move
                 var size = end - start;
@@ -1649,7 +1649,7 @@ namespace Avalonia.Utilities
                 if (_targetArray != _sourceArray)
                 {
                     T filler = default(T);
-                    for (int i=_previousEnd; i<end; ++i)
+                    for (int32 i=_previousEnd; i<end; ++i)
                     {
                         _sourceArray[i] = filler;
                     }
@@ -1665,7 +1665,7 @@ namespace Avalonia.Utilities
                 if (_sourceArray == _targetArray)
                 {
                     // in-place array source
-                    for (int i = _validItemCount, n = _store.Count; i < n; ++i)
+                    for (int32 i = _validItemCount, n = _store.Count; i < n; ++i)
                     {
                         _sourceArray[i] = filler;
                     }
@@ -1674,7 +1674,7 @@ namespace Avalonia.Utilities
                 {
                     // array source to new array target
                     /* this code is not needed - see remarks in IncludeOverride()
-                    for (int i=_previousEnd, n=_store._count; i<n; ++i)
+                    for (int32 i=_previousEnd, n=_store._count; i<n; ++i)
                     {
                         _sourceArray[i] = filler;
                     }
@@ -1699,12 +1699,12 @@ namespace Avalonia.Utilities
         {
         }
 
-        public FrugalObjectList(int size)
+        public FrugalObjectList(int32 size)
         {
             Capacity = size;
         }
 
-        public int Capacity
+        public int32 Capacity
         {
             get
             {
@@ -1752,7 +1752,7 @@ namespace Avalonia.Utilities
             }
         }
 
-        public int Count
+        public int32 Count
         {
             get
             {
@@ -1761,7 +1761,7 @@ namespace Avalonia.Utilities
         }
 
 
-        public T this[int index]
+        public T this[int32 index]
         {
             get
             {
@@ -1788,7 +1788,7 @@ namespace Avalonia.Utilities
             }
         }
 
-        public int Add(T value)
+        public int32 Add(T value)
         {
             if (null != _listStore)
             {
@@ -1875,7 +1875,7 @@ namespace Avalonia.Utilities
             return false;
         }
 
-        public int IndexOf(T value)
+        public int32 IndexOf(T value)
         {
             if (null != _listStore && _listStore.Count > 0)
             {
@@ -1885,7 +1885,7 @@ namespace Avalonia.Utilities
             return -1;
         }
 
-        public void Insert(int index, T value)
+        public void Insert(int32 index, T value)
         {
             if (index == 0 || _listStore != null && index <= _listStore.Count && index >= 0)
             {
@@ -1919,7 +1919,7 @@ namespace Avalonia.Utilities
             return false;
         }
 
-        public void RemoveAt(int index)
+        public void RemoveAt(int32 index)
         {
             if (null != _listStore && index < _listStore.Count && index >= 0)
             {
@@ -1931,7 +1931,7 @@ namespace Avalonia.Utilities
             throw new ArgumentOutOfRangeException(nameof(index));
         }
 
-        public void EnsureIndex(int index)
+        public void EnsureIndex(int32 index)
         {
             if (index >= 0)
             {
@@ -1966,7 +1966,7 @@ namespace Avalonia.Utilities
             return null;
         }
 
-        public void CopyTo(T[] array, int index)
+        public void CopyTo(T[] array, int32 index)
         {
             if (null != _listStore && _listStore.Count > 0)
             {
@@ -2004,7 +2004,7 @@ namespace Avalonia.Utilities
             private readonly FrugalObjectList<T> _list;
             private readonly FrugalListBase<T>.Compacter _storeCompacter;
 
-            public Compacter(FrugalObjectList<T> list, int newCount)
+            public Compacter(FrugalObjectList<T> list, int32 newCount)
             {
                 _list = list;
 
@@ -2013,7 +2013,7 @@ namespace Avalonia.Utilities
                 _storeCompacter = store?.NewCompacter(newCount);
             }
 
-            public void Include(int start, int end)
+            public void Include(int32 start, int32 end)
             {
                 _storeCompacter.Include(start, end);
             }
@@ -2034,7 +2034,7 @@ namespace Avalonia.Utilities
     {
         internal FrugalListBase<T> _listStore;
 
-        public FrugalStructList(int size)
+        public FrugalStructList(int32 size)
         {
             _listStore = null;
             Capacity = size;
@@ -2078,7 +2078,7 @@ namespace Avalonia.Utilities
             }
         }
 
-        public int Capacity
+        public int32 Capacity
         {
             get
             {
@@ -2131,7 +2131,7 @@ namespace Avalonia.Utilities
             }
         }
 
-        public int Count
+        public int32 Count
         {
             get
             {
@@ -2140,7 +2140,7 @@ namespace Avalonia.Utilities
         }
 
 
-        public T this[int index]
+        public T this[int32 index]
         {
             get
             {
@@ -2166,7 +2166,7 @@ namespace Avalonia.Utilities
             }
         }
 
-        public int Add(T value)
+        public int32 Add(T value)
         {
             if (null != _listStore)
             {
@@ -2247,7 +2247,7 @@ namespace Avalonia.Utilities
             return false;
         }
 
-        public int IndexOf(T value)
+        public int32 IndexOf(T value)
         {
             if (null != _listStore && _listStore.Count > 0)
             {
@@ -2257,7 +2257,7 @@ namespace Avalonia.Utilities
             return -1;
         }
 
-        public void Insert(int index, T value)
+        public void Insert(int32 index, T value)
         {
             if (index == 0 || null != _listStore && index <= _listStore.Count && index >= 0)
             {
@@ -2291,7 +2291,7 @@ namespace Avalonia.Utilities
             return false;
         }
 
-        public void RemoveAt(int index)
+        public void RemoveAt(int32 index)
         {
             if (null != _listStore && index < _listStore.Count && index >= 0)
             {
@@ -2302,7 +2302,7 @@ namespace Avalonia.Utilities
             throw new ArgumentOutOfRangeException(nameof(index));
         }
 
-        public void EnsureIndex(int index)
+        public void EnsureIndex(int32 index)
         {
             if (index >= 0)
             {
@@ -2336,7 +2336,7 @@ namespace Avalonia.Utilities
             return null;
         }
 
-        public void CopyTo(T[] array, int index)
+        public void CopyTo(T[] array, int32 index)
         {
             if (null != _listStore && _listStore.Count > 0)
             {

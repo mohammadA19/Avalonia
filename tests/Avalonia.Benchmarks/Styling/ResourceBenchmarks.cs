@@ -64,7 +64,7 @@ namespace Avalonia.Benchmarks.Styling
         
             var current = root;
             
-            for (int i = 0; i < 10; i++)
+            for (int32 i = 0; i < 10; i++)
             {
                 var child = new Decorator();
 
@@ -76,12 +76,12 @@ namespace Avalonia.Benchmarks.Styling
             current.Child = _searchStart;
         }
 
-        private const int LookupCount = 100;
+        private const int32 LookupCount = 100;
         
         [Benchmark]
         public void FindPreResource()
         {
-            for (int i = 0; i < LookupCount; ++i)
+            for (int32 i = 0; i < LookupCount; ++i)
             {
                 _searchStart.FindResource("preTheme");
             }
@@ -90,7 +90,7 @@ namespace Avalonia.Benchmarks.Styling
         [Benchmark]
         public void FindPostResource()
         {
-            for (int i = 0; i < LookupCount; ++i)
+            for (int32 i = 0; i < LookupCount; ++i)
             {
                 _searchStart.FindResource("postTheme");
             }
@@ -99,7 +99,7 @@ namespace Avalonia.Benchmarks.Styling
         [Benchmark]
         public void FindNotExistingResource()
         {
-            for (int i = 0; i < LookupCount; ++i)
+            for (int32 i = 0; i < LookupCount; ++i)
             {
                 _searchStart.FindResource("notPresent");
             }

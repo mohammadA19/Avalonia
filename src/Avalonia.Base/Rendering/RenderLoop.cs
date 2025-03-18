@@ -18,7 +18,7 @@ namespace Avalonia.Rendering
         private readonly List<IRenderLoopTask> _items = new List<IRenderLoopTask>();
         private readonly List<IRenderLoopTask> _itemsCopy = new List<IRenderLoopTask>();
         private IRenderTimer? _timer;
-        private int _inTick;
+        private int32 _inTick;
         
         public static IRenderLoop LocatorAutoInstance
         {
@@ -106,7 +106,7 @@ namespace Avalonia.Rendering
                     }
                     
 
-                    for (int i = 0; i < _itemsCopy.Count; i++)
+                    for (int32 i = 0; i < _itemsCopy.Count; i++)
                     {
                         _itemsCopy[i].Render();
                     }

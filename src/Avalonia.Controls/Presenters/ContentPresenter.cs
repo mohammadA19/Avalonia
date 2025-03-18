@@ -119,7 +119,7 @@ namespace Avalonia.Controls.Presenters
         /// <summary>
         /// Defines the <see cref="MaxLines"/> property
         /// </summary>
-        public static readonly StyledProperty<int> MaxLinesProperty =
+        public static readonly StyledProperty<int32> MaxLinesProperty =
             TextBlock.MaxLinesProperty.AddOwner<ContentPresenter>();
                 
         /// <summary>
@@ -328,7 +328,7 @@ namespace Avalonia.Controls.Presenters
         /// <summary>
         /// Gets or sets the max lines
         /// </summary>
-        public int MaxLines
+        public int32 MaxLines
         {
             get => GetValue(MaxLinesProperty);
             set => SetValue(MaxLinesProperty, value);

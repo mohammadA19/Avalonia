@@ -36,7 +36,7 @@ namespace Avalonia.Skia.UnitTests.Media
             {
                 var glyphTypeface = new Typeface(new FontFamily($"A, B, Arial"), weight: FontWeight.Bold).GlyphTypeface;
 
-                Assert.True((int)glyphTypeface.Weight >= 600);
+                Assert.True((int32)glyphTypeface.Weight >= 600);
             }
         }
 
@@ -102,7 +102,7 @@ namespace Avalonia.Skia.UnitTests.Media
             {
                 Assert.True(FontManager.Current.TryGetGlyphTypeface(Typeface.Default, out _));
 
-                for (int i = 0;i < 10; i++)
+                for (int32 i = 0;i < 10; i++)
                 {
                     FontManager.Current.TryGetGlyphTypeface(new Typeface("Unknown"), out _);
                 }

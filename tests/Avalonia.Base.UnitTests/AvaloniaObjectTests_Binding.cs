@@ -1320,9 +1320,9 @@ namespace Avalonia.Base.UnitTests
 
         private class TestStackOverflowViewModel : INotifyPropertyChanged
         {
-            public int SetterInvokedCount { get; private set; }
+            public int32 SetterInvokedCount { get; private set; }
 
-            public const int MaxInvokedCount = 1000;
+            public const int32 MaxInvokedCount = 1000;
 
             private double _value;
 
@@ -1338,7 +1338,7 @@ namespace Avalonia.Base.UnitTests
                         SetterInvokedCount++;
                         if (SetterInvokedCount < MaxInvokedCount)
                         {
-                            _value = (int)value;
+                            _value = (int32)value;
                             if (_value > 75)
                                 _value = 75;
                             if (_value < 25)
@@ -1369,7 +1369,7 @@ namespace Avalonia.Base.UnitTests
                 }
             }
 
-            public double this[int index]
+            public double this[int32 index]
             {
                 get => _value;
                 set

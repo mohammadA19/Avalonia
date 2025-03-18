@@ -897,7 +897,7 @@ namespace Avalonia.Controls
 
         private void RemoveChild(Window window)
         {
-            for (int i = _children.Count - 1; i >= 0; i--)
+            for (int32 i = _children.Count - 1; i >= 0; i--)
             {
                 var (child, _) = _children[i];
 

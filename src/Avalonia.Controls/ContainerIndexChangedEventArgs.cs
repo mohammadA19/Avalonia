@@ -7,7 +7,7 @@ namespace Avalonia.Controls
     /// </summary>
     public class ContainerIndexChangedEventArgs : EventArgs
     {
-        public ContainerIndexChangedEventArgs(Control container, int oldIndex, int newIndex)
+        public ContainerIndexChangedEventArgs(Control container, int32 oldIndex, int32 newIndex)
         {
             Container = container;
             OldIndex = oldIndex;
@@ -22,11 +22,11 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets the index of the container after the change.
         /// </summary>
-        public int NewIndex { get; }
+        public int32 NewIndex { get; }
 
         /// <summary>
         /// Gets the index of the container before the change.
         /// </summary>
-        public int OldIndex { get; }
+        public int32 OldIndex { get; }
     }
 }

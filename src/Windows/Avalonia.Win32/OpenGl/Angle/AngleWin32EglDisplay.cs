@@ -203,7 +203,7 @@ namespace Avalonia.Win32.OpenGl.Angle
             return CreatePBufferFromClientBuffer(EGL_D3D_TEXTURE_ANGLE, handle, attrs);
         }
 
-        public unsafe EglSurface WrapDirect3D11Texture(IntPtr handle, int offsetX, int offsetY, int width, int height)
+        public unsafe EglSurface WrapDirect3D11Texture(IntPtr handle, int32 offsetX, int32 offsetY, int32 width, int32 height)
         {
             if (PlatformApi != AngleOptions.PlatformApi.DirectX11)
                 ThrowInvalidPlatformApi();

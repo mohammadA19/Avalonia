@@ -59,14 +59,14 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the ToolTip.ShowDelay property.
         /// </summary>
-        public static readonly AttachedProperty<int> ShowDelayProperty =
-            AvaloniaProperty.RegisterAttached<ToolTip, Control, int>("ShowDelay", 400);
+        public static readonly AttachedProperty<int32> ShowDelayProperty =
+            AvaloniaProperty.RegisterAttached<ToolTip, Control, int32>("ShowDelay", 400);
 
         /// <summary>
         /// Defines the ToolTip.BetweenShowDelay property.
         /// </summary>
-        public static readonly AttachedProperty<int> BetweenShowDelayProperty =
-            AvaloniaProperty.RegisterAttached<ToolTip, Control, int>("BetweenShowDelay", 100);
+        public static readonly AttachedProperty<int32> BetweenShowDelayProperty =
+            AvaloniaProperty.RegisterAttached<ToolTip, Control, int32>("BetweenShowDelay", 100);
 
         /// <summary>
         /// Defines the ToolTip.ShowOnDisabled property.
@@ -237,7 +237,7 @@ namespace Avalonia.Controls
         /// <returns>
         /// A value indicating the time, in milliseconds, before a tool tip opens.
         /// </returns>
-        public static int GetShowDelay(Control element)
+        public static int32 GetShowDelay(Control element)
         {
             return element.GetValue(ShowDelayProperty);
         }
@@ -247,7 +247,7 @@ namespace Avalonia.Controls
         /// </summary>
         /// <param name="element">The control to get the property from.</param>
         /// <param name="value">A value indicating the time, in milliseconds, before a tool tip opens.</param>
-        public static void SetShowDelay(Control element, int value)
+        public static void SetShowDelay(Control element, int32 value)
         {
             element.SetValue(ShowDelayProperty, value);
         }
@@ -257,7 +257,7 @@ namespace Avalonia.Controls
         /// or a negative value indicating that the tooltip will always wait for <see cref="ShowDelayProperty"/> before opening.
         /// </summary>
         /// <param name="element">The control to get the property from.</param>
-        public static int GetBetweenShowDelay(Control element) => element.GetValue(BetweenShowDelayProperty);
+        public static int32 GetBetweenShowDelay(Control element) => element.GetValue(BetweenShowDelayProperty);
 
         /// <summary>
         /// Sets the number of milliseconds since the last tooltip closed during which the tooltip of <paramref name="element"/> will open immediately.
@@ -268,7 +268,7 @@ namespace Avalonia.Controls
         /// </remarks>
         /// <param name="element">The control to get the property from.</param>
         /// <param name="value">The number of milliseconds to set, or a negative value to disable the behaviour.</param>
-        public static void SetBetweenShowDelay(Control element, int value) => element.SetValue(BetweenShowDelayProperty, value);
+        public static void SetBetweenShowDelay(Control element, int32 value) => element.SetValue(BetweenShowDelayProperty, value);
 
         /// <summary>
         /// Gets whether a control will display a tooltip even if it disabled.

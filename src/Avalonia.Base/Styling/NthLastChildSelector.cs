@@ -16,7 +16,7 @@ namespace Avalonia.Styling
         /// <param name="previous">Previous selector.</param>
         /// <param name="step">Position step.</param>
         /// <param name="offset">Initial index offset, counting from the end.</param>
-        public NthLastChildSelector(Selector? previous, int step, int offset) : base(previous, step, offset, true)
+        public NthLastChildSelector(Selector? previous, int32 step, int32 offset) : base(previous, step, offset, true)
         {
         }
     }

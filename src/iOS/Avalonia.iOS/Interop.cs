@@ -35,14 +35,14 @@ internal unsafe class Interop
     
     [DllImport(CoreFoundationLibrary)]
     internal static extern IntPtr CFRunLoopObserverCreate(IntPtr allocator, CFOptionFlags activities,
-        int repeats, int index, delegate* unmanaged<IntPtr, CFOptionFlags, IntPtr, void> callout, IntPtr context);
+        int32 repeats, int32 index, delegate* unmanaged<IntPtr, CFOptionFlags, IntPtr, void> callout, IntPtr context);
 
     [DllImport(CoreFoundationLibrary)]
     internal static extern IntPtr CFRunLoopAddObserver(IntPtr loop, IntPtr observer, IntPtr mode);
 
     [DllImport(CoreFoundationLibrary)]
     internal static extern IntPtr CFRunLoopTimerCreate(IntPtr allocator, double firstDate, double interval,
-        CFOptionFlags flags, int order, delegate* unmanaged<IntPtr, IntPtr, void> callout, IntPtr context);
+        CFOptionFlags flags, int32 order, delegate* unmanaged<IntPtr, IntPtr, void> callout, IntPtr context);
 
     [DllImport(CoreFoundationLibrary)]
     internal static extern void CFRunLoopTimerSetTolerance(IntPtr timer, double tolerance);

@@ -18,11 +18,11 @@ namespace Avalonia.X11
     /// <see href="https://gitlab.gnome.org/GNOME/gtk/-/blob/3.22.30/gdk/x11/gdkwindow-x11.c#L823" />
     internal class X11FocusProxy
     {
-        private const int InvisibleBorder = 0;
-        private const int DepthCopyFromParent = 0;
+        private const int32 InvisibleBorder = 0;
+        private const int32 DepthCopyFromParent = 0;
         private readonly IntPtr _visualCopyFromParent = IntPtr.Zero;
-        private readonly (int X, int Y) _outOfScreen = (-1, -1);
-        private readonly (int Width, int Height) _smallest = (1, 1);
+        private readonly (int32 X, int32 Y) _outOfScreen = (-1, -1);
+        private readonly (int32 Width, int32 Height) _smallest = (1, 1);
 
         internal IntPtr _handle;
         private readonly AvaloniaX11Platform _platform;
@@ -78,7 +78,7 @@ namespace Avalonia.X11
                 _smallest.Width, _smallest.Height,
                 InvisibleBorder,
                 DepthCopyFromParent,
-                (int)CreateWindowArgs.InputOutput,
+                (int32)CreateWindowArgs.InputOutput,
                 _visualCopyFromParent,
                 new UIntPtr((uint)valueMask),
                 ref attrs);

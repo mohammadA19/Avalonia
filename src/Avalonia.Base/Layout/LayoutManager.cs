@@ -20,7 +20,7 @@ namespace Avalonia.Layout
     [PrivateApi]
     public class LayoutManager : ILayoutManager, IDisposable
     {
-        private const int MaxPasses = 10;
+        private const int32 MaxPasses = 10;
         private readonly Layoutable _owner;
         private readonly LayoutQueue<Layoutable> _toMeasure = new LayoutQueue<Layoutable>(v => !v.IsMeasureValid);
         private readonly LayoutQueue<Layoutable> _toArrange = new LayoutQueue<Layoutable>(v => !v.IsArrangeValid);
@@ -29,7 +29,7 @@ namespace Avalonia.Layout
         private bool _disposed;
         private bool _queued;
         private bool _running;
-        private int _totalPassCount;
+        private int32 _totalPassCount;
         private readonly Action _invokeOnRender;
 
         public LayoutManager(ILayoutRoot owner)

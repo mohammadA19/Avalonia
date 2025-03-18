@@ -10,12 +10,12 @@
 
         public double Height { get; init; }
 
-        public int TrailingWhitespaceLength { get; init; }
+        public int32 TrailingWhitespaceLength { get; init; }
 
-        public int NewLineLength { get; init; }
+        public int32 NewLineLength { get; init; }
 
-        public int FirstCluster { get; init; }
+        public int32 FirstCluster { get; init; }
 
-        public int LastCluster { get; init; }
+        public int32 LastCluster { get; init; }
     }
 }

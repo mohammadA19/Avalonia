@@ -27,7 +27,7 @@ namespace Avalonia.Win32
             LoadModuleCursor(StandardCursorType.DragLink, "ole32.dll", 4);
         }
 
-        private static void LoadModuleCursor(StandardCursorType cursorType, string module, int id)
+        private static void LoadModuleCursor(StandardCursorType cursorType, string module, int32 id)
         {
             IntPtr mh = UnmanagedMethods.GetModuleHandle(module);
             if (mh != IntPtr.Zero)
@@ -40,8 +40,8 @@ namespace Avalonia.Win32
             }
         }
 
-        private static readonly Dictionary<StandardCursorType, int> CursorTypeMapping = new Dictionary
-            <StandardCursorType, int>
+        private static readonly Dictionary<StandardCursorType, int32> CursorTypeMapping = new Dictionary
+            <StandardCursorType, int32>
         {
             {StandardCursorType.None, 0},
             {StandardCursorType.AppStarting, 32650},

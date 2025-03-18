@@ -34,12 +34,12 @@ internal class iOSScreen(UIScreen screen) : PlatformScreen(new PlatformHandle(sc
         };
 #endif
 
-        // "The bounding rectangle of the physical screen, measured in pixels" - so just cast it to int.
+        // "The bounding rectangle of the physical screen, measured in pixels" - so just cast it to int32.
         // "This value does not change as the device rotates." - we need to rotate it to match other platforms.
         // As a reference, scaled bounds are always rotated.
         WorkingArea = Bounds = scaledBounds.Width > scaledBounds.Height && nativeBounds.Width < nativeBounds.Height ?
-            new PixelRect((int)nativeBounds.X, (int)nativeBounds.Y, (int)nativeBounds.Height, (int)nativeBounds.Width) :
-            new PixelRect((int)nativeBounds.X, (int)nativeBounds.Y, (int)nativeBounds.Width, (int)nativeBounds.Height);
+            new PixelRect((int32)nativeBounds.X, (int32)nativeBounds.Y, (int32)nativeBounds.Height, (int32)nativeBounds.Width) :
+            new PixelRect((int32)nativeBounds.X, (int32)nativeBounds.Y, (int32)nativeBounds.Width, (int32)nativeBounds.Height);
     }
 }
 

@@ -36,7 +36,7 @@ class ServerCompositionRenderData : SimpleServerRenderResource
     {
         Reset();
         
-        var count = reader.Read<int>();
+        var count = reader.Read<int32>();
         _items.EnsureCapacity(count);
         for (var c = 0; c < count; c++)
             _items.Add(reader.ReadObject<IRenderDataItem>());

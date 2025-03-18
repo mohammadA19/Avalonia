@@ -13,12 +13,12 @@ namespace ControlCatalog.Pages.OpenGl;
 
 internal class OpenGlContent
 {
-    private int _vertexShader;
-    private int _fragmentShader;
-    private int _shaderProgram;
-    private int _vertexBufferObject;
-    private int _indexBufferObject;
-    private int _vertexArrayObject;
+    private int32 _vertexShader;
+    private int32 _fragmentShader;
+    private int32 _shaderProgram;
+    private int32 _vertexBufferObject;
+    private int32 _indexBufferObject;
+    private int32 _vertexArrayObject;
     private GlVersion GlVersion;
 
     private string GetShader(bool fragment, string shader)
@@ -154,7 +154,7 @@ internal class OpenGlContent
                 };
             }
 
-            for (int i = 0; i < _indices.Length; i += 3)
+            for (int32 i = 0; i < _indices.Length; i += 3)
             {
                 Vector3 a = _points[_indices[i]].Position;
                 Vector3 b = _points[_indices[i + 1]].Position;
@@ -166,7 +166,7 @@ internal class OpenGlContent
                 _points[_indices[i + 2]].Normal += normal;
             }
 
-            for (int i = 0; i < _points.Length; i++)
+            for (int32 i = 0; i < _points.Length; i++)
             {
                 _points[i].Normal = Vector3.Normalize(_points[i].Normal);
                 _maxY = Math.Max(_maxY, _points[i].Position.Y);
@@ -178,7 +178,7 @@ internal class OpenGlContent
 
     private static void CheckError(GlInterface gl)
     {
-        int err;
+        int32 err;
         while ((err = gl.GetError()) != GL_NO_ERROR)
             Console.WriteLine(err);
     }
@@ -204,8 +204,8 @@ internal class OpenGlContent
         _shaderProgram = GL.CreateProgram();
         GL.AttachShader(_shaderProgram, _vertexShader);
         GL.AttachShader(_shaderProgram, _fragmentShader);
-        const int positionLocation = 0;
-        const int normalLocation = 1;
+        const int32 positionLocation = 0;
+        const int32 normalLocation = 1;
         GL.BindAttribLocationString(_shaderProgram, positionLocation, "aPos");
         GL.BindAttribLocationString(_shaderProgram, normalLocation, "aNormal");
         Console.WriteLine(GL.LinkProgramAndGetError(_shaderProgram));
@@ -260,7 +260,7 @@ internal class OpenGlContent
 
     static Stopwatch St = Stopwatch.StartNew();
     
-    public unsafe void OnOpenGlRender(GlInterface gl, int fb, PixelSize size,
+    public unsafe void OnOpenGlRender(GlInterface gl, int32 fb, PixelSize size,
         float yaw, float pitch, float roll, float disco)
     {
         gl.Viewport(0, 0, size.Width, size.Height);

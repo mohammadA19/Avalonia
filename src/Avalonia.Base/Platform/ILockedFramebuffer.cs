@@ -17,7 +17,7 @@ namespace Avalonia.Platform
         /// <summary>
         /// Number of bytes per row
         /// </summary>
-        int RowBytes { get; }
+        int32 RowBytes { get; }
         
         /// <summary>
         /// DPI of underling screen

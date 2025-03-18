@@ -20,7 +20,7 @@ namespace Avalonia.X11.Glx
 
         public GlxContext(GlxInterface glx, IntPtr handle, GlxDisplay display,
             GlxContext? sharedWith,
-            GlVersion version, int sampleCount, int stencilSize,
+            GlVersion version, int32 sampleCount, int32 stencilSize,
             X11Info x11, IntPtr defaultXid,
             bool ownsPBuffer)
         {
@@ -44,8 +44,8 @@ namespace Avalonia.X11.Glx
         public GlxDisplay Display { get; }
         public GlVersion Version { get; }
         public GlInterface GlInterface { get; }
-        public int SampleCount { get; }
-        public int StencilSize { get; }
+        public int32 SampleCount { get; }
+        public int32 StencilSize { get; }
 
         private class RestoreContext : IDisposable
         {

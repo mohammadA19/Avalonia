@@ -8,7 +8,7 @@ namespace Avalonia.X11
         private const string LibIce = "libICE.so.6";
 
         [DllImport(LibIce, CallingConvention = CallingConvention.StdCall)]
-        public static extern int IceAddConnectionWatch(
+        public static extern int32 IceAddConnectionWatch(
             IntPtr watchProc,
             IntPtr clientData
         );
@@ -45,10 +45,10 @@ namespace Avalonia.X11
         public delegate void IceErrorHandler(
             IntPtr iceConn,
             bool swap,
-            int offendingMinorOpcode,
+            int32 offendingMinorOpcode,
             nuint offendingSequence,
-            int errorClass,
-            int severity,
+            int32 errorClass,
+            int32 severity,
             IntPtr values
         );
 

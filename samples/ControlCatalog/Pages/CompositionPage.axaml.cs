@@ -241,7 +241,7 @@ public partial class CompositionPage : UserControl
             
             _ellipses.Clear();
             
-            const int cnt = 20;
+            const int32 cnt = 20;
             var maxPointSizeX = EffectiveSize.X / (cnt * 1.6);
             var maxPointSizeY = EffectiveSize.Y / 4;
             var pointSize = Math.Min(maxPointSizeX, maxPointSizeY);

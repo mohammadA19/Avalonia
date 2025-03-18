@@ -7,7 +7,7 @@ namespace Avalonia.Animation.Animators
         private static readonly BoxShadowAnimator s_boxShadowAnimator = new BoxShadowAnimator();
         public override BoxShadows Interpolate(double progress, BoxShadows oldValue, BoxShadows newValue)
         {
-            int cnt = progress >= 1d ? newValue.Count : oldValue.Count;
+            int32 cnt = progress >= 1d ? newValue.Count : oldValue.Count;
             if (cnt == 0)
                 return new BoxShadows();
 

@@ -11,7 +11,7 @@ namespace Avalonia.Media
     public sealed class ImmediateDrawingContext : IDisposable, IOptionalFeatureProvider
     {
         private readonly bool _ownsImpl;
-        private int _currentLevel;
+        private int32 _currentLevel;
         
         private static ThreadSafeObjectPool<Stack<PushedState>> StateStackPool { get; } =
             ThreadSafeObjectPool<Stack<PushedState>>.Default;
@@ -205,7 +205,7 @@ namespace Avalonia.Media
 
         public readonly record struct PushedState : IDisposable
         {
-            private readonly int _level;
+            private readonly int32 _level;
             private readonly ImmediateDrawingContext _context;
             private readonly Matrix _matrix;
             private readonly PushedStateType _type;

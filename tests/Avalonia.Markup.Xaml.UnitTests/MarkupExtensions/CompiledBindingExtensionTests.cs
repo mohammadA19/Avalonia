@@ -684,7 +684,7 @@ namespace Avalonia.Markup.Xaml.UnitTests.MarkupExtensions
                 // Assert DataGridLikeColumn.Binding data type.
                 var compiledPath = ((CompiledBindingExtension)column.Binding!).Path;
                 var node = Assert.IsType<PropertyElement>(Assert.Single(compiledPath.Elements));
-                Assert.Equal(typeof(int), node.Property.PropertyType);
+                Assert.Equal(typeof(int32), node.Property.PropertyType);
                 
                 // Assert DataGridLikeColumn.Template data type by evaluating the template.
                 var firstItem = dataContext.ListProperty[0];
@@ -729,7 +729,7 @@ namespace Avalonia.Markup.Xaml.UnitTests.MarkupExtensions
                 // Assert DataGridLikeColumn.Binding data type.
                 var compiledPath = ((CompiledBindingExtension)column.Binding!).Path;
                 var node = Assert.IsType<PropertyElement>(Assert.Single(compiledPath.Elements));
-                Assert.Equal(typeof(int), node.Property.PropertyType);
+                Assert.Equal(typeof(int32), node.Property.PropertyType);
                 
                 // Assert DataGridLikeColumn.Template data type by evaluating the template.
                 var firstItem = dataContext.ListProperty[0];
@@ -1873,9 +1873,9 @@ namespace Avalonia.Markup.Xaml.UnitTests.MarkupExtensions
                 window.DataContext = new MethodDataContext();
 
                 Assert.IsAssignableFrom(typeof(Action), window.GetControl<ContentControl>("action").Content);
-                Assert.IsAssignableFrom(typeof(Func<int>), window.GetControl<ContentControl>("func").Content);
-                Assert.IsAssignableFrom(typeof(Action<int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int>), window.GetControl<ContentControl>("action16").Content);
-                Assert.IsAssignableFrom(typeof(Func<int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int>), window.GetControl<ContentControl>("func16").Content);
+                Assert.IsAssignableFrom(typeof(Func<int32>), window.GetControl<ContentControl>("func").Content);
+                Assert.IsAssignableFrom(typeof(Action<int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32>), window.GetControl<ContentControl>("action16").Content);
+                Assert.IsAssignableFrom(typeof(Func<int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32, int32>), window.GetControl<ContentControl>("func16").Content);
                 Assert.True(typeof(Delegate).IsAssignableFrom(window.GetControl<ContentControl>("customvoid").Content!.GetType()));
                 Assert.True(typeof(Delegate).IsAssignableFrom(window.GetControl<ContentControl>("customint").Content!.GetType()));
             }
@@ -2498,7 +2498,7 @@ namespace Avalonia.Markup.Xaml.UnitTests.MarkupExtensions
 
         public static string StaticProperty => "World";
 
-        public ListItemCollectionView<int> GenericProperty { get; } = new();
+        public ListItemCollectionView<int32> GenericProperty { get; } = new();
 
         public const decimal ExpectedDecimal = 15.756m;
         public decimal DecimalValue { get; set; } = ExpectedDecimal;
@@ -2533,12 +2533,12 @@ namespace Avalonia.Markup.Xaml.UnitTests.MarkupExtensions
     {
         public void Action() { }
 
-        public int Func() => 1;
+        public int32 Func() => 1;
 
-        public void Action16(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16) { }
-        public int Func16(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16) => i;
-        public void CustomDelegateTypeVoid(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16, int i17) { }
-        public int CustomDelegateTypeInt(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16, int i17) => i;
+        public void Action16(int32 i, int32 i2, int32 i3, int32 i4, int32 i5, int32 i6, int32 i7, int32 i8, int32 i9, int32 i10, int32 i11, int32 i12, int32 i13, int32 i14, int32 i15, int32 i16) { }
+        public int32 Func16(int32 i, int32 i2, int32 i3, int32 i4, int32 i5, int32 i6, int32 i7, int32 i8, int32 i9, int32 i10, int32 i11, int32 i12, int32 i13, int32 i14, int32 i15, int32 i16) => i;
+        public void CustomDelegateTypeVoid(int32 i, int32 i2, int32 i3, int32 i4, int32 i5, int32 i6, int32 i7, int32 i8, int32 i9, int32 i10, int32 i11, int32 i12, int32 i13, int32 i14, int32 i15, int32 i16, int32 i17) { }
+        public int32 CustomDelegateTypeInt(int32 i, int32 i2, int32 i3, int32 i4, int32 i5, int32 i6, int32 i7, int32 i8, int32 i9, int32 i10, int32 i11, int32 i12, int32 i13, int32 i14, int32 i15, int32 i16, int32 i17) => i;
     }
 
     public class MethodAsCommandDataContext : INotifyPropertyChanged
@@ -2546,8 +2546,8 @@ namespace Avalonia.Markup.Xaml.UnitTests.MarkupExtensions
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public string Method() => Value = "Called";
-        public string Method1(int i) => Value = $"Called {i}";
-        public string Method2(int i, int j) => Value = $"Called {i},{j}";
+        public string Method1(int32 i) => Value = $"Called {i}";
+        public string Method2(int32 i, int32 j) => Value = $"Called {i},{j}";
         public string Value { get; private set; } = "Not called";
 
         private object? _parameter;

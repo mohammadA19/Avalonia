@@ -41,10 +41,10 @@ public class Binding_Setup
 
     private class TestControl : Control
     {
-        public static readonly StyledProperty<int> IntValueProperty =
-            AvaloniaProperty.Register<TestControl, int>(nameof(IntValue));
+        public static readonly StyledProperty<int32> IntValueProperty =
+            AvaloniaProperty.Register<TestControl, int32>(nameof(IntValue));
 
-        public int IntValue
+        public int32 IntValue
         {
             get => GetValue(IntValueProperty);
             set => SetValue(IntValueProperty, value);
@@ -53,6 +53,6 @@ public class Binding_Setup
 
     private class TestData
     {
-        public int IntValue { get; set; }
+        public int32 IntValue { get; set; }
     }
 }

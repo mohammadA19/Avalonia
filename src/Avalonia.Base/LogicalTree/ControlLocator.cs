@@ -9,7 +9,7 @@ namespace Avalonia.LogicalTree
     /// </summary>
     public static class ControlLocator
     {
-        public static IObservable<ILogical?> Track(ILogical relativeTo, int ancestorLevel, Type? ancestorType = null)
+        public static IObservable<ILogical?> Track(ILogical relativeTo, int32 ancestorLevel, Type? ancestorType = null)
         {
             return new ControlTracker(relativeTo, ancestorLevel, ancestorType);
         }
@@ -17,11 +17,11 @@ namespace Avalonia.LogicalTree
         private class ControlTracker : LightweightObservableBase<ILogical?>
         {
             private readonly ILogical _relativeTo;
-            private readonly int _ancestorLevel;
+            private readonly int32 _ancestorLevel;
             private readonly Type? _ancestorType;
             private ILogical? _value;
 
-            public ControlTracker(ILogical relativeTo, int ancestorLevel, Type? ancestorType)
+            public ControlTracker(ILogical relativeTo, int32 ancestorLevel, Type? ancestorType)
             {
                 _relativeTo = relativeTo;
                 _ancestorLevel = ancestorLevel;

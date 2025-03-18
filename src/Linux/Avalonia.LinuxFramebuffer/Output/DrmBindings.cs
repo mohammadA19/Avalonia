@@ -87,7 +87,7 @@ namespace Avalonia.LinuxFramebuffer.Output
     {
         public List<DrmConnector> Connectors { get; } = new List<DrmConnector>();
         internal Dictionary<uint, DrmEncoder> Encoders { get; } = new Dictionary<uint, DrmEncoder>();
-        public DrmResources(int fd, bool connectorsForceProbe = false)
+        public DrmResources(int32 fd, bool connectorsForceProbe = false)
         {
             var res = drmModeGetResources(fd);
             if (res == null)
@@ -118,7 +118,7 @@ namespace Avalonia.LinuxFramebuffer.Output
 
         internal void Dump()
         {
-            void Print(int off, string s)
+            void Print(int32 off, string s)
             {
                 for (var c = 0; c < off; c++)
                     Console.Write("    ");
@@ -140,7 +140,7 @@ namespace Avalonia.LinuxFramebuffer.Output
 
     public unsafe class DrmCard : IDisposable
     {
-        public int Fd { get; private set; }
+        public int32 Fd { get; private set; }
         public DrmCard(string? path = null)
         {
             if (path == null)
@@ -170,7 +170,7 @@ namespace Avalonia.LinuxFramebuffer.Output
             }
         }
 
-        public DrmCard(int fd)
+        public DrmCard(int32 fd)
         {
             Fd = fd;
         }

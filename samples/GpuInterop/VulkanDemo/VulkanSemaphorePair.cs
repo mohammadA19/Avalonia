@@ -36,7 +36,7 @@ class VulkanSemaphorePair : IDisposable
         RenderFinishedSemaphore = semaphore;
     }
 
-    public int ExportFd(bool renderFinished)
+    public int32 ExportFd(bool renderFinished)
     {
         if (!_resources.Api.TryGetDeviceExtension<KhrExternalSemaphoreFd>(_resources.Instance, _resources.Device,
                 out var ext))

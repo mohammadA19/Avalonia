@@ -16,12 +16,12 @@ namespace Avalonia.iOS.Eagl
         private readonly EAGLContext _context;
         private readonly GlInterface _gl;
         private readonly CAEAGLLayer _layer;
-        private int _framebuffer;
-        private int _renderbuffer;
-        private int _depthBuffer;
+        private int32 _framebuffer;
+        private int32 _renderbuffer;
+        private int32 _depthBuffer;
         private bool _disposed;
 
-        private LayerFbo(EAGLContext context, GlInterface gl, CAEAGLLayer layer, int framebuffer, int renderbuffer, int depthBuffer)
+        private LayerFbo(EAGLContext context, GlInterface gl, CAEAGLLayer layer, int32 framebuffer, int32 renderbuffer, int32 depthBuffer)
         {
             _context = context;
             _gl = gl;
@@ -69,8 +69,8 @@ namespace Avalonia.iOS.Eagl
             };
         }
         
-        public int Width { get; private set; }
-        public int Height { get; private set; }
+        public int32 Width { get; private set; }
+        public int32 Height { get; private set; }
 
         public void Bind()
         {
@@ -149,8 +149,8 @@ namespace Avalonia.iOS.Eagl
 
         public void Present() => _fbo!.Present();
 
-        public int Width => _fbo?.Width ?? 0;
-        public int Height => _fbo?.Height ?? 0;
+        public int32 Width => _fbo?.Width ?? 0;
+        public int32 Height => _fbo?.Height ?? 0;
         public double Scaling => _oldLayerScale;
     }
 }

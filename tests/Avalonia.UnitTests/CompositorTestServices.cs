@@ -89,7 +89,7 @@ public class CompositorTestServices : IDisposable
         Events.Rects.Clear();
     }
 
-    public void AssertRenderedVisuals(int renderVisuals)
+    public void AssertRenderedVisuals(int32 renderVisuals)
     {
         RunJobs();
         Assert.Equal(Events.RenderedVisuals, renderVisuals);
@@ -117,7 +117,7 @@ public class CompositorTestServices : IDisposable
     {
         public List<Rect> Rects = new();
 
-        public int RenderedVisuals { get; private set; }
+        public int32 RenderedVisuals { get; private set; }
 
         public void IncrementRenderedVisuals()
         {

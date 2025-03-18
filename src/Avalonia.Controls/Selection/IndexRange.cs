@@ -10,20 +10,20 @@ namespace Avalonia.Controls.Selection
 {
     internal readonly struct IndexRange : IEquatable<IndexRange>
     {
-        private static readonly IndexRange s_invalid = new IndexRange(int.MinValue, int.MinValue);
+        private static readonly IndexRange s_invalid = new IndexRange(int32.MinValue, int32.MinValue);
 
-        public IndexRange(int index)
+        public IndexRange(int32 index)
         {
             Begin = index;
             End = index;
         }
 
-        public IndexRange(int begin, int end)
+        public IndexRange(int32 begin, int32 end)
         {
             // Accept out of order begin/end pairs, just swap them.
             if (begin > end)
             {
-                int temp = begin;
+                int32 temp = begin;
                 begin = end;
                 end = temp;
             }
@@ -32,13 +32,13 @@ namespace Avalonia.Controls.Selection
             End = end;
         }
 
-        public int Begin { get; }
-        public int End { get; }
-        public int Count => (End - Begin) + 1;
+        public int32 Begin { get; }
+        public int32 End { get; }
+        public int32 Count => (End - Begin) + 1;
 
-        public bool Contains(int index) => index >= Begin && index <= End;
+        public bool Contains(int32 index) => index >= Begin && index <= End;
 
-        public bool Split(int splitIndex, out IndexRange before, out IndexRange after)
+        public bool Split(int32 splitIndex, out IndexRange before, out IndexRange after)
         {
             bool afterIsValid;
 
@@ -78,7 +78,7 @@ namespace Avalonia.Controls.Selection
             return Begin == other.Begin && End == other.End;
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             var hashCode = 1903003160;
             hashCode = hashCode * -1521134295 + Begin.GetHashCode();
@@ -91,7 +91,7 @@ namespace Avalonia.Controls.Selection
         public static bool operator ==(IndexRange left, IndexRange right) => left.Equals(right);
         public static bool operator !=(IndexRange left, IndexRange right) => !(left == right);
 
-        public static bool Contains(IReadOnlyList<IndexRange>? ranges, int index)
+        public static bool Contains(IReadOnlyList<IndexRange>? ranges, int32 index)
         {
             if (ranges is null || index < 0)
             {
@@ -109,7 +109,7 @@ namespace Avalonia.Controls.Selection
             return false;
         }
 
-        public static int GetAt(IReadOnlyList<IndexRange> ranges, int index)
+        public static int32 GetAt(IReadOnlyList<IndexRange> ranges, int32 index)
         {
             var currentIndex = 0;
 
@@ -128,7 +128,7 @@ namespace Avalonia.Controls.Selection
             throw new IndexOutOfRangeException("The index was out of range.");
         }
 
-        public static int Add(
+        public static int32 Add(
             IList<IndexRange> ranges,
             IndexRange range,
             IList<IndexRange>? added = null)
@@ -173,7 +173,7 @@ namespace Avalonia.Controls.Selection
             return result;
         }
 
-        public static int Add(
+        public static int32 Add(
             IList<IndexRange> destination,
             IReadOnlyList<IndexRange> source,
             IList<IndexRange>? added = null)
@@ -188,7 +188,7 @@ namespace Avalonia.Controls.Selection
             return result;
         }
 
-        public static int Intersect(
+        public static int32 Intersect(
             IList<IndexRange> ranges,
             IndexRange range,
             IList<IndexRange>? removed = null)
@@ -235,7 +235,7 @@ namespace Avalonia.Controls.Selection
             return result;
         }
 
-        public static int Remove(
+        public static int32 Remove(
             IList<IndexRange>? ranges,
             IndexRange range,
             IList<IndexRange>? removed = null)
@@ -285,7 +285,7 @@ namespace Avalonia.Controls.Selection
             return result;
         }
 
-        public static int Remove(
+        public static int32 Remove(
             IList<IndexRange> destination,
             IReadOnlyList<IndexRange> source,
             IList<IndexRange>? added = null)
@@ -300,7 +300,7 @@ namespace Avalonia.Controls.Selection
             return result;
         }
 
-        public static IEnumerable<int> EnumerateIndices(IEnumerable<IndexRange> ranges)
+        public static IEnumerable<int32> EnumerateIndices(IEnumerable<IndexRange> ranges)
         {
             foreach (var range in ranges)
             {
@@ -311,7 +311,7 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        public static int GetCount(IEnumerable<IndexRange> ranges)
+        public static int32 GetCount(IEnumerable<IndexRange> ranges)
         {
             var result = 0;
 

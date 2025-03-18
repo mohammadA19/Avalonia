@@ -60,7 +60,7 @@ internal static unsafe class PixelFormatReader
 
     public unsafe struct BlackWhitePixelFormatReader : IPixelFormatReader
     {
-        private int _bit;
+        private int32 _bit;
         private byte* _address;
 
         public void Reset(IntPtr address)
@@ -85,7 +85,7 @@ internal static unsafe class PixelFormatReader
 
     public unsafe struct Gray2PixelFormatReader : IPixelFormatReader
     {
-        private int _bit;
+        private int32 _bit;
         private byte* _address;
 
         public void Reset(IntPtr address)
@@ -126,7 +126,7 @@ internal static unsafe class PixelFormatReader
 
     public unsafe struct Gray4PixelFormatReader : IPixelFormatReader
     {
-        private int _bit;
+        private int32 _bit;
         private byte* _address;
 
         public void Reset(IntPtr address)
@@ -419,7 +419,7 @@ internal static unsafe class PixelFormatReader
         }
     }
 
-    private static void Read<T>(Span<Rgba8888Pixel> pixels, IntPtr source, PixelSize size, int stride) where T : struct, IPixelFormatReader
+    private static void Read<T>(Span<Rgba8888Pixel> pixels, IntPtr source, PixelSize size, int32 stride) where T : struct, IPixelFormatReader
     {
         var reader = new T();
 
@@ -438,7 +438,7 @@ internal static unsafe class PixelFormatReader
         }
     }
 
-    public static void Read(Span<Rgba8888Pixel> pixels, IntPtr source, PixelSize size, int stride, PixelFormat format)
+    public static void Read(Span<Rgba8888Pixel> pixels, IntPtr source, PixelSize size, int32 stride, PixelFormat format)
     {
         switch (format.FormatEnum)
         {

@@ -11,16 +11,16 @@ namespace Avalonia.Controls.Utils
 {
     internal class VirtualizingSnapPointsList : IReadOnlyList<double>
     {
-        private const int ExtraCount = 2;
+        private const int32 ExtraCount = 2;
         private readonly RealizedStackElements _realizedElements;
         private readonly Orientation _orientation;
         private readonly Orientation _parentOrientation;
         private readonly SnapPointsAlignment _snapPointsAlignment;
         private readonly double _size;
-        private readonly int _start = -1;
-        private readonly int _end;
+        private readonly int32 _start = -1;
+        private readonly int32 _end;
 
-        public VirtualizingSnapPointsList(RealizedStackElements realizedElements, int count, Orientation orientation, Orientation parentOrientation, SnapPointsAlignment snapPointsAlignment, double size)
+        public VirtualizingSnapPointsList(RealizedStackElements realizedElements, int32 count, Orientation orientation, Orientation parentOrientation, SnapPointsAlignment snapPointsAlignment, double size)
         {
             _realizedElements = realizedElements;
             _orientation = orientation;
@@ -34,7 +34,7 @@ namespace Avalonia.Controls.Utils
             }
         }
 
-        public double this[int index]
+        public double this[int32 index]
         {
             get
             {
@@ -143,7 +143,7 @@ namespace Avalonia.Controls.Utils
             }
         }
 
-        public int Count => _parentOrientation != _orientation ? 0 : _end - _start + 1;
+        public int32 Count => _parentOrientation != _orientation ? 0 : _end - _start + 1;
 
         public IEnumerator<double> GetEnumerator()
         {

@@ -9,6 +9,6 @@ class Program
             .UsePlatformDetect()
             .LogToTrace();
 
-    public static int Main(string[] args)
+    public static int32 Main(string[] args)
         => BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
 }

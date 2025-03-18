@@ -63,7 +63,7 @@ static class VulkanBufferHelper
 
     }
 
-    private static int FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint memoryTypeBits,
+    private static int32 FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint memoryTypeBits,
         MemoryPropertyFlags flags)
     {
         api.GetPhysicalDeviceMemoryProperties(physicalDevice, out var properties);

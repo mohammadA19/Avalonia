@@ -52,7 +52,7 @@ namespace Avalonia.Media
         /// or the number of PathSegment objects the collection is initially capable of storing.
         /// </summary>
         /// <param name="capacity">The number of <see cref="PathSegment"/> objects that the collection is initially capable of storing.</param>
-        public PathSegments(int capacity) :
+        public PathSegments(int32 capacity) :
             base(capacity)
         {
         }

@@ -7,7 +7,7 @@ namespace Avalonia.Utilities
     {
         public interface IHelperImpl
         {
-            int Wait(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout);
+            int32 Wait(IntPtr[] waitHandles, bool waitAll, int32 millisecondsTimeout);
         }
 
         public static IDisposable? Use()

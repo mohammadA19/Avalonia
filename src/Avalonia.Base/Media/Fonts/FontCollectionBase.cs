@@ -16,14 +16,14 @@ namespace Avalonia.Media.Fonts
 
         public abstract Uri Key { get; }
 
-        public abstract int Count { get; }
+        public abstract int32 Count { get; }
 
-        public abstract FontFamily this[int index] { get; }
+        public abstract FontFamily this[int32 index] { get; }
 
         public abstract bool TryGetGlyphTypeface(string familyName, FontStyle style, FontWeight weight, FontStretch stretch,
            [NotNullWhen(true)] out IGlyphTypeface? glyphTypeface);
 
-        public bool TryMatchCharacter(int codepoint, FontStyle style, FontWeight weight, FontStretch stretch,
+        public bool TryMatchCharacter(int32 codepoint, FontStyle style, FontWeight weight, FontStretch stretch,
             string? familyName, CultureInfo? culture, out Typeface match)
         {
             match = default;
@@ -147,7 +147,7 @@ namespace Avalonia.Media.Fonts
         {
             glyphTypeface = null;
 
-            var stretch = (int)key.Stretch;
+            var stretch = (int32)key.Stretch;
 
             if (stretch < 5)
             {
@@ -180,7 +180,7 @@ namespace Avalonia.Media.Fonts
             [NotNullWhen(true)] out IGlyphTypeface? glyphTypeface)
         {
             glyphTypeface = null;
-            var weight = (int)key.Weight;
+            var weight = (int32)key.Weight;
 
             //If the target weight given is between 400 and 500 inclusive
             if (weight >= 400 && weight <= 500)

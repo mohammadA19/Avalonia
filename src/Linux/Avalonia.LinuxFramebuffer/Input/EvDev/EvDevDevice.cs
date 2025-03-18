@@ -6,14 +6,14 @@ namespace Avalonia.LinuxFramebuffer.Input.EvDev
 {
     unsafe class EvDevDevice
     {
-        public int Fd { get; }
+        public int32 Fd { get; }
         private IntPtr _dev;
         public string? Name { get; }
         public List<EvType> EventTypes { get; private set; } = new List<EvType>();
         public input_absinfo? AbsX { get; }
         public input_absinfo? AbsY { get; }
 
-        public EvDevDevice(int fd, IntPtr dev)
+        public EvDevDevice(int32 fd, IntPtr dev)
         {
             Fd = fd;
             _dev = dev;
@@ -27,10 +27,10 @@ namespace Avalonia.LinuxFramebuffer.Input.EvDev
                 if (NativeUnsafeMethods.libevdev_has_event_type(dev, type) != 0)
                     EventTypes.Add(type);
             }
-            var ptr = NativeUnsafeMethods.libevdev_get_abs_info(dev, (int) AbsAxis.ABS_X);
+            var ptr = NativeUnsafeMethods.libevdev_get_abs_info(dev, (int32) AbsAxis.ABS_X);
             if (ptr != null)
                 AbsX = *ptr;
-            ptr = NativeUnsafeMethods.libevdev_get_abs_info(dev, (int)AbsAxis.ABS_Y);
+            ptr = NativeUnsafeMethods.libevdev_get_abs_info(dev, (int32)AbsAxis.ABS_Y);
             if (ptr != null)
                 AbsY = *ptr;
         }
@@ -61,7 +61,7 @@ namespace Avalonia.LinuxFramebuffer.Input.EvDev
 
     internal class EvDevAxisInfo
     {
-        public int Minimum { get; set; }
-        public int Maximum { get; set; }
+        public int32 Minimum { get; set; }
+        public int32 Maximum { get; set; }
     }
 }

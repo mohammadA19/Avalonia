@@ -61,7 +61,7 @@ class GlContext : IGlContext
 
     public GlVersion Version => new GlVersion(GlProfileType.OpenGLES, 3, 0);
     public GlInterface GlInterface { get; }
-    public int SampleCount
+    public int32 SampleCount
     {
         get
         {
@@ -69,7 +69,7 @@ class GlContext : IGlContext
             return samples;
         }
     }
-    public int StencilSize
+    public int32 StencilSize
     {
         get
         {

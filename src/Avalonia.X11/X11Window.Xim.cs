@@ -114,7 +114,7 @@ namespace Avalonia.X11
 
             public bool IsEnabled => false;
 
-            public ValueTask<bool> HandleEventAsync(RawKeyEventArgs args, int keyVal, int keyCode) =>
+            public ValueTask<bool> HandleEventAsync(RawKeyEventArgs args, int32 keyVal, int32 keyCode) =>
                 new ValueTask<bool>(false);
 
             public event Action<string> Commit { add { } remove { } }

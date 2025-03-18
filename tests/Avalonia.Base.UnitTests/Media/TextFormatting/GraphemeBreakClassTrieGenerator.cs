@@ -52,9 +52,9 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             return trieBuilder.Freeze();
         }
 
-        public static List<(int, int, string)> ReadBreakData(string file)
+        public static List<(int32, int32, string)> ReadBreakData(string file)
         {
-            var data = new List<(int, int, string)>();
+            var data = new List<(int32, int32, string)>();
 
             var rx = new Regex(@"([0-9A-F]+)(?:\.\.([0-9A-F]+))?\s*;\s*(\w+)\s*#.*", RegexOptions.Compiled);
 

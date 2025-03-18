@@ -15,7 +15,7 @@ namespace ControlCatalog.ViewModels
         private bool _alwaysSelected;
         private bool _autoScrollToSelectedItem = true;
         private bool _wrapSelection;
-        private int _counter;
+        private int32 _counter;
         private IObservable<SelectionMode> _selectionMode;
 
         public ListBoxPageViewModel()
@@ -114,7 +114,7 @@ namespace ControlCatalog.ViewModels
         /// Creates a new ItemModel with the given ID
         /// </summary>
         /// <param name="id">The ID to display</param>
-        public ItemModel(int id)
+        public ItemModel(int32 id)
         {
             ID = id;
         }
@@ -122,7 +122,7 @@ namespace ControlCatalog.ViewModels
         /// <summary>
         /// The ID of this Item
         /// </summary>
-        public int ID { get; }
+        public int32 ID { get; }
 
         public override string ToString()
         {

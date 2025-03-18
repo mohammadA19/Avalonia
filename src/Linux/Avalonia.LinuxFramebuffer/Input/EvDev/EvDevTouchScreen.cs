@@ -13,7 +13,7 @@ namespace Avalonia.LinuxFramebuffer.Input.EvDev
         private input_absinfo _axisY;
         private TouchDevice _device = new TouchDevice();
 
-        private int _currentX, _currentY;
+        private int32 _currentX, _currentY;
         private bool _hasMovement;
         private bool? _pressAction;
 

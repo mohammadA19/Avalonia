@@ -102,11 +102,11 @@ namespace Avalonia.Visuals.UnitTests.Media.TextFormatting
     
     public struct BiDiClassData
     {
-        public int LineNumber { get; set; }
-        public int[] CodePoints{ get; set; }
+        public int32 LineNumber { get; set; }
+        public int32[] CodePoints{ get; set; }
         public sbyte ParagraphLevel{ get; set; }
         public  sbyte ResolvedParagraphLevel{ get; set; }
         public sbyte[] ResolvedLevels{ get; set; }
-        public int[] ResolvedOrder{ get; set; }
+        public int32[] ResolvedOrder{ get; set; }
     }
 }

@@ -10,20 +10,20 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Defines the <see cref="Rows"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> RowsProperty =
-            AvaloniaProperty.Register<UniformGrid, int>(nameof(Rows));
+        public static readonly StyledProperty<int32> RowsProperty =
+            AvaloniaProperty.Register<UniformGrid, int32>(nameof(Rows));
 
         /// <summary>
         /// Defines the <see cref="Columns"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> ColumnsProperty =
-            AvaloniaProperty.Register<UniformGrid, int>(nameof(Columns));
+        public static readonly StyledProperty<int32> ColumnsProperty =
+            AvaloniaProperty.Register<UniformGrid, int32>(nameof(Columns));
 
         /// <summary>
         /// Defines the <see cref="FirstColumn"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> FirstColumnProperty =
-            AvaloniaProperty.Register<UniformGrid, int>(nameof(FirstColumn));
+        public static readonly StyledProperty<int32> FirstColumnProperty =
+            AvaloniaProperty.Register<UniformGrid, int32>(nameof(FirstColumn));
 
         /// <summary>
         /// Defines the <see cref="RowSpacing"/> property.
@@ -37,8 +37,8 @@ namespace Avalonia.Controls.Primitives
         public static readonly StyledProperty<double> ColumnSpacingProperty =
             AvaloniaProperty.Register<UniformGrid, double>(nameof(ColumnSpacing), 0);
 
-        private int _rows;
-        private int _columns;
+        private int32 _rows;
+        private int32 _columns;
 
         static UniformGrid()
         {
@@ -48,7 +48,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Specifies the row count. If set to 0, row count will be calculated automatically.
         /// </summary>
-        public int Rows
+        public int32 Rows
         {
             get => GetValue(RowsProperty);
             set => SetValue(RowsProperty, value);
@@ -57,7 +57,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Specifies the column count. If set to 0, column count will be calculated automatically.
         /// </summary>
-        public int Columns
+        public int32 Columns
         {
             get => GetValue(ColumnsProperty);
             set => SetValue(ColumnsProperty, value);
@@ -66,7 +66,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Specifies, for the first row, the column where the items should start.
         /// </summary>
-        public int FirstColumn
+        public int32 FirstColumn
         {
             get => GetValue(FirstColumnProperty);
             set => SetValue(FirstColumnProperty, value);
@@ -187,11 +187,11 @@ namespace Avalonia.Controls.Primitives
             {
                 if (_columns == 0)
                 {
-                    _rows = _columns = (int)Math.Ceiling(Math.Sqrt(itemCount));
+                    _rows = _columns = (int32)Math.Ceiling(Math.Sqrt(itemCount));
                 }
                 else
                 {
-                    _rows = Math.DivRem(itemCount, _columns, out int rem);
+                    _rows = Math.DivRem(itemCount, _columns, out int32 rem);
 
                     if (rem != 0)
                     {
@@ -201,7 +201,7 @@ namespace Avalonia.Controls.Primitives
             }
             else if (_columns == 0)
             {
-                _columns = Math.DivRem(itemCount, _rows, out int rem);
+                _columns = Math.DivRem(itemCount, _rows, out int32 rem);
 
                 if (rem != 0)
                 {

@@ -118,7 +118,7 @@ namespace Avalonia.Reactive
             if (Volatile.Read(ref _observers) != null)
             {
                 IObserver<T>[]? observers = null;
-                int count = 0;
+                int32 count = 0;
 
                 // Optimize for the common case of 1/2/3 observers.
                 IObserver<T>? observer0 = null;
@@ -165,7 +165,7 @@ namespace Avalonia.Reactive
                 }
                 else if (observers != null)
                 {
-                    for(int i = 0; i < count; i++)
+                    for(int32 i = 0; i < count; i++)
                     {
                         observers[i].OnNext(value);
                     }

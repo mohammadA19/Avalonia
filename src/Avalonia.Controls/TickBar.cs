@@ -317,7 +317,7 @@ namespace Avalonia.Controls
                 // Draw ticks using specified Ticks collection
                 if (ticks?.Count > 0)
                 {
-                    for (int i = 0; i < ticks.Count; i++)
+                    for (int32 i = 0; i < ticks.Count; i++)
                     {
                         if (MathUtilities.LessThanOrClose(ticks[i], Minimum) || MathUtilities.GreaterThanOrClose(ticks[i], Maximum))
                         {
@@ -370,7 +370,7 @@ namespace Avalonia.Controls
                 // Draw ticks using specified Ticks collection
                 if (ticks?.Count > 0)
                 {
-                    for (int i = 0; i < ticks.Count; i++)
+                    for (int32 i = 0; i < ticks.Count; i++)
                     {
                         if (MathUtilities.LessThanOrClose(ticks[i], Minimum) || MathUtilities.GreaterThanOrClose(ticks[i], Maximum))
                         {

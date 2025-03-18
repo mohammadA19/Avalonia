@@ -14,7 +14,7 @@ namespace Avalonia.Media.TextFormatting
             BidiLevel = biDiLevel;
         }
 
-        public override int Length
+        public override int32 Length
             => Text.Length;
 
         public override ReadOnlyMemory<char> Text { get; }

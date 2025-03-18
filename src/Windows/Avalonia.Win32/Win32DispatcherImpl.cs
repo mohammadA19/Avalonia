@@ -19,15 +19,15 @@ internal class Win32DispatcherImpl : IControlledDispatcherImpl
     }
     
     public bool CurrentThreadIsLoopThread => s_uiThread == Thread.CurrentThread;
-    internal const int SignalW = unchecked((int)0xdeadbeaf);
-    internal const int SignalL = unchecked((int)0x12345678);
+    internal const int32 SignalW = unchecked((int32)0xdeadbeaf);
+    internal const int32 SignalL = unchecked((int32)0x12345678);
 
     public void Signal() =>
         // Messages from PostMessage are always processed before any user input,
         // so Win32 should call us ASAP
         PostMessage(
             _messageWindow,
-            (int)WindowsMessage.WM_DISPATCH_WORK_ITEM,
+            (int32)WindowsMessage.WM_DISPATCH_WORK_ITEM,
             new IntPtr(SignalW),
             new IntPtr(SignalL));
     
@@ -46,7 +46,7 @@ internal class Win32DispatcherImpl : IControlledDispatcherImpl
         }
         else
         {
-            var interval = (uint)Math.Min(int.MaxValue - 10, Math.Max(1, Now - dueTimeInMs.Value));
+            var interval = (uint)Math.Min(int32.MaxValue - 10, Math.Max(1, Now - dueTimeInMs.Value));
             SetTimer(
                 _messageWindow,
                 (IntPtr)Win32Platform.TIMERID_DISPATCHER,

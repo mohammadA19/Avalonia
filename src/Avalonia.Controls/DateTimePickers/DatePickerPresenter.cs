@@ -394,7 +394,7 @@ namespace Avalonia.Controls
         private void SetGrid()
         {
             var fmt = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
-            var columns = new List<(Panel?, int)>
+            var columns = new List<(Panel?, int32)>
             {
                 (_monthHost, MonthVisible ? fmt.IndexOf("m", StringComparison.OrdinalIgnoreCase) : -1),
                 (_yearHost, YearVisible ? fmt.IndexOf("y", StringComparison.OrdinalIgnoreCase) : -1),
@@ -444,9 +444,9 @@ namespace Avalonia.Controls
 
         private void SetInitialFocus()
         {
-            int monthCol = MonthVisible ? Grid.GetColumn(_monthHost!) : int.MaxValue;
-            int dayCol = DayVisible ? Grid.GetColumn(_dayHost!) : int.MaxValue;
-            int yearCol = YearVisible ? Grid.GetColumn(_yearHost!) : int.MaxValue;
+            int32 monthCol = MonthVisible ? Grid.GetColumn(_monthHost!) : int32.MaxValue;
+            int32 dayCol = DayVisible ? Grid.GetColumn(_dayHost!) : int32.MaxValue;
+            int32 yearCol = YearVisible ? Grid.GetColumn(_yearHost!) : int32.MaxValue;
 
             if (monthCol < dayCol && monthCol < yearCol)
             {
@@ -494,7 +494,7 @@ namespace Avalonia.Controls
             if (_suppressUpdateSelection)
                 return;
 
-            int maxDays = _calendar.GetDaysInMonth(_yearSelector!.SelectedValue, _syncDate.Month);
+            int32 maxDays = _calendar.GetDaysInMonth(_yearSelector!.SelectedValue, _syncDate.Month);
             var newDate = new DateTimeOffset(_yearSelector.SelectedValue, _syncDate.Month,
                 _syncDate.Day > maxDays ? maxDays : _syncDate.Day, 0, 0, 0, _syncDate.Offset);
 
@@ -528,7 +528,7 @@ namespace Avalonia.Controls
             if (_suppressUpdateSelection)
                 return;
 
-            int maxDays = _calendar.GetDaysInMonth(_syncDate.Year, _monthSelector!.SelectedValue);
+            int32 maxDays = _calendar.GetDaysInMonth(_syncDate.Year, _monthSelector!.SelectedValue);
             var newDate = new DateTimeOffset(_syncDate.Year, _monthSelector.SelectedValue,
                 _syncDate.Day > maxDays ? maxDays : _syncDate.Day, 0, 0, 0, _syncDate.Offset);
 

@@ -140,12 +140,12 @@ namespace Avalonia.X11
             if (visualInfo != null)
             {
                 visual = visualInfo.Value.visual;
-                depth = (int)visualInfo.Value.depth;
+                depth = (int32)visualInfo.Value.depth;
                 attr.colormap = XCreateColormap(_x11.Display, _x11.RootWindow, visualInfo.Value.visual, 0);
                 valueMask |= SetWindowValuemask.ColorMap;   
             }
 
-            int defaultWidth = 0, defaultHeight = 0;
+            int32 defaultWidth = 0, defaultHeight = 0;
 
             if (!_popup && _platform.Screens != null)
             {
@@ -155,8 +155,8 @@ namespace Avalonia.X11
                 if (monitor != null)
                 {
                     // Emulate Window 7+'s default window size behavior.
-                    defaultWidth = (int)(monitor.WorkingArea.Width * 0.75d);
-                    defaultHeight = (int)(monitor.WorkingArea.Height * 0.7d);
+                    defaultWidth = (int32)(monitor.WorkingArea.Width * 0.75d);
+                    defaultHeight = (int32)(monitor.WorkingArea.Height * 0.7d);
                 }
             }
 
@@ -166,7 +166,7 @@ namespace Avalonia.X11
 
             _handle = XCreateWindow(_x11.Display, _x11.RootWindow, 10, 10, defaultWidth, defaultHeight, 0,
                 depth,
-                (int)CreateWindowArgs.InputOutput, 
+                (int32)CreateWindowArgs.InputOutput, 
                 visual,
                 new UIntPtr((uint)valueMask), ref attr);
             AppendPid(_handle);
@@ -174,7 +174,7 @@ namespace Avalonia.X11
             if (_useRenderWindow)
             {
                 _renderHandle = XCreateWindow(_x11.Display, _handle, 0, 0, defaultWidth, defaultHeight, 0, depth,
-                    (int)CreateWindowArgs.InputOutput,
+                    (int32)CreateWindowArgs.InputOutput,
                     visual,
                     new UIntPtr((uint)(SetWindowValuemask.BorderPixel | SetWindowValuemask.BitGravity |
                                        SetWindowValuemask.WinGravity | SetWindowValuemask.BackingStore)), ref attr);
@@ -195,7 +195,7 @@ namespace Avalonia.X11
                                      | XEventMask.PointerMotionHintMask;
             if (platform.XI2 != null)
                 ignoredMask |= platform.XI2.AddWindow(_handle, this);
-            var mask = new IntPtr(0xffffff ^ (int)ignoredMask);
+            var mask = new IntPtr(0xffffff ^ (int32)ignoredMask);
             XSelectInput(_x11.Display, _handle, mask);
             if (!_overrideRedirect)
             {
@@ -334,9 +334,9 @@ namespace Avalonia.X11
 
             var hints = new MotifWmHints
             {
-                flags = new IntPtr((int)(MotifFlags.Decorations | MotifFlags.Functions)),
-                decorations = new IntPtr((int)decorations),
-                functions = new IntPtr((int)functions)
+                flags = new IntPtr((int32)(MotifFlags.Decorations | MotifFlags.Functions)),
+                decorations = new IntPtr((int32)decorations),
+                functions = new IntPtr((int32)functions)
             };
 
             XChangeProperty(_x11.Display, _handle,
@@ -357,7 +357,7 @@ namespace Avalonia.X11
                 _x11.Atoms._NET_WM_PID, _x11.Atoms.XA_CARDINAL, 32,
                 PropertyMode.Replace, ref pid, 1);
 
-            const int maxLength = 1024;
+            const int32 maxLength = 1024;
             var name = stackalloc byte[maxLength];
             var result = gethostname(name, maxLength);
             if (result != 0)
@@ -378,11 +378,11 @@ namespace Avalonia.X11
         }
 
         [DllImport("libc")]
-        private static extern int gethostname(byte* name, int len);
+        private static extern int32 gethostname(byte* name, int32 len);
 
-        private static readonly int s_pid = GetProcessId();
+        private static readonly int32 s_pid = GetProcessId();
 
-        private static int GetProcessId()
+        private static int32 GetProcessId()
         {
 #if NET6_0_OR_GREATER
             var pid = Environment.ProcessId;
@@ -794,7 +794,7 @@ namespace Avalonia.X11
                           (IntPtr)Atom.XA_ATOM)
                       ?? []
                     : [];
-                int maximized = 0;
+                int32 maximized = 0;
                 foreach (var atom in atoms)
                 {
                     if (atom == _x11.Atoms._NET_WM_STATE_HIDDEN)
@@ -857,7 +857,7 @@ namespace Avalonia.X11
         
         private SystemDecorations _systemDecorations = SystemDecorations.Full;
         private bool _canResize = true;
-        private const int MaxWindowDimension = 100000;
+        private const int32 MaxWindowDimension = 100000;
 
         private (Size minSize, Size maxSize) _scaledMinMaxSize =
             (new Size(1, 1), new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -1135,7 +1135,7 @@ namespace Avalonia.X11
             Resize(size, true, WindowResizeReason.Layout);
         }
 
-        private PixelSize ToPixelSize(Size size) => new PixelSize((int)(size.Width * RenderScaling), (int)(size.Height * RenderScaling));
+        private PixelSize ToPixelSize(Size size) => new PixelSize((int32)(size.Width * RenderScaling), (int32)(size.Height * RenderScaling));
 
         private void Resize(Size clientSize, bool force, WindowResizeReason reason)
         {
@@ -1195,7 +1195,7 @@ namespace Avalonia.X11
                     extents = default(Thickness);
                 }
 
-                return new PixelPoint(_position.Value.X - (int)extents.Value.Left, _position.Value.Y - (int)extents.Value.Top);
+                return new PixelPoint(_position.Value.X - (int32)extents.Value.Left, _position.Value.Y - (int32)extents.Value.Top);
             }
             set
             {
@@ -1208,7 +1208,7 @@ namespace Avalonia.X11
                 var changes = new XWindowChanges
                 {
                     x = value.X,
-                    y = (int)value.Y
+                    y = (int32)value.Y
                 };
 
                 XConfigureWindow(_x11.Display, _handle, ChangeWindowFlags.CWX | ChangeWindowFlags.CWY,
@@ -1255,7 +1255,7 @@ namespace Avalonia.X11
             };
             xev.ClientMessageEvent.ptr4 = l4 ?? IntPtr.Zero;
             XSendEvent(_x11.Display, _x11.RootWindow, false,
-                new IntPtr((int)(EventMask.SubstructureRedirectMask | EventMask.SubstructureNotifyMask)), ref xev);
+                new IntPtr((int32)(EventMask.SubstructureRedirectMask | EventMask.SubstructureNotifyMask)), ref xev);
 
         }
 
@@ -1349,13 +1349,13 @@ namespace Avalonia.X11
         {
             _scaledMinMaxSize = (minSize, maxSize);
             var min = new PixelSize(
-                (int)(minSize.Width < 1 ? 1 : minSize.Width * RenderScaling),
-                (int)(minSize.Height < 1 ? 1 : minSize.Height * RenderScaling));
+                (int32)(minSize.Width < 1 ? 1 : minSize.Width * RenderScaling),
+                (int32)(minSize.Height < 1 ? 1 : minSize.Height * RenderScaling));
 
-            const int maxDim = MaxWindowDimension;
+            const int32 maxDim = MaxWindowDimension;
             var max = new PixelSize(
-                (int)(maxSize.Width > maxDim ? maxDim : Math.Max(min.Width, maxSize.Width * RenderScaling)),
-                (int)(maxSize.Height > maxDim ? maxDim : Math.Max(min.Height, maxSize.Height * RenderScaling)));
+                (int32)(maxSize.Width > maxDim ? maxDim : Math.Max(min.Width, maxSize.Width * RenderScaling)),
+                (int32)(maxSize.Height > maxDim ? maxDim : Math.Max(min.Height, maxSize.Height * RenderScaling)));
             
             _minMaxSize = (min, max);
             UpdateSizeHints(null);
@@ -1435,7 +1435,7 @@ namespace Avalonia.X11
                 var data = ((X11IconData)icon).Data;
                 fixed (void* pdata = data)
                     XChangeProperty(_x11.Display, _handle, _x11.Atoms._NET_WM_ICON,
-                        new IntPtr((int)Atom.XA_CARDINAL), 32, PropertyMode.Replace,
+                        new IntPtr((int32)Atom.XA_CARDINAL), 32, PropertyMode.Replace,
                         pdata, data.Length);
             }
             else
@@ -1545,7 +1545,7 @@ namespace Avalonia.X11
             // a mapping of parent windows to their children, sorted by z-order (bottom to top)
             var windowsChildren = new Dictionary<IntPtr, List<IntPtr>>();
 
-            var indexInWindowsSpan = new Dictionary<IntPtr, int>();
+            var indexInWindowsSpan = new Dictionary<IntPtr, int32>();
             for (var i = 0; i < windows.Length; i++)
                 if (windows[i].PlatformImpl is { Handle: { } handle })
                     indexInWindowsSpan[handle.Handle] = i;
@@ -1606,7 +1606,7 @@ namespace Avalonia.X11
 
                 // Children are returned bottom to top, so we need to push them in reverse order
                 // In order to traverse bottom children first
-                for (int i = children.Count - 1; i >= 0; i--)
+                for (int32 i = children.Count - 1; i >= 0; i--)
                 {
                     stack.Push(children[i]);
                 }

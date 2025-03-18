@@ -49,8 +49,8 @@ internal class SkiaRegionImpl : IPlatformRenderInterfaceRegion
     }
 
     public bool Intersects(LtrbRect rect) => Region.Intersects(
-        new SKRectI((int)rect.Left, (int)rect.Top,
-            (int)Math.Ceiling(rect.Right), (int)Math.Ceiling(rect.Bottom)));
+        new SKRectI((int32)rect.Left, (int32)rect.Top,
+            (int32)Math.Ceiling(rect.Right), (int32)Math.Ceiling(rect.Bottom)));
     
-    public bool Contains(Point pt) => Region.Contains((int)pt.X, (int)pt.Y);
+    public bool Contains(Point pt) => Region.Contains((int32)pt.X, (int32)pt.Y);
 }

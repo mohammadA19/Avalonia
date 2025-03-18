@@ -35,7 +35,7 @@ namespace Avalonia.UnitTests
             return _customTypefaces.Select(x => x.FontFamily!.Name).ToArray();
         }
 
-        public bool TryMatchCharacter(int codepoint, FontStyle fontStyle, FontWeight fontWeight,
+        public bool TryMatchCharacter(int32 codepoint, FontStyle fontStyle, FontWeight fontWeight,
             FontStretch fontStretch, CultureInfo culture, out Typeface fontKey)
         {
             foreach (var customTypeface in _customTypefaces)

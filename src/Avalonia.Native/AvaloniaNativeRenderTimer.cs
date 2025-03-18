@@ -12,7 +12,7 @@ internal sealed class AvaloniaNativeRenderTimer : NativeCallbackBase, IRenderTim
     private readonly IAvnPlatformRenderTimer _platformRenderTimer;
     private readonly Stopwatch _stopwatch;
     private Action<TimeSpan>? _tick;
-    private int _subscriberCount;
+    private int32 _subscriberCount;
     private bool registered;
 
     public AvaloniaNativeRenderTimer(IAvnPlatformRenderTimer platformRenderTimer)

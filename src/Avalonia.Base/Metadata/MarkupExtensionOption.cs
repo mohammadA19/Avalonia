@@ -12,7 +12,7 @@ public sealed class MarkupExtensionOptionAttribute : Attribute
 
     public object Value { get; }
 
-    public int Priority { get; set; } = 0;
+    public int32 Priority { get; set; } = 0;
 }
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]

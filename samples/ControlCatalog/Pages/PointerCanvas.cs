@@ -15,9 +15,9 @@ namespace ControlCatalog.Pages;
 public class PointerCanvas : Control
 {
     private readonly Stopwatch _stopwatch = Stopwatch.StartNew();
-    private int _events;
+    private int32 _events;
     private IDisposable? _statusUpdated;
-    private Dictionary<int, PointerPoints> _pointers = new();
+    private Dictionary<int32, PointerPoints> _pointers = new();
     private PointerPointProperties? _lastProperties;
     private PointerUpdateKind? _lastNonOtherUpdateKind;
     class PointerPoints
@@ -31,7 +31,7 @@ public class PointerCanvas : Control
         }
 
         readonly CanvasPoint[] _points = new CanvasPoint[1000];
-        int _index;
+        int32 _index;
 
         public void Render(DrawingContext context, bool drawPoints)
         {
@@ -93,11 +93,11 @@ public class PointerCanvas : Control
         }
     }
 
-    private int _threadSleep;
-    public static readonly DirectProperty<PointerCanvas, int> ThreadSleepProperty =
-        AvaloniaProperty.RegisterDirect<PointerCanvas, int>(nameof(ThreadSleep), c => c.ThreadSleep, (c, v) => c.ThreadSleep = v);
+    private int32 _threadSleep;
+    public static readonly DirectProperty<PointerCanvas, int32> ThreadSleepProperty =
+        AvaloniaProperty.RegisterDirect<PointerCanvas, int32>(nameof(ThreadSleep), c => c.ThreadSleep, (c, v) => c.ThreadSleep = v);
 
-    public int ThreadSleep
+    public int32 ThreadSleep
     {
         get => _threadSleep;
         set => SetAndRaise(ThreadSleepProperty, ref _threadSleep, value);

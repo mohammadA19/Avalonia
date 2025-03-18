@@ -83,7 +83,7 @@ namespace Avalonia.Controls
                 _tabControl.Items != null)
             {
                 // Determine the number of visible tab items
-                int numVisibleItems = 0;
+                int32 numVisibleItems = 0;
                 foreach (var item in _tabControl.Items)
                 {
                     if (item is Control control &&
@@ -243,9 +243,9 @@ namespace Avalonia.Controls
                     SetCurrentValue(PaletteColumnCountProperty, palette.ColorCount);
 
                     List<Color> newPaletteColors = new List<Color>();
-                    for (int shadeIndex = 0; shadeIndex < palette.ShadeCount; shadeIndex++)
+                    for (int32 shadeIndex = 0; shadeIndex < palette.ShadeCount; shadeIndex++)
                     {
-                        for (int colorIndex = 0; colorIndex < palette.ColorCount; colorIndex++)
+                        for (int32 colorIndex = 0; colorIndex < palette.ColorCount; colorIndex++)
                         {
                             newPaletteColors.Add(palette.GetColor(colorIndex, shadeIndex));
                         }

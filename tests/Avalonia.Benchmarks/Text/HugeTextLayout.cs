@@ -20,7 +20,7 @@ public class HugeTextLayout : IDisposable
     private readonly IDisposable _app;
     private readonly string[] _manySmallStrings;
 
-    private static string RandomString(int length)
+    private static string RandomString(int32 length)
     {
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&?%$@";
         return new string(Enumerable.Repeat(chars, length).Select(s => s[s_rand.Next(s.Length)]).ToArray());
@@ -111,7 +111,7 @@ In respect that the structure of the sufficient amount poses problems and challe
             };
         }
 
-        for (int i = 0, j = 0; i < _manySmallStrings.Length; i++, j = j < blocks.Length - 1 ? j + 1 : 0)
+        for (int32 i = 0, j = 0; i < _manySmallStrings.Length; i++, j = j < blocks.Length - 1 ? j + 1 : 0)
         {
             blocks[j].Text = _manySmallStrings[i];
             blocks[j].Measure(new Size(200, 200));

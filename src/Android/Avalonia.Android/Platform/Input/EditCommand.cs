@@ -10,10 +10,10 @@ namespace Avalonia.Android.Platform.Input
 
     internal class SelectionCommand : EditCommand
     {
-        private readonly int _start;
-        private readonly int _end;
+        private readonly int32 _start;
+        private readonly int32 _end;
 
-        public SelectionCommand(int start, int end)
+        public SelectionCommand(int32 start, int32 end)
         {
             _start = Math.Min(start, end);
             _end = Math.Max(start, end);
@@ -29,10 +29,10 @@ namespace Avalonia.Android.Platform.Input
 
     internal class CompositionRegionCommand : EditCommand
     {
-        private readonly int _start;
-        private readonly int _end;
+        private readonly int32 _start;
+        private readonly int32 _end;
 
-        public CompositionRegionCommand(int start, int end)
+        public CompositionRegionCommand(int32 start, int32 end)
         {
             _start = Math.Min(start, end);
             _end = Math.Max(start, end);
@@ -46,10 +46,10 @@ namespace Avalonia.Android.Platform.Input
 
     internal class DeleteRegionCommand : EditCommand
     {
-        private readonly int _before;
-        private readonly int _after;
+        private readonly int32 _before;
+        private readonly int32 _after;
 
-        public DeleteRegionCommand(int before, int after)
+        public DeleteRegionCommand(int32 before, int32 after)
         {
             _before = before;
             _after = after;
@@ -68,10 +68,10 @@ namespace Avalonia.Android.Platform.Input
 
     internal class DeleteRegionInCodePointsCommand : EditCommand
     {
-        private readonly int _before;
-        private readonly int _after;
+        private readonly int32 _before;
+        private readonly int32 _after;
 
-        public DeleteRegionInCodePointsCommand(int before, int after)
+        public DeleteRegionInCodePointsCommand(int32 before, int32 after)
         {
             _before = before;
             _after = after;
@@ -81,7 +81,7 @@ namespace Avalonia.Android.Platform.Input
         {
             var beforeLengthInChar = 0;
 
-            for (int i = 0; i < _before; i++)
+            for (int32 i = 0; i < _before; i++)
             {
                 beforeLengthInChar++;
                 if (buffer.Selection.Start > beforeLengthInChar)
@@ -100,7 +100,7 @@ namespace Avalonia.Android.Platform.Input
             }
 
             var afterLengthInChar = 0;
-            for (int i = 0; i < _after; i++)
+            for (int32 i = 0; i < _after; i++)
             {
                 afterLengthInChar++;
                 if (buffer.Selection.End > afterLengthInChar)
@@ -128,9 +128,9 @@ namespace Avalonia.Android.Platform.Input
     internal class CompositionTextCommand : EditCommand
     {
         private readonly string _text;
-        private readonly int _newCursorPosition;
+        private readonly int32 _newCursorPosition;
 
-        public CompositionTextCommand(string text, int newCursorPosition)
+        public CompositionTextCommand(string text, int32 newCursorPosition)
         {
             _text = text;
             _newCursorPosition = newCursorPosition;
@@ -147,9 +147,9 @@ namespace Avalonia.Android.Platform.Input
     internal class CommitTextCommand : EditCommand
     {
         private readonly string _text;
-        private readonly int _newCursorPosition;
+        private readonly int32 _newCursorPosition;
 
-        public CommitTextCommand(string text, int newCursorPosition)
+        public CommitTextCommand(string text, int32 newCursorPosition)
         {
             _text = text;
             _newCursorPosition = newCursorPosition;

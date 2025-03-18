@@ -75,7 +75,7 @@ namespace Avalonia.Win32
 
             public uint Skip(uint celt)
             {
-                _current += Math.Min(celt, int.MaxValue - _current);
+                _current += Math.Min(celt, int32.MaxValue - _current);
                 if (_current >= _formats.Length)
                     return (uint)UnmanagedMethods.HRESULT.S_FALSE;
                 return 0;
@@ -98,8 +98,8 @@ namespace Avalonia.Win32
         private const uint OLE_E_ADVISENOTSUPPORTED = 0x80040003;
         private const uint STG_E_MEDIUMFULL = 0x80030070;
 
-        private const int GMEM_ZEROINIT = 0x0040;
-        private const int GMEM_MOVEABLE = 0x0002;
+        private const int32 GMEM_ZEROINIT = 0x0040;
+        private const int32 GMEM_MOVEABLE = 0x0002;
 
 
         private IDataObject _wrapped;
@@ -136,18 +136,18 @@ namespace Avalonia.Win32
 
         #region IOleDataObject
 
-        unsafe int Win32Com.IDataObject.DAdvise(FORMATETC* pFormatetc, int advf, void* adviseSink)
+        unsafe int32 Win32Com.IDataObject.DAdvise(FORMATETC* pFormatetc, int32 advf, void* adviseSink)
         {
             if (_wrapped is Win32Com.IDataObject ole)
                 return ole.DAdvise(pFormatetc, advf, adviseSink);
             return 0;
         }
 
-        void Win32Com.IDataObject.DUnadvise(int connection)
+        void Win32Com.IDataObject.DUnadvise(int32 connection)
         {
             if (_wrapped is Win32Com.IDataObject ole)
                 ole.DUnadvise(connection);
-            throw new COMException(nameof(OLE_E_ADVISENOTSUPPORTED), unchecked((int)OLE_E_ADVISENOTSUPPORTED));
+            throw new COMException(nameof(OLE_E_ADVISENOTSUPPORTED), unchecked((int32)OLE_E_ADVISENOTSUPPORTED));
         }
 
         unsafe void* Win32Com.IDataObject.EnumDAdvise()
@@ -158,13 +158,13 @@ namespace Avalonia.Win32
             return null;
         }
 
-        Win32Com.IEnumFORMATETC Win32Com.IDataObject.EnumFormatEtc(int direction)
+        Win32Com.IEnumFORMATETC Win32Com.IDataObject.EnumFormatEtc(int32 direction)
         {
             if (_wrapped is Win32Com.IDataObject ole)
                 return ole.EnumFormatEtc(direction);
             if ((DATADIR)direction == DATADIR.DATADIR_GET)
                 return new FormatEnumerator(_wrapped);
-            throw new COMException(nameof(UnmanagedMethods.HRESULT.E_NOTIMPL), unchecked((int)UnmanagedMethods.HRESULT.E_NOTIMPL));
+            throw new COMException(nameof(UnmanagedMethods.HRESULT.E_NOTIMPL), unchecked((int32)UnmanagedMethods.HRESULT.E_NOTIMPL));
         }
 
         unsafe FORMATETC Win32Com.IDataObject.GetCanonicalFormatEtc(FORMATETC* formatIn)
@@ -172,7 +172,7 @@ namespace Avalonia.Win32
             if (_wrapped is Win32Com.IDataObject ole)
                 return ole.GetCanonicalFormatEtc(formatIn);
 
-            throw new COMException(nameof(UnmanagedMethods.HRESULT.E_NOTIMPL), unchecked((int)UnmanagedMethods.HRESULT.E_NOTIMPL));
+            throw new COMException(nameof(UnmanagedMethods.HRESULT.E_NOTIMPL), unchecked((int32)UnmanagedMethods.HRESULT.E_NOTIMPL));
         }
 
         unsafe uint Win32Com.IDataObject.GetData(FORMATETC* format, Interop.STGMEDIUM* medium)
@@ -240,7 +240,7 @@ namespace Avalonia.Win32
             return 0;
         }
         
-        unsafe uint Win32Com.IDataObject.SetData(FORMATETC* pformatetc, Interop.STGMEDIUM* pmedium, int fRelease)
+        unsafe uint Win32Com.IDataObject.SetData(FORMATETC* pformatetc, Interop.STGMEDIUM* pmedium, int32 fRelease)
         {
             if (_wrapped is Win32Com.IDataObject ole)
             {
@@ -262,7 +262,7 @@ namespace Avalonia.Win32
                 return WriteFileListToHGlobal(ref hGlobal, items.Select(f => f.TryGetLocalPath()).Where(f => f is not null)!);
             if (data is Stream stream)
             {
-                var length = (int)(stream.Length - stream.Position);
+                var length = (int32)(stream.Length - stream.Position);
                 var buffer = ArrayPool<byte>.Shared.Rent(length);
 
                 try
@@ -298,7 +298,7 @@ namespace Avalonia.Win32
 
         private static unsafe uint WriteBytesToHGlobal(ref IntPtr hGlobal, ReadOnlySpan<byte> data)
         {
-            int required = data.Length;
+            int32 required = data.Length;
             if (hGlobal == IntPtr.Zero)
                 hGlobal = UnmanagedMethods.GlobalAlloc(GMEM_MOVEABLE | GMEM_ZEROINIT, required);
 
@@ -312,7 +312,7 @@ namespace Avalonia.Win32
             try
             {
                 data.CopyTo(new Span<byte>((void*)ptr, data.Length));
-                return unchecked((int)UnmanagedMethods.HRESULT.S_OK);
+                return unchecked((int32)UnmanagedMethods.HRESULT.S_OK);
             }
             finally
             {
@@ -323,14 +323,14 @@ namespace Avalonia.Win32
         private static uint WriteFileListToHGlobal(ref IntPtr hGlobal, IEnumerable<string> files)
         {
             if (!files.Any())
-                return unchecked((int)UnmanagedMethods.HRESULT.S_OK);
+                return unchecked((int32)UnmanagedMethods.HRESULT.S_OK);
 
             char[] filesStr = (string.Join("\0", files) + "\0\0").ToCharArray();
             _DROPFILES df = new _DROPFILES();
             df.pFiles = Marshal.SizeOf<_DROPFILES>();
             df.fWide = true;
             
-            int required = (filesStr.Length * sizeof(char)) + Marshal.SizeOf<_DROPFILES>();
+            int32 required = (filesStr.Length * sizeof(char)) + Marshal.SizeOf<_DROPFILES>();
             if (hGlobal == IntPtr.Zero)
                 hGlobal = UnmanagedMethods.GlobalAlloc(GMEM_MOVEABLE | GMEM_ZEROINIT, required);
 
@@ -344,7 +344,7 @@ namespace Avalonia.Win32
                 Marshal.StructureToPtr(df, ptr, false);
 
                 Marshal.Copy(filesStr, 0, ptr + Marshal.SizeOf<_DROPFILES>(), filesStr.Length);
-                return unchecked((int)UnmanagedMethods.HRESULT.S_OK);
+                return unchecked((int32)UnmanagedMethods.HRESULT.S_OK);
             }
             finally
             {
@@ -354,7 +354,7 @@ namespace Avalonia.Win32
 
         private static uint WriteStringToHGlobal(ref IntPtr hGlobal, string data)
         {
-            int required = (data.Length + 1) * sizeof(char);
+            int32 required = (data.Length + 1) * sizeof(char);
             if (hGlobal == IntPtr.Zero)
                 hGlobal = UnmanagedMethods.GlobalAlloc(GMEM_MOVEABLE|GMEM_ZEROINIT, required);
 
@@ -367,7 +367,7 @@ namespace Avalonia.Win32
             {
                 char[] chars = (data + '\0').ToCharArray();
                 Marshal.Copy(chars, 0, ptr, chars.Length);
-                return unchecked((int)UnmanagedMethods.HRESULT.S_OK);
+                return unchecked((int32)UnmanagedMethods.HRESULT.S_OK);
             }
             finally
             {

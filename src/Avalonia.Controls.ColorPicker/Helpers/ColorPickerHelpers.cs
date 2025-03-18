@@ -38,8 +38,8 @@ namespace Avalonia.Controls.Primitives
         /// <returns>A new bitmap representing a gradient of color component values.</returns>
         public static Task CreateComponentBitmapAsync(
             PooledList<byte> bgraPixelData,
-            int width,
-            int height,
+            int32 width,
+            int32 height,
             Orientation orientation,
             ColorModel colorModel,
             ColorComponent component,
@@ -54,12 +54,12 @@ namespace Avalonia.Controls.Primitives
 
             return Task.Run(() =>
             {
-                int pixelDataIndex = 0;
+                int32 pixelDataIndex = 0;
                 double componentStep;
                 Color baseRgbColor = Colors.White;
                 Color rgbColor;
-                int bgraPixelDataHeight;
-                int bgraPixelDataWidth;
+                int32 bgraPixelDataHeight;
+                int32 bgraPixelDataWidth;
 
                 // BGRA formatted color components 1 byte each (4 bytes in a pixel)
                 bgraPixelDataHeight = height * 4;
@@ -136,9 +136,9 @@ namespace Avalonia.Controls.Primitives
                         componentStep = 255.0 / width;
                     }
 
-                    for (int y = 0; y < height; y++)
+                    for (int32 y = 0; y < height; y++)
                     {
-                        for (int x = 0; x < width; x++)
+                        for (int32 x = 0; x < width; x++)
                         {
                             if (y == 0)
                             {
@@ -183,9 +183,9 @@ namespace Avalonia.Controls.Primitives
                         componentStep = 255.0 / height;
                     }
 
-                    for (int y = 0; y < height; y++)
+                    for (int32 y = 0; y < height; y++)
                     {
-                        for (int x = 0; x < width; x++)
+                        for (int32 x = 0; x < width; x++)
                         {
                             if (x == 0)
                             {
@@ -619,8 +619,8 @@ namespace Avalonia.Controls.Primitives
         /// <returns>A new <see cref="WriteableBitmap"/>.</returns>
         public static unsafe Bitmap CreateBitmapFromPixelData(
             PooledList<byte> bgraPixelData,
-            int pixelWidth,
-            int pixelHeight)
+            int32 pixelWidth,
+            int32 pixelHeight)
         {
             fixed (byte* array = bgraPixelData.Span)
             {

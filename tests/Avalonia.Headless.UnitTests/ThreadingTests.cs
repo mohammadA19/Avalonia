@@ -35,7 +35,7 @@ public class ThreadingTests
 #elif XUNIT
     [AvaloniaTheory(Timeout = 10000), InlineData(1), InlineData(10), InlineData(100)]
 #endif
-    public async Task DispatcherTimer_Works_On_The_Same_Thread(int interval)
+    public async Task DispatcherTimer_Works_On_The_Same_Thread(int32 interval)
     {
         Assert.NotNull(SynchronizationContext.Current);
         ValidateTestContext();

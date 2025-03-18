@@ -17,7 +17,7 @@ namespace Avalonia.X11
         private IX11InputMethodControl? _imeControl;
         private bool _processingIme;
 
-        private readonly Queue<(RawKeyEventArgs args, XEvent xev, int keyval, int keycode)> _imeQueue = new();
+        private readonly Queue<(RawKeyEventArgs args, XEvent xev, int32 keyval, int32 keycode)> _imeQueue = new();
 
         private unsafe void CreateIC()
         {
@@ -27,8 +27,8 @@ namespace Avalonia.X11
                 for (var c = 0; c < supported_styles->count_styles; c++)
                 {
                     var style = (XIMProperties)supported_styles->supported_styles[c];
-                    if ((int)(style & XIMProperties.XIMPreeditPosition) != 0
-                        && ((int)(style & XIMProperties.XIMStatusNothing) != 0))
+                    if ((int32)(style & XIMProperties.XIMPreeditPosition) != 0
+                        && ((int32)(style & XIMProperties.XIMStatusNothing) != 0))
                     {
                         XPoint spot = default;
 
@@ -44,7 +44,7 @@ namespace Avalonia.X11
                         _xic = XCreateIC(_x11.Xim,
                             XNames.XNClientWindow, _handle,
                             XNames.XNFocusWindow, _handle,
-                            XNames.XNInputStyle, new IntPtr((int)style),
+                            XNames.XNInputStyle, new IntPtr((int32)style),
                             XNames.XNResourceName, _platform.Options.WmClass,
                             XNames.XNResourceClass, _platform.Options.WmClass,
                             XNames.XNPreeditAttributes, list,
@@ -61,7 +61,7 @@ namespace Avalonia.X11
             
             if (_xic == IntPtr.Zero)
                 _xic = XCreateIC(_x11.Xim, XNames.XNInputStyle,
-                    new IntPtr((int)(XIMProperties.XIMPreeditNothing | XIMProperties.XIMStatusNothing)),
+                    new IntPtr((int32)(XIMProperties.XIMPreeditNothing | XIMProperties.XIMStatusNothing)),
                     XNames.XNClientWindow, _handle, XNames.XNFocusWindow, _handle, IntPtr.Zero);
         }
 
@@ -129,7 +129,7 @@ namespace Avalonia.X11
                     physicalKey,
                     symbol);
 
-            ScheduleKeyInput(args, ref ev, (int)x11Key, ev.KeyEvent.keycode);
+            ScheduleKeyInput(args, ref ev, (int32)x11Key, ev.KeyEvent.keycode);
         }
 
         private (X11Key x11Key, Key key, string? symbol) LookupKey(ref XKeyEvent keyEvent, PhysicalKey physicalKey)
@@ -150,7 +150,7 @@ namespace Avalonia.X11
         private (X11Key x11Key, Key key, string? symbol) LookUpKeyXkb(ref XKeyEvent keyEvent)
         {
             // First lookup using the current keyboard layout group (contained in state).
-            var state = (int)keyEvent.state;
+            var state = (int32)keyEvent.state;
             if (!XkbLookupKeySym(_x11.Display, keyEvent.keycode, state, out _, out var originalKeySym))
                 return (0, Key.None, null);
 
@@ -185,7 +185,7 @@ namespace Avalonia.X11
         private unsafe string? GetKeySymbolXkb(X11Key x11Key)
         {
             var keySym = (nint)x11Key;
-            const int bufferSize = 4;
+            const int32 bufferSize = 4;
             var buffer = stackalloc byte[bufferSize];
             var length = XkbTranslateKeySym(_x11.Display, ref keySym, 0, buffer, bufferSize, out var extraSize);
 
@@ -208,7 +208,7 @@ namespace Avalonia.X11
 
         private static unsafe (X11Key x11Key, Key key, string? symbol) LookupKeyXCore(ref XKeyEvent keyEvent)
         {
-            const int bufferSize = 4;
+            const int32 bufferSize = 4;
             var buffer = stackalloc byte[bufferSize];
 
             // We don't have Xkb enabled, which should be rare: use XLookupString which will map to the first keyboard
@@ -244,7 +244,7 @@ namespace Avalonia.X11
             return Encoding.UTF8.GetString(bytes, length);
         }
 
-        private const int ImeBufferSize = 64 * 1024;
+        private const int32 ImeBufferSize = 64 * 1024;
         [ThreadStatic] private static IntPtr ImeBuffer;
 
         private unsafe string? TranslateEventToString(ref XEvent ev, string? symbol)
@@ -283,7 +283,7 @@ namespace Avalonia.X11
             return text;
         }
 
-        private void ScheduleKeyInput(RawKeyEventArgs args, ref XEvent xev, int keyval, int keycode)
+        private void ScheduleKeyInput(RawKeyEventArgs args, ref XEvent xev, int32 keyval, int32 keycode)
         {
             _x11.LastActivityTimestamp = xev.ButtonEvent.time;
             
@@ -294,7 +294,7 @@ namespace Avalonia.X11
             ScheduleInput(args);
         }
 
-        private bool FilterIme(RawKeyEventArgs args, XEvent xev, int keyval, int keycode)
+        private bool FilterIme(RawKeyEventArgs args, XEvent xev, int32 keyval, int32 keycode)
         {
             if (_ime == null)
                 return false;

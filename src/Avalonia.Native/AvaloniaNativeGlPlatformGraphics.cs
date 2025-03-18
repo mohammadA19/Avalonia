@@ -18,7 +18,7 @@ namespace Avalonia.Native
             _display = display;
             var context = display.CreateContext(null);
             
-            int major, minor;
+            int32 major, minor;
             GlInterface glInterface;
             using (context.MakeCurrent())
             {
@@ -59,7 +59,7 @@ namespace Avalonia.Native
     {
         private readonly IAvnGlDisplay _display;
 
-        public GlDisplay(IAvnGlDisplay display, GlInterface glInterface, int sampleCount, int stencilSize)
+        public GlDisplay(IAvnGlDisplay display, GlInterface glInterface, int32 sampleCount, int32 stencilSize)
         {
             _display = display;
             SampleCount = sampleCount;
@@ -69,9 +69,9 @@ namespace Avalonia.Native
 
         public GlInterface GlInterface { get; }
 
-        public int SampleCount { get; }
+        public int32 SampleCount { get; }
 
-        public int StencilSize { get; }
+        public int32 StencilSize { get; }
 
         public void ClearContext() => _display.LegacyClearCurrentContext();
 
@@ -96,8 +96,8 @@ namespace Avalonia.Native
 
         public GlVersion Version { get; }
         public GlInterface GlInterface => _display.GlInterface;
-        public int SampleCount => _display.SampleCount;
-        public int StencilSize => _display.StencilSize;
+        public int32 SampleCount => _display.SampleCount;
+        public int32 StencilSize => _display.StencilSize;
         public IDisposable MakeCurrent()
         {
             if (IsLost)

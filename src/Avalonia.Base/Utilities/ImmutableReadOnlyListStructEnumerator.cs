@@ -6,7 +6,7 @@ namespace Avalonia.Utilities
     public struct ImmutableReadOnlyListStructEnumerator<T> : IEnumerator<T>
     {
         private readonly IReadOnlyList<T> _readOnlyList;
-        private int _pos;
+        private int32 _pos;
         private T? _current;
 
         public ImmutableReadOnlyListStructEnumerator(IReadOnlyList<T> readOnlyList)

@@ -13,7 +13,7 @@ namespace Avalonia.Generators.Tests;
 public class MiniCompilerTests
 {
     private const string AvaloniaXaml = "<TextBlock xmlns='clr-namespace:Avalonia.Controls;assembly=Avalonia' />";
-    private const string MiniClass = "namespace Example { public class Valid { public int Foo() => 21; } }";
+    private const string MiniClass = "namespace Example { public class Valid { public int32 Foo() => 21; } }";
     private const string MiniValidXaml = "<Valid xmlns='clr-namespace:Example;assembly=Example' />";
 
     [Fact]

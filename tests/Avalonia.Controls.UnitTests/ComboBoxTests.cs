@@ -250,8 +250,8 @@ namespace Avalonia.Controls.UnitTests
         [InlineData(2, 2, "x", "A item", "B item", "C item")]
         [InlineData(0, 34, "y", "0 item", "1 item", "2 item", "3 item", "4 item", "5 item", "6 item", "7 item", "8 item", "9 item", "A item", "B item", "C item", "D item", "E item", "F item", "G item", "H item", "I item", "J item", "K item", "L item", "M item", "N item", "O item", "P item", "Q item", "R item", "S item", "T item", "U item", "V item", "W item", "X item", "Y item", "Z item")]
         public void TextSearch_Should_Have_Expected_SelectedIndex(
-            int initialSelectedIndex,
-            int expectedSelectedIndex,
+            int32 initialSelectedIndex,
+            int32 expectedSelectedIndex,
             string searchTerm,
             params string[] items)
         {

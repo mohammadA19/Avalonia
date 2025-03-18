@@ -112,10 +112,10 @@ namespace Avalonia.Controls
         /// value of properties without performing any of the actions in their
         /// change handlers.
         /// </summary>
-        /// <remarks>The int is important as a value because the TextBox
+        /// <remarks>The int32 is important as a value because the TextBox
         /// TextChanged event does not immediately fire, and this will allow for
         /// nested property changes to be ignored.</remarks>
-        private int _ignoreTextPropertyChange;
+        private int32 _ignoreTextPropertyChange;
 
         /// <summary>
         /// Gets or sets a value indicating whether to ignore calling a pending
@@ -138,7 +138,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the last observed text box selection start location.
         /// </summary>
-        private int _textSelectionStart;
+        private int32 _textSelectionStart;
 
         /// <summary>
         /// Gets or sets a value indicating whether the user initiated the
@@ -224,7 +224,7 @@ namespace Avalonia.Controls
                 nameof(TextChanged),
                 RoutingStrategies.Bubble);
 
-        private static bool IsValidMinimumPrefixLength(int value) => value >= -1;
+        private static bool IsValidMinimumPrefixLength(int32 value) => value >= -1;
 
         private static bool IsValidMinimumPopulateDelay(TimeSpan value) => value.TotalMilliseconds >= 0.0;
 
@@ -519,7 +519,7 @@ namespace Avalonia.Controls
             }
         }
 
-        private int TextBoxSelectionStart
+        private int32 TextBoxSelectionStart
         {
             get
             {
@@ -533,7 +533,7 @@ namespace Avalonia.Controls
                 }
             }
         }
-        private int TextBoxSelectionLength
+        private int32 TextBoxSelectionLength
         {
             get
             {
@@ -1521,21 +1521,21 @@ namespace Avalonia.Controls
             // Update the cache
             if (e.Action == NotifyCollectionChangedAction.Remove && e.OldItems != null)
             {
-                for (int index = 0; index < e.OldItems.Count; index++)
+                for (int32 index = 0; index < e.OldItems.Count; index++)
                 {
                     _items!.RemoveAt(e.OldStartingIndex);
                 }
             }
             if (e.Action == NotifyCollectionChangedAction.Add && e.NewItems != null && _items!.Count >= e.NewStartingIndex)
             {
-                for (int index = 0; index < e.NewItems.Count; index++)
+                for (int32 index = 0; index < e.NewItems.Count; index++)
                 {
                     _items.Insert(e.NewStartingIndex + index, e.NewItems[index]!);
                 }
             }
             if (e.Action == NotifyCollectionChangedAction.Replace && e.NewItems != null && e.OldItems != null)
             {
-                for (int index = 0; index < e.NewItems.Count; index++)
+                for (int32 index = 0; index < e.NewItems.Count; index++)
                 {
                     _items![e.NewStartingIndex] = e.NewItems[index]!;
                 }
@@ -1544,7 +1544,7 @@ namespace Avalonia.Controls
             // Update the view
             if ((e.Action == NotifyCollectionChangedAction.Remove || e.Action == NotifyCollectionChangedAction.Replace) && e.OldItems != null)
             {
-                for (int index = 0; index < e.OldItems.Count; index++)
+                for (int32 index = 0; index < e.OldItems.Count; index++)
                 {
                     _view!.Remove(e.OldItems[index]!);
                 }
@@ -1635,8 +1635,8 @@ namespace Avalonia.Controls
             {
                 if (IsTextCompletionEnabled && TextBox != null && userInitiated)
                 {
-                    int currentLength = TextBox.Text?.Length ?? 0;
-                    int selectionStart = TextBoxSelectionStart;
+                    int32 currentLength = TextBox.Text?.Length ?? 0;
+                    int32 selectionStart = TextBoxSelectionStart;
                     if (selectionStart == text?.Length && selectionStart > _textSelectionStart)
                     {
                         // When the FilterMode dependency property is set to
@@ -1656,7 +1656,7 @@ namespace Avalonia.Controls
                             string? topString = FormatValue(top, true);
 
                             // Only replace partially when the two words being the same
-                            int minLength = Math.Min(topString?.Length ?? 0, Text?.Length ?? 0);
+                            int32 minLength = Math.Min(topString?.Length ?? 0, Text?.Length ?? 0);
                             if (AutoCompleteSearch.Equals(Text?.Substring(0, minLength), topString?.Substring(0, minLength)))
                             {
                                 // Update the text
@@ -1738,7 +1738,7 @@ namespace Avalonia.Controls
         {
             if (TextBox != null)
             {
-                int length = TextBox.Text?.Length ?? 0;
+                int32 length = TextBox.Text?.Length ?? 0;
                 TextBox.SelectionStart = length;
                 TextBox.SelectionEnd = length;
             }

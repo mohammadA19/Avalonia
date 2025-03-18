@@ -17,15 +17,15 @@ namespace Avalonia.Win32.OpenGl
         private static IntPtr _bootstrapWindow;
         private static IntPtr _bootstrapDc;
         private static PixelFormatDescriptor _defaultPfd;
-        private static int _defaultPixelFormat;
+        private static int32 _defaultPixelFormat;
         public static IntPtr OpenGl32Handle = LoadLibrary("opengl32");
 
-        private delegate bool WglChoosePixelFormatARBDelegate(IntPtr hdc, int[]? piAttribIList, float[]? pfAttribFList,
-            int nMaxFormats, int[] piFormats, out int nNumFormats);
+        private delegate bool WglChoosePixelFormatARBDelegate(IntPtr hdc, int32[]? piAttribIList, float[]? pfAttribFList,
+            int32 nMaxFormats, int32[] piFormats, out int32 nNumFormats);
 
         private static WglChoosePixelFormatARBDelegate? s_wglChoosePixelFormatArb;
 
-        private delegate IntPtr WglCreateContextAttribsARBDelegate(IntPtr hDC, IntPtr hShareContext, int[]? attribList);
+        private delegate IntPtr WglCreateContextAttribsARBDelegate(IntPtr hDC, IntPtr hShareContext, int32[]? attribList);
 
         private static WglCreateContextAttribsARBDelegate? s_wglCreateContextAttribsArb;
         
@@ -33,7 +33,7 @@ namespace Avalonia.Win32.OpenGl
 
         private static GlDebugMessageCallbackDelegate? s_glDebugMessageCallback;
 
-        private delegate void DebugCallbackDelegate(int source, int type, int id, int severity, int len, IntPtr message,
+        private delegate void DebugCallbackDelegate(int32 source, int32 type, int32 id, int32 severity, int32 len, IntPtr message,
             IntPtr userParam);
 
         [MemberNotNullWhen(true, nameof(s_wglChoosePixelFormatArb))]
@@ -77,8 +77,8 @@ namespace Avalonia.Win32.OpenGl
                 null;
             
 
-            var formats = new int[1];
-            s_wglChoosePixelFormatArb(_bootstrapDc, new int[]
+            var formats = new int32[1];
+            s_wglChoosePixelFormatArb(_bootstrapDc, new int32[]
             {
                 WGL_DRAW_TO_WINDOW_ARB, 1,
                 WGL_ACCELERATION_ARB, WGL_FULL_ACCELERATION_ARB,
@@ -90,7 +90,7 @@ namespace Avalonia.Win32.OpenGl
                 WGL_DEPTH_BITS_ARB, 0,
                 WGL_STENCIL_BITS_ARB, 0,
                 0, // End
-            }, null, 1, formats, out int numFormats);
+            }, null, 1, formats, out int32 numFormats);
             if (numFormats != 0)
             {
                 DescribePixelFormat(_bootstrapDc, formats[0], Marshal.SizeOf<PixelFormatDescriptor>(), ref _defaultPfd);
@@ -101,7 +101,7 @@ namespace Avalonia.Win32.OpenGl
             return true;
         }
 
-        private static void DebugCallback(int source, int type, int id, int severity, int len, IntPtr message, IntPtr userparam)
+        private static void DebugCallback(int32 source, int32 type, int32 id, int32 severity, int32 len, IntPtr message, IntPtr userparam)
         {
             var err = Marshal.PtrToStringAnsi(message, len);
             Console.Error.WriteLine(err);

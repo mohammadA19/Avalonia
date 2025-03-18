@@ -175,13 +175,13 @@ namespace Avalonia.Media
         /// Hashcode is not guaranteed to be unique.
         /// </summary>
         /// <returns>The hashcode for this object.</returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             // Same algorithm as Color
             // This is used instead of HashCode.Combine() due to .NET Standard 2.0 requirements
             unchecked
             {
-                int hashCode = A.GetHashCode();
+                int32 hashCode = A.GetHashCode();
                 hashCode = (hashCode * 397) ^ H.GetHashCode();
                 hashCode = (hashCode * 397) ^ S.GetHashCode();
                 hashCode = (hashCode * 397) ^ V.GetHashCode();
@@ -334,7 +334,7 @@ namespace Avalonia.Media
             bool TryInternalParse(ReadOnlySpan<char> inString, out double outDouble)
             {
                 // The percent sign, if it exists, must be at the end of the number
-                int percentIndex = inString.IndexOf("%".AsSpan(), StringComparison.Ordinal);
+                int32 percentIndex = inString.IndexOf("%".AsSpan(), StringComparison.Ordinal);
 
                 if (percentIndex >= 0)
                 {
@@ -476,7 +476,7 @@ namespace Avalonia.Media
             // equal to the minimum plus the chroma (i.e., the max minus the min), multiplied by the percentage towards the new color.
             // This gets us a value between the maximum and the minimum representing the partially present channel.
             // Finally, the not-present color must be equal to the minimum value, since it is the one least participating in the overall color.
-            int sextant = (int)(hue / 60);
+            int32 sextant = (int32)(hue / 60);
             double intermediateColorPercentage = (hue / 60) - sextant;
             double max = chroma + min;
 

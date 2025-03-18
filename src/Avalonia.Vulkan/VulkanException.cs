@@ -11,7 +11,7 @@ public class VulkanException : Exception
         
     }
 
-    public VulkanException(string funcName, int res) : this(funcName, (VkResult)res)
+    public VulkanException(string funcName, int32 res) : this(funcName, (VkResult)res)
     {
         
     }
@@ -21,7 +21,7 @@ public class VulkanException : Exception
 
     }
 
-    public static void ThrowOnError(string funcName, int res) => ((VkResult)res).ThrowOnError(funcName);
+    public static void ThrowOnError(string funcName, int32 res) => ((VkResult)res).ThrowOnError(funcName);
 }
 
 internal static class VulkanExceptionExtensions

@@ -324,7 +324,7 @@ namespace Avalonia.Markup.Parsers
                     }
                     else if (args.Count == 1)
                     {
-                        if (int.TryParse(args[0], out int level))
+                        if (int32.TryParse(args[0], out int32 level))
                         {
                             ancestorType = null;
                             ancestorLevel = level;
@@ -339,7 +339,7 @@ namespace Avalonia.Markup.Parsers
                     {
                         var reader = new CharacterReader(args[0].AsSpan());
                         (ancestorNamespace, ancestorType) = ParseTypeName(ref reader);
-                        ancestorLevel = int.Parse(args[1]);
+                        ancestorLevel = int32.Parse(args[1]);
                     }
                 }
                 nodes.Add(new AncestorNode
@@ -522,7 +522,7 @@ namespace Avalonia.Markup.Parsers
         {
             public string? Namespace { get; set; }
             public string? TypeName { get; set; }
-            public int Level { get; set; }
+            public int32 Level { get; set; }
         }
 
         public class TypeCastNode : INode

@@ -26,9 +26,9 @@ internal partial interface IRawElementProviderFragment
 {
     IRawElementProviderFragment? Navigate(NavigateDirection direction);
 #if NET8_0_OR_GREATER
-    [return: MarshalUsing(typeof(SafeArrayMarshaller<int>))]
+    [return: MarshalUsing(typeof(SafeArrayMarshaller<int32>))]
 #endif
-    int[]? GetRuntimeId();
+    int32[]? GetRuntimeId();
     Rect GetBoundingRectangle();
 #if NET8_0_OR_GREATER
     [return: MarshalUsing(typeof(SafeArrayMarshaller<IRawElementProviderSimple>))]

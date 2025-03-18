@@ -6,9 +6,9 @@ namespace Avalonia.Platform.Internal;
 internal class SlicedStream : Stream
 {
     private readonly Stream _baseStream;
-    private readonly int _from;
+    private readonly int32 _from;
 
-    public SlicedStream(Stream baseStream, int from, int length)
+    public SlicedStream(Stream baseStream, int32 from, int32 length)
     {
         Length = length;
         _baseStream = baseStream;
@@ -19,9 +19,9 @@ internal class SlicedStream : Stream
     {
     }
 
-    public override int Read(byte[] buffer, int offset, int count)
+    public override int32 Read(byte[] buffer, int32 offset, int32 count)
     {
-        return _baseStream.Read(buffer, offset, (int)Math.Min(count, Length - Position));
+        return _baseStream.Read(buffer, offset, (int32)Math.Min(count, Length - Position));
     }
 
     public override long Seek(long offset, SeekOrigin origin)
@@ -37,7 +37,7 @@ internal class SlicedStream : Stream
 
     public override void SetLength(long value) => throw new NotSupportedException();
 
-    public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+    public override void Write(byte[] buffer, int32 offset, int32 count) => throw new NotSupportedException();
 
     public override bool CanRead => true;
     public override bool CanSeek => _baseStream.CanRead;

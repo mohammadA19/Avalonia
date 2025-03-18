@@ -17,17 +17,17 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
     private struct epoll_data
     {
         [FieldOffset(0)] public IntPtr ptr;
-        [FieldOffset(0)] public int fd;
+        [FieldOffset(0)] public int32 fd;
         [FieldOffset(0)] public uint u32;
         [FieldOffset(0)] public ulong u64;
     }
 
-    private const int CLOCK_MONOTONIC = 1;
-    private const int EPOLLIN = 1;
-    private const int EPOLL_CTL_ADD = 1;
-    private const int O_NONBLOCK = 2048;
-    private const int O_CLOEXEC = 0x80000;
-    private const int EPOLL_CLOEXEC = 0x80000;
+    private const int32 CLOCK_MONOTONIC = 1;
+    private const int32 EPOLLIN = 1;
+    private const int32 EPOLL_CTL_ADD = 1;
+    private const int32 O_NONBLOCK = 2048;
+    private const int32 O_CLOEXEC = 0x80000;
+    private const int32 EPOLL_CLOEXEC = 0x80000;
 
     [StructLayout(LayoutKind.Sequential)]
     private struct epoll_event
@@ -37,22 +37,22 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
     }
 
     [DllImport("libc")]
-    private extern static int epoll_create1(int flags);
+    private extern static int32 epoll_create1(int32 flags);
 
     [DllImport("libc")]
-    private extern static int epoll_ctl(int epfd, int op, int fd, ref epoll_event __event);
+    private extern static int32 epoll_ctl(int32 epfd, int32 op, int32 fd, ref epoll_event __event);
 
     [DllImport("libc")]
-    private extern static int epoll_wait(int epfd, epoll_event* events, int maxevents, int timeout);
+    private extern static int32 epoll_wait(int32 epfd, epoll_event* events, int32 maxevents, int32 timeout);
 
     [DllImport("libc")]
-    private extern static int pipe2(int* fds, int flags);
+    private extern static int32 pipe2(int32* fds, int32 flags);
 
     [DllImport("libc")]
-    private extern static IntPtr write(int fd, void* buf, IntPtr count);
+    private extern static IntPtr write(int32 fd, void* buf, IntPtr count);
 
     [DllImport("libc")]
-    private extern static IntPtr read(int fd, void* buf, IntPtr count);
+    private extern static IntPtr read(int32 fd, void* buf, IntPtr count);
 
 #pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
     struct timespec
@@ -69,10 +69,10 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
 #pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
 
     [DllImport("libc")]
-    private extern static int timerfd_create(int clockid, int flags);
+    private extern static int32 timerfd_create(int32 clockid, int32 flags);
 
     [DllImport("libc")]
-    private extern static int timerfd_settime(int fd, int flags, itimerspec* new_value, itimerspec* old_value);
+    private extern static int32 timerfd_settime(int32 fd, int32 flags, itimerspec* new_value, itimerspec* old_value);
 
     private enum EventCodes
     {
@@ -80,13 +80,13 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
         Signal = 2
     }
 
-    private int _sigread, _sigwrite;
-    private int _timerfd;
+    private int32 _sigread, _sigwrite;
+    private int32 _timerfd;
     private object _lock = new();
     private bool _signaled;
     private bool _wakeupRequested;
     private TimeSpan? _nextTimer;
-    private int _epoll;
+    private int32 _epoll;
     private Stopwatch _clock = Stopwatch.StartNew();
 
     public EpollDispatcherImpl(ManagedDispatcherImpl.IManagedDispatcherInputProvider inputProvider)
@@ -99,7 +99,7 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
         if (_epoll == -1)
             throw new Win32Exception("epoll_create1 failed");
 
-        var fds = stackalloc int[2];
+        var fds = stackalloc int32[2];
         pipe2(fds, O_NONBLOCK | O_CLOEXEC);
         _sigread = fds[0];
         _sigwrite = fds[1];
@@ -107,13 +107,13 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
         var ev = new epoll_event
         {
             events = EPOLLIN,
-            data = { u32 = (int)EventCodes.Signal }
+            data = { u32 = (int32)EventCodes.Signal }
         };
         if (epoll_ctl(_epoll, EPOLL_CTL_ADD, _sigread, ref ev) == -1)
             throw new Win32Exception("Unable to attach signal pipe to epoll");
 
         _timerfd = timerfd_create(CLOCK_MONOTONIC, O_NONBLOCK | O_CLOEXEC);
-        ev.data.u32 = (int)EventCodes.Timer;
+        ev.data.u32 = (int32)EventCodes.Timer;
         if (epoll_ctl(_epoll, EPOLL_CTL_ADD, _timerfd, ref ev) == -1)
             throw new Win32Exception("Unable to attach timer fd to epoll");
     }
@@ -164,7 +164,7 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
                     it_interval = default,
                     it_value = new()
                     {
-                        tv_sec = new IntPtr(Math.Min((int)waitFor.TotalSeconds, 100)),
+                        tv_sec = new IntPtr(Math.Min((int32)waitFor.TotalSeconds, 100)),
                         tv_nsec = new IntPtr((waitFor.Ticks % 10000000) * 100)
                     }
                 };
@@ -176,7 +176,7 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
                 timerfd_settime(_timerfd, 0, &none, null);
             }
 
-            epoll_wait(_epoll, &ev, 1, (int)-1);
+            epoll_wait(_epoll, &ev, 1, (int32)-1);
 
             // Drain the signaled pipe
             long buf = 0;
@@ -202,7 +202,7 @@ internal unsafe class EpollDispatcherImpl : IControlledDispatcherImpl
             if (_wakeupRequested)
                 return;
             _wakeupRequested = true;
-            int buf = 0;
+            int32 buf = 0;
             write(_sigwrite, &buf, new IntPtr(1));
         }
     }

@@ -55,7 +55,7 @@ namespace Avalonia.X11 {
 	internal struct XAnyEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
 	}
@@ -64,77 +64,77 @@ namespace Avalonia.X11 {
 	internal struct XKeyEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
 		internal IntPtr		root;
 		internal IntPtr		subwindow;
 		internal IntPtr		time;
-		internal int		x;
-		internal int		y;
-		internal int		x_root;
-		internal int		y_root;
+		internal int32		x;
+		internal int32		y;
+		internal int32		x_root;
+		internal int32		y_root;
 	    internal XModifierMask state;
-		internal int		keycode;
-		internal int		same_screen;
+		internal int32		keycode;
+		internal int32		same_screen;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XButtonEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
 		internal IntPtr		root;
 		internal IntPtr		subwindow;
 		internal IntPtr		time;
-		internal int		x;
-		internal int		y;
-		internal int		x_root;
-		internal int		y_root;
+		internal int32		x;
+		internal int32		y;
+		internal int32		x_root;
+		internal int32		y_root;
 		internal XModifierMask		state;
-		internal int		button;
-		internal int		same_screen;
+		internal int32		button;
+		internal int32		same_screen;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XMotionEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
 		internal IntPtr		root;
 		internal IntPtr		subwindow;
 		internal IntPtr		time;
-		internal int		x;
-		internal int		y;
-		internal int		x_root;
-		internal int		y_root;
+		internal int32		x;
+		internal int32		y;
+		internal int32		x_root;
+		internal int32		y_root;
 		internal XModifierMask		state;
 		internal byte		is_hint;
-		internal int		same_screen;
+		internal int32		same_screen;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XCrossingEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
 		internal IntPtr		root;
 		internal IntPtr		subwindow;
 		internal IntPtr		time;
-		internal int		x;
-		internal int		y;
-		internal int		x_root;
-		internal int		y_root;
+		internal int32		x;
+		internal int32		y;
+		internal int32		x_root;
+		internal int32		y_root;
 		internal NotifyMode	mode;
 		internal NotifyDetail	detail;
-		internal int		same_screen;
-		internal int		focus;
+		internal int32		same_screen;
+		internal int32		focus;
 		internal XModifierMask		state;
 	}
 
@@ -142,10 +142,10 @@ namespace Avalonia.X11 {
 	internal struct XFocusChangeEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
-		internal int		mode;
+		internal int32		mode;
 		internal NotifyDetail	detail;
 	}
 
@@ -153,7 +153,7 @@ namespace Avalonia.X11 {
 	internal struct XKeymapEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
 		internal byte		key_vector0;
@@ -194,74 +194,74 @@ namespace Avalonia.X11 {
 	internal struct XExposeEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
-		internal int		x;
-		internal int		y;
-		internal int		width;
-		internal int		height;
-		internal int		count;
+		internal int32		x;
+		internal int32		y;
+		internal int32		width;
+		internal int32		height;
+		internal int32		count;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XGraphicsExposeEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		drawable;
-		internal int		x;
-		internal int		y;
-		internal int		width;
-		internal int		height;
-		internal int		count;
-		internal int		major_code;
-		internal int		minor_code;
+		internal int32		x;
+		internal int32		y;
+		internal int32		width;
+		internal int32		height;
+		internal int32		count;
+		internal int32		major_code;
+		internal int32		minor_code;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XNoExposeEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		drawable;
-		internal int		major_code;
-		internal int		minor_code;
+		internal int32		major_code;
+		internal int32		minor_code;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XVisibilityEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
-		internal int		state;
+		internal int32		state;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XCreateWindowEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		parent;
 		internal IntPtr		window;
-		internal int		x;
-		internal int		y;
-		internal int		width;
-		internal int		height;
-		internal int		border_width;
-		internal int		override_redirect;
+		internal int32		x;
+		internal int32		y;
+		internal int32		width;
+		internal int32		height;
+		internal int32		border_width;
+		internal int32		override_redirect;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XDestroyWindowEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		xevent;
 		internal IntPtr		window;
@@ -271,29 +271,29 @@ namespace Avalonia.X11 {
 	internal struct XUnmapEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		xevent;
 		internal IntPtr		window;
-		internal int		from_configure;
+		internal int32		from_configure;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XMapEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		xevent;
 		internal IntPtr		window;
-		internal int		override_redirect;
+		internal int32		override_redirect;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XMapRequestEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		parent;
 		internal IntPtr		window;
@@ -303,71 +303,71 @@ namespace Avalonia.X11 {
 	internal struct XReparentEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		xevent;
 		internal IntPtr		window;
 		internal IntPtr		parent;
-		internal int		x;
-		internal int		y;
-		internal int		override_redirect;
+		internal int32		x;
+		internal int32		y;
+		internal int32		override_redirect;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XConfigureEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		xevent;
 		internal IntPtr		window;
-		internal int		x;
-		internal int		y;
-		internal int		width;
-		internal int		height;
-		internal int		border_width;
+		internal int32		x;
+		internal int32		y;
+		internal int32		width;
+		internal int32		height;
+		internal int32		border_width;
 		internal IntPtr		above;
-		internal int		override_redirect;
+		internal int32		override_redirect;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XGravityEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		xevent;
 		internal IntPtr		window;
-		internal int		x;
-		internal int		y;
+		internal int32		x;
+		internal int32		y;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XResizeRequestEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
-		internal int		width;
-		internal int		height;
+		internal int32		width;
+		internal int32		height;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XConfigureRequestEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		parent;
 		internal IntPtr		window;
-		internal int		x;
-		internal int		y;
-		internal int		width;
-		internal int		height;
-		internal int		border_width;
+		internal int32		x;
+		internal int32		y;
+		internal int32		width;
+		internal int32		height;
+		internal int32		border_width;
 		internal IntPtr		above;
-		internal int		detail;
+		internal int32		detail;
 		internal IntPtr		value_mask;
 	}
 
@@ -375,41 +375,41 @@ namespace Avalonia.X11 {
 	internal struct XCirculateEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		xevent;
 		internal IntPtr		window;
-		internal int		place;
+		internal int32		place;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XCirculateRequestEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		parent;
 		internal IntPtr		window;
-		internal int		place;
+		internal int32		place;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XPropertyEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
 		internal IntPtr		atom;
 		internal IntPtr		time;
-		internal int		state;
+		internal int32		state;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XSelectionClearEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
 		internal IntPtr		selection;
@@ -420,7 +420,7 @@ namespace Avalonia.X11 {
 	internal struct XSelectionRequestEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		owner;
 		internal IntPtr		requestor;
@@ -434,7 +434,7 @@ namespace Avalonia.X11 {
 	internal struct XSelectionEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		requestor;
 		internal IntPtr		selection;
@@ -447,23 +447,23 @@ namespace Avalonia.X11 {
 	internal struct XColormapEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
 		internal IntPtr		colormap;
-		internal int		c_new;
-		internal int		state;
+		internal int32		c_new;
+		internal int32		state;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XClientMessageEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
 		internal IntPtr		message_type;
-		internal int		format;
+		internal int32		format;
 		internal IntPtr		ptr1;
 		internal IntPtr		ptr2;
 		internal IntPtr		ptr3;
@@ -475,12 +475,12 @@ namespace Avalonia.X11 {
 	internal struct XMappingEvent {
 		internal XEventName	type;
 		internal IntPtr		serial;
-		internal int		send_event;
+		internal int32		send_event;
 		internal IntPtr		display;
 		internal IntPtr		window;
-		internal int		request;
-		internal int		first_keycode;
-		internal int		count;
+		internal int32		request;
+		internal int32		first_keycode;
+		internal int32		count;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -534,12 +534,12 @@ namespace Avalonia.X11 {
     [StructLayout(LayoutKind.Sequential)]
     internal unsafe struct XGenericEventCookie
     {
-        internal int type; /* of event. Always GenericEvent */
+        internal int32 type; /* of event. Always GenericEvent */
         internal IntPtr serial; /* # of last request processed */
-        internal int send_event; /* true if from SendEvent request */
+        internal int32 send_event; /* true if from SendEvent request */
         internal IntPtr display; /* Display the event was read from */
-        internal int extension; /* major opcode of extension that caused the event */
-        internal int evtype; /* actual event type. */
+        internal int32 extension; /* major opcode of extension that caused the event */
+        internal int32 evtype; /* actual event type. */
         internal uint cookie;
         internal void* data;
 
@@ -588,7 +588,7 @@ namespace Avalonia.X11 {
 		[ FieldOffset(0) ] internal XGenericEventCookie GenericEventCookie;
 
 		//[MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValArray, SizeConst=24)]
-		//[ FieldOffset(0) ] internal int[] pad;
+		//[ FieldOffset(0) ] internal int32[] pad;
 		[ FieldOffset(0) ] internal XEventPad Pad;
 		public override string ToString() {
 			switch (type)
@@ -662,7 +662,7 @@ namespace Avalonia.X11 {
 			string result = string.Empty;
 			Type type = ev.GetType ();
 			FieldInfo [] fields = type.GetFields (System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Instance);
-			for (int i = 0; i < fields.Length; i++) {
+			for (int32 i = 0; i < fields.Length; i++) {
 				if (!string.IsNullOrEmpty(result)) {
 					result += ", ";
 				}
@@ -681,41 +681,41 @@ namespace Avalonia.X11 {
 		internal IntPtr		border_pixel;
 		internal Gravity	bit_gravity;
 		internal Gravity	win_gravity;
-		internal int		backing_store;
+		internal int32		backing_store;
 		internal IntPtr		backing_planes;
 		internal IntPtr		backing_pixel;
-		internal int		save_under;
+		internal int32		save_under;
 		internal IntPtr		event_mask;
 		internal IntPtr		do_not_propagate_mask;
-		internal int		override_redirect;
+		internal int32		override_redirect;
 		internal IntPtr		colormap;
 		internal IntPtr		cursor;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XWindowAttributes {
-		internal int		x;
-		internal int		y;
-		internal int		width;
-		internal int		height;
-		internal int		border_width;
-		internal int		depth;
+		internal int32		x;
+		internal int32		y;
+		internal int32		width;
+		internal int32		height;
+		internal int32		border_width;
+		internal int32		depth;
 		internal IntPtr		visual;
 		internal IntPtr		root;
-		internal int		c_class;
+		internal int32		c_class;
 		internal Gravity	bit_gravity;
 		internal Gravity	win_gravity;
-		internal int		backing_store;
+		internal int32		backing_store;
 		internal IntPtr		backing_planes;
 		internal IntPtr		backing_pixel;
-		internal int		save_under;
+		internal int32		save_under;
 		internal IntPtr		colormap;
-		internal int		map_installed;
+		internal int32		map_installed;
 		internal MapState	map_state;
 		internal IntPtr		all_event_masks;
 		internal IntPtr		your_event_mask;
 		internal IntPtr		do_not_propagate_mask;
-		internal int		override_direct;
+		internal int32		override_direct;
 		internal IntPtr		screen;
 
 		public override string ToString ()
@@ -728,7 +728,7 @@ namespace Avalonia.X11 {
 	internal struct XTextProperty {
 		internal string		value;
 		internal IntPtr		encoding;
-		internal int		format;
+		internal int32		format;
 		internal IntPtr		nitems;
 	}
 
@@ -1026,22 +1026,22 @@ namespace Avalonia.X11 {
 		internal IntPtr		ext_data;
 		internal IntPtr		display;
 		internal IntPtr		root;
-		internal int		width;
-		internal int		height;
-		internal int		mwidth;
-		internal int		mheight;
-		internal int		ndepths;
+		internal int32		width;
+		internal int32		height;
+		internal int32		mwidth;
+		internal int32		mheight;
+		internal int32		ndepths;
 		internal IntPtr		depths;
-		internal int		root_depth;
+		internal int32		root_depth;
 		internal IntPtr		root_visual;
 		internal IntPtr		default_gc;
 		internal IntPtr		cmap;
 		internal IntPtr		white_pixel;
 		internal IntPtr		black_pixel;
-		internal int		max_maps;
-		internal int		min_maps;
-		internal int		backing_store;
-		internal int		save_unders;
+		internal int32		max_maps;
+		internal int32		min_maps;
+		internal int32		backing_store;
+		internal int32		save_unders;
 		internal IntPtr	    root_input_mask;
 	}
 
@@ -1066,11 +1066,11 @@ namespace Avalonia.X11 {
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XWindowChanges {
-		internal int		x;
-		internal int		y;
-		internal int		width;
-		internal int		height;
-		internal int		border_width;
+		internal int32		x;
+		internal int32		y;
+		internal int32		width;
+		internal int32		height;
+		internal int32		border_width;
 		internal IntPtr		sibling;
 		internal StackMode	stack_mode;
 	}	
@@ -1176,7 +1176,7 @@ namespace Avalonia.X11 {
 
 	[StructLayout (LayoutKind.Sequential)]
 	internal struct XModifierKeymap {
-		public int max_keypermod;
+		public int32 max_keypermod;
 		public IntPtr modifiermap;
 	} 
 
@@ -1188,11 +1188,11 @@ namespace Avalonia.X11 {
 
 	[StructLayout (LayoutKind.Sequential)]
 	internal struct XKeyBoardState {
-		public int key_click_percent;
-		public int bell_percent;
+		public int32 key_click_percent;
+		public int32 bell_percent;
 		public uint bell_pitch, bell_duration;
 		public IntPtr led_mask;
-		public int global_auto_repeat;
+		public int32 global_auto_repeat;
 		public AutoRepeats auto_repeats;
 
 		[StructLayout (LayoutKind.Explicit)]
@@ -1279,7 +1279,7 @@ namespace Avalonia.X11 {
 		internal IntPtr			plane_mask;
 		internal IntPtr			foreground;
 		internal IntPtr			background;
-		internal int			line_width;
+		internal int32			line_width;
 		internal GCLineStyle		line_style;
 		internal GCCapStyle		cap_style;
 		internal GCJoinStyle		join_style;
@@ -1288,15 +1288,15 @@ namespace Avalonia.X11 {
 		internal GCArcMode		arc_mode;
 		internal IntPtr			tile;
 		internal IntPtr			stipple;
-		internal int			ts_x_origin;
-		internal int			ts_y_origin;
+		internal int32			ts_x_origin;
+		internal int32			ts_y_origin;
 		internal IntPtr			font;
 		internal GCSubwindowMode	subwindow_mode;
-		internal int			graphics_exposures;
-		internal int			clip_x_origin;
-		internal int			clib_y_origin;
+		internal int32			graphics_exposures;
+		internal int32			clip_x_origin;
+		internal int32			clib_y_origin;
 		internal IntPtr			clip_mask;
-		internal int			dash_offset;
+		internal int32			dash_offset;
 		internal byte			dashes;
 	}
 
@@ -1469,23 +1469,23 @@ namespace Avalonia.X11 {
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XSizeHints {
 		internal IntPtr			flags;
-		internal int			x;
-		internal int			y;
-		internal int			width;
-		internal int			height;
-		internal int			min_width;
-		internal int			min_height;
-		internal int			max_width;
-		internal int			max_height;
-		internal int			width_inc;
-		internal int			height_inc;
-		internal int			min_aspect_x;
-		internal int			min_aspect_y;
-		internal int			max_aspect_x;
-		internal int			max_aspect_y;
-		internal int			base_width;
-		internal int			base_height;
-		internal int			win_gravity;
+		internal int32			x;
+		internal int32			y;
+		internal int32			width;
+		internal int32			height;
+		internal int32			min_width;
+		internal int32			min_height;
+		internal int32			max_width;
+		internal int32			max_height;
+		internal int32			width_inc;
+		internal int32			height_inc;
+		internal int32			min_aspect_x;
+		internal int32			min_aspect_y;
+		internal int32			max_aspect_x;
+		internal int32			max_aspect_y;
+		internal int32			base_width;
+		internal int32			base_height;
+		internal int32			win_gravity;
 	}
 
 	[Flags]
@@ -1511,27 +1511,27 @@ namespace Avalonia.X11 {
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XWMHints {
 		internal IntPtr			flags;
-		internal int			input;
+		internal int32			input;
 		internal XInitialState		initial_state;
 		internal IntPtr			icon_pixmap;
 		internal IntPtr			icon_window;
-		internal int			icon_x;
-		internal int			icon_y;
+		internal int32			icon_x;
+		internal int32			icon_y;
 		internal IntPtr			icon_mask;
 		internal IntPtr			window_group;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct XIconSize {
-		internal int			min_width;
-		internal int			min_height;
-		internal int			max_width;
-		internal int			max_height;
-		internal int			width_inc;
-		internal int			height_inc;
+		internal int32			min_width;
+		internal int32			min_height;
+		internal int32			max_width;
+		internal int32			max_height;
+		internal int32			width_inc;
+		internal int32			height_inc;
 	}
 
-	internal delegate int  XErrorHandler(IntPtr DisplayHandle, ref XErrorEvent error_event);
+	internal delegate int32  XErrorHandler(IntPtr DisplayHandle, ref XErrorEvent error_event);
 
 	internal enum XRequest : byte {
 		X_CreateWindow			= 1,
@@ -1696,13 +1696,13 @@ namespace Avalonia.X11 {
 	[StructLayout (LayoutKind.Sequential)]
 	internal struct XcursorImage
 	{
-		public int version;
-		public int size;       /* nominal size for matching */
-		public int width;      /* actual width */
-		public int height;     /* actual height */
-		public int xhot;       /* hot spot x (must be inside image) */
-		public int yhot;       /* hot spot y (must be inside image) */
-		public int delay;       /* hot spot y (must be inside image) */
+		public int32 version;
+		public int32 size;       /* nominal size for matching */
+		public int32 width;      /* actual width */
+		public int32 height;     /* actual height */
+		public int32 xhot;       /* hot spot x (must be inside image) */
+		public int32 yhot;       /* hot spot y (must be inside image) */
+		public int32 delay;       /* hot spot y (must be inside image) */
 		public IntPtr pixels;    /* pointer to pixels */
 
 		public override string ToString ()
@@ -1714,7 +1714,7 @@ namespace Avalonia.X11 {
 	[StructLayout (LayoutKind.Sequential)]
 	internal struct XcursorImages
 	{
-		public int nimage;     /* number of images */
+		public int32 nimage;     /* number of images */
 		public IntPtr images;   /* array of XcursorImage pointers */
 	}
 
@@ -1770,17 +1770,17 @@ namespace Avalonia.X11 {
     internal unsafe struct XImage
 #pragma warning restore CA1815 // Override equals and operator equals on value types
     {
-        public int width, height; /* size of image */
-        public int xoffset; /* number of pixels offset in X direction */
-        public int format; /* XYBitmap, XYPixmap, ZPixmap */
+        public int32 width, height; /* size of image */
+        public int32 xoffset; /* number of pixels offset in X direction */
+        public int32 format; /* XYBitmap, XYPixmap, ZPixmap */
         public IntPtr data; /* pointer to image data */
-        public int byte_order; /* data byte order, LSBFirst, MSBFirst */
-        public int bitmap_unit; /* quant. of scanline 8, 16, 32 */
-        public int bitmap_bit_order; /* LSBFirst, MSBFirst */
-        public int bitmap_pad; /* 8, 16, 32 either XY or ZPixmap */
-        public int depth; /* depth of image */
-        public int bytes_per_line; /* accelerator to next scanline */
-        public int bits_per_pixel; /* bits per pixel (ZPixmap) */
+        public int32 byte_order; /* data byte order, LSBFirst, MSBFirst */
+        public int32 bitmap_unit; /* quant. of scanline 8, 16, 32 */
+        public int32 bitmap_bit_order; /* LSBFirst, MSBFirst */
+        public int32 bitmap_pad; /* 8, 16, 32 either XY or ZPixmap */
+        public int32 depth; /* depth of image */
+        public int32 bytes_per_line; /* accelerator to next scanline */
+        public int32 bits_per_pixel; /* bits per pixel (ZPixmap) */
         public ulong red_mask; /* bits in z arrangement */
         public ulong green_mask;
         public ulong blue_mask;
@@ -1792,14 +1792,14 @@ namespace Avalonia.X11 {
     {
         internal IntPtr visual;
         internal IntPtr visualid;
-        internal int screen;
+        internal int32 screen;
         internal uint depth;
-        internal int klass;
+        internal int32 klass;
         internal IntPtr red_mask;
         internal IntPtr green_mask;
         internal IntPtr blue_mask;
-        internal int colormap_size;
-        internal int bits_per_rgb;
+        internal int32 colormap_size;
+        internal int32 bits_per_rgb;
     }
 	
 	internal enum XIMFeedback
@@ -1821,15 +1821,15 @@ namespace Avalonia.X11 {
 	{
 		public ushort Length;
 		public IntPtr Feedback; // to XIMFeedbackStruct
-		public int EncodingIsWChar;
+		public int32 EncodingIsWChar;
 		public IntPtr String; // it could be either char* or wchar_t*
 	}
 
 	internal struct XIMPreeditDrawCallbackStruct
 	{
-		public int Caret;
-		public int ChangeFirst;
-		public int ChangeLength;
+		public int32 Caret;
+		public int32 ChangeFirst;
+		public int32 ChangeLength;
 		public IntPtr Text; // to XIMText
 	}
 
@@ -1858,13 +1858,13 @@ namespace Avalonia.X11 {
 
 	internal struct XIMPreeditCaretCallbackStruct
 	{
-		public int Position;
+		public int32 Position;
 		public XIMCaretDirection Direction;
 		public XIMCaretStyle Style;
 	}
 
 	// only PreeditStartCallback requires return value though.
-	internal delegate int XIMProc (IntPtr xim, IntPtr clientData, IntPtr callData);
+	internal delegate int32 XIMProc (IntPtr xim, IntPtr clientData, IntPtr callData);
 
 	internal static class XNames
 	{
@@ -1897,15 +1897,15 @@ namespace Avalonia.X11 {
 
     internal unsafe struct XRRMonitorInfo {
         public IntPtr Name;
-        public int Primary;
-        public int Automatic;
-        public int NOutput;
-        public int X;
-        public int Y;
-        public int Width;
-        public int Height;
-        public int MWidth;
-        public int MHeight;
+        public int32 Primary;
+        public int32 Automatic;
+        public int32 NOutput;
+        public int32 X;
+        public int32 Y;
+        public int32 Width;
+        public int32 Height;
+        public int32 MWidth;
+        public int32 MHeight;
         public IntPtr* Outputs;
     } 
 }

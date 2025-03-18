@@ -43,7 +43,7 @@ namespace Avalonia.Rendering.Composition.Transport
 
         public bool Contains(TClient item) => _list.Contains(item);
 
-        public void CopyTo(TClient[] array, int arrayIndex) => _list.CopyTo(array, arrayIndex);
+        public void CopyTo(TClient[] array, int32 arrayIndex) => _list.CopyTo(array, arrayIndex);
 
         public bool Remove(TClient item)
         {
@@ -54,25 +54,25 @@ namespace Avalonia.Rendering.Composition.Transport
             return true;
         }
 
-        public int Count => _list.Count;
+        public int32 Count => _list.Count;
         public bool IsReadOnly => false;
-        public int IndexOf(TClient item) => _list.IndexOf(item);
+        public int32 IndexOf(TClient item) => _list.IndexOf(item);
 
-        public void Insert(int index, TClient item)
+        public void Insert(int32 index, TClient item)
         {
             _list.Insert(index, item);
             _changed = true;
             _parent.RegisterForSerialization();
         }
 
-        public void RemoveAt(int index)
+        public void RemoveAt(int32 index)
         {
             _list.RemoveAt(index);
             _changed = true;
             _parent.RegisterForSerialization();
         }
 
-        public TClient this[int index]
+        public TClient this[int32 index]
         {
             get => _list[index];
             set

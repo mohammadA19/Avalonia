@@ -148,7 +148,7 @@ internal class VulkanInstance : IVulkanInstance
         if (supportedExtensionCount > 0)
         {
             var ptr = (VkExtensionProperties*)Marshal.AllocHGlobal(Unsafe.SizeOf<VkExtensionProperties>() *
-                                                                   (int)supportedExtensionCount);
+                                                                   (int32)supportedExtensionCount);
             try
             {
                 api.vkEnumerateInstanceExtensionProperties(IntPtr.Zero, &supportedExtensionCount, ptr)

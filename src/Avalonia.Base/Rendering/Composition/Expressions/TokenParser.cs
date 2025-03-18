@@ -9,7 +9,7 @@ namespace Avalonia.Rendering.Composition.Expressions
     internal ref struct TokenParser
     {
         private ReadOnlySpan<char> _s;
-        public int Position { get; private set; }
+        public int32 Position { get; private set; }
         public TokenParser(ReadOnlySpan<char> s)
         {
             _s = s;
@@ -109,13 +109,13 @@ namespace Avalonia.Rendering.Composition.Expressions
             return true;
         }
 
-        public void Advance(int c)
+        public void Advance(int32 c)
         {
             _s = _s.Slice(c);
             Position += c;
         }
 
-        public int Length => _s.Length;
+        public int32 Length => _s.Length;
 
         public bool TryParseIdentifier(ReadOnlySpan<char> extraValidChars, out ReadOnlySpan<char> res)
         {
@@ -126,7 +126,7 @@ namespace Avalonia.Rendering.Composition.Expressions
             var first = _s[0];
             if (!((first >= 'a' && first <= 'z') || (first >= 'A' && first <= 'Z')))
                 return false;
-            int len = 1;
+            int32 len = 1;
             for (var c = 1; c < _s.Length; c++)
             {
                 var ch = _s[c];
@@ -163,7 +163,7 @@ namespace Avalonia.Rendering.Composition.Expressions
             var first = _s[0];
             if (!((first >= 'a' && first <= 'z') || (first >= 'A' && first <= 'Z')))
                 return false;
-            int len = 1;
+            int32 len = 1;
             for (var c = 1; c < _s.Length; c++)
             {
                 var ch = _s[c];
@@ -187,7 +187,7 @@ namespace Avalonia.Rendering.Composition.Expressions
             var first = _s[0];
             if (!((first >= 'a' && first <= 'z') || (first >= 'A' && first <= 'Z')))
                 return false;
-            int len = 1;
+            int32 len = 1;
             for (var c = 1; c < _s.Length; c++)
             {
                 var ch = _s[c];

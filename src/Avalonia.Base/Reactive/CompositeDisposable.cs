@@ -10,15 +10,15 @@ internal sealed class CompositeDisposable : ICollection<IDisposable>, IDisposabl
     private readonly object _gate = new object();
     private bool _disposed;
     private List<IDisposable?> _disposables;
-    private int _count;
-    private const int ShrinkThreshold = 64;
+    private int32 _count;
+    private const int32 ShrinkThreshold = 64;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CompositeDisposable"/> class with the specified number of disposables.
     /// </summary>
     /// <param name="capacity">The number of disposables that the new CompositeDisposable can initially store.</param>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="capacity"/> is less than zero.</exception>
-    public CompositeDisposable(int capacity)
+    public CompositeDisposable(int32 capacity)
     {
         if (capacity < 0)
         {
@@ -97,7 +97,7 @@ internal sealed class CompositeDisposable : ICollection<IDisposable>, IDisposabl
     /// <summary>
     /// Gets the number of disposables contained in the <see cref="CompositeDisposable"/>.
     /// </summary>
-    public int Count => Volatile.Read(ref _count);
+    public int32 Count => Volatile.Read(ref _count);
 
     /// <summary>
     /// Adds a disposable to the <see cref="CompositeDisposable"/> or disposes the disposable if the <see cref="CompositeDisposable"/> is disposed.
@@ -289,7 +289,7 @@ internal sealed class CompositeDisposable : ICollection<IDisposable>, IDisposabl
     /// <param name="arrayIndex">Target index at which to copy the first disposable of the group.</param>
     /// <exception cref="ArgumentNullException"><paramref name="array"/> is <c>null</c>.</exception>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than zero. -or - <paramref name="arrayIndex"/> is larger than or equal to the array length.</exception>
-    public void CopyTo(IDisposable[] array, int arrayIndex)
+    public void CopyTo(IDisposable[] array, int32 arrayIndex)
     {
         if (array == null)
         {
@@ -376,7 +376,7 @@ internal sealed class CompositeDisposable : ICollection<IDisposable>, IDisposabl
     private sealed class CompositeEnumerator : IEnumerator<IDisposable>
     {
         private readonly IDisposable?[] _disposables;
-        private int _index;
+        private int32 _index;
 
         public CompositeEnumerator(IDisposable?[] disposables)
         {

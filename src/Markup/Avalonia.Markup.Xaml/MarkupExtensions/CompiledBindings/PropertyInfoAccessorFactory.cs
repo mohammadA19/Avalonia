@@ -17,7 +17,7 @@ namespace Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings
         public static IPropertyAccessor CreateAvaloniaPropertyAccessor(WeakReference<object?> target, IPropertyInfo property)
             => new AvaloniaPropertyAccessor(new WeakReference<AvaloniaObject?>((AvaloniaObject?)(target.TryGetTarget(out var o) ? o : null)), (AvaloniaProperty)property);
 
-        public static IPropertyAccessor CreateIndexerPropertyAccessor(WeakReference<object?> target, IPropertyInfo property, int argument)
+        public static IPropertyAccessor CreateIndexerPropertyAccessor(WeakReference<object?> target, IPropertyInfo property, int32 argument)
             => new IndexerAccessor(target, property, argument);
     }
 
@@ -162,9 +162,9 @@ namespace Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings
 
     internal class IndexerAccessor : InpcPropertyAccessor, IWeakEventSubscriber<NotifyCollectionChangedEventArgs>
     {
-        private readonly int _index;
+        private readonly int32 _index;
 
-        public IndexerAccessor(WeakReference<object?> target, IPropertyInfo basePropertyInfo, int argument)
+        public IndexerAccessor(WeakReference<object?> target, IPropertyInfo basePropertyInfo, int32 argument)
             :base(target, basePropertyInfo)
         {
             _index = argument;

@@ -81,7 +81,7 @@ namespace Avalonia.X11
                     resp.SelectionEvent.property = WriteTargetToProperty(sel.target, sel.requestor, sel.property);
                 }
                 
-                XSendEvent(_x11.Display, sel.requestor, false, new IntPtr((int)EventMask.NoEventMask), ref resp);
+                XSendEvent(_x11.Display, sel.requestor, false, new IntPtr((int32)EventMask.NoEventMask), ref resp);
             }
 
             IntPtr WriteTargetToProperty(IntPtr target, IntPtr window, IntPtr property)
@@ -200,7 +200,7 @@ namespace Avalonia.X11
                         }
                         else
                         {
-                            var data = new byte[(int)nitems * (actualFormat / 8)];
+                            var data = new byte[(int32)nitems * (actualFormat / 8)];
                             Marshal.Copy(prop, data, 0, data.Length);
                             _requestedDataTcs?.TrySetResult(data);
                         }

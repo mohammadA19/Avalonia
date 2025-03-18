@@ -59,7 +59,7 @@ internal abstract class BrowserSurface : IDisposable
     {
         var oldScaling = Scaling;
         var oldClientSize = ClientSize;
-        RenderSize = new PixelSize((int)pixelWidth, (int)pixelHeight);
+        RenderSize = new PixelSize((int32)pixelWidth, (int32)pixelHeight);
         ClientSize = RenderSize.ToSize(dpr);
         Scaling = dpr;
         if (oldClientSize != ClientSize)

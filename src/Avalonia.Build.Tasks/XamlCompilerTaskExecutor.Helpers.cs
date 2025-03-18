@@ -129,7 +129,7 @@ namespace Avalonia.Build.Tasks
         }
         
 
-        private static bool MatchThisCall(Collection<Instruction> instructions, int idx)
+        private static bool MatchThisCall(Collection<Instruction> instructions, int32 idx)
         {
             var i = instructions[idx];
             // A "normal" way of passing `this` to a static method:

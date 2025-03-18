@@ -5,11 +5,11 @@ namespace Avalonia.Controls.Primitives
 {
     public class VisualLayerManager : Decorator
     {
-        private const int AdornerZIndex = int.MaxValue - 100;
-        private const int ChromeZIndex = int.MaxValue - 99;
-        private const int LightDismissOverlayZIndex = int.MaxValue - 98;
-        private const int OverlayZIndex = int.MaxValue - 97;
-        private const int TextSelectorLayerZIndex = int.MaxValue - 96;
+        private const int32 AdornerZIndex = int32.MaxValue - 100;
+        private const int32 ChromeZIndex = int32.MaxValue - 99;
+        private const int32 LightDismissOverlayZIndex = int32.MaxValue - 98;
+        private const int32 OverlayZIndex = int32.MaxValue - 97;
+        private const int32 TextSelectorLayerZIndex = int32.MaxValue - 96;
 
         private ILogicalRoot? _logicalRoot;
         private readonly List<Control> _layers = new();
@@ -105,7 +105,7 @@ namespace Avalonia.Controls.Primitives
             return null;
         }
 
-        private void AddLayer(Control layer, int zindex)
+        private void AddLayer(Control layer, int32 zindex)
         {
             _layers.Add(layer);
             ((ISetLogicalParent)layer).SetParent(this);

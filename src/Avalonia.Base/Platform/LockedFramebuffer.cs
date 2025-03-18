@@ -6,7 +6,7 @@ namespace Avalonia.Platform
     {
         private readonly Action? _onDispose;
 
-        public LockedFramebuffer(IntPtr address, PixelSize size, int rowBytes, Vector dpi, PixelFormat format,
+        public LockedFramebuffer(IntPtr address, PixelSize size, int32 rowBytes, Vector dpi, PixelFormat format,
             Action? onDispose)
         {
             _onDispose = onDispose;
@@ -19,7 +19,7 @@ namespace Avalonia.Platform
 
         public IntPtr Address { get; }
         public PixelSize Size { get; }
-        public int RowBytes { get; }
+        public int32 RowBytes { get; }
         public Vector Dpi { get; }
         public PixelFormat Format { get; }
 

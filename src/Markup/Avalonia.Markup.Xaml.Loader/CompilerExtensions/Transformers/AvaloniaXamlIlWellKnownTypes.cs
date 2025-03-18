@@ -265,7 +265,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions.Transformers
             ThemeVariant = cfg.TypeSystem.GetType("Avalonia.Styling.ThemeVariant");
             WindowTransparencyLevel = cfg.TypeSystem.GetType("Avalonia.Controls.WindowTransparencyLevel");
 
-            (IXamlType, IXamlConstructor) GetNumericTypeInfo([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] string name, IXamlType componentType, int componentCount)
+            (IXamlType, IXamlConstructor) GetNumericTypeInfo([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] string name, IXamlType componentType, int32 componentCount)
             {
                 var type = cfg.TypeSystem.GetType(name);
                 var ctor = type.GetConstructor(Enumerable.Range(0, componentCount).Select(_ => componentType).ToList());

@@ -8,10 +8,10 @@ namespace Avalonia.Data.Core.ExpressionNodes;
 internal sealed class VisualAncestorElementNode : SourceNode
 {
     private readonly Type? _ancestorType;
-    private readonly int _ancestorLevel;
+    private readonly int32 _ancestorLevel;
     private IDisposable? _subscription;
 
-    public VisualAncestorElementNode(Type? ancestorType, int ancestorLevel)
+    public VisualAncestorElementNode(Type? ancestorType, int32 ancestorLevel)
     {
         _ancestorType = ancestorType;
         _ancestorLevel = ancestorLevel;

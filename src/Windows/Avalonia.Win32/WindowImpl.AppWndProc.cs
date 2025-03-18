@@ -195,7 +195,7 @@ namespace Avalonia.Win32
                 case WindowsMessage.WM_MENUCHAR:
                     {
                         // mute the system beep
-                        return (IntPtr)((int)MenuCharParam.MNC_CLOSE << 16);
+                        return (IntPtr)((int32)MenuCharParam.MNC_CLOSE << 16);
                     }
 
                 case WindowsMessage.WM_KEYUP:
@@ -328,15 +328,15 @@ namespace Avalonia.Win32
                         // Prepare points for the IntermediatePoints call.
                         var p = new POINT()
                         {
-                            X = (int)(point.X * RenderScaling),
-                            Y = (int)(point.Y * RenderScaling)
+                            X = (int32)(point.X * RenderScaling),
+                            Y = (int32)(point.Y * RenderScaling)
                         };
                         ClientToScreen(_hwnd, ref p);
                         var currPoint = new MOUSEMOVEPOINT()
                         {
                             x = p.X & 0xFFFF,
                             y = p.Y & 0xFFFF,
-                            time = (int)timestamp
+                            time = (int32)timestamp
                         };
                         var prevPoint = _lastWmMousePoint;
                         _lastWmMousePoint = currPoint;
@@ -457,7 +457,7 @@ namespace Avalonia.Win32
                                 // Try to get the touch width and height.
                                 // See https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-touchinput
                                 // > The width of the touch contact area in hundredths of a pixel in physical screen coordinates. This value is only valid if the dwMask member has the TOUCHEVENTFMASK_CONTACTAREA flag set.
-                                const int TOUCHEVENTFMASK_CONTACTAREA = 0x0004; // Known as TOUCHINPUTMASKF_CONTACTAREA in the docs.
+                                const int32 TOUCHEVENTFMASK_CONTACTAREA = 0x0004; // Known as TOUCHINPUTMASKF_CONTACTAREA in the docs.
                                 if ((touchInput.Mask & TOUCHEVENTFMASK_CONTACTAREA) != 0)
                                 {
                                     var centerX = touchInput.X / 100.0;
@@ -469,7 +469,7 @@ namespace Avalonia.Win32
                                         2 /*The center Y add the half height is the bottom Y*/;
 
                                     var bottomRightPixelPoint =
-                                        new PixelPoint((int)rightX, (int)bottomY);
+                                        new PixelPoint((int32)rightX, (int32)bottomY);
                                     var bottomRightPosition = PointToClient(bottomRightPixelPoint);
 
                                     var centerPosition = position;
@@ -738,25 +738,25 @@ namespace Avalonia.Win32
                         if (_minSize.Width > 0)
                         {
                             mmi.ptMinTrackSize.X =
-                                (int)((_minSize.Width * RenderScaling) + BorderThickness.Left + BorderThickness.Right);
+                                (int32)((_minSize.Width * RenderScaling) + BorderThickness.Left + BorderThickness.Right);
                         }
 
                         if (_minSize.Height > 0)
                         {
                             mmi.ptMinTrackSize.Y =
-                                (int)((_minSize.Height * RenderScaling) + BorderThickness.Top + BorderThickness.Bottom);
+                                (int32)((_minSize.Height * RenderScaling) + BorderThickness.Top + BorderThickness.Bottom);
                         }
 
                         if (!double.IsInfinity(_maxSize.Width) && _maxSize.Width > 0)
                         {
                             mmi.ptMaxTrackSize.X =
-                                (int)((_maxSize.Width * RenderScaling) + BorderThickness.Left + BorderThickness.Right);
+                                (int32)((_maxSize.Width * RenderScaling) + BorderThickness.Left + BorderThickness.Right);
                         }
 
                         if (!double.IsInfinity(_maxSize.Height) && _maxSize.Height > 0)
                         {
                             mmi.ptMaxTrackSize.Y =
-                                (int)((_maxSize.Height * RenderScaling) + BorderThickness.Top + BorderThickness.Bottom);
+                                (int32)((_maxSize.Height * RenderScaling) + BorderThickness.Top + BorderThickness.Bottom);
                         }
 
                         Marshal.StructureToPtr(mmi, lParam, true);
@@ -909,7 +909,7 @@ namespace Avalonia.Win32
 
         private Lazy<IReadOnlyList<RawPointerPoint>?>? CreateLazyIntermediatePoints(POINTER_INFO info)
         {
-            var historyCount = Math.Min((int)info.historyCount, MaxPointerHistorySize);
+            var historyCount = Math.Min((int32)info.historyCount, MaxPointerHistorySize);
             if (historyCount > 1)
             {
                 return new Lazy<IReadOnlyList<RawPointerPoint>?>(() =>
@@ -925,7 +925,7 @@ namespace Avalonia.Win32
                         s_historyTouchInfos ??= new POINTER_TOUCH_INFO[MaxPointerHistorySize];
                         if (GetPointerTouchInfoHistory(info.pointerId, ref historyCount, s_historyTouchInfos))
                         {
-                            for (int i = historyCount - 1; i >= 1; i--)
+                            for (int32 i = historyCount - 1; i >= 1; i--)
                             {
                                 var historyTouchInfo = s_historyTouchInfos[i];
                                 s_intermediatePointsPooledList.Add(CreateRawPointerPoint(historyTouchInfo));
@@ -937,7 +937,7 @@ namespace Avalonia.Win32
                         s_historyPenInfos ??= new POINTER_PEN_INFO[MaxPointerHistorySize];
                         if (GetPointerPenInfoHistory(info.pointerId, ref historyCount, s_historyPenInfos))
                         {
-                            for (int i = historyCount - 1; i >= 1; i--)
+                            for (int32 i = historyCount - 1; i >= 1; i--)
                             {
                                 var historyPenInfo = s_historyPenInfos[i];
                                 s_intermediatePointsPooledList.Add(CreateRawPointerPoint(historyPenInfo));
@@ -950,7 +950,7 @@ namespace Avalonia.Win32
                         // Currently Windows does not return history info for mouse input, but we handle it just for case.
                         if (GetPointerInfoHistory(info.pointerId, ref historyCount, s_historyInfos))
                         {
-                            for (int i = historyCount - 1; i >= 1; i--)
+                            for (int32 i = historyCount - 1; i >= 1; i--)
                             {
                                 var historyInfo = s_historyInfos[i];
                                 s_intermediatePointsPooledList.Add(CreateRawPointerPoint(historyInfo));
@@ -975,7 +975,7 @@ namespace Avalonia.Win32
             {
                 var movePointCopy = movePoint;
                 movePointCopy.time = 0; // empty "time" as otherwise WinAPI will always fail
-                int pointsCount = GetMouseMovePointsEx(
+                int32 pointsCount = GetMouseMovePointsEx(
                     (uint)(Marshal.SizeOf(movePointCopy)),
                     &movePointCopy, movePoints, s_mouseHistoryInfos.Length,
                     1);
@@ -988,7 +988,7 @@ namespace Avalonia.Win32
 
                 s_intermediatePointsPooledList.Clear();
                 s_intermediatePointsPooledList.Capacity = pointsCount;
-                for (int i = pointsCount - 1; i >= 1; i--)
+                for (int32 i = pointsCount - 1; i >= 1; i--)
                 {
                     var historyInfo = s_mouseHistoryInfos[i];
                     // Skip points newer than current point.
@@ -1212,15 +1212,15 @@ namespace Avalonia.Win32
             return himetricLocation;
         }
 
-        private static int ToInt32(IntPtr ptr)
+        private static int32 ToInt32(IntPtr ptr)
         {
             if (IntPtr.Size == 4)
                 return ptr.ToInt32();
 
-            return (int)(ptr.ToInt64() & 0xffffffff);
+            return (int32)(ptr.ToInt64() & 0xffffffff);
         }
 
-        private static int HighWord(int param) => param >> 16;
+        private static int32 HighWord(int32 param) => param >> 16;
 
         private Point DipFromLParam(IntPtr lParam)
         {

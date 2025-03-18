@@ -51,7 +51,7 @@ namespace Avalonia.DesignerSupport.Tests
             var port = ((IPEndPoint)tcpListener.LocalEndpoint).Port;
             tcpListener.Stop();
 
-            var tcs = new TaskCompletionSource<int>();
+            var tcs = new TaskCompletionSource<int32>();
             serverTransport.Listen(IPAddress.Loopback, port, connected =>
             {
                 _server = connected;
@@ -100,7 +100,7 @@ namespace Avalonia.DesignerSupport.Tests
 
                 if (t == typeof(bool))
                     return true;
-                if (t == typeof(int) || t == typeof(long))
+                if (t == typeof(int32) || t == typeof(long))
                     return rnd.Next();
                 if (t == typeof(byte))
                     return (byte)rnd.Next(255);
@@ -172,11 +172,11 @@ namespace Avalonia.DesignerSupport.Tests
     {
         public double Width { get; set; }
         
-        public int SomeNewProperty { get; set; }
-        public int[] SomeArrayProperty { get; set; }
+        public int32 SomeNewProperty { get; set; }
+        public int32[] SomeArrayProperty { get; set; }
         public class SubObject
         {
-            public int Foo { get; set; }
+            public int32 Foo { get; set; }
         }
         public SubObject SubObjectProperty { get; set; }
         public double Height { get; set; }

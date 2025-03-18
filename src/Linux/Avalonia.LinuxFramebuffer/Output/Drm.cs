@@ -27,21 +27,21 @@ namespace Avalonia.LinuxFramebuffer.Output
         private const string libdrm = "libdrm.so.2";
         private const string libgbm = "libgbm.so.1";
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate void DrmEventVBlankHandlerDelegate(int fd,
+        public unsafe delegate void DrmEventVBlankHandlerDelegate(int32 fd,
             uint sequence,
             uint tv_sec,
             uint tv_usec,
             void* user_data);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate void DrmEventPageFlipHandlerDelegate(int fd,
+        public unsafe delegate void DrmEventPageFlipHandlerDelegate(int32 fd,
             uint sequence,
             uint tv_sec,
             uint tv_usec,
             void* user_data);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate IntPtr DrmEventPageFlipHandler2Delegate(int fd,
+        public unsafe delegate IntPtr DrmEventPageFlipHandler2Delegate(int32 fd,
             uint sequence,
             uint tv_sec,
             uint tv_usec,
@@ -49,7 +49,7 @@ namespace Avalonia.LinuxFramebuffer.Output
             void* user_data);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate void DrmEventSequenceHandlerDelegate(int fd,
+        public unsafe delegate void DrmEventSequenceHandlerDelegate(int32 fd,
             ulong sequence,
             ulong ns,
             ulong user_data);
@@ -57,7 +57,7 @@ namespace Avalonia.LinuxFramebuffer.Output
         [StructLayout(LayoutKind.Sequential)]
         public struct DrmEventContext
         {
-            public int version; //4
+            public int32 version; //4
             public IntPtr vblank_handler;
             public IntPtr page_flip_handler;
             public IntPtr page_flip_handler2;
@@ -67,16 +67,16 @@ namespace Avalonia.LinuxFramebuffer.Output
         [StructLayout(LayoutKind.Sequential)]
         public struct drmModeRes {
 
-            public int count_fbs;
+            public int32 count_fbs;
             public uint *fbs;
 
-            public int count_crtcs;
+            public int32 count_crtcs;
             public uint *crtcs;
 
-            public int count_connectors;
+            public int32 count_connectors;
             public uint *connectors;
 
-            public int count_encoders;
+            public int32 count_encoders;
             public uint *encoders;
 
             uint min_width, max_width;
@@ -120,14 +120,14 @@ namespace Avalonia.LinuxFramebuffer.Output
             public uint mmWidth, mmHeight; //  HxW in millimeters 
             public DrmModeSubPixel subpixel;
 
-            public int count_modes;
+            public int32 count_modes;
             public drmModeModeInfo* modes;
 
-            public int count_props;
+            public int32 count_props;
             public uint *props; // List of property ids 
             public ulong *prop_values; // List of property values 
 
-            public int count_encoders;
+            public int32 count_encoders;
             public uint *encoders; //List of encoder ids
         }
         
@@ -147,51 +147,51 @@ namespace Avalonia.LinuxFramebuffer.Output
 
             public uint x, y; // Position on the framebuffer 
             public uint width, height;
-            public int mode_valid;
+            public int32 mode_valid;
             public drmModeModeInfo mode;
 
-            public int gamma_size; // Number of gamma stops 
+            public int32 gamma_size; // Number of gamma stops 
 
         }
         
         [DllImport(libdrm, SetLastError = true)]
-        public static extern drmModeRes* drmModeGetResources(int fd);
+        public static extern drmModeRes* drmModeGetResources(int32 fd);
         [DllImport(libdrm, SetLastError = true)]
         public static extern void drmModeFreeResources(drmModeRes* res);
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern drmModeConnector* drmModeGetConnector(int fd, uint connector);
+        public static extern drmModeConnector* drmModeGetConnector(int32 fd, uint connector);
         [DllImport(libdrm, SetLastError = true)]
-        public static extern drmModeConnector* drmModeGetConnectorCurrent(int fd, uint connector);
+        public static extern drmModeConnector* drmModeGetConnectorCurrent(int32 fd, uint connector);
         [DllImport(libdrm, SetLastError = true)]
         public static extern void drmModeFreeConnector(drmModeConnector* res);
         
         [DllImport(libdrm, SetLastError = true)]
-        public static extern drmModeEncoder* drmModeGetEncoder(int fd, uint id);
+        public static extern drmModeEncoder* drmModeGetEncoder(int32 fd, uint id);
         [DllImport(libdrm, SetLastError = true)]
         public static extern void drmModeFreeEncoder(drmModeEncoder* enc);
         [DllImport(libdrm, SetLastError = true)]
-        public static extern drmModeCrtc* drmModeGetCrtc(int fd, uint id);
+        public static extern drmModeCrtc* drmModeGetCrtc(int32 fd, uint id);
         [DllImport(libdrm, SetLastError = true)]
         public static extern void drmModeFreeCrtc(drmModeCrtc* enc);
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern int drmModeAddFB(int fd, uint width, uint height, byte depth,
+        public static extern int32 drmModeAddFB(int32 fd, uint width, uint height, byte depth,
             byte bpp, uint pitch, uint bo_handle,
             out uint buf_id);
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern int drmModeAddFB2(int fd, uint width, uint height,
+        public static extern int32 drmModeAddFB2(int32 fd, uint width, uint height,
             uint pixel_format, uint[] bo_handles, uint[] pitches,
             uint[] offsets, out uint buf_id, uint flags);
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern int drmModeSetCrtc(int fd, uint crtcId, uint bufferId,
-            uint x, uint y, uint *connectors, int count,
+        public static extern int32 drmModeSetCrtc(int32 fd, uint crtcId, uint bufferId,
+            uint x, uint y, uint *connectors, int32 count,
             drmModeModeInfo* mode);
         
         [DllImport(libdrm, SetLastError = true)]
-        public static extern void drmModeRmFB(int fd, int id);
+        public static extern void drmModeRmFB(int32 fd, int32 id);
 
         [Flags]
         public enum DrmModePageFlip
@@ -203,15 +203,15 @@ namespace Avalonia.LinuxFramebuffer.Output
         }
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern void drmModePageFlip(int fd, uint crtc_id, uint fb_id,
+        public static extern void drmModePageFlip(int32 fd, uint crtc_id, uint fb_id,
             DrmModePageFlip flags, void *user_data);
 
 
         [DllImport(libdrm, SetLastError = true)]
-        public static extern void drmHandleEvent(int fd, DrmEventContext* context);
+        public static extern void drmHandleEvent(int32 fd, DrmEventContext* context);
 
         [DllImport(libgbm, SetLastError = true)]
-        public static extern IntPtr gbm_create_device(int fd);
+        public static extern IntPtr gbm_create_device(int32 fd);
         
         
         [Flags]
@@ -245,11 +245,11 @@ namespace Avalonia.LinuxFramebuffer.Output
         };
 
         [DllImport(libgbm, SetLastError = true)]
-        public static extern IntPtr gbm_surface_create(IntPtr device, int width, int height, uint format, GbmBoFlags flags);
+        public static extern IntPtr gbm_surface_create(IntPtr device, int32 width, int32 height, uint format, GbmBoFlags flags);
         [DllImport(libgbm, SetLastError = true)]
         public static extern IntPtr gbm_surface_lock_front_buffer(IntPtr surface);
         [DllImport(libgbm, SetLastError = true)]
-        public static extern int gbm_surface_release_buffer(IntPtr surface, IntPtr bo);
+        public static extern int32 gbm_surface_release_buffer(IntPtr surface, IntPtr bo);
         [DllImport(libgbm, SetLastError = true)]
         public static extern IntPtr gbm_bo_get_user_data(IntPtr surface);
 
@@ -278,7 +278,7 @@ namespace Avalonia.LinuxFramebuffer.Output
             [FieldOffset(0)]
             public void *ptr;
             [FieldOffset(0)]
-            public int s32;
+            public int32 s32;
             [FieldOffset(0)]
             public uint u32;
             [FieldOffset(0)]

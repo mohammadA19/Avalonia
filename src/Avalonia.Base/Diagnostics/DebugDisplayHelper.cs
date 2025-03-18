@@ -6,7 +6,7 @@ internal static class DebugDisplayHelper
 {
     public static void AppendOptionalValue(StringBuilder builder, string name, object? value, bool includeContent)
     {
-        const int maxValueLength = 50;
+        const int32 maxValueLength = 50;
 
         if (value is null or string { Length: 0 })
         {

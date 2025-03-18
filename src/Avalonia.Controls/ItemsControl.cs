@@ -40,8 +40,8 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="ItemCount"/> property.
         /// </summary>
-        public static readonly DirectProperty<ItemsControl, int> ItemCountProperty =
-            AvaloniaProperty.RegisterDirect<ItemsControl, int>(nameof(ItemCount), o => o.ItemCount);
+        public static readonly DirectProperty<ItemsControl, int32> ItemCountProperty =
+            AvaloniaProperty.RegisterDirect<ItemsControl, int32>(nameof(ItemCount), o => o.ItemCount);
 
         /// <summary>
         /// Defines the <see cref="ItemsPanel"/> property.
@@ -82,7 +82,7 @@ namespace Avalonia.Controls
         }
 
         private readonly ItemCollection _items = new();
-        private int _itemCount;
+        private int32 _itemCount;
         private ItemContainerGenerator? _itemContainerGenerator;
         private EventHandler<ChildIndexChangedEventArgs>? _childIndexChanged;
         private IDataTemplate? _displayMemberItemTemplate;
@@ -135,7 +135,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets the number of items being displayed by the <see cref="ItemsControl"/>.
         /// </summary>
-        public int ItemCount
+        public int32 ItemCount
         {
             get => _itemCount;
             private set
@@ -263,7 +263,7 @@ namespace Avalonia.Controls
         /// The container for the item at the specified index within the item collection, if the
         /// item has a container; otherwise, null.
         /// </returns>
-        public Control? ContainerFromIndex(int index) => Presenter?.ContainerFromIndex(index);
+        public Control? ContainerFromIndex(int32 index) => Presenter?.ContainerFromIndex(index);
 
         /// <summary>
         /// Returns the container corresponding to the specified item.
@@ -287,7 +287,7 @@ namespace Avalonia.Controls
         /// The index to the item that corresponds to the specified generated container, or -1 if 
         /// <paramref name="container"/> is not found.
         /// </returns>
-        public int IndexFromContainer(Control container) => Presenter?.IndexFromContainer(container) ?? -1;
+        public int32 IndexFromContainer(Control container) => Presenter?.IndexFromContainer(container) ?? -1;
 
         /// <summary>
         /// Returns the item that corresponds to the specified, generated container.
@@ -311,7 +311,7 @@ namespace Avalonia.Controls
         /// Scrolls the specified item into view.
         /// </summary>
         /// <param name="index">The index of the item.</param>
-        public void ScrollIntoView(int index) => Presenter?.ScrollIntoView(index);
+        public void ScrollIntoView(int32 index) => Presenter?.ScrollIntoView(index);
 
         /// <summary>
         /// Scrolls the specified item into view.
@@ -359,7 +359,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Creates or a container that can be used to display an item.
         /// </summary>
-        protected internal virtual Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+        protected internal virtual Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
         {
             return new ContentPresenter();
         }
@@ -370,7 +370,7 @@ namespace Avalonia.Controls
         /// <param name="container">The element that's used to display the specified item.</param>
         /// <param name="item">The item to display.</param>
         /// <param name="index">The index of the item to display.</param>
-        protected internal virtual void PrepareContainerForItemOverride(Control container, object? item, int index)
+        protected internal virtual void PrepareContainerForItemOverride(Control container, object? item, int32 index)
         {
             if (container == item)
                 return;
@@ -436,7 +436,7 @@ namespace Avalonia.Controls
         /// logical and visual trees, but may be called before a layout pass has completed. It is
         /// called immediately before the <see cref="ContainerPrepared"/> event is raised.
         /// </remarks>
-        protected internal virtual void ContainerForItemPreparedOverride(Control container, object? item, int index)
+        protected internal virtual void ContainerForItemPreparedOverride(Control container, object? item, int32 index)
         {
         }
 
@@ -447,12 +447,12 @@ namespace Avalonia.Controls
         /// <param name="container">The container whose index changed.</param>
         /// <param name="oldIndex">The old index.</param>
         /// <param name="newIndex">The new index.</param>
-        protected virtual void ContainerIndexChangedOverride(Control container, int oldIndex, int newIndex)
+        protected virtual void ContainerIndexChangedOverride(Control container, int32 oldIndex, int32 newIndex)
         {
         }
 
         /// <summary>
-        /// Undoes the effects of the <see cref="PrepareContainerForItemOverride(Control, object?, int)"/> method.
+        /// Undoes the effects of the <see cref="PrepareContainerForItemOverride(Control, object?, int32)"/> method.
         /// </summary>
         /// <param name="container">The container element.</param>
         protected internal virtual void ClearContainerForItemOverride(Control container)
@@ -509,13 +509,13 @@ namespace Avalonia.Controls
         /// true if the item needs a container; otherwise false if the item can itself be used
         /// as a container.
         /// </returns>
-        protected internal virtual bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
+        protected internal virtual bool NeedsContainerOverride(object? item, int32 index, out object? recycleKey)
         {
             return NeedsContainer<Control>(item, out recycleKey);
         }
 
         /// <summary>
-        /// A default implementation of <see cref="NeedsContainerOverride(object, int, out object?)"/>
+        /// A default implementation of <see cref="NeedsContainerOverride(object, int32, out object?)"/>
         /// that returns true and sets the recycle key to <see cref="DefaultRecycleKey"/> if the item
         /// is not a <typeparamref name="T"/> .
         /// </summary>
@@ -709,7 +709,7 @@ namespace Avalonia.Controls
             _childIndexChanged?.Invoke(this, ChildIndexChangedEventArgs.ChildIndexesReset);
         }
 
-        internal void PrepareItemContainer(Control container, object? item, int index)
+        internal void PrepareItemContainer(Control container, object? item, int32 index)
         {
             PreparingContainer?.Invoke(this, new(container, index));
 
@@ -741,14 +741,14 @@ namespace Avalonia.Controls
             PrepareContainerForItemOverride(container, item, index);
         }
 
-        internal void ItemContainerPrepared(Control container, object? item, int index)
+        internal void ItemContainerPrepared(Control container, object? item, int32 index)
         {
             ContainerForItemPreparedOverride(container, item, index);
             _childIndexChanged?.Invoke(this, new ChildIndexChangedEventArgs(container, index));
             ContainerPrepared?.Invoke(this, new(container, index));
         }
 
-        internal void ItemContainerIndexChanged(Control container, int oldIndex, int newIndex)
+        internal void ItemContainerIndexChanged(Control container, int32 oldIndex, int32 newIndex)
         {
             ContainerIndexChangedOverride(container, oldIndex, newIndex);
             _childIndexChanged?.Invoke(this, new ChildIndexChangedEventArgs(container, newIndex));
@@ -879,12 +879,12 @@ namespace Avalonia.Controls
             }
         }
 
-        int IChildIndexProvider.GetChildIndex(ILogical child)
+        int32 IChildIndexProvider.GetChildIndex(ILogical child)
         {
             return child is Control container ? IndexFromContainer(container) : -1;
         }
 
-        bool IChildIndexProvider.TryGetTotalCount(out int count)
+        bool IChildIndexProvider.TryGetTotalCount(out int32 count)
         {
             count = ItemsView.Count;
             return true;

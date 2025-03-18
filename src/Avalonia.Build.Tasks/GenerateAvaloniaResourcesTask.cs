@@ -27,7 +27,7 @@ namespace Avalonia.Build.Tasks
         class Source
         {
             public string Path { get; set; }
-            public int Size { get; set; }
+            public int32 Size { get; set; }
             private byte[] _data;
             private string _sourcePath;
 
@@ -36,7 +36,7 @@ namespace Avalonia.Build.Tasks
                 root = SPath.GetFullPath(root);
                 var relativePath = avaloniaResourceItem.ItemSpec;
                 _sourcePath = SPath.Combine(root, relativePath);
-                Size = (int)new FileInfo(_sourcePath).Length;
+                Size = (int32)new FileInfo(_sourcePath).Length;
                 var link = avaloniaResourceItem.GetMetadata("Link");
                 var path = !string.IsNullOrEmpty(link)
                     ? link

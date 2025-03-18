@@ -111,7 +111,7 @@ namespace Avalonia.Styling
         /// <returns></returns>
         public SelectorMatch And(in SelectorMatch other)
         {
-            var result = (SelectorMatchResult)Math.Min((int)Result, (int)other.Result);
+            var result = (SelectorMatchResult)Math.Min((int32)Result, (int32)other.Result);
 
             if (result == SelectorMatchResult.Sometimes)
             {

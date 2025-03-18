@@ -14,15 +14,15 @@ namespace Avalonia.Win32.Automation.Interop;
 [Guid("a407b27b-0f6d-4427-9292-473c7bf93258")]
 internal partial interface IRawElementProviderAdviseEvents
 {
-    void AdviseEventAdded(int eventId,
+    void AdviseEventAdded(int32 eventId,
 #if NET8_0_OR_GREATER
-        [MarshalUsing(typeof(SafeArrayMarshaller<int>))]
+        [MarshalUsing(typeof(SafeArrayMarshaller<int32>))]
 #endif
-        int[] properties);
+        int32[] properties);
 
-    void AdviseEventRemoved(int eventId,
+    void AdviseEventRemoved(int32 eventId,
 #if NET8_0_OR_GREATER
-        [MarshalUsing(typeof(SafeArrayMarshaller<int>))]
+        [MarshalUsing(typeof(SafeArrayMarshaller<int32>))]
 #endif
-        int[] properties);
+        int32[] properties);
 }

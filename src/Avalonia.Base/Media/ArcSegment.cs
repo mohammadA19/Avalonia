@@ -101,6 +101,6 @@ namespace Avalonia.Media
         }
 
         public override string ToString()
-            => FormattableString.Invariant($"A {Size} {RotationAngle} {(IsLargeArc ? 1 : 0)} {(int)SweepDirection} {Point}");
+            => FormattableString.Invariant($"A {Size} {RotationAngle} {(IsLargeArc ? 1 : 0)} {(int32)SweepDirection} {Point}");
     }
 }

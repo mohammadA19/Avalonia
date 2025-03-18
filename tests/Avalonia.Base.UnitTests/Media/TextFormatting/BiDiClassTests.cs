@@ -21,18 +21,18 @@ namespace Avalonia.Visuals.UnitTests.Media.TextFormatting
         [ClassData(typeof(BiDiClassTestDataGenerator))]
         [SuppressMessage("Usage", "xUnit1026:Theory methods should use all of their parameters", Justification = "Parameters match BiDi fields")]
         public void Should_Resolve(
-            int lineNumber,
-            int[] codePoints,
+            int32 lineNumber,
+            int32[] codePoints,
             sbyte paragraphLevel,
             sbyte resolvedParagraphLevel,
             sbyte[] resolvedLevels,
-            int[] resolvedOrder)
+            int32[] resolvedOrder)
         {
 
             var bidi = new BidiAlgorithm();
             var bidiData = new BidiData { ParagraphEmbeddingLevel = paragraphLevel };
 
-            var text = Encoding.UTF32.GetString(MemoryMarshal.Cast<int, byte>(codePoints).ToArray());
+            var text = Encoding.UTF32.GetString(MemoryMarshal.Cast<int32, byte>(codePoints).ToArray());
 
             // Append
             bidiData.Append(text);

@@ -18,7 +18,7 @@ namespace Avalonia.Benchmarks.Base
         }
 
         [Benchmark(Baseline = true)]
-        public int SetClrPropertyValues()
+        public int32 SetClrPropertyValues()
         {
             var target = _baseline;
             var result = 0;

@@ -239,8 +239,8 @@ namespace Avalonia.Media
                     // Match any outstanding Push calls with a Pop
                     if (_previousDrawingGroupStack != null)
                     {
-                        int stackCount = _previousDrawingGroupStack.Count;
-                        for (int i = 0; i < stackCount; i++)
+                        int32 stackCount = _previousDrawingGroupStack.Count;
+                        for (int32 i = 0; i < stackCount; i++)
                         {
                             Pop();
                         }

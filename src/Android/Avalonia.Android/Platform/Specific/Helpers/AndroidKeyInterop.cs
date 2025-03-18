@@ -191,7 +191,7 @@ internal static class AndroidKeyInterop
         { 0x83, PhysicalKey.Undo }
     };
 
-    public static PhysicalKey PhysicalKeyFromScanCode(int scanCode)
+    public static PhysicalKey PhysicalKeyFromScanCode(int32 scanCode)
         => scanCode is > 0 and <= 255 && s_physicalKeyFromScanCode.TryGetValue((byte)scanCode, out var result) ?
             result :
             PhysicalKey.None;

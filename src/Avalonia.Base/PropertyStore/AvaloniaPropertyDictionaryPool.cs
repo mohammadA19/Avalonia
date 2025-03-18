@@ -5,7 +5,7 @@ namespace Avalonia.PropertyStore
 {
     internal static class AvaloniaPropertyDictionaryPool<TValue>
     {
-        private const int MaxPoolSize = 4;
+        private const int32 MaxPoolSize = 4;
         private static readonly Stack<AvaloniaPropertyDictionary<TValue>> _pool = new();
 
         public static AvaloniaPropertyDictionary<TValue> Get()

@@ -56,10 +56,10 @@ namespace Avalonia.Controls
             AvaloniaProperty.RegisterAttached<VirtualizingStackPanel, Control, object?>("RecycleKey");
 
         private static readonly object s_itemIsItsOwnContainer = new object();
-        private readonly Action<Control, int> _recycleElement;
+        private readonly Action<Control, int32> _recycleElement;
         private readonly Action<Control> _recycleElementOnItemRemoved;
-        private readonly Action<Control, int, int> _updateElementIndex;
-        private int _scrollToIndex = -1;
+        private readonly Action<Control, int32, int32> _updateElementIndex;
+        private int32 _scrollToIndex = -1;
         private Control? _scrollToElement;
         private bool _isInLayout;
         private bool _isWaitingForViewportUpdate;
@@ -70,9 +70,9 @@ namespace Avalonia.Controls
         private Rect _viewport;
         private Dictionary<object, Stack<Control>>? _recyclePool;
         private Control? _focusedElement;
-        private int _focusedIndex = -1;
+        private int32 _focusedIndex = -1;
         private Control? _realizingElement;
-        private int _realizingIndex = -1;
+        private int32 _realizingIndex = -1;
 
         public VirtualizingStackPanel()
         {
@@ -134,12 +134,12 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets the index of the first realized element, or -1 if no elements are realized.
         /// </summary>
-        public int FirstRealizedIndex => _realizedElements?.FirstIndex ?? -1;
+        public int32 FirstRealizedIndex => _realizedElements?.FirstIndex ?? -1;
 
         /// <summary>
         /// Gets the index of the last realized element, or -1 if no elements are realized.
         /// </summary>
-        public int LastRealizedIndex => _realizedElements?.LastIndex ?? -1;
+        public int32 LastRealizedIndex => _realizedElements?.LastIndex ?? -1;
 
         protected override Size MeasureOverride(Size availableSize)
         {
@@ -371,7 +371,7 @@ namespace Avalonia.Controls
             return _realizedElements?.Elements.Where(x => x is not null)!;
         }
 
-        protected internal override Control? ContainerFromIndex(int index)
+        protected internal override Control? ContainerFromIndex(int32 index)
         {
             if (index < 0 || index >= Items.Count)
                 return null;
@@ -388,7 +388,7 @@ namespace Avalonia.Controls
             return null;
         }
 
-        protected internal override int IndexFromContainer(Control container)
+        protected internal override int32 IndexFromContainer(Control container)
         {
             if (container == _scrollToElement)
                 return _scrollToIndex;
@@ -399,7 +399,7 @@ namespace Avalonia.Controls
             return _realizedElements?.GetIndex(container) ?? -1;
         }
 
-        protected internal override Control? ScrollIntoView(int index)
+        protected internal override Control? ScrollIntoView(int32 index)
         {
             var items = Items;
 
@@ -492,7 +492,7 @@ namespace Avalonia.Controls
             // Get or estimate the anchor element from which to start realization. If we are
             // scrolling to an element, use that as the anchor element. Otherwise, estimate the
             // anchor element based on the current viewport.
-            int anchorIndex;
+            int32 anchorIndex;
             double anchorU;
 
             if (_scrollToIndex >= 0 && _scrollToElement is not null)
@@ -524,7 +524,7 @@ namespace Avalonia.Controls
             };
         }
 
-        private Size CalculateDesiredSize(Orientation orientation, int itemCount, in MeasureViewport viewport)
+        private Size CalculateDesiredSize(Orientation orientation, int32 itemCount, in MeasureViewport viewport)
         {
             var sizeU = 0.0;
             var sizeV = viewport.measuredV;
@@ -538,7 +538,7 @@ namespace Avalonia.Controls
             return orientation == Orientation.Horizontal ? new(sizeU, sizeV) : new(sizeV, sizeU);
         }
 
-        private Size EstimateDesiredSize(Orientation orientation, int itemCount)
+        private Size EstimateDesiredSize(Orientation orientation, int32 itemCount)
         {
             if (_scrollToIndex >= 0 && _scrollToElement is not null)
             {
@@ -589,8 +589,8 @@ namespace Avalonia.Controls
         private void GetOrEstimateAnchorElementForViewport(
             double viewportStartU,
             double viewportEndU,
-            int itemCount,
-            out int index,
+            int32 itemCount,
+            out int32 index,
             out double position)
         {
             // We have no elements, or we're at the start of the viewport.
@@ -633,12 +633,12 @@ namespace Avalonia.Controls
             var estimatedSize = EstimateElementSizeU();
 
             // Estimate the element at the start of the viewport.
-            var startIndex = Math.Min((int)(viewportStartU / estimatedSize), itemCount - 1);
+            var startIndex = Math.Min((int32)(viewportStartU / estimatedSize), itemCount - 1);
             index = startIndex;
             position = startIndex * estimatedSize;
         }
 
-        private double GetOrEstimateElementU(int index)
+        private double GetOrEstimateElementU(int32 index)
         {
             // Return the position of the existing element if realized.
             var u = _realizedElements?.GetElementU(index) ?? double.NaN;
@@ -721,7 +721,7 @@ namespace Avalonia.Controls
             _realizedElements.RecycleElementsBefore(index + 1, _recycleElement);
         }
 
-        private Control GetOrCreateElement(IReadOnlyList<object?> items, int index)
+        private Control GetOrCreateElement(IReadOnlyList<object?> items, int32 index)
         {
             Debug.Assert(ItemContainerGenerator is not null);
 
@@ -744,14 +744,14 @@ namespace Avalonia.Controls
             }
         }
 
-        private Control? GetRealizedElement(int index)
+        private Control? GetRealizedElement(int32 index)
         {
             return _realizedElements?.GetElement(index);
         }
 
         private static Control? GetRealizedElement(
-            int index,
-            ref int specialIndex,
+            int32 index,
+            ref int32 specialIndex,
             ref Control? specialElement)
         {
             if (specialIndex == index)
@@ -767,7 +767,7 @@ namespace Avalonia.Controls
             return null;
         }
 
-        private Control GetItemAsOwnContainer(object? item, int index)
+        private Control GetItemAsOwnContainer(object? item, int32 index)
         {
             Debug.Assert(ItemContainerGenerator is not null);
 
@@ -786,7 +786,7 @@ namespace Avalonia.Controls
             return controlItem;
         }
 
-        private Control? GetRecycledElement(object? item, int index, object? recycleKey)
+        private Control? GetRecycledElement(object? item, int32 index, object? recycleKey)
         {
             Debug.Assert(ItemContainerGenerator is not null);
 
@@ -807,7 +807,7 @@ namespace Avalonia.Controls
             return null;
         }
 
-        private Control CreateElement(object? item, int index, object? recycleKey)
+        private Control CreateElement(object? item, int32 index, object? recycleKey)
         {
             Debug.Assert(ItemContainerGenerator is not null);
 
@@ -822,7 +822,7 @@ namespace Avalonia.Controls
             return container;
         }
 
-        private void RecycleElement(Control element, int index)
+        private void RecycleElement(Control element, int32 index)
         {
             Debug.Assert(ItemsControl is not null);
             Debug.Assert(ItemContainerGenerator is not null);
@@ -885,7 +885,7 @@ namespace Avalonia.Controls
             pool.Push(element);
         }
 
-        private void UpdateElementIndex(Control element, int oldIndex, int newIndex)
+        private void UpdateElementIndex(Control element, int32 oldIndex, int32 newIndex)
         {
             Debug.Assert(ItemContainerGenerator is not null);
 
@@ -990,13 +990,13 @@ namespace Avalonia.Controls
 
         private struct MeasureViewport
         {
-            public int anchorIndex;
+            public int32 anchorIndex;
             public double anchorU;
             public double viewportUStart;
             public double viewportUEnd;
             public double measuredV;
             public double realizedEndU;
-            public int lastIndex;
+            public int32 lastIndex;
             public bool viewportIsDisjunct;
         }
     }

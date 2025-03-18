@@ -611,7 +611,7 @@ namespace Avalonia.Controls.UnitTests.Platform
 
         class FakePointer : IPointer
         {
-            public int Id { get; } = Pointer.GetNextFreeId();
+            public int32 Id { get; } = Pointer.GetNextFreeId();
 
             public void Capture(IInputElement control)
             {

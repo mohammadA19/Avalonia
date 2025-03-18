@@ -24,7 +24,7 @@ namespace Avalonia.UnitTests
             };
         }
 
-        private int ButtonCount(PointerPointProperties props)
+        private int32 ButtonCount(PointerPointProperties props)
         {
             var rv = 0;
             if (props.IsLeftButtonPressed)
@@ -39,13 +39,13 @@ namespace Avalonia.UnitTests
         private MouseButton _pressedButton;
 
         public void Down(Interactive target, MouseButton mouseButton = MouseButton.Left, Point position = default,
-            KeyModifiers modifiers = default, int clickCount = 1)
+            KeyModifiers modifiers = default, int32 clickCount = 1)
         {
             Down(target, target, mouseButton, position, modifiers, clickCount);
         }
 
         public void Down(Interactive target, Interactive source, MouseButton mouseButton = MouseButton.Left, 
-            Point position = default, KeyModifiers modifiers = default, int clickCount = 1)
+            Point position = default, KeyModifiers modifiers = default, int32 clickCount = 1)
         {
             _pressedButtons |= Convert(mouseButton);
             var props = new PointerPointProperties((RawInputModifiers)_pressedButtons,

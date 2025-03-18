@@ -11,7 +11,7 @@ internal static class PenHelper
     /// <param name="pen">The pen.</param>
     /// <param name="includeBrush">Whether to include the brush in the hash code.</param>
     /// <returns>The hash code.</returns>
-    public static int GetHashCode(IPen? pen, bool includeBrush)
+    public static int32 GetHashCode(IPen? pen, bool includeBrush)
     {
         if (pen is null)
             return 0;

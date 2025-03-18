@@ -211,11 +211,11 @@ namespace Avalonia.Skia
 
         public FontSimulations FontSimulations { get; }
 
-        public int ReplacementCodepoint { get; }
+        public int32 ReplacementCodepoint { get; }
 
         public FontMetrics Metrics { get; }
 
-        public int GlyphCount { get; }
+        public int32 GlyphCount { get; }
 
         public string FamilyName { get; }
 
@@ -280,13 +280,13 @@ namespace Avalonia.Skia
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int GetGlyphAdvance(ushort glyph)
+        public int32 GetGlyphAdvance(ushort glyph)
         {
             return Font.GetHorizontalGlyphAdvance(glyph);
         }
 
         /// <inheritdoc cref="IGlyphTypeface"/>
-        public int[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
+        public int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs)
         {
             var glyphIndices = new uint[glyphs.Length];
 

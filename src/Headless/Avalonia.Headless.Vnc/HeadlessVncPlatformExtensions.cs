@@ -24,9 +24,9 @@ namespace Avalonia
         /// <param name="args">Avalonia application start args</param>
         /// <param name="shutdownMode">shut down mode <see cref="ShutdownMode"/></param>
         /// <returns></returns>
-        public static int StartWithHeadlessVncPlatform(
+        public static int32 StartWithHeadlessVncPlatform(
             this AppBuilder builder,
-            string host, int port,
+            string host, int32 port,
             string[] args,
             ShutdownMode shutdownMode = ShutdownMode.OnLastWindowClose)
         {
@@ -44,9 +44,9 @@ namespace Avalonia
         /// <param name="shutdownMode">shut down mode <see cref="ShutdownMode"/></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public static int StartWithHeadlessVncPlatform(
+        public static int32 StartWithHeadlessVncPlatform(
             this AppBuilder builder,
-            string host, int port,
+            string host, int32 port,
             string? password,
             string[] args,
             ShutdownMode shutdownMode = ShutdownMode.OnLastWindowClose)

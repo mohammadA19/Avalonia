@@ -11,20 +11,20 @@ namespace Avalonia.X11
         public static extern IntPtr SmcOpenConnection(
             [MarshalAs(UnmanagedType.LPStr)] string? networkId,
             IntPtr content,
-            int xsmpMajorRev,
-            int xsmpMinorRev,
+            int32 xsmpMajorRev,
+            int32 xsmpMinorRev,
             nuint mask,
             ref SmcCallbacks callbacks,
             [MarshalAs(UnmanagedType.LPStr)] string? previousId,
             ref IntPtr clientIdRet,
-            int errorLength,
+            int32 errorLength,
             [Out] byte[] errorStringRet
         );
 
         [DllImport(LibSm, CallingConvention = CallingConvention.StdCall)]
-        public static extern int SmcCloseConnection(
+        public static extern int32 SmcCloseConnection(
             IntPtr smcConn,
-            int count,
+            int32 count,
             string[] reasonMsgs
         );
 
@@ -35,7 +35,7 @@ namespace Avalonia.X11
         );
 
         [DllImport(LibSm, CallingConvention = CallingConvention.StdCall)]
-        public static extern int SmcInteractRequest(
+        public static extern int32 SmcInteractRequest(
             IntPtr smcConn,
             SmDialogValue dialogType,
             IntPtr interactProc,
@@ -106,9 +106,9 @@ namespace Avalonia.X11
         public delegate void SmcSaveYourselfProc(
             IntPtr smcConn,
             IntPtr clientData,
-            int saveType,
+            int32 saveType,
             bool shutdown,
-            int interactStyle,
+            int32 interactStyle,
             bool fast
         );
 
@@ -122,10 +122,10 @@ namespace Avalonia.X11
         public delegate void SmcErrorHandler(
             IntPtr smcConn,
             bool swap,
-            int offendingMinorOpcode,
+            int32 offendingMinorOpcode,
             nuint offendingSequence,
-            int errorClass,
-            int severity,
+            int32 errorClass,
+            int32 severity,
             IntPtr values
         );
     }

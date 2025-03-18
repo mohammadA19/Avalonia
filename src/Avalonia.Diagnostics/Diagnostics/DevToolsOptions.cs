@@ -29,7 +29,7 @@ namespace Avalonia.Diagnostics
         /// <summary>
         /// Get or set the startup screen index where the DevTools window will be displayed.
         /// </summary>
-        public int? StartupScreenIndex { get; set; }
+        public int32? StartupScreenIndex { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether DevTools should be displayed implemented interfaces on Control details. The default value is true.

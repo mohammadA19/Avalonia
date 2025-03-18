@@ -10,15 +10,15 @@ namespace Avalonia.Styling.Activators
     {
         private readonly ILogical _control;
         private readonly IChildIndexProvider _provider;
-        private readonly int _step;
-        private readonly int _offset;
+        private readonly int32 _step;
+        private readonly int32 _offset;
         private readonly bool _reversed;
-        private int _index = -1;
+        private int32 _index = -1;
 
         public NthChildActivator(
             ILogical control,
             IChildIndexProvider provider,
-            int step, int offset, bool reversed)
+            int32 step, int32 offset, bool reversed)
         {
             _control = control;
             _provider = provider;

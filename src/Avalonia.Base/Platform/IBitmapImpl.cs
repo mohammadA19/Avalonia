@@ -23,7 +23,7 @@ namespace Avalonia.Platform
         /// <summary>
         /// Version of the pixel data
         /// </summary>
-        int Version { get; }
+        int32 Version { get; }
 
         /// <summary>
         /// Saves the bitmap to a file.
@@ -34,7 +34,7 @@ namespace Avalonia.Platform
         /// The quality value is interpreted from 0 - 100. If quality is null the default quality 
         /// setting of the backend is applied.
         /// </param>
-        void Save(string fileName, int? quality = null);
+        void Save(string fileName, int32? quality = null);
 
         /// <summary>
         /// Saves the bitmap to a stream in png format.
@@ -45,6 +45,6 @@ namespace Avalonia.Platform
         /// The quality value is interpreted from 0 - 100. If quality is null the default quality 
         /// setting of the backend is applied.
         /// </param>
-        void Save(Stream stream, int? quality = null);
+        void Save(Stream stream, int32? quality = null);
     }
 }

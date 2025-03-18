@@ -20,7 +20,7 @@ namespace Avalonia.Media.Fonts
 
         public override Uri Key => FontManager.SystemFontsKey;
 
-        public override FontFamily this[int index]
+        public override FontFamily this[int32 index]
         {
             get
             {
@@ -30,7 +30,7 @@ namespace Avalonia.Media.Fonts
             }
         }
 
-        public override int Count => _familyNames.Count;
+        public override int32 Count => _familyNames.Count;
 
         public override IEnumerator<FontFamily> GetEnumerator()
         {

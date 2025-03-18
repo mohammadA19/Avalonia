@@ -39,13 +39,13 @@ namespace Avalonia.Controls.Notifications
         /// <summary>
         /// Defines the <see cref="MaxItems"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> MaxItemsProperty =
-          AvaloniaProperty.Register<WindowNotificationManager, int>(nameof(MaxItems), 5);
+        public static readonly StyledProperty<int32> MaxItemsProperty =
+          AvaloniaProperty.Register<WindowNotificationManager, int32>(nameof(MaxItems), 5);
 
         /// <summary>
         /// Defines the maximum number of notifications visible at once.
         /// </summary>
-        public int MaxItems
+        public int32 MaxItems
         {
             get => GetValue(MaxItemsProperty);
             set => SetValue(MaxItemsProperty, value);

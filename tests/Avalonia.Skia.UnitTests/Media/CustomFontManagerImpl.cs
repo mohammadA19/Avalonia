@@ -44,7 +44,7 @@ namespace Avalonia.Skia.UnitTests.Media
 
         private readonly string[] _bcp47 = { CultureInfo.CurrentCulture.ThreeLetterISOLanguageName, CultureInfo.CurrentCulture.TwoLetterISOLanguageName };
 
-        public bool TryMatchCharacter(int codepoint, FontStyle fontStyle, FontWeight fontWeight, FontStretch fontStretch,
+        public bool TryMatchCharacter(int32 codepoint, FontStyle fontStyle, FontWeight fontWeight, FontStretch fontStretch,
             CultureInfo culture, out Typeface typeface)
         {
             if (!_isInitialized)

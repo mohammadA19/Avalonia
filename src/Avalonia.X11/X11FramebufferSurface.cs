@@ -8,11 +8,11 @@ namespace Avalonia.X11
     {
         private readonly IntPtr _display;
         private readonly IntPtr _xid;
-        private readonly int _depth;
+        private readonly int32 _depth;
         private readonly bool _retain;
         private RetainedFramebuffer? _fb;
 
-        public X11FramebufferSurface(IntPtr display, IntPtr xid, int depth, bool retain)
+        public X11FramebufferSurface(IntPtr display, IntPtr xid, int32 depth, bool retain)
         {
             _display = display;
             _xid = xid;
@@ -23,7 +23,7 @@ namespace Avalonia.X11
         void Blit(RetainedFramebuffer fb)
         {
             var image = new XImage();
-            int bitsPerPixel = 32;
+            int32 bitsPerPixel = 32;
             image.width = fb.Size.Width;
             image.height = fb.Size.Height;
             image.format = 2; //ZPixmap;

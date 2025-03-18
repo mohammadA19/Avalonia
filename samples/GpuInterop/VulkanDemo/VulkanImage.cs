@@ -182,7 +182,7 @@ public unsafe class VulkanImage : IDisposable
             TransitionLayout(ImageLayout.ColorAttachmentOptimal, AccessFlags.NoneKhr);
         }
 
-        public int ExportFd()
+        public int32 ExportFd()
         {
             if (!Api.TryGetDeviceExtension<KhrExternalMemoryFd>(_instance, _device, out var ext))
                 throw new InvalidOperationException();

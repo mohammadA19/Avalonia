@@ -18,7 +18,7 @@ internal abstract class ExpressionNode
     /// <summary>
     /// Gets the index of the node in the binding path.
     /// </summary>
-    public int Index { get; private set; }
+    public int32 Index { get; private set; }
 
     /// <summary>
     /// Gets the owning <see cref="BindingExpression"/>.
@@ -69,7 +69,7 @@ internal abstract class ExpressionNode
     /// <exception cref="InvalidOperationException">
     /// The node already has an owner.
     /// </exception>
-    public void SetOwner(BindingExpression owner, int index)
+    public void SetOwner(BindingExpression owner, int32 index)
     {
         if (Owner is not null)
             throw new InvalidOperationException($"{this} already has an owner.");

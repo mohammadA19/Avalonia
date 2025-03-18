@@ -523,17 +523,17 @@ namespace Avalonia.Markup.Xaml.UnitTests
 
     public static class XamlIlBugTestsStaticClassWithAttachedProperty
     {
-        public static readonly AvaloniaProperty<int> TestIntProperty = AvaloniaProperty
-            .RegisterAttached<Control, int>("TestInt", typeof(XamlIlBugTestsStaticClassWithAttachedProperty));
+        public static readonly AvaloniaProperty<int32> TestIntProperty = AvaloniaProperty
+            .RegisterAttached<Control, int32>("TestInt", typeof(XamlIlBugTestsStaticClassWithAttachedProperty));
 
-        public static void SetTestInt(Control control, int value)
+        public static void SetTestInt(Control control, int32 value)
         {
             control.SetValue(TestIntProperty, value);
         }
 
-        public static int GetTestInt(Control control)
+        public static int32 GetTestInt(Control control)
         {
-            return (int)control.GetValue(TestIntProperty);
+            return (int32)control.GetValue(TestIntProperty);
         }
     }
 
@@ -545,13 +545,13 @@ namespace Avalonia.Markup.Xaml.UnitTests
         {
             var pvt = prov.GetService<IProvideValueTarget>();
             var info = (ClrPropertyInfo)pvt.TargetProperty;
-            var v = (int)info.Get(pvt.TargetObject);
+            var v = (int32)info.Get(pvt.TargetObject);
             return v + 1;
         }
     }
 
     public class XamlIlClassWithClrPropertyWithValue
     {
-        public int Count { get; set; }= 5;
+        public int32 Count { get; set; }= 5;
     }
 }

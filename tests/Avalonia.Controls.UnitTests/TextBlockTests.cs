@@ -432,10 +432,10 @@ namespace Avalonia.Controls.UnitTests
                 var textblock = new TextBlock();
                 textblock.Inlines?.Add(new Run("123"));
                 textblock.Measure(new Size(200, 200));
-                int count = textblock.TextLayout.TextLines[0].TextRuns.Count;
+                int32 count = textblock.TextLayout.TextLines[0].TextRuns.Count;
                 textblock.Inlines?.Clear();
                 textblock.Measure(new Size(200, 200));
-                int count1 = textblock.TextLayout.TextLines[0].TextRuns.Count;
+                int32 count1 = textblock.TextLayout.TextLines[0].TextRuns.Count;
                 Assert.NotEqual(count, count1);
             }
         }

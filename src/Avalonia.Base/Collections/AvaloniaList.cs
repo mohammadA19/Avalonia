@@ -64,7 +64,7 @@ namespace Avalonia.Collections
         /// Initializes a new instance of the <see cref="AvaloniaList{T}"/>.
         /// </summary>
         /// <param name="capacity">Initial list capacity.</param>
-        public AvaloniaList(int capacity)
+        public AvaloniaList(int32 capacity)
         {
             _inner = new List<T>(capacity);
         }
@@ -104,7 +104,7 @@ namespace Avalonia.Collections
         /// <summary>
         /// Gets the number of items in the collection.
         /// </summary>
-        public int Count => _inner.Count;
+        public int32 Count => _inner.Count;
 
         /// <summary>
         /// Gets or sets the reset behavior of the list.
@@ -151,7 +151,7 @@ namespace Avalonia.Collections
         bool IList.IsReadOnly => false;
 
         /// <inheritdoc/>
-        int ICollection.Count => _inner.Count;
+        int32 ICollection.Count => _inner.Count;
 
         /// <inheritdoc/>
         bool ICollection.IsSynchronized => false;
@@ -167,7 +167,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns>The item.</returns>
-        public T this[int index]
+        public T this[int32 index]
         {
             get
             {
@@ -202,7 +202,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns>The item.</returns>
-        object? IList.this[int index]
+        object? IList.this[int32 index]
         {
             get { return this[index]; }
             set { this[index] = (T)value!; }
@@ -211,7 +211,7 @@ namespace Avalonia.Collections
         /// <summary>
         /// Gets or sets the total number of elements the internal data structure can hold without resizing.
         /// </summary>
-        public int Capacity
+        public int32 Capacity
         {
             get => _inner.Capacity;
             set => _inner.Capacity = value;
@@ -224,7 +224,7 @@ namespace Avalonia.Collections
         public virtual void Add(T item)
         {
             Validator?.Validate(item);
-            int index = _inner.Count;
+            int32 index = _inner.Count;
             _inner.Add(item);
             NotifyAdd(item, index);
         }
@@ -276,7 +276,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="array">The array.</param>
         /// <param name="arrayIndex">The first index of the array to copy to.</param>
-        public void CopyTo(T[] array, int arrayIndex)
+        public void CopyTo(T[] array, int32 arrayIndex)
         {
             _inner.CopyTo(array, arrayIndex);
         }
@@ -306,7 +306,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="index">The zero-based <see cref="AvaloniaList{T}"/> index at which the range starts.</param>
         /// <param name="count">The number of elements in the range.</param>
-        public IEnumerable<T> GetRange(int index, int count)
+        public IEnumerable<T> GetRange(int32 index, int32 count)
         {
             return _inner.GetRange(index, count);
         }
@@ -318,7 +318,7 @@ namespace Avalonia.Collections
         /// <returns>
         /// The index of the item or -1 if the item is not contained in the collection.
         /// </returns>
-        public int IndexOf(T item)
+        public int32 IndexOf(T item)
         {
             return _inner.IndexOf(item);
         }
@@ -328,7 +328,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="item">The item.</param>
-        public virtual void Insert(int index, T item)
+        public virtual void Insert(int32 index, T item)
         {
             Validator?.Validate(item);
             _inner.Insert(index, item);
@@ -340,7 +340,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="items">The items.</param>
-        public virtual void InsertRange(int index, IEnumerable<T> items)
+        public virtual void InsertRange(int32 index, IEnumerable<T> items)
         {
             _ = items ?? throw new ArgumentNullException(nameof(items));
 
@@ -370,7 +370,7 @@ namespace Avalonia.Collections
 
                         using (IEnumerator<T> en = items.GetEnumerator())
                         {
-                            int insertIndex = index;
+                            int32 insertIndex = index;
 
                             while (en.MoveNext())
                             {
@@ -400,7 +400,7 @@ namespace Avalonia.Collections
                             new List<T>() :
                             null;
 
-                        int insertIndex = index;
+                        int32 insertIndex = index;
 
                         do
                         {
@@ -435,7 +435,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="oldIndex">The index of the item to move.</param>
         /// <param name="newIndex">The index to move the item to.</param>
-        public void Move(int oldIndex, int newIndex)
+        public void Move(int32 oldIndex, int32 newIndex)
         {
             var item = this[oldIndex];
             _inner.RemoveAt(oldIndex);
@@ -458,7 +458,7 @@ namespace Avalonia.Collections
         /// <param name="oldIndex">The first index of the items to move.</param>
         /// <param name="count">The number of items to move.</param>
         /// <param name="newIndex">The index to move the items to.</param>
-        public void MoveRange(int oldIndex, int count, int newIndex)
+        public void MoveRange(int32 oldIndex, int32 count, int32 newIndex)
         {
             var items = _inner.GetRange(oldIndex, count);
             var modifiedNewIndex = newIndex;
@@ -486,7 +486,7 @@ namespace Avalonia.Collections
         /// Ensures that the capacity of the list is at least <see cref="Capacity"/>.
         /// </summary>
         /// <param name="capacity">The capacity.</param>
-        public void EnsureCapacity(int capacity)
+        public void EnsureCapacity(int32 capacity)
         {
             // Adapted from List<T> implementation.
             var currentCapacity = _inner.Capacity;
@@ -511,7 +511,7 @@ namespace Avalonia.Collections
         /// <returns>True if the item was found and removed, otherwise false.</returns>
         public virtual bool Remove(T item)
         {
-            int index = _inner.IndexOf(item);
+            int32 index = _inner.IndexOf(item);
 
             if (index != -1)
             {
@@ -533,8 +533,8 @@ namespace Avalonia.Collections
 
             var hItems = new HashSet<T>(items);
 
-            int counter = 0;
-            for (int i = _inner.Count - 1; i >= 0; --i)
+            int32 counter = 0;
+            for (int32 i = _inner.Count - 1; i >= 0; --i)
             {
                 if (hItems.Contains(_inner[i]))
                 {
@@ -555,7 +555,7 @@ namespace Avalonia.Collections
         /// Removes the item at the specified index.
         /// </summary>
         /// <param name="index">The index.</param>
-        public virtual void RemoveAt(int index)
+        public virtual void RemoveAt(int32 index)
         {
             T item = _inner[index];
             _inner.RemoveAt(index);
@@ -567,7 +567,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="index">The first index to remove.</param>
         /// <param name="count">The number of items to remove.</param>
-        public virtual void RemoveRange(int index, int count)
+        public virtual void RemoveRange(int32 index, int32 count)
         {
             if (count > 0)
             {
@@ -578,9 +578,9 @@ namespace Avalonia.Collections
         }
 
         /// <inheritdoc/>
-        int IList.Add(object? value)
+        int32 IList.Add(object? value)
         {
-            int index = Count;
+            int32 index = Count;
             Add((T)value!);
             return index;
         }
@@ -598,13 +598,13 @@ namespace Avalonia.Collections
         }
 
         /// <inheritdoc/>
-        int IList.IndexOf(object? value)
+        int32 IList.IndexOf(object? value)
         {
             return IndexOf((T)value!);
         }
 
         /// <inheritdoc/>
-        void IList.Insert(int index, object? value)
+        void IList.Insert(int32 index, object? value)
         {
             Insert(index, (T)value!);
         }
@@ -616,13 +616,13 @@ namespace Avalonia.Collections
         }
 
         /// <inheritdoc/>
-        void IList.RemoveAt(int index)
+        void IList.RemoveAt(int32 index)
         {
             RemoveAt(index);
         }
 
         /// <inheritdoc/>
-        void ICollection.CopyTo(Array array, int index)
+        void ICollection.CopyTo(Array array, int32 index)
         {
             if (array == null)
             {
@@ -677,10 +677,10 @@ namespace Avalonia.Collections
                     throw new ArgumentException("Invalid array type");
                 }
 
-                int count = _inner.Count;
+                int32 count = _inner.Count;
                 try
                 {
-                    for (int i = 0; i < count; i++)
+                    for (int32 i = 0; i < count; i++)
                     {
                         objects[index++] = _inner[i];
                     }
@@ -700,7 +700,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="t">The items that were added.</param>
         /// <param name="index">The starting index.</param>
-        private void NotifyAdd(IList t, int index)
+        private void NotifyAdd(IList t, int32 index)
         {
             if (_collectionChanged != null)
             {
@@ -716,7 +716,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="item">The item that was added.</param>
         /// <param name="index">The starting index.</param>
-        private void NotifyAdd(T item, int index)
+        private void NotifyAdd(T item, int32 index)
         {
             if (_collectionChanged != null)
             {
@@ -741,7 +741,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="t">The items that were removed.</param>
         /// <param name="index">The starting index.</param>
-        private void NotifyRemove(IList t, int index)
+        private void NotifyRemove(IList t, int32 index)
         {
             if (_collectionChanged != null)
             {
@@ -757,7 +757,7 @@ namespace Avalonia.Collections
         /// </summary>
         /// <param name="item">The item that was removed.</param>
         /// <param name="index">The starting index.</param>
-        private void NotifyRemove(T item, int index)
+        private void NotifyRemove(T item, int32 index)
         {
             if (_collectionChanged != null)
             {

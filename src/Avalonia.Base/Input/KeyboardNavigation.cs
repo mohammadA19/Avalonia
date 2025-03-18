@@ -8,11 +8,11 @@ namespace Avalonia.Input
         /// <summary>
         /// Defines the TabIndex attached property.
         /// </summary>
-        public static readonly AttachedProperty<int> TabIndexProperty =
-            AvaloniaProperty.RegisterAttached<StyledElement, int>(
+        public static readonly AttachedProperty<int32> TabIndexProperty =
+            AvaloniaProperty.RegisterAttached<StyledElement, int32>(
                 "TabIndex",
                 typeof(KeyboardNavigation),
-                int.MaxValue);
+                int32.MaxValue);
 
         /// <summary>
         /// Defines the TabNavigation attached property.
@@ -56,7 +56,7 @@ namespace Avalonia.Input
         /// </summary>
         /// <param name="element">The container.</param>
         /// <returns>The <see cref="KeyboardNavigationMode"/> for the container.</returns>
-        public static int GetTabIndex(IInputElement element)
+        public static int32 GetTabIndex(IInputElement element)
         {
             return ((AvaloniaObject)element).GetValue(TabIndexProperty);
         }
@@ -66,7 +66,7 @@ namespace Avalonia.Input
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="value">The tab index.</param>
-        public static void SetTabIndex(IInputElement element, int value)
+        public static void SetTabIndex(IInputElement element, int32 value)
         {
             ((AvaloniaObject)element).SetValue(TabIndexProperty, value);
         }

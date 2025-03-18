@@ -379,7 +379,7 @@ namespace Avalonia.Markup.UnitTests.Data
                     "Length",
                     x => ((string)x).Length,
                     null,
-                    typeof(int));
+                    typeof(int32));
                 var bindingPath = new CompiledBindingPathBuilder()
                     .Property(stringLengthProperty, PropertyInfoAccessorFactory.CreateInpcPropertyAccessor)
                     .Build();

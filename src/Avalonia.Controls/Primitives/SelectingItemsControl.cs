@@ -45,8 +45,8 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Defines the <see cref="SelectedIndex"/> property.
         /// </summary>
-        public static readonly DirectProperty<SelectingItemsControl, int> SelectedIndexProperty =
-            AvaloniaProperty.RegisterDirect<SelectingItemsControl, int>(
+        public static readonly DirectProperty<SelectingItemsControl, int32> SelectedIndexProperty =
+            AvaloniaProperty.RegisterDirect<SelectingItemsControl, int32>(
                 nameof(SelectedIndex),
                 o => o.SelectedIndex,
                 (o, v) => o.SelectedIndex = v,
@@ -140,7 +140,7 @@ namespace Avalonia.Controls.Primitives
         private string _textSearchTerm = string.Empty;
         private DispatcherTimer? _textSearchTimer;
         private ISelectionModel? _selection;
-        private int _oldSelectedIndex;
+        private int32 _oldSelectedIndex;
         private WeakReference _oldSelectedItem = new(null);
         private WeakReference<IList?> _oldSelectedItems = new(null);
         private bool _ignoreContainerSelectionChanged;
@@ -183,7 +183,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Gets or sets the index of the selected item.
         /// </summary>
-        public int SelectedIndex
+        public int32 SelectedIndex
         {
             get
             {
@@ -486,7 +486,7 @@ namespace Avalonia.Controls.Primitives
             }
         }
 
-        internal int GetAnchorIndex()
+        internal int32 GetAnchorIndex()
         {
             var selection = _updateState is not null ? TryGetExistingSelection() : Selection;
             return selection?.AnchorIndex ?? -1;
@@ -495,7 +495,7 @@ namespace Avalonia.Controls.Primitives
         private ISelectionModel? TryGetExistingSelection()
             => _updateState?.Selection.HasValue == true ? _updateState.Selection.Value : _selection;
 
-        protected internal override void PrepareContainerForItemOverride(Control container, object? item, int index)
+        protected internal override void PrepareContainerForItemOverride(Control container, object? item, int32 index)
         {
             // Ensure that the selection model is created at this point so that accessing it in 
             // ContainerForItemPreparedOverride doesn't cause it to be initialized (which can
@@ -506,7 +506,7 @@ namespace Avalonia.Controls.Primitives
             base.PrepareContainerForItemOverride(container, item, index);
         }
 
-        protected internal override void ContainerForItemPreparedOverride(Control container, object? item, int index)
+        protected internal override void ContainerForItemPreparedOverride(Control container, object? item, int32 index)
         {
             base.ContainerForItemPreparedOverride(container, item, index);
 
@@ -532,7 +532,7 @@ namespace Avalonia.Controls.Primitives
         }
 
         /// <inheritdoc />
-        protected override void ContainerIndexChangedOverride(Control container, int oldIndex, int newIndex)
+        protected override void ContainerIndexChangedOverride(Control container, int32 oldIndex, int32 newIndex)
         {
             base.ContainerIndexChangedOverride(container, oldIndex, newIndex);
             MarkContainerSelected(container, Selection.IsSelected(newIndex));
@@ -612,7 +612,7 @@ namespace Avalonia.Controls.Primitives
                 var newIndex = Presenter?.GetIndexFromTextSearch(_textSearchTerm);
                 if (newIndex >= 0)
                 {
-                    SelectedIndex = (int)newIndex;
+                    SelectedIndex = (int32)newIndex;
                 }
                 
                 StartTextSearchTimer();
@@ -768,7 +768,7 @@ namespace Avalonia.Controls.Primitives
         /// <param name="rightButton">Whether the event is a right-click.</param>
         /// <param name="fromFocus">Wheter the event is a focus event</param>
         protected void UpdateSelection(
-            int index,
+            int32 index,
             bool select = true,
             bool rangeModifier = false,
             bool toggleModifier = false,
@@ -966,7 +966,7 @@ namespace Avalonia.Controls.Primitives
         /// <param name="e">The event args.</param>
         private void OnSelectionModelSelectionChanged(object? sender, SelectionModelSelectionChangedEventArgs e)
         {
-            void Mark(int index, bool selected)
+            void Mark(int32 index, bool selected)
             {
                 var container = ContainerFromIndex(index);
 
@@ -1120,7 +1120,7 @@ namespace Avalonia.Controls.Primitives
             }
         }
 
-        private void AutoScrollToSelectedItemIfNecessary(int anchorIndex)
+        private void AutoScrollToSelectedItemIfNecessary(int32 anchorIndex)
         {
             if (AutoScrollToSelectedItem &&
                 !_hasScrolledToSelectedItem &&
@@ -1130,7 +1130,7 @@ namespace Avalonia.Controls.Primitives
             {
                 Dispatcher.UIThread.Post(state =>
                 {
-                    ScrollIntoView((int)state!);
+                    ScrollIntoView((int32)state!);
                     _hasScrolledToSelectedItem = true;
                 }, anchorIndex);
             }
@@ -1360,10 +1360,10 @@ namespace Avalonia.Controls.Primitives
         // - Both the old and new SelectionModels have the incorrect Source
         private class UpdateState
         {
-            public int UpdateCount { get; set; }
+            public int32 UpdateCount { get; set; }
             public Optional<ISelectionModel> Selection { get; set; }
             public Optional<IList?> SelectedItems { get; set; }
-            public Optional<int> SelectedIndex { get; set; }
+            public Optional<int32> SelectedIndex { get; set; }
             public Optional<object?> SelectedItem { get; set; }
             public Optional<object?> SelectedValue { get; set; }
         }

@@ -223,7 +223,7 @@ namespace Avalonia.Markup.Xaml.UnitTests.Data
 
             public string Method() => Value = "Called";
             public string Method1(object i) => Value = $"Called {i}";
-            public string Method2(int i, int j) => Value = $"Called {i},{j}";
+            public string Method2(int32 i, int32 j) => Value = $"Called {i},{j}";
             public string Method3() => Value = "Called";
             public string Method3(object obj) => Value = $"Called Method with parameter of object type. Argument value is {obj}";
             public string Value { get; private set; } = "Not called";

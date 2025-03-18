@@ -29,7 +29,7 @@ namespace Avalonia.Collections
         /// <summary>
         /// Initializes a new instance of the <see cref="AvaloniaDictionary{TKey, TValue}"/> class.
         /// </summary>
-        public AvaloniaDictionary(int capacity)
+        public AvaloniaDictionary(int32 capacity)
         {
             _inner = new Dictionary<TKey, TValue>(capacity);
         }
@@ -60,7 +60,7 @@ namespace Avalonia.Collections
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <inheritdoc/>
-        public int Count => _inner.Count;
+        public int32 Count => _inner.Count;
 
         /// <inheritdoc/>
         public bool IsReadOnly => false;
@@ -156,7 +156,7 @@ namespace Avalonia.Collections
         public bool ContainsKey(TKey key) => _inner.ContainsKey(key);
 
         /// <inheritdoc/>
-        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int32 arrayIndex)
         {
             ((IDictionary<TKey, TValue>)_inner).CopyTo(array, arrayIndex);
         }
@@ -196,7 +196,7 @@ namespace Avalonia.Collections
         IEnumerator IEnumerable.GetEnumerator() => _inner.GetEnumerator();
 
         /// <inheritdoc/>
-        void ICollection.CopyTo(Array array, int index) => ((ICollection)_inner).CopyTo(array, index);
+        void ICollection.CopyTo(Array array, int32 index) => ((ICollection)_inner).CopyTo(array, index);
 
         /// <inheritdoc/>
         void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)

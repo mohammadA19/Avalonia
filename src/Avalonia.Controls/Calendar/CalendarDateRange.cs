@@ -67,7 +67,7 @@ namespace Avalonia.Controls
         {
             _ = range ?? throw new ArgumentNullException(nameof(range));
 
-            int start = DateTime.Compare(Start, range.Start);
+            int32 start = DateTime.Compare(Start, range.Start);
 
             // Check if any part of the supplied range is contained by this
             // range or if the supplied range completely covers this range.

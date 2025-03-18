@@ -23,7 +23,7 @@ internal class BrowserInputHandler
     private static readonly PooledList<RawPointerPoint> s_intermediatePointsPooledList = new(ClearMode.Never);
     private readonly RawEventGrouper? _rawEventGrouper;
 
-    public BrowserInputHandler(BrowserTopLevelImpl topLevelImpl, JSObject container, JSObject inputElement, int topLevelId)
+    public BrowserInputHandler(BrowserTopLevelImpl topLevelImpl, JSObject container, JSObject inputElement, int32 topLevelId)
     {
         _topLevelImpl = topLevelImpl;
         _container = container ?? throw new ArgumentNullException(nameof(container));
@@ -64,7 +64,7 @@ internal class BrowserInputHandler
     };
 
     public bool OnPointerMove(string pointerType, long pointerId, double offsetX, double offsetY,
-        double pressure, double tiltX, double tiltY, double twist, int modifier, JSObject argsObj)
+        double pressure, double tiltX, double tiltY, double twist, int32 modifier, JSObject argsObj)
     {
         var point = CreateRawPointer(offsetX, offsetY, pressure, tiltX, tiltY, twist);
         var type = pointerType switch
@@ -80,7 +80,7 @@ internal class BrowserInputHandler
             coalescedEvents = new Lazy<IReadOnlyList<RawPointerPoint>?>(() =>
             {
                 // To minimize JS interop usage, we resolve all points properties in a single call.
-                const int itemsPerPoint = 6;
+                const int32 itemsPerPoint = 6;
                 var pointsProps = InputHelper.GetCoalescedEvents(argsObj);
                 argsObj.Dispose();
                 s_intermediatePointsPooledList.Clear();
@@ -105,8 +105,8 @@ internal class BrowserInputHandler
             coalescedEvents);
     }
 
-    public bool OnPointerDown(string pointerType, long pointerId, int buttons, double offsetX, double offsetY,
-        double pressure, double tiltX, double tiltY, double twist, int modifier)
+    public bool OnPointerDown(string pointerType, long pointerId, int32 buttons, double offsetX, double offsetY,
+        double pressure, double tiltX, double tiltY, double twist, int32 modifier)
     {
         var type = pointerType switch
         {
@@ -127,8 +127,8 @@ internal class BrowserInputHandler
         return RawPointerEvent(type, pointerType, point, (RawInputModifiers)modifier, pointerId);
     }
 
-    public bool OnPointerUp(string pointerType, long pointerId, int buttons, double offsetX, double offsetY,
-        double pressure, double tiltX, double tiltY, double twist, int modifier)
+    public bool OnPointerUp(string pointerType, long pointerId, int32 buttons, double offsetX, double offsetY,
+        double pressure, double tiltX, double tiltY, double twist, int32 modifier)
     {
         var type = pointerType switch
         {
@@ -150,7 +150,7 @@ internal class BrowserInputHandler
     }
 
     public bool OnPointerCancel(string pointerType, long pointerId, double offsetX, double offsetY,
-        double pressure, double tiltX, double tiltY, double twist, int modifier)
+        double pressure, double tiltX, double tiltY, double twist, int32 modifier)
     {
         if (pointerType == "touch")
         {
@@ -162,14 +162,14 @@ internal class BrowserInputHandler
         return false;
     }
 
-    public bool OnWheel(double offsetX, double offsetY, double deltaX, double deltaY, int modifier)
+    public bool OnWheel(double offsetX, double offsetY, double deltaX, double deltaY, int32 modifier)
     {
         return RawMouseWheelEvent(new Point(offsetX, offsetY),
             new Vector(-(deltaX / 50), -(deltaY / 50)),
             (RawInputModifiers)modifier);
     }
 
-    public bool OnDragEvent(string type, double offsetX, double offsetY, int modifiers, string? effectAllowedStr, JSObject? dataTransfer)
+    public bool OnDragEvent(string type, double offsetX, double offsetY, int32 modifiers, string? effectAllowedStr, JSObject? dataTransfer)
     {
         var eventType = type switch
         {
@@ -177,7 +177,7 @@ internal class BrowserInputHandler
             "dragover" => RawDragEventType.DragOver,
             "dragleave" => RawDragEventType.DragLeave,
             "drop" => RawDragEventType.Drop,
-            _ => (RawDragEventType)(int)-1
+            _ => (RawDragEventType)(int32)-1
         };
         if (eventType < 0 || dataTransfer is null)
         {
@@ -226,7 +226,7 @@ internal class BrowserInputHandler
                && dropEffect != DragDropEffects.None;
     }
 
-    public bool OnKeyDown(string code, string key, int modifier)
+    public bool OnKeyDown(string code, string key, int32 modifier)
     {
         var handled = RawKeyboardEvent(RawKeyEventType.KeyDown, code, key, (RawInputModifiers)modifier);
 
@@ -238,7 +238,7 @@ internal class BrowserInputHandler
         return handled;
     }
 
-    public bool OnKeyUp(string code, string key, int modifier)
+    public bool OnKeyUp(string code, string key, int32 modifier)
     {
         return RawKeyboardEvent(RawKeyEventType.KeyUp, code, key, (RawInputModifiers)modifier);
     }

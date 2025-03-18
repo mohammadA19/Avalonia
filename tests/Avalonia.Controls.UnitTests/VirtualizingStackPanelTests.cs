@@ -1419,7 +1419,7 @@ namespace Avalonia.Controls.UnitTests
             Assert.Equal(new Rect(0, 140, 100, 20), container.Bounds);
         }
 
-        private static IReadOnlyList<int> GetRealizedIndexes(VirtualizingStackPanel target, ItemsControl itemsControl)
+        private static IReadOnlyList<int32> GetRealizedIndexes(VirtualizingStackPanel target, ItemsControl itemsControl)
         {
             return target.GetRealizedElements()
                 .Select(x => x is null ? -1 : itemsControl.IndexFromContainer((Control)x))
@@ -1429,8 +1429,8 @@ namespace Avalonia.Controls.UnitTests
         private static void AssertRealizedItems(
             VirtualizingStackPanel target,
             ItemsControl itemsControl,
-            int firstIndex,
-            int count)
+            int32 firstIndex,
+            int32 count)
         {
             Assert.All(target.GetRealizedContainers()!, x => Assert.Same(target, x.VisualParent));
             Assert.All(target.GetRealizedContainers()!, x => Assert.Same(itemsControl, x.Parent));
@@ -1451,8 +1451,8 @@ namespace Avalonia.Controls.UnitTests
         private static void AssertRealizedControlItems<TContainer>(
             VirtualizingStackPanel target,
             ItemsControl itemsControl,
-            int firstIndex,
-            int count)
+            int32 firstIndex,
+            int32 count)
         {
             Assert.All(target.GetRealizedContainers()!, x => Assert.IsType<TContainer>(x));
             Assert.All(target.GetRealizedContainers()!, x => Assert.Same(target, x.VisualParent));
@@ -1599,7 +1599,7 @@ namespace Avalonia.Controls.UnitTests
         {
             private double _height;
 
-            public ItemWithHeight(int index, double height = 10)
+            public ItemWithHeight(int32 index, double height = 10)
             {
                 Caption = $"Item {index}";
                 Height = height;
@@ -1618,7 +1618,7 @@ namespace Avalonia.Controls.UnitTests
         {
             private double _width;
 
-            public ItemWithWidth(int index, double width = 10)
+            public ItemWithWidth(int32 index, double width = 10)
             {
                 Caption = $"Item {index}";
                 Width = width;
@@ -1637,7 +1637,7 @@ namespace Avalonia.Controls.UnitTests
         {
             private bool _isVisible = true;
 
-            public ItemWithIsVisible(int index)
+            public ItemWithIsVisible(int32 index)
             {
                 Caption = $"Item {index}";
             }
@@ -1674,7 +1674,7 @@ namespace Avalonia.Controls.UnitTests
         {
             protected override Type StyleKeyOverride => typeof(ItemsControl);
 
-            protected internal override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
+            protected internal override bool NeedsContainerOverride(object? item, int32 index, out object? recycleKey)
             {
                 recycleKey = null;
                 return true;

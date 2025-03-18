@@ -9,9 +9,9 @@ namespace ControlCatalog.Pages.OpenGl;
 internal class OpenGlFbo : IDisposable
 {
     private readonly GRContext _grContext;
-    private int _fbo;
-    private int _depthBuffer;
-    private int _texture;
+    private int32 _fbo;
+    private int32 _depthBuffer;
+    private int32 _texture;
     private PixelSize _size;
     public PixelSize Size => _size;
     public GlInterface Gl => Context.GlInterface;
@@ -60,7 +60,7 @@ internal class OpenGlFbo : IDisposable
         IsValid = (status == GL_FRAMEBUFFER_COMPLETE);
         if(!IsValid)
         {
-            int code = Gl.GetError();
+            int32 code = Gl.GetError();
             Console.WriteLine("Unable to configure OpenGL FBO: " + code);
         }
         
@@ -69,7 +69,7 @@ internal class OpenGlFbo : IDisposable
 
     public bool IsValid { get; private set; }
 
-    public int Fbo => _fbo;
+    public int32 Fbo => _fbo;
 
     public SKImage? Snapshot()
     {

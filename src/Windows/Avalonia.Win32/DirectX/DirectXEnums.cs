@@ -172,7 +172,7 @@ namespace Avalonia.Win32.DirectX
 
         DXGI_ALPHA_MODE_IGNORE = 3,
 
-        DXGI_ALPHA_MODE_FORCE_DWORD = (unchecked((int)0xffffffff)),
+        DXGI_ALPHA_MODE_FORCE_DWORD = (unchecked((int32)0xffffffff)),
     }
 
     internal enum D3D_DRIVER_TYPE

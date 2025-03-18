@@ -111,13 +111,13 @@ namespace Avalonia.Controls.Primitives
         private void AccentBorder_PointerPressed(object? sender, PointerPressedEventArgs e)
         {
             Border? border = sender as Border;
-            int accentStep = 0;
+            int32 accentStep = 0;
             HsvColor hsvColor = HsvColor;
 
             // Get the value component delta
             try
             {
-                accentStep = int.Parse(border?.Tag?.ToString() ?? "0", CultureInfo.InvariantCulture);
+                accentStep = int32.Parse(border?.Tag?.ToString() ?? "0", CultureInfo.InvariantCulture);
             }
             catch { }
 

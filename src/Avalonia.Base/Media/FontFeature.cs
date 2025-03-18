@@ -9,8 +9,8 @@ namespace Avalonia.Media;
 /// </summary>
 public record FontFeature
 {
-    private const int DefaultValue = 1;
-    private const int InfinityEnd = -1;
+    private const int32 DefaultValue = 1;
+    private const int32 InfinityEnd = -1;
     
     private static readonly Regex s_featureRegex = new Regex(
         @"^\s*(?<Value>[+-])?\s*(?<Tag>\w{4})\s*(\[\s*(?<Start>\d+)?(\s*(?<Separator>:)\s*)?(?<End>\d+)?\s*\])?\s*(?(Value)()|(=\s*(?<Value>\d+|on|off)))?\s*$", 
@@ -24,21 +24,21 @@ public record FontFeature
     }
 
     /// <summary>Gets or sets the value.</summary>
-    public int Value
+    public int32 Value
     {
         get;
         init;
     }
 
     /// <summary>Gets or sets the start.</summary>
-    public int Start
+    public int32 Start
     {
         get;
         init;
     }
 
     /// <summary>Gets or sets the end.</summary>
-    public int End
+    public int32 End
     {
         get;
         init;
@@ -91,8 +91,8 @@ public record FontFeature
         }
            
         var hasSeparator = match.Groups["Separator"].Value == ":";
-        var hasStart = int.TryParse(match.Groups["Start"].Value, NumberStyles.None, CultureInfo.InvariantCulture, out var start);
-        var hasEnd = int.TryParse(match.Groups["End"].Value, NumberStyles.None, CultureInfo.InvariantCulture, out var end);
+        var hasStart = int32.TryParse(match.Groups["Start"].Value, NumberStyles.None, CultureInfo.InvariantCulture, out var start);
+        var hasEnd = int32.TryParse(match.Groups["End"].Value, NumberStyles.None, CultureInfo.InvariantCulture, out var end);
         
         var stringValue = match.Groups["Value"].Value;
         if (stringValue == "-" || stringValue.ToUpperInvariant() == "OFF")
@@ -105,7 +105,7 @@ public record FontFeature
             Tag = match.Groups["Tag"].Value,
             Start = hasStart ? start : 0,
             End = hasEnd ? end : hasStart && !hasSeparator ? (start + 1) : InfinityEnd,
-            Value = int.TryParse(stringValue, NumberStyles.None, CultureInfo.InvariantCulture, out var value) ? value : DefaultValue,
+            Value = int32.TryParse(stringValue, NumberStyles.None, CultureInfo.InvariantCulture, out var value) ? value : DefaultValue,
         };
 
         return result;

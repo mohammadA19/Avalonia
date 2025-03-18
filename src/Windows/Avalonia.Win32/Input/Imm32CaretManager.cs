@@ -15,7 +15,7 @@ namespace Avalonia.Win32.Input
             }
         }
 
-        public void TryMove(int x, int y)
+        public void TryMove(int32 x, int32 y)
         {
             if (_isCaretCreated)
             {

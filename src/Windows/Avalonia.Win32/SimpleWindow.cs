@@ -39,7 +39,7 @@ internal class SimpleWindow : IDisposable
                 0,
                 s_classAtom,
                 null,
-                (int)UnmanagedMethods.WindowStyles.WS_OVERLAPPEDWINDOW,
+                (int32)UnmanagedMethods.WindowStyles.WS_OVERLAPPEDWINDOW,
                 UnmanagedMethods.CW_USEDEFAULT,
                 UnmanagedMethods.CW_USEDEFAULT,
                 UnmanagedMethods.CW_USEDEFAULT,

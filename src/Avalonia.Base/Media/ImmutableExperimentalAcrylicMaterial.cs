@@ -44,11 +44,11 @@ namespace Avalonia.Media
             return TintColor;
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
-                int hash = 17;
+                int32 hash = 17;
 
                 hash = (hash * 23) + TintColor.GetHashCode();                
                 hash = (hash * 23) + TintOpacity.GetHashCode();

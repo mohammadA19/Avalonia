@@ -49,7 +49,7 @@ namespace Avalonia.Controls.Presenters
             var generator = itemsControl.ItemContainerGenerator;
             var children = _presenter.Panel.Children;
 
-            void Add(int index, IEnumerable items)
+            void Add(int32 index, IEnumerable items)
             {
                 var i = index;
                 foreach (var item in items)
@@ -62,7 +62,7 @@ namespace Avalonia.Controls.Presenters
                     generator.ItemContainerIndexChanged(children[i], i - delta, i);
             }
 
-            void Remove(int index, int count)
+            void Remove(int32 index, int32 count)
             {
                 for (var i = 0; i < count; ++i)
                 {
@@ -129,7 +129,7 @@ namespace Avalonia.Controls.Presenters
             ItemsControl itemsControl,
             Controls children,
             object? item, 
-            int index)
+            int32 index)
         {
             var generator = itemsControl.ItemContainerGenerator;
             Control container;

@@ -281,10 +281,10 @@ internal partial interface IRawElementProviderSimple
 {
     ProviderOptions GetProviderOptions();
     [return: MarshalAs(UnmanagedType.Interface)]
-    object? GetPatternProvider(int patternId);
+    object? GetPatternProvider(int32 patternId);
 #if NET8_0_OR_GREATER
     [return: MarshalUsing(typeof(ComVariantMarshaller))]
 #endif
-    object? GetPropertyValue(int propertyId);
+    object? GetPropertyValue(int32 propertyId);
     IRawElementProviderSimple? GetHostRawElementProvider();
 }

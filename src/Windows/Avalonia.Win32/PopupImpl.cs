@@ -57,7 +57,7 @@ namespace Avalonia.Win32
                 UnmanagedMethods.WindowStyles.WS_EX_TOPMOST;
 
             var result = UnmanagedMethods.CreateWindowEx(
-                (int)exStyle,
+                (int32)exStyle,
                 atom,
                 null,
                 (uint)style,
@@ -127,15 +127,15 @@ namespace Avalonia.Win32
 
         private static void EnableBoxShadow (IntPtr hwnd, bool enabled)
         {
-            var classes = (int)UnmanagedMethods.GetClassLongPtr(hwnd, (int)UnmanagedMethods.ClassLongIndex.GCL_STYLE);
+            var classes = (int32)UnmanagedMethods.GetClassLongPtr(hwnd, (int32)UnmanagedMethods.ClassLongIndex.GCL_STYLE);
 
             if (enabled)
             {
-                classes |= (int)UnmanagedMethods.ClassStyles.CS_DROPSHADOW;
+                classes |= (int32)UnmanagedMethods.ClassStyles.CS_DROPSHADOW;
             }
             else
             {
-                classes &= ~(int)UnmanagedMethods.ClassStyles.CS_DROPSHADOW;
+                classes &= ~(int32)UnmanagedMethods.ClassStyles.CS_DROPSHADOW;
             }
 
             UnmanagedMethods.SetClassLong(hwnd, UnmanagedMethods.ClassLongIndex.GCL_STYLE, new IntPtr(classes));

@@ -28,7 +28,7 @@ namespace Avalonia.Win32.WinRT.Composition
 
         public abstract Guid EffectId { get; }
         public unsafe void GetNamedPropertyMapping(IntPtr name, uint* index, GRAPHICS_EFFECT_PROPERTY_MAPPING* mapping) =>
-            throw new COMException("Not supported", unchecked((int)0x80004001));
+            throw new COMException("Not supported", unchecked((int32)0x80004001));
 
         public abstract uint PropertyCount { get; }
         public abstract IPropertyValue? GetProperty(uint index);
@@ -36,7 +36,7 @@ namespace Avalonia.Win32.WinRT.Composition
         public IGraphicsEffectSource GetSource(uint index)
         {
             if (_sources == null || index> _sources.Length)
-                throw new COMException("Invalid index", unchecked((int)0x80070057));
+                throw new COMException("Invalid index", unchecked((int32)0x80070057));
             return _sources[index];
         }
 
@@ -55,12 +55,12 @@ namespace Avalonia.Win32.WinRT.Composition
     
      class BorderEffect : WinUIEffectBase
     {
-        private readonly int _x;
-        private readonly int _y;
+        private readonly int32 _x;
+        private readonly int32 _y;
         public override Guid EffectId => D2DEffects.CLSID_D2D1Border;
         public override uint PropertyCount => 2;
 
-        public BorderEffect(int x, int y, params IGraphicsEffectSource[] _sources):base(_sources)
+        public BorderEffect(int32 x, int32 y, params IGraphicsEffectSource[] _sources):base(_sources)
         {
             _x = x;
             _y = y;
@@ -78,9 +78,9 @@ namespace Avalonia.Win32.WinRT.Composition
 
     class BlendEffect : WinUIEffectBase
     {
-        private readonly int _mode;
+        private readonly int32 _mode;
 
-        public BlendEffect(int mode, params IGraphicsEffectSource[] _sources) : base(_sources)
+        public BlendEffect(int32 mode, params IGraphicsEffectSource[] _sources) : base(_sources)
         {
             _mode = mode;
         }
@@ -100,7 +100,7 @@ namespace Avalonia.Win32.WinRT.Composition
     {
         private readonly float _mode;
 
-        public CompositeStepEffect(int mode, params IGraphicsEffectSource[] _sources) : base(_sources)
+        public CompositeStepEffect(int32 mode, params IGraphicsEffectSource[] _sources) : base(_sources)
         {
             _mode = mode;
         }

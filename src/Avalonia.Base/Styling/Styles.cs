@@ -37,7 +37,7 @@ namespace Avalonia.Styling
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
         public event EventHandler? OwnerChanged;
 
-        public int Count => _styles.Count;
+        public int32 Count => _styles.Count;
 
         public IResourceHost? Owner
         {
@@ -101,11 +101,11 @@ namespace Avalonia.Styling
             }
         }
 
-        IStyle IReadOnlyList<IStyle>.this[int index] => _styles[index];
+        IStyle IReadOnlyList<IStyle>.this[int32 index] => _styles[index];
 
         IReadOnlyList<IStyle> IStyle.Children => this;
 
-        public IStyle this[int index]
+        public IStyle this[int32 index]
         {
             get => _styles[index];
             set => _styles[index] = value;
@@ -135,28 +135,28 @@ namespace Avalonia.Styling
         public void AddRange(IEnumerable<IStyle> items) => _styles.AddRange(items);
 
         /// <inheritdoc/>
-        public void InsertRange(int index, IEnumerable<IStyle> items) => _styles.InsertRange(index, items);
+        public void InsertRange(int32 index, IEnumerable<IStyle> items) => _styles.InsertRange(index, items);
 
         /// <inheritdoc/>
-        public void Move(int oldIndex, int newIndex) => _styles.Move(oldIndex, newIndex);
+        public void Move(int32 oldIndex, int32 newIndex) => _styles.Move(oldIndex, newIndex);
 
         /// <inheritdoc/>
-        public void MoveRange(int oldIndex, int count, int newIndex) => _styles.MoveRange(oldIndex, count, newIndex);
+        public void MoveRange(int32 oldIndex, int32 count, int32 newIndex) => _styles.MoveRange(oldIndex, count, newIndex);
 
         /// <inheritdoc/>
         public void RemoveAll(IEnumerable<IStyle> items) => _styles.RemoveAll(items);
 
         /// <inheritdoc/>
-        public void RemoveRange(int index, int count) => _styles.RemoveRange(index, count);
+        public void RemoveRange(int32 index, int32 count) => _styles.RemoveRange(index, count);
 
         /// <inheritdoc/>
-        public int IndexOf(IStyle item) => _styles.IndexOf(item);
+        public int32 IndexOf(IStyle item) => _styles.IndexOf(item);
 
         /// <inheritdoc/>
-        public void Insert(int index, IStyle item) => _styles.Insert(index, item);
+        public void Insert(int32 index, IStyle item) => _styles.Insert(index, item);
 
         /// <inheritdoc/>
-        public void RemoveAt(int index) => _styles.RemoveAt(index);
+        public void RemoveAt(int32 index) => _styles.RemoveAt(index);
 
         /// <inheritdoc/>
         public void Add(IStyle item) => _styles.Add(item);
@@ -168,7 +168,7 @@ namespace Avalonia.Styling
         public bool Contains(IStyle item) => _styles.Contains(item);
 
         /// <inheritdoc/>
-        public void CopyTo(IStyle[] array, int arrayIndex) => _styles.CopyTo(array, arrayIndex);
+        public void CopyTo(IStyle[] array, int32 arrayIndex) => _styles.CopyTo(array, arrayIndex);
 
         /// <inheritdoc/>
         public bool Remove(IStyle item) => _styles.Remove(item);

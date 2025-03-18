@@ -199,7 +199,7 @@ namespace Avalonia.Collections.Pooled
         }
 
         [DoesNotReturn]
-        internal static void ThrowArgumentOutOfRangeException(ExceptionArgument argument, int paramNumber, ExceptionResource resource)
+        internal static void ThrowArgumentOutOfRangeException(ExceptionArgument argument, int32 paramNumber, ExceptionResource resource)
         {
             throw GetArgumentOutOfRangeException(argument, paramNumber, resource);
         }
@@ -295,7 +295,7 @@ namespace Avalonia.Collections.Pooled
         }
 
         [DoesNotReturn]
-        internal static void ThrowInvalidOperationException_EnumCurrent(int index)
+        internal static void ThrowInvalidOperationException_EnumCurrent(int32 index)
         {
             throw GetInvalidOperationException_EnumCurrent(index);
         }
@@ -371,12 +371,12 @@ namespace Avalonia.Collections.Pooled
             return new ArgumentException(GetResourceString(resource), GetArgumentName(argument));
         }
 
-        private static ArgumentOutOfRangeException GetArgumentOutOfRangeException(ExceptionArgument argument, int paramNumber, ExceptionResource resource)
+        private static ArgumentOutOfRangeException GetArgumentOutOfRangeException(ExceptionArgument argument, int32 paramNumber, ExceptionResource resource)
         {
             return new ArgumentOutOfRangeException(GetArgumentName(argument) + "[" + paramNumber.ToString() + "]", GetResourceString(resource));
         }
 
-        private static InvalidOperationException GetInvalidOperationException_EnumCurrent(int index)
+        private static InvalidOperationException GetInvalidOperationException_EnumCurrent(int32 index)
         {
             return new InvalidOperationException(
                 index < 0 ?
@@ -400,7 +400,7 @@ namespace Avalonia.Collections.Pooled
         {
             if (typeof(T) != typeof(byte) && typeof(T) != typeof(sbyte) &&
                 typeof(T) != typeof(short) && typeof(T) != typeof(ushort) &&
-                typeof(T) != typeof(int) && typeof(T) != typeof(uint) &&
+                typeof(T) != typeof(int32) && typeof(T) != typeof(uint) &&
                 typeof(T) != typeof(long) && typeof(T) != typeof(ulong) &&
                 typeof(T) != typeof(float) && typeof(T) != typeof(double))
             {

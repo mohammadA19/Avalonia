@@ -16,10 +16,10 @@ namespace Avalonia.Utilities
     internal class SafeEnumerableHashSet<T> : IEnumerable<T>
     {
         private HashSet<T> _hashSet = new();
-        private int _generation;
-        private int _enumCount = 0;
+        private int32 _generation;
+        private int32 _enumCount = 0;
 
-        public int Count => _hashSet.Count;
+        public int32 Count => _hashSet.Count;
         internal HashSet<T> Inner => _hashSet;
 
         public void Add(T item) => GetSet().Add(item);
@@ -45,7 +45,7 @@ namespace Avalonia.Utilities
         public struct Enumerator : IEnumerator<T>, IEnumerator
         {
             private readonly SafeEnumerableHashSet<T> _owner;
-            private readonly int _generation;
+            private readonly int32 _generation;
             private HashSet<T>.Enumerator _enumerator;
 
             internal Enumerator(SafeEnumerableHashSet<T> owner, HashSet<T> list)

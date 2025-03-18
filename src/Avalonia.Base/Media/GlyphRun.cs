@@ -17,7 +17,7 @@ namespace Avalonia.Media
 
         private IRef<IGlyphRunImpl>? _platformImpl;
         private double _fontRenderingEmSize;
-        private int _biDiLevel;
+        private int32 _biDiLevel;
         private GlyphRunMetrics? _glyphRunMetrics;
         private ReadOnlyMemory<char> _characters;
         private IReadOnlyList<GlyphInfo> _glyphInfos;
@@ -44,7 +44,7 @@ namespace Avalonia.Media
             ReadOnlyMemory<char> characters,
             IReadOnlyList<ushort> glyphIndices,
             Point? baselineOrigin = null,
-            int biDiLevel = 0)
+            int32 biDiLevel = 0)
             : this(glyphTypeface, fontRenderingEmSize, characters,
                 CreateGlyphInfos(glyphIndices, fontRenderingEmSize, glyphTypeface), baselineOrigin, biDiLevel)
         {
@@ -66,7 +66,7 @@ namespace Avalonia.Media
             ReadOnlyMemory<char> characters,
             IReadOnlyList<GlyphInfo> glyphInfos,
             Point? baselineOrigin = null,
-            int biDiLevel = 0)
+            int32 biDiLevel = 0)
         {
             GlyphTypeface = glyphTypeface;
 
@@ -198,7 +198,7 @@ namespace Avalonia.Media
         /// <summary>
         ///     Gets or sets the bidirectional nesting level of the <see cref="GlyphRun"/>.
         /// </summary>
-        public int BiDiLevel
+        public int32 BiDiLevel
         {
             get => _biDiLevel;
             set => Set(ref _biDiLevel, value);
@@ -448,7 +448,7 @@ namespace Avalonia.Media
         /// <returns>
         /// The glyph index.
         /// </returns>
-        public int FindGlyphIndex(int characterIndex)
+        public int32 FindGlyphIndex(int32 characterIndex)
         {
             if (_hasOneCharPerCluster)
             {
@@ -532,7 +532,7 @@ namespace Avalonia.Media
         /// <returns>
         /// The nearest <see cref="CharacterHit"/>.
         /// </returns>
-        public CharacterHit FindNearestCharacterHit(int index, out double width)
+        public CharacterHit FindNearestCharacterHit(int32 index, out double width)
         {
             width = 0.0;
 
@@ -590,7 +590,7 @@ namespace Avalonia.Media
 
                 if (IsLeftToRight)
                 {
-                    for (int i = 1; i < _glyphInfos.Count; i++)
+                    for (int32 i = 1; i < _glyphInfos.Count; i++)
                     {
                         nextCluster = _glyphInfos[i].GlyphCluster;
 
@@ -608,7 +608,7 @@ namespace Avalonia.Media
                 }
                 else
                 {
-                    for (int i = _glyphInfos.Count - 1; i >= 0; i--)
+                    for (int32 i = _glyphInfos.Count - 1; i >= 0; i--)
                     {
                         nextCluster = _glyphInfos[i].GlyphCluster;
 
@@ -640,7 +640,7 @@ namespace Avalonia.Media
 
         private GlyphRunMetrics CreateGlyphRunMetrics()
         {
-            int firstCluster, lastCluster;
+            int32 firstCluster, lastCluster;
 
             if (Characters.IsEmpty || _glyphInfos.Count == 0)
             {
@@ -702,7 +702,7 @@ namespace Avalonia.Media
             };
         }
 
-        private int GetTrailingWhitespaceLength(bool isReversed, out int newLineLength, out int glyphCount)
+        private int32 GetTrailingWhitespaceLength(bool isReversed, out int32 newLineLength, out int32 glyphCount)
         {
             if (isReversed)
             {
@@ -768,7 +768,7 @@ namespace Avalonia.Media
             return trailingWhitespaceLength;
         }
 
-        private int GetTrailingWhitespaceLengthRightToLeft(out int newLineLength, out int glyphCount)
+        private int32 GetTrailingWhitespaceLengthRightToLeft(out int32 newLineLength, out int32 glyphCount)
         {
             glyphCount = 0;
             newLineLength = 0;

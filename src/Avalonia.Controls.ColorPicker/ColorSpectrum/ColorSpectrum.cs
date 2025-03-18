@@ -87,12 +87,12 @@ namespace Avalonia.Controls.Primitives
         private ColorSpectrumComponents _componentsFromLastBitmapCreation = ColorSpectrumComponents.HueSaturation;
         private double _imageWidthFromLastBitmapCreation = 0.0;
         private double _imageHeightFromLastBitmapCreation = 0.0;
-        private int _minHueFromLastBitmapCreation = 0;
-        private int _maxHueFromLastBitmapCreation = 0;
-        private int _minSaturationFromLastBitmapCreation = 0;
-        private int _maxSaturationFromLastBitmapCreation = 0;
-        private int _minValueFromLastBitmapCreation = 0;
-        private int _maxValueFromLastBitmapCreation = 0;
+        private int32 _minHueFromLastBitmapCreation = 0;
+        private int32 _maxHueFromLastBitmapCreation = 0;
+        private int32 _minSaturationFromLastBitmapCreation = 0;
+        private int32 _maxSaturationFromLastBitmapCreation = 0;
+        private int32 _minValueFromLastBitmapCreation = 0;
+        private int32 _maxValueFromLastBitmapCreation = 0;
 
         private Color _oldColor = Color.FromArgb(255, 255, 255, 255);
         private HsvColor _oldHsvColor = HsvColor.FromAhsv(0.0f, 0.0f, 1.0f, 1.0f);
@@ -428,8 +428,8 @@ namespace Avalonia.Controls.Primitives
             else if (change.Property == MinHueProperty ||
                      change.Property == MaxHueProperty)
             {
-                int minHue = MinHue;
-                int maxHue = MaxHue;
+                int32 minHue = MinHue;
+                int32 maxHue = MaxHue;
 
                 if (minHue < 0 || minHue > 359)
                 {
@@ -453,8 +453,8 @@ namespace Avalonia.Controls.Primitives
             else if (change.Property == MinSaturationProperty ||
                      change.Property == MaxSaturationProperty)
             {
-                int minSaturation = MinSaturation;
-                int maxSaturation = MaxSaturation;
+                int32 minSaturation = MinSaturation;
+                int32 maxSaturation = MaxSaturation;
 
                 if (minSaturation < 0 || minSaturation > 100)
                 {
@@ -478,8 +478,8 @@ namespace Avalonia.Controls.Primitives
             else if (change.Property == MinValueProperty ||
                      change.Property == MaxValueProperty)
             {
-                int minValue = MinValue;
-                int maxValue = MaxValue;
+                int32 minValue = MinValue;
+                int32 maxValue = MaxValue;
 
                 if (minValue < 0 || minValue > 100)
                 {
@@ -741,9 +741,9 @@ namespace Avalonia.Controls.Primitives
             }
 
             // Now we need to find the index into the array of HSL values at each point in the spectrum m_image.
-            int x = (int)Math.Round(xPosition);
-            int y = (int)Math.Round(yPosition);
-            int width = (int)Math.Round(_imageWidthFromLastBitmapCreation);
+            int32 x = (int32)Math.Round(xPosition);
+            int32 y = (int32)Math.Round(yPosition);
+            int32 width = (int32)Math.Round(_imageWidthFromLastBitmapCreation);
 
             if (x < 0)
             {
@@ -751,7 +751,7 @@ namespace Avalonia.Controls.Primitives
             }
             else if (x >= _imageWidthFromLastBitmapCreation)
             {
-                x = (int)Math.Round(_imageWidthFromLastBitmapCreation) - 1;
+                x = (int32)Math.Round(_imageWidthFromLastBitmapCreation) - 1;
             }
 
             if (y < 0)
@@ -760,7 +760,7 @@ namespace Avalonia.Controls.Primitives
             }
             else if (y >= _imageHeightFromLastBitmapCreation)
             {
-                y = (int)Math.Round(_imageHeightFromLastBitmapCreation) - 1;
+                y = (int32)Math.Round(_imageHeightFromLastBitmapCreation) - 1;
             }
 
             // The gradient image contains two dimensions of HSL information, but not the third.
@@ -1076,12 +1076,12 @@ namespace Avalonia.Controls.Primitives
             _spectrumOverlayEllipse.Height = minDimension;
 
             HsvColor hsvColor = HsvColor;
-            int minHue = MinHue;
-            int maxHue = MaxHue;
-            int minSaturation = MinSaturation;
-            int maxSaturation = MaxSaturation;
-            int minValue = MinValue;
-            int maxValue = MaxValue;
+            int32 minHue = MinHue;
+            int32 maxHue = MaxHue;
+            int32 minSaturation = MinSaturation;
+            int32 maxSaturation = MaxSaturation;
+            int32 minValue = MinValue;
+            int32 maxValue = MaxValue;
             ColorSpectrumShape shape = Shape;
             ColorSpectrumComponents components = Components;
 
@@ -1109,7 +1109,7 @@ namespace Avalonia.Controls.Primitives
             // Remember bitmaps in Avalonia are rendered mapping to actual device pixels, not the device-
             // independent pixels of controls.
             var scale = LayoutHelper.GetLayoutScale(this);
-            int pixelDimension = (int)Math.Round(minDimension * scale);
+            int32 pixelDimension = (int32)Math.Round(minDimension * scale);
             var pixelCount = pixelDimension * pixelDimension;
             var pixelDataSize = pixelCount * 4;
             // We'll only save pixel data for the middle bitmaps if our third dimension is hue.
@@ -1145,9 +1145,9 @@ namespace Avalonia.Controls.Primitives
                 // but the running time savings after that are *huge* when we can just set an opacity instead of generating a brand new bitmap.
                 if (shape == ColorSpectrumShape.Box)
                 {
-                    for (int x = pixelDimension - 1; x >= 0; --x)
+                    for (int32 x = pixelDimension - 1; x >= 0; --x)
                     {
-                        for (int y = pixelDimension - 1; y >= 0; --y)
+                        for (int32 y = pixelDimension - 1; y >= 0; --y)
                         {
                             FillPixelForBox(
                                 x, y, hsv, pixelDimension, components, minHue, maxHue, minSaturation, maxSaturation, minValue, maxValue,
@@ -1158,9 +1158,9 @@ namespace Avalonia.Controls.Primitives
                 }
                 else
                 {
-                    for (int y = 0; y < pixelDimension; ++y)
+                    for (int32 y = 0; y < pixelDimension; ++y)
                     {
-                        for (int x = 0; x < pixelDimension; ++x)
+                        for (int32 x = 0; x < pixelDimension; ++x)
                         {
                             FillPixelForRing(
                                 x, y, pixelDimension / 2.0, hsv, components, minHue, maxHue, minSaturation, maxSaturation, minValue, maxValue,
@@ -1173,8 +1173,8 @@ namespace Avalonia.Controls.Primitives
 
             await Dispatcher.UIThread.InvokeAsync(() =>
             {
-                int pixelWidth = pixelDimension;
-                int pixelHeight = pixelDimension;
+                int32 pixelWidth = pixelDimension;
+                int32 pixelHeight = pixelDimension;
 
                 ColorSpectrumComponents components2 = Components;
 
@@ -1234,7 +1234,7 @@ namespace Avalonia.Controls.Primitives
             double x,
             double y,
             Hsv baseHsv,
-            int minDimension,
+            int32 minDimension,
             ColorSpectrumComponents components,
             double minHue,
             double maxHue,
@@ -1687,8 +1687,8 @@ namespace Avalonia.Controls.Primitives
                             spectrumOverlayBrush = new ImageBrush(_hueRedBitmap);
                         }
 
-                        _spectrumOverlayRectangle.Opacity = sextant - (int)sextant;
-                        _spectrumOverlayEllipse.Opacity = sextant - (int)sextant;
+                        _spectrumOverlayRectangle.Opacity = sextant - (int32)sextant;
+                        _spectrumOverlayEllipse.Opacity = sextant - (int32)sextant;
                         _spectrumRectangle.Fill = spectrumBrush;
                         _spectrumEllipse.Fill = spectrumBrush;
                         _spectrumOverlayRectangle.Fill = spectrumOverlayBrush;

@@ -116,12 +116,12 @@ namespace Avalonia.Controls
         /// </summary>
         public void UnselectAll() => Selection.Clear();
 
-        protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+        protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
         {
             return new ListBoxItem();
         }
 
-        protected internal override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
+        protected internal override bool NeedsContainerOverride(object? item, int32 index, out object? recycleKey)
         {
             return NeedsContainer<ListBoxItem>(item, out recycleKey);
         }

@@ -112,7 +112,7 @@ namespace Avalonia.X11.NativeDialogs
         public static extern void gtk_widget_hide(IntPtr gtkWidget);
 
         [DllImport(GtkName)]
-        private static extern bool gtk_init_check(int argc, IntPtr argv);
+        private static extern bool gtk_init_check(int32 argc, IntPtr argv);
 
         [DllImport(GdkName)]
         private static extern IntPtr gdk_x11_window_foreign_new_for_display(IntPtr display, IntPtr xid);
@@ -134,7 +134,7 @@ namespace Avalonia.X11.NativeDialogs
         private static extern IntPtr gdk_x11_display_get_xdisplay(IntPtr display);
 
         [DllImport(GtkName)]
-        private static extern IntPtr gtk_application_new(Utf8Buffer appId, int flags);
+        private static extern IntPtr gtk_application_new(Utf8Buffer appId, int32 flags);
 
         [DllImport(GdkName)]
         public static extern void gdk_window_set_transient_for(IntPtr window, IntPtr parent);

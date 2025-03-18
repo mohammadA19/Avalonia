@@ -51,7 +51,7 @@ namespace Avalonia.Media
             var points = Points;
             if (points.Count > 0)
             {
-                for (int i = 0; i < points.Count; i++)
+                for (int32 i = 0; i < points.Count; i++)
                 {
                     ctx.LineTo(points[i], IsStroked);
                 }

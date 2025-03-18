@@ -176,7 +176,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// DefinitionBase's index in the parents collection.
         /// </summary>
-        internal int Index
+        internal int32 Index
         {
             get => (_parentIndex);
             set
@@ -356,7 +356,7 @@ namespace Avalonia.Controls
 
             if (id.Length > 0)
             {
-                int i = -1;
+                int32 i = -1;
                 while (++i < id.Length)
                 {
                     bool isDigit = Char.IsDigit(id[i]);
@@ -428,7 +428,7 @@ namespace Avalonia.Controls
         }
 
         private Flags _flags;                           //  flags reflecting various aspects of internal state
-        internal int _parentIndex = -1;                  //  this instance's index in parent's children collection
+        internal int32 _parentIndex = -1;                  //  this instance's index in parent's children collection
 
         private Grid.LayoutTimeSizeType _sizeType;      //  layout-time user size type. it may differ from _userSizeValueCache.UnitType when calculating "to-content"
 
@@ -539,7 +539,7 @@ namespace Avalonia.Controls
 
                 if (_broadcastInvalidation)
                 {
-                    for (int i = 0, count = _registry.Count; i < count; ++i)
+                    for (int32 i = 0, count = _registry.Count; i < count; ++i)
                     {
                         Grid parentGrid = _registry[i].Parent!;
                         parentGrid.Invalidate();
@@ -588,7 +588,7 @@ namespace Avalonia.Controls
             {
                 _userSize = new GridLength(1, GridUnitType.Auto);
 
-                for (int i = 0, count = _registry.Count; i < count; ++i)
+                for (int32 i = 0, count = _registry.Count; i < count; ++i)
                 {
                     Debug.Assert(_userSize.GridUnitType == GridUnitType.Auto
                                 || _userSize.GridUnitType == GridUnitType.Pixel);
@@ -624,7 +624,7 @@ namespace Avalonia.Controls
                 double sharedMinSize = 0;
 
                 //  accumulate min size of all participating definitions
-                for (int i = 0, count = _registry.Count; i < count; ++i)
+                for (int32 i = 0, count = _registry.Count; i < count; ++i)
                 {
                     sharedMinSize = Math.Max(sharedMinSize, _registry[i].MinSize);
                 }
@@ -632,7 +632,7 @@ namespace Avalonia.Controls
                 bool sharedMinSizeChanged = !MathUtilities.AreClose(_minSize, sharedMinSize);
 
                 //  compare accumulated min size with min sizes of the individual definitions
-                for (int i = 0, count = _registry.Count; i < count; ++i)
+                for (int32 i = 0, count = _registry.Count; i < count; ++i)
                 {
                     DefinitionBase definitionBase = _registry[i];
 

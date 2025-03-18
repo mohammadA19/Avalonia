@@ -47,7 +47,7 @@ namespace Avalonia.Media.Imaging
         /// <param name="size">The size of the bitmap in device pixels.</param>
         /// <param name="dpi">The DPI of the bitmap.</param>
         /// <param name="stride">The number of bytes per row.</param>
-        public unsafe WriteableBitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int stride)
+        public unsafe WriteableBitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int32 stride)
             : this(size, dpi, format, alphaFormat)
         {
             var minStride = (format.BitsPerPixel * size.Width + 7) / 8;
@@ -78,7 +78,7 @@ namespace Avalonia.Media.Imaging
                 });
         }
 
-        public override void CopyPixels(PixelRect sourceRect, IntPtr buffer, int bufferSize, int stride)
+        public override void CopyPixels(PixelRect sourceRect, IntPtr buffer, int32 bufferSize, int32 stride)
         {
             using (var fb = Lock())
                 CopyPixelsCore(sourceRect, buffer, bufferSize, stride, fb);
@@ -99,7 +99,7 @@ namespace Avalonia.Media.Imaging
         /// <param name="width">The desired width of the resulting bitmap.</param>
         /// <param name="interpolationMode">The <see cref="BitmapInterpolationMode"/> to use should any scaling be required.</param>
         /// <returns>An instance of the <see cref="WriteableBitmap"/> class.</returns>
-        public new static WriteableBitmap DecodeToWidth(Stream stream, int width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
+        public new static WriteableBitmap DecodeToWidth(Stream stream, int32 width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             var ri = GetFactory();
 
@@ -114,7 +114,7 @@ namespace Avalonia.Media.Imaging
         /// <param name="height">The desired height of the resulting bitmap.</param>
         /// <param name="interpolationMode">The <see cref="BitmapInterpolationMode"/> to use should any scaling be required.</param>
         /// <returns>An instance of the <see cref="WriteableBitmap"/> class.</returns>
-        public new static WriteableBitmap DecodeToHeight(Stream stream, int height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
+        public new static WriteableBitmap DecodeToHeight(Stream stream, int32 height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             var ri = GetFactory();
 

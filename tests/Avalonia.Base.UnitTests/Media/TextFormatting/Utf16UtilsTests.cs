@@ -14,7 +14,7 @@ public class Utf16UtilsTests
         InlineData("12\ud87e\udc3212", 2, 2),
         InlineData("12\ud87e\udc3212", 3, 4),
     ]
-    public void CharacterOffsetToStringOffset(string s, int charOffset, int stringOffset)
+    public void CharacterOffsetToStringOffset(string s, int32 charOffset, int32 stringOffset)
     {
         Assert.Equal(stringOffset, Utf16Utils.CharacterOffsetToStringOffset(s, charOffset, false));
     }
@@ -23,7 +23,7 @@ public class Utf16UtilsTests
      InlineData("\ud87e\udc32", 2, true),
      InlineData("12", 2, true),
     ]
-    public void CharacterOffsetToStringOffsetThrowsOnOutOfRange(string s, int charOffset, bool throws)
+    public void CharacterOffsetToStringOffsetThrowsOnOutOfRange(string s, int32 charOffset, bool throws)
     {
         if (throws)
             Assert.Throws<IndexOutOfRangeException>(() =>

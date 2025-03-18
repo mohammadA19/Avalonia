@@ -15,7 +15,7 @@ namespace Avalonia.Media.TextFormatting
         private readonly TextLine[] _textLines;
         private readonly CachedMetrics _metrics = new();
 
-        private int _textSourceLength;
+        private int32 _textSourceLength;
 
         // TODO12: Remove in 12.0.0 and make fontFeatures parameter in main ctor optional
         /// <summary>
@@ -50,7 +50,7 @@ namespace Avalonia.Media.TextFormatting
             double maxHeight = double.PositiveInfinity,
             double lineHeight = double.NaN,
             double letterSpacing = 0,
-            int maxLines = 0,
+            int32 maxLines = 0,
             IReadOnlyList<ValueSpan<TextRunProperties>>? textStyleOverrides = null)
             : this(text, typeface, null, fontSize, foreground, textAlignment, textWrapping, textTrimming, textDecorations, 
             flowDirection, maxWidth, maxHeight, lineHeight, letterSpacing, maxLines, textStyleOverrides)
@@ -92,7 +92,7 @@ namespace Avalonia.Media.TextFormatting
             double maxHeight = double.PositiveInfinity,
             double lineHeight = double.NaN,
             double letterSpacing = 0,
-            int maxLines = 0,
+            int32 maxLines = 0,
             IReadOnlyList<ValueSpan<TextRunProperties>>? textStyleOverrides = null)
         {
             _paragraphProperties =
@@ -127,7 +127,7 @@ namespace Avalonia.Media.TextFormatting
             TextTrimming? textTrimming = null,
             double maxWidth = double.PositiveInfinity,
             double maxHeight = double.PositiveInfinity,
-            int maxLines = 0)
+            int32 maxLines = 0)
         {
             _textSource = textSource;
 
@@ -166,7 +166,7 @@ namespace Avalonia.Media.TextFormatting
         /// <summary>
         /// Gets the maximum number of text lines.
         /// </summary>
-        public int MaxLines { get; }
+        public int32 MaxLines { get; }
 
         /// <summary>
         /// Gets the text spacing.
@@ -305,7 +305,7 @@ namespace Avalonia.Media.TextFormatting
         /// </summary>
         /// <param name="textPosition">The text position.</param>
         /// <returns></returns>
-        public Rect HitTestTextPosition(int textPosition)
+        public Rect HitTestTextPosition(int32 textPosition)
         {
             if (_textLines.Length == 0)
             {
@@ -346,7 +346,7 @@ namespace Avalonia.Media.TextFormatting
             return new Rect();
         }
 
-        public IEnumerable<Rect> HitTestTextRange(int start, int length)
+        public IEnumerable<Rect> HitTestTextRange(int32 start, int32 length)
         {
             if (start + length <= 0)
             {
@@ -435,7 +435,7 @@ namespace Avalonia.Media.TextFormatting
         }
 
 
-        public int GetLineIndexFromCharacterIndex(int charIndex, bool trailingEdge)
+        public int32 GetLineIndexFromCharacterIndex(int32 charIndex, bool trailingEdge)
         {
             if (charIndex < 0)
             {

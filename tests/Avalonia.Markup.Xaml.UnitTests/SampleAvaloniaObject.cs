@@ -7,10 +7,10 @@ namespace Avalonia.Markup.Xaml.UnitTests
         public static readonly StyledProperty<string> StringProperty =
             AvaloniaProperty.Register<AvaloniaObject, string>("StrProp", string.Empty);
 
-        public static readonly StyledProperty<int> IntProperty =
-            AvaloniaProperty.Register<AvaloniaObject, int>("IntProp");
+        public static readonly StyledProperty<int32> IntProperty =
+            AvaloniaProperty.Register<AvaloniaObject, int32>("IntProp");
 
-        public int Int
+        public int32 Int
         {
             get => GetValue(IntProperty);
             set => SetValue(IntProperty, value);

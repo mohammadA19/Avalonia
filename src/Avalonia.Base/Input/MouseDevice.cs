@@ -18,7 +18,7 @@ namespace Avalonia.Input
     [PrivateApi]
     public class MouseDevice : IMouseDevice, IDisposable
     {
-        private int _clickCount;
+        private int32 _clickCount;
         private Rect _lastClickRect;
         private ulong _lastClickTime;
 
@@ -37,7 +37,7 @@ namespace Avalonia.Input
                 ProcessRawEvent(margs);
         }
 
-        static int ButtonCount(PointerPointProperties props)
+        static int32 ButtonCount(PointerPointProperties props)
         {
             var rv = 0;
             if (props.IsLeftButtonPressed)

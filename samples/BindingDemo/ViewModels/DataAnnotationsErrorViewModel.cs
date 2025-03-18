@@ -9,6 +9,6 @@ namespace BindingDemo.ViewModels
         public string PhoneNumber { get; set; }
 
         [Range(0, 9)]
-        public int LessThan10 { get; set; }
+        public int32 LessThan10 { get; set; }
     }
 }

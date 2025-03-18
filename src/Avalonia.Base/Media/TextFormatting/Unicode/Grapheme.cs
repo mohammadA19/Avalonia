@@ -5,7 +5,7 @@
     /// </summary>
     public readonly ref struct Grapheme
     {
-        public Grapheme(Codepoint firstCodepoint, int offset, int length)
+        public Grapheme(Codepoint firstCodepoint, int32 offset, int32 length)
         {
             FirstCodepoint = firstCodepoint;
             Offset = offset;
@@ -20,11 +20,11 @@
         /// <summary>
         /// Gets the starting code unit offset of this grapheme inside its containing text.
         /// </summary>
-        public int Offset { get; }
+        public int32 Offset { get; }
 
         /// <summary>
         /// Gets the length of this grapheme, in code units.
         /// </summary>
-        public int Length { get; }
+        public int32 Length { get; }
     }
 }

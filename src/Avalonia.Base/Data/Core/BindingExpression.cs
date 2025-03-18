@@ -232,7 +232,7 @@ internal partial class BindingExpression : UntypedBindingExpressionBase, IDescri
     /// <param name="dataValidationError">
     /// The data validation error associated with the current value, if any.
     /// </param>
-    internal void OnNodeValueChanged(int nodeIndex, object? value, Exception? dataValidationError)
+    internal void OnNodeValueChanged(int32 nodeIndex, object? value, Exception? dataValidationError)
     {
         Debug.Assert(value is not BindingNotification);
         Debug.Assert(nodeIndex >= 0 && nodeIndex < _nodes.Count);
@@ -283,7 +283,7 @@ internal partial class BindingExpression : UntypedBindingExpressionBase, IDescri
     /// The <see cref="ExpressionNode.Index"/> or -1 if the source is null.
     /// </param>
     /// <param name="error">The error message.</param>
-    internal void OnNodeError(int nodeIndex, string error)
+    internal void OnNodeError(int32 nodeIndex, string error)
     {
         // Set the source of all nodes after the one that errored to unset. This needs to be done
         // for each node individually because setting the source to unset will not result in
@@ -424,7 +424,7 @@ internal partial class BindingExpression : UntypedBindingExpressionBase, IDescri
         }
     }
 
-    private string CalculateErrorPoint(int nodeIndex)
+    private string CalculateErrorPoint(int32 nodeIndex)
     {
         // Build a string describing the binding chain up to the node that errored.
         var result = new StringBuilder();

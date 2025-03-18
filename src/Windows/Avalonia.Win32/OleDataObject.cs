@@ -99,12 +99,12 @@ namespace Avalonia.Win32
         private static IEnumerable<string> ReadFileNamesFromHGlobal(IntPtr hGlobal)
         {
             var files = new List<string>();
-            int fileCount = UnmanagedMethods.DragQueryFile(hGlobal, -1, null, 0);
+            int32 fileCount = UnmanagedMethods.DragQueryFile(hGlobal, -1, null, 0);
             if (fileCount > 0)
             {
-                for (int i = 0; i < fileCount; i++)
+                for (int32 i = 0; i < fileCount; i++)
                 {
-                    int pathLen = UnmanagedMethods.DragQueryFile(hGlobal, i, null, 0);
+                    int32 pathLen = UnmanagedMethods.DragQueryFile(hGlobal, i, null, 0);
                     var sb = StringBuilderCache.Acquire(pathLen+1);
 
                     if (UnmanagedMethods.DragQueryFile(hGlobal, i, sb, sb.Capacity) == pathLen)
@@ -134,7 +134,7 @@ namespace Avalonia.Win32
             IntPtr source = UnmanagedMethods.GlobalLock(hGlobal);
             try
             {
-                int size = (int)UnmanagedMethods.GlobalSize(hGlobal).ToInt64();
+                int32 size = (int32)UnmanagedMethods.GlobalSize(hGlobal).ToInt64();
                 byte[] data = new byte[size];
                 Marshal.Copy(source, data, 0, size);
                 return data;
@@ -148,7 +148,7 @@ namespace Avalonia.Win32
         private unsafe IEnumerable<string> GetDataFormatsCore()
         {
             var formatsList = new List<string>();
-            var enumFormat = _wrapped.EnumFormatEtc((int)DATADIR.DATADIR_GET);
+            var enumFormat = _wrapped.EnumFormatEtc((int32)DATADIR.DATADIR_GET);
 
             if (enumFormat != null)
             {

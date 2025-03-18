@@ -37,11 +37,11 @@ namespace Avalonia.Collections.Pooled
         private object? _syncRoot;
 
         private T[] _array; // Storage for stack elements. Do not rename (binary serialization)
-        private int _size; // Number of items in the stack. Do not rename (binary serialization)
-        private int _version; // Used to keep enumerator in sync w/ collection. Do not rename (binary serialization)
+        private int32 _size; // Number of items in the stack. Do not rename (binary serialization)
+        private int32 _version; // Used to keep enumerator in sync w/ collection. Do not rename (binary serialization)
         private readonly bool _clearOnFree;
 
-        private const int DefaultCapacity = 4;
+        private const int32 DefaultCapacity = 4;
 
         #region Constructors
 
@@ -74,25 +74,25 @@ namespace Avalonia.Collections.Pooled
         /// Create a stack with a specific initial capacity.  The initial capacity
         /// must be a non-negative number.
         /// </summary>
-        public PooledStack(int capacity) : this(capacity, ClearMode.Auto, ArrayPool<T>.Shared) { }
+        public PooledStack(int32 capacity) : this(capacity, ClearMode.Auto, ArrayPool<T>.Shared) { }
 
         /// <summary>
         /// Create a stack with a specific initial capacity.  The initial capacity
         /// must be a non-negative number.
         /// </summary>
-        public PooledStack(int capacity, ClearMode clearMode) : this(capacity, clearMode, ArrayPool<T>.Shared) { }
+        public PooledStack(int32 capacity, ClearMode clearMode) : this(capacity, clearMode, ArrayPool<T>.Shared) { }
 
         /// <summary>
         /// Create a stack with a specific initial capacity.  The initial capacity
         /// must be a non-negative number.
         /// </summary>
-        public PooledStack(int capacity, ArrayPool<T> customPool) : this(capacity, ClearMode.Auto, customPool) { }
+        public PooledStack(int32 capacity, ArrayPool<T> customPool) : this(capacity, ClearMode.Auto, customPool) { }
 
         /// <summary>
         /// Create a stack with a specific initial capacity.  The initial capacity
         /// must be a non-negative number.
         /// </summary>
-        public PooledStack(int capacity, ClearMode clearMode, ArrayPool<T> customPool)
+        public PooledStack(int32 capacity, ClearMode clearMode, ArrayPool<T> customPool)
         {
             if (capacity < 0)
             {
@@ -221,7 +221,7 @@ namespace Avalonia.Collections.Pooled
         /// <summary>
         /// The number of items in the stack.
         /// </summary>
-        public int Count => _size;
+        public int32 Count => _size;
 
         /// <summary>
         /// Returns the ClearMode behavior for the collection, denoting whether values are
@@ -276,12 +276,12 @@ namespace Avalonia.Collections.Pooled
         /// This method removes all items which match the predicate.
         /// The complexity is O(n).
         /// </summary>
-        public int RemoveWhere(Func<T, bool> match)
+        public int32 RemoveWhere(Func<T, bool> match)
         {
             if (match == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.match);
 
-            int freeIndex = 0;   // the first free slot in items array
+            int32 freeIndex = 0;   // the first free slot in items array
 
             // Find the first item which needs to be removed.
             while (freeIndex < _size && !match(_array[freeIndex]))
@@ -289,7 +289,7 @@ namespace Avalonia.Collections.Pooled
             if (freeIndex >= _size)
                 return 0;
 
-            int current = freeIndex + 1;
+            int32 current = freeIndex + 1;
             while (current < _size)
             {
                 // Find the first item which needs to be kept.
@@ -309,14 +309,14 @@ namespace Avalonia.Collections.Pooled
                 Array.Clear(_array, freeIndex, _size - freeIndex);
             }
 
-            int result = _size - freeIndex;
+            int32 result = _size - freeIndex;
             _size = freeIndex;
             _version++;
             return result;
         }
 
         // Copies the stack into an array.
-        public void CopyTo(T[] array, int arrayIndex)
+        public void CopyTo(T[] array, int32 arrayIndex)
         {
             if (array == null)
             {
@@ -334,8 +334,8 @@ namespace Avalonia.Collections.Pooled
             }
 
             Debug.Assert(array != _array);
-            int srcIndex = 0;
-            int dstIndex = arrayIndex + _size;
+            int32 srcIndex = 0;
+            int32 dstIndex = arrayIndex + _size;
             while (srcIndex < _size)
             {
                 array[--dstIndex] = _array[srcIndex++];
@@ -349,15 +349,15 @@ namespace Avalonia.Collections.Pooled
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            int srcIndex = 0;
-            int dstIndex = _size;
+            int32 srcIndex = 0;
+            int32 dstIndex = _size;
             while (srcIndex < _size)
             {
                 span[--dstIndex] = _array[srcIndex++];
             }
         }
 
-        void ICollection.CopyTo(Array array, int arrayIndex)
+        void ICollection.CopyTo(Array array, int32 arrayIndex)
         {
             if (array == null)
             {
@@ -418,7 +418,7 @@ namespace Avalonia.Collections.Pooled
                 return;
             }
 
-            int threshold = (int)(_array.Length * 0.9);
+            int32 threshold = (int32)(_array.Length * 0.9);
             if (_size < threshold)
             {
                 var newArray = _pool.Rent(_size);
@@ -445,7 +445,7 @@ namespace Avalonia.Collections.Pooled
         /// </summary>
         public T Peek()
         {
-            int size = _size - 1;
+            int32 size = _size - 1;
             T[] array = _array;
 
             if ((uint)size >= (uint)array.Length)
@@ -458,7 +458,7 @@ namespace Avalonia.Collections.Pooled
 
         public bool TryPeek([MaybeNullWhen(false)] out T result)
         {
-            int size = _size - 1;
+            int32 size = _size - 1;
             T[] array = _array;
 
             if ((uint)size >= (uint)array.Length)
@@ -476,7 +476,7 @@ namespace Avalonia.Collections.Pooled
         /// </summary>
         public T Pop()
         {
-            int size = _size - 1;
+            int32 size = _size - 1;
             T[] array = _array;
 
             // if (_size == 0) is equivalent to if (size == -1), and this case
@@ -499,7 +499,7 @@ namespace Avalonia.Collections.Pooled
 
         public bool TryPop([MaybeNullWhen(false)] out T result)
         {
-            int size = _size - 1;
+            int32 size = _size - 1;
             T[] array = _array;
 
             if ((uint)size >= (uint)array.Length)
@@ -523,7 +523,7 @@ namespace Avalonia.Collections.Pooled
         /// </summary>
         public void Push(T item)
         {
-            int size = _size;
+            int32 size = _size;
             T[] array = _array;
 
             if ((uint)size < (uint)array.Length)
@@ -559,7 +559,7 @@ namespace Avalonia.Collections.Pooled
                 return Array.Empty<T>();
 
             T[] objArray = new T[_size];
-            int i = 0;
+            int32 i = 0;
             while (i < _size)
             {
                 objArray[i] = _array[_size - i - 1];
@@ -623,8 +623,8 @@ namespace Avalonia.Collections.Pooled
         public struct Enumerator : IEnumerator<T>, IEnumerator
         {
             private readonly PooledStack<T> _stack;
-            private readonly int _version;
-            private int _index;
+            private readonly int32 _version;
+            private int32 _index;
             private T? _currentElement;
 
             internal Enumerator(PooledStack<T> stack)

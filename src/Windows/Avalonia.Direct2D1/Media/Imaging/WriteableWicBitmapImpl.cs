@@ -8,7 +8,7 @@ namespace Avalonia.Direct2D1.Media.Imaging
 {
     internal class WriteableWicBitmapImpl : WicBitmapImpl, IWriteableBitmapImpl
     {
-        public WriteableWicBitmapImpl(Stream stream, int decodeSize, bool horizontal,
+        public WriteableWicBitmapImpl(Stream stream, int32 decodeSize, bool horizontal,
             Avalonia.Media.Imaging.BitmapInterpolationMode interpolationMode)
         : base(stream, decodeSize, horizontal, interpolationMode)
         {

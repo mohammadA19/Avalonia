@@ -86,10 +86,10 @@ internal sealed class ReflectionIndexerNode : CollectionNodeBase, ISettableNode
         return typeInfo.GetDeclaredProperty(e.PropertyName)?.GetIndexParameters().Any() ?? false;
     }
 
-    protected override int? TryGetFirstArgumentAsInt()
+    protected override int32? TryGetFirstArgumentAsInt()
     {
-        if (TypeUtilities.TryConvert(typeof(int), Arguments[0], CultureInfo.InvariantCulture, out var value))
-            return (int?)value;
+        if (TypeUtilities.TryConvert(typeof(int32), Arguments[0], CultureInfo.InvariantCulture, out var value))
+            return (int32?)value;
         return null;
     }
 

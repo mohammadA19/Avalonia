@@ -19,7 +19,7 @@ namespace Avalonia
         /// </summary>
         public static readonly object UnsetValue = new UnsetValueType();
 
-        private static int s_nextId;
+        private static int32 s_nextId;
 
         /// <summary>
         /// Provides a metadata object for types which have no metadata of their own.
@@ -161,7 +161,7 @@ namespace Avalonia
         /// <summary>
         /// Gets the integer ID that represents this property.
         /// </summary>
-        internal int Id { get; }
+        internal int32 Id { get; }
 
         /// <summary>
         /// Provides access to a property's binding via the <see cref="AvaloniaObject"/>
@@ -464,7 +464,7 @@ namespace Avalonia
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             return Id;
         }

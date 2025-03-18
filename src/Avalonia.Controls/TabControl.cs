@@ -152,17 +152,17 @@ namespace Avalonia.Controls
             return RegisterContentPresenter(presenter);
         }
 
-        protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+        protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
         {
             return new TabItem();
         }
 
-        protected internal override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
+        protected internal override bool NeedsContainerOverride(object? item, int32 index, out object? recycleKey)
         {
             return NeedsContainer<TabItem>(item, out recycleKey);
         }
 
-        protected internal override void PrepareContainerForItemOverride(Control element, object? item, int index)
+        protected internal override void PrepareContainerForItemOverride(Control element, object? item, int32 index)
         {
             base.PrepareContainerForItemOverride(element, item, index);
 
@@ -177,7 +177,7 @@ namespace Avalonia.Controls
             }
         }
 
-        protected override void ContainerIndexChangedOverride(Control container, int oldIndex, int newIndex)
+        protected override void ContainerIndexChangedOverride(Control container, int32 oldIndex, int32 newIndex)
         {
             base.ContainerIndexChangedOverride(container, oldIndex, newIndex);
 

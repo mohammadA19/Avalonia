@@ -16,47 +16,47 @@ unsafe partial class ExternalObjectsInterface
     }
     
     [GetProcAddress("glImportMemoryFdEXT", true)]
-    public partial void ImportMemoryFdEXT(uint memory, ulong size, int handleType, int fd);
+    public partial void ImportMemoryFdEXT(uint memory, ulong size, int32 handleType, int32 fd);
     
     [GetProcAddress("glImportSemaphoreFdEXT", true)]
     public partial void ImportSemaphoreFdEXT(uint semaphore,
-                              int handleType,
-                              int fd);
+                              int32 handleType,
+                              int32 fd);
     
     [GetProcAddress("glCreateMemoryObjectsEXT")]
-    public partial void CreateMemoryObjectsEXT(int n, out uint memoryObjects);
+    public partial void CreateMemoryObjectsEXT(int32 n, out uint memoryObjects);
     
     [GetProcAddress("glDeleteMemoryObjectsEXT")]
-    public partial void DeleteMemoryObjectsEXT(int n, ref uint objects);
+    public partial void DeleteMemoryObjectsEXT(int32 n, ref uint objects);
 
     [GetProcAddress("glTexStorageMem2DEXT")]
-    public partial void TexStorageMem2DEXT(int target, int levels, int internalFormat, int width, int height,
+    public partial void TexStorageMem2DEXT(int32 target, int32 levels, int32 internalFormat, int32 width, int32 height,
         uint memory, ulong offset);
     
     [GetProcAddress("glGenSemaphoresEXT")]
-    public partial void GenSemaphoresEXT(int n, out uint semaphores);
+    public partial void GenSemaphoresEXT(int32 n, out uint semaphores);
 
     [GetProcAddress("glDeleteSemaphoresEXT")]
-    public partial void DeleteSemaphoresEXT(int n, ref uint semaphores);
+    public partial void DeleteSemaphoresEXT(int32 n, ref uint semaphores);
     
     [GetProcAddress("glWaitSemaphoreEXT")]
     public partial void WaitSemaphoreEXT(uint semaphore,
         uint numBufferBarriers, uint* buffers,
-        uint numTextureBarriers, int* textures,
-        int* srcLayouts);
+        uint numTextureBarriers, int32* textures,
+        int32* srcLayouts);
     
     [GetProcAddress("glSignalSemaphoreEXT")]
     public partial void SignalSemaphoreEXT(uint semaphore,
         uint numBufferBarriers, uint* buffers,
-        uint numTextureBarriers, int* textures,
-        int* dstLayouts);
+        uint numTextureBarriers, int32* textures,
+        int32* dstLayouts);
     
     
     [GetProcAddress("glGetUnsignedBytei_vEXT", true)]
-    public partial void GetUnsignedBytei_vEXT(int target, uint index, byte* data);
+    public partial void GetUnsignedBytei_vEXT(int32 target, uint index, byte* data);
     
     [GetProcAddress("glGetUnsignedBytevEXT", true)]
-    public partial void GetUnsignedBytevEXT(int target, byte* data);
+    public partial void GetUnsignedBytevEXT(int32 target, byte* data);
 }
 
 public class ExternalObjectsOpenGlExtensionFeature : IGlContextExternalObjectsFeature
@@ -259,7 +259,7 @@ public class ExternalObjectsOpenGlExtensionFeature : IGlContextExternalObjectsFe
 
         public ExternalImageTexture(IGlContext context,
             PlatformGraphicsExternalImageProperties properties,
-            ExternalObjectsInterface ext, uint objectId, int textureId)
+            ExternalObjectsInterface ext, uint objectId, int32 textureId)
         {
             Properties = properties;
             TextureId = textureId;
@@ -284,8 +284,8 @@ public class ExternalObjectsOpenGlExtensionFeature : IGlContextExternalObjectsFe
 
         public void ReleaseKeyedMutex(uint key) => throw new NotSupportedException();
 
-        public int TextureId { get; }
-        public int InternalFormat => GL_RGBA8;
+        public int32 TextureId { get; }
+        public int32 InternalFormat => GL_RGBA8;
         public PlatformGraphicsExternalImageProperties Properties { get; }
     }
 }

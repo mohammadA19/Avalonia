@@ -35,7 +35,7 @@ namespace Avalonia.Controls
 
         private bool _hasExecutedInitialLayoutPass;
         private bool _isActive;
-        private int _ignoreVisibilityChanges;
+        private int32 _ignoreVisibilityChanges;
         private WindowBase? _owner;
         
         protected bool IgnoreVisibilityChanges => _ignoreVisibilityChanges > 0;

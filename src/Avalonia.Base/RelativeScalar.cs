@@ -59,9 +59,9 @@ public struct RelativeScalar : IEquatable<RelativeScalar>
         return obj is RelativeScalar other && Equals(other);
     }
 
-    public override int GetHashCode()
+    public override int32 GetHashCode()
     {
-        return _scalar.GetHashCode() ^ (int)_unit;
+        return _scalar.GetHashCode() ^ (int32)_unit;
     }
 
     public static bool operator ==(RelativeScalar left, RelativeScalar right)

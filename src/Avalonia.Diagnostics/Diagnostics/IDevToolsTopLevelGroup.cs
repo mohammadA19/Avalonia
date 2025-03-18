@@ -21,7 +21,7 @@ internal class ClassicDesktopStyleApplicationLifetimeTopLevelGroup : IDevToolsTo
 
     public IReadOnlyList<TopLevel> Items => _lifetime.Windows;
 
-    public override int GetHashCode()
+    public override int32 GetHashCode()
     {
         return _lifetime.GetHashCode();
     }
@@ -44,7 +44,7 @@ internal class SingleViewTopLevelGroup : IDevToolsTopLevelGroup
     
     public IReadOnlyList<TopLevel> Items { get; }
     
-    public override int GetHashCode()
+    public override int32 GetHashCode()
     {
         return _topLevel.GetHashCode();
     }

@@ -29,7 +29,7 @@ public class CompositorInvalidationClippingTests : CompositorTestsBase
         AssertRenderedVisuals(clipToBounds: false, clipGeometry: true, expectedRenderedVisualsCount: 3);
     }
 
-    private void AssertRenderedVisuals(bool clipToBounds, bool clipGeometry, int expectedRenderedVisualsCount)
+    private void AssertRenderedVisuals(bool clipToBounds, bool clipGeometry, int32 expectedRenderedVisualsCount)
     {
         using (var s = new CompositorCanvas())
         {

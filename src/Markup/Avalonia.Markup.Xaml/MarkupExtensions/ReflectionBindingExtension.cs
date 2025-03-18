@@ -45,7 +45,7 @@ namespace Avalonia.Markup.Xaml.MarkupExtensions
         }
 
         /// <inheritdoc cref="BindingBase.Delay"/>
-        public int Delay { get; set; }
+        public int32 Delay { get; set; }
 
         public IValueConverter? Converter { get; set; }
 

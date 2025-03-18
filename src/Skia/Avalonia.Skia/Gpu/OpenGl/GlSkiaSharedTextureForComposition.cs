@@ -7,7 +7,7 @@ internal class GlSkiaSharedTextureForComposition : ICompositionImportableOpenGlS
     public IGlContext Context { get; }
     private readonly object _lock = new();
 
-    public GlSkiaSharedTextureForComposition(IGlContext context, int textureId, int internalFormat, PixelSize size)
+    public GlSkiaSharedTextureForComposition(IGlContext context, int32 textureId, int32 internalFormat, PixelSize size)
     {
         Context = context;
         TextureId = textureId;
@@ -34,8 +34,8 @@ internal class GlSkiaSharedTextureForComposition : ICompositionImportableOpenGlS
         }
     }
 
-    public int TextureId { get; private set; }
-    public int InternalFormat { get; }
+    public int32 TextureId { get; private set; }
+    public int32 InternalFormat { get; }
     public PixelSize Size { get; }
     public void Dispose()
     {

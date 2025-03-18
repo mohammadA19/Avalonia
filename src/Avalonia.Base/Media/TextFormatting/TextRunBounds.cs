@@ -8,7 +8,7 @@
         /// <summary>
         /// Constructing TextRunBounds
         /// </summary>
-        internal TextRunBounds(Rect bounds, int firstCharacterIndex, int length, TextRun textRun)
+        internal TextRunBounds(Rect bounds, int32 firstCharacterIndex, int32 length, TextRun textRun)
         {
             Rectangle = bounds;
             TextSourceCharacterIndex = firstCharacterIndex;
@@ -19,12 +19,12 @@
         /// <summary>
         /// First text source character index of text run
         /// </summary>
-        public int TextSourceCharacterIndex { get; }
+        public int32 TextSourceCharacterIndex { get; }
 
         /// <summary>
         /// character length of bounded text run
         /// </summary>
-        public int Length { get; }
+        public int32 Length { get; }
 
         /// <summary>
         /// Text run bounding rectangle

@@ -180,7 +180,7 @@ namespace Avalonia.Controls.UnitTests
                 var (target, carousel) = CreateTarget(items, transition.Object);
                 var cycleindexes = new[] { 1, 2, 0};
 
-                for (int cycleIndex = 0; cycleIndex < cycleindexes.Length; cycleIndex++)
+                for (int32 cycleIndex = 0; cycleIndex < cycleindexes.Length; cycleIndex++)
                 {
                     carousel.SelectedIndex = cycleindexes[cycleIndex];
                     Layout(target);
@@ -205,7 +205,7 @@ namespace Avalonia.Controls.UnitTests
 
                 var cycleindexes = new[] { 2, 1, 0};
 
-                for (int cycleIndex = 0; cycleIndex < cycleindexes.Length; cycleIndex++)
+                for (int32 cycleIndex = 0; cycleIndex < cycleindexes.Length; cycleIndex++)
                 {
                     carousel.SelectedIndex = cycleindexes[cycleIndex];
                     Layout(target);

@@ -64,7 +64,7 @@ namespace Avalonia.Controls.Primitives
         private protected override void RenderCore(DrawingContext context)
         {
             base.RenderCore(context);
-            int underscore = Text?.IndexOf('_') ?? -1;
+            int32 underscore = Text?.IndexOf('_') ?? -1;
 
             if (underscore != -1 && ShowAccessKey)
             {
@@ -122,7 +122,7 @@ namespace Avalonia.Controls.Primitives
             {
                 var accessKeyMarker = "_";
                 var doubleAccessKeyMarker = accessKeyMarker + accessKeyMarker;
-                int index = FindAccessKeyMarker(text);
+                int32 index = FindAccessKeyMarker(text);
                 if (index >= 0 && index < text.Length - 1)
                     text = text.Remove(index, 1);
                 text = text.Replace(doubleAccessKeyMarker, accessKeyMarker);
@@ -130,13 +130,13 @@ namespace Avalonia.Controls.Primitives
             return text;
         }
 
-        private static int FindAccessKeyMarker(string text)
+        private static int32 FindAccessKeyMarker(string text)
         {
             var length = text.Length;
             var startIndex = 0;
             while (startIndex < length)
             {
-                int index = text.IndexOf('_', startIndex);
+                int32 index = text.IndexOf('_', startIndex);
                 if (index == -1)
                     return -1;
                 if (index + 1 < length && text[index + 1] != '_')
@@ -157,7 +157,7 @@ namespace Avalonia.Controls.Primitives
 
             if (text != null)
             {
-                int underscore = text.IndexOf('_');
+                int32 underscore = text.IndexOf('_');
 
                 if (underscore != -1 && underscore < text.Length - 1)
                 {

@@ -4,7 +4,7 @@ namespace GpuInterop.VulkanDemo;
 
 internal static class VulkanMemoryHelper
 {
-    internal static int FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint memoryTypeBits,
+    internal static int32 FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint memoryTypeBits,
         MemoryPropertyFlags flags)
     {
         api.GetPhysicalDeviceMemoryProperties(physicalDevice, out var properties);

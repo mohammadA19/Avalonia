@@ -60,7 +60,7 @@ namespace Avalonia.Skia
             Dpi = new Vector(96, 96);
         }
 
-        public ImmutableBitmap(Stream stream, int decodeSize, bool horizontal, BitmapInterpolationMode interpolationMode)
+        public ImmutableBitmap(Stream stream, int32 decodeSize, bool horizontal, BitmapInterpolationMode interpolationMode)
         {
             using (var skStream = new SKManagedStream(stream))
             using (var skData = SKData.Create(skStream))
@@ -86,11 +86,11 @@ namespace Avalonia.Skia
 
                 if (horizontal)
                 {
-                    desired = new SKImageInfo(decodeSize, (int)(realScale * decodeSize));
+                    desired = new SKImageInfo(decodeSize, (int32)(realScale * decodeSize));
                 }
                 else
                 {
-                    desired = new SKImageInfo((int)(realScale * decodeSize), decodeSize);
+                    desired = new SKImageInfo((int32)(realScale * decodeSize), decodeSize);
                 }
 
                 if (_bitmap.Width != desired.Width || _bitmap.Height != desired.Height)
@@ -125,7 +125,7 @@ namespace Avalonia.Skia
         /// <param name="format">Format of data pixels.</param>
         /// <param name="alphaFormat">Alpha format of data pixels.</param>
         /// <param name="data">Data pixels.</param>
-        public ImmutableBitmap(PixelSize size, Vector dpi, int stride, PixelFormat format, AlphaFormat alphaFormat, IntPtr data)
+        public ImmutableBitmap(PixelSize size, Vector dpi, int32 stride, PixelFormat format, AlphaFormat alphaFormat, IntPtr data)
         {
             using (var tmp = new SKBitmap())
             {
@@ -149,7 +149,7 @@ namespace Avalonia.Skia
         public Vector Dpi { get; }
         public PixelSize PixelSize { get; }
 
-        public int Version { get; } = 1;
+        public int32 Version { get; } = 1;
 
         /// <inheritdoc />
         public void Dispose()
@@ -159,13 +159,13 @@ namespace Avalonia.Skia
         }
 
         /// <inheritdoc />
-        public void Save(string fileName, int? quality = null)
+        public void Save(string fileName, int32? quality = null)
         {
             ImageSavingHelper.SaveImage(_image, fileName, quality);
         }
 
         /// <inheritdoc />
-        public void Save(Stream stream, int? quality = null)
+        public void Save(Stream stream, int32? quality = null)
         {
             ImageSavingHelper.SaveImage(_image, stream, quality);
         }

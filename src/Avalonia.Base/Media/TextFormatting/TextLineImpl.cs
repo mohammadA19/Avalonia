@@ -21,7 +21,7 @@ namespace Avalonia.Media.TextFormatting
         private Rect _inkBounds;
         private Rect _bounds;
 
-        public TextLineImpl(TextRun[] textRuns, int firstTextSourceIndex, int length, double paragraphWidth,
+        public TextLineImpl(TextRun[] textRuns, int32 firstTextSourceIndex, int32 length, double paragraphWidth,
             TextParagraphProperties paragraphProperties, FlowDirection resolvedFlowDirection = FlowDirection.LeftToRight,
             TextLineBreak? lineBreak = null, bool hasCollapsed = false)
         {
@@ -41,10 +41,10 @@ namespace Avalonia.Media.TextFormatting
         public override IReadOnlyList<TextRun> TextRuns => _textRuns;
 
         /// <inheritdoc/>
-        public override int FirstTextSourceIndex { get; }
+        public override int32 FirstTextSourceIndex { get; }
 
         /// <inheritdoc/>
-        public override int Length { get; }
+        public override int32 Length { get; }
 
         /// <inheritdoc/>
         public override TextLineBreak? TextLineBreak => _textLineBreak;
@@ -65,7 +65,7 @@ namespace Avalonia.Media.TextFormatting
         public override double Height => _textLineMetrics.Height;
 
         /// <inheritdoc/>
-        public override int NewLineLength => _textLineMetrics.NewlineLength;
+        public override int32 NewLineLength => _textLineMetrics.NewlineLength;
 
         /// <inheritdoc/>
         public override double OverhangAfter => _textLineMetrics.OverhangAfter;
@@ -77,7 +77,7 @@ namespace Avalonia.Media.TextFormatting
         public override double OverhangTrailing => _textLineMetrics.OverhangTrailing;
 
         /// <inheritdoc/>
-        public override int TrailingWhitespaceLength => _textLineMetrics.TrailingWhitespaceLength;
+        public override int32 TrailingWhitespaceLength => _textLineMetrics.TrailingWhitespaceLength;
 
         /// <inheritdoc/>
         public override double Start => _textLineMetrics.Start;
@@ -327,7 +327,7 @@ namespace Avalonia.Media.TextFormatting
             return characterHit;
         }
 
-        private static CharacterHit GetRunCharacterHit(TextRun run, int currentPosition, double distance)
+        private static CharacterHit GetRunCharacterHit(TextRun run, int32 currentPosition, double distance)
         {
             CharacterHit characterHit;
 
@@ -416,7 +416,7 @@ namespace Avalonia.Media.TextFormatting
                 return currentIndexedRun;
             }
 
-            double GetPreceedingDistance(int firstIndex)
+            double GetPreceedingDistance(int32 firstIndex)
             {
                 var distance = 0.0;
 
@@ -600,7 +600,7 @@ namespace Avalonia.Media.TextFormatting
             return GetPreviousCharacterHit(characterHit, true);
         }
 
-        public override IReadOnlyList<TextBounds> GetTextBounds(int firstTextSourceIndex, int textLength)
+        public override IReadOnlyList<TextBounds> GetTextBounds(int32 firstTextSourceIndex, int32 textLength)
         {
             if (_indexedTextRuns is null || _indexedTextRuns.Count == 0)
             {
@@ -647,7 +647,7 @@ namespace Avalonia.Media.TextFormatting
                 return currentIndexedRun;
             }
 
-            double GetPreceedingDistance(int firstIndex)
+            double GetPreceedingDistance(int32 firstIndex)
             {
                 var distance = 0.0;
 
@@ -685,7 +685,7 @@ namespace Avalonia.Media.TextFormatting
 
                 if (currentBounds.Rectangle.Right == lastBounds.Rectangle.Left)
                 {
-                    for (int i = 0; i < currentBounds.TextRunBounds.Count; i++)
+                    for (int32 i = 0; i < currentBounds.TextRunBounds.Count; i++)
                     {
                         lastBounds.TextRunBounds.Insert(i, currentBounds.TextRunBounds[i]);
                     }
@@ -733,7 +733,7 @@ namespace Avalonia.Media.TextFormatting
                     directionalWidth = currentDrawable.Size.Width;
                 }
 
-                int coveredLength;
+                int32 coveredLength;
                 TextBounds? currentBounds;
 
                 switch (currentDirection)
@@ -870,14 +870,14 @@ namespace Avalonia.Media.TextFormatting
             return previousCharacterHit;
         }
 
-        private TextBounds GetTextRunBoundsRightToLeft(int firstRunIndex, int lastRunIndex, double endX,
-            int firstTextSourceIndex, int currentPosition, int remainingLength, out int coveredLength, out int newPosition)
+        private TextBounds GetTextRunBoundsRightToLeft(int32 firstRunIndex, int32 lastRunIndex, double endX,
+            int32 firstTextSourceIndex, int32 currentPosition, int32 remainingLength, out int32 coveredLength, out int32 newPosition)
         {
             coveredLength = 0;
             var textRunBounds = new List<TextRunBounds>();
             var startX = endX;
 
-            for (int i = lastRunIndex; i >= firstRunIndex; i--)
+            for (int32 i = lastRunIndex; i >= firstRunIndex; i--)
             {
                 var currentRun = _textRuns[i];
 
@@ -942,14 +942,14 @@ namespace Avalonia.Media.TextFormatting
             return new TextBounds(bounds, FlowDirection.RightToLeft, textRunBounds);
         }
 
-        private TextBounds GetTextBoundsLeftToRight(int firstRunIndex, int lastRunIndex, double startX,
-           int firstTextSourceIndex, int currentPosition, int remainingLength, out int coveredLength, out int newPosition)
+        private TextBounds GetTextBoundsLeftToRight(int32 firstRunIndex, int32 lastRunIndex, double startX,
+           int32 firstTextSourceIndex, int32 currentPosition, int32 remainingLength, out int32 coveredLength, out int32 newPosition)
         {
             coveredLength = 0;
             var textRunBounds = new List<TextRunBounds>();
             var endX = startX;
 
-            for (int i = firstRunIndex; i <= lastRunIndex; i++)
+            for (int32 i = firstRunIndex; i <= lastRunIndex; i++)
             {
                 var currentRun = _textRuns[i];
 
@@ -1015,7 +1015,7 @@ namespace Avalonia.Media.TextFormatting
         }
 
         private TextRunBounds GetRunBoundsLeftToRight(ShapedTextRun currentRun, double startX,
-            int firstTextSourceIndex, int remainingLength, int currentPosition, out int offset)
+            int32 firstTextSourceIndex, int32 remainingLength, int32 currentPosition, out int32 offset)
         {
             var startIndex = currentPosition;
 
@@ -1081,7 +1081,7 @@ namespace Avalonia.Media.TextFormatting
         }
 
         private TextRunBounds GetRunBoundsRightToLeft(ShapedTextRun currentRun, double endX,
-            int firstTextSourceIndex, int remainingLength, int currentPosition, out int offset)
+            int32 firstTextSourceIndex, int32 remainingLength, int32 currentPosition, out int32 offset)
         {
             var startX = endX;
 
@@ -1156,7 +1156,7 @@ namespace Avalonia.Media.TextFormatting
 
         public override void Dispose()
         {
-            for (int i = 0; i < _textRuns.Length; i++)
+            for (int32 i = 0; i < _textRuns.Length; i++)
             {
                 if (_textRuns[i] is ShapedTextRun shapedTextRun)
                 {
@@ -1184,7 +1184,7 @@ namespace Avalonia.Media.TextFormatting
         /// <param name="direction">The logical direction.</param>
         /// <param name="textPosition">The text position of the found run index.</param>
         /// <returns>The text run index.</returns>
-        private TextRun? GetRunAtCharacterIndex(int codepointIndex, LogicalDirection direction, out int textPosition)
+        private TextRun? GetRunAtCharacterIndex(int32 codepointIndex, LogicalDirection direction, out int32 textPosition)
         {
             var runIndex = 0;
             textPosition = FirstTextSourceIndex;

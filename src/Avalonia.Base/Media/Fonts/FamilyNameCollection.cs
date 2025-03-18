@@ -32,7 +32,7 @@ namespace Avalonia.Media.Fonts
         { 
             _names = new string[fontSources.Count];
 
-            for (int i = 0; i < fontSources.Count; i++)
+            for (int32 i = 0; i < fontSources.Count; i++)
             {
                 _names[i] = fontSources[i].Name;
             }
@@ -98,7 +98,7 @@ namespace Avalonia.Media.Fonts
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             if (_names.Length == 0)
             {
@@ -107,7 +107,7 @@ namespace Avalonia.Media.Fonts
 
             unchecked
             {
-                int hash = 17;
+                int32 hash = 17;
 
                 for (var i = 0; i < _names.Length; i++)
                 {
@@ -145,8 +145,8 @@ namespace Avalonia.Media.Fonts
         public override bool Equals(object? obj)
             => obj is FamilyNameCollection other && _names.AsSpan().SequenceEqual(other._names);
 
-        public int Count => _names.Length;
+        public int32 Count => _names.Length;
 
-        public string this[int index] => _names[index];
+        public string this[int32 index] => _names[index];
     }
 }

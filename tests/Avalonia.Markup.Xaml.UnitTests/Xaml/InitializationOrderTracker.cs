@@ -10,7 +10,7 @@ namespace Avalonia.Markup.Xaml.UnitTests.Xaml
     {
         public IList<string> Order { get; } = new List<string>();
 
-        public int InitState { get; private set; }
+        public int32 InitState { get; private set; }
 
         protected override void OnAttachedToLogicalTree(LogicalTreeAttachmentEventArgs e)
         {

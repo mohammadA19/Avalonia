@@ -59,14 +59,14 @@ partial class X11Window
                     message_type = X11.Atoms._XEMBED,
                     format = 32,
                     ptr1 = default,
-                    ptr2 = new ((int)message),
+                    ptr2 = new ((int32)message),
                     ptr3 = detail,
                     ptr4 = data1,
                     ptr5 = data2
                 }
             };
             XSendEvent(X11.Display, _currentEmbedder, false,
-                new IntPtr((int)(EventMask.NoEventMask)), ref xev);
+                new IntPtr((int32)(EventMask.NoEventMask)), ref xev);
         }
         
         static XEmbedClientWindowMode()
@@ -201,8 +201,8 @@ partial class X11Window
 
         public override PixelPoint PointToScreen(Point point) =>
             new PixelPoint(
-                (int)(point.X * Window.RenderScaling),
-                (int)(point.Y * Window.RenderScaling))
+                (int32)(point.X * Window.RenderScaling),
+                (int32)(point.Y * Window.RenderScaling))
             + GetWindowOffset();
     }
 }

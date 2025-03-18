@@ -35,13 +35,13 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="MinuteIncrement"/> property
         /// </summary>
-        public static readonly StyledProperty<int> MinuteIncrementProperty =
+        public static readonly StyledProperty<int32> MinuteIncrementProperty =
             TimePicker.MinuteIncrementProperty.AddOwner<TimePickerPresenter>();
         
         /// <summary>
         /// Defines the <see cref="SecondIncrement"/> property
         /// </summary>
-        public static readonly StyledProperty<int> SecondIncrementProperty =
+        public static readonly StyledProperty<int32> SecondIncrementProperty =
             TimePicker.SecondIncrementProperty.AddOwner<TimePickerPresenter>();
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the minute increment in the selector
         /// </summary>
-        public int MinuteIncrement
+        public int32 MinuteIncrement
         {
             get => GetValue(MinuteIncrementProperty);
             set => SetValue(MinuteIncrementProperty, value);
@@ -105,7 +105,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the second increment in the selector
         /// </summary>
-        public int SecondIncrement
+        public int32 SecondIncrement
         {
             get => GetValue(SecondIncrementProperty);
             set => SetValue(SecondIncrementProperty, value);

@@ -114,8 +114,8 @@ namespace Avalonia.Controls.UnitTests.Primitives
             target.PropertyChanged += (s, e) =>
             {
                 indexRaised |= e.Property.Name == "SelectedIndex" &&
-                    (int)e.OldValue! == -1 &&
-                    (int)e.NewValue! == 1;
+                    (int32)e.OldValue! == -1 &&
+                    (int32)e.NewValue! == 1;
                 itemRaised |= e.Property.Name == "SelectedItem" &&
                     (string?)e.OldValue == null &&
                     (string?)e.NewValue == "bar";
@@ -156,8 +156,8 @@ namespace Avalonia.Controls.UnitTests.Primitives
             bool raised = false;
             target.PropertyChanged += (s, e) =>
                 raised |= e.Property.Name == "SelectedIndex" &&
-                          (int)e.OldValue! == 0 &&
-                          (int)e.NewValue! == -1;
+                          (int32)e.OldValue! == 0 &&
+                          (int32)e.NewValue! == -1;
 
             target.SelectedItems.RemoveAt(0);
 
@@ -367,7 +367,7 @@ namespace Avalonia.Controls.UnitTests.Primitives
             using var app = Start();
             var target = CreateTarget(itemsSource: new[] { "foo", "bar", "baz" });
 
-            var selectedIndexes = new List<int>();
+            var selectedIndexes = new List<int32>();
             target.GetObservable(TestSelector.SelectedIndexProperty).Subscribe(x => selectedIndexes.Add(x));
 
             target.SelectedItems = new AvaloniaList<object> { "bar", "baz" };
@@ -1166,7 +1166,7 @@ namespace Avalonia.Controls.UnitTests.Primitives
             Assert.Equal(new[] { items[1] }, target.Selection.SelectedItems);
         }
 
-        private static IEnumerable<int> SelectedContainers(SelectingItemsControl target)
+        private static IEnumerable<int32> SelectedContainers(SelectingItemsControl target)
         {
             Assert.NotNull(target.ItemsPanel);
 
@@ -1387,20 +1387,20 @@ namespace Avalonia.Controls.UnitTests.Primitives
 
             public void SelectAll() => Selection.SelectAll();
             public void UnselectAll() => Selection.Clear();
-            public void SelectRange(int index) => UpdateSelection(index, true, true);
-            public void Toggle(int index) => UpdateSelection(index, true, false, true);
+            public void SelectRange(int32 index) => UpdateSelection(index, true, true);
+            public void Toggle(int32 index) => UpdateSelection(index, true, false, true);
         }
 
         private class TestSelectorWithContainers : TestSelector
         {
             protected override Type StyleKeyOverride => typeof(TestSelector);
 
-            protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+            protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
             {
                 return new TestContainer();
             }
 
-            protected internal override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
+            protected internal override bool NeedsContainerOverride(object? item, int32 index, out object? recycleKey)
             {
                 return NeedsContainer<TestContainer>(item, out recycleKey);
             }

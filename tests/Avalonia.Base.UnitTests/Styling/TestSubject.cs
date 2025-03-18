@@ -15,7 +15,7 @@ namespace Avalonia.Base.UnitTests.Styling
             _initial = initial;
         }
 
-        public int SubscriberCount => _subscribers.Count;
+        public int32 SubscriberCount => _subscribers.Count;
 
         public void OnCompleted()
         {

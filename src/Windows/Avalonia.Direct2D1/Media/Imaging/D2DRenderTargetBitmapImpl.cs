@@ -57,7 +57,7 @@ namespace Avalonia.Direct2D1.Media.Imaging
             return new OptionalDispose<D2DBitmap>(_renderTarget.Bitmap.QueryInterface<Bitmap1>(), false);
         }
 
-        public override void Save(Stream stream, int? quality = null)
+        public override void Save(Stream stream, int32? quality = null)
         {
             using (var wic = new WicRenderTargetBitmapImpl(PixelSize, Dpi))
             {

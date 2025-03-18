@@ -16,7 +16,7 @@ namespace Avalonia.Diagnostics
             return StringBuilderCache.GetStringAndRelease(result);
         }
 
-        private static void PrintVisualTree(Visual visual, StringBuilder builder, int indent)
+        private static void PrintVisualTree(Visual visual, StringBuilder builder, int32 indent)
         {
             Control? control = visual as Control;
 
@@ -62,7 +62,7 @@ namespace Avalonia.Diagnostics
             }
         }
 
-        private static string Indent(int indent)
+        private static string Indent(int32 indent)
         {
             return new string(' ' , Math.Max(indent, 0) * 4);
         }

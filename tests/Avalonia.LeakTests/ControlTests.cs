@@ -729,7 +729,7 @@ namespace Avalonia.LeakTests
                 const double ListBoxItemHeight = 12;
                 const double TextBoxHeight = 25;
 
-                var items = new ObservableCollection<int>(Enumerable.Range(0, 10));
+                var items = new ObservableCollection<int32>(Enumerable.Range(0, 10));
                 NameScope ns;
                 TextBox tb;
                 ListBox lb;
@@ -752,7 +752,7 @@ namespace Avalonia.LeakTests
                             (lb = new ListBox
                             {
                                 ItemsSource = items,
-                                ItemTemplate = new FuncDataTemplate<int>((_, _) =>
+                                ItemTemplate = new FuncDataTemplate<int32>((_, _) =>
                                     new Canvas
                                     {
                                         Width = 10,

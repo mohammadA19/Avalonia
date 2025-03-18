@@ -19,7 +19,7 @@ namespace Avalonia.Skia.Helpers
         /// The quality value is interpreted from 0 - 100. If quality is null 
         /// the encoder applies the default quality value.
         /// </param>
-        public static void SaveImage(SKImage image, string fileName, int? quality = null)
+        public static void SaveImage(SKImage image, string fileName, int32? quality = null)
         {
             if (image == null) throw new ArgumentNullException(nameof(image));
             if (fileName == null) throw new ArgumentNullException(nameof(fileName));
@@ -40,7 +40,7 @@ namespace Avalonia.Skia.Helpers
         /// The quality value is interpreted from 0 - 100. If quality is null 
         /// the encoder applies the default quality value.
         /// </param>
-        public static void SaveImage(SKImage image, Stream stream, int? quality = null)
+        public static void SaveImage(SKImage image, Stream stream, int32? quality = null)
         {
             if (image == null) throw new ArgumentNullException(nameof(image));
             if (stream == null) throw new ArgumentNullException(nameof(stream));
@@ -54,7 +54,7 @@ namespace Avalonia.Skia.Helpers
             }
             else
             {
-                using (var data = image.Encode(SKEncodedImageFormat.Png, (int)quality))
+                using (var data = image.Encode(SKEncodedImageFormat.Png, (int32)quality))
                 {
                     data.SaveTo(stream);
                 }
@@ -64,8 +64,8 @@ namespace Avalonia.Skia.Helpers
         // This method is here mostly for debugging purposes
         internal static void SavePicture(SKPicture picture, float scale, string path)
         {
-            var snapshotSize = new SKSizeI((int)Math.Ceiling(picture.CullRect.Width * scale),
-                (int)Math.Ceiling(picture.CullRect.Height * scale));
+            var snapshotSize = new SKSizeI((int32)Math.Ceiling(picture.CullRect.Width * scale),
+                (int32)Math.Ceiling(picture.CullRect.Height * scale));
             using var snap =
                 SKImage.FromPicture(picture, snapshotSize, SKMatrix.CreateScale(scale, scale));
             SaveImage(snap, path);

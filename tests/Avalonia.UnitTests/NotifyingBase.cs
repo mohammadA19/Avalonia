@@ -29,7 +29,7 @@ namespace Avalonia.UnitTests
             }
         }
 
-        public int PropertyChangedSubscriptionCount
+        public int32 PropertyChangedSubscriptionCount
         {
             get;
             private set;

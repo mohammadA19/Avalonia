@@ -29,7 +29,7 @@ namespace Avalonia.FreeDesktop
 
         private static string GetSymlinkTarget(string x) => Path.GetFullPath(Path.Combine(DevByLabelDir, NativeMethods.ReadLink(x)));
 
-        private static string UnescapeString(string input, string regexText, int escapeBase) =>
+        private static string UnescapeString(string input, string regexText, int32 escapeBase) =>
             new Regex(regexText).Replace(input, m => Convert.ToChar(Convert.ToByte(m.Groups[1].Value, escapeBase)).ToString());
 
         private static string UnescapePathFromProcMounts(string input) => UnescapeString(input, @"\\(\d{3})", 8);

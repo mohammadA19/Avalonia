@@ -46,7 +46,7 @@ namespace Avalonia.Input.GestureRecognizers
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public int Count => _recognizers?.Count ?? 0;
+        public int32 Count => _recognizers?.Count ?? 0;
 
         internal bool HandlePointerPressed(PointerPressedEventArgs e)
         {

@@ -96,7 +96,7 @@ internal unsafe class WindowsInputPane : InputPaneBase, IDisposable
         private readonly WindowsInputPane _pane;
 
         public Handler(WindowsInputPane pane) => _pane = pane;
-        public void Showing(UnmanagedMethods.RECT* rect, int _) => _pane.OnStateChanged(true, *rect);
-        public void Hiding(int fEnsureFocusedElementInView) => _pane.OnStateChanged(false, null);
+        public void Showing(UnmanagedMethods.RECT* rect, int32 _) => _pane.OnStateChanged(true, *rect);
+        public void Hiding(int32 fEnsureFocusedElementInView) => _pane.OnStateChanged(false, null);
     }
 }

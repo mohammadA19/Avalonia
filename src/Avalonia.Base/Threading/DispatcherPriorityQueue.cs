@@ -9,7 +9,7 @@ namespace Avalonia.Threading;
 internal class DispatcherPriorityQueue
 {
     // Priority chains...
-    private readonly SortedList<int, PriorityChain> _priorityChains; // NOTE: should be Priority
+    private readonly SortedList<int32, PriorityChain> _priorityChains; // NOTE: should be Priority
     private readonly Stack<PriorityChain> _cacheReusableChains;
 
     // Sequential chain...
@@ -19,20 +19,20 @@ internal class DispatcherPriorityQueue
     public DispatcherPriorityQueue()
     {
         // Build the collection of priority chains.
-        _priorityChains = new SortedList<int, PriorityChain>(); // NOTE: should be Priority
+        _priorityChains = new SortedList<int32, PriorityChain>(); // NOTE: should be Priority
         _cacheReusableChains = new Stack<PriorityChain>(10);
 
         _head = _tail = null;
     }
 
     // NOTE: not used
-    // public int Count {get{return _count;}}
+    // public int32 Count {get{return _count;}}
 
     public DispatcherPriority MaxPriority // NOTE: should be Priority
     {
         get
         {
-            int count = _priorityChains.Count;
+            int32 count = _priorityChains.Count;
 
             if (count > 0)
             {
@@ -63,7 +63,7 @@ internal class DispatcherPriorityQueue
     public DispatcherOperation Dequeue()
     {
         // Get the max-priority chain.
-        int count = _priorityChains.Count;
+        int32 count = _priorityChains.Count;
         if (count > 0)
         {
             PriorityChain chain = _priorityChains.Values[count - 1];
@@ -85,7 +85,7 @@ internal class DispatcherPriorityQueue
     public DispatcherOperation? Peek()
     {
         // Get the max-priority chain.
-        int count = _priorityChains.Count;
+        int32 count = _priorityChains.Count;
         if (count > 0)
         {
             PriorityChain chain = _priorityChains.Values[count - 1];
@@ -132,7 +132,7 @@ internal class DispatcherPriorityQueue
     {
         PriorityChain? chain = null;
 
-        int count = _priorityChains.Count;
+        int32 count = _priorityChains.Count;
         if (count > 0)
         {
             if (priority == _priorityChains.Keys[0])
@@ -427,7 +427,7 @@ internal class PriorityChain
 
     public DispatcherPriority Priority { get; set; } // NOTE: should be Priority
 
-    public int Count { get; set; }
+    public int32 Count { get; set; }
 
     public DispatcherOperation? Head { get; set; }
 

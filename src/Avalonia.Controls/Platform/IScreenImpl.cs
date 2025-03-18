@@ -11,7 +11,7 @@ namespace Avalonia.Platform
     [Unstable]
     public interface IScreenImpl
     {
-        int ScreenCount { get; }
+        int32 ScreenCount { get; }
         IReadOnlyList<Screen> AllScreens { get; }
         Action? Changed { get; set; }
         Screen? ScreenFromWindow(IWindowBaseImpl window);
@@ -26,7 +26,7 @@ namespace Avalonia.Platform
     {
         public override IPlatformHandle? TryGetPlatformHandle() => platformHandle;
 
-        public override int GetHashCode() => platformHandle.GetHashCode();
+        public override int32 GetHashCode() => platformHandle.GetHashCode();
 
         public override bool Equals(Screen? obj)
         {
@@ -43,7 +43,7 @@ namespace Avalonia.Platform
             new Dictionary<TKey, TScreen>(screenKeyComparer) :
             new Dictionary<TKey, TScreen>();
         private TScreen[]? _allScreens;
-        private int? _screenCount;
+        private int32? _screenCount;
         private bool? _screenDetailsRequestGranted;
         private DispatcherOperation? _onChangeOperation;
 
@@ -52,7 +52,7 @@ namespace Avalonia.Platform
             
         }
 
-        public int ScreenCount => _screenCount ??= GetScreenCount();
+        public int32 ScreenCount => _screenCount ??= GetScreenCount();
 
         public IReadOnlyList<Screen> AllScreens
         {
@@ -109,7 +109,7 @@ namespace Avalonia.Platform
         protected virtual void ScreenAdded(TScreen screen) => ScreenChanged(screen);
         protected virtual void ScreenChanged(TScreen screen) {}
         protected virtual void ScreenRemoved(TScreen screen) => screen.OnRemoved();
-        protected virtual int GetScreenCount() => AllScreens.Count;
+        protected virtual int32 GetScreenCount() => AllScreens.Count;
         protected abstract IReadOnlyList<TKey> GetAllScreenKeys();
         protected abstract TScreen CreateScreenFromKey(TKey key);
         protected virtual Task<bool> RequestScreenDetailsCore() => Task.FromResult(true);
@@ -151,7 +151,7 @@ namespace Avalonia.Platform
                 }
             }
 
-            int i = 0;
+            int32 i = 0;
             foreach (var newScreenKey in screens)
             {
                 if (_allScreensByKey.TryGetValue(newScreenKey, out var oldScreen))

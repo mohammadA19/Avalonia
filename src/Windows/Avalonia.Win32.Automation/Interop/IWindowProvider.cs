@@ -33,7 +33,7 @@ internal partial interface IWindowProvider
     void Close();
 
     [return: MarshalAs(UnmanagedType.Bool)]
-    bool WaitForInputIdle(int milliseconds);
+    bool WaitForInputIdle(int32 milliseconds);
 
     [return: MarshalAs(UnmanagedType.Bool)]
     bool GetMaximizable();

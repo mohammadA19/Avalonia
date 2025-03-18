@@ -89,7 +89,7 @@ namespace PlatformSanityChecks
 
         static void CheckTimerTicking() => EnterLoop(cts =>
         {
-            int ticks = 0;
+            int32 ticks = 0;
             var st = Stopwatch.StartNew();
             DispatcherTimer.Run(() =>
             {

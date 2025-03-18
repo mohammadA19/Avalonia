@@ -29,7 +29,7 @@ namespace Avalonia.FreeDesktop
 
         public Task EnqueueAsync(Func<Task> cb)
         {
-            var tcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var tcs = new TaskCompletionSource<int32>(TaskCreationOptions.RunContinuationsAsynchronously);
             _q.Enqueue(new Item(cb)
             {
                 OnFinish = e =>

@@ -19,7 +19,7 @@ namespace Avalonia.Styling
         private readonly Selector? _previous;
         private readonly bool _reversed;
 
-        internal protected NthChildSelector(Selector? previous, int step, int offset, bool reversed)
+        internal protected NthChildSelector(Selector? previous, int32 step, int32 offset, bool reversed)
         {
             _previous = previous;
             Step = step;
@@ -33,7 +33,7 @@ namespace Avalonia.Styling
         /// <param name="previous">Previous selector.</param>
         /// <param name="step">Position step.</param>
         /// <param name="offset">Initial index offset.</param>
-        public NthChildSelector(Selector? previous, int step, int offset)
+        public NthChildSelector(Selector? previous, int32 step, int32 offset)
             : this(previous, step, offset, false)
         {
 
@@ -45,8 +45,8 @@ namespace Avalonia.Styling
 
         internal override Type? TargetType => _previous?.TargetType;
 
-        public int Step { get; }
-        public int Offset { get; }
+        public int32 Step { get; }
+        public int32 Offset { get; }
 
         private protected override SelectorMatch Evaluate(StyledElement control, IStyle? parent, bool subscribe)
         {
@@ -70,8 +70,8 @@ namespace Avalonia.Styling
         }
 
         internal static SelectorMatch Evaluate(
-            int index, IChildIndexProvider childIndexProvider,
-            int step, int offset, bool reversed)
+            int32 index, IChildIndexProvider childIndexProvider,
+            int32 step, int32 offset, bool reversed)
         {
             if (index < 0)
             {

@@ -20,7 +20,7 @@ namespace Avalonia.Media
         /// <param name="trailingLength">In the case of a leading edge, this value is 0. In the case of a trailing edge,
         /// this value is the number of code points until the next valid caret position.</param>
         [DebuggerStepThrough]
-        public CharacterHit(int firstCharacterIndex, int trailingLength = 0)
+        public CharacterHit(int32 firstCharacterIndex, int32 trailingLength = 0)
         {
             FirstCharacterIndex = firstCharacterIndex;
 
@@ -30,12 +30,12 @@ namespace Avalonia.Media
         /// <summary>
         ///     Gets the index of the first character that got hit.
         /// </summary>
-        public int FirstCharacterIndex { get; }
+        public int32 FirstCharacterIndex { get; }
 
         /// <summary>
         ///     Gets the trailing length value for the character that got hit.
         /// </summary>
-        public int TrailingLength { get; }
+        public int32 TrailingLength { get; }
 
         public bool Equals(CharacterHit other)
         {
@@ -47,7 +47,7 @@ namespace Avalonia.Media
             return obj is CharacterHit other && Equals(other);
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {

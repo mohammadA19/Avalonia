@@ -20,7 +20,7 @@ namespace Avalonia.Skia
         // can be mapped directly to array indices.
         //
         // Should Skia update the enum with more elements, then the size of this array should be updated appropriately.
-        private const int FontEdgingsCount = (int)SKFontEdging.SubpixelAntialias + 1;
+        private const int32 FontEdgingsCount = (int32)SKFontEdging.SubpixelAntialias + 1;
         private readonly SKTextBlob?[] _textBlobCache = new SKTextBlob?[FontEdgingsCount];
 
         public GlyphRunImpl(IGlyphTypeface glyphTypeface, double fontRenderingEmSize,
@@ -45,7 +45,7 @@ namespace Avalonia.Skia
 
             var currentX = 0.0;
 
-            for (int i = 0; i < count; i++)
+            for (int32 i = 0; i < count; i++)
             {
                 var glyphInfo = glyphInfos[i];
                 var offset = glyphInfo.GlyphOffset;
@@ -117,7 +117,7 @@ namespace Avalonia.Skia
                     break;
             }
 
-            if (_textBlobCache[(int)edging] is null)
+            if (_textBlobCache[(int32)edging] is null)
             {
                 using var font = CreateFont(edging);
 
@@ -132,10 +132,10 @@ namespace Avalonia.Skia
 
                 SKTextBlobBuilderCache.Shared.Return(builder);
 
-                Interlocked.CompareExchange(ref _textBlobCache[(int)edging], textBlob, null);
+                Interlocked.CompareExchange(ref _textBlobCache[(int32)edging], textBlob, null);
             }
 
-            return _textBlobCache[(int)edging]!;
+            return _textBlobCache[(int32)edging]!;
         }
 
         private SKFont CreateFont(SKFontEdging edging)

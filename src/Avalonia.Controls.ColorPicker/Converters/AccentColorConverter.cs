@@ -25,7 +25,7 @@ namespace Avalonia.Controls.Primitives.Converters
             object? parameter,
             CultureInfo culture)
         {
-            int accentStep;
+            int32 accentStep;
             Color? rgbColor = null;
             HsvColor? hsvColor = null;
 
@@ -54,7 +54,7 @@ namespace Avalonia.Controls.Primitives.Converters
             // Get the value component delta
             try
             {
-                accentStep = int.Parse(parameter?.ToString() ?? "", CultureInfo.InvariantCulture);
+                accentStep = int32.Parse(parameter?.ToString() ?? "", CultureInfo.InvariantCulture);
             }
             catch
             {
@@ -99,7 +99,7 @@ namespace Avalonia.Controls.Primitives.Converters
         /// <param name="hsvColor">The base color to calculate the accent from.</param>
         /// <param name="accentStep">The number of accent color steps to move.</param>
         /// <returns>The new accent color.</returns>
-        public static HsvColor GetAccent(HsvColor hsvColor, int accentStep)
+        public static HsvColor GetAccent(HsvColor hsvColor, int32 accentStep)
         {
             if (accentStep != 0)
             {

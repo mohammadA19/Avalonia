@@ -13,7 +13,7 @@ namespace Avalonia.Utilities
     /// </summary>
     public static class TypeUtilities
     {
-        private static readonly int[] Conversions =
+        private static readonly int32[] Conversions =
         {
             0b101111111111101, // Boolean
             0b100001111111110, // Char
@@ -32,7 +32,7 @@ namespace Avalonia.Utilities
             0b111111111111111, // String
         };
 
-        private static readonly int[] ImplicitConversions =
+        private static readonly int32[] ImplicitConversions =
         {
             0b000000000000001, // Boolean
             0b001110111100010, // Char
@@ -186,7 +186,7 @@ namespace Avalonia.Utilities
             {
                 try
                 {
-                    result = Convert.ChangeType((int)value, toUnderl, culture);
+                    result = Convert.ChangeType((int32)value, toUnderl, culture);
                     return true;
                 }
                 catch

@@ -16,7 +16,7 @@ public class UiThreadRenderTimer : DefaultRenderTimer
     /// Initializes a new instance of the <see cref="UiThreadRenderTimer"/> class.
     /// </summary>
     /// <param name="framesPerSecond">The number of frames per second at which the loop should run.</param>
-    public UiThreadRenderTimer(int framesPerSecond) : base(framesPerSecond)
+    public UiThreadRenderTimer(int32 framesPerSecond) : base(framesPerSecond)
     {
     }
 

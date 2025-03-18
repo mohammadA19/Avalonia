@@ -10,7 +10,7 @@ namespace Avalonia.Base.UnitTests
         public void GetObservable_Returns_Initial_Value()
         {
             Class1 target = new Class1();
-            int raised = 0;
+            int32 raised = 0;
 
             target.GetObservable(Class1.FooProperty).Subscribe(x =>
             {

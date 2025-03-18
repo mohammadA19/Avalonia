@@ -57,7 +57,7 @@ namespace Avalonia.Controls.UnitTests
                 container = (desc.ElementAt(1) as Button).Content as Grid;
                 Assert.True(container != null);
 
-                for(int i = 0; i < container.Children.Count; i++)
+                for(int32 i = 0; i < container.Children.Count; i++)
                 {
                     if(container.Children[i] is TextBlock tb && tb.Name == "PART_DayTextBlock")
                     {
@@ -95,7 +95,7 @@ namespace Avalonia.Controls.UnitTests
                 container = (desc.ElementAt(1) as Button).Content as Grid;
                 Assert.True(container != null);
 
-                for (int i = 0; i < container.Children.Count; i++)
+                for (int32 i = 0; i < container.Children.Count; i++)
                 {
                     if (container.Children[i] is TextBlock tb && tb.Name == "PART_MonthTextBlock")
                     {
@@ -133,7 +133,7 @@ namespace Avalonia.Controls.UnitTests
                 container = (desc.ElementAt(1) as Button).Content as Grid;
                 Assert.True(container != null);
 
-                for (int i = 0; i < container.Children.Count; i++)
+                for (int32 i = 0; i < container.Children.Count; i++)
                 {
                     if (container.Children[i] is TextBlock tb && tb.Name == "PART_YearTextBlock")
                     {
@@ -173,7 +173,7 @@ namespace Avalonia.Controls.UnitTests
                 container = (desc.ElementAt(1) as Button).Content as Grid;
                 Assert.True(container != null);
 
-                for (int i = 0; i < container.Children.Count; i++)
+                for (int32 i = 0; i < container.Children.Count; i++)
                 {
                     if (container.Children[i] is TextBlock tb && tb.Name == "PART_YearTextBlock")
                     {

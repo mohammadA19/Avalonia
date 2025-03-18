@@ -19,7 +19,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets the total number of screens available on the device.
         /// </summary>
-        public int ScreenCount => _iScreenImpl.ScreenCount;
+        public int32 ScreenCount => _iScreenImpl.ScreenCount;
 
         /// <summary>
         /// Gets the list of all screens available on the device.

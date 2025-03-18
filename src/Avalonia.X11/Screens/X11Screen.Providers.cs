@@ -9,11 +9,11 @@ namespace Avalonia.X11.Screens;
 
 internal partial class X11Screens
 {
-    internal unsafe class X11Screen(MonitorInfo info, X11Info x11, IScalingProvider? scalingProvider, int id) : PlatformScreen(new PlatformHandle(info.Name, "XRandRMonitorName"))
+    internal unsafe class X11Screen(MonitorInfo info, X11Info x11, IScalingProvider? scalingProvider, int32 id) : PlatformScreen(new PlatformHandle(info.Name, "XRandRMonitorName"))
     {
         public Size? PhysicalSize { get; set; }
         // Length of a EDID-Block-Length(128 bytes), XRRGetOutputProperty multiplies offset and length by 4
-        private const int EDIDStructureLength = 32;
+        private const int32 EDIDStructureLength = 32;
 
         public virtual void Refresh()
         {
@@ -28,7 +28,7 @@ internal partial class X11Screens
             Bounds = new PixelRect(info.X, info.Y, info.Width, info.Height);
 
             Size? pSize = null;
-            for (int o = 0; o < info.Outputs.Length; o++)
+            for (int32 o = 0; o < info.Outputs.Length; o++)
             {
                 var outputSize = GetPhysicalMonitorSizeFromEDID(info.Outputs[o]);
                 if (outputSize != null)
@@ -46,7 +46,7 @@ internal partial class X11Screens
         {
             if (rrOutput == IntPtr.Zero)
                 return null;
-            var properties = XRRListOutputProperties(x11.Display, rrOutput, out int propertyCount);
+            var properties = XRRListOutputProperties(x11.Display, rrOutput, out int32 propertyCount);
             var hasEDID = false;
             for (var pc = 0; pc < propertyCount; pc++)
             {
@@ -57,7 +57,7 @@ internal partial class X11Screens
             if (!hasEDID)
                 return null;
             XRRGetOutputProperty(x11.Display, rrOutput, x11.Atoms.EDID, 0, EDIDStructureLength, false, false,
-                x11.Atoms.AnyPropertyType, out IntPtr actualType, out int actualFormat, out int bytesAfter, out _,
+                x11.Atoms.AnyPropertyType, out IntPtr actualType, out int32 actualFormat, out int32 bytesAfter, out _,
                 out IntPtr prop);
             if (actualType != x11.Atoms.XA_INTEGER)
                 return null;
@@ -97,7 +97,7 @@ internal partial class X11Screens
                 out var bytesAfter,
                 out var prop);
 
-            if (res != (int)Status.Success || type == IntPtr.Zero ||
+            if (res != (int32)Status.Success || type == IntPtr.Zero ||
                 format == 0 || bytesAfter.ToInt64() != 0 || count.ToInt64() % 4 != 0)
                 return;
 
@@ -137,10 +137,10 @@ internal partial class X11Screens
     {
         public IntPtr Name;
         public bool IsPrimary;
-        public int X;
-        public int Y;
-        public int Width;
-        public int Height;
+        public int32 X;
+        public int32 Y;
+        public int32 Width;
+        public int32 Height;
         public IntPtr[] Outputs;
     }
 
@@ -167,7 +167,7 @@ internal partial class X11Screens
 
         private void OnEvent(ref XEvent ev)
         {
-            if ((int)ev.type == _x11.RandrEventBase + (int)RandrEvent.RRScreenChangeNotify)
+            if ((int32)ev.type == _x11.RandrEventBase + (int32)RandrEvent.RRScreenChangeNotify)
             {
                 _cache = null;
                 Changed?.Invoke();
@@ -188,7 +188,7 @@ internal partial class X11Screens
                     var mon = monitors[c];
                     var outputs = new nint[mon.NOutput];
 
-                    for (int i = 0; i < outputs.Length; i++)
+                    for (int32 i = 0; i < outputs.Length; i++)
                     {
                         outputs[i] = mon.Outputs[i];
                     }

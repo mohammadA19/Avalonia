@@ -18,7 +18,7 @@ namespace Avalonia.Benchmarks.Base
         }
 
         [Benchmark(Baseline = true)]
-        public int GetClrPropertyValues()
+        public int32 GetClrPropertyValues()
         {
             var target = _baseline;
             var result = 0;
@@ -40,7 +40,7 @@ namespace Avalonia.Benchmarks.Base
         }
 
         [Benchmark]
-        public int GetDefaultValues()
+        public int32 GetDefaultValues()
         {
             var target = _target;
             var result = 0;
@@ -76,7 +76,7 @@ namespace Avalonia.Benchmarks.Base
         }
 
         [Benchmark]
-        public int Get_Local_Values()
+        public int32 Get_Local_Values()
         {
             var target = _target;
             var result = 0;
@@ -122,7 +122,7 @@ namespace Avalonia.Benchmarks.Base
         }
 
         [Benchmark]
-        public int Get_Local_Values_With_Style_Values()
+        public int32 Get_Local_Values_With_Style_Values()
         {
             var target = _target;
             var result = 0;

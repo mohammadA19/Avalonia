@@ -19,12 +19,12 @@ namespace Avalonia.Media.TextFormatting
         /// <summary>
         /// Gets the first TextSource position of the current line.
         /// </summary>
-        public abstract int FirstTextSourceIndex { get; }
+        public abstract int32 FirstTextSourceIndex { get; }
 
         /// <summary>
         /// Gets the total number of TextSource positions of the current line.
         /// </summary>
-        public abstract int Length { get; }
+        public abstract int32 Length { get; }
 
         /// <summary>
         /// Gets the state of the line when broken by line breaking process.
@@ -80,7 +80,7 @@ namespace Avalonia.Media.TextFormatting
         /// <returns>
         /// The number of newline characters.
         /// </returns>
-        public abstract int NewLineLength { get; }
+        public abstract int32 NewLineLength { get; }
 
         /// <summary>
         /// Gets the distance that black pixels extend beyond the bottom alignment edge of a line.
@@ -120,7 +120,7 @@ namespace Avalonia.Media.TextFormatting
         /// <returns>
         /// The number of whitespace code points beyond the last non-blank character in a line.
         /// </returns>
-        public abstract int TrailingWhitespaceLength { get; }
+        public abstract int32 TrailingWhitespaceLength { get; }
 
         /// <summary>
         /// Gets the width of a line of text, excluding trailing whitespace characters.
@@ -206,7 +206,7 @@ namespace Avalonia.Media.TextFormatting
         /// <param name="firstTextSourceCharacterIndex">index of first character of specified range</param>
         /// <param name="textLength">number of characters of the specified range</param>
         /// <returns>an array of bounding rectangles.</returns>
-        public abstract IReadOnlyList<TextBounds> GetTextBounds(int firstTextSourceCharacterIndex, int textLength);
+        public abstract IReadOnlyList<TextBounds> GetTextBounds(int32 firstTextSourceCharacterIndex, int32 textLength);
 
         public abstract void Dispose();
     }

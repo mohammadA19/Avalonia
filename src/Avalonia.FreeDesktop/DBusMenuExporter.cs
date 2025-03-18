@@ -26,8 +26,8 @@ namespace Avalonia.FreeDesktop
 
         private sealed class DBusMenuExporterImpl : ComCanonicalDbusmenuHandler, ITopLevelNativeMenuExporter, IDisposable
         {
-            private readonly Dictionary<int, NativeMenuItemBase> _idsToItems = new();
-            private readonly Dictionary<NativeMenuItemBase, int> _itemsToIds = new();
+            private readonly Dictionary<int32, NativeMenuItemBase> _idsToItems = new();
+            private readonly Dictionary<NativeMenuItemBase, int32> _itemsToIds = new();
             private readonly HashSet<NativeMenu> _menus = [];
             private readonly PathHandler _pathHandler;
             private readonly uint _xid;
@@ -37,7 +37,7 @@ namespace Avalonia.FreeDesktop
             private bool _disposed;
             private uint _revision = 1;
             private bool _resetQueued;
-            private int _nextId = 1;
+            private int32 _nextId = 1;
 
             public DBusMenuExporterImpl(Connection connection, IntPtr xid)
             {
@@ -63,7 +63,7 @@ namespace Avalonia.FreeDesktop
 
             public override Connection Connection { get; }
 
-            protected override ValueTask<(uint Revision, (int, Dictionary<string, VariantValue>, VariantValue[]) Layout)> OnGetLayoutAsync(Message message, int parentId, int recursionDepth, string[] propertyNames)
+            protected override ValueTask<(uint Revision, (int32, Dictionary<string, VariantValue>, VariantValue[]) Layout)> OnGetLayoutAsync(Message message, int32 parentId, int32 recursionDepth, string[] propertyNames)
             {
                 var menu = GetMenu(parentId);
                 var layout = GetLayout(menu.item, menu.menu, recursionDepth, propertyNames);
@@ -73,31 +73,31 @@ namespace Avalonia.FreeDesktop
                     OnIsNativeMenuExportedChanged?.Invoke(this, EventArgs.Empty);
                 }
 
-                return new ValueTask<(uint, (int, Dictionary<string, VariantValue>, VariantValue[]))>((_revision, layout));
+                return new ValueTask<(uint, (int32, Dictionary<string, VariantValue>, VariantValue[]))>((_revision, layout));
             }
 
-            protected override ValueTask<(int, Dictionary<string, VariantValue>)[]> OnGetGroupPropertiesAsync(Message message, int[] ids, string[] propertyNames)
+            protected override ValueTask<(int32, Dictionary<string, VariantValue>)[]> OnGetGroupPropertiesAsync(Message message, int32[] ids, string[] propertyNames)
                 => new(ids.Select(id => (id, GetProperties(GetMenu(id), propertyNames))).ToArray());
 
-            protected override ValueTask<VariantValue> OnGetPropertyAsync(Message message, int id, string name) =>
+            protected override ValueTask<VariantValue> OnGetPropertyAsync(Message message, int32 id, string name) =>
                 new(GetProperty(GetMenu(id), name) ?? VariantValue.Int32(0));
 
-            protected override ValueTask OnEventAsync(Message message, int id, string eventId, VariantValue data, uint timestamp)
+            protected override ValueTask OnEventAsync(Message message, int32 id, string eventId, VariantValue data, uint timestamp)
             {
                 HandleEvent(id, eventId);
                 return new ValueTask();
             }
 
-            protected override ValueTask<int[]> OnEventGroupAsync(Message message, (int, string, VariantValue, uint)[] events)
+            protected override ValueTask<int32[]> OnEventGroupAsync(Message message, (int32, string, VariantValue, uint)[] events)
             {
                 foreach (var e in events)
                     HandleEvent(e.Item1, e.Item2);
-                return new ValueTask<int[]>([]);
+                return new ValueTask<int32[]>([]);
             }
 
-            protected override ValueTask<bool> OnAboutToShowAsync(Message message, int id) => new(false);
+            protected override ValueTask<bool> OnAboutToShowAsync(Message message, int32 id) => new(false);
 
-            protected override ValueTask<(int[] UpdatesNeeded, int[] IdErrors)> OnAboutToShowGroupAsync(Message message, int[] ids) =>
+            protected override ValueTask<(int32[] UpdatesNeeded, int32[] IdErrors)> OnAboutToShowGroupAsync(Message message, int32[] ids) =>
                 new(([], []));
 
             private async Task InitializeAsync()
@@ -178,7 +178,7 @@ namespace Avalonia.FreeDesktop
                 Dispatcher.UIThread.Post(DoLayoutReset, DispatcherPriority.Background);
             }
 
-            private (NativeMenuItemBase? item, NativeMenu? menu) GetMenu(int id)
+            private (NativeMenuItemBase? item, NativeMenu? menu) GetMenu(int32 id)
             {
                 if (id == 0)
                     return (null, _menu);
@@ -192,7 +192,7 @@ namespace Avalonia.FreeDesktop
                     ((INotifyCollectionChanged)menu.Items).CollectionChanged += OnMenuItemsChanged;
             }
 
-            private int GetId(NativeMenuItemBase item)
+            private int32 GetId(NativeMenuItemBase item)
             {
                 if (_itemsToIds.TryGetValue(item, out var id))
                     return id;
@@ -311,7 +311,7 @@ namespace Avalonia.FreeDesktop
                 return properties;
             }
 
-            private (int, Dictionary<string, VariantValue>, VariantValue[]) GetLayout(NativeMenuItemBase? item, NativeMenu? menu, int depth, string[] propertyNames)
+            private (int32, Dictionary<string, VariantValue>, VariantValue[]) GetLayout(NativeMenuItemBase? item, NativeMenu? menu, int32 depth, string[] propertyNames)
             {
                 var id = item is null ? 0 : GetId(item);
                 var props = GetProperties((item, menu), propertyNames);
@@ -332,7 +332,7 @@ namespace Avalonia.FreeDesktop
                 return (id, props, children);
             }
 
-            private void HandleEvent(int id, string eventId)
+            private void HandleEvent(int32 id, string eventId)
             {
                 if (eventId == "clicked")
                 {

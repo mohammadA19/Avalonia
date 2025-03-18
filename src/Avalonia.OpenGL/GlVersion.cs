@@ -9,12 +9,12 @@ namespace Avalonia.OpenGL
     public record struct GlVersion
     {
         public GlProfileType Type { get; }
-        public int Major { get; }
-        public int Minor { get; }
+        public int32 Major { get; }
+        public int32 Minor { get; }
         public bool IsCompatibilityProfile { get; } // Only makes sense if Type is OpenGL and Version is >= 3.2
 
-        public GlVersion(GlProfileType type, int major, int minor) : this(type, major, minor, false) { }
-        public GlVersion(GlProfileType type, int major, int minor, bool isCompatibilityProfile)
+        public GlVersion(GlProfileType type, int32 major, int32 minor) : this(type, major, minor, false) { }
+        public GlVersion(GlProfileType type, int32 major, int32 minor, bool isCompatibilityProfile)
         {
             Type = type;
             Major = major;

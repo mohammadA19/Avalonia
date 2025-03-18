@@ -16,9 +16,9 @@ namespace TinyJson
 {
     // Really simple JSON parser in ~300 lines
     // - Attempts to parse JSON files with minimal GC allocation
-    // - Nice and simple "[1,2,3]".FromJson<List<int>>() API
+    // - Nice and simple "[1,2,3]".FromJson<List<int32>>() API
     // - Classes and structs can be parsed too!
-    //      class Foo { public int Value; }
+    //      class Foo { public int32 Value; }
     //      "{\"Value\":10}".FromJson<Foo>()
     // - Can parse JSON without type information into Dictionary<string,object> and List<object> e.g.
     //      "[1,2,3]".FromJson<object>().GetType() == typeof(List<object>)
@@ -29,7 +29,7 @@ namespace TinyJson
     //
     // Limitations:
     // - No JIT Emit support to parse structures quickly
-    // - Limited to parsing <2GB JSON files (due to int.MaxValue)
+    // - Limited to parsing <2GB JSON files (due to int32.MaxValue)
     // - Parsing of abstract classes or interfaces is NOT supported and will throw an exception.
     [RequiresUnreferencedCode("Json Parsing")]
     internal static class JSONParser
@@ -49,7 +49,7 @@ namespace TinyJson
 
             //Remove all whitespace not within strings to make parsing simpler
             stringBuilder.Length = 0;
-            for (int i = 0; i < json.Length; i++)
+            for (int32 i = 0; i < json.Length; i++)
             {
                 char c = json[i];
                 if (c == '"')
@@ -67,10 +67,10 @@ namespace TinyJson
             return (T)ParseValue(typeof(T), stringBuilder.ToString());
         }
 
-        static int AppendUntilStringEnd(bool appendEscapeCharacter, int startIdx, string json)
+        static int32 AppendUntilStringEnd(bool appendEscapeCharacter, int32 startIdx, string json)
         {
             stringBuilder.Append(json[startIdx]);
-            for (int i = startIdx + 1; i < json.Length; i++)
+            for (int32 i = startIdx + 1; i < json.Length; i++)
             {
                 if (json[i] == '\\')
                 {
@@ -97,9 +97,9 @@ namespace TinyJson
             splitArray.Clear();
             if (json.Length == 2)
                 return splitArray;
-            int parseDepth = 0;
+            int32 parseDepth = 0;
             stringBuilder.Length = 0;
-            for (int i = 1; i < json.Length - 1; i++)
+            for (int32 i = 1; i < json.Length - 1; i++)
             {
                 switch (json[i])
                 {
@@ -140,11 +140,11 @@ namespace TinyJson
                 if (json.Length <= 2)
                     return string.Empty;
                 StringBuilder parseStringBuilder = new StringBuilder(json.Length);
-                for (int i = 1; i < json.Length - 1; ++i)
+                for (int32 i = 1; i < json.Length - 1; ++i)
                 {
                     if (json[i] == '\\' && i + 1 < json.Length - 1)
                     {
-                        int j = "\"\\nrtbf/".IndexOf(json[i + 1]);
+                        int32 j = "\"\\nrtbf/".IndexOf(json[i + 1]);
                         if (j >= 0)
                         {
                             parseStringBuilder.Append("\"\\\n\r\t\b\f/"[j]);
@@ -208,7 +208,7 @@ namespace TinyJson
 
                 List<string> elems = Split(json);
                 Array newArray = Array.CreateInstance(arrayType, elems.Count);
-                for (int i = 0; i < elems.Count; i++)
+                for (int32 i = 0; i < elems.Count; i++)
                     newArray.SetValue(ParseValue(arrayType, elems[i]), i);
                 splitArrayPool.Push(elems);
                 return newArray;
@@ -220,8 +220,8 @@ namespace TinyJson
                     return null;
 
                 List<string> elems = Split(json);
-                var list = (IList)type.GetConstructor(new Type[] { typeof(int) }).Invoke(new object[] { elems.Count });
-                for (int i = 0; i < elems.Count; i++)
+                var list = (IList)type.GetConstructor(new Type[] { typeof(int32) }).Invoke(new object[] { elems.Count });
+                for (int32 i = 0; i < elems.Count; i++)
                     list.Add(ParseValue(listType, elems[i]));
                 splitArrayPool.Push(elems);
                 return list;
@@ -246,8 +246,8 @@ namespace TinyJson
                 if (elems.Count % 2 != 0)
                     return null;
 
-                var dictionary = (IDictionary)type.GetConstructor(new Type[] { typeof(int) }).Invoke(new object[] { elems.Count / 2 });
-                for (int i = 0; i < elems.Count; i += 2)
+                var dictionary = (IDictionary)type.GetConstructor(new Type[] { typeof(int32) }).Invoke(new object[] { elems.Count / 2 });
+                for (int32 i = 0; i < elems.Count; i += 2)
                 {
                     if (elems[i].Length <= 2)
                         continue;
@@ -279,7 +279,7 @@ namespace TinyJson
                 if (elems.Count % 2 != 0)
                     return null;
                 var dict = new Dictionary<string, object>(elems.Count / 2);
-                for (int i = 0; i < elems.Count; i += 2)
+                for (int32 i = 0; i < elems.Count; i += 2)
                     dict[elems[i].Substring(1, elems[i].Length - 2)] = ParseAnonymousValue(elems[i + 1]);
                 return dict;
             }
@@ -287,7 +287,7 @@ namespace TinyJson
             {
                 List<string> items = Split(json);
                 var finalList = new List<object>(items.Count);
-                for (int i = 0; i < items.Count; i++)
+                for (int32 i = 0; i < items.Count; i++)
                     finalList.Add(ParseAnonymousValue(items[i]));
                 return finalList;
             }
@@ -306,8 +306,8 @@ namespace TinyJson
                 }
                 else
                 {
-                    int result;
-                    int.TryParse(json, out result);
+                    int32 result;
+                    int32.TryParse(json, out result);
                     return result;
                 }
             }
@@ -322,7 +322,7 @@ namespace TinyJson
         static Dictionary<string, T> CreateMemberNameDictionary<T>(T[] members) where T : MemberInfo
         {
             Dictionary<string, T> nameToMember = new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase);
-            for (int i = 0; i < members.Length; i++)
+            for (int32 i = 0; i < members.Length; i++)
             {
                 T member = members[i];
                 if (member.IsDefined(typeof(IgnoreDataMemberAttribute), true))
@@ -368,7 +368,7 @@ namespace TinyJson
                 propertyInfoCache.Add(type, nameToProperty);
             }
 
-            for (int i = 0; i < elems.Count; i += 2)
+            for (int32 i = 0; i < elems.Count; i += 2)
             {
                 if (elems[i].Length <= 2)
                     continue;

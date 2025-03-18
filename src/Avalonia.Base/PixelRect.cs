@@ -16,7 +16,7 @@ namespace Avalonia
         /// <param name="y">The Y position.</param>
         /// <param name="width">The width.</param>
         /// <param name="height">The height.</param>
-        public PixelRect(int x, int y, int width, int height)
+        public PixelRect(int32 x, int32 y, int32 width, int32 height)
         {
             X = x;
             Y = y;
@@ -65,22 +65,22 @@ namespace Avalonia
         /// <summary>
         /// Gets the X position.
         /// </summary>
-        public int X { get; }
+        public int32 X { get; }
 
         /// <summary>
         /// Gets the Y position.
         /// </summary>
-        public int Y { get; }
+        public int32 Y { get; }
 
         /// <summary>
         /// Gets the width.
         /// </summary>
-        public int Width { get; }
+        public int32 Width { get; }
 
         /// <summary>
         /// Gets the height.
         /// </summary>
-        public int Height { get; }
+        public int32 Height { get; }
 
         /// <summary>
         /// Gets the position of the rectangle.
@@ -95,12 +95,12 @@ namespace Avalonia
         /// <summary>
         /// Gets the right position of the rectangle.
         /// </summary>
-        public int Right => X + Width;
+        public int32 Right => X + Width;
 
         /// <summary>
         /// Gets the bottom position of the rectangle.
         /// </summary>
-        public int Bottom => Y + Height;
+        public int32 Bottom => Y + Height;
 
         /// <summary>
         /// Gets the top left point of the rectangle.
@@ -216,11 +216,11 @@ namespace Avalonia
         /// Returns the hash code for this instance.
         /// </summary>
         /// <returns>The hash code.</returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
-                int hash = 17;
+                int32 hash = 17;
                 hash = (hash * 23) + X.GetHashCode();
                 hash = (hash * 23) + Y.GetHashCode();
                 hash = (hash * 23) + Width.GetHashCode();
@@ -304,7 +304,7 @@ namespace Avalonia
         /// </summary>
         /// <param name="x">The x position.</param>
         /// <returns>The new <see cref="PixelRect"/>.</returns>
-        public PixelRect WithX(int x)
+        public PixelRect WithX(int32 x)
         {
             return new PixelRect(x, Y, Width, Height);
         }
@@ -314,7 +314,7 @@ namespace Avalonia
         /// </summary>
         /// <param name="y">The y position.</param>
         /// <returns>The new <see cref="PixelRect"/>.</returns>
-        public PixelRect WithY(int y)
+        public PixelRect WithY(int32 y)
         {
             return new PixelRect(X, y, Width, Height);
         }
@@ -324,7 +324,7 @@ namespace Avalonia
         /// </summary>
         /// <param name="width">The width.</param>
         /// <returns>The new <see cref="PixelRect"/>.</returns>
-        public PixelRect WithWidth(int width)
+        public PixelRect WithWidth(int32 width)
         {
             return new PixelRect(X, Y, width, Height);
         }
@@ -334,7 +334,7 @@ namespace Avalonia
         /// </summary>
         /// <param name="height">The height.</param>
         /// <returns>The new <see cref="PixelRect"/>.</returns>
-        public PixelRect WithHeight(int height)
+        public PixelRect WithHeight(int32 height)
         {
             return new PixelRect(X, Y, Width, height);
         }
@@ -447,8 +447,8 @@ namespace Avalonia
         private static PixelPoint FromPointCeiling(Point point, Vector scale)
         {
             return new PixelPoint(
-                (int)Math.Ceiling(point.X * scale.X),
-                (int)Math.Ceiling(point.Y * scale.Y));
+                (int32)Math.Ceiling(point.X * scale.X),
+                (int32)Math.Ceiling(point.Y * scale.Y));
         }
     }
 }

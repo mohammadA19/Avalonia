@@ -35,7 +35,7 @@ namespace Avalonia.Headless.Vnc
                         _ => MouseButton.None
                     };
 
-                var modifiers = (RawInputModifiers)(((int)buttons & 7) << 4);
+                var modifiers = (RawInputModifiers)(((int32)buttons & 7) << 4);
 
                 Dispatcher.UIThread.Post(() =>
                 {
@@ -339,7 +339,7 @@ namespace Avalonia.Headless.Vnc
             return _framebuffer;
         }
         
-        public ExtendedDesktopSizeStatus SetDesktopSize(int width, int height)
+        public ExtendedDesktopSizeStatus SetDesktopSize(int32 width, int32 height)
         {
             Dispatcher.UIThread.Post(() =>
             {

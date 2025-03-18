@@ -12,7 +12,7 @@ namespace Avalonia.Markup.UnitTests.Data;
 
 public class BindingTests_Delay : IDisposable
 {
-    private const int DelayMilliseconds = 10;
+    private const int32 DelayMilliseconds = 10;
     private const string InitialFooValue = "foo";
 
     private readonly ManualTimerDispatcher _dispatcher;

@@ -127,13 +127,13 @@ namespace Avalonia.Media.TextFormatting.Unicode
             get
             {
                 const ulong whiteSpaceMask =
-                    (1UL << (int)GeneralCategory.Control) |
-                    (1UL << (int)GeneralCategory.NonspacingMark) |
-                    (1UL << (int)GeneralCategory.Format) |
-                    (1UL << (int)GeneralCategory.SpaceSeparator) |
-                    (1UL << (int)GeneralCategory.SpacingMark);
+                    (1UL << (int32)GeneralCategory.Control) |
+                    (1UL << (int32)GeneralCategory.NonspacingMark) |
+                    (1UL << (int32)GeneralCategory.Format) |
+                    (1UL << (int32)GeneralCategory.SpaceSeparator) |
+                    (1UL << (int32)GeneralCategory.SpacingMark);
 
-                return ((1UL << (int)GeneralCategory) & whiteSpaceMask) != 0UL;
+                return ((1UL << (int32)GeneralCategory) & whiteSpaceMask) != 0UL;
             }
         }
         
@@ -183,9 +183,9 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return true;
         }
 
-        public static implicit operator int(Codepoint codepoint)
+        public static implicit operator int32(Codepoint codepoint)
         {
-            return (int)codepoint._value;
+            return (int32)codepoint._value;
         }
 
         public static implicit operator uint(Codepoint codepoint)
@@ -205,7 +205,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
 #else
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
-        public static Codepoint ReadAt(ReadOnlySpan<char> text, int index, out int count)
+        public static Codepoint ReadAt(ReadOnlySpan<char> text, int32 index, out int32 count)
         {
             // Perf note: this method is performance critical for text layout, modify with care!
 

@@ -13,61 +13,61 @@ namespace Avalonia.LinuxFramebuffer
     unsafe class NativeUnsafeMethods
     {
         [DllImport("libc", EntryPoint = "open", SetLastError = true)]
-        public static extern int open(string pathname, int flags, int mode);
+        public static extern int32 open(string pathname, int32 flags, int32 mode);
 
         [DllImport("libc", EntryPoint = "close", SetLastError = true)]
-        public static extern int close(int fd);
+        public static extern int32 close(int32 fd);
 
         [DllImport("libc", EntryPoint = "ioctl", SetLastError = true)]
-        public static extern int ioctl(int fd, FbIoCtl code, void* arg);
+        public static extern int32 ioctl(int32 fd, FbIoCtl code, void* arg);
 
         [DllImport("libc", EntryPoint = "mmap", SetLastError = true)]
-        public static extern IntPtr mmap(IntPtr addr, IntPtr length, int prot, int flags,
-                  int fd, IntPtr offset);
+        public static extern IntPtr mmap(IntPtr addr, IntPtr length, int32 prot, int32 flags,
+                  int32 fd, IntPtr offset);
         [DllImport("libc", EntryPoint = "munmap", SetLastError = true)]
-        public static extern int munmap(IntPtr addr, IntPtr length);
+        public static extern int32 munmap(IntPtr addr, IntPtr length);
 
         [DllImport("libc", EntryPoint = "memcpy", SetLastError = true)]
-        public static extern int memcpy(IntPtr dest, IntPtr src, IntPtr length);
+        public static extern int32 memcpy(IntPtr dest, IntPtr src, IntPtr length);
 
         [DllImport("libc", EntryPoint = "select", SetLastError = true)]
-        public static extern int select(int nfds, void* rfds, void* wfds, void* exfds, IntPtr* timevals);
+        public static extern int32 select(int32 nfds, void* rfds, void* wfds, void* exfds, IntPtr* timevals);
 
 
         [DllImport("libc", EntryPoint = "poll", SetLastError = true)]
-        public static extern int poll(PollFd* fds, IntPtr nfds, int timeout);
+        public static extern int32 poll(PollFd* fds, IntPtr nfds, int32 timeout);
 
         [DllImport("libevdev.so.2", EntryPoint = "libevdev_new_from_fd", SetLastError = true)]
-        public static extern int libevdev_new_from_fd(int fd, out IntPtr dev);
+        public static extern int32 libevdev_new_from_fd(int32 fd, out IntPtr dev);
 
         [DllImport("libevdev.so.2", EntryPoint = "libevdev_has_event_type", SetLastError = true)]
-        public static extern int libevdev_has_event_type(IntPtr dev, EvType type);
+        public static extern int32 libevdev_has_event_type(IntPtr dev, EvType type);
 
         [DllImport("libevdev.so.2", EntryPoint = "libevdev_next_event", SetLastError = true)]
-        public static extern int libevdev_next_event(IntPtr dev, int flags, out input_event ev);
+        public static extern int32 libevdev_next_event(IntPtr dev, int32 flags, out input_event ev);
 
         [DllImport("libevdev.so.2", EntryPoint = "libevdev_get_name", SetLastError = true)]
         public static extern IntPtr libevdev_get_name(IntPtr dev);
         [DllImport("libevdev.so.2", EntryPoint = "libevdev_get_abs_info", SetLastError = true)]
-        public static extern input_absinfo* libevdev_get_abs_info(IntPtr dev, int code);
+        public static extern input_absinfo* libevdev_get_abs_info(IntPtr dev, int32 code);
         
         [DllImport("libc")]
-        public extern static int epoll_create1(int size);
+        public extern static int32 epoll_create1(int32 size);
 
         [DllImport("libc")]
-        public extern static int epoll_ctl(int epfd, int op, int fd, ref epoll_event __event);
+        public extern static int32 epoll_ctl(int32 epfd, int32 op, int32 fd, ref epoll_event __event);
 
         [DllImport("libc")]
-        public extern static int epoll_wait(int epfd, epoll_event* events, int maxevents, int timeout);
+        public extern static int32 epoll_wait(int32 epfd, epoll_event* events, int32 maxevents, int32 timeout);
         
-        public const int EPOLLIN = 1;
-        public const int EPOLL_CTL_ADD = 1;
-        public const int O_NONBLOCK = 2048;
+        public const int32 EPOLLIN = 1;
+        public const int32 EPOLL_CTL_ADD = 1;
+        public const int32 O_NONBLOCK = 2048;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     struct PollFd {
-        public int   fd;         /* file descriptor */
+        public int32   fd;         /* file descriptor */
         public short events;     /* requested events */
         public short revents;    /* returned events */
     };
@@ -205,7 +205,7 @@ namespace Avalonia.LinuxFramebuffer
     {
         private IntPtr timeval1, timeval2;
         public ushort _type, _code;
-        public int value;
+        public int32 value;
         public EvType Type => (EvType)_type;
         public EvKey Key => (EvKey)_code;
         public AbsAxis Axis => (AbsAxis)_code;
@@ -224,7 +224,7 @@ namespace Avalonia.LinuxFramebuffer
     [StructLayout(LayoutKind.Sequential)]
     unsafe struct fd_set
     {
-        public int count;
+        public int32 count;
         public fixed byte fds [256];
     }
 
@@ -297,7 +297,7 @@ namespace Avalonia.LinuxFramebuffer
         [FieldOffset(0)]
         public IntPtr ptr;
         [FieldOffset(0)]
-        public int fd;
+        public int32 fd;
         [FieldOffset(0)]
         public uint u32;
         [FieldOffset(0)]

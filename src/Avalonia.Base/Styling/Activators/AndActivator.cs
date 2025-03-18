@@ -10,7 +10,7 @@ namespace Avalonia.Styling.Activators
     {
         private List<IStyleActivator>? _sources;
 
-        public int Count => _sources?.Count ?? 0;
+        public int32 Count => _sources?.Count ?? 0;
 
         public void Add(IStyleActivator activator)
         {

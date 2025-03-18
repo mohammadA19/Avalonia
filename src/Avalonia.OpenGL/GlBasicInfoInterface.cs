@@ -14,21 +14,21 @@ namespace Avalonia.OpenGL
         }
     
         [GetProcAddress("glGetIntegerv")]
-        public partial void GetIntegerv(int name, out int rv);
+        public partial void GetIntegerv(int32 name, out int32 rv);
     
         [GetProcAddress("glGetFloatv")]
-        public partial void GetFloatv(int name, out float rv);
+        public partial void GetFloatv(int32 name, out float rv);
 
         [GetProcAddress("glGetString")]
-        public partial IntPtr GetStringNative(int v);
+        public partial IntPtr GetStringNative(int32 v);
 
         [GetProcAddress("glGetStringi")]
-        public partial IntPtr GetStringiNative(int v, int v1);
+        public partial IntPtr GetStringiNative(int32 v, int32 v1);
 
         [GetProcAddress("glGetError")]
-        public partial int GetError();
+        public partial int32 GetError();
 
-        public string? GetString(int v)
+        public string? GetString(int32 v)
         {
             var ptr = GetStringNative(v);
             if (ptr != IntPtr.Zero)
@@ -36,7 +36,7 @@ namespace Avalonia.OpenGL
             return null;
         }
         
-        public string? GetString(int v, int index)
+        public string? GetString(int32 v, int32 index)
         {
             var ptr = GetStringiNative(v, index);
             if (ptr != IntPtr.Zero)
@@ -59,7 +59,7 @@ namespace Avalonia.OpenGL
             GetError();
 
             // For other (generally newer) versions
-            GetIntegerv(GlConsts.GL_NUM_EXTENSIONS, out int count);
+            GetIntegerv(GlConsts.GL_NUM_EXTENSIONS, out int32 count);
             var rv = new List<string>(count);
             for (var c = 0; c < count; c++)
             {

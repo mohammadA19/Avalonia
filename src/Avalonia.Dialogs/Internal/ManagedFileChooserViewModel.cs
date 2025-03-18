@@ -61,7 +61,7 @@ namespace Avalonia.Dialogs.Internal
         public SelectionMode SelectionMode { get; }
         public string? Title { get; }
 
-        public int QuickLinksSelectedIndex
+        public int32 QuickLinksSelectedIndex
         {
             get
             {

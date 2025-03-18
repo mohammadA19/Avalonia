@@ -32,6 +32,6 @@ namespace Avalonia.Markup.Xaml.MarkupExtensions
 
         public TreeType Tree { get; set; }
 
-        public int AncestorLevel { get; set; } = 1;
+        public int32 AncestorLevel { get; set; } = 1;
     }
 }

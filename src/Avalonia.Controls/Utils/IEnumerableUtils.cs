@@ -12,7 +12,7 @@ namespace Avalonia.Controls.Utils
             return items.IndexOf(item) != -1;
         }
 
-        public static bool TryGetCountFast(this IEnumerable? items, out int count)
+        public static bool TryGetCountFast(this IEnumerable? items, out int32 count)
         {
             if (items != null)
             {
@@ -32,7 +32,7 @@ namespace Avalonia.Controls.Utils
             return false;
         }
 
-        public static int Count(this IEnumerable? items)
+        public static int32 Count(this IEnumerable? items)
         {
             if (TryGetCountFast(items, out var count))
             {
@@ -48,7 +48,7 @@ namespace Avalonia.Controls.Utils
             }
         }
 
-        public static int IndexOf(this IEnumerable items, object item)
+        public static int32 IndexOf(this IEnumerable items, object item)
         {
             _ = items ?? throw new ArgumentNullException(nameof(items));
 
@@ -60,7 +60,7 @@ namespace Avalonia.Controls.Utils
             }
             else
             {
-                int index = 0;
+                int32 index = 0;
 
                 foreach (var i in items)
                 {
@@ -76,7 +76,7 @@ namespace Avalonia.Controls.Utils
             }
         }
 
-        public static object? ElementAt(this IEnumerable items, int index)
+        public static object? ElementAt(this IEnumerable items, int32 index)
         {
             _ = items ?? throw new ArgumentNullException(nameof(items));
 

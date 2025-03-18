@@ -12,7 +12,7 @@ namespace Avalonia.Interactivity
     /// </summary>
     public class Interactive : Layoutable
     {
-        internal static int TotalHandlersCount { get; private set; }
+        internal static int32 TotalHandlersCount { get; private set; }
         private Dictionary<RoutedEvent, List<EventSubscription>>? _eventHandlers;
 
         /// <summary>

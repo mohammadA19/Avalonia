@@ -43,7 +43,7 @@ namespace Avalonia.Win32
         private static readonly Win32Platform s_instance = new();
         private static Win32PlatformOptions? s_options;
         private static Compositor? s_compositor;
-        internal const int TIMERID_DISPATCHER = 1;
+        internal const int32 TIMERID_DISPATCHER = 1;
 
         private WndProc? _wndProcDelegate;
         private IntPtr _hwnd;
@@ -139,7 +139,7 @@ namespace Avalonia.Win32
         [SuppressMessage("Microsoft.StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Using Win32 naming for consistency.")]
         private IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
         {
-            if (msg == (int)WindowsMessage.WM_DISPATCH_WORK_ITEM 
+            if (msg == (int32)WindowsMessage.WM_DISPATCH_WORK_ITEM 
                 && wParam.ToInt64() == Win32DispatcherImpl.SignalW 
                 && lParam.ToInt64() == Win32DispatcherImpl.SignalL) 
                 _dispatcher?.DispatchWorkItem();

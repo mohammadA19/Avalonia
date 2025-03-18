@@ -9,7 +9,7 @@ internal partial class X11Screens
 {
     internal interface IScalingProvider
     {
-        double GetScaling(X11Screen screen, int index);
+        double GetScaling(X11Screen screen, int32 index);
     }
 
     interface IScalingProviderWithChanges : IScalingProvider
@@ -28,12 +28,12 @@ internal partial class X11Screens
             _factor = factor;
         }
 
-        public double GetScaling(X11Screen screen, int index) => _inner.GetScaling(screen, index) * _factor;
+        public double GetScaling(X11Screen screen, int32 index) => _inner.GetScaling(screen, index) * _factor;
     }
 
     class NullScalingProvider : IScalingProvider
     {
-        public double GetScaling(X11Screen screen, int index) => 1;
+        public double GetScaling(X11Screen screen, int32 index) => 1;
     }
 
 
@@ -73,15 +73,15 @@ internal partial class X11Screens
         
         public event Action? SettingsChanged;
         
-        public double GetScaling(X11Screen screen, int index) => _factor;
+        public double GetScaling(X11Screen screen, int32 index) => _factor;
     }
     
     class PhysicalDpiScalingProvider : IScalingProvider
     {
-        private const int FullHDWidth = 1920;
-        private const int FullHDHeight = 1080;
+        private const int32 FullHDWidth = 1920;
+        private const int32 FullHDHeight = 1080;
         
-        public double GetScaling(X11Screen screen, int index)
+        public double GetScaling(X11Screen screen, int32 index)
         {
             if (screen.PhysicalSize == null)
                 return 1;
@@ -128,7 +128,7 @@ internal partial class X11Screens
             _indexedConfig = indexedConfig;
         }
         
-        public double GetScaling(X11Screen screen, int index)
+        public double GetScaling(X11Screen screen, int32 index)
         {
             if (_indexedConfig != null)
             {

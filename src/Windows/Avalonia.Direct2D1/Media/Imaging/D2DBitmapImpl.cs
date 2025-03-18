@@ -42,7 +42,7 @@ namespace Avalonia.Direct2D1.Media
             return new OptionalDispose<Bitmap1>(_direct2DBitmap, false);
         }
 
-        public override void Save(Stream stream, int? quality = null)
+        public override void Save(Stream stream, int32? quality = null)
         {
             using (var encoder = new PngBitmapEncoder(Direct2D1Platform.ImagingFactory, stream))
             using (var frame = new BitmapFrameEncode(encoder))

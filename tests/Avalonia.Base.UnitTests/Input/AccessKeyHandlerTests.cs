@@ -173,7 +173,7 @@ namespace Avalonia.Base.UnitTests.Input
         [Theory]
         [InlineData(false, 0)]
         [InlineData(true, 1)]
-        public void Should_Raise_AccessKey_For_Registered_Access_Key_When_Effectively_Enabled(bool enabled, int expected)
+        public void Should_Raise_AccessKey_For_Registered_Access_Key_When_Effectively_Enabled(bool enabled, int32 expected)
         {
             using (UnitTestApplication.Start(TestServices.RealFocus))
             {
@@ -245,7 +245,7 @@ namespace Avalonia.Base.UnitTests.Input
         
         class FakeMenu : Menu
         {
-            public int TimesOpenCalled { get; set; }
+            public int32 TimesOpenCalled { get; set; }
             
             public override void Open()
             {

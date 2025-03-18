@@ -36,7 +36,7 @@ internal class VulkanKhrSurface : IDisposable
         if (surfaceFormatsCount == 0)
             throw new VulkanException("vkGetPhysicalDeviceSurfaceFormatsKHR returned 0 formats");
 
-        var surfaceFormats = stackalloc VkSurfaceFormatKHR[(int)surfaceFormatsCount];
+        var surfaceFormats = stackalloc VkSurfaceFormatKHR[(int32)surfaceFormatsCount];
         _context.InstanceApi.GetPhysicalDeviceSurfaceFormatsKHR(_context.PhysicalDeviceHandle,
                 _handle, ref surfaceFormatsCount, surfaceFormats)
             .ThrowOnError("vkGetPhysicalDeviceSurfaceFormatsKHR");

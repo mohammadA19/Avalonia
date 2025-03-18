@@ -450,12 +450,12 @@ internal class TopLevelImpl : ITopLevelImpl, IFramebufferPlatformSurface
             _parent.RawMouseEvent(type, pointerDeviceType, timeStamp, modifiers, point, delta, pressure, xTilt, yTilt);
         }
 
-        int IAvnTopLevelEvents.RawKeyEvent(AvnRawKeyEventType type, ulong timeStamp, AvnInputModifiers modifiers, AvnKey key, AvnPhysicalKey physicalKey, string keySymbol)
+        int32 IAvnTopLevelEvents.RawKeyEvent(AvnRawKeyEventType type, ulong timeStamp, AvnInputModifiers modifiers, AvnKey key, AvnPhysicalKey physicalKey, string keySymbol)
         {
             return _parent.RawKeyEvent(type, timeStamp, modifiers, key, physicalKey, keySymbol).AsComBool();
         }
 
-        int IAvnTopLevelEvents.RawTextInputEvent(ulong timeStamp, string text)
+        int32 IAvnTopLevelEvents.RawTextInputEvent(ulong timeStamp, string text)
         {
             return _parent.RawTextInputEvent(timeStamp, text).AsComBool();
         }
@@ -555,7 +555,7 @@ internal class TopLevelImpl : ITopLevelImpl, IFramebufferPlatformSurface
                         cb(_parent.Native);
                     }
                 }
-            }, (int)w, (int)h, new Vector(dpi, dpi));
+            }, (int32)w, (int32)h, new Vector(dpi, dpi));
         }
     }
 }

@@ -125,7 +125,7 @@ namespace Avalonia.UnitTests
         public static Mock<IScreenImpl> CreateScreenMock()
         {
             var screenImpl = new Mock<IScreenImpl>();
-            var bounds = new PixelRect(0, 0, (int)s_screenSize.Width, (int)s_screenSize.Height);
+            var bounds = new PixelRect(0, 0, (int32)s_screenSize.Width, (int32)s_screenSize.Height);
             var screen = new Screen(96, bounds, bounds, true);
             screenImpl.Setup(x => x.AllScreens).Returns(new[] { screen });
             screenImpl.Setup(x => x.ScreenCount).Returns(1);

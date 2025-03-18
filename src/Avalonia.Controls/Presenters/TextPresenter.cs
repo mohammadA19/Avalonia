@@ -20,7 +20,7 @@ namespace Avalonia.Controls.Presenters
         public static readonly StyledProperty<bool> ShowSelectionHighlightProperty =
             AvaloniaProperty.Register<TextPresenter, bool>(nameof(ShowSelectionHighlight), defaultValue: true);
 
-        public static readonly StyledProperty<int> CaretIndexProperty =
+        public static readonly StyledProperty<int32> CaretIndexProperty =
             TextBox.CaretIndexProperty.AddOwner<TextPresenter>(new(coerce: TextBox.CoerceCaretIndex));
 
         public static readonly StyledProperty<bool> RevealPasswordProperty =
@@ -41,10 +41,10 @@ namespace Avalonia.Controls.Presenters
         public static readonly StyledProperty<TimeSpan> CaretBlinkIntervalProperty =
             TextBox.CaretBlinkIntervalProperty.AddOwner<TextPresenter>();
 
-        public static readonly StyledProperty<int> SelectionStartProperty =
+        public static readonly StyledProperty<int32> SelectionStartProperty =
             TextBox.SelectionStartProperty.AddOwner<TextPresenter>(new(coerce: TextBox.CoerceCaretIndex));
 
-        public static readonly StyledProperty<int> SelectionEndProperty =
+        public static readonly StyledProperty<int32> SelectionEndProperty =
             TextBox.SelectionEndProperty.AddOwner<TextPresenter>(new(coerce: TextBox.CoerceCaretIndex));
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace Avalonia.Controls.Presenters
         /// <summary>
         /// Defines the <see cref="PreeditText"/> property.
         /// </summary>
-        public static readonly StyledProperty<int?> PreeditTextCursorPositionProperty =
-            AvaloniaProperty.Register<TextPresenter, int?>(nameof(PreeditTextCursorPosition));
+        public static readonly StyledProperty<int32?> PreeditTextCursorPositionProperty =
+            AvaloniaProperty.Register<TextPresenter, int32?>(nameof(PreeditTextCursorPosition));
 
         /// <summary>
         /// Defines the <see cref="TextAlignment"/> property.
@@ -149,7 +149,7 @@ namespace Avalonia.Controls.Presenters
             set => SetValue(PreeditTextProperty, value);
         }
         
-        public int? PreeditTextCursorPosition
+        public int32? PreeditTextCursorPosition
         {
             get => GetValue(PreeditTextCursorPositionProperty);
             set => SetValue(PreeditTextCursorPositionProperty, value);
@@ -274,7 +274,7 @@ namespace Avalonia.Controls.Presenters
             }
         }
 
-        public int CaretIndex
+        public int32 CaretIndex
         {
             get => GetValue(CaretIndexProperty);
             set => SetValue(CaretIndexProperty, value);
@@ -319,13 +319,13 @@ namespace Avalonia.Controls.Presenters
             set => SetValue(CaretBlinkIntervalProperty, value);
         }
 
-        public int SelectionStart
+        public int32 SelectionStart
         {
             get => GetValue(SelectionStartProperty);
             set => SetValue(SelectionStartProperty, value);
         }
 
-        public int SelectionEnd
+        public int32 SelectionEnd
         {
             get => GetValue(SelectionEndProperty);
             set => SetValue(SelectionEndProperty, value);
@@ -588,7 +588,7 @@ namespace Avalonia.Controls.Presenters
             return result;
         }
 
-        private static string? GetCombinedText(string? text, int caretIndex, string? preeditText)
+        private static string? GetCombinedText(string? text, int32 caretIndex, string? preeditText)
         {
             if (string.IsNullOrEmpty(preeditText))
             {
@@ -665,7 +665,7 @@ namespace Avalonia.Controls.Presenters
             InvalidateVisual();
         }
 
-        public void MoveCaretToTextPosition(int textPosition, bool trailingEdge = false)
+        public void MoveCaretToTextPosition(int32 textPosition, bool trailingEdge = false)
         {
             var lineIndex = TextLayout.GetLineIndexFromCharacterIndex(textPosition, trailingEdge);
             var textLine = TextLayout.TextLines[lineIndex];
@@ -970,7 +970,7 @@ namespace Avalonia.Controls.Presenters
             }
         }
         
-        private void OnPreeditChanged(string? preeditText, int? cursorPosition)
+        private void OnPreeditChanged(string? preeditText, int32? cursorPosition)
         {
             if (string.IsNullOrEmpty(preeditText))
             {
@@ -993,7 +993,7 @@ namespace Avalonia.Controls.Presenters
 
             if (change.Property == CaretIndexProperty)
             {
-                MoveCaretToTextPosition(change.GetNewValue<int>());
+                MoveCaretToTextPosition(change.GetNewValue<int32>());
             }
 
             if(change.Property == PreeditTextProperty)

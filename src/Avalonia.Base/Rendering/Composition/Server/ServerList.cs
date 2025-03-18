@@ -17,7 +17,7 @@ namespace Avalonia.Rendering.Composition.Server
             if (reader.Read<byte>() == 1)
             {
                 List.Clear();
-                var count = reader.Read<int>();
+                var count = reader.Read<int32>();
                 for (var c = 0; c < count; c++) 
                     List.Add(reader.ReadObject<T>());
             }

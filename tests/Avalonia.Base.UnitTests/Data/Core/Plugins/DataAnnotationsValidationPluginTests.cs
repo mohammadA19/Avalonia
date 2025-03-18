@@ -102,9 +102,9 @@ namespace Avalonia.Base.UnitTests.Data.Core.Plugins
         private class Data
         {
             [Range(5, 10)]
-            public int Between5And10 { get; set; } = 5;
+            public int32 Between5And10 { get; set; } = 5;
 
-            public int Unvalidated { get; set; }
+            public int32 Unvalidated { get; set; }
 
             [Phone]
             [MaxLength(10)]

@@ -16,7 +16,7 @@ public partial class WindowDecorationsPage : UserControl
     {
         window.ExtendClientAreaToDecorationsHint = WindowExtendClientAreaToDecorationsHint.IsChecked!.Value;
         window.ExtendClientAreaTitleBarHeightHint =
-            int.TryParse(WindowTitleBarHeightHint.Text, out var val) ? val / window.DesktopScaling : -1;
+            int32.TryParse(WindowTitleBarHeightHint.Text, out var val) ? val / window.DesktopScaling : -1;
         window.ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome
             | (WindowForceSystemChrome.IsChecked == true ? ExtendClientAreaChromeHints.SystemChrome : 0)
             | (WindowPreferSystemChrome.IsChecked == true ? ExtendClientAreaChromeHints.PreferSystemChrome : 0)

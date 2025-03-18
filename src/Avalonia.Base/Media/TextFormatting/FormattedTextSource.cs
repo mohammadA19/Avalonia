@@ -19,7 +19,7 @@ namespace Avalonia.Media.TextFormatting
             _textModifier = textModifier;
         }
 
-        public TextRun? GetTextRun(int textSourceIndex)
+        public TextRun? GetTextRun(int32 textSourceIndex)
         {
             if (textSourceIndex > _text.Length)
             {
@@ -48,7 +48,7 @@ namespace Avalonia.Media.TextFormatting
         /// <returns>
         /// The created text style run.
         /// </returns>
-        internal static ValueSpan<TextRunProperties> CreateTextStyleRun(ReadOnlySpan<char> text, int firstTextSourceIndex,
+        internal static ValueSpan<TextRunProperties> CreateTextStyleRun(ReadOnlySpan<char> text, int32 firstTextSourceIndex,
             TextRunProperties defaultProperties, IReadOnlyList<ValueSpan<TextRunProperties>>? textModifier)
         {
             if (textModifier == null || textModifier.Count == 0)
@@ -114,7 +114,7 @@ namespace Avalonia.Media.TextFormatting
             return new ValueSpan<TextRunProperties>(firstTextSourceIndex, length, currentProperties);
         }
 
-        private static int CoerceLength(ReadOnlySpan<char> text, int length)
+        private static int32 CoerceLength(ReadOnlySpan<char> text, int32 length)
         {
             var finalLength = 0;
 

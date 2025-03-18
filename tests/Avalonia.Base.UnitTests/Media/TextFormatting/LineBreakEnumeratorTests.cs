@@ -57,7 +57,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
         [InlineData("Hello\rWorld", 5, 6 )]
         [InlineData("Hello\r\nWorld", 5 , 7)]
         [Theory]
-        public void ShouldFindMandatoryBreaks(string text, int positionMeasure, int positionWrap)
+        public void ShouldFindMandatoryBreaks(string text, int32 positionMeasure, int32 positionWrap)
         {
             var lineBreaker = new LineBreakEnumerator(text);
             
@@ -91,13 +91,13 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
         [Theory(Skip = "Only runs when the spec changes")]
         [ClassData(typeof(LineBreakTestDataGenerator))]
-        public void ShouldFindBreaks(int lineNumber, int[] codePoints, int[] breakPoints, string rules)
+        public void ShouldFindBreaks(int32 lineNumber, int32[] codePoints, int32[] breakPoints, string rules)
         {
             var text = string.Join(null, codePoints.Select(char.ConvertFromUtf32));
 
             var lineBreaker = new LineBreakEnumerator(text);
 
-            var foundBreaks = new List<int>();
+            var foundBreaks = new List<int32>();
 
             while (lineBreaker.MoveNext(out var lineBreak))
             {
@@ -223,10 +223,10 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
                 return tests;
             }
 
-            public static (int[], int[]) ReadLineData(string line)
+            public static (int32[], int32[]) ReadLineData(string line)
             {
-                var codePoints = new List<int>();
-                var breakPoints = new List<int>();
+                var codePoints = new List<int32>();
+                var breakPoints = new List<int32>();
 
                 // Parse the test
                 var p = 0;

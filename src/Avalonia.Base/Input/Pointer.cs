@@ -8,17 +8,17 @@ namespace Avalonia.Input
 {
     public class Pointer : IPointer, IDisposable
     {
-        private static int s_NextFreePointerId = 1000;
-        public static int GetNextFreeId() => s_NextFreePointerId++;
+        private static int32 s_NextFreePointerId = 1000;
+        public static int32 GetNextFreeId() => s_NextFreePointerId++;
         
-        public Pointer(int id, PointerType type, bool isPrimary)
+        public Pointer(int32 id, PointerType type, bool isPrimary)
         {
             Id = id;
             Type = type;
             IsPrimary = isPrimary;
         }
 
-        public int Id { get; }
+        public int32 Id { get; }
 
         static IInputElement? FindCommonParent(IInputElement? control1, IInputElement? control2)
         {

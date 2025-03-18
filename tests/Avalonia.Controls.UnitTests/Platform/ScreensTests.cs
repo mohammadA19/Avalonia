@@ -146,31 +146,31 @@ public class ScreensTests : ScopedTestBase
         Assert.Equal(1, hasChangedTimes);
     }
     
-    private class TestScreens : ScreensBase<int, TestScreen>
+    private class TestScreens : ScreensBase<int32, TestScreen>
     {
-        private IReadOnlyList<int> _keys = [];
-        private int _count;
+        private IReadOnlyList<int32> _keys = [];
+        private int32 _count;
 
-        public void PushNewScreens(IReadOnlyList<int> keys)
+        public void PushNewScreens(IReadOnlyList<int32> keys)
         {
             _count = keys.Count;
             _keys = keys;
             OnChanged();
         }
 
-        public TestScreen? GetScreen(int key) => TryGetScreen(key, out var screen) ? screen : null;
+        public TestScreen? GetScreen(int32 key) => TryGetScreen(key, out var screen) ? screen : null;
 
-        protected override int GetScreenCount() => _count;
+        protected override int32 GetScreenCount() => _count;
 
-        protected override IReadOnlyList<int> GetAllScreenKeys() => _keys;
+        protected override IReadOnlyList<int32> GetAllScreenKeys() => _keys;
 
-        protected override TestScreen CreateScreenFromKey(int key) => new(key);
+        protected override TestScreen CreateScreenFromKey(int32 key) => new(key);
         protected override void ScreenChanged(TestScreen screen) => screen.Generation++;
         protected override void ScreenRemoved(TestScreen screen) => screen.Generation = -1000;
     }
 
-    public class TestScreen(int key) : PlatformScreen(new PlatformHandle(new IntPtr(key), "TestHandle"))
+    public class TestScreen(int32 key) : PlatformScreen(new PlatformHandle(new IntPtr(key), "TestHandle"))
     {
-        public int Generation { get; set; }
+        public int32 Generation { get; set; }
     }
 }

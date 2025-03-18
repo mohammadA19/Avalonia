@@ -22,7 +22,7 @@ namespace Avalonia.VisualTree
         /// The number of steps from the visual to the ancestor or -1 if
         /// <paramref name="visual"/> is not a descendent of <paramref name="ancestor"/>.
         /// </returns>
-        public static int CalculateDistanceFromAncestor(this Visual visual, Visual? ancestor)
+        public static int32 CalculateDistanceFromAncestor(this Visual visual, Visual? ancestor)
         {
             Visual? v = visual ?? throw new ArgumentNullException(nameof(visual));
             var result = 0;
@@ -44,7 +44,7 @@ namespace Avalonia.VisualTree
         /// <returns>
         /// The number of steps from the visual to the root.
         /// </returns>
-        public static int CalculateDistanceFromRoot(Visual visual)
+        public static int32 CalculateDistanceFromRoot(Visual visual)
         {
             Visual? v = visual ?? throw new ArgumentNullException(nameof(visual));
             var result = 0;
@@ -74,9 +74,9 @@ namespace Avalonia.VisualTree
                 return null;
             }
 
-            void GoUpwards(ref Visual? node, int count)
+            void GoUpwards(ref Visual? node, int32 count)
             {
-                for (int i = 0; i < count; ++i)
+                for (int32 i = 0; i < count; ++i)
                 {
                     node = node?.VisualParent;
                 }
@@ -520,12 +520,12 @@ namespace Avalonia.VisualTree
         private class ZOrderElement : IComparable<ZOrderElement>
         {
             public Visual? Element { get; set; }
-            public int Index { get; set; }
-            public int ZIndex { get; set; }
+            public int32 Index { get; set; }
+            public int32 ZIndex { get; set; }
 
             class ZOrderComparer : IComparer<ZOrderElement>
             {
-                public int Compare(ZOrderElement? x, ZOrderElement? y)
+                public int32 Compare(ZOrderElement? x, ZOrderElement? y)
                 {
                     if (ReferenceEquals(x, y)) return 0;
                     if (ReferenceEquals(null, y)) return 1;
@@ -536,7 +536,7 @@ namespace Avalonia.VisualTree
 
             public static IComparer<ZOrderElement> Comparer { get; } = new ZOrderComparer();
             
-            public int CompareTo(ZOrderElement? other)
+            public int32 CompareTo(ZOrderElement? other)
             {
                 if (other is null)
                     return 1;

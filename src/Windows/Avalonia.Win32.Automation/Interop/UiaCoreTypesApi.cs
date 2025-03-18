@@ -19,10 +19,10 @@ namespace Avalonia.Win32.Automation.Interop
             TextAttribute
         }
 
-        internal const int UIA_E_ELEMENTNOTENABLED = unchecked((int)0x80040200);
-        internal const int UIA_E_ELEMENTNOTAVAILABLE = unchecked((int)0x80040201);
-        internal const int UIA_E_NOCLICKABLEPOINT = unchecked((int)0x80040202);
-        internal const int UIA_E_PROXYASSEMBLYNOTLOADED = unchecked((int)0x80040203);
+        internal const int32 UIA_E_ELEMENTNOTENABLED = unchecked((int32)0x80040200);
+        internal const int32 UIA_E_ELEMENTNOTAVAILABLE = unchecked((int32)0x80040201);
+        internal const int32 UIA_E_NOCLICKABLEPOINT = unchecked((int32)0x80040202);
+        internal const int32 UIA_E_PROXYASSEMBLYNOTLOADED = unchecked((int32)0x80040203);
 
         internal static bool IsNetComInteropAvailable
         {
@@ -44,17 +44,17 @@ namespace Avalonia.Win32.Automation.Interop
             }
         }
 
-        internal static int UiaLookupId(AutomationIdType type, ref Guid guid)
+        internal static int32 UiaLookupId(AutomationIdType type, ref Guid guid)
         {
             return RawUiaLookupId(type, ref guid);
         }
 
 #if NET7_0_OR_GREATER
         [LibraryImport("UIAutomationCore.dll", EntryPoint = "UiaLookupId", StringMarshalling = StringMarshalling.Utf8)]
-        private static partial int RawUiaLookupId(AutomationIdType type, ref Guid guid);
+        private static partial int32 RawUiaLookupId(AutomationIdType type, ref Guid guid);
 #else
         [DllImport("UIAutomationCore.dll", EntryPoint = "UiaLookupId", CharSet = CharSet.Unicode)]
-        private static extern int RawUiaLookupId(AutomationIdType type, ref Guid guid);
+        private static extern int32 RawUiaLookupId(AutomationIdType type, ref Guid guid);
 #endif
     }
 }

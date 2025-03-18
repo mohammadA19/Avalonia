@@ -233,7 +233,7 @@ namespace Avalonia.Markup.UnitTests.Data
         {
             private object? _notifyingValue;
 
-            public int? NonNotifyingValue { get; set; } = 0;
+            public int32? NonNotifyingValue { get; set; } = 0;
 
             public object? NotifyingValue
             {

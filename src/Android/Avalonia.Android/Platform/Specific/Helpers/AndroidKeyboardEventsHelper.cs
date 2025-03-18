@@ -107,7 +107,7 @@ namespace Avalonia.Android.Platform.Specific.Helpers
             return rv;
         }
 
-        private static string? GetKeySymbol(int unicodeChar, PhysicalKey physicalKey)
+        private static string? GetKeySymbol(int32 unicodeChar, PhysicalKey physicalKey)
         {
             // Handle a very limited set of control characters so that we're consistent with other platforms
             // (matches KeySymbolHelper.IsAllowedAsciiKeySymbol)

@@ -21,7 +21,7 @@ namespace Avalonia.Diagnostics.ViewModels
         private readonly HotKeyPageViewModel _hotKeys;
         private readonly IDisposable _pointerOverSubscription;
         private ViewModelBase? _content;
-        private int _selectedTab;
+        private int32 _selectedTab;
         private string? _focusedControl;
         private IInputElement? _pointerOverElement;
         private bool _shouldVisualizeMarginPadding = true;
@@ -180,7 +180,7 @@ namespace Avalonia.Diagnostics.ViewModels
             }
         }
 
-        public int SelectedTab
+        public int32 SelectedTab
         {
             get { return _selectedTab; }
             // [MemberNotNull(nameof(_content))]
@@ -306,7 +306,7 @@ namespace Avalonia.Diagnostics.ViewModels
             }
         }
 
-        public int? StartupScreenIndex { get; private set; } = default;
+        public int32? StartupScreenIndex { get; private set; } = default;
 
         [DependsOn(nameof(TreePageViewModel.SelectedNode))]
         [DependsOn(nameof(Content))]
@@ -342,7 +342,7 @@ namespace Avalonia.Diagnostics.ViewModels
             StartupScreenIndex = options.StartupScreenIndex;
             ShowImplementedInterfaces = options.ShowImplementedInterfaces;
             FocusHighlighter = options.FocusHighlighterBrush;
-            SelectedTab = (int)options.LaunchView;
+            SelectedTab = (int32)options.LaunchView;
 
             _hotKeys.SetOptions(options);
         }

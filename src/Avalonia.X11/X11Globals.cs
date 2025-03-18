@@ -8,7 +8,7 @@ namespace Avalonia.X11
     internal unsafe class X11Globals
     {
         private readonly AvaloniaX11Platform _plat;
-        private readonly int _screenNumber;
+        private readonly int32 _screenNumber;
         private readonly X11Info _x11;
         private readonly IntPtr _rootWindow;
         private readonly IntPtr _compositingAtom;
@@ -40,7 +40,7 @@ namespace Avalonia.X11
             _rootWindow = XRootWindow(_x11.Display, _screenNumber);
             plat.Windows[_rootWindow] = OnRootWindowEvent;
             XSelectInput(_x11.Display, _rootWindow,
-                new IntPtr((int)(EventMask.StructureNotifyMask | EventMask.PropertyChangeMask)));
+                new IntPtr((int32)(EventMask.StructureNotifyMask | EventMask.PropertyChangeMask)));
             _compositingAtom = XInternAtom(_x11.Display, "_NET_WM_CM_S" + _screenNumber, false);
             OnNewWindowManager();
             UpdateCompositingAtomOwner();
@@ -102,7 +102,7 @@ namespace Avalonia.X11
         {
             XGetWindowProperty(_x11.Display, _rootWindow, _x11.Atoms._NET_SUPPORTING_WM_CHECK,
                 IntPtr.Zero, new IntPtr(IntPtr.Size), false,
-                _x11.Atoms.XA_WINDOW, out IntPtr actualType, out int actualFormat, out IntPtr nitems,
+                _x11.Atoms.XA_WINDOW, out IntPtr actualType, out int32 actualFormat, out IntPtr nitems,
                 out IntPtr bytesAfter, out IntPtr prop);
             if (nitems.ToInt32() != 1)
                 return IntPtr.Zero;
@@ -138,7 +138,7 @@ namespace Avalonia.X11
                 if (CompositionAtomOwner != IntPtr.Zero)
                 {
                     _plat.Windows[newOwner] = HandleCompositionAtomOwnerEvents;
-                    XSelectInput(_x11.Display, CompositionAtomOwner, new IntPtr((int)(EventMask.StructureNotifyMask)));
+                    XSelectInput(_x11.Display, CompositionAtomOwner, new IntPtr((int32)(EventMask.StructureNotifyMask)));
                 }
                 
                 // Check for the new owner again and repeat the procedure if it was changed between XGetSelectionOwner and XSelectInput call

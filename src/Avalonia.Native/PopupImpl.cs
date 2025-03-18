@@ -71,7 +71,7 @@ namespace Avalonia.Native
                 // NOP on Popup
             }
 
-            int IAvnWindowEvents.Closing()
+            int32 IAvnWindowEvents.Closing()
             {
                 return true.AsComBool();
             }

@@ -1318,7 +1318,7 @@ namespace Avalonia.Controls.UnitTests
 
                 var item = lbItems[0];
 
-                int tappedCount = 0;
+                int32 tappedCount = 0;
                 target.Tapped += (s, e) =>
                 {
                     tappedCount++;
@@ -1355,7 +1355,7 @@ namespace Avalonia.Controls.UnitTests
 
         private class ResettingCollection : List<string>, INotifyCollectionChanged
         {
-            public ResettingCollection(int itemCount)
+            public ResettingCollection(int32 itemCount)
             {
                 AddRange(Enumerable.Range(0, itemCount).Select(x => $"Item{x}"));
             }
@@ -1375,7 +1375,7 @@ namespace Avalonia.Controls.UnitTests
         {
             private readonly List<string> _inner = new(Enumerable.Repeat<string>(null, 100));
 
-            public object this[int index] 
+            public object this[int32 index] 
             { 
                 get => _inner[index] = $"Item{index}"; 
                 set => throw new NotSupportedException();
@@ -1384,18 +1384,18 @@ namespace Avalonia.Controls.UnitTests
             public IEnumerable<string> GetRealizedItems() => _inner.Where(x => x is not null);
             public bool IsFixedSize => true;
             public bool IsReadOnly => true;
-            public int Count => _inner.Count;
+            public int32 Count => _inner.Count;
             public bool IsSynchronized => false;
             public object SyncRoot => this;
-            public int Add(object value) => throw new NotSupportedException();
+            public int32 Add(object value) => throw new NotSupportedException();
             public void Clear() => throw new NotSupportedException();
             public bool Contains(object value) => throw new NotImplementedException();
-            public void CopyTo(Array array, int index) => throw new NotImplementedException();
+            public void CopyTo(Array array, int32 index) => throw new NotImplementedException();
             public IEnumerator GetEnumerator() => _inner.GetEnumerator();
-            public int IndexOf(object value) => throw new NotImplementedException();
-            public void Insert(int index, object value) => throw new NotSupportedException();
+            public int32 IndexOf(object value) => throw new NotImplementedException();
+            public void Insert(int32 index, object value) => throw new NotSupportedException();
             public void Remove(object value) => throw new NotSupportedException();
-            public void RemoveAt(int index) => throw new NotSupportedException();
+            public void RemoveAt(int32 index) => throw new NotSupportedException();
         }
     }
 }

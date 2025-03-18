@@ -35,11 +35,11 @@ namespace Avalonia.Media.Fonts
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
-                var hash = (int)2166136261;
+                var hash = (int32)2166136261;
 
                 hash = (hash * 16777619) ^ Source.GetHashCode();
 

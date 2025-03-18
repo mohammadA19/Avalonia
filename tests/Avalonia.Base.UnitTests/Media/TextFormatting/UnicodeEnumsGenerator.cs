@@ -175,7 +175,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
                 writer.WriteLine("        public static PairBreakType Map(LineBreakClass first, LineBreakClass second)");
                 writer.WriteLine("        {");
-                writer.WriteLine("            return (PairBreakType)s_breakPairTable[(int)first][(int)second];");
+                writer.WriteLine("            return (PairBreakType)s_breakPairTable[(int32)first][(int32)second];");
                 writer.WriteLine("        }");
 
                 writer.WriteLine("    }");

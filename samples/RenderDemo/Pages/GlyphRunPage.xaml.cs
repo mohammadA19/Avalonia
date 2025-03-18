@@ -27,7 +27,7 @@ namespace RenderDemo.Pages
         private ushort[] _glyphIndices = new ushort[1];
         private char[] _characters = new char[1];
         private float _fontSize = 20;
-        private int _direction = 10;
+        private int32 _direction = 10;
 
         private DispatcherTimer _timer;
 
@@ -86,7 +86,7 @@ namespace RenderDemo.Pages
         private ushort[] _glyphIndices = new ushort[1];
         private char[] _characters = new char[1];
         private float _fontSize = 20;
-        private int _direction = 10;
+        private int32 _direction = 10;
 
         private DispatcherTimer _timer;
 

@@ -24,9 +24,9 @@ namespace Avalonia.IntegrationTests.Appium
                                            || Maximize?.Enabled == true
                                            || FullScreen?.Enabled == true);
 
-        public int TitleBarHeight => TitleBar?.Size.Height ?? -1;
+        public int32 TitleBarHeight => TitleBar?.Size.Height ?? -1;
 
-        public int MaxButtonHeight =>
+        public int32 MaxButtonHeight =>
             Math.Max(
                 Math.Max(Close?.Size.Height ?? -1, Minimize?.Size.Height ?? -1),
                 Math.Max(Maximize?.Size.Height ?? -1, FullScreen?.Size.Height ?? -1));
@@ -149,7 +149,7 @@ namespace Avalonia.IntegrationTests.Appium
                 element.Click();
 
                 if (delay is not null)
-                    Thread.Sleep((int)delay.Value.TotalMilliseconds);
+                    Thread.Sleep((int32)delay.Value.TotalMilliseconds);
 
                 string? newHandle = null;
                 IWebElement? newChildWindow = null;

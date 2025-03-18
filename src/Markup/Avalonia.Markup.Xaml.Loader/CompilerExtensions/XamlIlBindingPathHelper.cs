@@ -246,7 +246,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
                             IEnumerable<IXamlType> parameters = property.IndexerParameters;
 
                             List<IXamlAstValueNode> values = new List<IXamlAstValueNode>();
-                            int currentParamIndex = 0;
+                            int32 currentParamIndex = 0;
                             foreach (var param in parameters)
                             {
                                 var textNode = new XamlAstTextNode(lineInfo, indexer.Arguments[currentParamIndex], type: context.Configuration.WellKnownTypes.String);
@@ -575,9 +575,9 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
 
         class FindAncestorPathElementNode : IXamlIlBindingPathElementNode, IXamlIlBindingPathNodeWithDataContextType
         {
-            private readonly int _level;
+            private readonly int32 _level;
 
-            public FindAncestorPathElementNode(IXamlType ancestorType, int level, IXamlType? dataContextType)
+            public FindAncestorPathElementNode(IXamlType ancestorType, int32 level, IXamlType? dataContextType)
             {
                 Type = ancestorType;
                 _level = level;
@@ -597,9 +597,9 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
 
         class FindVisualAncestorPathElementNode : IXamlIlBindingPathElementNode
         {
-            private readonly int _level;
+            private readonly int32 _level;
 
-            public FindVisualAncestorPathElementNode(IXamlType ancestorType, int level)
+            public FindVisualAncestorPathElementNode(IXamlType ancestorType, int32 level)
             {
                 Type = ancestorType;
                 _level = level;
@@ -850,7 +850,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
                         .Newarr(context.Configuration.WellKnownTypes.String)
                         .Stloc(dependsOnPropertiesArray.Local);
 
-                    for (int i = 0; i < _dependsOnProperties.Count; i++)
+                    for (int32 i = 0; i < _dependsOnProperties.Count; i++)
                     {
                         codeGen
                             .Ldloc(dependsOnPropertiesArray.Local)
@@ -916,15 +916,15 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
         class XamlIlArrayIndexerPathElementNode : IXamlIlBindingPathElementNode
         {
             private readonly IXamlType _arrayType;
-            private readonly List<int> _values;
+            private readonly List<int32> _values;
 
             public XamlIlArrayIndexerPathElementNode(IXamlType arrayType, IList<string> values, IXamlLineInfo lineInfo)
             {
                 _arrayType = arrayType;
-                _values = new List<int>(values.Count);
+                _values = new List<int32>(values.Count);
                 foreach (var item in values)
                 {
-                    if (!int.TryParse(item, out var index))
+                    if (!int32.TryParse(item, out var index))
                     {
                         throw new XamlX.XamlTransformException($"Unable to convert '{item}' to an integer.", lineInfo);
                     }
@@ -939,7 +939,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
                 codeGen.Ldc_I4(_values.Count)
                     .Newarr(intType)
                     .Stloc(indices);
-                for (int i = 0; i < _values.Count; i++)
+                for (int32 i = 0; i < _values.Count; i++)
                 {
                     codeGen.Ldloc(indices)
                         .Ldc_I4(i)
@@ -999,7 +999,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
                 var intType = context.Configuration.TypeSystem.GetType("System.Int32");
                 var types = context.GetAvaloniaTypes();
 
-                // We're calling the CompiledBindingPathBuilder(int apiVersion) with an apiVersion 
+                // We're calling the CompiledBindingPathBuilder(int32 apiVersion) with an apiVersion 
                 // of 1 to indicate that we don't want TemplatedParent compatibility hacks enabled.
                 codeGen
                     .Ldc_I4(1)
@@ -1021,14 +1021,14 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
 
             public override void VisitChildren(IXamlAstVisitor visitor)
             {
-                for (int i = 0; i < _transformElements.Count; i++)
+                for (int32 i = 0; i < _transformElements.Count; i++)
                 {
                     if (_transformElements[i] is IXamlAstNode ast)
                     {
                         _transformElements[i] = (IXamlIlBindingPathElementNode)ast.Visit(visitor);
                     }
                 }
-                for (int i = 0; i < Elements.Count; i++)
+                for (int32 i = 0; i < Elements.Count; i++)
                 {
                     if (Elements[i] is IXamlAstNode ast)
                     {

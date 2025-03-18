@@ -181,16 +181,16 @@ internal class NuiAvaloniaViewTextEditable
 internal interface INuiTextInput
 {
     string Text { get; set; }
-    int PrimaryCursorPosition { get; set; }
+    int32 PrimaryCursorPosition { get; set; }
     bool EnableSelection { get; set; }
     bool Sensitive { get; set; }
-    int SelectedTextStart { get; }
-    int SelectedTextEnd { get; }
+    int32 SelectedTextStart { get; }
+    int32 SelectedTextEnd { get; }
 
     void Show();
     InputMethodContext GetInputMethodContext();
     void Hide();
-    void SelectText(int selectedTextStart, int value);
+    void SelectText(int32 selectedTextStart, int32 value);
     void SelectWholeText();
 }
 

@@ -15,11 +15,11 @@ namespace Avalonia.Win32.Automation.Interop;
 internal partial interface IMultipleViewProvider
 {
     [return: MarshalAs(UnmanagedType.BStr)]
-    string GetViewName(int viewId);
-    void SetCurrentView(int viewId);
-    int GetCurrentView();
+    string GetViewName(int32 viewId);
+    void SetCurrentView(int32 viewId);
+    int32 GetCurrentView();
 #if NET8_0_OR_GREATER
-    [return: MarshalUsing(typeof(SafeArrayMarshaller<int>))]
+    [return: MarshalUsing(typeof(SafeArrayMarshaller<int32>))]
 #endif
-    int[] GetSupportedViews();
+    int32[] GetSupportedViews();
 }

@@ -19,7 +19,7 @@ namespace Avalonia.Rendering.Composition.Animations
         private readonly PlaybackDirection _direction;
         private readonly TimeSpan _duration;
         private readonly AnimationIterationBehavior _iterationBehavior;
-        private readonly int _iterationCount;
+        private readonly int32 _iterationCount;
         private readonly AnimationStopBehavior _stopBehavior;
         private TimeSpan _startedAt;
         private T _startingValue;
@@ -33,7 +33,7 @@ namespace Avalonia.Rendering.Composition.Animations
             AnimationDelayBehavior delayBehavior, TimeSpan delayTime,
             PlaybackDirection direction, TimeSpan duration,
             AnimationIterationBehavior iterationBehavior,
-            int iterationCount, AnimationStopBehavior stopBehavior) : base(target, snapshot)
+            int32 iterationCount, AnimationStopBehavior stopBehavior) : base(target, snapshot)
         {
             _interpolator = interpolator;
             _keyFrames = keyFrames;

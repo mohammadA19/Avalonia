@@ -30,7 +30,7 @@ namespace Avalonia.Controls.UnitTests
                 var window = PreparedWindow();
                 window.Show();
 
-                int tracker = 0;
+                int32 tracker = 0;
                 Flyout f = new Flyout();
                 f.Opening += (s, e) =>
                 {
@@ -51,7 +51,7 @@ namespace Avalonia.Controls.UnitTests
                 var window = PreparedWindow();
                 window.Show();
 
-                int tracker = 0;
+                int32 tracker = 0;
                 Flyout f = new Flyout();
                 f.Opened += (s, e) =>
                 {
@@ -71,7 +71,7 @@ namespace Avalonia.Controls.UnitTests
                 var window = PreparedWindow();
                 window.Show();
 
-                int tracker = 0;
+                int32 tracker = 0;
                 Flyout f = new Flyout();
                 f.Opening += (s, e) =>
                 {
@@ -96,7 +96,7 @@ namespace Avalonia.Controls.UnitTests
                 var window = PreparedWindow();
                 window.Show();
 
-                int tracker = 0;
+                int32 tracker = 0;
                 Flyout f = new Flyout();
                 f.Closing += (s, e) =>
                 {
@@ -117,7 +117,7 @@ namespace Avalonia.Controls.UnitTests
                 var window = PreparedWindow();
                 window.Show();
 
-                int tracker = 0;
+                int32 tracker = 0;
                 Flyout f = new Flyout();
                 f.Closed += (s, e) =>
                 {
@@ -430,7 +430,7 @@ namespace Avalonia.Controls.UnitTests
                 var window = PreparedWindow(target);
                 window.Show();
 
-                int openedCount = 0;
+                int32 openedCount = 0;
 
                 flyout.Opened += (sender, args) =>
                 {

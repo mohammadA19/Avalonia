@@ -9,13 +9,13 @@ namespace Avalonia.Styling
 
         public StyleChildren(StyleBase owner) => _owner = owner;
 
-        protected override void InsertItem(int index, IStyle item)
+        protected override void InsertItem(int32 index, IStyle item)
         {
             (item as StyleBase)?.SetParent(_owner);
             base.InsertItem(index, item);
         }
 
-        protected override void RemoveItem(int index)
+        protected override void RemoveItem(int32 index)
         {
             var item = Items[index];
             (item as StyleBase)?.SetParent(null);
@@ -24,7 +24,7 @@ namespace Avalonia.Styling
             base.RemoveItem(index);
         }
 
-        protected override void SetItem(int index, IStyle item)
+        protected override void SetItem(int32 index, IStyle item)
         {
             (item as StyleBase)?.SetParent(_owner);
             base.SetItem(index, item);

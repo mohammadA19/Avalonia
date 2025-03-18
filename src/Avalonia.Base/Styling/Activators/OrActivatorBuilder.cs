@@ -14,7 +14,7 @@ namespace Avalonia.Styling.Activators
         private IStyleActivator? _single;
         private OrActivator? _multiple;
 
-        public int Count => _multiple?.Count ?? (_single is object ? 1 : 0);
+        public int32 Count => _multiple?.Count ?? (_single is object ? 1 : 0);
 
         public void Add(IStyleActivator? activator)
         {

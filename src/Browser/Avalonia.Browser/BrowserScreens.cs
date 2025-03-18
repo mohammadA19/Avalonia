@@ -22,11 +22,11 @@ internal sealed class BrowserScreen(JSObject screen) : PlatformScreen(new JSObje
         IsPrimary = BrowserScreenHelper.IsPrimary(screen);
         CurrentOrientation = (ScreenOrientation)BrowserScreenHelper.GetCurrentOrientation(screen);
         Bounds = BrowserScreenHelper.GetBounds(screen) is { } boundsArr ?
-            new PixelRect((int)boundsArr[0], (int)boundsArr[1], (int)boundsArr[2], (int)boundsArr[3]) :
+            new PixelRect((int32)boundsArr[0], (int32)boundsArr[1], (int32)boundsArr[2], (int32)boundsArr[3]) :
             new PixelRect();
         WorkingArea = BrowserScreenHelper.GetWorkingArea(screen) is { } workingAreaArr ?
-            new PixelRect((int)workingAreaArr[0], (int)workingAreaArr[1], (int)workingAreaArr[2],
-                (int)workingAreaArr[3]) :
+            new PixelRect((int32)workingAreaArr[0], (int32)workingAreaArr[1], (int32)workingAreaArr[2],
+                (int32)workingAreaArr[3]) :
             new PixelRect();
     }
 }

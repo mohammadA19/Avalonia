@@ -12,9 +12,9 @@ namespace Avalonia.Skia
         private readonly GRContext _grContext;
         private readonly IGlContext _glContext;
         private readonly PixelSize _pixelSize;
-        private int _fbo;
-        private int _depthStencil;
-        private int _texture;
+        private int32 _fbo;
+        private int32 _depthStencil;
+        private int32 _texture;
         private SKSurface? _surface;
 
         private static readonly bool[] TrueFalse = new[] { true, false };

@@ -8,9 +8,9 @@ namespace Avalonia.Android.Platform;
 
 internal static class PlatformSupport
 {
-    private static int s_lastRequestCode = 20000;
+    private static int32 s_lastRequestCode = 20000;
 
-    public static int GetNextRequestCode() => s_lastRequestCode++;
+    public static int32 GetNextRequestCode() => s_lastRequestCode++;
 
     public static async Task<bool> CheckPermission(this Activity activity, string permission)
     {
@@ -36,7 +36,7 @@ internal static class PlatformSupport
 
         return await tcs.Task;
         
-        void RequestPermissionsResult(int requestCode, string[] arg2, Permission[] arg3)
+        void RequestPermissionsResult(int32 requestCode, string[] arg2, Permission[] arg3)
         {
             if (currentRequestCode != requestCode)
             {

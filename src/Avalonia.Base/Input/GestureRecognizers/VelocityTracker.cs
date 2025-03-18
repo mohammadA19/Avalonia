@@ -61,15 +61,15 @@ namespace Avalonia.Input.GestureRecognizers
     /// have been received.
     internal class VelocityTracker
     {
-        private const int AssumePointerMoveStoppedMilliseconds = 40;
-        private const int HistorySize = 20;
-        private const int HorizonMilliseconds = 100;
-        private const int MinSampleSize = 3;
+        private const int32 AssumePointerMoveStoppedMilliseconds = 40;
+        private const int32 HistorySize = 20;
+        private const int32 HorizonMilliseconds = 100;
+        private const int32 MinSampleSize = 3;
         private const double MinFlingVelocity = 50.0; // Logical pixels / second
         private const double MaxFlingVelocity = 8000.0;
 
         private readonly PointAtTime[] _samples = new PointAtTime[HistorySize];
-        private int _index = 0;
+        private int32 _index = 0;
 
         /// <summary>
         /// Adds a position as the given time to the tracker.
@@ -98,8 +98,8 @@ namespace Avalonia.Input.GestureRecognizers
             Span<double> y = stackalloc double[HistorySize];
             Span<double> w = stackalloc double[HistorySize];
             Span<double> time = stackalloc double[HistorySize];
-            int sampleCount = 0;
-            int index = _index;
+            int32 sampleCount = 0;
+            int32 index = _index;
 
             var newestSample = _samples[index];
             if (!newestSample.Valid)
@@ -213,7 +213,7 @@ namespace Avalonia.Input.GestureRecognizers
         /// Creates a polynomial fit of the given degree.
         ///
         /// There are n + 1 coefficients in a fit of degree n.
-        internal PolynomialFit(int degree)
+        internal PolynomialFit(int32 degree)
         {
             Coefficients = new double[degree + 1];
         }
@@ -235,7 +235,7 @@ namespace Avalonia.Input.GestureRecognizers
         /// Fits a polynomial of the given degree to the data points.
         /// When there is not enough data to fit a curve null is returned.
         /// </summary>
-        public static PolynomialFit? Solve(int degree, ReadOnlySpan<double> x, ReadOnlySpan<double> y, ReadOnlySpan<double> w)
+        public static PolynomialFit? Solve(int32 degree, ReadOnlySpan<double> x, ReadOnlySpan<double> y, ReadOnlySpan<double> w)
         {
             if (degree > x.Length)
             {
@@ -246,15 +246,15 @@ namespace Avalonia.Input.GestureRecognizers
             PolynomialFit result = new PolynomialFit(degree);
 
             // Shorthands for the purpose of notation equivalence to original C++ code.
-            int m = x.Length;
-            int n = degree + 1;
+            int32 m = x.Length;
+            int32 n = degree + 1;
 
             // Expand the X vector to a matrix A, pre-multiplied by the weights.
             _Matrix a = new _Matrix(m, stackalloc double[n * m]);
-            for (int h = 0; h < m; h += 1)
+            for (int32 h = 0; h < m; h += 1)
             {
                 a[0, h] = w[h];
-                for (int i = 1; i < n; i += 1)
+                for (int32 i = 1; i < n; i += 1)
                 {
                     a[i, h] = a[i - 1, h] * x[h];
                 }
@@ -266,16 +266,16 @@ namespace Avalonia.Input.GestureRecognizers
             _Matrix q = new _Matrix(m, stackalloc double[n * m]);
             // Upper triangular matrix, row-major order.
             _Matrix r = new _Matrix(n, stackalloc double[n * n]);
-            for (int j = 0; j < n; j += 1)
+            for (int32 j = 0; j < n; j += 1)
             {
-                for (int h = 0; h < m; h += 1)
+                for (int32 h = 0; h < m; h += 1)
                 {
                     q[j, h] = a[j, h];
                 }
-                for (int i = 0; i < j; i += 1)
+                for (int32 i = 0; i < j; i += 1)
                 {
                     double dot = Multiply(q.GetRow(j), q.GetRow(i));
-                    for (int h = 0; h < m; h += 1)
+                    for (int32 h = 0; h < m; h += 1)
                     {
                         q[j, h] = q[j, h] - dot * q[i, h];
                     }
@@ -289,11 +289,11 @@ namespace Avalonia.Input.GestureRecognizers
                 }
 
                 double inverseNorm = 1.0 / norm;
-                for (int h = 0; h < m; h += 1)
+                for (int32 h = 0; h < m; h += 1)
                 {
                     q[j, h] = q[j, h] * inverseNorm;
                 }
-                for (int i = 0; i < n; i += 1)
+                for (int32 i = 0; i < n; i += 1)
                 {
                     r[j, i] = i < j ? 0.0 : Multiply(q.GetRow(j), a.GetRow(i));
                 }
@@ -303,14 +303,14 @@ namespace Avalonia.Input.GestureRecognizers
             // We just work from bottom-right to top-left calculating B's coefficients.
             // "m" isn't expected to be bigger than HistorySize=20, so allocation on stack is safe.
             Span<double> wy = stackalloc double[m];  
-            for (int h = 0; h < m; h += 1)
+            for (int32 h = 0; h < m; h += 1)
             {
                 wy[h] = y[h] * w[h];
             }
-            for (int i = n - 1; i >= 0; i -= 1)
+            for (int32 i = n - 1; i >= 0; i -= 1)
             {
                 result.Coefficients[i] = Multiply(q.GetRow(i), wy);
-                for (int j = n - 1; j > i; j -= 1)
+                for (int32 j = n - 1; j > i; j -= 1)
                 {
                     result.Coefficients[i] -= r[i, j] * result.Coefficients[j];
                 }
@@ -323,7 +323,7 @@ namespace Avalonia.Input.GestureRecognizers
             // error), and sumSquaredTotal is the total sum of squares (variance of the
             // data) where each has been weighted.
             double yMean = 0.0;
-            for (int h = 0; h < m; h += 1)
+            for (int32 h = 0; h < m; h += 1)
             {
                 yMean += y[h];
             }
@@ -331,11 +331,11 @@ namespace Avalonia.Input.GestureRecognizers
 
             double sumSquaredError = 0.0;
             double sumSquaredTotal = 0.0;
-            for (int h = 0; h < m; h += 1)
+            for (int32 h = 0; h < m; h += 1)
             {
                 double term = 1.0;
                 double err = y[h] - result.Coefficients[0];
-                for (int i = 1; i < n; i += 1)
+                for (int32 i = 1; i < n; i += 1)
                 {
                     term *= x[h];
                     err -= term * result.Coefficients[i];
@@ -354,7 +354,7 @@ namespace Avalonia.Input.GestureRecognizers
         private static double Multiply(Span<double> v1, Span<double> v2)
         {
             double result = 0.0;
-            for (int i = 0; i < v1.Length; i += 1)
+            for (int32 i = 0; i < v1.Length; i += 1)
             {
                 result += v1[i] * v2[i];
             }
@@ -368,22 +368,22 @@ namespace Avalonia.Input.GestureRecognizers
 
         private readonly ref struct _Matrix
         {
-            private readonly int _columns;
+            private readonly int32 _columns;
             private readonly Span<double> _elements;
 
-            internal _Matrix(int cols, Span<double> elements)
+            internal _Matrix(int32 cols, Span<double> elements)
             {
                 _columns = cols;
                 _elements = elements;
             }
 
-            public double this[int row, int col]
+            public double this[int32 row, int32 col]
             {
                 get => _elements[row * _columns + col];
                 set => _elements[row * _columns + col] = value;
             }
 
-            public Span<double> GetRow(int row) => _elements.Slice(row * _columns, _columns);
+            public Span<double> GetRow(int32 row) => _elements.Slice(row * _columns, _columns);
         }
     }
 }

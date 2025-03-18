@@ -20,22 +20,22 @@ namespace Avalonia.Utilities
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryParseInt(this ReadOnlySpan<char> span, out int value)
+        public static bool TryParseInt(this ReadOnlySpan<char> span, out int32 value)
         {
 #if NETSTANDARD2_0
-            return int.TryParse(span.ToString(), out value);
+            return int32.TryParse(span.ToString(), out value);
 #else
-            return int.TryParse(span, out value);
+            return int32.TryParse(span, out value);
 #endif
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryParseInt(this ReadOnlySpan<char> span, NumberStyles style, IFormatProvider provider, out int value)
+        public static bool TryParseInt(this ReadOnlySpan<char> span, NumberStyles style, IFormatProvider provider, out int32 value)
         {
 #if NETSTANDARD2_0
-            return int.TryParse(span.ToString(), style, provider, out value);
+            return int32.TryParse(span.ToString(), style, provider, out value);
 #else
-            return int.TryParse(span, style, provider, out value);
+            return int32.TryParse(span, style, provider, out value);
 #endif
         }
 

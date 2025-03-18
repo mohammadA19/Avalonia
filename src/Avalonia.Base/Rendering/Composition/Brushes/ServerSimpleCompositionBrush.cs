@@ -31,7 +31,7 @@ namespace Avalonia.Rendering.Composition.Server
             base.DeserializeChangesCore(reader, committedAt);
             SpreadMethod = reader.Read<GradientSpreadMethod>();
             _gradientStops.Clear();
-            var count = reader.Read<int>();
+            var count = reader.Read<int32>();
             for (var c = 0; c < count; c++)
                 _gradientStops.Add(reader.ReadObject<ImmutableGradientStop>());
         }

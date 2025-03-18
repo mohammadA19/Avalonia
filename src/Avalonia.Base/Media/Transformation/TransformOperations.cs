@@ -36,7 +36,7 @@ namespace Avalonia.Media.Transformation
             return TransformParser.Parse(s);
         }
 
-        public static Builder CreateBuilder(int capacity)
+        public static Builder CreateBuilder(int32 capacity)
         {
             return new Builder(capacity);
         }
@@ -55,7 +55,7 @@ namespace Avalonia.Media.Transformation
             return result;
         }
 
-        private Matrix ApplyTransforms(int startOffset = 0)
+        private Matrix ApplyTransforms(int32 startOffset = 0)
         {
             Matrix matrix = Matrix.Identity;
 
@@ -91,14 +91,14 @@ namespace Avalonia.Media.Transformation
                 return true;
             }
 
-            int matchingPrefixLength = ComputeMatchingPrefixLength(from, to);
-            int fromSize = fromIdentity ? 0 : from._operations.Count;
-            int toSize = toIdentity ? 0 : to._operations.Count;
-            int numOperations = Math.Max(fromSize, toSize);
+            int32 matchingPrefixLength = ComputeMatchingPrefixLength(from, to);
+            int32 fromSize = fromIdentity ? 0 : from._operations.Count;
+            int32 toSize = toIdentity ? 0 : to._operations.Count;
+            int32 numOperations = Math.Max(fromSize, toSize);
 
             var builder = new Builder(matchingPrefixLength);
 
-            for (int i = 0; i < matchingPrefixLength; i++)
+            for (int32 i = 0; i < matchingPrefixLength; i++)
             {
                 TransformOperation interpolated = new TransformOperation
                 {
@@ -135,7 +135,7 @@ namespace Avalonia.Media.Transformation
             return true;
         }
 
-        private static bool ComputeDecomposedTransform(TransformOperations operations, int startOffset, out Matrix.Decomposed decomposed)
+        private static bool ComputeDecomposedTransform(TransformOperations operations, int32 startOffset, out Matrix.Decomposed decomposed)
         {
             Matrix transform = operations.ApplyTransforms(startOffset);
 
@@ -147,11 +147,11 @@ namespace Avalonia.Media.Transformation
             return true;
         }
 
-        private static int ComputeMatchingPrefixLength(TransformOperations from, TransformOperations to)
+        private static int32 ComputeMatchingPrefixLength(TransformOperations from, TransformOperations to)
         {
-            int numOperations = Math.Min(from._operations.Count, to._operations.Count);
+            int32 numOperations = Math.Min(from._operations.Count, to._operations.Count);
 
-            for (int i = 0; i < numOperations; i++)
+            for (int32 i = 0; i < numOperations; i++)
             {
                 if (from._operations[i].Type != to._operations[i].Type)
                 {
@@ -169,7 +169,7 @@ namespace Avalonia.Media.Transformation
         {
             private readonly List<TransformOperation> _operations;
 
-            public Builder(int capacity)
+            public Builder(int32 capacity)
             {
                 _operations = new List<TransformOperation>(capacity);
             }

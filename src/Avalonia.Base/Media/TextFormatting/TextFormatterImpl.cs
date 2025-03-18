@@ -18,7 +18,7 @@ namespace Avalonia.Media.TextFormatting
         [ThreadStatic] private static BidiAlgorithm? t_bidiAlgorithm;
 
         /// <inheritdoc cref="TextFormatter.FormatLine"/>
-        public override TextLine? FormatLine(ITextSource textSource, int firstTextSourceIndex, double paragraphWidth,
+        public override TextLine? FormatLine(ITextSource textSource, int32 firstTextSourceIndex, double paragraphWidth,
             TextParagraphProperties paragraphProperties, TextLineBreak? previousLineBreak = null)
         {
             TextLineBreak? nextLineBreak = null;
@@ -90,7 +90,7 @@ namespace Avalonia.Media.TextFormatting
         /// <param name="length">The length to split at.</param>
         /// <param name="objectPool">A pool used to get reusable formatting objects.</param>
         /// <returns>The split text runs.</returns>
-        internal static SplitResult<RentedList<TextRun>> SplitTextRuns(IReadOnlyList<TextRun> textRuns, int length,
+        internal static SplitResult<RentedList<TextRun>> SplitTextRuns(IReadOnlyList<TextRun> textRuns, int32 length,
             FormattingObjectPool objectPool)
         {
             var first = objectPool.TextRunLists.Rent();
@@ -344,7 +344,7 @@ namespace Avalonia.Media.TextFormatting
             joinedMemory = default;
             return false;
 
-            static bool TryGetContiguousStart(int xStart, int xLength, int yStart, int yLength, out int joinedStart)
+            static bool TryGetContiguousStart(int32 xStart, int32 xLength, int32 yStart, int32 yLength, out int32 joinedStart)
             {
                 var xRange = (Start: xStart, Length: xLength);
                 var yRange = (Start: yStart, Length: yLength);
@@ -485,8 +485,8 @@ namespace Avalonia.Media.TextFormatting
         /// <returns>
         /// The formatted text runs.
         /// </returns>
-        private static RentedList<TextRun> FetchTextRuns(ITextSource textSource, int firstTextSourceIndex,
-            FormattingObjectPool objectPool, out TextEndOfLine? endOfLine, out int textSourceLength)
+        private static RentedList<TextRun> FetchTextRuns(ITextSource textSource, int32 firstTextSourceIndex,
+            FormattingObjectPool objectPool, out TextEndOfLine? endOfLine, out int32 textSourceLength)
         {
             textSourceLength = 0;
 
@@ -570,7 +570,7 @@ namespace Avalonia.Media.TextFormatting
             return false;
         }
 
-        private static int MeasureLength(IReadOnlyList<TextRun> textRuns, double paragraphWidth)
+        private static int32 MeasureLength(IReadOnlyList<TextRun> textRuns, double paragraphWidth)
         {
             var measuredLength = 0;
             var currentWidth = 0.0;
@@ -671,7 +671,7 @@ namespace Avalonia.Media.TextFormatting
         /// Creates an empty text line.
         /// </summary>
         /// <returns>The empty text line.</returns>
-        public static TextLineImpl CreateEmptyTextLine(int firstTextSourceIndex, double paragraphWidth,
+        public static TextLineImpl CreateEmptyTextLine(int32 firstTextSourceIndex, double paragraphWidth,
             TextParagraphProperties paragraphProperties)
         {
             var flowDirection = paragraphProperties.FlowDirection;
@@ -705,7 +705,7 @@ namespace Avalonia.Media.TextFormatting
         /// <param name="objectPool">A pool used to get reusable formatting objects.</param>
         /// <returns>The wrapped text line.</returns>
         private static TextLineImpl PerformTextWrapping(List<TextRun> textRuns, bool canReuseTextRunList,
-            int firstTextSourceIndex, double paragraphWidth, TextParagraphProperties paragraphProperties,
+            int32 firstTextSourceIndex, double paragraphWidth, TextParagraphProperties paragraphProperties,
             FlowDirection resolvedFlowDirection, TextLineBreak? currentLineBreak, FormattingObjectPool objectPool)
         {
             if (textRuns.Count == 0)
@@ -719,7 +719,7 @@ namespace Avalonia.Media.TextFormatting
             {
                 if(paragraphProperties.TextWrapping == TextWrapping.NoWrap)
                 {
-                    for (int i = 0; i < textRuns.Count; i++)
+                    for (int32 i = 0; i < textRuns.Count; i++)
                     {
                         measuredLength += textRuns[i].Length;
                     }
@@ -990,9 +990,9 @@ namespace Avalonia.Media.TextFormatting
         private struct TextRunEnumerator
         {
             private readonly ITextSource _textSource;
-            private int _pos;
+            private int32 _pos;
 
-            public TextRunEnumerator(ITextSource textSource, int firstTextSourceIndex)
+            public TextRunEnumerator(ITextSource textSource, int32 firstTextSourceIndex)
             {
                 _textSource = textSource;
                 _pos = firstTextSourceIndex;

@@ -78,7 +78,7 @@ namespace Avalonia.Media.TextFormatting
             return ReferenceEquals(this, obj) || obj is TextRunProperties other && Equals(other);
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {

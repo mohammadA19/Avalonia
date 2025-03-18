@@ -22,7 +22,7 @@ namespace Avalonia.Controls.UnitTests
             Permute(sourceArray, 0, sourceArray.Length - 1);
             return results;
 
-            void Permute(T[] elements, int depth, int maxDepth)
+            void Permute(T[] elements, int32 depth, int32 maxDepth)
             {
                 if (depth == maxDepth)
                 {

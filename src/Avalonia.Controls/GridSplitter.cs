@@ -244,7 +244,7 @@ namespace Avalonia.Controls
         /// </summary>
         private bool SetupDefinitionsToResize()
         {
-            int gridSpan = GetValue(_resizeData!.ResizeDirection == GridResizeDirection.Columns ?
+            int32 gridSpan = GetValue(_resizeData!.ResizeDirection == GridResizeDirection.Columns ?
                 Grid.ColumnSpanProperty :
                 Grid.RowSpanProperty);
 
@@ -255,7 +255,7 @@ namespace Avalonia.Controls
                     Grid.RowProperty);
 
                 // Select the columns based on behavior.
-                int index1, index2;
+                int32 index1, index2;
 
                 switch (_resizeData.ResizeBehavior)
                 {
@@ -277,7 +277,7 @@ namespace Avalonia.Controls
                 }
 
                 // Get count of rows/columns in the resize direction.
-                int count = _resizeData.ResizeDirection == GridResizeDirection.Columns ?
+                int32 count = _resizeData.ResizeDirection == GridResizeDirection.Columns ?
                     _resizeData.Grid!.ColumnDefinitions.Count :
                     _resizeData.Grid!.RowDefinitions.Count;
 
@@ -514,7 +514,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets Column or Row definition at index from grid based on resize direction.
         /// </summary>
-        private static DefinitionBase GetGridDefinition(Grid grid, int index, GridResizeDirection direction)
+        private static DefinitionBase GetGridDefinition(Grid grid, int32 index, GridResizeDirection direction)
         {
             return direction == GridResizeDirection.Columns ?
                 (DefinitionBase)grid.ColumnDefinitions[index] :
@@ -797,11 +797,11 @@ namespace Avalonia.Controls
             public SplitBehavior SplitBehavior;
 
             // The index of the splitter.
-            public int SplitterIndex;
+            public int32 SplitterIndex;
 
             // The indices of the columns/rows.
-            public int Definition1Index;
-            public int Definition2Index;
+            public int32 Definition1Index;
+            public int32 Definition2Index;
 
             // The original lengths of Definition1 and Definition2 (to restore lengths if user cancels resize).
             public GridLength OriginalDefinition1Length;

@@ -100,7 +100,7 @@ internal sealed class ColorPaletteResourcesCollection : ResourceProvider, IDicti
         return ((ICollection<KeyValuePair<ThemeVariant, ColorPaletteResources>>)_inner).Contains(item);
     }
 
-    void ICollection<KeyValuePair<ThemeVariant, ColorPaletteResources>>.CopyTo(KeyValuePair<ThemeVariant, ColorPaletteResources>[] array, int arrayIndex)
+    void ICollection<KeyValuePair<ThemeVariant, ColorPaletteResources>>.CopyTo(KeyValuePair<ThemeVariant, ColorPaletteResources>[] array, int32 arrayIndex)
     {
         _inner.CopyTo(array, arrayIndex);
     }
@@ -110,7 +110,7 @@ internal sealed class ColorPaletteResourcesCollection : ResourceProvider, IDicti
         return ((ICollection<KeyValuePair<ThemeVariant, ColorPaletteResources>>)_inner).Remove(item);
     }
 
-    int ICollection<KeyValuePair<ThemeVariant, ColorPaletteResources>>.Count => _inner.Count;
+    int32 ICollection<KeyValuePair<ThemeVariant, ColorPaletteResources>>.Count => _inner.Count;
 
     bool ICollection<KeyValuePair<ThemeVariant, ColorPaletteResources>>.IsReadOnly => _inner.IsReadOnly;
 

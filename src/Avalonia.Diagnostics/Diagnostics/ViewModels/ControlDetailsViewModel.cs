@@ -269,7 +269,7 @@ namespace Avalonia.Diagnostics.ViewModels
 
         private void UpdateStyles()
         {
-            int activeCount = 0;
+            int32 activeCount = 0;
 
             foreach (var style in AppliedFrames)
             {
@@ -331,7 +331,7 @@ namespace Avalonia.Diagnostics.ViewModels
         {
             public static PropertyComparer Instance { get; } = new PropertyComparer();
 
-            public int Compare(PropertyViewModel? x, PropertyViewModel? y)
+            public int32 Compare(PropertyViewModel? x, PropertyViewModel? y)
             {
                 if (x is null && y is null)
                     return 0;
@@ -355,7 +355,7 @@ namespace Avalonia.Diagnostics.ViewModels
                 }
             }
 
-            private static int GroupIndex(string? group)
+            private static int32 GroupIndex(string? group)
             {
                 switch (group)
                 {
@@ -372,7 +372,7 @@ namespace Avalonia.Diagnostics.ViewModels
                 }
             }
 
-            public int Compare(object? x, object? y) =>
+            public int32 Compare(object? x, object? y) =>
                 Compare(x as PropertyViewModel, y as PropertyViewModel);
         }
 

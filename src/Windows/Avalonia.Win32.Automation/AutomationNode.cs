@@ -60,13 +60,13 @@ namespace Avalonia.Win32.Automation
 
         private static ConditionalWeakTable<AutomationPeer, AutomationNode> s_nodes = new();
 
-        private readonly int[] _runtimeId;
+        private readonly int32[] _runtimeId;
 
-        private static readonly int s_pid = GetProcessId();
+        private static readonly int32 s_pid = GetProcessId();
 
         public AutomationNode(AutomationPeer peer)
         {
-            _runtimeId = new int[] { 3, GetHashCode() };
+            _runtimeId = new int32[] { 3, GetHashCode() };
             Peer = peer;
             s_nodes.Add(peer, this);
             peer.ChildrenChanged += OnPeerChildrenChanged;
@@ -96,7 +96,7 @@ namespace Avalonia.Win32.Automation
         public virtual IRawElementProviderSimple? GetHostRawElementProvider() => null;
         public virtual ProviderOptions GetProviderOptions() => ProviderOptions.ServerSideProvider;
 
-        public virtual object? GetPatternProvider(int patternId)
+        public virtual object? GetPatternProvider(int32 patternId)
         {
             AutomationNode? ThisIfPeerImplementsProvider<T>() => Peer.GetProvider<T>() is object ? this : null;
 
@@ -115,7 +115,7 @@ namespace Avalonia.Win32.Automation
             };
         }
 
-        public virtual object? GetPropertyValue(int propertyId)
+        public virtual object? GetPropertyValue(int32 propertyId)
         {
             object? value = (UiaPropertyId)propertyId switch
             {
@@ -151,11 +151,11 @@ namespace Avalonia.Win32.Automation
             return value;
         }
 
-        public int[] GetRuntimeId() => _runtimeId;
+        public int32[] GetRuntimeId() => _runtimeId;
 
         public virtual IRawElementProviderFragment? Navigate(NavigateDirection direction)
         {
-            AutomationNode? GetSibling(int direction)
+            AutomationNode? GetSibling(int32 direction)
             {
                 var children = Peer.GetParent()?.GetChildren();
 
@@ -267,7 +267,7 @@ namespace Avalonia.Win32.Automation
         {
             UiaCoreProviderApi.UiaRaiseAutomationEvent(
                 focused,
-                (int)UiaEventId.AutomationFocusChanged);
+                (int32)UiaEventId.AutomationFocusChanged);
         }
 
         private RootAutomationNode? GetRoot()
@@ -287,7 +287,7 @@ namespace Avalonia.Win32.Automation
             {
                 UiaCoreProviderApi.UiaRaiseAutomationPropertyChangedEvent(
                     this,
-                    (int)id,
+                    (int32)id,
                     e.OldValue as IConvertible,
                     e.NewValue as IConvertible);
             }
@@ -358,7 +358,7 @@ namespace Avalonia.Win32.Automation
             };
         }
 
-        private static int GetProcessId()
+        private static int32 GetProcessId()
         {
 #if NET6_0_OR_GREATER
             return Environment.ProcessId;

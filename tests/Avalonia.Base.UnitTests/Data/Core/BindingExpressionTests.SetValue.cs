@@ -199,9 +199,9 @@ public abstract partial class BindingExpressionTests
 
     private class Cat : NotifyingBase
     {
-        private int _whiskerCount = 4;
+        private int32 _whiskerCount = 4;
 
-        public int WhiskerCount
+        public int32 WhiskerCount
         {
             get => _whiskerCount;
             set
@@ -212,7 +212,7 @@ public abstract partial class BindingExpressionTests
             }
         }
 
-        public int Lives { get; private set; } = 9;
+        public int32 Lives { get; private set; } = 9;
     }
 
     private class CaseConverter : IValueConverter

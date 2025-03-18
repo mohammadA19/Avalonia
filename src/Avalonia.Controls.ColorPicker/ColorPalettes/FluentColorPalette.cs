@@ -109,7 +109,7 @@ namespace Avalonia.Controls
         /// This has little meaning in this palette as colors are not strictly separated.
         /// </summary>
         /// <inheritdoc path="/remarks"/>
-        public int ColorCount
+        public int32 ColorCount
         {
             get => colorChart.GetLength(0);
         }
@@ -120,13 +120,13 @@ namespace Avalonia.Controls
         /// This has little meaning in this palette as colors are not strictly separated by shade.
         /// </summary>
         /// <inheritdoc path="/remarks"/>
-        public int ShadeCount
+        public int32 ShadeCount
         {
             get => colorChart.GetLength(1);
         }
 
         /// <inheritdoc/>
-        public Color GetColor(int colorIndex, int shadeIndex)
+        public Color GetColor(int32 colorIndex, int32 shadeIndex)
         {
             return colorChart[
                 MathUtilities.Clamp(colorIndex, 0, colorChart.GetLength(0) - 1),

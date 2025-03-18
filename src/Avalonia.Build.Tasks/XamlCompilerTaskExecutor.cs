@@ -600,7 +600,7 @@ namespace Avalonia.Build.Tasks
                                 var nop = Instruction.Create(OpCodes.Nop);
                                 i.Add(Instruction.Create(OpCodes.Ldarg_1));
                                 i.Add(Instruction.Create(OpCodes.Ldstr, res.Uri));
-                                i.Add(Instruction.Create(OpCodes.Ldc_I4, (int)StringComparison.OrdinalIgnoreCase));
+                                i.Add(Instruction.Create(OpCodes.Ldc_I4, (int32)StringComparison.OrdinalIgnoreCase));
                                 i.Add(Instruction.Create(OpCodes.Call, stringEquals));
                                 i.Add(Instruction.Create(OpCodes.Brfalse, nop));
                                 if (parameterlessConstructor != null)
@@ -648,7 +648,7 @@ namespace Avalonia.Build.Tasks
                 }
 
                 // Technically that's a hack, but it fixes corert incompatibility caused by deterministic builds
-                int dupeCounter = 1;
+                int32 dupeCounter = 1;
                 foreach (var grp in typeDef.NestedTypes.GroupBy(x => x.Name))
                 {
                     if (grp.Count() > 1)
@@ -677,7 +677,7 @@ namespace Avalonia.Build.Tasks
         {
             var hasAnyError = diagnostics.Any(d => d.Severity >= XamlDiagnosticSeverity.Error);
 
-            const int maxErrorsPerDocument = 100;
+            const int32 maxErrorsPerDocument = 100;
             foreach (var diagnostic in diagnostics
                          .GroupBy(d => d.Document)
                          .SelectMany(d => d.Take(maxErrorsPerDocument)))

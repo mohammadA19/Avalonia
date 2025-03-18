@@ -106,8 +106,8 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="MaxLines"/> property.
         /// </summary>
-        public static readonly AttachedProperty<int> MaxLinesProperty =
-            AvaloniaProperty.RegisterAttached<TextBlock, Control, int>(
+        public static readonly AttachedProperty<int32> MaxLinesProperty =
+            AvaloniaProperty.RegisterAttached<TextBlock, Control, int32>(
                 nameof(MaxLines),
                 validate: IsValidMaxLines,
                 inherits: true);
@@ -301,7 +301,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the maximum number of text lines.
         /// </summary>
-        public int MaxLines
+        public int32 MaxLines
         {
             get => GetValue(MaxLinesProperty);
             set => SetValue(MaxLinesProperty, value);
@@ -560,7 +560,7 @@ namespace Avalonia.Controls
         /// Reads the attached property from the given element
         /// </summary>
         /// <param name="control">The element to which to read the attached property.</param>
-        public static int GetMaxLines(Control control)
+        public static int32 GetMaxLines(Control control)
         {
             if (control == null)
             {
@@ -575,7 +575,7 @@ namespace Avalonia.Controls
         /// </summary>
         /// <param name="control">The element to which to write the attached property.</param>
         /// <param name="maxLines">The property value to set</param>
-        public static void SetMaxLines(Control control, int maxLines)
+        public static void SetMaxLines(Control control, int32 maxLines)
         {
             if (control == null)
             {
@@ -851,7 +851,7 @@ namespace Avalonia.Controls
             }
         }
 
-        private static bool IsValidMaxLines(int maxLines) => maxLines >= 0;
+        private static bool IsValidMaxLines(int32 maxLines) => maxLines >= 0;
 
         private static bool IsValidLineHeight(double lineHeight) => double.IsNaN(lineHeight) || lineHeight > 0;
 
@@ -908,7 +908,7 @@ namespace Avalonia.Controls
                 _defaultProperties = defaultProperties;
             }
 
-            public TextRun? GetTextRun(int textSourceIndex)
+            public TextRun? GetTextRun(int32 textSourceIndex)
             {
                 if (textSourceIndex > _text.Length)
                 {
@@ -941,7 +941,7 @@ namespace Avalonia.Controls
 
             public IReadOnlyList<TextRun> TextRuns => _textRuns;
 
-            public TextRun? GetTextRun(int textSourceIndex)
+            public TextRun? GetTextRun(int32 textSourceIndex)
             {
                 var currentPosition = 0;
 

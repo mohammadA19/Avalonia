@@ -61,7 +61,7 @@ namespace Avalonia.Build.Tasks
                 var ilProcessor = method.Body.GetILProcessor();
 
                 var instructions = method.Body.Instructions;
-                for (int i = 0; i < instructions.Count; i++)
+                for (int32 i = 0; i < instructions.Count; i++)
                 {
                     Instruction instruction = instructions[i];
 
@@ -90,7 +90,7 @@ namespace Avalonia.Build.Tasks
 
                             // Last parameter is the function ptr, so we don't add it as a parameter for calli
                             // as it is already an implicit parameter for calli
-                            for (int j = 0; j < methodDescription.Parameters.Count - 1; j++)
+                            for (int32 j = 0; j < methodDescription.Parameters.Count - 1; j++)
                             {
                                 var parameterDefinition = methodDescription.Parameters[j];
                                 callSite.Parameters.Add(parameterDefinition);

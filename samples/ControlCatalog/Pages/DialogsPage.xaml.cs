@@ -409,7 +409,7 @@ namespace ControlCatalog.Pages
             }
         }
 
-        internal static async Task<string> ReadTextFromFile(IStorageFile file, int length)
+        internal static async Task<string> ReadTextFromFile(IStorageFile file, int32 length)
         {
 #if NET6_0_OR_GREATER
             await using var stream = await file.OpenReadAsync();

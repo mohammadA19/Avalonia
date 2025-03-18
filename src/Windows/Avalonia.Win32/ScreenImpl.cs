@@ -12,7 +12,7 @@ namespace Avalonia.Win32;
 
 internal unsafe class ScreenImpl : ScreensBase<nint, WinScreen>
 {
-    protected override int GetScreenCount() => GetSystemMetrics(SystemMetric.SM_CMONITORS);
+    protected override int32 GetScreenCount() => GetSystemMetrics(SystemMetric.SM_CMONITORS);
 
     protected override IReadOnlyList<nint> GetAllScreenKeys()
     {

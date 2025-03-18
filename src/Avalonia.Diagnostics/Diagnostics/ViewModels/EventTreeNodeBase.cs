@@ -62,7 +62,7 @@ namespace Avalonia.Diagnostics.ViewModels
 
                 bool? value = false;
 
-                for (int i = 0; i < Children.Count; i++)
+                for (int32 i = 0; i < Children.Count; i++)
                 {
                     if (i == 0)
                     {

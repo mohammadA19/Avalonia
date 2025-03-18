@@ -13,17 +13,17 @@ namespace Avalonia.Utilities
     /// <typeparam name="T">The type of item contained in the array.</typeparam>
     internal struct ArrayBuilder<T>
     {
-        private const int DefaultCapacity = 4;
-        private const int MaxCoreClrArrayLength = 0x7FeFFFFF;
+        private const int32 DefaultCapacity = 4;
+        private const int32 MaxCoreClrArrayLength = 0x7FeFFFFF;
 
         // Starts out null, initialized on first Add.
         private T[]? _data;
-        private int _size;
+        private int32 _size;
 
         /// <summary>
         /// Gets or sets the number of items in the array.
         /// </summary>
-        public int Length
+        public int32 Length
         {
             get => _size;
 
@@ -50,7 +50,7 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Gets the current capacity of the array.
         /// </summary>
-        public int Capacity
+        public int32 Capacity
             => _data?.Length ?? 0;
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Avalonia.Utilities
         /// <exception cref="IndexOutOfRangeException">
         /// Thrown when index less than 0 or index greater than or equal to <see cref="Length"/>.
         /// </exception>
-        public ref T this[int index]
+        public ref T this[int32 index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
@@ -84,7 +84,7 @@ namespace Avalonia.Utilities
         /// <param name="length">The number of items in the slice.</param>
         /// <param name="clear">Whether to clear the new slice, Defaults to <see langword="true"/>.</param>
         /// <returns>The <see cref="ArraySlice{T}"/>.</returns>
-        public ArraySlice<T> Add(int length, bool clear = true)
+        public ArraySlice<T> Add(int32 length, bool clear = true)
         {
             var position = _size;
 
@@ -160,7 +160,7 @@ namespace Avalonia.Utilities
             }
         }
 
-        private void EnsureCapacity(int min)
+        private void EnsureCapacity(int32 min)
         {
             var length = _data?.Length ?? 0;
 
@@ -205,7 +205,7 @@ namespace Avalonia.Utilities
         /// <param name="length">The number of items in the slice.</param>
         /// <returns>The <see cref="ArraySlice{T}"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public ArraySlice<T> AsSlice(int length) => new ArraySlice<T>(_data!, 0, length);
+        public ArraySlice<T> AsSlice(int32 length) => new ArraySlice<T>(_data!, 0, length);
 
         /// <summary>
         /// Returns the current state of the array as a slice.
@@ -214,7 +214,7 @@ namespace Avalonia.Utilities
         /// <param name="length">The number of items in the slice.</param>
         /// <returns>The <see cref="ArraySlice{T}"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public ArraySlice<T> AsSlice(int start, int length) => new ArraySlice<T>(_data!, start, length);
+        public ArraySlice<T> AsSlice(int32 start, int32 length) => new ArraySlice<T>(_data!, start, length);
 
         /// <summary>
         /// Returns the current state of the array as a span.

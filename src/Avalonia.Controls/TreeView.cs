@@ -518,17 +518,17 @@ namespace Avalonia.Controls
             return (false, null);
         }
 
-        protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+        protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
         {
             return new TreeViewItem();
         }
 
-        protected internal override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
+        protected internal override bool NeedsContainerOverride(object? item, int32 index, out object? recycleKey)
         {
             return NeedsContainer<TreeViewItem>(item, out recycleKey);
         }
 
-        protected internal override void ContainerForItemPreparedOverride(Control container, object? item, int index)
+        protected internal override void ContainerForItemPreparedOverride(Control container, object? item, int32 index)
         {
             base.ContainerForItemPreparedOverride(container, item, index);
 

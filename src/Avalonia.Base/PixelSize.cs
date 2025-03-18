@@ -20,7 +20,7 @@ namespace Avalonia
         /// </summary>
         /// <param name="width">The width.</param>
         /// <param name="height">The height.</param>
-        public PixelSize(int width, int height)
+        public PixelSize(int32 width, int32 height)
         {
             Width = width;
             Height = height;
@@ -34,12 +34,12 @@ namespace Avalonia
         /// <summary>
         /// Gets the width.
         /// </summary>
-        public int Width { get; }
+        public int32 Width { get; }
 
         /// <summary>
         /// Gets the height.
         /// </summary>
-        public int Height { get; }
+        public int32 Height { get; }
 
         /// <summary>
         /// Checks for equality between two <see cref="PixelSize"/>s.
@@ -126,11 +126,11 @@ namespace Avalonia
         /// Returns a hash code for a <see cref="PixelSize"/>.
         /// </summary>
         /// <returns>The hash code.</returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
-                int hash = 17;
+                int32 hash = 17;
                 hash = (hash * 23) + Width.GetHashCode();
                 hash = (hash * 23) + Height.GetHashCode();
                 return hash;
@@ -142,14 +142,14 @@ namespace Avalonia
         /// </summary>
         /// <param name="width">The width.</param>
         /// <returns>The new <see cref="PixelSize"/>.</returns>
-        public PixelSize WithWidth(int width) => new PixelSize(width, Height);
+        public PixelSize WithWidth(int32 width) => new PixelSize(width, Height);
 
         /// <summary>
         /// Returns a new <see cref="PixelSize"/> with the same width and the specified height.
         /// </summary>
         /// <param name="height">The height.</param>
         /// <returns>The new <see cref="PixelSize"/>.</returns>
-        public PixelSize WithHeight(int height) => new PixelSize(Width, height);
+        public PixelSize WithHeight(int32 height) => new PixelSize(Width, height);
 
         /// <summary>
         /// Converts the <see cref="PixelSize"/> to a device-independent <see cref="Size"/> using the
@@ -190,8 +190,8 @@ namespace Avalonia
         /// <param name="scale">The scaling factor.</param>
         /// <returns>The device-independent size.</returns>
         public static PixelSize FromSize(Size size, double scale) => new PixelSize(
-            (int)Math.Ceiling(size.Width * scale),
-            (int)Math.Ceiling(size.Height * scale));
+            (int32)Math.Ceiling(size.Width * scale),
+            (int32)Math.Ceiling(size.Height * scale));
         
         /// <summary>
         /// A reversible variant of <see cref="FromSize(Size, double)"/> that uses Round instead of Ceiling to make it reversible from ToSize
@@ -200,8 +200,8 @@ namespace Avalonia
         /// <param name="scale">The scaling factor.</param>
         /// <returns>The device-independent size.</returns>
         internal static PixelSize FromSizeRounded(Size size, double scale) => new PixelSize(
-            (int)Math.Round(size.Width * scale),
-            (int)Math.Round(size.Height * scale));
+            (int32)Math.Round(size.Width * scale),
+            (int32)Math.Round(size.Height * scale));
 
 
         /// <summary>
@@ -211,8 +211,8 @@ namespace Avalonia
         /// <param name="scale">The scaling factor.</param>
         /// <returns>The device-independent size.</returns>
         public static PixelSize FromSize(Size size, Vector scale) => new PixelSize(
-            (int)Math.Ceiling(size.Width * scale.X),
-            (int)Math.Ceiling(size.Height * scale.Y));
+            (int32)Math.Ceiling(size.Width * scale.X),
+            (int32)Math.Ceiling(size.Height * scale.Y));
 
         /// <summary>
         /// Converts a <see cref="Size"/> to device pixels using the specified dots per inch (DPI).

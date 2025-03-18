@@ -8,7 +8,7 @@ namespace Avalonia.LinuxFramebuffer.Output
 {
     internal unsafe class FbDevBackBuffer : IDisposable
     {
-        private readonly int _fb;
+        private readonly int32 _fb;
         private readonly fb_fix_screeninfo _fixedInfo;
         private readonly fb_var_screeninfo _varInfo;
         private readonly IntPtr _targetAddress;
@@ -73,7 +73,7 @@ namespace Avalonia.LinuxFramebuffer.Output
             }
         }
 
-        public FbDevBackBuffer(int fb, fb_fix_screeninfo fixedInfo, fb_var_screeninfo varInfo, IntPtr targetAddress,
+        public FbDevBackBuffer(int32 fb, fb_fix_screeninfo fixedInfo, fb_var_screeninfo varInfo, IntPtr targetAddress,
             bool asyncBlit)
         {
             _fb = fb;
@@ -102,8 +102,8 @@ namespace Avalonia.LinuxFramebuffer.Output
             fb_fix_screeninfo fixedInfo, Vector dpi, Action? dispose)
         {
             return new LockedFramebuffer(address,
-                new PixelSize((int)varInfo.xres, (int)varInfo.yres),
-                (int)fixedInfo.line_length, dpi,
+                new PixelSize((int32)varInfo.xres, (int32)varInfo.yres),
+                (int32)fixedInfo.line_length, dpi,
                 varInfo.bits_per_pixel == 16 ? PixelFormat.Rgb565
                 : varInfo.blue.offset == 16 ? PixelFormat.Rgba8888
                 : PixelFormat.Bgra8888, dispose);
@@ -145,7 +145,7 @@ namespace Avalonia.LinuxFramebuffer.Output
         }
 
         public IntPtr Address { get; private set; }
-        public PixelSize Size => new PixelSize((int)_varInfo.xres, (int) _varInfo.yres);
-        public int RowBytes => (int) _fixedInfo.line_length;
+        public PixelSize Size => new PixelSize((int32)_varInfo.xres, (int32) _varInfo.yres);
+        public int32 RowBytes => (int32) _fixedInfo.line_length;
     }
 }

@@ -20,7 +20,7 @@ internal class AvaloniaTestAssemblyRunner : XunitTestAssemblyRunner
     {
     }
 
-    protected override void SetupSyncContext(int maxParallelThreads)
+    protected override void SetupSyncContext(int32 maxParallelThreads)
     {
         _session = HeadlessUnitTestSession.GetOrStartForAssembly(
             Assembly.Load(new AssemblyName(TestAssembly.Assembly.Name)));

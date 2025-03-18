@@ -15,7 +15,7 @@ namespace Avalonia.FreeDesktop
     internal struct X11InputMethodForwardedKey
 #pragma warning restore CA1815 // Override equals and operator equals on value types
     {
-        public int KeyVal { get; set; }
+        public int32 KeyVal { get; set; }
         public KeyModifiers Modifiers { get; set; }
         public RawKeyEventType Type { get; set; }
     }
@@ -24,7 +24,7 @@ namespace Avalonia.FreeDesktop
     {
         void SetWindowActive(bool active);
         bool IsEnabled { get; }
-        ValueTask<bool> HandleEventAsync(RawKeyEventArgs args, int keyVal, int keyCode);
+        ValueTask<bool> HandleEventAsync(RawKeyEventArgs args, int32 keyVal, int32 keyCode);
         event Action<string> Commit;
         event Action<X11InputMethodForwardedKey> ForwardKey;
         

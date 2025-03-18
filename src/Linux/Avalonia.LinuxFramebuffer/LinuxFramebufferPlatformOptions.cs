@@ -9,7 +9,7 @@
         /// Gets or sets the number of frames per second at which the renderer should run.
         /// Default 60.
         /// </summary>
-        public int Fps { get; set; } = 60;
+        public int32 Fps { get; set; } = 60;
         
         /// <summary>
         /// Render directly on the UI thread instead of using a dedicated render thread.

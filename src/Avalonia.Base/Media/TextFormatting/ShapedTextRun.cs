@@ -31,7 +31,7 @@ namespace Avalonia.Media.TextFormatting
         public override TextRunProperties Properties { get; }
 
         /// <inheritdoc/>
-        public override int Length
+        public override int32 Length
             => ShapedBuffer.Text.Length;
 
         public TextMetrics TextMetrics { get; }
@@ -98,7 +98,7 @@ namespace Avalonia.Media.TextFormatting
         /// <returns>
         /// <c>true</c> if characters fit into the available width; otherwise, <c>false</c>.
         /// </returns>
-        public bool TryMeasureCharacters(double availableWidth, out int length)
+        public bool TryMeasureCharacters(double availableWidth, out int32 length)
         {
             length = 0;
             var currentWidth = 0.0;
@@ -136,7 +136,7 @@ namespace Avalonia.Media.TextFormatting
             return length > 0;
         }
 
-        internal bool TryMeasureCharactersBackwards(double availableWidth, out int length, out double width)
+        internal bool TryMeasureCharactersBackwards(double availableWidth, out int32 length, out double width)
         {
             length = 0;
             width = 0;
@@ -160,7 +160,7 @@ namespace Avalonia.Media.TextFormatting
             return length > 0;
         }
 
-        internal SplitResult<ShapedTextRun> Split(int length)
+        internal SplitResult<ShapedTextRun> Split(int32 length)
         {
             var isReversed = IsReversed;
 

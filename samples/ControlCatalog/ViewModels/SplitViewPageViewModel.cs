@@ -7,7 +7,7 @@ namespace ControlCatalog.ViewModels
     public class SplitViewPageViewModel : ViewModelBase
     {
         private bool _isLeft = true;
-        private int _displayMode = 3; //CompactOverlay
+        private int32 _displayMode = 3; //CompactOverlay
 
         public bool IsLeft
         {
@@ -19,7 +19,7 @@ namespace ControlCatalog.ViewModels
             }
         }
         
-        public int DisplayMode
+        public int32 DisplayMode
         {
             get => _displayMode;
             set

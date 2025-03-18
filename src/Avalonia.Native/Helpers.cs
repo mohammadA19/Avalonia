@@ -11,7 +11,7 @@ namespace Avalonia.Native
 
         public static PixelPoint ToAvaloniaPixelPoint(this AvnPoint pt)
         {
-            return new PixelPoint((int)pt.X, (int)pt.Y);
+            return new PixelPoint((int32)pt.X, (int32)pt.Y);
         }
 
         public static AvnPoint ToAvnPoint (this Point pt)
@@ -51,7 +51,7 @@ namespace Avalonia.Native
 
         public static PixelRect ToAvaloniaPixelRect(this AvnRect rect)
         {
-            return new PixelRect((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
+            return new PixelRect((int32)rect.X, (int32)rect.Y, (int32)rect.Width, (int32)rect.Height);
         }
     }
 }

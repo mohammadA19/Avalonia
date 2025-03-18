@@ -19,7 +19,7 @@ namespace Avalonia.Input
     {
         private readonly Dictionary<long, Pointer> _pointers = new();
         private readonly bool _releasePointerOnPenUp;
-        private int _clickCount;
+        private int32 _clickCount;
         private Rect _lastClickRect;
         private ulong _lastClickTime;
         private MouseButton _lastMouseDownButton;

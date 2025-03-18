@@ -266,7 +266,7 @@ namespace Avalonia.Media
             /// <summary>
             /// Maximal degree for Bezier curve approximation
             /// </summary>
-            private int _maxDegree;
+            private int32 _maxDegree;
             /// <summary>
             /// Default flatness for Bezier curve approximation
             /// </summary>
@@ -415,7 +415,7 @@ namespace Avalonia.Media
             /// </summary>
             /// <param name="maxDegree">Maximal allowed degree (must be between 1 and 3)</param>
             /// <exception cref="ArgumentException">Thrown if maxDegree is not between 1 and 3</exception>
-            public void SetMaxDegree(int maxDegree)
+            public void SetMaxDegree(int32 maxDegree)
             {
                 if (maxDegree < 1 || maxDegree > 3)
                 {
@@ -560,7 +560,7 @@ namespace Avalonia.Media
             /// <param name="etaA">Start angle of the sub-arc</param>
             /// <param name="etaB">End angle of the sub-arc</param>
             /// <returns>Upper bound of the approximation error between the Bezier curve and the real ellipse</returns>
-            public double EstimateError(int degree, double etaA, double etaB)
+            public double EstimateError(int32 degree, double etaA, double etaB)
             {
                 if (degree < 1 || degree > _maxDegree)
                     throw new ArgumentException($"degree should be between {1} and {_maxDegree}", nameof(degree));
@@ -863,14 +863,14 @@ namespace Avalonia.Media
             /// <param name="degree">degree of the Bezier curve to use</param>
             /// <param name="threshold">acceptable error</param>
             /// <param name="openNewFigure">if true, a new figure will be started in the specified StreamGeometryContext</param>
-            public void BuildArc(StreamGeometryContext path, int degree, double threshold, bool openNewFigure)
+            public void BuildArc(StreamGeometryContext path, int32 degree, double threshold, bool openNewFigure)
             {
                 if (degree < 1 || degree > _maxDegree)
                     throw new ArgumentException($"degree should be between {1} and {_maxDegree}", nameof(degree));
 
                 // find the number of Bezier curves needed
                 bool found = false;
-                int n = 1;
+                int32 n = 1;
                 double dEta;
                 double etaB;
                 while (!found && n < 1024)
@@ -880,7 +880,7 @@ namespace Avalonia.Media
                     {
                         etaB = Eta1;
                         found = true;
-                        for (int i = 0; found && i < n; ++i)
+                        for (int32 i = 0; found && i < n; ++i)
                         {
                             double etaA = etaB;
                             etaB += dEta;
@@ -937,7 +937,7 @@ namespace Avalonia.Media
 
                 double t = Math.Tan(0.5 * dEta);
                 double alpha = Math.Sin(dEta) * (Math.Sqrt(4 + 3 * t * t) - 1) / 3;
-                for (int i = 0; i < n; ++i)
+                for (int32 i = 0; i < n; ++i)
                 {
                     //double etaA = etaB;
                     double xA = xB;
@@ -1073,7 +1073,7 @@ namespace Avalonia.Media
                 double multiplier = Math.Sqrt(Math.Abs(numerator / denominator));
                 Point mulVec = new Point(rx * p1S.Y / ry, -ry * p1S.X / rx);
 
-                int sign = (clockwise != isLargeArc) ? 1 : -1;
+                int32 sign = (clockwise != isLargeArc) ? 1 : -1;
 
                 Point cs = new Point(mulVec.X * multiplier * sign, mulVec.Y * multiplier * sign);
 

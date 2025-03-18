@@ -12,40 +12,40 @@ namespace Avalonia.Win32.Input
     public static class KeyInterop
     {
         // source: https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
-        private static readonly Dictionary<Key, int> s_virtualKeyFromKey = new(169)
+        private static readonly Dictionary<Key, int32> s_virtualKeyFromKey = new(169)
         {
-            { Key.Cancel, (int)VK_CANCEL },
-            { Key.Back, (int)VK_BACK },
-            { Key.Tab, (int)VK_TAB },
-            { Key.Clear, (int)VK_CLEAR },
-            { Key.Return, (int)VK_RETURN },
-            { Key.Pause, (int)VK_PAUSE },
-            { Key.Capital, (int)VK_CAPITAL },
-            { Key.KanaMode, (int)VK_KANA },
-            { Key.JunjaMode, (int)VK_JUNJA },
-            { Key.FinalMode, (int)VK_FINAL },
-            { Key.HanjaMode, (int)VK_HANJA },
-            { Key.Escape, (int)VK_ESCAPE },
-            { Key.ImeConvert, (int)VK_CONVERT },
-            { Key.ImeNonConvert, (int)VK_NONCONVERT },
-            { Key.ImeAccept, (int)VK_ACCEPT },
-            { Key.ImeModeChange, (int)VK_MODECHANGE },
-            { Key.Space, (int)VK_SPACE },
-            { Key.PageUp, (int)VK_PRIOR },
-            { Key.PageDown, (int)VK_NEXT },
-            { Key.End, (int)VK_END },
-            { Key.Home, (int)VK_HOME },
-            { Key.Left, (int)VK_LEFT },
-            { Key.Up, (int)VK_UP },
-            { Key.Right, (int)VK_RIGHT },
-            { Key.Down, (int)VK_DOWN },
-            { Key.Select, (int)VK_SELECT },
-            { Key.Print, (int)VK_PRINT },
-            { Key.Execute, (int)VK_EXECUTE },
-            { Key.Snapshot, (int)VK_SNAPSHOT },
-            { Key.Insert, (int)VK_INSERT },
-            { Key.Delete, (int)VK_DELETE },
-            { Key.Help, (int)VK_HELP },
+            { Key.Cancel, (int32)VK_CANCEL },
+            { Key.Back, (int32)VK_BACK },
+            { Key.Tab, (int32)VK_TAB },
+            { Key.Clear, (int32)VK_CLEAR },
+            { Key.Return, (int32)VK_RETURN },
+            { Key.Pause, (int32)VK_PAUSE },
+            { Key.Capital, (int32)VK_CAPITAL },
+            { Key.KanaMode, (int32)VK_KANA },
+            { Key.JunjaMode, (int32)VK_JUNJA },
+            { Key.FinalMode, (int32)VK_FINAL },
+            { Key.HanjaMode, (int32)VK_HANJA },
+            { Key.Escape, (int32)VK_ESCAPE },
+            { Key.ImeConvert, (int32)VK_CONVERT },
+            { Key.ImeNonConvert, (int32)VK_NONCONVERT },
+            { Key.ImeAccept, (int32)VK_ACCEPT },
+            { Key.ImeModeChange, (int32)VK_MODECHANGE },
+            { Key.Space, (int32)VK_SPACE },
+            { Key.PageUp, (int32)VK_PRIOR },
+            { Key.PageDown, (int32)VK_NEXT },
+            { Key.End, (int32)VK_END },
+            { Key.Home, (int32)VK_HOME },
+            { Key.Left, (int32)VK_LEFT },
+            { Key.Up, (int32)VK_UP },
+            { Key.Right, (int32)VK_RIGHT },
+            { Key.Down, (int32)VK_DOWN },
+            { Key.Select, (int32)VK_SELECT },
+            { Key.Print, (int32)VK_PRINT },
+            { Key.Execute, (int32)VK_EXECUTE },
+            { Key.Snapshot, (int32)VK_SNAPSHOT },
+            { Key.Insert, (int32)VK_INSERT },
+            { Key.Delete, (int32)VK_DELETE },
+            { Key.Help, (int32)VK_HELP },
             { Key.D0, '0' },
             { Key.D1, '1' },
             { Key.D2, '2' },
@@ -82,110 +82,110 @@ namespace Avalonia.Win32.Input
             { Key.X, 'X' },
             { Key.Y, 'Y' },
             { Key.Z, 'Z' },
-            { Key.LWin, (int)VK_LWIN },
-            { Key.RWin, (int)VK_RWIN },
-            { Key.Apps, (int)VK_APPS },
-            { Key.Sleep, (int)VK_SLEEP },
-            { Key.NumPad0, (int)VK_NUMPAD0 },
-            { Key.NumPad1, (int)VK_NUMPAD1 },
-            { Key.NumPad2, (int)VK_NUMPAD2 },
-            { Key.NumPad3, (int)VK_NUMPAD3 },
-            { Key.NumPad4, (int)VK_NUMPAD4 },
-            { Key.NumPad5, (int)VK_NUMPAD5 },
-            { Key.NumPad6, (int)VK_NUMPAD6 },
-            { Key.NumPad7, (int)VK_NUMPAD7 },
-            { Key.NumPad8, (int)VK_NUMPAD8 },
-            { Key.NumPad9, (int)VK_NUMPAD9 },
-            { Key.Multiply, (int)VK_MULTIPLY },
-            { Key.Add, (int)VK_ADD },
-            { Key.Separator, (int)VK_SEPARATOR },
-            { Key.Subtract, (int)VK_SUBTRACT },
-            { Key.Decimal, (int)VK_DECIMAL },
-            { Key.Divide, (int)VK_DIVIDE },
-            { Key.F1, (int)VK_F1 },
-            { Key.F2, (int)VK_F2 },
-            { Key.F3, (int)VK_F3 },
-            { Key.F4, (int)VK_F4 },
-            { Key.F5, (int)VK_F5 },
-            { Key.F6, (int)VK_F6 },
-            { Key.F7, (int)VK_F7 },
-            { Key.F8, (int)VK_F8 },
-            { Key.F9, (int)VK_F9 },
-            { Key.F10, (int)VK_F10 },
-            { Key.F11, (int)VK_F11 },
-            { Key.F12, (int)VK_F12 },
-            { Key.F13, (int)VK_F13 },
-            { Key.F14, (int)VK_F14 },
-            { Key.F15, (int)VK_F15 },
-            { Key.F16, (int)VK_F16 },
-            { Key.F17, (int)VK_F17 },
-            { Key.F18, (int)VK_F18 },
-            { Key.F19, (int)VK_F19 },
-            { Key.F20, (int)VK_F20 },
-            { Key.F21, (int)VK_F21 },
-            { Key.F22, (int)VK_F22 },
-            { Key.F23, (int)VK_F23 },
-            { Key.F24, (int)VK_F24 },
-            { Key.NumLock, (int)VK_NUMLOCK },
-            { Key.Scroll, (int)VK_SCROLL },
-            { Key.LeftShift, (int)VK_LSHIFT },
-            { Key.RightShift, (int)VK_RSHIFT },
-            { Key.LeftCtrl, (int)VK_LCONTROL },
-            { Key.RightCtrl, (int)VK_RCONTROL },
-            { Key.LeftAlt, (int)VK_LMENU },
-            { Key.RightAlt, (int)VK_RMENU },
-            { Key.BrowserBack, (int)VK_BROWSER_BACK },
-            { Key.BrowserForward, (int)VK_BROWSER_FORWARD },
-            { Key.BrowserRefresh, (int)VK_BROWSER_REFRESH },
-            { Key.BrowserStop, (int)VK_BROWSER_STOP },
-            { Key.BrowserSearch, (int)VK_BROWSER_SEARCH },
-            { Key.BrowserFavorites, (int)VK_BROWSER_FAVORITES },
-            { Key.BrowserHome, (int)VK_BROWSER_HOME },
-            { Key.VolumeMute, (int)VK_VOLUME_MUTE },
-            { Key.VolumeDown, (int)VK_VOLUME_DOWN },
-            { Key.VolumeUp, (int)VK_VOLUME_UP },
-            { Key.MediaNextTrack, (int)VK_MEDIA_NEXT_TRACK },
-            { Key.MediaPreviousTrack, (int)VK_MEDIA_PREV_TRACK },
-            { Key.MediaStop, (int)VK_MEDIA_STOP },
-            { Key.MediaPlayPause, (int)VK_MEDIA_PLAY_PAUSE },
-            { Key.LaunchMail, (int)VK_LAUNCH_MAIL },
-            { Key.SelectMedia, (int)VK_LAUNCH_MEDIA_SELECT },
-            { Key.LaunchApplication1, (int)VK_LAUNCH_APP1 },
-            { Key.LaunchApplication2, (int)VK_LAUNCH_APP2 },
-            { Key.Oem1, (int)VK_OEM_1 },
-            { Key.OemPlus, (int)VK_OEM_PLUS },
-            { Key.OemComma, (int)VK_OEM_COMMA },
-            { Key.OemMinus, (int)VK_OEM_MINUS },
-            { Key.OemPeriod, (int)VK_OEM_PERIOD },
-            { Key.OemQuestion, (int)VK_OEM_2 },
-            { Key.Oem3, (int)VK_OEM_3 },
-            { Key.AbntC1, (int)VK_ABNT_C1 },
-            { Key.AbntC2, (int)VK_ABNT_C2 },
-            { Key.OemOpenBrackets, (int)VK_OEM_4 },
-            { Key.Oem5, (int)VK_OEM_5 },
-            { Key.Oem6, (int)VK_OEM_6 },
-            { Key.OemQuotes, (int)VK_OEM_7 },
-            { Key.Oem8, (int)VK_OEM_8 },
-            { Key.OemBackslash, (int)VK_OEM_102 },
-            { Key.ImeProcessed, (int)VK_PROCESSKEY },
-            { Key.OemAttn, (int)VK_OEM_ATTN },
-            { Key.OemFinish, (int)VK_OEM_FINISH },
-            { Key.OemCopy, (int)VK_OEM_COPY },
-            { Key.DbeSbcsChar, (int)VK_OEM_AUTO },
-            { Key.OemEnlw, (int)VK_OEM_ENLW },
-            { Key.OemBackTab, (int)VK_OEM_BACKTAB },
-            { Key.DbeNoRoman, (int)VK_ATTN },
-            { Key.DbeEnterWordRegisterMode, (int)VK_CRSEL },
-            { Key.DbeEnterImeConfigureMode, (int)VK_EXSEL },
-            { Key.EraseEof, (int)VK_EREOF },
-            { Key.Play, (int)VK_PLAY },
-            { Key.DbeNoCodeInput, (int)VK_ZOOM },
-            { Key.NoName, (int)VK_NONAME },
-            { Key.Pa1, (int)VK_PA1 },
-            { Key.OemClear, (int)VK_OEM_CLEAR }
+            { Key.LWin, (int32)VK_LWIN },
+            { Key.RWin, (int32)VK_RWIN },
+            { Key.Apps, (int32)VK_APPS },
+            { Key.Sleep, (int32)VK_SLEEP },
+            { Key.NumPad0, (int32)VK_NUMPAD0 },
+            { Key.NumPad1, (int32)VK_NUMPAD1 },
+            { Key.NumPad2, (int32)VK_NUMPAD2 },
+            { Key.NumPad3, (int32)VK_NUMPAD3 },
+            { Key.NumPad4, (int32)VK_NUMPAD4 },
+            { Key.NumPad5, (int32)VK_NUMPAD5 },
+            { Key.NumPad6, (int32)VK_NUMPAD6 },
+            { Key.NumPad7, (int32)VK_NUMPAD7 },
+            { Key.NumPad8, (int32)VK_NUMPAD8 },
+            { Key.NumPad9, (int32)VK_NUMPAD9 },
+            { Key.Multiply, (int32)VK_MULTIPLY },
+            { Key.Add, (int32)VK_ADD },
+            { Key.Separator, (int32)VK_SEPARATOR },
+            { Key.Subtract, (int32)VK_SUBTRACT },
+            { Key.Decimal, (int32)VK_DECIMAL },
+            { Key.Divide, (int32)VK_DIVIDE },
+            { Key.F1, (int32)VK_F1 },
+            { Key.F2, (int32)VK_F2 },
+            { Key.F3, (int32)VK_F3 },
+            { Key.F4, (int32)VK_F4 },
+            { Key.F5, (int32)VK_F5 },
+            { Key.F6, (int32)VK_F6 },
+            { Key.F7, (int32)VK_F7 },
+            { Key.F8, (int32)VK_F8 },
+            { Key.F9, (int32)VK_F9 },
+            { Key.F10, (int32)VK_F10 },
+            { Key.F11, (int32)VK_F11 },
+            { Key.F12, (int32)VK_F12 },
+            { Key.F13, (int32)VK_F13 },
+            { Key.F14, (int32)VK_F14 },
+            { Key.F15, (int32)VK_F15 },
+            { Key.F16, (int32)VK_F16 },
+            { Key.F17, (int32)VK_F17 },
+            { Key.F18, (int32)VK_F18 },
+            { Key.F19, (int32)VK_F19 },
+            { Key.F20, (int32)VK_F20 },
+            { Key.F21, (int32)VK_F21 },
+            { Key.F22, (int32)VK_F22 },
+            { Key.F23, (int32)VK_F23 },
+            { Key.F24, (int32)VK_F24 },
+            { Key.NumLock, (int32)VK_NUMLOCK },
+            { Key.Scroll, (int32)VK_SCROLL },
+            { Key.LeftShift, (int32)VK_LSHIFT },
+            { Key.RightShift, (int32)VK_RSHIFT },
+            { Key.LeftCtrl, (int32)VK_LCONTROL },
+            { Key.RightCtrl, (int32)VK_RCONTROL },
+            { Key.LeftAlt, (int32)VK_LMENU },
+            { Key.RightAlt, (int32)VK_RMENU },
+            { Key.BrowserBack, (int32)VK_BROWSER_BACK },
+            { Key.BrowserForward, (int32)VK_BROWSER_FORWARD },
+            { Key.BrowserRefresh, (int32)VK_BROWSER_REFRESH },
+            { Key.BrowserStop, (int32)VK_BROWSER_STOP },
+            { Key.BrowserSearch, (int32)VK_BROWSER_SEARCH },
+            { Key.BrowserFavorites, (int32)VK_BROWSER_FAVORITES },
+            { Key.BrowserHome, (int32)VK_BROWSER_HOME },
+            { Key.VolumeMute, (int32)VK_VOLUME_MUTE },
+            { Key.VolumeDown, (int32)VK_VOLUME_DOWN },
+            { Key.VolumeUp, (int32)VK_VOLUME_UP },
+            { Key.MediaNextTrack, (int32)VK_MEDIA_NEXT_TRACK },
+            { Key.MediaPreviousTrack, (int32)VK_MEDIA_PREV_TRACK },
+            { Key.MediaStop, (int32)VK_MEDIA_STOP },
+            { Key.MediaPlayPause, (int32)VK_MEDIA_PLAY_PAUSE },
+            { Key.LaunchMail, (int32)VK_LAUNCH_MAIL },
+            { Key.SelectMedia, (int32)VK_LAUNCH_MEDIA_SELECT },
+            { Key.LaunchApplication1, (int32)VK_LAUNCH_APP1 },
+            { Key.LaunchApplication2, (int32)VK_LAUNCH_APP2 },
+            { Key.Oem1, (int32)VK_OEM_1 },
+            { Key.OemPlus, (int32)VK_OEM_PLUS },
+            { Key.OemComma, (int32)VK_OEM_COMMA },
+            { Key.OemMinus, (int32)VK_OEM_MINUS },
+            { Key.OemPeriod, (int32)VK_OEM_PERIOD },
+            { Key.OemQuestion, (int32)VK_OEM_2 },
+            { Key.Oem3, (int32)VK_OEM_3 },
+            { Key.AbntC1, (int32)VK_ABNT_C1 },
+            { Key.AbntC2, (int32)VK_ABNT_C2 },
+            { Key.OemOpenBrackets, (int32)VK_OEM_4 },
+            { Key.Oem5, (int32)VK_OEM_5 },
+            { Key.Oem6, (int32)VK_OEM_6 },
+            { Key.OemQuotes, (int32)VK_OEM_7 },
+            { Key.Oem8, (int32)VK_OEM_8 },
+            { Key.OemBackslash, (int32)VK_OEM_102 },
+            { Key.ImeProcessed, (int32)VK_PROCESSKEY },
+            { Key.OemAttn, (int32)VK_OEM_ATTN },
+            { Key.OemFinish, (int32)VK_OEM_FINISH },
+            { Key.OemCopy, (int32)VK_OEM_COPY },
+            { Key.DbeSbcsChar, (int32)VK_OEM_AUTO },
+            { Key.OemEnlw, (int32)VK_OEM_ENLW },
+            { Key.OemBackTab, (int32)VK_OEM_BACKTAB },
+            { Key.DbeNoRoman, (int32)VK_ATTN },
+            { Key.DbeEnterWordRegisterMode, (int32)VK_CRSEL },
+            { Key.DbeEnterImeConfigureMode, (int32)VK_EXSEL },
+            { Key.EraseEof, (int32)VK_EREOF },
+            { Key.Play, (int32)VK_PLAY },
+            { Key.DbeNoCodeInput, (int32)VK_ZOOM },
+            { Key.NoName, (int32)VK_NONAME },
+            { Key.Pa1, (int32)VK_PA1 },
+            { Key.OemClear, (int32)VK_OEM_CLEAR }
         };
 
-        private static readonly Dictionary<int, Key> s_keyFromVirtualKey =
+        private static readonly Dictionary<int32, Key> s_keyFromVirtualKey =
             s_virtualKeyFromKey.ToDictionary(pair => pair.Value, pair => pair.Key);
 
         // https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input#scan-codes
@@ -377,62 +377,62 @@ namespace Avalonia.Win32.Input
         /// Indicates whether the key is an extended key, such as the right-hand ALT and CTRL keys.
         /// According to https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-keydown.
         /// </summary>
-        private static bool IsExtended(int keyData)
+        private static bool IsExtended(int32 keyData)
         {
-            const int extendedMask = 1 << 24;
+            const int32 extendedMask = 1 << 24;
 
             return (keyData & extendedMask) != 0;
         }
 
-        private static byte GetScanCode(int keyData)
+        private static byte GetScanCode(int32 keyData)
         {
             // Bits from 16 to 23 represent scan code.
-            const int scanCodeMask = 0xFF0000;
+            const int32 scanCodeMask = 0xFF0000;
 
             return (byte)((keyData & scanCodeMask) >> 16);
         }
 
-        private static int GetVirtualKey(int virtualKey, int keyData)
+        private static int32 GetVirtualKey(int32 virtualKey, int32 keyData)
         {
             // Adapted from https://github.com/dotnet/wpf/blob/master/src/Microsoft.DotNet.Wpf/src/PresentationCore/System/Windows/InterOp/HwndKeyboardInputProvider.cs.
 
-            if (virtualKey == (int)VK_SHIFT)
+            if (virtualKey == (int32)VK_SHIFT)
             {
                 var scanCode = GetScanCode(keyData);
 
-                virtualKey = (int)MapVirtualKey(scanCode, (uint)MapVirtualKeyMapTypes.MAPVK_VSC_TO_VK_EX);
+                virtualKey = (int32)MapVirtualKey(scanCode, (uint)MapVirtualKeyMapTypes.MAPVK_VSC_TO_VK_EX);
 
                 if (virtualKey == 0)
                 {
-                    virtualKey = (int)VK_LSHIFT;
+                    virtualKey = (int32)VK_LSHIFT;
                 }
             }
 
-            else if (virtualKey == (int)VK_MENU)
+            else if (virtualKey == (int32)VK_MENU)
             {
                 bool isRight = IsExtended(keyData);
 
                 if (isRight)
                 {
-                    virtualKey = (int)VK_RMENU;
+                    virtualKey = (int32)VK_RMENU;
                 }
                 else
                 {
-                    virtualKey = (int)VK_LMENU;
+                    virtualKey = (int32)VK_LMENU;
                 }
             }
             
-            else if (virtualKey == (int)VK_CONTROL)
+            else if (virtualKey == (int32)VK_CONTROL)
             {
                 bool isRight = IsExtended(keyData);
 
                 if (isRight)
                 {
-                    virtualKey = (int)VK_RCONTROL;
+                    virtualKey = (int32)VK_RCONTROL;
                 }
                 else
                 {
-                    virtualKey = (int)VK_LCONTROL;
+                    virtualKey = (int32)VK_LCONTROL;
                 }
             }
 
@@ -445,7 +445,7 @@ namespace Avalonia.Win32.Input
         /// <param name="virtualKey">The Windows virtual-key.</param>
         /// <param name="keyData">The key data (in the same format as lParam for WM_KEYDOWN).</param>
         /// <returns>An Avalonia key, or <see cref="Key.None"/> if none matched.</returns>
-        public static Key KeyFromVirtualKey(int virtualKey, int keyData)
+        public static Key KeyFromVirtualKey(int32 virtualKey, int32 keyData)
         {
             virtualKey = GetVirtualKey(virtualKey, keyData);
 
@@ -459,7 +459,7 @@ namespace Avalonia.Win32.Input
         /// </summary>
         /// <param name="key">The Avalonia key.</param>
         /// <returns>A Windows virtual-key code, or 0 if none matched.</returns>
-        public static int VirtualKeyFromKey(Key key)
+        public static int32 VirtualKeyFromKey(Key key)
         {
             s_virtualKeyFromKey.TryGetValue(key, out var result);
 
@@ -472,7 +472,7 @@ namespace Avalonia.Win32.Input
         /// <param name="virtualKey">The Windows virtual-key.</param>
         /// <param name="keyData">The key data (in the same format as lParam for WM_KEYDOWN).</param>
         /// <returns>An Avalonia physical key, or <see cref="PhysicalKey.None"/> if none matched.</returns>
-        public static PhysicalKey PhysicalKeyFromVirtualKey(int virtualKey, int keyData)
+        public static PhysicalKey PhysicalKeyFromVirtualKey(int32 virtualKey, int32 keyData)
         {
             uint scanCode = GetScanCode(keyData);
             if (scanCode == 0U)
@@ -499,9 +499,9 @@ namespace Avalonia.Win32.Input
         /// <param name="virtualKey">The Windows virtual-key.</param>
         /// <param name="keyData">The key data (in the same format as lParam for WM_KEYDOWN).</param>
         /// <returns>A key symbol, or null if none matched.</returns>
-        public static unsafe string? GetKeySymbol(int virtualKey, int keyData)
+        public static unsafe string? GetKeySymbol(int32 virtualKey, int32 keyData)
         {
-            const int bufferSize = 4;
+            const int32 bufferSize = 4;
             const uint doNotChangeKeyboardState = 1U << 2;
 
             fixed (byte* keyStates = stackalloc byte[256])

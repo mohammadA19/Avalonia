@@ -208,7 +208,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Number of decimals to round the Matrix to.
         /// </summary>
-        private const int DecimalsAfterRound = 8;
+        private const int32 DecimalsAfterRound = 8;
 
         /// <summary>
         /// Actual DesiredSize of Child element (the value it returned from its MeasureOverride method).
@@ -243,7 +243,7 @@ namespace Avalonia.Controls
         /// <param name="matrix">Matrix to round.</param>
         /// <param name="decimals">Number of decimal places to round to.</param>
         /// <returns>Rounded Matrix.</returns>
-        private static Matrix RoundMatrix(Matrix matrix, int decimals)
+        private static Matrix RoundMatrix(Matrix matrix, int32 decimals)
         {
             return new Matrix(
                 Math.Round(matrix.M11, decimals),

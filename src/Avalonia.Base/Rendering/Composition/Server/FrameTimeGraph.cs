@@ -26,13 +26,13 @@ internal sealed class FrameTimeGraph
     private readonly string _title;
     private readonly DiagnosticTextRenderer _textRenderer;
 
-    private int _startFrameIndex;
-    private int _frameCount;
+    private int32 _startFrameIndex;
+    private int32 _frameCount;
 
     public Size Size
         => _size;
 
-    public FrameTimeGraph(int maxFrames, Size size, double defaultMaxY, string title,
+    public FrameTimeGraph(int32 maxFrames, Size size, double defaultMaxY, string title,
         DiagnosticTextRenderer textRenderer)
     {
         Debug.Assert(maxFrames >= 1);
@@ -166,6 +166,6 @@ internal sealed class FrameTimeGraph
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private double GetFrameValue(int frameOffset)
+    private double GetFrameValue(int32 frameOffset)
         => _frameValues[(_startFrameIndex + frameOffset) % _frameValues.Length];
 }

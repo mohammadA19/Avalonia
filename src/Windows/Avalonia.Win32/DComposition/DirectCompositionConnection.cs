@@ -40,7 +40,7 @@ internal class DirectCompositionConnection : IRenderTimer, IWindowsSurfaceFactor
                 var result = NativeMethods.DCompositionCreateDevice2(default, IID_IDCompositionDesktopDevice, out var cDevice);
                 if (result != UnmanagedMethods.HRESULT.S_OK)
                 {
-                    throw new Win32Exception((int)result);
+                    throw new Win32Exception((int32)result);
                 }
 
                 using (var device = MicroComRuntime.CreateProxyFor<IDCompositionDesktopDevice>(cDevice, false))

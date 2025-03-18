@@ -92,9 +92,9 @@ namespace Avalonia.Media.Transformation
         {
             static UnitValue ParseValue(ReadOnlySpan<char> part)
             {
-                int unitIndex = -1;
+                int32 unitIndex = -1;
 
-                for (int i = 0; i < part.Length; i++)
+                for (int32 i = 0; i < part.Length; i++)
                 {
                     char c = part[i];
 
@@ -123,7 +123,7 @@ namespace Avalonia.Media.Transformation
                 return new UnitValue(unit, value);
             }
 
-            static int ParseValuePair(
+            static int32 ParseValuePair(
                 in ReadOnlySpan<char> part,
                 ref UnitValue leftValue,
                 ref UnitValue rightValue)
@@ -146,9 +146,9 @@ namespace Avalonia.Media.Transformation
                 return 1;
             }
 
-            static int ParseCommaDelimitedValues(ReadOnlySpan<char> part, in Span<UnitValue> outValues)
+            static int32 ParseCommaDelimitedValues(ReadOnlySpan<char> part, in Span<UnitValue> outValues)
             {
-                int valueIndex = 0;
+                int32 valueIndex = 0;
 
                 while (true)
                 {
@@ -188,7 +188,7 @@ namespace Avalonia.Media.Transformation
                     var scaleX = UnitValue.One;
                     var scaleY = UnitValue.One;
 
-                    int count = ParseValuePair(functionPart, ref scaleX, ref scaleY);
+                    int32 count = ParseValuePair(functionPart, ref scaleX, ref scaleY);
 
                     if (count != 1 && (function == TransformFunction.ScaleX || function == TransformFunction.ScaleY))
                     {
@@ -219,7 +219,7 @@ namespace Avalonia.Media.Transformation
                     var skewX = UnitValue.Zero;
                     var skewY = UnitValue.Zero;
 
-                    int count = ParseValuePair(functionPart, ref skewX, ref skewY);
+                    int32 count = ParseValuePair(functionPart, ref skewX, ref skewY);
 
                     if (count != 1 && (function == TransformFunction.SkewX || function == TransformFunction.SkewY))
                     {
@@ -244,7 +244,7 @@ namespace Avalonia.Media.Transformation
                     var angle = UnitValue.Zero;
                     UnitValue _ = default;
 
-                    int count = ParseValuePair(functionPart, ref angle, ref _);
+                    int32 count = ParseValuePair(functionPart, ref angle, ref _);
 
                     if (count != 1)
                     {
@@ -264,7 +264,7 @@ namespace Avalonia.Media.Transformation
                     var translateX = UnitValue.Zero;
                     var translateY = UnitValue.Zero;
 
-                    int count = ParseValuePair(functionPart, ref translateX, ref translateY);
+                    int32 count = ParseValuePair(functionPart, ref translateX, ref translateY);
 
                     if (count != 1 && (function == TransformFunction.TranslateX || function == TransformFunction.TranslateY))
                     {
@@ -288,7 +288,7 @@ namespace Avalonia.Media.Transformation
                 {
                     Span<UnitValue> values = stackalloc UnitValue[6];
 
-                    int count = ParseCommaDelimitedValues(functionPart, in values);
+                    int32 count = ParseCommaDelimitedValues(functionPart, in values);
 
                     if (count != 6)
                     {
@@ -356,7 +356,7 @@ namespace Avalonia.Media.Transformation
             throw new FormatException($"Invalid value {value.Value} {unitString} for {function}");
         }
 
-        private static void ThrowFormatInvalidValueCount(TransformFunction function, int count)
+        private static void ThrowFormatInvalidValueCount(TransformFunction function, int32 count)
         {
             throw new FormatException($"Invalid format. {function} expects {count} value(s).");
         }

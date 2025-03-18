@@ -49,7 +49,7 @@ internal class RadioButtonGroupManager
     {
         if (!string.IsNullOrEmpty(oldGroupName) && _registeredGroups.TryGetValue(oldGroupName, out var group))
         {
-            int i = 0;
+            int32 i = 0;
             while (i < group.Count)
             {
                 if (!group[i].TryGetTarget(out var button) || button == radioButton)

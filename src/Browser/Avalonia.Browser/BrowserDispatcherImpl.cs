@@ -12,7 +12,7 @@ internal class BrowserDispatcherImpl : IDispatcherImpl
     private readonly Thread _thread;
     private readonly Stopwatch _clock;
     private bool _signaled;
-    private int? _timerId;
+    private int32? _timerId;
 
     public BrowserDispatcherImpl()
     {
@@ -59,7 +59,7 @@ internal class BrowserDispatcherImpl : IDispatcherImpl
         if (dueTimeInMs.HasValue)
         {
             var interval = Math.Max(1, dueTimeInMs.Value - _clock.ElapsedMilliseconds);
-            _timerId = TimerHelper.SetInterval((int)interval);
+            _timerId = TimerHelper.SetInterval((int32)interval);
         }
     }
 }

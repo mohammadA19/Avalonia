@@ -13,7 +13,7 @@ namespace Avalonia.Direct2D1.UnitTests
                    Math.Round(a.Height, 3) == Math.Round(b.Height, 3);
         }
 
-        public int GetHashCode(Rect obj)
+        public int32 GetHashCode(Rect obj)
         {
             throw new NotImplementedException();
         }

@@ -7,7 +7,7 @@ namespace Avalonia.Benchmarks.Base
     public class AvaloniaObjectBenchmark
     {
         private Class1 target = new Class1();
-        private Subject<int> intBinding = new Subject<int>();
+        private Subject<int32> intBinding = new Subject<int32>();
 
         public AvaloniaObjectBenchmark()
         {
@@ -35,8 +35,8 @@ namespace Avalonia.Benchmarks.Base
 
         class Class1 : AvaloniaObject
         {
-            public static readonly StyledProperty<int> IntProperty =
-                AvaloniaProperty.Register<Class1, int>("Int");
+            public static readonly StyledProperty<int32> IntProperty =
+                AvaloniaProperty.Register<Class1, int32>("Int");
         }
     }
 }

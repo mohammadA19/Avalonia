@@ -633,19 +633,19 @@ namespace Avalonia.Controls
         }
 
         /// <inheritdoc/>
-        public int ColorCount
+        public int32 ColorCount
         {
             get => 19;
         }
 
         /// <inheritdoc/>
-        public int ShadeCount
+        public int32 ShadeCount
         {
             get => 10;
         }
 
         /// <inheritdoc/>
-        public Color GetColor(int colorIndex, int shadeIndex)
+        public Color GetColor(int32 colorIndex, int32 shadeIndex)
         {
             if (_colorChart == null)
             {

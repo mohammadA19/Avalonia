@@ -205,7 +205,7 @@ public abstract partial class BindingExpressionTests
         {
             var t when t == typeof(bool) => TargetClass.BoolProperty,
             var t when t == typeof(double) => TargetClass.DoubleProperty,
-            var t when t == typeof(int) => TargetClass.IntProperty,
+            var t when t == typeof(int32) => TargetClass.IntProperty,
             var t when t == typeof(string) => TargetClass.StringProperty,
             _ => TargetClass.ObjectProperty,
         };
@@ -251,7 +251,7 @@ public abstract partial class BindingExpressionTests
     {
         private bool _boolValue;
         private double _doubleValue;
-        private int _intValue;
+        private int32 _intValue;
         private object? _objectValue;
         private string? _stringValue;
         private ViewModel? _next;
@@ -264,7 +264,7 @@ public abstract partial class BindingExpressionTests
             set { _boolValue = value; RaisePropertyChanged(); }
         }
 
-        public int IntValue
+        public int32 IntValue
         {
             get => _intValue;
             set { _intValue = value; RaisePropertyChanged(); }
@@ -348,8 +348,8 @@ public abstract partial class BindingExpressionTests
             AvaloniaProperty.Register<TargetClass, bool>("Bool");
         public static readonly StyledProperty<double> DoubleProperty =
             AvaloniaProperty.Register<TargetClass, double>("Double");
-        public static readonly StyledProperty<int> IntProperty =
-            AvaloniaProperty.Register<TargetClass, int>("Int");
+        public static readonly StyledProperty<int32> IntProperty =
+            AvaloniaProperty.Register<TargetClass, int32>("Int");
         public static readonly StyledProperty<object?> ObjectProperty =
             AvaloniaProperty.Register<TargetClass, object?>("Object");
         public static readonly StyledProperty<string?> StringProperty =
@@ -378,7 +378,7 @@ public abstract partial class BindingExpressionTests
             set => SetValue(DoubleProperty, value);
         }
 
-        public int Int
+        public int32 Int
         {
             get => GetValue(IntProperty);
             set => SetValue(IntProperty, value);

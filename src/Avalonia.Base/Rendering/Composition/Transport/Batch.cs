@@ -13,8 +13,8 @@ namespace Avalonia.Rendering.Composition.Transport
     {
         private static long _nextSequenceId = 1;
         private static readonly ConcurrentBag<BatchStreamData> _pool = new();
-        private readonly TaskCompletionSource<int> _acceptedTcs = new();
-        private readonly TaskCompletionSource<int> _renderedTcs = new();
+        private readonly TaskCompletionSource<int32> _acceptedTcs = new();
+        private readonly TaskCompletionSource<int32> _renderedTcs = new();
         
         internal long SequenceId { get; }
         

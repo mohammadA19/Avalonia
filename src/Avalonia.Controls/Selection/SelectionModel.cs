@@ -11,8 +11,8 @@ namespace Avalonia.Controls.Selection
     public class SelectionModel<T> : SelectionNodeBase<T>, ISelectionModel
     {
         private bool _singleSelect = true;
-        private int _anchorIndex = -1;
-        private int _selectedIndex = -1;
+        private int32 _anchorIndex = -1;
+        private int32 _selectedIndex = -1;
         private Operation? _operation;
         private SelectedIndexes<T>? _selectedIndexes;
         private SelectedItems<T>? _selectedItems;
@@ -64,7 +64,7 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        public int SelectedIndex 
+        public int32 SelectedIndex 
         {
             get => _selectedIndex;
             set
@@ -87,7 +87,7 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        public IReadOnlyList<int> SelectedIndexes => _selectedIndexes ??= new SelectedIndexes<T>(this);
+        public IReadOnlyList<int32> SelectedIndexes => _selectedIndexes ??= new SelectedIndexes<T>(this);
 
         public T? SelectedItem
         {
@@ -132,7 +132,7 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        public int AnchorIndex 
+        public int32 AnchorIndex 
         {
             get => _anchorIndex;
             set
@@ -143,7 +143,7 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        public int Count
+        public int32 Count
         {
             get
             {
@@ -225,7 +225,7 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        public bool IsSelected(int index)
+        public bool IsSelected(int32 index)
         {
             if (index < 0)
             {
@@ -241,13 +241,13 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        public void Select(int index) => SelectRange(index, index, false, true);
+        public void Select(int32 index) => SelectRange(index, index, false, true);
 
-        public void Deselect(int index) => DeselectRange(index, index);
+        public void Deselect(int32 index) => DeselectRange(index, index);
 
-        public void SelectRange(int start, int end) => SelectRange(start, end, false, false);
+        public void SelectRange(int32 start, int32 end) => SelectRange(start, end, false, false);
 
-        public void DeselectRange(int start, int end)
+        public void DeselectRange(int32 start, int32 end)
         {
             using var update = BatchUpdate();
             var o = update.Operation;
@@ -278,8 +278,8 @@ namespace Avalonia.Controls.Selection
             _initSelectedItems = null;
         }
 
-        public void SelectAll() => SelectRange(0, int.MaxValue);
-        public void Clear() => DeselectRange(0, int.MaxValue);
+        public void SelectAll() => SelectRange(0, int32.MaxValue);
+        public void Clear() => DeselectRange(0, int32.MaxValue);
 
         protected void RaisePropertyChanged(string propertyName)
         {
@@ -327,7 +327,7 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        protected override void OnIndexesChanged(int shiftIndex, int shiftDelta)
+        protected override void OnIndexesChanged(int32 shiftIndex, int32 shiftDelta)
         {
             IndexesChanged?.Invoke(this, new SelectionModelIndexesChangedEventArgs(shiftIndex, shiftDelta));
         }
@@ -341,7 +341,7 @@ namespace Avalonia.Controls.Selection
         protected override void OnSourceReset()
         {
             _selectedIndex = _anchorIndex = -1;
-            CommitDeselect(0, int.MaxValue);
+            CommitDeselect(0, int32.MaxValue);
 
             if (SourceReset is not null)
             {
@@ -357,7 +357,7 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        protected override void OnSelectionRemoved(int index, int count, IReadOnlyList<T> deselectedItems)
+        protected override void OnSelectionRemoved(int32 index, int32 count, IReadOnlyList<T> deselectedItems)
         {
             // Note: We're *not* putting this in a using scope. A collection update is still in progress
             // so the operation won't get committed by normal means: we have to commit it manually.
@@ -375,7 +375,7 @@ namespace Avalonia.Controls.Selection
             CommitOperation(update.Operation, raisePropertyChanged: false);
         }
 
-        protected override CollectionChangeState OnItemsAdded(int index, IList items)
+        protected override CollectionChangeState OnItemsAdded(int32 index, IList items)
         {
             var count = items.Count;
             var shifted = SelectedIndex >= index;
@@ -394,7 +394,7 @@ namespace Avalonia.Controls.Selection
             };
         }
 
-        private protected override CollectionChangeState OnItemsRemoved(int index, IList items)
+        private protected override CollectionChangeState OnItemsRemoved(int32 index, IList items)
         {
             var count = items.Count;
             var removedRange = new IndexRange(index, index + count - 1);
@@ -512,7 +512,7 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        private int GetFirstSelectedIndexFromRanges(List<IndexRange>? except = null)
+        private int32 GetFirstSelectedIndexFromRanges(List<IndexRange>? except = null)
         {
             if (RangesEnabled)
             {
@@ -534,8 +534,8 @@ namespace Avalonia.Controls.Selection
         }
 
         private void SelectRange(
-            int start,
-            int end,
+            int32 start,
+            int32 end,
             bool forceSelectedIndex,
             bool forceAnchorIndex)
         {
@@ -581,7 +581,7 @@ namespace Avalonia.Controls.Selection
         }
 
         [return: MaybeNull]
-        private T GetItemAt(int index)
+        private T GetItemAt(int32 index)
         {
             if (ItemsView is null || index < 0 || index >= ItemsView.Count)
             {
@@ -591,7 +591,7 @@ namespace Avalonia.Controls.Selection
             return ItemsView[index];
         }
 
-        private int CoerceIndex(int index)
+        private int32 CoerceIndex(int32 index)
         {
             index = Math.Max(index, -1);
 
@@ -603,9 +603,9 @@ namespace Avalonia.Controls.Selection
             return index;
         }
 
-        private IndexRange CoerceRange(int start, int end)
+        private IndexRange CoerceRange(int32 start, int32 end)
         {
-            var max = ItemsView is not null ? ItemsView.Count - 1 : int.MaxValue;
+            var max = ItemsView is not null ? ItemsView.Count - 1 : int32.MaxValue;
 
             if (start > max || (start < 0 && end < 0))
             {
@@ -799,11 +799,11 @@ namespace Avalonia.Controls.Selection
                 SelectedIndex = owner.SelectedIndex;
             }
 
-            public int UpdateCount { get; set; }
+            public int32 UpdateCount { get; set; }
             public bool IsSourceUpdate { get; set; }
             public bool SkipLostSelection { get; set; }
-            public int AnchorIndex { get; set; }
-            public int SelectedIndex { get; set; }
+            public int32 AnchorIndex { get; set; }
+            public int32 SelectedIndex { get; set; }
             public List<IndexRange>? SelectedRanges { get; set; }
             public List<IndexRange>? DeselectedRanges { get; set; }
             public IReadOnlyList<T>? DeselectedItems { get; set; }

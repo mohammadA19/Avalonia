@@ -11,7 +11,7 @@ namespace Avalonia.Rendering.Composition.Transport;
 /// <summary>
 /// The batch data is separated into 2 "streams":
 /// - objects: CLR reference types that are references to either server-side or common objects
-/// - structs: blittable types like int, Matrix, Color
+/// - structs: blittable types like int32, Matrix, Color
 /// Each "stream" consists of memory segments that are pooled 
 /// </summary>
 internal class BatchStreamData
@@ -23,7 +23,7 @@ internal class BatchStreamData
 public record struct BatchStreamSegment<TData>
 {
     public TData Data { get; set; }
-    public int ElementCount { get; set; }
+    public int32 ElementCount { get; set; }
 }
 
 
@@ -48,7 +48,7 @@ static unsafe class UnalignedMemoryHelper
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static unsafe void UnalignedMemcpy(byte* dst, byte* src, int count)
+    static unsafe void UnalignedMemcpy(byte* dst, byte* src, int32 count)
     {
         for (var c = 0; c < count; c++)
         {
@@ -140,7 +140,7 @@ internal class BatchStreamReader : IDisposable
 
     private BatchStreamSegment<object?[]?> _currentObjectSegment;
     private BatchStreamSegment<IntPtr> _currentDataSegment;
-    private int _memoryOffset, _objectOffset;
+    private int32 _memoryOffset, _objectOffset;
     
     public BatchStreamReader(BatchStreamData input, BatchStreamMemoryPool memoryPool, BatchStreamObjectPool<object?> objectPool)
     {

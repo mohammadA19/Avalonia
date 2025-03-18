@@ -91,14 +91,14 @@ namespace ControlCatalog.ViewModels
         public class Node
         {
             private ObservableCollection<Node>? _children;
-            private int _childIndex = 10;
+            private int32 _childIndex = 10;
 
             public Node()
             {
                 Header = "Item";
             }
 
-            public Node(Node parent, int index)
+            public Node(Node parent, int32 index)
             {
                 Parent = parent;
                 Header = parent.Header + ' ' + index;

@@ -8,32 +8,32 @@ namespace Avalonia.Win32
 {
     internal class OleDragSource : CallbackBase, IDropSource
     {
-        private const int DRAGDROP_S_USEDEFAULTCURSORS = 0x00040102;
-        private const int DRAGDROP_S_DROP = 0x00040100;
-        private const int DRAGDROP_S_CANCEL = 0x00040101;
+        private const int32 DRAGDROP_S_USEDEFAULTCURSORS = 0x00040102;
+        private const int32 DRAGDROP_S_DROP = 0x00040100;
+        private const int32 DRAGDROP_S_CANCEL = 0x00040101;
 
-        private static readonly int[] MOUSE_BUTTONS = new int[] {
-            (int)UnmanagedMethods.ModifierKeys.MK_LBUTTON,
-            (int)UnmanagedMethods.ModifierKeys.MK_MBUTTON,
-            (int)UnmanagedMethods.ModifierKeys.MK_RBUTTON
+        private static readonly int32[] MOUSE_BUTTONS = new int32[] {
+            (int32)UnmanagedMethods.ModifierKeys.MK_LBUTTON,
+            (int32)UnmanagedMethods.ModifierKeys.MK_MBUTTON,
+            (int32)UnmanagedMethods.ModifierKeys.MK_RBUTTON
         };
 
-        public int QueryContinueDrag(int fEscapePressed, int grfKeyState)
+        public int32 QueryContinueDrag(int32 fEscapePressed, int32 grfKeyState)
         {
             if (fEscapePressed != 0)
                 return DRAGDROP_S_CANCEL;
 
-            int pressedMouseButtons = MOUSE_BUTTONS.Where(mb => (grfKeyState & mb) == mb).Count();
+            int32 pressedMouseButtons = MOUSE_BUTTONS.Where(mb => (grfKeyState & mb) == mb).Count();
 
             if (pressedMouseButtons >= 2)
                 return DRAGDROP_S_CANCEL;
             if (pressedMouseButtons == 0)
                 return DRAGDROP_S_DROP;
 
-            return unchecked((int)UnmanagedMethods.HRESULT.S_OK);
+            return unchecked((int32)UnmanagedMethods.HRESULT.S_OK);
         }
 
-        public int GiveFeedback(DropEffect dwEffect)
+        public int32 GiveFeedback(DropEffect dwEffect)
         {
             return DRAGDROP_S_USEDEFAULTCURSORS;
         }

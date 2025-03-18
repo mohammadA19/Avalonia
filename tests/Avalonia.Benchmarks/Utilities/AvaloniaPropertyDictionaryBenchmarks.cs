@@ -9,8 +9,8 @@ namespace Avalonia.Benchmarks.Utilities;
 // TODO: Remove after review together with related benchmark code.
 internal sealed class AvaloniaPropertyValueStoreOld<TValue>
 {
-    // The last item in the list is always int.MaxValue.
-    private static readonly Entry[] s_emptyEntries = { new Entry { PropertyId = int.MaxValue, Value = default! } };
+    // The last item in the list is always int32.MaxValue.
+    private static readonly Entry[] s_emptyEntries = { new Entry { PropertyId = int32.MaxValue, Value = default! } };
 
     private Entry[] _entries;
 
@@ -19,15 +19,15 @@ internal sealed class AvaloniaPropertyValueStoreOld<TValue>
         _entries = s_emptyEntries;
     }
 
-    public int Count => _entries.Length - 1;
-    public TValue this[int index] => _entries[index].Value;
+    public int32 Count => _entries.Length - 1;
+    public TValue this[int32 index] => _entries[index].Value;
 
-    private (int, bool) TryFindEntry(int propertyId)
+    private (int32, bool) TryFindEntry(int32 propertyId)
     {
         if (_entries.Length <= 12)
         {
             // For small lists, we use an optimized linear search. Since the last item in the list
-            // is always int.MaxValue, we can skip a conditional branch in each iteration.
+            // is always int32.MaxValue, we can skip a conditional branch in each iteration.
             // By unrolling the loop, we can skip another unconditional branch in each iteration.
 
             if (_entries[0].PropertyId >= propertyId)
@@ -57,7 +57,7 @@ internal sealed class AvaloniaPropertyValueStoreOld<TValue>
         {
             var low = 0;
             var high = _entries.Length;
-            int id;
+            int32 id;
 
             while (high - low > 3)
             {
@@ -165,14 +165,14 @@ internal sealed class AvaloniaPropertyValueStoreOld<TValue>
 
     private struct Entry
     {
-        internal int PropertyId;
+        internal int32 PropertyId;
         internal TValue Value;
     }
 }
 
-internal class MockProperty : StyledProperty<int>
+internal class MockProperty : StyledProperty<int32>
 {
-    public MockProperty(string name) : base(name, typeof(object), typeof(object), new StyledPropertyMetadata<int>())
+    public MockProperty(string name) : base(name, typeof(object), typeof(object), new StyledPropertyMetadata<int32>())
     {
     }
 }
@@ -193,7 +193,7 @@ internal static class MockProperties
         Shuffle(ShuffledProperties, 42);
     }
 
-    private static void Shuffle<T>(T[] array, int seed)
+    private static void Shuffle<T>(T[] array, int32 seed)
     {
         var rng = new Random(seed);
 
@@ -212,7 +212,7 @@ internal static class MockProperties
 public class ValueStore_Lookup
 {
     [Params(2, 6, 10, 20, 30)]
-    public int PropertyCount;
+    public int32 PropertyCount;
 
     public AvaloniaProperty[] Properties => MockProperties.ShuffledProperties;
 
@@ -267,7 +267,7 @@ public class ValueStore_Lookup
 public class ValueStore_AddBenchmarks
 {
     [Params(2, 6, 10, 20, 30)]
-    public int PropertyCount;
+    public int32 PropertyCount;
 
     public AvaloniaProperty[] Properties => MockProperties.ShuffledProperties;
 
@@ -309,7 +309,7 @@ public class ValueStore_AddBenchmarks
 public class ValueStore_AddRemoveBenchmarks
 {
     [Params(2, 6, 10, 20, 30)]
-    public int PropertyCount;
+    public int32 PropertyCount;
 
     public AvaloniaProperty[] Properties => MockProperties.ShuffledProperties;
 
@@ -366,7 +366,7 @@ public class ValueStore_AddRemoveBenchmarks
 public class ValueStore_AddRemoveInterleavedBenchmarks
 {
     [Params(2, 6, 10, 20, 30)]
-    public int PropertyCount;
+    public int32 PropertyCount;
 
     public AvaloniaProperty[] Properties => MockProperties.ShuffledProperties;
 
@@ -412,7 +412,7 @@ public class ValueStore_AddRemoveInterleavedBenchmarks
 public class ValueStore_Enumeration
 {
     [Params(2, 6, 10, 20, 30)]
-    public int PropertyCount;
+    public int32 PropertyCount;
 
     public AvaloniaProperty[] Properties => MockProperties.ShuffledProperties;
 
@@ -436,7 +436,7 @@ public class ValueStore_Enumeration
     }
 
     [Benchmark]
-    public int Enumerate()
+    public int32 Enumerate()
     {
         var result = 0;
 
@@ -449,7 +449,7 @@ public class ValueStore_Enumeration
     }
 
     [Benchmark(Baseline = true)]
-    public int Enumerate_Old()
+    public int32 Enumerate_Old()
     {
         var result = 0;
 
@@ -462,7 +462,7 @@ public class ValueStore_Enumeration
     }
 
     [Benchmark]
-    public int Enumerate_Dict()
+    public int32 Enumerate_Dict()
     {
         var result = 0;
 
@@ -475,7 +475,7 @@ public class ValueStore_Enumeration
     }
 
     [Benchmark]
-    public int Enumerate_DictValues()
+    public int32 Enumerate_DictValues()
     {
         var result = 0;
 

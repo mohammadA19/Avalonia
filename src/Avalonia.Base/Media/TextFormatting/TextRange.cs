@@ -7,7 +7,7 @@ namespace Avalonia.Media.TextFormatting
     /// </summary>
     public readonly record struct TextRange
     {
-        public TextRange(int start, int length)
+        public TextRange(int32 start, int32 length)
         {
             Start = start;
             Length = length;
@@ -19,7 +19,7 @@ namespace Avalonia.Media.TextFormatting
         /// <value>
         /// The start.
         /// </value>
-        public int Start { get; }
+        public int32 Start { get; }
 
         /// <summary>
         /// Gets the length.
@@ -27,7 +27,7 @@ namespace Avalonia.Media.TextFormatting
         /// <value>
         /// The length.
         /// </value>
-        public int Length { get; }
+        public int32 Length { get; }
 
         /// <summary>
         /// Gets the end.
@@ -35,14 +35,14 @@ namespace Avalonia.Media.TextFormatting
         /// <value>
         /// The end.
         /// </value>
-        public int End => Start + Length - 1;
+        public int32 End => Start + Length - 1;
 
         /// <summary>
         /// Returns a specified number of contiguous elements from the start of the slice.
         /// </summary>
         /// <param name="length">The number of elements to return.</param>
         /// <returns>A <see cref="TextRange"/> that contains the specified number of elements from the start of this slice.</returns>
-        public TextRange Take(int length)
+        public TextRange Take(int32 length)
         {
             if (length > Length)
             {
@@ -57,7 +57,7 @@ namespace Avalonia.Media.TextFormatting
         /// </summary>
         /// <param name="length">The number of elements to skip before returning the remaining elements.</param>
         /// <returns>A <see cref="TextRange"/> that contains the elements that occur after the specified index in this slice.</returns>
-        public TextRange Skip(int length)
+        public TextRange Skip(int32 length)
         {
             if (length > Length)
             {

@@ -54,7 +54,7 @@ namespace Avalonia.Platform
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             return (Handle, HandleDescriptor).GetHashCode();
         }

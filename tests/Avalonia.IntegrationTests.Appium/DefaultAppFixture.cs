@@ -24,7 +24,7 @@ namespace Avalonia.IntegrationTests.Appium
                     options);
 
                 // https://github.com/microsoft/WinAppDriver/issues/1025
-                SetForegroundWindow(new IntPtr(int.Parse(
+                SetForegroundWindow(new IntPtr(int32.Parse(
                     Session.WindowHandles[0].Substring(2),
                     NumberStyles.AllowHexSpecifier)));
             }

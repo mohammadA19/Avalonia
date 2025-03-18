@@ -29,7 +29,7 @@ namespace Avalonia.Media
         /// <summary>
         ///     Gets the number of glyphs held by this glyph typeface. 
         /// </summary>
-        int GlyphCount { get; }
+        int32 GlyphCount { get; }
 
         /// <summary>
         ///     Gets the font metrics.
@@ -92,7 +92,7 @@ namespace Avalonia.Media
         /// <returns>
         ///     The advance.
         /// </returns>
-        int GetGlyphAdvance(ushort glyph);
+        int32 GetGlyphAdvance(ushort glyph);
 
         /// <summary>
         ///     Returns an array of glyph advances in design em size.
@@ -101,7 +101,7 @@ namespace Avalonia.Media
         /// <returns>
         ///     An array of glyph advances.
         /// </returns>
-        int[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs);
+        int32[] GetGlyphAdvances(ReadOnlySpan<ushort> glyphs);
 
         /// <summary>
         ///     Returns the contents of the table data for the specified tag.

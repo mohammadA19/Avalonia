@@ -5,9 +5,9 @@ namespace Avalonia.Input
 {
     public class PullGestureRecognizer : GestureRecognizer
     {
-        internal static int MinPullDetectionSize = 50;
+        internal static int32 MinPullDetectionSize = 50;
         private Point _initialPosition;
-        private int _gestureId;
+        private int32 _gestureId;
         private IPointer? _tracking;
         private bool _pullInProgress;
 

@@ -210,7 +210,7 @@ public partial class BindingExpressionTests
     {
         var data = new
         {
-            Foo = new Dictionary<string, int>
+            Foo = new Dictionary<string, int32>
             {
                 {"foo", 1 }
             }
@@ -233,7 +233,7 @@ public partial class BindingExpressionTests
     {
         var data = new
         {
-            Foo = new Dictionary<string, int>
+            Foo = new Dictionary<string, int32>
             {
                 {"foo", 1 }
             }

@@ -26,7 +26,7 @@ internal class NuiTouchHandler
             uint id;
             if (_knownTouches.Count > i)
             {
-                id = _knownTouches[(int)i];
+                id = _knownTouches[(int32)i];
             }
             else
             {

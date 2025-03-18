@@ -41,7 +41,7 @@ namespace Avalonia.Skia
             }
         }
 
-        public WriteableBitmapImpl(Stream stream, int decodeSize, bool horizontal, BitmapInterpolationMode interpolationMode)
+        public WriteableBitmapImpl(Stream stream, int32 decodeSize, bool horizontal, BitmapInterpolationMode interpolationMode)
         {
             using (var skStream = new SKManagedStream(stream))
             using (var skData = SKData.Create(skStream))
@@ -64,11 +64,11 @@ namespace Avalonia.Skia
 
                 if (horizontal)
                 {
-                    desired = new SKImageInfo(decodeSize, (int)(realScale * decodeSize));
+                    desired = new SKImageInfo(decodeSize, (int32)(realScale * decodeSize));
                 }
                 else
                 {
-                    desired = new SKImageInfo((int)(realScale * decodeSize), decodeSize);
+                    desired = new SKImageInfo((int32)(realScale * decodeSize), decodeSize);
                 }
 
                 if (bmp.Width != desired.Width || bmp.Height != desired.Height)
@@ -115,7 +115,7 @@ namespace Avalonia.Skia
         /// <inheritdoc />
         public PixelSize PixelSize { get; }
 
-        public int Version { get; private set; } = 1;
+        public int32 Version { get; private set; } = 1;
 
         /// <inheritdoc />
         public void Draw(DrawingContextImpl context, SKRect sourceRect, SKRect destRect, SKPaint paint)
@@ -149,7 +149,7 @@ namespace Avalonia.Skia
         }
 
         /// <inheritdoc />
-        public void Save(Stream stream, int? quality = null)
+        public void Save(Stream stream, int32? quality = null)
         {
             using (var image = GetSnapshot())
             {
@@ -158,7 +158,7 @@ namespace Avalonia.Skia
         }
 
         /// <inheritdoc />
-        public void Save(string fileName, int? quality = null)
+        public void Save(string fileName, int32? quality = null)
         {
             using (var image = GetSnapshot())
             {
@@ -231,7 +231,7 @@ namespace Avalonia.Skia
             public PixelSize Size => new PixelSize(_bitmap.Width, _bitmap.Height);
 
             /// <inheritdoc />
-            public int RowBytes => _bitmap.RowBytes;
+            public int32 RowBytes => _bitmap.RowBytes;
 
             /// <inheritdoc />
             public Vector Dpi => _parent.Dpi;

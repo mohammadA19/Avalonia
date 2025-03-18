@@ -5,9 +5,9 @@ namespace Avalonia.Android.Automation
 {
     public interface INodeInfoProvider
     {
-        int VirtualViewId { get; }
+        int32 VirtualViewId { get; }
 
-        bool PerformNodeAction(int action, Bundle? arguments);
+        bool PerformNodeAction(int32 action, Bundle? arguments);
 
         void PopulateNodeInfo(AccessibilityNodeInfoCompat nodeInfo);
     }

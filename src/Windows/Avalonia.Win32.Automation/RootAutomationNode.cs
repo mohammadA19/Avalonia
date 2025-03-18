@@ -36,7 +36,7 @@ namespace Avalonia.Win32.Automation
             if (WindowImpl is null)
                 return null;
 
-            var p = WindowImpl.PointToClient(new PixelPoint((int)x, (int)y));
+            var p = WindowImpl.PointToClient(new PixelPoint((int32)x, (int32)y));
             var found = InvokeSync(() => Peer.GetPeerFromPoint(p));
             var result = GetOrCreate(found) as IRawElementProviderFragment;
             return result;

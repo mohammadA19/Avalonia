@@ -81,12 +81,12 @@ namespace ControlCatalog.ViewModels
         }
 
 
-        private int _Duration = 500;
+        private int32 _Duration = 500;
 
         /// <summary>
         /// Gets or Sets the duration
         /// </summary>
-        public int Duration 
+        public int32 Duration 
         {
             get { return _Duration; }
             set 

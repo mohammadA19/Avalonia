@@ -36,7 +36,7 @@ internal class UnmanagedBlob : IDisposable
 #endif
     public static bool SuppressFinalizerWarning { get; set; }
 
-    public UnmanagedBlob(int size)
+    public UnmanagedBlob(int32 size)
     {
         try
         {
@@ -106,16 +106,16 @@ internal class UnmanagedBlob : IDisposable
     }
 
     public IntPtr Address => IsDisposed ? throw new ObjectDisposedException("UnmanagedBlob") : _address;
-    public int Size { get; private set; }
+    public int32 Size { get; private set; }
     public bool IsDisposed { get; private set; }
 
     [DllImport("libc")]
-    private static extern IntPtr mmap(IntPtr addr, IntPtr length, int prot, int flags, int fd, IntPtr offset);
+    private static extern IntPtr mmap(IntPtr addr, IntPtr length, int32 prot, int32 flags, int32 fd, IntPtr offset);
     [DllImport("libc")]
-    private static extern int munmap(IntPtr addr, IntPtr length);
+    private static extern int32 munmap(IntPtr addr, IntPtr length);
 
     // Could be replaced with https://github.com/dotnet/runtime/issues/40892 when it will be available.
-    private IntPtr Alloc(int size)
+    private IntPtr Alloc(int32 size)
     {
         if (!OperatingSystemEx.IsLinux())
         {
@@ -137,7 +137,7 @@ internal class UnmanagedBlob : IDisposable
         }
     }
 
-    private void Free(IntPtr ptr, int len)
+    private void Free(IntPtr ptr, int32 len)
     {
         if (!OperatingSystemEx.IsLinux())
         {

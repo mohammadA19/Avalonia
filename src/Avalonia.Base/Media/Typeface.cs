@@ -26,7 +26,7 @@ namespace Avalonia.Media
                 throw new ArgumentException("Font weight must be > 0.");
             }
             
-            if ((int)stretch < 1)
+            if ((int32)stretch < 1)
             {
                 throw new ArgumentException("Font stretch must be > 1.");
             }
@@ -115,14 +115,14 @@ namespace Avalonia.Media
                    Weight == other.Weight && Stretch == other.Stretch;
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
                 var hashCode = (FontFamily != null ? FontFamily.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (int)Style;
-                hashCode = (hashCode * 397) ^ (int)Weight;
-                hashCode = (hashCode * 397) ^ (int)Stretch;
+                hashCode = (hashCode * 397) ^ (int32)Style;
+                hashCode = (hashCode * 397) ^ (int32)Weight;
+                hashCode = (hashCode * 397) ^ (int32)Stretch;
                 return hashCode;
             }
         }

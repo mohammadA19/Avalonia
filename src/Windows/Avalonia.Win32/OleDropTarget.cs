@@ -49,7 +49,7 @@ namespace Avalonia.Win32
             return result;
         }
         
-        private static RawInputModifiers ConvertKeyState(int grfKeyState)
+        private static RawInputModifiers ConvertKeyState(int32 grfKeyState)
         {
             var modifiers = RawInputModifiers.None;
             var state = (UnmanagedMethods.ModifierKeys)grfKeyState;
@@ -69,12 +69,12 @@ namespace Avalonia.Win32
             return modifiers;
         }
 
-        unsafe void Win32Com.IDropTarget.DragEnter(Win32Com.IDataObject pDataObj, int grfKeyState, UnmanagedMethods.POINT pt, DropEffect* pdwEffect)
+        unsafe void Win32Com.IDropTarget.DragEnter(Win32Com.IDataObject pDataObj, int32 grfKeyState, UnmanagedMethods.POINT pt, DropEffect* pdwEffect)
         {
             var dispatch = _topLevel.Input;
             if (dispatch == null)
             {
-                *pdwEffect= (int)DropEffect.None;
+                *pdwEffect= (int32)DropEffect.None;
                 return;
             }
 
@@ -93,12 +93,12 @@ namespace Avalonia.Win32
             *pdwEffect = ConvertDropEffect(args.Effects);
         }
 
-        unsafe void Win32Com.IDropTarget.DragOver(int grfKeyState, UnmanagedMethods.POINT pt, DropEffect* pdwEffect)
+        unsafe void Win32Com.IDropTarget.DragOver(int32 grfKeyState, UnmanagedMethods.POINT pt, DropEffect* pdwEffect)
         {
             var dispatch = _topLevel.Input;
             if (dispatch == null || _currentDrag is null)
             {
-                *pdwEffect = (int)DropEffect.None;
+                *pdwEffect = (int32)DropEffect.None;
                 return;
             }
             
@@ -141,14 +141,14 @@ namespace Avalonia.Win32
             }
         }
 
-        unsafe void Win32Com.IDropTarget.Drop(Win32Com.IDataObject pDataObj, int grfKeyState, UnmanagedMethods.POINT pt, DropEffect* pdwEffect)
+        unsafe void Win32Com.IDropTarget.Drop(Win32Com.IDataObject pDataObj, int32 grfKeyState, UnmanagedMethods.POINT pt, DropEffect* pdwEffect)
         {
             try
             {
                 var dispatch = _topLevel.Input;
                 if (dispatch == null)
                 {
-                    *pdwEffect = (int)DropEffect.None;
+                    *pdwEffect = (int32)DropEffect.None;
                     return;
                 }
 

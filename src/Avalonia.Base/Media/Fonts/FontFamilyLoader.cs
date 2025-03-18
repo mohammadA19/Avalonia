@@ -134,7 +134,7 @@ namespace Avalonia.Media.Fonts
             return path;
         }
 
-        private static ReadOnlySpan<char> GetFileName(ReadOnlySpan<char> path, char directorySeparator, int extensionLength)
+        private static ReadOnlySpan<char> GetFileName(ReadOnlySpan<char> path, char directorySeparator, int32 extensionLength)
         {
             for (var i = path.Length - extensionLength - 1; i >= 0; --i)
             {

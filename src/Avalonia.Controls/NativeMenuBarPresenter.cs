@@ -10,7 +10,7 @@ internal class NativeMenuBarPresenter : Menu
 {
     protected override Type StyleKeyOverride => typeof(Menu);
 
-    internal static Control? CreateContainerForNativeItem(object? item, int index, object? recycleKey)
+    internal static Control? CreateContainerForNativeItem(object? item, int32 index, object? recycleKey)
     {
         if (item is NativeMenuItemSeparator)
         {
@@ -59,7 +59,7 @@ internal class NativeMenuBarPresenter : Menu
         }
     }
 
-    protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+    protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
     {
         return CreateContainerForNativeItem(item, index, recycleKey)
                ?? base.CreateContainerForItemOverride(item, index, recycleKey);
@@ -69,7 +69,7 @@ internal class NativeMenuBarPresenter : Menu
     {
         protected override Type StyleKeyOverride => typeof(MenuItem);
 
-        protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+        protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
         {
             return CreateContainerForNativeItem(item, index, recycleKey)
                    ?? base.CreateContainerForItemOverride(item, index, recycleKey);

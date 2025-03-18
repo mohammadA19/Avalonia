@@ -37,16 +37,16 @@ internal struct ComVariant : IDisposable
     {
         [FieldOffset(0)] public sbyte _i1;
         [FieldOffset(0)] public short _i2;
-        [FieldOffset(0)] public int _i4;
+        [FieldOffset(0)] public int32 _i4;
         [FieldOffset(0)] public long _i8;
         [FieldOffset(0)] public byte _ui1;
         [FieldOffset(0)] public ushort _ui2;
         [FieldOffset(0)] public uint _ui4;
         [FieldOffset(0)] public ulong _ui8;
-        [FieldOffset(0)] public int _int;
+        [FieldOffset(0)] public int32 _int;
         [FieldOffset(0)] public uint _uint;
         [FieldOffset(0)] public short _bool;
-        [FieldOffset(0)] public int _error;
+        [FieldOffset(0)] public int32 _error;
         [FieldOffset(0)] public float _r4;
         [FieldOffset(0)] public double _r8;
         [FieldOffset(0)] public long _cy;
@@ -120,10 +120,10 @@ internal struct ComVariant : IDisposable
             variant.VarType = VarEnum.VT_I2;
             variant._typeUnion._unionTypes._i2 = (short)value;
         }
-        else if (value is int)
+        else if (value is int32)
         {
             variant.VarType = VarEnum.VT_I4;
-            variant._typeUnion._unionTypes._i4 = (int)value;
+            variant._typeUnion._unionTypes._i4 = (int32)value;
         }
         else if (value is float)
         {
@@ -248,9 +248,9 @@ internal struct ComVariant : IDisposable
                 // integer
                 VarEnum.VT_I1 => SafeArrayRef.ToArray<sbyte>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_I2 => SafeArrayRef.ToArray<short>(_typeUnion._unionTypes.parray),
-                VarEnum.VT_I4 => SafeArrayRef.ToArray<int>(_typeUnion._unionTypes.parray),
+                VarEnum.VT_I4 => SafeArrayRef.ToArray<int32>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_I8 => SafeArrayRef.ToArray<long>(_typeUnion._unionTypes.parray),
-                VarEnum.VT_INT => SafeArrayRef.ToArray<int>(_typeUnion._unionTypes.parray),
+                VarEnum.VT_INT => SafeArrayRef.ToArray<int32>(_typeUnion._unionTypes.parray),
                 // unsigned integer
                 VarEnum.VT_UI1 => SafeArrayRef.ToArray<byte>(_typeUnion._unionTypes.parray),
                 VarEnum.VT_UI2 => SafeArrayRef.ToArray<ushort>(_typeUnion._unionTypes.parray),

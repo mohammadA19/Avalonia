@@ -211,7 +211,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions.Transformers
                 public override bool Equals(object? obj)
                     => Equals(obj as XamlIlDirectCallPropertySetter);
 
-                public override int GetHashCode() 
+                public override int32 GetHashCode() 
                     => (_method.GetHashCode() * 397) ^ _type.GetHashCode();
             }
         }

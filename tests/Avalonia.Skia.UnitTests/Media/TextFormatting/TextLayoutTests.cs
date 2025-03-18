@@ -21,7 +21,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
         [InlineData("01234\r01234\r", 3)]
         [InlineData("01234\r01234", 2)]
         [Theory]
-        public void Should_Break_Lines(string text, int numberOfLines)
+        public void Should_Break_Lines(string text, int32 numberOfLines)
         {
             using (Start())
             {
@@ -74,7 +74,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
         [InlineData(27)]
         [InlineData(22)]
         [Theory]
-        public void Should_Wrap_And_Apply_Style(int length)
+        public void Should_Wrap_And_Apply_Style(int32 length)
         {
             using (Start())
             {
@@ -469,10 +469,10 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
         }
 
         [Theory]
-        [InlineData("☝🏿", new int[] { 0 })]
-        [InlineData("☝🏿 ab", new int[] { 0, 3, 4, 5 })]
-        [InlineData("ab ☝🏿", new int[] { 0, 1, 2, 3 })]
-        public void Should_Create_Valid_Clusters_For_Text(string text, int[] clusters)
+        [InlineData("☝🏿", new int32[] { 0 })]
+        [InlineData("☝🏿 ab", new int32[] { 0, 3, 4, 5 })]
+        [InlineData("ab ☝🏿", new int32[] { 0, 1, 2, 3 })]
+        public void Should_Create_Valid_Clusters_For_Text(string text, int32[] clusters)
         {
             using (Start())
             {
@@ -507,7 +507,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
         [InlineData("abcde\u000B", 6)] // Vertical Tab
         [InlineData("abcde\u000C", 6)] // Form Feed
         [InlineData("abcde\u000D", 6)] // Carriage Return
-        public void Should_Break_With_BreakChar(string text, int expectedLength)
+        public void Should_Break_With_BreakChar(string text, int32 expectedLength)
         {
             using (Start())
             {
@@ -605,7 +605,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
         [InlineData("0123456789\r\n0123456789\r\n0123456789", 1, 1)]
         [InlineData("0123456789\r\n0123456789\r\n0123456789", 4, 3)]
         [Theory]
-        public void Should_Not_Exceed_MaxLines(string text, int maxLines, int expectedLines)
+        public void Should_Not_Exceed_MaxLines(string text, int32 maxLines, int32 expectedLines)
         {
             using (Start())
             {
@@ -704,8 +704,8 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
         {
             using (Start())
             {
-                const int start = 0;
-                const int length = 10;
+                const int32 start = 0;
+                const int32 length = 10;
 
                 var layout = new TextLayout(
                     RightToLeftText,
@@ -1005,7 +1005,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
 
                     var cluster = text.Length;
 
-                    for (int j = 0; j < clusters.Count - 1; j++)
+                    for (int32 j = 0; j < clusters.Count - 1; j++)
                     {                     
                         var glyphAdvance = glyphAdvances[j];
 
@@ -1052,7 +1052,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
         [InlineData("שנב🧐שנב", 2, 4, FlowDirection.LeftToRight, "11.268,38.208")]
         [InlineData("שנב🧐שנב", 2, 4, FlowDirection.RightToLeft, "11.268,38.208")]
         [Theory]
-        public void Should_HitTestTextRangeBetweenRuns(string text, int start, int length, 
+        public void Should_HitTestTextRangeBetweenRuns(string text, int32 start, int32 length, 
             FlowDirection flowDirection, string expected)
         {
             using (Start())
@@ -1077,7 +1077,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
                 var endX = textLayout.TextLines[0].GetDistanceFromCharacterHit(new CharacterHit(2));
                 var startX = textLayout.TextLines[0].GetDistanceFromCharacterHit(new CharacterHit(5, 1));
 
-                for (int i = 0; i < expectedRects.Length; i++)
+                for (int32 i = 0; i < expectedRects.Length; i++)
                 {
                     var expectedRect = expectedRects[i];
 

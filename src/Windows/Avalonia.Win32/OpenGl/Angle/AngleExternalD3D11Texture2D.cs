@@ -37,7 +37,7 @@ internal class AngleExternalMemoryD3D11Texture2D : IGlExternalImageTexture
         _eglSurface = _context.Display.CreatePBufferFromClientBuffer(EGL_D3D_TEXTURE_ANGLE, texture2D.GetNativeIntPtr(), attrs);
         
         var gl = _context.GlInterface;
-        int temp = 0;
+        int32 temp = 0;
         gl.GenTextures(1, &temp);
         TextureId = temp;
         gl.BindTexture(GL_TEXTURE_2D, TextureId);
@@ -63,11 +63,11 @@ internal class AngleExternalMemoryD3D11Texture2D : IGlExternalImageTexture
         _mutex = null;
     }
 
-    public void AcquireKeyedMutex(uint key) => Mutex.AcquireSync(key, int.MaxValue);
+    public void AcquireKeyedMutex(uint key) => Mutex.AcquireSync(key, int32.MaxValue);
     public void ReleaseKeyedMutex(uint key) => Mutex.ReleaseSync(key);
 
-    public int TextureId { get; private set; }
-    public int InternalFormat { get; }
+    public int32 TextureId { get; private set; }
+    public int32 InternalFormat { get; }
     public PlatformGraphicsExternalImageProperties Properties { get; }
 }
 
@@ -86,7 +86,7 @@ internal class AngleExternalMemoryD3D11ExportedTexture2D : AngleExternalMemoryD3
         : this(context, texture2D, GetHandle(texture2D),
             new PlatformGraphicsExternalImageProperties
             {
-                Width = (int)desc.Width, Height = (int)desc.Height, Format = format
+                Width = (int32)desc.Width, Height = (int32)desc.Height, Format = format
             })
     {
 

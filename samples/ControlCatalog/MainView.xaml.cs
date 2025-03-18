@@ -96,7 +96,7 @@ namespace ControlCatalog
 
             var decorations = this.Get<ComboBox>("Decorations");
             if (VisualRoot is Window window)
-                decorations.SelectedIndex = (int)window.SystemDecorations;
+                decorations.SelectedIndex = (int32)window.SystemDecorations;
 
             var insets = TopLevel.GetTopLevel(this)!.InsetsManager;
             if (insets != null)

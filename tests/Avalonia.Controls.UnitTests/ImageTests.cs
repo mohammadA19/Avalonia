@@ -164,7 +164,7 @@ namespace Avalonia.Controls.UnitTests
             Assert.Equal(new Size(25, 100), target.Bounds.Size);
         }
 
-        private static IBitmap CreateBitmap(int width, int height)
+        private static IBitmap CreateBitmap(int32 width, int32 height)
         {
             return Mock.Of<IBitmap>(x => x.Size == new Size(width, height));
         }

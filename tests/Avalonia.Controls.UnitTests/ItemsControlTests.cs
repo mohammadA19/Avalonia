@@ -596,7 +596,7 @@ namespace Avalonia.Controls.UnitTests
             using var app = Start();
             var target = CreateTarget(itemsSource: new[] { 1, 2, 3 });
 
-            target.ItemsSource = new int[0];
+            target.ItemsSource = new int32[0];
 
             Assert.Contains(":empty", target.Classes);
         }
@@ -614,7 +614,7 @@ namespace Avalonia.Controls.UnitTests
         public void Item_Count_Should_Be_Set_When_Items_Changed()
         {
             using var app = Start();
-            var items = new ObservableCollection<int>() { 1, 2, 3 };
+            var items = new ObservableCollection<int32>() { 1, 2, 3 };
             var target = CreateTarget(items: new[] { 1, 2, 3 });
 
             target.Items.Add(4);
@@ -630,7 +630,7 @@ namespace Avalonia.Controls.UnitTests
         public void Item_Count_Should_Be_Set_When_ItemsSource_Items_Changed()
         {
             using var app = Start();
-            var items = new ObservableCollection<int>() { 1, 2, 3 };
+            var items = new ObservableCollection<int32>() { 1, 2, 3 };
             var target = CreateTarget(itemsSource: items);
 
             items.Add(4);
@@ -646,7 +646,7 @@ namespace Avalonia.Controls.UnitTests
         public void Empty_Class_Should_Be_Set_When_Items_Collection_Cleared()
         {
             using var app = Start();
-            var items = new ObservableCollection<int>() { 1, 2, 3 };
+            var items = new ObservableCollection<int32>() { 1, 2, 3 };
             var target = CreateTarget(itemsSource: items);
 
             items.Clear();
@@ -658,7 +658,7 @@ namespace Avalonia.Controls.UnitTests
         public void Empty_Class_Should_Not_Be_Set_When_ItemsSource_Collection_Count_Increases()
         {
             using var app = Start();
-            var items = new ObservableCollection<int>() { };
+            var items = new ObservableCollection<int32>() { };
             var target = CreateTarget(itemsSource: items);
 
             items.Add(1);
@@ -670,7 +670,7 @@ namespace Avalonia.Controls.UnitTests
         public void Single_Item_Class_Should_Be_Set_When_ItemsSource_Collection_Count_Increases_To_One()
         {
             using var app = Start();
-            var items = new ObservableCollection<int>() { };
+            var items = new ObservableCollection<int32>() { };
             var target = CreateTarget(itemsSource: items);
 
             items.Add(1);
@@ -682,7 +682,7 @@ namespace Avalonia.Controls.UnitTests
         public void Empty_Class_Should_Not_Be_Set_When_ItemsSource_Collection_Cleared()
         {
             using var app = Start();
-            var items = new ObservableCollection<int>() { 1, 2, 3 };
+            var items = new ObservableCollection<int32>() { 1, 2, 3 };
             var target = CreateTarget(itemsSource: items);
 
             items.Clear();
@@ -694,7 +694,7 @@ namespace Avalonia.Controls.UnitTests
         public void Single_Item_Class_Should_Not_Be_Set_When_Items_Collection_Count_Increases_Beyond_One()
         {
             using var app = Start();
-            var items = new ObservableCollection<int>() { 1 };
+            var items = new ObservableCollection<int32>() { 1 };
             var target = CreateTarget(itemsSource: items);
 
             items.Add(2);
@@ -1219,12 +1219,12 @@ namespace Avalonia.Controls.UnitTests
             (c.GetVisualRoot() as ILayoutRoot)?.LayoutManager.ExecuteLayoutPass();
         }
 
-        private static ContentPresenter GetContainer(ItemsControl target, int index = 0)
+        private static ContentPresenter GetContainer(ItemsControl target, int32 index = 0)
         {
             return Assert.IsType<ContentPresenter>(target.GetRealizedContainers().ElementAt(index));
         }
 
-        private static T GetContainer<T>(ItemsControl target, int index = 0)
+        private static T GetContainer<T>(ItemsControl target, int32 index = 0)
         {
             return Assert.IsType<T>(target.GetRealizedContainers().ElementAt(index));
         }
@@ -1246,12 +1246,12 @@ namespace Avalonia.Controls.UnitTests
         {
             protected override Type StyleKeyOverride => typeof(ItemsControl);
 
-            protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+            protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
             {
                 return new ContainerControl();
             }
 
-            protected internal override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
+            protected internal override bool NeedsContainerOverride(object? item, int32 index, out object? recycleKey)
             {
                 return NeedsContainer<ContainerControl>(item, out recycleKey);
             }

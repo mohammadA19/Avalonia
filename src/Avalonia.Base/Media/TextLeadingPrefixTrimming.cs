@@ -5,9 +5,9 @@ namespace Avalonia.Media
     public sealed class TextLeadingPrefixTrimming : TextTrimming
     {
         private readonly string _ellipsis;
-        private readonly int _prefixLength;
+        private readonly int32 _prefixLength;
 
-        public TextLeadingPrefixTrimming(string ellipsis, int prefixLength)
+        public TextLeadingPrefixTrimming(string ellipsis, int32 prefixLength)
         {
             _prefixLength = prefixLength;
             _ellipsis = ellipsis;

@@ -9,7 +9,7 @@ namespace Avalonia.Media
     {
         private readonly BoxShadow _first;
         private readonly BoxShadow[]? _list;
-        public int Count { get; }
+        public int32 Count { get; }
         
         public BoxShadows(BoxShadow shadow)
         {
@@ -25,7 +25,7 @@ namespace Avalonia.Media
             Count = 1 + (rest?.Length ?? 0);
         }
 
-        public BoxShadow this[int c]
+        public BoxShadow this[int32 c]
         {
             get
             {
@@ -60,7 +60,7 @@ namespace Avalonia.Media
         public struct BoxShadowsEnumerator
 #pragma warning restore CA1815 // Override equals and operator equals on value types
         {
-            private int _index;
+            private int32 _index;
             private readonly BoxShadows _shadows;
 
             public BoxShadowsEnumerator(BoxShadows shadows)
@@ -135,11 +135,11 @@ namespace Avalonia.Media
             return obj is BoxShadows other && Equals(other);
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
-                int hashCode = 0;
+                int32 hashCode = 0;
                 foreach (var s in this)
                     hashCode = (hashCode * 397) ^ s.GetHashCode();
                 return hashCode;

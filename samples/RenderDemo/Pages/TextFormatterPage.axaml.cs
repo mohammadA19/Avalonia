@@ -78,7 +78,7 @@ namespace RenderDemo.Pages
                 _defaultProperties = defaultProperties;
             }
             
-            public TextRun GetTextRun(int textSourceIndex)
+            public TextRun GetTextRun(int32 textSourceIndex)
             {
                 if (textSourceIndex >= _text.Length * 2 + TextRun.DefaultTextSourceLength)
                 {

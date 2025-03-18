@@ -12,7 +12,7 @@ namespace Avalonia.Remote.Protocol
         
         private Queue<SendOperation> _sendQueue = new Queue<SendOperation>();
         private object _lock =new object();
-        private TaskCompletionSource<int> _signal;
+        private TaskCompletionSource<int32> _signal;
         private bool _workerIsAlive;
         public TransportConnectionWrapper(IAvaloniaRemoteTransportConnection conn)
         {
@@ -27,7 +27,7 @@ namespace Avalonia.Remote.Protocol
         class SendOperation
         {
             public object Message { get; set; }
-            public TaskCompletionSource<int> Tcs { get; set; }
+            public TaskCompletionSource<int32> Tcs { get; set; }
         }
         
         public void Dispose() => _conn.Dispose();
@@ -44,7 +44,7 @@ namespace Avalonia.Remote.Protocol
                 }
                 if (wi == null)
                 {
-                    var signal = new TaskCompletionSource<int>();
+                    var signal = new TaskCompletionSource<int32>();
                     lock (_lock)
                         _signal = signal;
                     await signal.Task.ConfigureAwait(false);
@@ -64,7 +64,7 @@ namespace Avalonia.Remote.Protocol
         
         public Task Send(object data)
         {
-            var tcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var tcs = new TaskCompletionSource<int32>(TaskCreationOptions.RunContinuationsAsynchronously);
             lock (_lock)
             {
                 if (!_workerIsAlive)

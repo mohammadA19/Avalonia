@@ -150,7 +150,7 @@ public partial class BindingExpressionTests
     public void Indei_Validation_Subscribes_And_Unsubscribes()
     {
         var data = new IndeiViewModel { MustBePositive = 5 };
-        var (target, expression) = CreateTargetAndExpression<IndeiViewModel, int>(
+        var (target, expression) = CreateTargetAndExpression<IndeiViewModel, int32>(
             o => o.MustBePositive,
             enableDataValidation: true,
             mode: BindingMode.TwoWay,
@@ -307,9 +307,9 @@ public partial class BindingExpressionTests
 
     public class ExceptionViewModel : NotifyingBase
     {
-        private int _mustBePositive;
+        private int32 _mustBePositive;
 
-        public int MustBePositive
+        public int32 MustBePositive
         {
             get { return _mustBePositive; }
             set
@@ -327,10 +327,10 @@ public partial class BindingExpressionTests
 
     private class IndeiViewModel : IndeiBase
     {
-        private int _mustBePositive;
+        private int32 _mustBePositive;
         private Dictionary<string, IList<string>> _errors = new Dictionary<string, IList<string>>();
 
-        public int MustBePositive
+        public int32 MustBePositive
         {
             get { return _mustBePositive; }
             set

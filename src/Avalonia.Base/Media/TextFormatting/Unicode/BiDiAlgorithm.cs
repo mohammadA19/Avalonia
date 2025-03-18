@@ -46,7 +46,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <summary>
         /// Paired bracket values as provided by caller
         /// </summary>
-        private ArraySlice<int> _pairedBracketValues;
+        private ArraySlice<int32> _pairedBracketValues;
 
         /// <summary>
         /// Try if the incoming data is known to contain brackets
@@ -70,7 +70,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// The forward mapping maps the start index to the end index.
         /// The reverse mapping maps the end index to the start index.
         /// </remarks>
-        private readonly BidiDictionary<int, int> _isolatePairs = new();
+        private readonly BidiDictionary<int32, int32> _isolatePairs = new();
 
         /// <summary>
         /// The working BiDi classes
@@ -106,7 +106,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <summary>
         /// Mapping used to virtually remove characters for rule X9
         /// </summary>
-        private ArrayBuilder<int> _x9Map;
+        private ArrayBuilder<int32> _x9Map;
 
         /// <summary>
         /// Re-usable list of level runs
@@ -117,17 +117,17 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// Mapping for the current isolating sequence, built
         /// by joining level runs from the x9 map.
         /// </summary>
-        private ArrayBuilder<int> _isolatedRunMapping;
+        private ArrayBuilder<int32> _isolatedRunMapping;
 
         /// <summary>
         /// A stack of pending isolate openings used by FindIsolatePairs()
         /// </summary>
-        private readonly Stack<int> _pendingIsolateOpenings = new();
+        private readonly Stack<int32> _pendingIsolateOpenings = new();
 
         /// <summary>
         /// The level of the isolating run currently being processed
         /// </summary>
-        private int _runLevel;
+        private int32 _runLevel;
 
         /// <summary>
         /// The direction of the isolating run currently being processed
@@ -137,7 +137,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <summary>
         /// The length of the isolating run currently being processed
         /// </summary>
-        private int _runLength;
+        private int32 _runLength;
 
         /// <summary>
         /// A mapped slice of the resolved types for the isolating run currently
@@ -167,18 +167,18 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// A mapped slice of the paired bracket values of the isolating
         /// run currently being processed
         /// </summary>
-        private MappedArraySlice<int> _runPairedBracketValues;
+        private MappedArraySlice<int32> _runPairedBracketValues;
 
         /// <summary>
         /// Maximum pairing depth for paired brackets
         /// </summary>
-        private const int MaxPairedBracketDepth = 63;
+        private const int32 MaxPairedBracketDepth = 63;
 
         /// <summary>
         /// Reusable list of pending opening brackets used by the
         /// LocatePairedBrackets method
         /// </summary>
-        private readonly List<int> _pendingOpeningBrackets = new();
+        private readonly List<int32> _pendingOpeningBrackets = new();
 
         /// <summary>
         /// Resolved list of paired brackets
@@ -200,7 +200,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <summary>
         /// Gets the resolved paragraph embedding level
         /// </summary>
-        public int ResolvedParagraphEmbeddingLevel => _paragraphEmbeddingLevel;
+        public int32 ResolvedParagraphEmbeddingLevel => _paragraphEmbeddingLevel;
 
         /// <summary>
         /// Process data from a BiDiData instance
@@ -223,7 +223,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         public void Process(
             ArraySlice<BidiClass> types,
             ArraySlice<BidiPairedBracketType> pairedBracketTypes,
-            ArraySlice<int> pairedBracketValues,
+            ArraySlice<int32> pairedBracketValues,
             sbyte paragraphEmbeddingLevel,
             bool? hasBrackets,
             bool? hasEmbeddings,
@@ -347,11 +347,11 @@ namespace Avalonia.Media.TextFormatting.Unicode
         private static bool IsIsolateStart(BidiClass type)
         {
             const uint mask =
-                (1U << (int)BidiClass.LeftToRightIsolate) |
-                (1U << (int)BidiClass.RightToLeftIsolate) |
-                (1U << (int)BidiClass.FirstStrongIsolate);
+                (1U << (int32)BidiClass.LeftToRightIsolate) |
+                (1U << (int32)BidiClass.RightToLeftIsolate) |
+                (1U << (int32)BidiClass.FirstStrongIsolate);
 
-            return ((1U << (int)type) & mask) != 0U;
+            return ((1U << (int32)type) & mask) != 0U;
         }
 
         /// <summary>
@@ -422,7 +422,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             var validIsolateCount = 0;
 
             // Constants
-            const int maxStackDepth = 125;
+            const int32 maxStackDepth = 125;
 
             // Rule X1 - setup initial state
             _statusStack.Clear();
@@ -666,7 +666,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             }
             else
             {
-                for (int i = 0, count = _originalClasses.Length; i < count; i++)
+                for (int32 i = 0, count = _originalClasses.Length; i < count; i++)
                 {
                     _x9Map[i] = i;
                 }
@@ -679,7 +679,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="index">Index in the x9 removal map</param>
         /// <returns>Index to the original data</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private int MapX9(int index) => _x9Map[index];
+        private int32 MapX9(int32 index) => _x9Map[index];
 
         /// <summary>
         /// Add a new level run
@@ -691,7 +691,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="start">The index of the start of the run (in x9 removed units)</param>
         /// <param name="length">The length of the run (in x9 removed units)</param>
         /// <param name="level">The level of the run</param>
-        private void AddLevelRun(int start, int length, int level)
+        private void AddLevelRun(int32 start, int32 length, int32 level)
         {
             // Get original indices to first and last character in this run
             var firstCharIndex = MapX9(start);
@@ -710,7 +710,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
 
             // Work out eos
             var lastType = _workingClasses[lastCharIndex];
-            int nextLevel;
+            int32 nextLevel;
 
             if (IsIsolateStart(lastType))
             {
@@ -744,7 +744,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             
             for (var i = 0; i < _x9Map.Length; ++i)
             {
-                int level = _resolvedLevels[MapX9(i)];
+                int32 level = _resolvedLevels[MapX9(i)];
 
                 if (level == currentLevel)
                 {
@@ -772,7 +772,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// </summary>
         /// <param name="index">The index into the original (unmapped) data</param>
         /// <returns>The index of the run that starts at that index</returns>
-        private int FindRunForIndex(int index)
+        private int32 FindRunForIndex(int32 index)
         {
             for (var i = 0; i < _levelRuns.Count; i++)
             {
@@ -853,7 +853,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// Process a single isolated run sequence, where the character sequence
         /// mapping is currently held in _isolatedRunMapping.
         /// </summary>
-        private void ProcessIsolatedRunSequence(BidiClass sos, BidiClass eos, int runLevel)
+        private void ProcessIsolatedRunSequence(BidiClass sos, BidiClass eos, int32 runLevel)
         {
             // Create mappings onto the underlying data
             var isolatedRunMapping = _isolatedRunMapping.AsSlice();
@@ -863,7 +863,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             if (_hasBrackets)
             {
                 _runBiDiPairedBracketTypes = new MappedArraySlice<BidiPairedBracketType>(_pairedBracketTypes, isolatedRunMapping);
-                _runPairedBracketValues = new MappedArraySlice<int>(_pairedBracketValues, isolatedRunMapping);
+                _runPairedBracketValues = new MappedArraySlice<int32>(_pairedBracketValues, isolatedRunMapping);
             }
 
             _runLevel = runLevel;
@@ -872,22 +872,22 @@ namespace Avalonia.Media.TextFormatting.Unicode
 
             // Rule W1
             // Also, set hasXX flags
-            int i;
+            int32 i;
             var previousClass = sos;
             
             const uint isolateMask =
-                (1U << (int)BidiClass.LeftToRightIsolate) |
-                (1U << (int)BidiClass.RightToLeftIsolate) |
-                (1U << (int)BidiClass.FirstStrongIsolate) |
-                (1U << (int)BidiClass.PopDirectionalIsolate);
+                (1U << (int32)BidiClass.LeftToRightIsolate) |
+                (1U << (int32)BidiClass.RightToLeftIsolate) |
+                (1U << (int32)BidiClass.FirstStrongIsolate) |
+                (1U << (int32)BidiClass.PopDirectionalIsolate);
 
             const uint wRulesMask =
-                (1U << (int)BidiClass.EuropeanNumber) |
-                (1U << (int)BidiClass.ArabicLetter) |
-                (1U << (int)BidiClass.EuropeanSeparator) |
-                (1U << (int)BidiClass.CommonSeparator) |
-                (1U << (int)BidiClass.ArabicNumber) |
-                (1U << (int)BidiClass.EuropeanTerminator);
+                (1U << (int32)BidiClass.EuropeanNumber) |
+                (1U << (int32)BidiClass.ArabicLetter) |
+                (1U << (int32)BidiClass.EuropeanSeparator) |
+                (1U << (int32)BidiClass.CommonSeparator) |
+                (1U << (int32)BidiClass.ArabicNumber) |
+                (1U << (int32)BidiClass.EuropeanTerminator);
 
             uint wRules = 0;
 
@@ -901,7 +901,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 }
                 else
                 {
-                    var classBit = 1U << (int)resolvedClass;
+                    var classBit = 1U << (int32)resolvedClass;
                     if ((classBit & isolateMask) != 0U)
                     {
                         previousClass = BidiClass.OtherNeutral;
@@ -916,12 +916,12 @@ namespace Avalonia.Media.TextFormatting.Unicode
 
             // By tracking the types of characters known to be in the current run, we can
             // skip some of the rules that we know won't apply.
-            var hasEN = (wRules & (1U << (int)BidiClass.EuropeanNumber)) != 0U;
-            var hasAL = (wRules & (1U << (int)BidiClass.ArabicLetter)) != 0U;
-            var hasES = (wRules & (1U << (int)BidiClass.EuropeanSeparator)) != 0U;
-            var hasCS = (wRules & (1U << (int)BidiClass.CommonSeparator)) != 0U;
-            var hasAN = (wRules & (1U << (int)BidiClass.ArabicNumber)) != 0U;
-            var hasET = (wRules & (1U << (int)BidiClass.EuropeanTerminator)) != 0U;
+            var hasEN = (wRules & (1U << (int32)BidiClass.EuropeanNumber)) != 0U;
+            var hasAL = (wRules & (1U << (int32)BidiClass.ArabicLetter)) != 0U;
+            var hasES = (wRules & (1U << (int32)BidiClass.EuropeanSeparator)) != 0U;
+            var hasCS = (wRules & (1U << (int32)BidiClass.CommonSeparator)) != 0U;
+            var hasAN = (wRules & (1U << (int32)BidiClass.ArabicNumber)) != 0U;
+            var hasET = (wRules & (1U << (int32)BidiClass.EuropeanTerminator)) != 0U;
 
             // Rule W2
             if (hasEN)
@@ -1095,7 +1095,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             // Rule N0 - process bracket pairs
             if (_hasBrackets)
             {
-                int count;
+                int32 count;
                 var pairedBrackets = LocatePairedBrackets();
                 
                 for (i = 0, count = pairedBrackets.Count; i < count; i++)
@@ -1274,10 +1274,10 @@ namespace Avalonia.Media.TextFormatting.Unicode
             // pairs - if that), we use a simple linear lookup and insert most of the
             // time.  If there are more that `sortLimit` paired brackets we abort th
             // linear searching/inserting and using List.Sort at the end.
-            const int sortLimit = 8;
+            const int32 sortLimit = 8;
 
             // Process all characters in the run, looking for paired brackets
-            for (int i = 0, length = _runLength; i < length; i++)
+            for (int32 i = 0, length = _runLength; i < length; i++)
             {
                 // Ignore non-neutral characters
                 if (_runResolvedClasses[i] != BidiClass.OtherNeutral)
@@ -1409,7 +1409,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             // Set the directionality of NSM's inside the brackets
             // BN  characters (such as ZWJ or ZWSP) that appear between the base bracket character
             // and the nonspacing mark should be ignored.
-            for (int i = pairedBracket.OpeningIndex + 1; i < pairedBracket.ClosingIndex; i++)
+            for (int32 i = pairedBracket.OpeningIndex + 1; i < pairedBracket.ClosingIndex; i++)
             {
                 if (_runOriginalClasses[i] == BidiClass.NonspacingMark)
                 {
@@ -1422,7 +1422,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             }
 
             // Set the directionality of NSM's following the brackets
-            for (int i = pairedBracket.ClosingIndex + 1; i < _runLength; i++)
+            for (int32 i = pairedBracket.ClosingIndex + 1; i < _runLength; i++)
             {
                 if (_runOriginalClasses[i] == BidiClass.NonspacingMark)
                 {
@@ -1516,7 +1516,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 _workingClasses[0] = _originalClasses[0];
             }
 
-            for (int i = 1, length = _workingClasses.Length; i < length; i++)
+            for (int32 i = 1, length = _workingClasses.Length; i < length; i++)
             {
                 var originalClass = _originalClasses[i];
                 
@@ -1535,19 +1535,19 @@ namespace Avalonia.Media.TextFormatting.Unicode
         private static bool IsWhitespace(BidiClass biDiClass)
         {
             const uint mask =
-                (1U << (int)BidiClass.LeftToRightEmbedding) |
-                (1U << (int)BidiClass.RightToLeftEmbedding) |
-                (1U << (int)BidiClass.LeftToRightOverride) |
-                (1U << (int)BidiClass.RightToLeftOverride) |
-                (1U << (int)BidiClass.PopDirectionalFormat) |
-                (1U << (int)BidiClass.LeftToRightIsolate) |
-                (1U << (int)BidiClass.RightToLeftIsolate) |
-                (1U << (int)BidiClass.FirstStrongIsolate) |
-                (1U << (int)BidiClass.PopDirectionalIsolate) |
-                (1U << (int)BidiClass.BoundaryNeutral) |
-                (1U << (int)BidiClass.WhiteSpace);
+                (1U << (int32)BidiClass.LeftToRightEmbedding) |
+                (1U << (int32)BidiClass.RightToLeftEmbedding) |
+                (1U << (int32)BidiClass.LeftToRightOverride) |
+                (1U << (int32)BidiClass.RightToLeftOverride) |
+                (1U << (int32)BidiClass.PopDirectionalFormat) |
+                (1U << (int32)BidiClass.LeftToRightIsolate) |
+                (1U << (int32)BidiClass.RightToLeftIsolate) |
+                (1U << (int32)BidiClass.FirstStrongIsolate) |
+                (1U << (int32)BidiClass.PopDirectionalIsolate) |
+                (1U << (int32)BidiClass.BoundaryNeutral) |
+                (1U << (int32)BidiClass.WhiteSpace);
 
-            return ((1U << (int)biDiClass) & mask) != 0U;
+            return ((1U << (int32)biDiClass) & mask) != 0U;
         }
 
         /// <summary>
@@ -1557,7 +1557,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// <param name="level">The level to convert</param>
         /// <returns>A directionality</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static BidiClass DirectionFromLevel(int level)
+        private static BidiClass DirectionFromLevel(int32 level)
             => ((level & 0x1) == 0) ? BidiClass.LeftToRight : BidiClass.RightToLeft;
 
         /// <summary>
@@ -1569,14 +1569,14 @@ namespace Avalonia.Media.TextFormatting.Unicode
         private static bool IsRemovedByX9(BidiClass biDiClass)
         {
             const uint mask =
-                (1U << (int)BidiClass.LeftToRightEmbedding) |
-                (1U << (int)BidiClass.RightToLeftEmbedding) |
-                (1U << (int)BidiClass.LeftToRightOverride) |
-                (1U << (int)BidiClass.RightToLeftOverride) |
-                (1U << (int)BidiClass.PopDirectionalFormat) |
-                (1U << (int)BidiClass.BoundaryNeutral);
+                (1U << (int32)BidiClass.LeftToRightEmbedding) |
+                (1U << (int32)BidiClass.RightToLeftEmbedding) |
+                (1U << (int32)BidiClass.LeftToRightOverride) |
+                (1U << (int32)BidiClass.RightToLeftOverride) |
+                (1U << (int32)BidiClass.PopDirectionalFormat) |
+                (1U << (int32)BidiClass.BoundaryNeutral);
 
-            return ((1U << (int)biDiClass) & mask) != 0U;
+            return ((1U << (int32)biDiClass) & mask) != 0U;
         }
 
         /// <summary>
@@ -1586,16 +1586,16 @@ namespace Avalonia.Media.TextFormatting.Unicode
         private static bool IsNeutralClass(BidiClass direction)
         {
             const uint mask =
-                (1U << (int)BidiClass.ParagraphSeparator) |
-                (1U << (int)BidiClass.SegmentSeparator) |
-                (1U << (int)BidiClass.WhiteSpace) |
-                (1U << (int)BidiClass.OtherNeutral) |
-                (1U << (int)BidiClass.RightToLeftIsolate) |
-                (1U << (int)BidiClass.LeftToRightIsolate) |
-                (1U << (int)BidiClass.FirstStrongIsolate) |
-                (1U << (int)BidiClass.PopDirectionalIsolate);
+                (1U << (int32)BidiClass.ParagraphSeparator) |
+                (1U << (int32)BidiClass.SegmentSeparator) |
+                (1U << (int32)BidiClass.WhiteSpace) |
+                (1U << (int32)BidiClass.OtherNeutral) |
+                (1U << (int32)BidiClass.RightToLeftIsolate) |
+                (1U << (int32)BidiClass.LeftToRightIsolate) |
+                (1U << (int32)BidiClass.FirstStrongIsolate) |
+                (1U << (int32)BidiClass.PopDirectionalIsolate);
 
-            return ((1U << (int)direction) & mask) != 0U;
+            return ((1U << (int32)direction) & mask) != 0U;
         }
 
         /// <summary>
@@ -1671,7 +1671,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             /// </summary>
             /// <param name="openingIndex">Index of the opening bracket</param>
             /// <param name="closingIndex">Index of the closing bracket</param>
-            public BracketPair(int openingIndex, int closingIndex)
+            public BracketPair(int32 openingIndex, int32 closingIndex)
             {
                 OpeningIndex = openingIndex;
                 ClosingIndex = closingIndex;
@@ -1680,14 +1680,14 @@ namespace Avalonia.Media.TextFormatting.Unicode
             /// <summary>
             /// Gets the index of the opening bracket
             /// </summary>
-            public int OpeningIndex { get; }
+            public int32 OpeningIndex { get; }
 
             /// <summary>
             /// Gets the index of the closing bracket
             /// </summary>
-            public int ClosingIndex { get; }
+            public int32 ClosingIndex { get; }
 
-            public int CompareTo(BracketPair other)
+            public int32 CompareTo(BracketPair other)
                 => OpeningIndex.CompareTo(other.OpeningIndex);
         }
 
@@ -1717,7 +1717,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
         /// </summary>
         private readonly struct LevelRun
         {
-            public LevelRun(int start, int length, int level, BidiClass sos, BidiClass eos)
+            public LevelRun(int32 start, int32 length, int32 level, BidiClass sos, BidiClass eos)
             {
                 Start = start;
                 Length = length;
@@ -1726,11 +1726,11 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 Eos = eos;
             }
 
-            public int Start { get; }
+            public int32 Start { get; }
 
-            public int Length { get; }
+            public int32 Length { get; }
 
-            public int Level { get; }
+            public int32 Level { get; }
 
             public BidiClass Sos { get; }
 

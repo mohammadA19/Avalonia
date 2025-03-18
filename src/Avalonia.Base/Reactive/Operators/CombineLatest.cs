@@ -282,7 +282,7 @@ internal sealed class CombineLatest<TSource, TResult> : IObservable<TResult>
             SetUpstream(new CompositeDisposable(_subscriptions));
         }
 
-        private void OnNext(int index, TSource value)
+        private void OnNext(int32 index, TSource value)
         {
             lock (_gate)
             {
@@ -320,7 +320,7 @@ internal sealed class CombineLatest<TSource, TResult> : IObservable<TResult>
             }
         }
 
-        private void OnCompleted(int index)
+        private void OnCompleted(int32 index)
         {
             lock (_gate)
             {
@@ -340,9 +340,9 @@ internal sealed class CombineLatest<TSource, TResult> : IObservable<TResult>
         private sealed class SourceObserver : IObserver<TSource>, IDisposable
         {
             private readonly _ _parent;
-            private readonly int _index;
+            private readonly int32 _index;
 
-            public SourceObserver(_ parent, int index)
+            public SourceObserver(_ parent, int32 index)
             {
                 _parent = parent;
                 _index = index;

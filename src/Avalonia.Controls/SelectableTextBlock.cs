@@ -19,10 +19,10 @@ namespace Avalonia.Controls
     /// </summary>
     public class SelectableTextBlock : TextBlock, IInlineHost
     {
-        public static readonly StyledProperty<int> SelectionStartProperty =
+        public static readonly StyledProperty<int32> SelectionStartProperty =
             TextBox.SelectionStartProperty.AddOwner<SelectableTextBlock>();
 
-        public static readonly StyledProperty<int> SelectionEndProperty =
+        public static readonly StyledProperty<int32> SelectionEndProperty =
             TextBox.SelectionEndProperty.AddOwner<SelectableTextBlock>();
 
         public static readonly DirectProperty<SelectableTextBlock, string> SelectedTextProperty =
@@ -44,7 +44,7 @@ namespace Avalonia.Controls
                 nameof(CopyingToClipboard), RoutingStrategies.Bubble);
 
         private bool _canCopy;
-        private int _wordSelectionStart = -1;
+        private int32 _wordSelectionStart = -1;
 
         static SelectableTextBlock()
         {
@@ -79,7 +79,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets a character index for the beginning of the current selection.
         /// </summary>
-        public int SelectionStart
+        public int32 SelectionStart
         {
             get => GetValue(SelectionStartProperty);
             set => SetValue(SelectionStartProperty, value);
@@ -88,7 +88,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets a character index for the end of the current selection.
         /// </summary>
-        public int SelectionEnd
+        public int32 SelectionEnd
         {
             get => GetValue(SelectionEndProperty);
             set => SetValue(SelectionEndProperty, value);

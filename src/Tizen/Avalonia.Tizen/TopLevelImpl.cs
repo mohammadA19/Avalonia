@@ -65,7 +65,7 @@ internal class TopLevelImpl : ITopLevelImpl
 
     public Point PointToClient(PixelPoint point) => new Point(point.X, point.Y);
 
-    public PixelPoint PointToScreen(Point point) => new PixelPoint((int)point.X, (int)point.Y);
+    public PixelPoint PointToScreen(Point point) => new PixelPoint((int32)point.X, (int32)point.Y);
 
     public void SetCursor(ICursorImpl? cursor)
     {

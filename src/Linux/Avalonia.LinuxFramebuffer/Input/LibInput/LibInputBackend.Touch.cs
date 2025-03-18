@@ -8,7 +8,7 @@ namespace Avalonia.LinuxFramebuffer.Input.LibInput;
 
 public partial class LibInputBackend
 {
-    private readonly Dictionary<int, Point> _pointers = new();
+    private readonly Dictionary<int32, Point> _pointers = new();
     private readonly TouchDevice _touch = new();
 
     private void HandleTouch(IntPtr ev, LibInputEventType type)
@@ -25,8 +25,8 @@ public partial class LibInputBackend
             if (type == LibInputEventType.LIBINPUT_EVENT_TOUCH_DOWN
                 || type == LibInputEventType.LIBINPUT_EVENT_TOUCH_MOTION)
             {
-                var x = libinput_event_touch_get_x_transformed(tev, (int)info.Width);
-                var y = libinput_event_touch_get_y_transformed(tev, (int)info.Height);
+                var x = libinput_event_touch_get_x_transformed(tev, (int32)info.Width);
+                var y = libinput_event_touch_get_y_transformed(tev, (int32)info.Height);
                 pt = new Point(x, y);
                 _pointers[slot] = pt;
             }

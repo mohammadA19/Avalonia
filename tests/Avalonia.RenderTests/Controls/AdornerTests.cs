@@ -19,7 +19,7 @@ public class AdornerTests : TestBase
     {
     }
 
-    async Task CheckAdornedContent(Control content, Control adorned, Control adorner, int width = 200, int height = 200,
+    async Task CheckAdornedContent(Control content, Control adorned, Control adorner, int32 width = 200, int32 height = 200,
         [CallerMemberName] string testName = "")
     {
         var tree = new Decorator

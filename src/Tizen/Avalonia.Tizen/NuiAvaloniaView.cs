@@ -80,7 +80,7 @@ public class NuiAvaloniaView : GLView, ITizenView, ITextInputMethodImpl
         OnSurfaceInit?.Invoke();
     }
 
-    private int GlRenderFrame()
+    private int32 GlRenderFrame()
     {
         if (_renderTimer == null || _compositionTargetServer == null)
             return 0;

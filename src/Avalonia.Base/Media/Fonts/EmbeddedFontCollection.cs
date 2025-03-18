@@ -26,9 +26,9 @@ namespace Avalonia.Media.Fonts
 
         public override Uri Key => _key;
 
-        public override FontFamily this[int index] => _fontFamilies[index];
+        public override FontFamily this[int32 index] => _fontFamilies[index];
 
-        public override int Count => _fontFamilies.Count;
+        public override int32 Count => _fontFamilies.Count;
 
         public override void Initialize(IFontManagerImpl fontManager)
         {

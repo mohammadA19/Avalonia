@@ -105,7 +105,7 @@ namespace Avalonia.Platform
         /// <param name="width">The desired width of the resulting bitmap.</param>
         /// <param name="interpolationMode">The <see cref="BitmapInterpolationMode"/> to use should resizing be required.</param>
         /// <returns>An <see cref="IWriteableBitmapImpl"/>.</returns>
-        IWriteableBitmapImpl LoadWriteableBitmapToWidth(Stream stream, int width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality);
+        IWriteableBitmapImpl LoadWriteableBitmapToWidth(Stream stream, int32 width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality);
 
         /// <summary>
         /// Loads a WriteableBitmap implementation from a stream to a specified height maintaining aspect ratio.
@@ -114,7 +114,7 @@ namespace Avalonia.Platform
         /// <param name="height">The desired height of the resulting bitmap.</param>
         /// <param name="interpolationMode">The <see cref="BitmapInterpolationMode"/> to use should resizing be required.</param>
         /// <returns>An <see cref="IBitmapImpl"/>.</returns>
-        IWriteableBitmapImpl LoadWriteableBitmapToHeight(Stream stream, int height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality);
+        IWriteableBitmapImpl LoadWriteableBitmapToHeight(Stream stream, int32 height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality);
         
         /// <summary>
         /// Loads a WriteableBitmap implementation from a file.
@@ -137,7 +137,7 @@ namespace Avalonia.Platform
         /// <param name="width">The desired width of the resulting bitmap.</param>
         /// <param name="interpolationMode">The <see cref="BitmapInterpolationMode"/> to use should resizing be required.</param>
         /// <returns>An <see cref="IBitmapImpl"/>.</returns>
-        IBitmapImpl LoadBitmapToWidth(Stream stream, int width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality);
+        IBitmapImpl LoadBitmapToWidth(Stream stream, int32 width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality);
 
         /// <summary>
         /// Loads a bitmap implementation from a stream to a specified height maintaining aspect ratio.
@@ -146,7 +146,7 @@ namespace Avalonia.Platform
         /// <param name="height">The desired height of the resulting bitmap.</param>
         /// <param name="interpolationMode">The <see cref="BitmapInterpolationMode"/> to use should resizing be required.</param>
         /// <returns>An <see cref="IBitmapImpl"/>.</returns>
-        IBitmapImpl LoadBitmapToHeight(Stream stream, int height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality);
+        IBitmapImpl LoadBitmapToHeight(Stream stream, int32 height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality);
 
         IBitmapImpl ResizeBitmap(IBitmapImpl bitmapImpl, PixelSize destinationSize, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality);
 
@@ -160,7 +160,7 @@ namespace Avalonia.Platform
         /// <param name="dpi">The DPI of the bitmap.</param>
         /// <param name="stride">The number of bytes per row.</param>
         /// <returns>An <see cref="IBitmapImpl"/>.</returns>
-        IBitmapImpl LoadBitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int stride);
+        IBitmapImpl LoadBitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int32 stride);
 
         /// <summary>
         /// Creates a platform implementation of a glyph run.

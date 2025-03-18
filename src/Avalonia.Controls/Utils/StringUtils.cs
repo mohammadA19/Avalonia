@@ -18,7 +18,7 @@ namespace Avalonia.Controls.Utils
             return c == '\r' || c == '\n';
         }
 
-        public static bool IsStartOfWord(string text, int index)
+        public static bool IsStartOfWord(string text, int32 index)
         {
             if (index >= text.Length)
             {
@@ -68,7 +68,7 @@ namespace Avalonia.Controls.Utils
             }
         }
 
-        public static bool IsEndOfWord(string text, int index)
+        public static bool IsEndOfWord(string text, int32 index)
         {
             if (index >= text.Length)
             {
@@ -125,7 +125,7 @@ namespace Avalonia.Controls.Utils
             }
         }
 
-        public static int PreviousWord(string text, int cursor)
+        public static int32 PreviousWord(string text, int32 cursor)
         {
             if (string.IsNullOrEmpty(text))
             {
@@ -134,10 +134,10 @@ namespace Avalonia.Controls.Utils
 
             cursor = Math.Min(cursor, text.Length);
 
-            int begin;
-            int i;
-            int cr;
-            int lf;
+            int32 begin;
+            int32 i;
+            int32 cr;
+            int32 lf;
 
             lf = LineBegin(text, cursor) - 1;
 
@@ -179,9 +179,9 @@ namespace Avalonia.Controls.Utils
             return i;
         }
 
-        public static int NextWord(string text, int cursor)
+        public static int32 NextWord(string text, int32 cursor)
         {
-            int i, lf, cr;
+            int32 i, lf, cr;
 
             cr = LineEnd(text, cursor);
 
@@ -250,7 +250,7 @@ namespace Avalonia.Controls.Utils
             }
         }
 
-        private static int LineBegin(string text, int pos)
+        private static int32 LineBegin(string text, int32 pos)
         {
             while (pos > 0 && !IsEol(text[pos - 1]))
             {
@@ -260,7 +260,7 @@ namespace Avalonia.Controls.Utils
             return pos;
         }
 
-        private static int LineEnd(string text, int cursor, bool include = false)
+        private static int32 LineEnd(string text, int32 cursor, bool include = false)
         {
             while (cursor < text.Length && !IsEol(text[cursor]))
             {

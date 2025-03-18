@@ -11,9 +11,9 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
     {
         public const string Ucd = "https://www.unicode.org/Public/16.0.0/ucd/";
 
-        public static UnicodeTrie GenerateBiDiTrie(out BiDiDataEntries biDiDataEntries, out Dictionary<int, BiDiDataItem> biDiData)
+        public static UnicodeTrie GenerateBiDiTrie(out BiDiDataEntries biDiDataEntries, out Dictionary<int32, BiDiDataItem> biDiData)
         {
-            biDiData = new Dictionary<int, BiDiDataItem>();
+            biDiData = new Dictionary<int32, BiDiDataItem>();
 
             var bidiClassEntries =
                 UnicodeEnumsGenerator.CreateBidiClassEnum();
@@ -96,7 +96,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
                       {
                   """);
 
-            for (int i = 0; i < trie.Data.Length; ++i)
+            for (int32 i = 0; i < trie.Data.Length; ++i)
             {
                 if (i > 0)
                     writer.Write(", ");
@@ -120,7 +120,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
                 """);
         }
 
-        public static UnicodeTrie GenerateUnicodeDataTrie(out UnicodeDataEntries dataEntries, out Dictionary<int, UnicodeDataItem> unicodeData)
+        public static UnicodeTrie GenerateUnicodeDataTrie(out UnicodeDataEntries dataEntries, out Dictionary<int32, UnicodeDataItem> unicodeData)
         {
             var generalCategoryEntries =
                 UnicodeEnumsGenerator.CreateGeneralCategoryEnum();
@@ -163,10 +163,10 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             return trie;
         }
 
-        private static Dictionary<int, UnicodeDataItem> GetUnicodeData(IReadOnlyDictionary<string, int> generalCategoryMappings, 
-            IReadOnlyDictionary<string, int> scriptMappings, IReadOnlyDictionary<string, int> lineBreakClassMappings)
+        private static Dictionary<int32, UnicodeDataItem> GetUnicodeData(IReadOnlyDictionary<string, int32> generalCategoryMappings, 
+            IReadOnlyDictionary<string, int32> scriptMappings, IReadOnlyDictionary<string, int32> lineBreakClassMappings)
         {
-            var unicodeData = new Dictionary<int, UnicodeDataItem>();
+            var unicodeData = new Dictionary<int32, UnicodeDataItem>();
             
             var generalCategoryData = ReadGeneralCategoryData();
 
@@ -198,9 +198,9 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             return unicodeData;
         }
 
-        public static Dictionary<string, int> CreateTagToIndexMappings(IReadOnlyList<DataEntry> entries)
+        public static Dictionary<string, int32> CreateTagToIndexMappings(IReadOnlyList<DataEntry> entries)
         {
-            var mappings = new Dictionary<string, int>();
+            var mappings = new Dictionary<string, int32>();
 
             for (var i = 0; i < entries.Count; i++)
             {
@@ -210,9 +210,9 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             return mappings;
         }
 
-        public static Dictionary<string, int> CreateNameToIndexMappings(IReadOnlyList<DataEntry> entries)
+        public static Dictionary<string, int32> CreateNameToIndexMappings(IReadOnlyList<DataEntry> entries)
         {
-            var mappings = new Dictionary<string, int>();
+            var mappings = new Dictionary<string, int32>();
 
             for (var i = 0; i < entries.Count; i++)
             {
@@ -222,8 +222,8 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             return mappings;
         }
 
-        private static void AddGeneralCategoryRange(Dictionary<int, UnicodeDataItem> codepoints, CodepointRange range,
-            int generalCategory)
+        private static void AddGeneralCategoryRange(Dictionary<int32, UnicodeDataItem> codepoints, CodepointRange range,
+            int32 generalCategory)
         {
             for (var i = range.Start; i <= range.End; i++)
             {
@@ -238,8 +238,8 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             }
         }
 
-        private static void AddScriptRange(Dictionary<int, UnicodeDataItem> codepoints, CodepointRange range,
-            int script)
+        private static void AddScriptRange(Dictionary<int32, UnicodeDataItem> codepoints, CodepointRange range,
+            int32 script)
         {
             for (var i = range.Start; i <= range.End; i++)
             {
@@ -254,8 +254,8 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             }
         }
 
-        private static void AddBiDiClassRange(Dictionary<int, BiDiDataItem> codepoints, CodepointRange range,
-            int biDiClass)
+        private static void AddBiDiClassRange(Dictionary<int32, BiDiDataItem> codepoints, CodepointRange range,
+            int32 biDiClass)
         {
             for (var i = range.Start; i <= range.End; i++)
             {
@@ -270,8 +270,8 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             }
         }
 
-        private static void AddBiDiBracket(Dictionary<int, BiDiDataItem> codepoints, CodepointRange range,
-            int bracketType)
+        private static void AddBiDiBracket(Dictionary<int32, BiDiDataItem> codepoints, CodepointRange range,
+            int32 bracketType)
         {
             if (!codepoints.ContainsKey(range.Start))
             {
@@ -287,8 +287,8 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
             }
         }
 
-        private static void AddLineBreakClassRange(Dictionary<int, UnicodeDataItem> codepoints, CodepointRange range,
-            int lineBreakClass)
+        private static void AddLineBreakClassRange(Dictionary<int32, UnicodeDataItem> codepoints, CodepointRange range,
+            int32 lineBreakClass)
         {
             for (var i = range.Start; i <= range.End; i++)
             {
@@ -435,26 +435,26 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
         internal class UnicodeDataItem
         {
-            public int Codepoint { get; set; }
+            public int32 Codepoint { get; set; }
 
-            public int Script { get; set; }
+            public int32 Script { get; set; }
 
-            public int GeneralCategory { get; set; }
+            public int32 GeneralCategory { get; set; }
 
-            public int BiDiClass { get; set; }
+            public int32 BiDiClass { get; set; }
 
-            public int LineBreakClass { get; set; }
+            public int32 LineBreakClass { get; set; }
         }
         
         internal class BiDiDataItem
         {
-            public int Codepoint { get; set; }
+            public int32 Codepoint { get; set; }
 
-            public int Bracket { get; set; }
+            public int32 Bracket { get; set; }
 
-            public int BracketType { get; set; }
+            public int32 BracketType { get; set; }
 
-            public int BiDiClass { get; set; }
+            public int32 BiDiClass { get; set; }
         }      
     }
     
@@ -473,13 +473,13 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
     internal readonly struct CodepointRange
     {
-        public CodepointRange(int start, int end)
+        public CodepointRange(int32 start, int32 end)
         {
             Start = start;
             End = end;
         }
 
-        public int Start { get; }
-        public int End { get; }
+        public int32 Start { get; }
+        public int32 End { get; }
     }
 }

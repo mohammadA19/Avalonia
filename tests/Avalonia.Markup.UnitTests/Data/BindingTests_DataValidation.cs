@@ -14,7 +14,7 @@ namespace Avalonia.Markup.UnitTests.Data
     public class BindingTests_DataValidation
     {
         public abstract class TestBase<T>
-            where T : AvaloniaProperty<int>
+            where T : AvaloniaProperty<int32>
         {
             [Fact]
             public void Setter_Exception_Causes_DataValidation_Error()
@@ -94,15 +94,15 @@ namespace Avalonia.Markup.UnitTests.Data
             private protected abstract (DataValidationTestControl, T) CreateTarget();
         }
 
-        public class DirectPropertyTests : TestBase<DirectPropertyBase<int>>
+        public class DirectPropertyTests : TestBase<DirectPropertyBase<int32>>
         {
-            private protected override (DataValidationTestControl, DirectPropertyBase<int>) CreateTarget()
+            private protected override (DataValidationTestControl, DirectPropertyBase<int32>) CreateTarget()
             {
                 return (new ValidatedDirectPropertyClass(), ValidatedDirectPropertyClass.ValueProperty);
             }
         }
 
-        public class StyledPropertyTests : TestBase<StyledProperty<int>>
+        public class StyledPropertyTests : TestBase<StyledProperty<int32>>
         {
             [Fact]
             public void Style_Binding_Supports_Data_Validation()
@@ -287,7 +287,7 @@ namespace Avalonia.Markup.UnitTests.Data
                 Assert.Equal("Invalid value: 200.", target.DataValidationError?.Message);
             }
 
-            private protected override (DataValidationTestControl, StyledProperty<int>) CreateTarget()
+            private protected override (DataValidationTestControl, StyledProperty<int32>) CreateTarget()
             {
                 return (new ValidatedStyledPropertyClass(), ValidatedStyledPropertyClass.ValueProperty);
             }
@@ -300,12 +300,12 @@ namespace Avalonia.Markup.UnitTests.Data
 
         private class ValidatedStyledPropertyClass : DataValidationTestControl
         {
-            public static readonly StyledProperty<int> ValueProperty =
-                AvaloniaProperty.Register<ValidatedStyledPropertyClass, int>(
+            public static readonly StyledProperty<int32> ValueProperty =
+                AvaloniaProperty.Register<ValidatedStyledPropertyClass, int32>(
                     "Value",
                     enableDataValidation: true);
 
-            public int Value
+            public int32 Value
             {
                 get => GetValue(ValueProperty);
                 set => SetValue(ValueProperty, value);
@@ -322,16 +322,16 @@ namespace Avalonia.Markup.UnitTests.Data
 
         private class ValidatedDirectPropertyClass : DataValidationTestControl
         {
-            public static readonly DirectProperty<ValidatedDirectPropertyClass, int> ValueProperty =
-                AvaloniaProperty.RegisterDirect<ValidatedDirectPropertyClass, int>(
+            public static readonly DirectProperty<ValidatedDirectPropertyClass, int32> ValueProperty =
+                AvaloniaProperty.RegisterDirect<ValidatedDirectPropertyClass, int32>(
                     "Value",
                     o => o.Value,
                     (o, v) => o.Value = v,
                     enableDataValidation: true);
 
-            private int _value;
+            private int32 _value;
 
-            public int Value
+            public int32 Value
             {
                 get => _value;
                 set => SetAndRaise(ValueProperty, ref _value, value);
@@ -348,10 +348,10 @@ namespace Avalonia.Markup.UnitTests.Data
 
         private class ExceptionValidatingModel
         {
-            public const int MaxValue = 100;
-            private int _value = 20;
+            public const int32 MaxValue = 100;
+            private int32 _value = 20;
 
-            public int Value
+            public int32 Value
             {
                 get => _value;
                 set
@@ -365,11 +365,11 @@ namespace Avalonia.Markup.UnitTests.Data
 
         private class IndeiValidatingModel : INotifyDataErrorInfo
         {
-            public const int MaxValue = 100;
+            public const int32 MaxValue = 100;
             private bool _hasErrors;
-            private int _value = 20;
+            private int32 _value = 20;
 
-            public int Value
+            public int32 Value
             {
                 get => _value;
                 set

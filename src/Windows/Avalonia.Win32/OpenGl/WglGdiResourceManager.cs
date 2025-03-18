@@ -92,7 +92,7 @@ internal class WglGdiResourceManager
                         0,
                         s_windowClass,
                         null,
-                        (int)UnmanagedMethods.WindowStyles.WS_OVERLAPPEDWINDOW,
+                        (int32)UnmanagedMethods.WindowStyles.WS_OVERLAPPEDWINDOW,
                         0,
                         0,
                         640,
@@ -118,7 +118,7 @@ internal class WglGdiResourceManager
             hInstance = UnmanagedMethods.GetModuleHandle(null),
             lpfnWndProc = s_wndProcDelegate,
             lpszClassName = "AvaloniaGlWindow-" + Guid.NewGuid(),
-            style = (int)UnmanagedMethods.ClassStyles.CS_OWNDC
+            style = (int32)UnmanagedMethods.ClassStyles.CS_OWNDC
         };
             
         s_windowClass = UnmanagedMethods.RegisterClassEx(ref wndClassEx);

@@ -30,7 +30,7 @@ namespace Avalonia.Skia
 
         [ThreadStatic] private static string[]? t_languageTagBuffer;
 
-        public bool TryMatchCharacter(int codepoint, FontStyle fontStyle,
+        public bool TryMatchCharacter(int32 codepoint, FontStyle fontStyle,
             FontWeight fontWeight, FontStretch fontStretch, CultureInfo? culture, out Typeface fontKey)
         {
             SKFontStyle skFontStyle;
@@ -90,7 +90,7 @@ namespace Avalonia.Skia
 
             var fontSimulations = FontSimulations.None;
 
-            if ((int)weight >= 600 && !skTypeface.IsBold)
+            if ((int32)weight >= 600 && !skTypeface.IsBold)
             {
                 fontSimulations |= FontSimulations.Bold;
             }

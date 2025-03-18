@@ -27,22 +27,22 @@ namespace Avalonia.Win32.WinRT
         private readonly float[]? _singleArray;
 
         public PropertyType Type { get; }
-        public int IsNumericScalar { get; }
+        public int32 IsNumericScalar { get; }
         public byte UInt8 { get; }
         public short Int16 { get; }
         public ushort UInt16 { get; }
-        public int Int32 { get; }
+        public int32 Int32 { get; }
         public uint UInt32 { get; }
         public long Int64 { get; }
         public ulong UInt64 { get; }
         public float Single { get; }
         public double Double { get; }
         public char Char16 { get; }
-        public int Boolean { get; }
+        public int32 Boolean { get; }
         public IntPtr String { get; }
         public Guid Guid { get; }
 
-        private static COMException NotImplemented => new COMException("Not supported", unchecked((int)0x80004001));
+        private static COMException NotImplemented => new COMException("Not supported", unchecked((int32)0x80004001));
         
         public unsafe void GetDateTime(void* value) => throw NotImplemented;
 
@@ -60,7 +60,7 @@ namespace Avalonia.Win32.WinRT
 
         public unsafe ushort* GetUInt16Array(uint* __valueSize) => throw NotImplemented;
 
-        public unsafe int* GetInt32Array(uint* __valueSize)
+        public unsafe int32* GetInt32Array(uint* __valueSize)
         {
             throw NotImplemented;
         }
@@ -87,7 +87,7 @@ namespace Avalonia.Win32.WinRT
 
         public unsafe char* GetChar16Array(uint* __valueSize) => throw NotImplemented;
 
-        public unsafe int* GetBooleanArray(uint* __valueSize) => throw NotImplemented;
+        public unsafe int32* GetBooleanArray(uint* __valueSize) => throw NotImplemented;
 
         public unsafe IntPtr* GetStringArray(uint* __valueSize) => throw NotImplemented;
 

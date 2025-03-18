@@ -73,7 +73,7 @@ namespace Avalonia.Input.TextInput
         /// <summary>
         /// Sets the non-committed input string and cursor offset in that string
         /// </summary>
-        public virtual void SetPreeditText(string? preeditText, int? cursorPos)
+        public virtual void SetPreeditText(string? preeditText, int32? cursorPos)
         {
             SetPreeditText(preeditText);
         }
@@ -106,7 +106,7 @@ namespace Avalonia.Input.TextInput
         }
     }
 
-    public record struct TextSelection(int Start, int End);
+    public record struct TextSelection(int32 Start, int32 End);
 
     public enum ContextMenuAction
     {

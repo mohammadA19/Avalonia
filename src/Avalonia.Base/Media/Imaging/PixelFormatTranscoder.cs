@@ -9,11 +9,11 @@ internal static unsafe class PixelFormatTranscoder
     public static void Transcode(
         IntPtr source,
         PixelSize srcSize,
-        int sourceStride,
+        int32 sourceStride,
         PixelFormat srcFormat,
         AlphaFormat srcAlphaFormat,
         IntPtr dest,
-        int destStride,
+        int32 destStride,
         PixelFormat destFormat,
         AlphaFormat destAlphaFormat)
     {

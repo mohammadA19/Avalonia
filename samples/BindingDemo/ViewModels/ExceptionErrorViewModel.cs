@@ -5,9 +5,9 @@ namespace BindingDemo.ViewModels
 {
     public class ExceptionErrorViewModel : ViewModelBase
     {
-        private int _lessThan10;
+        private int32 _lessThan10;
 
-        public int LessThan10
+        public int32 LessThan10
         {
             get { return _lessThan10; }
             set

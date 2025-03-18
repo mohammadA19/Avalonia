@@ -23,7 +23,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
 {
     internal ref struct UnicodeTrie
     {
-        public UnicodeTrie(ReadOnlySpan<uint> data, int highStart, uint errorValue)
+        public UnicodeTrie(ReadOnlySpan<uint> data, int32 highStart, uint errorValue)
         {
             Data = data;
             HighStart = highStart;
@@ -32,7 +32,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
 
         public ReadOnlySpan<uint> Data { get; }
 
-        public int HighStart { get; }
+        public int32 HighStart { get; }
 
         public uint ErrorValue { get; }
 
@@ -52,7 +52,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 // Ordinary BMP code point, excluding leading surrogates.
                 // BMP uses a single level lookup.  BMP index starts at offset 0 in the Trie2 index.
                 // 16 bit data is stored in the index array itself.
-                index = Data[(int)(codePoint >> UnicodeTrieBuilder.SHIFT_2)];
+                index = Data[(int32)(codePoint >> UnicodeTrieBuilder.SHIFT_2)];
                 index = (index << UnicodeTrieBuilder.INDEX_SHIFT) + (codePoint & UnicodeTrieBuilder.DATA_MASK);
                 return Unsafe.Add(ref dataBase, (nint)index);
             }
@@ -65,7 +65,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 //   For this function, we need the code point data.
                 // Note: this expression could be refactored for slightly improved efficiency, but
                 //       surrogate code points will be so rare in practice that it's not worth it.
-                index = Data[(int)(UnicodeTrieBuilder.LSCP_INDEX_2_OFFSET + ((codePoint - 0xd800) >> UnicodeTrieBuilder.SHIFT_2))];
+                index = Data[(int32)(UnicodeTrieBuilder.LSCP_INDEX_2_OFFSET + ((codePoint - 0xd800) >> UnicodeTrieBuilder.SHIFT_2))];
                 index = (index << UnicodeTrieBuilder.INDEX_SHIFT) + (codePoint & UnicodeTrieBuilder.DATA_MASK);
                 return Unsafe.Add(ref dataBase, (nint)index);
             }
@@ -74,9 +74,9 @@ namespace Avalonia.Media.TextFormatting.Unicode
             {
                 // Supplemental code point, use two-level lookup.
                 index = UnicodeTrieBuilder.INDEX_1_OFFSET - UnicodeTrieBuilder.OMITTED_BMP_INDEX_1_LENGTH + (codePoint >> UnicodeTrieBuilder.SHIFT_1);
-                index = Data[(int)index];
+                index = Data[(int32)index];
                 index += (codePoint >> UnicodeTrieBuilder.SHIFT_2) & UnicodeTrieBuilder.INDEX_2_MASK;
-                index = Data[(int)index];
+                index = Data[(int32)index];
                 index = (index << UnicodeTrieBuilder.INDEX_SHIFT) + (codePoint & UnicodeTrieBuilder.DATA_MASK);
                 return Unsafe.Add(ref dataBase, (nint)index);
             }

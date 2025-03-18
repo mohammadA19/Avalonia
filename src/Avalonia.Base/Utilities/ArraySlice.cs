@@ -40,7 +40,7 @@ namespace Avalonia.Utilities
         /// <param name="data">The underlying data buffer.</param>
         /// <param name="start">The offset position in the underlying buffer this slice was created from.</param>
         /// <param name="length">The number of items in the slice.</param>
-        public ArraySlice(T[] data, int start, int length)
+        public ArraySlice(T[] data, int32 start, int32 length)
         {
 #if DEBUG
             if (start.CompareTo(0) < 0)
@@ -73,12 +73,12 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Gets the offset position in the underlying buffer this slice was created from.
         /// </summary>
-        public int Start { get; }
+        public int32 Start { get; }
 
         /// <summary>
         /// Gets the number of items in the slice.
         /// </summary>
-        public int Length { get; }
+        public int32 Length { get; }
 
         /// <summary>
         /// Gets a <see cref="Span{T}"/> representing this slice.
@@ -93,7 +93,7 @@ namespace Avalonia.Utilities
         /// <exception cref="IndexOutOfRangeException">
         /// Thrown when index less than 0 or index greater than or equal to <see cref="Length"/>.
         /// </exception>
-        public ref T this[int index]
+        public ref T this[int32 index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
@@ -128,14 +128,14 @@ namespace Avalonia.Utilities
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown when the specified <paramref name="start"/> or end index is not in range (&lt;0 or &gt;Length).
         /// </exception>
-        public ArraySlice<T> Slice(int start, int length) => new ArraySlice<T>(_data, start, length);
+        public ArraySlice<T> Slice(int32 start, int32 length) => new ArraySlice<T>(_data, start, length);
 
         /// <summary>
         ///     Returns a specified number of contiguous elements from the start of the slice.
         /// </summary>
         /// <param name="length">The number of elements to return.</param>
         /// <returns>A <see cref="ArraySlice{T}"/> that contains the specified number of elements from the start of this slice.</returns>
-        public ArraySlice<T> Take(int length)
+        public ArraySlice<T> Take(int32 length)
         {
             if (IsEmpty)
             {
@@ -155,7 +155,7 @@ namespace Avalonia.Utilities
         /// </summary>
         /// <param name="length">The number of elements to skip before returning the remaining elements.</param>
         /// <returns>A <see cref="ArraySlice{T}"/> that contains the elements that occur after the specified index in this slice.</returns>
-        public ArraySlice<T> Skip(int length)
+        public ArraySlice<T> Skip(int32 length)
         {
             if (IsEmpty)
             {
@@ -180,10 +180,10 @@ namespace Avalonia.Utilities
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc/>
-        T IReadOnlyList<T>.this[int index] => this[index];
+        T IReadOnlyList<T>.this[int32 index] => this[index];
 
         /// <inheritdoc/>
-        int IReadOnlyCollection<T>.Count => Length;
+        int32 IReadOnlyCollection<T>.Count => Length;
     }
 }
 

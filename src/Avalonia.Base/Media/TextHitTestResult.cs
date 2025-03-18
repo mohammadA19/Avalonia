@@ -7,7 +7,7 @@ namespace Avalonia.Media
     /// </summary>
     public readonly record struct TextHitTestResult
     {
-        public TextHitTestResult(CharacterHit characterHit, int textPosition, bool isInside, bool isTrailing)
+        public TextHitTestResult(CharacterHit characterHit, int32 textPosition, bool isInside, bool isTrailing)
         {
             CharacterHit = characterHit;
             TextPosition = textPosition;
@@ -28,7 +28,7 @@ namespace Avalonia.Media
         /// <summary>
         /// Gets the index of the hit character in the text.
         /// </summary>
-        public int TextPosition { get; }
+        public int32 TextPosition { get; }
 
         /// <summary>
         /// Gets a value indicating whether the hit is on the trailing edge of the character.

@@ -127,13 +127,13 @@ namespace Avalonia.Skia
             return new ImmutableBitmap(stream);
         }
 
-        public IWriteableBitmapImpl LoadWriteableBitmapToWidth(Stream stream, int width,
+        public IWriteableBitmapImpl LoadWriteableBitmapToWidth(Stream stream, int32 width,
             BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new WriteableBitmapImpl(stream, width, true, interpolationMode);
         }
 
-        public IWriteableBitmapImpl LoadWriteableBitmapToHeight(Stream stream, int height,
+        public IWriteableBitmapImpl LoadWriteableBitmapToHeight(Stream stream, int32 height,
             BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new WriteableBitmapImpl(stream, height, false, interpolationMode);
@@ -153,19 +153,19 @@ namespace Avalonia.Skia
         }
 
         /// <inheritdoc />
-        public IBitmapImpl LoadBitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int stride)
+        public IBitmapImpl LoadBitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int32 stride)
         {
             return new ImmutableBitmap(size, dpi, stride, format, alphaFormat, data);
         }
 
         /// <inheritdoc />
-        public IBitmapImpl LoadBitmapToWidth(Stream stream, int width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
+        public IBitmapImpl LoadBitmapToWidth(Stream stream, int32 width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new ImmutableBitmap(stream, width, true, interpolationMode);
         }
 
         /// <inheritdoc />
-        public IBitmapImpl LoadBitmapToHeight(Stream stream, int height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
+        public IBitmapImpl LoadBitmapToHeight(Stream stream, int32 height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new ImmutableBitmap(stream, height, false, interpolationMode);
         }

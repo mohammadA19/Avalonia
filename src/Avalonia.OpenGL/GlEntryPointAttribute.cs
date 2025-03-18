@@ -5,17 +5,17 @@ namespace Avalonia.OpenGL
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     sealed class GlMinVersionEntryPoint : Attribute
     {
-        public GlMinVersionEntryPoint(string entry, int minVersionMajor, int minVersionMinor)
+        public GlMinVersionEntryPoint(string entry, int32 minVersionMajor, int32 minVersionMinor)
         {
         }
         
-        public GlMinVersionEntryPoint(string entry, int minVersionMajor, int minVersionMinor, GlProfileType profile)
+        public GlMinVersionEntryPoint(string entry, int32 minVersionMajor, int32 minVersionMinor, GlProfileType profile)
         {
         }
 
         
         public static IntPtr GetProcAddress(Func<string, IntPtr> getProcAddress, GlInterface.GlContextInfo context,
-            string entry, int minVersionMajor, int minVersionMinor, GlProfileType? profile = null)
+            string entry, int32 minVersionMajor, int32 minVersionMinor, GlProfileType? profile = null)
         {
             if(profile.HasValue && context.Version.Type != profile)
                 return IntPtr.Zero;

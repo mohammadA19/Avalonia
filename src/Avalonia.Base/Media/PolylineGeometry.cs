@@ -88,7 +88,7 @@ namespace Avalonia.Media
                 if (points.Count > 0)
                 {
                     context.BeginFigure(points[0], isFilled);
-                    for (int i = 1; i < points.Count; i++)
+                    for (int32 i = 1; i < points.Count; i++)
                     {
                         context.LineTo(points[i]);
                     }

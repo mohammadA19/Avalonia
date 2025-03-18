@@ -2074,7 +2074,7 @@ namespace Avalonia.Controls.UnitTests.Primitives
                 }
             };
 
-            target.Selection = new SelectionModel<int>();
+            target.Selection = new SelectionModel<int32>();
 
             Assert.Equal(1, raised);
         }
@@ -2514,12 +2514,12 @@ namespace Avalonia.Controls.UnitTests.Primitives
         {
             public IList<Item> Items { get; set; }
             public Item SelectedItem { get; set; }
-            public int SelectedIndex { get; set; }
+            public int32 SelectedIndex { get; set; }
         }
 
         private class SelectionViewModel : NotifyingBase
         {
-            private int _selectedIndex = -1;
+            private int32 _selectedIndex = -1;
             private object _selectedItem;
 
             public SelectionViewModel()
@@ -2528,7 +2528,7 @@ namespace Avalonia.Controls.UnitTests.Primitives
                 SelectedItems = new ObservableCollection<string>();
             }
 
-            public int SelectedIndex
+            public int32 SelectedIndex
             {
                 get => _selectedIndex;
                 set
@@ -2599,7 +2599,7 @@ namespace Avalonia.Controls.UnitTests.Primitives
 
         private class ResettingCollection : List<string>, INotifyCollectionChanged
         {
-            public ResettingCollection(int itemCount)
+            public ResettingCollection(int32 itemCount)
             {
                 AddRange(Enumerable.Range(0, itemCount).Select(x => $"Item{x}"));
             }
@@ -2621,8 +2621,8 @@ namespace Avalonia.Controls.UnitTests.Primitives
         private sealed class FullSelectionViewModel : NotifyingBase
         {
             private ItemModel? _selectedItem;
-            private int _selectedIndex = -1;
-            private int? _selectedValue;
+            private int32 _selectedIndex = -1;
+            private int32? _selectedValue;
 
             public ObservableCollection<ItemModel> Items { get; } = new();
 
@@ -2632,13 +2632,13 @@ namespace Avalonia.Controls.UnitTests.Primitives
                 set => SetField(ref _selectedItem, value);
             }
 
-            public int SelectedIndex
+            public int32 SelectedIndex
             {
                 get => _selectedIndex;
                 set => SetField(ref _selectedIndex, value);
             }
 
-            public int? SelectedValue
+            public int32? SelectedValue
             {
                 get => _selectedValue;
                 set => SetField(ref _selectedValue, value);
@@ -2647,10 +2647,10 @@ namespace Avalonia.Controls.UnitTests.Primitives
 
         private sealed class ItemModel : NotifyingBase
         {
-            private int _id;
+            private int32 _id;
             private string? _name;
 
-            public int Id
+            public int32 Id
             {
                 get => _id;
                 set => SetField(ref _id, value);

@@ -313,7 +313,7 @@ namespace Avalonia.Controls
                 return;
 
             var fmt = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
-            var columns = new List<(TextBlock?, int)>
+            var columns = new List<(TextBlock?, int32)>
             {
                 (_monthText, MonthVisible ? fmt.IndexOf("m", StringComparison.OrdinalIgnoreCase) : -1),
                 (_yearText, YearVisible ? fmt.IndexOf("y", StringComparison.OrdinalIgnoreCase) : -1),

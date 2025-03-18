@@ -84,7 +84,7 @@ public sealed record ThemeVariant
         return Key.ToString() ?? $"ThemeVariant {{ Key = {Key} }}";
     }
 
-    public override int GetHashCode()
+    public override int32 GetHashCode()
     {
         return Key.GetHashCode();
     }

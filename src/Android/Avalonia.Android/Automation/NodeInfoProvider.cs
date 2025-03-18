@@ -7,7 +7,7 @@ using Avalonia.Automation.Peers;
 
 namespace Avalonia.Android.Automation
 {
-    internal delegate INodeInfoProvider NodeInfoProviderInitializer(ExploreByTouchHelper owner, AutomationPeer peer, int virtualViewId);
+    internal delegate INodeInfoProvider NodeInfoProviderInitializer(ExploreByTouchHelper owner, AutomationPeer peer, int32 virtualViewId);
 
     internal abstract class NodeInfoProvider<T> : INodeInfoProvider
     {
@@ -15,9 +15,9 @@ namespace Avalonia.Android.Automation
 
         private readonly AutomationPeer _peer;
 
-        public int VirtualViewId { get; }
+        public int32 VirtualViewId { get; }
 
-        public NodeInfoProvider(ExploreByTouchHelper owner, AutomationPeer peer, int virtualViewId)
+        public NodeInfoProvider(ExploreByTouchHelper owner, AutomationPeer peer, int32 virtualViewId)
         {
             _owner = owner;
             _peer = peer;
@@ -31,7 +31,7 @@ namespace Avalonia.Android.Automation
             _owner.InvalidateVirtualView(VirtualViewId);
         }
 
-        protected void InvalidateSelf(int changeTypes)
+        protected void InvalidateSelf(int32 changeTypes)
         {
             _owner.InvalidateVirtualView(VirtualViewId, changeTypes);
         }
@@ -41,7 +41,7 @@ namespace Avalonia.Android.Automation
         public T GetProvider() => _peer.GetProvider<T>() ??
             throw new InvalidOperationException($"Peer instance does not implement {nameof(T)}.");
 
-        public abstract bool PerformNodeAction(int action, Bundle? arguments);
+        public abstract bool PerformNodeAction(int32 action, Bundle? arguments);
 
         public abstract void PopulateNodeInfo(AccessibilityNodeInfoCompat nodeInfo);
     }

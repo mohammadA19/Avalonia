@@ -180,7 +180,7 @@ namespace Avalonia.Controls
         protected virtual IInputElement? GetControlInDirection(NavigationDirection direction, Control? from)
         {
             var horiz = Orientation == Orientation.Horizontal;
-            int index = from != null ? Children.IndexOf(from) : -1;
+            int32 index = from != null ? Children.IndexOf(from) : -1;
 
             switch (direction)
             {
@@ -256,7 +256,7 @@ namespace Avalonia.Controls
             //  Iterate through children.
             //  While we still supported virtualization, this was hidden in a child iterator (see source history).
             //
-            for (int i = 0, count = children.Count; i < count; ++i)
+            for (int32 i = 0, count = children.Count; i < count; ++i)
             {
                 // Get next child.
                 var child = children[i];
@@ -312,7 +312,7 @@ namespace Avalonia.Controls
             //
             // Arrange and Position Children.
             //
-            for (int i = 0, count = children.Count; i < count; ++i)
+            for (int32 i = 0, count = children.Count; i < count; ++i)
             {
                 var child = children[i];
 

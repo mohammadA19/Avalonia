@@ -16,9 +16,9 @@ namespace Avalonia.FreeDesktop.DBusIme.IBus
         private OrgFreedesktopIBusServiceProxy? _service;
         private OrgFreedesktopIBusInputContextProxy? _context;
         private string? _preeditText;
-        private int _preeditCursor;
+        private int32 _preeditCursor;
         private bool _preeditShown = true;
-        private int _insideReset;
+        private int32 _insideReset;
 
         public IBusX11TextInputMethod(Connection connection) : base(connection, "org.freedesktop.portal.IBus") { }
 
@@ -58,7 +58,7 @@ namespace Avalonia.FreeDesktop.DBusIme.IBus
                 _preeditText = stringItem.GetString();
                 _preeditCursor = _preeditText != null
                     ? Utf16Utils.CharacterOffsetToStringOffset(_preeditText,
-                        (int)Math.Min(preeditComponents.CursorPos, int.MaxValue), false)
+                        (int32)Math.Min(preeditComponents.CursorPos, int32.MaxValue), false)
                     : 0;
 
                 _preeditShown = true;
@@ -95,7 +95,7 @@ namespace Avalonia.FreeDesktop.DBusIme.IBus
                 mods |= KeyModifiers.Meta;
             FireForward(new X11InputMethodForwardedKey
             {
-                KeyVal = (int)k.keyval,
+                KeyVal = (int32)k.keyval,
                 Type = state.HasAllFlags(IBusModifierMask.ReleaseMask) ? RawKeyEventType.KeyUp : RawKeyEventType.KeyDown,
                 Modifiers = mods
             });
@@ -157,7 +157,7 @@ namespace Avalonia.FreeDesktop.DBusIme.IBus
             }
         }
 
-        protected override Task<bool> HandleKeyCore(RawKeyEventArgs args, int keyVal, int keyCode)
+        protected override Task<bool> HandleKeyCore(RawKeyEventArgs args, int32 keyVal, int32 keyCode)
         {
             IBusModifierMask state = default;
             if (args.Modifiers.HasAllFlags(RawInputModifiers.Control))

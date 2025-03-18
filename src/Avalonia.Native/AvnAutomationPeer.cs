@@ -43,13 +43,13 @@ namespace Avalonia.Native
         public IAvnAutomationPeer? Parent => Wrap(_inner.GetParent());
         public IAvnAutomationPeer? VisualRoot => Wrap(_inner.GetVisualRoot());
 
-        public int HasKeyboardFocus() => _inner.HasKeyboardFocus().AsComBool();
-        public int IsContentElement() => _inner.IsContentElement().AsComBool();
-        public int IsControlElement() => _inner.IsControlElement().AsComBool();
-        public int IsEnabled() => _inner.IsEnabled().AsComBool();
-        public int IsKeyboardFocusable() => _inner.IsKeyboardFocusable().AsComBool();
+        public int32 HasKeyboardFocus() => _inner.HasKeyboardFocus().AsComBool();
+        public int32 IsContentElement() => _inner.IsContentElement().AsComBool();
+        public int32 IsControlElement() => _inner.IsControlElement().AsComBool();
+        public int32 IsEnabled() => _inner.IsEnabled().AsComBool();
+        public int32 IsKeyboardFocusable() => _inner.IsKeyboardFocusable().AsComBool();
         public void SetFocus() => _inner.SetFocus();
-        public int ShowContextMenu() => _inner.ShowContextMenu().AsComBool();
+        public int32 ShowContextMenu() => _inner.ShowContextMenu().AsComBool();
 
         public void SetNode(IAvnAutomationNode node)
         {
@@ -58,7 +58,7 @@ namespace Avalonia.Native
             Node = node;
         }
 
-        public int IsInteropPeer() => (_inner is InteropAutomationPeer).AsComBool();
+        public int32 IsInteropPeer() => (_inner is InteropAutomationPeer).AsComBool();
         public IntPtr InteropPeer_GetNativeControlHandle() => ((InteropAutomationPeer)_inner).NativeControlHandle.Handle;
         
         public IAvnAutomationPeer? RootPeer
@@ -87,7 +87,7 @@ namespace Avalonia.Native
         private IToggleProvider ToggleProvider => GetProvider<IToggleProvider>();
         private IValueProvider ValueProvider => GetProvider<IValueProvider>();
 
-        public int IsRootProvider() => IsProvider<IRootProvider>();
+        public int32 IsRootProvider() => IsProvider<IRootProvider>();
 
         public IAvnWindowBase? RootProvider_GetWindow() => (RootProvider.PlatformImpl as WindowBaseImpl)?.Native;
         public IAvnAutomationPeer? RootProvider_GetFocus() => Wrap(RootProvider.GetFocus());
@@ -114,7 +114,7 @@ namespace Avalonia.Native
         }
 
 
-        public int IsEmbeddedRootProvider() => IsProvider<IEmbeddedRootProvider>();
+        public int32 IsEmbeddedRootProvider() => IsProvider<IEmbeddedRootProvider>();
 
         public IAvnAutomationPeer? EmbeddedRootProvider_GetFocus() => Wrap(EmbeddedRootProvider.GetFocus());
 
@@ -139,23 +139,23 @@ namespace Avalonia.Native
             return Wrap(result);
         }
 
-        public int IsExpandCollapseProvider() => IsProvider<IExpandCollapseProvider>();
+        public int32 IsExpandCollapseProvider() => IsProvider<IExpandCollapseProvider>();
 
-        public int ExpandCollapseProvider_GetIsExpanded() => ExpandCollapseProvider.ExpandCollapseState switch
+        public int32 ExpandCollapseProvider_GetIsExpanded() => ExpandCollapseProvider.ExpandCollapseState switch
         {
             ExpandCollapseState.Expanded => 1,
             ExpandCollapseState.PartiallyExpanded => 1,
             _ => 0,
         };
 
-        public int ExpandCollapseProvider_GetShowsMenu() => ExpandCollapseProvider.ShowsMenu.AsComBool();
+        public int32 ExpandCollapseProvider_GetShowsMenu() => ExpandCollapseProvider.ShowsMenu.AsComBool();
         public void ExpandCollapseProvider_Expand() => ExpandCollapseProvider.Expand();
         public void ExpandCollapseProvider_Collapse() => ExpandCollapseProvider.Collapse();
 
-        public int IsInvokeProvider() => IsProvider<IInvokeProvider>();
+        public int32 IsInvokeProvider() => IsProvider<IInvokeProvider>();
         public void InvokeProvider_Invoke() => InvokeProvider.Invoke();
 
-        public int IsRangeValueProvider() => IsProvider<IRangeValueProvider>();
+        public int32 IsRangeValueProvider() => IsProvider<IRangeValueProvider>();
         public double RangeValueProvider_GetValue() => RangeValueProvider.Value;
         public double RangeValueProvider_GetMinimum() => RangeValueProvider.Minimum;
         public double RangeValueProvider_GetMaximum() => RangeValueProvider.Maximum;
@@ -163,14 +163,14 @@ namespace Avalonia.Native
         public double RangeValueProvider_GetLargeChange() => RangeValueProvider.LargeChange;
         public void RangeValueProvider_SetValue(double value) => RangeValueProvider.SetValue(value);
 
-        public int IsSelectionItemProvider() => IsProvider<ISelectionItemProvider>();
-        public int SelectionItemProvider_IsSelected() => SelectionItemProvider.IsSelected.AsComBool();
+        public int32 IsSelectionItemProvider() => IsProvider<ISelectionItemProvider>();
+        public int32 SelectionItemProvider_IsSelected() => SelectionItemProvider.IsSelected.AsComBool();
         
-        public int IsToggleProvider() => IsProvider<IToggleProvider>();
-        public int ToggleProvider_GetToggleState() => (int)ToggleProvider.ToggleState;
+        public int32 IsToggleProvider() => IsProvider<IToggleProvider>();
+        public int32 ToggleProvider_GetToggleState() => (int32)ToggleProvider.ToggleState;
         public void ToggleProvider_Toggle() => ToggleProvider.Toggle();
 
-        public int IsValueProvider() => IsProvider<IValueProvider>();
+        public int32 IsValueProvider() => IsProvider<IValueProvider>();
         public IAvnString ValueProvider_GetValue() => ValueProvider.Value.ToAvnString();
         public void ValueProvider_SetValue(string value) => ValueProvider.SetValue(value);
 
@@ -186,7 +186,7 @@ namespace Avalonia.Native
                 $"The peer {_inner} does not implement {typeof(T)}.");
         }
 
-        private int IsProvider<T>() => (_inner.GetProvider<T>() is not null).AsComBool();
+        private int32 IsProvider<T>() => (_inner.GetProvider<T>() is not null).AsComBool();
     }
 
     internal class AvnAutomationPeerArray : NativeCallbackBase, IAvnAutomationPeerArray

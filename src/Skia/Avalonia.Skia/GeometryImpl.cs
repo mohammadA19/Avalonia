@@ -173,7 +173,7 @@ namespace Avalonia.Skia
 
         private struct PathCache : IDisposable
         {
-            private int _penHash;
+            private int32 _penHash;
             private SKPath? _path, _cachedFor;
             private Rect? _renderBounds;
             private static readonly SKPath s_emptyPath = new();

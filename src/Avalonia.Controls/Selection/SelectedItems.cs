@@ -20,7 +20,7 @@ namespace Avalonia.Controls.Selection
             _items = items;
         }
 
-        public override T? this[int index]
+        public override T? this[int32 index]
         {
             get
             {
@@ -44,7 +44,7 @@ namespace Avalonia.Controls.Selection
             }
         }
 
-        public override int Count
+        public override int32 Count
         {
             get
             {
@@ -96,8 +96,8 @@ namespace Avalonia.Controls.Selection
         {
             private readonly IReadOnlyList<T?> _source;
             public Untyped(IReadOnlyList<T?> source) => _source = source;
-            public override object? this[int index] => _source[index];
-            public override int Count => _source.Count;
+            public override object? this[int32 index] => _source[index];
+            public override int32 Count => _source.Count;
             public override IEnumerator<object?> GetEnumerator()
             {
                 foreach (var i in _source)

@@ -12,7 +12,7 @@ namespace Avalonia.Media.TextFormatting
         private GlyphInfo[]? _rentedBuffer;
         private ArraySlice<GlyphInfo> _glyphInfos;
 
-        public ShapedBuffer(ReadOnlyMemory<char> text, int bufferLength, IGlyphTypeface glyphTypeface, double fontRenderingEmSize, sbyte bidiLevel)
+        public ShapedBuffer(ReadOnlyMemory<char> text, int32 bufferLength, IGlyphTypeface glyphTypeface, double fontRenderingEmSize, sbyte bidiLevel)
         {
             Text = text;
             _rentedBuffer = ArrayPool<GlyphInfo>.Shared.Rent(bufferLength);
@@ -34,7 +34,7 @@ namespace Avalonia.Media.TextFormatting
         /// <summary>
         /// The buffer's length.
         /// </summary>
-        public int Length => _glyphInfos.Length;
+        public int32 Length => _glyphInfos.Length;
 
         /// <summary>
         /// The buffer's glyph typeface.
@@ -79,7 +79,7 @@ namespace Avalonia.Media.TextFormatting
             }
         }
 
-        public GlyphInfo this[int index]
+        public GlyphInfo this[int32 index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => _glyphInfos[index];
@@ -96,7 +96,7 @@ namespace Avalonia.Media.TextFormatting
         /// <returns>
         /// The glyph index.
         /// </returns>
-        private int FindGlyphIndex(int characterIndex)
+        private int32 FindGlyphIndex(int32 characterIndex)
         {
             if (characterIndex < _glyphInfos[0].GlyphCluster)
             {
@@ -146,7 +146,7 @@ namespace Avalonia.Media.TextFormatting
         /// </summary>
         /// <param name="length">The length.</param>
         /// <returns>The split result.</returns>
-        internal SplitResult<ShapedBuffer> Split(int length)
+        internal SplitResult<ShapedBuffer> Split(int32 length)
         {
             if (Text.Length == length)
             {
@@ -171,7 +171,7 @@ namespace Avalonia.Media.TextFormatting
 
         internal void ResetBidiLevel(sbyte paragraphEmbeddingLevel) => BidiLevel = paragraphEmbeddingLevel;
 
-        int IReadOnlyCollection<GlyphInfo>.Count => _glyphInfos.Length;
+        int32 IReadOnlyCollection<GlyphInfo>.Count => _glyphInfos.Length;
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();       
     }

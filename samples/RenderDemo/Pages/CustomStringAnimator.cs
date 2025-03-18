@@ -10,7 +10,7 @@ namespace RenderDemo.Pages
         {
             if (newValue.Length == 0) return "";
             var step = 1.0 / newValue.Length;
-            var length = (int)(progress / step);
+            var length = (int32)(progress / step);
             var result = newValue.Substring(0, length + 1);
             return result;
         }

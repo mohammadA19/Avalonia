@@ -47,7 +47,7 @@ public partial class Visual
         var compositionChildren = CompositionVisual.Children;
         var visualChildren = (AvaloniaList<Visual>)VisualChildren;
         
-        PooledList<(Visual visual, int index)>? sortedChildren = null;
+        PooledList<(Visual visual, int32 index)>? sortedChildren = null;
         if (HasNonUniformZIndexChildren && visualChildren.Count > 1)
         {
             sortedChildren = new (visualChildren.Count);

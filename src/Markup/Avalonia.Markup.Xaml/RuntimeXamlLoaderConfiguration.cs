@@ -68,8 +68,8 @@ public record RuntimeXamlDiagnostic(
     string Id,
     RuntimeXamlDiagnosticSeverity Severity,
     string Title,
-    int? LineNumber,
-    int? LinePosition)
+    int32? LineNumber,
+    int32? LinePosition)
 {
     public string? Document { get; set; }
 }

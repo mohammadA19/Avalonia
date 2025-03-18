@@ -269,7 +269,7 @@ namespace Avalonia.Controls.UnitTests.Presenters
 
             var (target, host) = CreateTarget();
             host.DataTemplates.Add(new FuncDataTemplate<string>((_, __) => textBlock));
-            host.DataTemplates.Add(new FuncDataTemplate<int>((_, __) => new Canvas()));
+            host.DataTemplates.Add(new FuncDataTemplate<int32>((_, __) => new Canvas()));
 
             target.Content = "foo";
             Assert.Same(textBlock, target.Child);

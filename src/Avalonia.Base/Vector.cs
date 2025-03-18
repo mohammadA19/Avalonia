@@ -171,7 +171,7 @@ namespace Avalonia
 
         public override bool Equals(object? obj) => obj is Vector other && Equals(other);
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {

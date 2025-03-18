@@ -4,9 +4,9 @@ namespace Avalonia.Rendering.Composition.Expressions
 {
     internal class ExpressionParseException : Exception
     {
-        public int Position { get; }
+        public int32 Position { get; }
 
-        public ExpressionParseException(string message, int position) : base(message)
+        public ExpressionParseException(string message, int32 position) : base(message)
         {
             Position = position;
         }

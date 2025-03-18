@@ -12,7 +12,7 @@ namespace Avalonia.Native
         private readonly Action<Action<IAvnTopLevel>> _lockTopLevel;
         
         public DeferredFramebuffer(IAvnSoftwareRenderTarget renderTarget, Action<Action<IAvnTopLevel>> lockTopLevel,
-                                   int width, int height, Vector dpi)
+                                   int32 width, int32 height, Vector dpi)
         {
             _renderTarget = renderTarget;
             _lockTopLevel = lockTopLevel;
@@ -25,8 +25,8 @@ namespace Avalonia.Native
 
         public IntPtr Address { get; set; }
         public PixelSize Size { get; set; }
-        public int Height { get; set; }
-        public int RowBytes { get; set; }
+        public int32 Height { get; set; }
+        public int32 RowBytes { get; set; }
         public Vector Dpi { get; set; }
         public PixelFormat Format { get; set; }
 

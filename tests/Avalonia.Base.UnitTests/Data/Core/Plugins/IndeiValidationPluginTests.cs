@@ -65,13 +65,13 @@ namespace Avalonia.Base.UnitTests.Data.Core.Plugins
 
         internal class Data : IndeiBase
         {
-            private int _value;
-            private int _maximum;
+            private int32 _value;
+            private int32 _maximum;
             private string _error;
 
             public override bool HasErrors => _error != null;
 
-            public int Value
+            public int32 Value
             {
                 get { return _value; }
                 set
@@ -82,7 +82,7 @@ namespace Avalonia.Base.UnitTests.Data.Core.Plugins
                 }
             }
 
-            public int Maximum
+            public int32 Maximum
             {
                 get { return _maximum; }
                 set

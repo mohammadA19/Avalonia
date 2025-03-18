@@ -51,8 +51,8 @@ namespace Avalonia.Controls.Primitives
         /// </returns>
         public bool Contains(DateTime date)
         {
-            int count = Count;
-            for (int i = 0; i < count; i++)
+            int32 count = Count;
+            for (int32 i = 0; i < count; i++)
             {
                 if (DateTimeHelper.InRange(date, this[i]))
                 {
@@ -88,8 +88,8 @@ namespace Avalonia.Controls.Primitives
                 rangeEnd = DateTimeHelper.DiscardTime(start);
             }
 
-            int count = Count;
-            for (int i = 0; i < count; i++)
+            int32 count = Count;
+            for (int32 i = 0; i < count; i++)
             {
                 CalendarDateRange range = this[i];
                 if (DateTime.Compare(range.Start, rangeStart) == 0 && DateTime.Compare(range.End, rangeEnd) == 0)
@@ -138,7 +138,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// This implementation raises the CollectionChanged event.
         /// </remarks>
-        protected override void InsertItem(int index, CalendarDateRange item)
+        protected override void InsertItem(int32 index, CalendarDateRange item)
         {
             EnsureValidThread();
 
@@ -160,7 +160,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// This implementation raises the CollectionChanged event.
         /// </remarks>
-        protected override void RemoveItem(int index)
+        protected override void RemoveItem(int32 index)
         {
             EnsureValidThread();
 
@@ -180,7 +180,7 @@ namespace Avalonia.Controls.Primitives
         /// <remarks>
         /// This implementation raises the CollectionChanged event.
         /// </remarks>
-        protected override void SetItem(int index, CalendarDateRange item)
+        protected override void SetItem(int32 index, CalendarDateRange item)
         {
             EnsureValidThread();
 

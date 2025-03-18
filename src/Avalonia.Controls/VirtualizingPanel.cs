@@ -67,7 +67,7 @@ namespace Avalonia.Controls
         /// <returns>
         /// The element with the specified index, or null if the element could not be brought into view.
         /// </returns>
-        protected internal abstract Control? ScrollIntoView(int index);
+        protected internal abstract Control? ScrollIntoView(int32 index);
 
         /// <summary>
         /// Returns the container for the item at the specified index.
@@ -82,7 +82,7 @@ namespace Avalonia.Controls
         /// item that has previously been realized, then the item should be returned even if it
         /// currently falls outside the realized viewport.
         /// </remarks>
-        protected internal abstract Control? ContainerFromIndex(int index);
+        protected internal abstract Control? ContainerFromIndex(int32 index);
 
         /// <summary>
         /// Returns the index to the item that has the specified realized container.
@@ -92,7 +92,7 @@ namespace Avalonia.Controls
         /// The index to the item that corresponds to the specified realized container, or -1 if 
         /// <paramref name="container"/> is not found.
         /// </returns>
-        protected internal abstract int IndexFromContainer(Control container);
+        protected internal abstract int32 IndexFromContainer(Control container);
 
         /// <summary>
         /// Gets the currently realized containers.
@@ -154,7 +154,7 @@ namespace Avalonia.Controls
         /// The index position within the collection at which the child element is inserted.
         /// </param>
         /// <param name="control">The control to add to the collection.</param>
-        protected void InsertInternalChild(int index, Control control)
+        protected void InsertInternalChild(int32 index, Control control)
         {
             var itemsControl = EnsureItemsControl();
             itemsControl.AddLogicalChild(control);
@@ -180,7 +180,7 @@ namespace Avalonia.Controls
         /// removed.
         /// </param>
         /// <param name="count">The number of child elements to remove.</param>
-        protected void RemoveInternalChildRange(int index, int count)
+        protected void RemoveInternalChildRange(int32 index, int32 count)
         {
             var itemsControl = EnsureItemsControl();
             
@@ -193,7 +193,7 @@ namespace Avalonia.Controls
             Children.RemoveRange(index, count);
         }
 
-        internal int GetIndexFromTextSearch(string textSearchTerm)
+        internal int32 GetIndexFromTextSearch(string textSearchTerm)
         {
             return ItemsPresenter.GetIndexFromTextSearch(Items, textSearchTerm);
         }

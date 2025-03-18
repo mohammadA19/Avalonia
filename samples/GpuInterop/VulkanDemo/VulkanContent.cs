@@ -59,7 +59,7 @@ unsafe class VulkanContent : IDisposable
                 };
             }
 
-            for (int i = 0; i < _indices.Length; i += 3)
+            for (int32 i = 0; i < _indices.Length; i += 3)
             {
                 Vector3 a = _points[_indices[i]].Position;
                 Vector3 b = _points[_indices[i + 1]].Position;
@@ -71,7 +71,7 @@ unsafe class VulkanContent : IDisposable
                 _points[_indices[i + 2]].Normal += normal;
             }
 
-            for (int i = 0; i < _points.Length; i++)
+            for (int32 i = 0; i < _points.Length; i++)
             {
                 _points[i].Normal = Vector3.Normalize(_points[i].Normal);
                 _maxY = Math.Max(_maxY, _points[i].Position.Y);
@@ -740,7 +740,7 @@ unsafe class VulkanContent : IDisposable
             out _indexBufferMemory, _indices);
     }
 
-    private static int FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint memoryTypeBits,
+    private static int32 FindSuitableMemoryTypeIndex(Vk api, PhysicalDevice physicalDevice, uint memoryTypeBits,
         MemoryPropertyFlags flags)
     {
         api.GetPhysicalDeviceMemoryProperties(physicalDevice, out var properties);

@@ -13,7 +13,7 @@ namespace Avalonia.Controls.Utils
     {
         public static NotifyCollectionChangedEventArgs ResetEventArgs { get; } = new(NotifyCollectionChangedAction.Reset);
 
-        public static void InsertMany<T>(this List<T> list, int index, T item, int count)
+        public static void InsertMany<T>(this List<T> list, int32 index, T item, int32 count)
         {
             var repeat = FastRepeat<T>.Instance;
             repeat.Count = count;
@@ -25,7 +25,7 @@ namespace Avalonia.Controls.Utils
         private class FastRepeat<T> : ICollection<T>
         {
             public static readonly FastRepeat<T> Instance = new();
-            public int Count { get; set; }
+            public int32 Count { get; set; }
             public bool IsReadOnly => true;
             [AllowNull] public T Item { get; set; }
             public void Add(T item) => throw new NotImplementedException();
@@ -35,7 +35,7 @@ namespace Avalonia.Controls.Utils
             IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
             public IEnumerator<T> GetEnumerator() => throw new NotImplementedException();
 
-            public void CopyTo(T[] array, int arrayIndex)
+            public void CopyTo(T[] array, int32 arrayIndex)
             {
                 var end = arrayIndex + Count;
 

@@ -11,7 +11,7 @@ namespace Avalonia.Layout
         private struct Info
         {
             public bool Active;
-            public int Count;
+            public int32 Count;
         }
 
         public LayoutQueue(Func<T, bool> shouldEnqueue)
@@ -24,9 +24,9 @@ namespace Avalonia.Layout
         private readonly Dictionary<T, Info> _loopQueueInfo = new Dictionary<T, Info>();
         private readonly List<KeyValuePair<T, Info>> _notFinalizedBuffer = new List<KeyValuePair<T, Info>>();
 
-        private int _maxEnqueueCountPerLoop = 1;
+        private int32 _maxEnqueueCountPerLoop = 1;
 
-        public int Count => _inner.Count;
+        public int32 Count => _inner.Count;
 
         public IEnumerator<T> GetEnumerator() => (_inner as IEnumerable<T>).GetEnumerator();
 
@@ -67,7 +67,7 @@ namespace Avalonia.Layout
             }
         }
 
-        public void BeginLoop(int maxEnqueueCountPerLoop)
+        public void BeginLoop(int32 maxEnqueueCountPerLoop)
         {
             _maxEnqueueCountPerLoop = maxEnqueueCountPerLoop;
         }

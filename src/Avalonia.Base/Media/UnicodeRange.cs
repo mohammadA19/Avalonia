@@ -14,7 +14,7 @@ namespace Avalonia.Media
         private readonly UnicodeRangeSegment _single;
         private readonly IReadOnlyList<UnicodeRangeSegment>? _segments = null;
 
-        public UnicodeRange(int start, int end)
+        public UnicodeRange(int32 start, int32 end)
         {
             _single = new UnicodeRangeSegment(start, end);
         }
@@ -46,7 +46,7 @@ namespace Avalonia.Media
         /// <returns>
         /// <c>true</c> If given value is inside the range, <c>false</c> otherwise.
         /// </returns>
-        public bool IsInRange(int value)
+        public bool IsInRange(int32 value)
         {
             if(_segments is null)
             {
@@ -93,7 +93,7 @@ namespace Avalonia.Media
 
             var segments = new UnicodeRangeSegment[length];
 
-            for (int i = 0; i < length; i++)
+            for (int32 i = 0; i < length; i++)
             {
                 segments[i] = UnicodeRangeSegment.Parse(parts[i].Trim());
             }
@@ -106,7 +106,7 @@ namespace Avalonia.Media
     {
         private static readonly Regex s_regex = new Regex(@"^(?:[uU]\+)?(?:([0-9a-fA-F](?:[0-9a-fA-F?]{1,5})?))$", RegexOptions.Compiled);
 
-        public UnicodeRangeSegment(int start, int end)
+        public UnicodeRangeSegment(int32 start, int32 end)
         {
             Start = start;
             End = end;
@@ -115,12 +115,12 @@ namespace Avalonia.Media
         /// <summary>
         /// Get the start of the segment.
         /// </summary>
-        public int Start { get; }
+        public int32 Start { get; }
 
         /// <summary>
         /// Get the end of the segment.
         /// </summary>
-        public int End { get; }
+        public int32 End { get; }
 
         /// <summary>
         /// Determines if given value is inside the range segment.
@@ -129,7 +129,7 @@ namespace Avalonia.Media
         /// <returns>
         /// <c>true</c> If given value is inside the range segment, <c>false</c> otherwise.
         /// </returns>
-        public bool IsInRange(int value)
+        public bool IsInRange(int32 value)
         {
             return Start <= value && value <= End;
         }
@@ -149,7 +149,7 @@ namespace Avalonia.Media
 
             var parts = s.Split('-');
 
-            int start, end;
+            int32 start, end;
 
             switch (parts.Length)
             {
@@ -165,13 +165,13 @@ namespace Avalonia.Media
 
                         if (!single.Value.Contains('?'))
                         {
-                            start = int.Parse(single.Groups[1].Value, System.Globalization.NumberStyles.HexNumber);
+                            start = int32.Parse(single.Groups[1].Value, System.Globalization.NumberStyles.HexNumber);
                             end = start;
                         }
                         else
                         {
-                            start = int.Parse(single.Groups[1].Value.Replace('?', '0'), System.Globalization.NumberStyles.HexNumber);
-                            end = int.Parse(single.Groups[1].Value.Replace('?', 'F'), System.Globalization.NumberStyles.HexNumber);
+                            start = int32.Parse(single.Groups[1].Value.Replace('?', '0'), System.Globalization.NumberStyles.HexNumber);
+                            end = int32.Parse(single.Groups[1].Value.Replace('?', 'F'), System.Globalization.NumberStyles.HexNumber);
                         }
                         break;
                     }
@@ -185,8 +185,8 @@ namespace Avalonia.Media
                             throw new FormatException("Could not parse specified Unicode range segment.");
                         }
 
-                        start = int.Parse(first.Groups[1].Value, System.Globalization.NumberStyles.HexNumber);
-                        end = int.Parse(second.Groups[1].Value, System.Globalization.NumberStyles.HexNumber);
+                        start = int32.Parse(first.Groups[1].Value, System.Globalization.NumberStyles.HexNumber);
+                        end = int32.Parse(second.Groups[1].Value, System.Globalization.NumberStyles.HexNumber);
                         break;
                     }
                 default:

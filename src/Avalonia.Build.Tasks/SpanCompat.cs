@@ -8,9 +8,9 @@ namespace System
     struct ReadOnlySpan<T>
     {
         private string _s;
-        private int _start;
-        private int _length;
-        public int Length => _length;
+        private int32 _start;
+        private int32 _length;
+        public int32 Length => _length;
 
         public static implicit operator ReadOnlySpan<T>(string s) => new ReadOnlySpan<T>(s);
 
@@ -18,7 +18,7 @@ namespace System
         {
             
         }
-        public ReadOnlySpan(string s, int start, int len)
+        public ReadOnlySpan(string s, int32 start, int32 len)
         {
             _s = s;
             _length = len;
@@ -29,18 +29,18 @@ namespace System
                 _length = s.Length - _start;
         }
 
-        public char this[int c] => _s[_start + c];
+        public char this[int32 c] => _s[_start + c];
 
         public bool IsEmpty => _length == 0;
         
-        public ReadOnlySpan<char> Slice(int start, int len)
+        public ReadOnlySpan<char> Slice(int32 start, int32 len)
         {
             return new ReadOnlySpan<char>(_s, _start + start, len);
         }
 
         public static ReadOnlySpan<char> Empty => default;
         
-        public ReadOnlySpan<char> Slice(int start)
+        public ReadOnlySpan<char> Slice(int32 start)
         {
             return new ReadOnlySpan<char>(_s, _start + start, _length - start);
         }
@@ -57,7 +57,7 @@ namespace System
         
         public ReadOnlySpan<char> TrimStart()
         {
-            int start = 0;
+            int32 start = 0;
             for (; start < Length; start++)
             {
                 if (!char.IsWhiteSpace(this[start]))
@@ -70,7 +70,7 @@ namespace System
 
         public ReadOnlySpan<char> TrimEnd()
         {
-            int end = Length - 1;
+            int32 end = Length - 1;
             for (; end >= 0; end--)
             {
                 if (!char.IsWhiteSpace(this[end]))
@@ -88,7 +88,7 @@ namespace System
         
         public override string ToString() => _length == 0 ? string.Empty : _s.Substring(_start, _length);
 
-        internal int IndexOf(ReadOnlySpan<char> v, StringComparison ordinal, int start = 0)
+        internal int32 IndexOf(ReadOnlySpan<char> v, StringComparison ordinal, int32 start = 0)
         {
             if(Length == 0 || v.IsEmpty)
             {

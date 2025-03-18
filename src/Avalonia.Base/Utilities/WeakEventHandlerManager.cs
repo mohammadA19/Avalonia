@@ -79,7 +79,7 @@ namespace Avalonia.Utilities
             private readonly Delegate _delegate;
 
             private Descriptor[] _data = new Descriptor[2];
-            private int _count;
+            private int32 _count;
 
             private delegate void CallerDelegate(TSubscriber s, object? sender, T args);
 
@@ -158,7 +158,7 @@ namespace Avalonia.Utilities
             {
                 var removed = false;
 
-                for (int c = 0; c < _count; ++c)
+                for (int32 c = 0; c < _count; ++c)
                 {
                     var reference = _data[c].Subscriber;
 
@@ -177,8 +177,8 @@ namespace Avalonia.Utilities
 
             private void Compact(bool preventDestroy = false)
             {
-                int empty = -1;
-                for (int c = 0; c < _count; c++)
+                int32 empty = -1;
+                for (int32 c = 0; c < _count; c++)
                 {
                     var r = _data[c];
 

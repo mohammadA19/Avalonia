@@ -92,7 +92,7 @@ internal static class EglDisplayUtils
                     EGL_DEPTH_SIZE, depthSize,
                     EGL_NONE
                 };
-                if (!egl.ChooseConfig(display, attribs, out var config, 1, out int numConfigs))
+                if (!egl.ChooseConfig(display, attribs, out var config, 1, out int32 numConfigs))
                     continue;
                 if (numConfigs == 0)
                     continue;
@@ -115,13 +115,13 @@ internal class EglConfigInfo
 {
     public IntPtr Config { get; }
     public GlVersion Version { get; }
-    public int SurfaceType { get; }
-    public int[] Attributes { get; }
-    public int SampleCount { get; }
-    public int StencilSize { get; }
+    public int32 SurfaceType { get; }
+    public int32[] Attributes { get; }
+    public int32 SampleCount { get; }
+    public int32 StencilSize { get; }
 
-    public EglConfigInfo(IntPtr config, GlVersion version, int surfaceType, int[] attributes, int sampleCount,
-        int stencilSize)
+    public EglConfigInfo(IntPtr config, GlVersion version, int32 surfaceType, int32[] attributes, int32 sampleCount,
+        int32 stencilSize)
     {
         Config = config;
         Version = version;

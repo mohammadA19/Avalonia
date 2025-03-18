@@ -530,7 +530,7 @@ namespace Avalonia.Controls.Primitives
                 return;
             }
             //Remove any classes no longer in use, ignoring pseudo classes
-            for (int i = presenter.Classes.Count - 1; i >= 0; i--)
+            for (int32 i = presenter.Classes.Count - 1; i >= 0; i--)
             {
                 if (!classes.Contains(presenter.Classes[i]) &&
                     !presenter.Classes[i].Contains(':'))

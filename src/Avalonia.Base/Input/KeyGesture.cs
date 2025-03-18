@@ -39,11 +39,11 @@ namespace Avalonia.Input
             return obj is KeyGesture gesture && Equals(gesture);
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
-                return ((int)Key * 397) ^ (int)KeyModifiers;
+                return ((int32)Key * 397) ^ (int32)KeyModifiers;
             }
         }
 

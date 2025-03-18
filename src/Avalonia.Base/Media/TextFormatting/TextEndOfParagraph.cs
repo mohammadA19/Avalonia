@@ -10,7 +10,7 @@
             
         }
         
-        public TextEndOfParagraph(int textSourceLength) : base(textSourceLength)
+        public TextEndOfParagraph(int32 textSourceLength) : base(textSourceLength)
         {
             
         }

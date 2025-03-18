@@ -47,7 +47,7 @@ partial class X11Window
             (point.Y - (Window._position ?? default).Y) / Window.RenderScaling);
 
         public override PixelPoint PointToScreen(Point point) => new PixelPoint(
-            (int)(point.X * Window.RenderScaling + (Window._position ?? default).X),
-            (int)(point.Y * Window.RenderScaling + (Window._position ?? default).Y));
+            (int32)(point.X * Window.RenderScaling + (Window._position ?? default).X),
+            (int32)(point.Y * Window.RenderScaling + (Window._position ?? default).Y));
     }
 }

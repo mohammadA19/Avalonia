@@ -24,8 +24,8 @@ public class CrossTestBase
         
         var w = root.Width;
         var h = root.Height;
-        var pw = (int)Math.Ceiling(w * dpi / 96);
-        var ph = (int)Math.Ceiling(h * dpi / 96);
+        var pw = (int32)Math.Ceiling(w * dpi / 96);
+        var ph = (int32)Math.Ceiling(h * dpi / 96);
         
         var control = new WpfCrossControl(root);
         control.Measure(new System.Windows.Size(w, h));

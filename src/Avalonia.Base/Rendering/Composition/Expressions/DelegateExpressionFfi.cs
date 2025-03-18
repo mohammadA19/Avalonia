@@ -18,8 +18,8 @@ namespace Avalonia.Rendering.Composition.Expressions
             public Func<IReadOnlyList<ExpressionVariant>, ExpressionVariant> Delegate;
         }
 
-        private readonly Dictionary<string, Dictionary<int, List<FfiRecord>>>
-            _registry = new Dictionary<string, Dictionary<int, List<FfiRecord>>>();
+        private readonly Dictionary<string, Dictionary<int32, List<FfiRecord>>>
+            _registry = new Dictionary<string, Dictionary<int32, List<FfiRecord>>>();
 
         public bool Call(string name, IReadOnlyList<ExpressionVariant> arguments, out ExpressionVariant result)
         {
@@ -98,7 +98,7 @@ namespace Avalonia.Rendering.Composition.Expressions
         {
             if (!_registry.TryGetValue(name, out var nameGroup))
                 _registry[name] = nameGroup =
-                    new Dictionary<int, List<FfiRecord>>();
+                    new Dictionary<int32, List<FfiRecord>>();
             if (!nameGroup.TryGetValue(types.Length, out var countGroup))
                 nameGroup[types.Length] = countGroup = new List<FfiRecord>();
 

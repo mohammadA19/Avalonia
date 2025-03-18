@@ -27,7 +27,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void Property_Indexer_Finds_Value(int count)
+        public void Property_Indexer_Finds_Value(int32 count)
         {
             if (count == 0)
                 return;
@@ -42,7 +42,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void Property_Indexer_Throws_If_Value_Not_Found(int count)
+        public void Property_Indexer_Throws_If_Value_Not_Found(int32 count)
         {
             var target = CreateTarget(count);
             var index = count;
@@ -53,7 +53,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void Property_Indexer_Adds_New_Value(int count)
+        public void Property_Indexer_Adds_New_Value(int32 count)
         {
             var target = CreateTarget(count);
             var index = count;
@@ -66,7 +66,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void Property_Indexer_Sets_Existing_Value(int count)
+        public void Property_Indexer_Sets_Existing_Value(int32 count)
         {
             if (count == 0)
                 return;
@@ -84,7 +84,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void Int_Indexer_Finds_Value(int count)
+        public void Int_Indexer_Finds_Value(int32 count)
         {
             if (count == 0)
                 return;
@@ -98,7 +98,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void Int_Indexer_Throws_If_Index_Out_Of_Range(int count)
+        public void Int_Indexer_Throws_If_Index_Out_Of_Range(int32 count)
         {
             var target = CreateTarget(count);
             var index = count;
@@ -108,7 +108,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void Add_Adds_New_Value(int count)
+        public void Add_Adds_New_Value(int32 count)
         {
             var target = CreateTarget(count);
             var index = count;
@@ -121,7 +121,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void Add_Throws_If_Key_Exists(int count)
+        public void Add_Throws_If_Key_Exists(int32 count)
         {
             if (count == 0)
                 return;
@@ -136,7 +136,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void ContainsKey_Returns_True_If_Value_Exists(int count)
+        public void ContainsKey_Returns_True_If_Value_Exists(int32 count)
         {
             if (count == 0)
                 return;
@@ -150,7 +150,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void ContainsKey_Returns_False_If_Value_Does_Not_Exist(int count)
+        public void ContainsKey_Returns_False_If_Value_Does_Not_Exist(int32 count)
         {
             var target = CreateTarget(count);
             var index = count;
@@ -161,7 +161,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void GetValue_Finds_Value(int count)
+        public void GetValue_Finds_Value(int32 count)
         {
             if (count == 0)
                 return;
@@ -176,7 +176,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void GetValue_Throws_If_Index_Out_Of_Range(int count)
+        public void GetValue_Throws_If_Index_Out_Of_Range(int32 count)
         {
             var target = CreateTarget(count);
             var index = count;
@@ -186,7 +186,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void Remove_Removes_Value(int count)
+        public void Remove_Removes_Value(int32 count)
         {
             if (count == 0)
                 return;
@@ -201,7 +201,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void Remove_Returns_False_If_Value_Not_Present(int count)
+        public void Remove_Returns_False_If_Value_Not_Present(int32 count)
         {
             var target = CreateTarget(count);
             var index = count;
@@ -212,7 +212,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void Remove_Returns_Existing_Value(int count)
+        public void Remove_Returns_Existing_Value(int32 count)
         {
             if (count == 0)
                 return;
@@ -227,7 +227,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void TryAdd_Adds_New_Value(int count)
+        public void TryAdd_Adds_New_Value(int32 count)
         {
             var target = CreateTarget(count);
             var index = count;
@@ -240,7 +240,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void TryAdd_Returns_False_If_Key_Exists(int count)
+        public void TryAdd_Returns_False_If_Key_Exists(int32 count)
         {
             if (count == 0)
                 return;
@@ -254,7 +254,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void TryGetValue_Finds_Value(int count)
+        public void TryGetValue_Finds_Value(int32 count)
         {
             if (count == 0)
                 return;
@@ -269,7 +269,7 @@ namespace Avalonia.Base.UnitTests.Utilities
 
         [Theory]
         [MemberData(nameof(Counts))]
-        public void TryGetValue_Returns_False_If_Key_Does_Not_Exist(int count)
+        public void TryGetValue_Returns_False_If_Key_Does_Not_Exist(int32 count)
         {
             if (count == 0)
                 return;
@@ -282,9 +282,9 @@ namespace Avalonia.Base.UnitTests.Utilities
             Assert.Null(value);
         }
 
-        public static TheoryData<int> Counts()
+        public static TheoryData<int32> Counts()
         {
-            var result = new TheoryData<int>();
+            var result = new TheoryData<int32>();
             result.Add(0);
             result.Add(1);
             result.Add(10);
@@ -294,7 +294,7 @@ namespace Avalonia.Base.UnitTests.Utilities
             return result;
         }
 
-        private static AvaloniaPropertyDictionary<string> CreateTarget(int items)
+        private static AvaloniaPropertyDictionary<string> CreateTarget(int32 items)
         {
             var result = new AvaloniaPropertyDictionary<string>();
 
@@ -304,14 +304,14 @@ namespace Avalonia.Base.UnitTests.Utilities
             return result;
         }
 
-        private static void Shuffle<T>(T[] array, int seed)
+        private static void Shuffle<T>(T[] array, int32 seed)
         {
             var rng = new Random(seed);
 
-            int n = array.Length;
+            int32 n = array.Length;
             while (n > 1)
             {
-                int k = rng.Next(n--);
+                int32 k = rng.Next(n--);
                 T temp = array[n];
                 array[n] = array[k];
                 array[k] = temp;

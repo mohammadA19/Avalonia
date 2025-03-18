@@ -35,7 +35,7 @@
         /// <param name="flowDirection">The flow direction.</param>
         /// <param name="shapedSymbol">The symbol.</param>
         /// <returns>List of remaining runs.</returns>
-        public static TextRun[] CreateCollapsedRuns(TextLine textLine, int collapsedLength, FlowDirection flowDirection, TextRun shapedSymbol)
+        public static TextRun[] CreateCollapsedRuns(TextLine textLine, int32 collapsedLength, FlowDirection flowDirection, TextRun shapedSymbol)
         {
             if (collapsedLength <= 0)
             {

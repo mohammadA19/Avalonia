@@ -80,7 +80,7 @@ namespace Avalonia
             AvaloniaProperty.Register<StyledElement, ControlTheme?>(nameof(Theme));
 
         private static readonly ControlTheme s_invalidTheme = new ControlTheme();
-        private int _initCount;
+        private int32 _initCount;
         private string? _name;
         private Classes? _classes;
         private ILogicalRoot? _logicalRoot;

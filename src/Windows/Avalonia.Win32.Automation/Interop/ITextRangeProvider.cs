@@ -36,12 +36,12 @@ internal partial interface ITextRangeProvider
     [return: MarshalAs(UnmanagedType.Bool)]
     bool Compare(ITextRangeProvider range);
 
-    int CompareEndpoints(TextPatternRangeEndpoint endpoint, ITextRangeProvider targetRange,
+    int32 CompareEndpoints(TextPatternRangeEndpoint endpoint, ITextRangeProvider targetRange,
         TextPatternRangeEndpoint targetEndpoint);
 
     void ExpandToEnclosingUnit(TextUnit unit);
 
-    ITextRangeProvider FindAttribute(int attribute,
+    ITextRangeProvider FindAttribute(int32 attribute,
 #if NET8_0_OR_GREATER
         [MarshalUsing(typeof(ComVariantMarshaller))]
 #endif
@@ -54,16 +54,16 @@ internal partial interface ITextRangeProvider
 #if NET8_0_OR_GREATER
     [return: MarshalUsing(typeof(ComVariantMarshaller))]
 #endif
-    object GetAttributeValue(int attribute);
+    object GetAttributeValue(int32 attribute);
 #if NET8_0_OR_GREATER
     [return: MarshalUsing(typeof(SafeArrayMarshaller<double>))]
 #endif
     double[] GetBoundingRectangles();
     IRawElementProviderSimple GetEnclosingElement();
     [return: MarshalAs(UnmanagedType.BStr)]
-    string GetText(int maxLength);
-    int Move(TextUnit unit, int count);
-    int MoveEndpointByUnit(TextPatternRangeEndpoint endpoint, TextUnit unit, int count);
+    string GetText(int32 maxLength);
+    int32 Move(TextUnit unit, int32 count);
+    int32 MoveEndpointByUnit(TextPatternRangeEndpoint endpoint, TextUnit unit, int32 count);
 
     void MoveEndpointByRange(TextPatternRangeEndpoint endpoint, ITextRangeProvider targetRange,
         TextPatternRangeEndpoint targetEndpoint);

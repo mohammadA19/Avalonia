@@ -145,7 +145,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions.Transformers
                     var ancestorLevel = relativeSourceObject.Children
                         .OfType<XamlAstXamlPropertyValueNode>()
                         .FirstOrDefault(x => x.Property.GetClrProperty().Name == "FindAncestor")
-                        ?.Values[0] is XamlAstTextNode ancestorLevelText ? int.Parse(ancestorLevelText.Text) - 1 : 0;
+                        ?.Values[0] is XamlAstTextNode ancestorLevelText ? int32.Parse(ancestorLevelText.Text) - 1 : 0;
 
                     var treeType = relativeSourceObject.Children
                         .OfType<XamlAstXamlPropertyValueNode>()
@@ -306,7 +306,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions.Transformers
 
         public override void VisitChildren(IXamlAstVisitor visitor)
         {
-            for (int i = 0; i < Path.Count; i++)
+            for (int32 i = 0; i < Path.Count; i++)
             {
                 if (Path[i] is IXamlAstNode ast)
                 {
@@ -319,13 +319,13 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions.Transformers
     class VisualAncestorBindingExpressionNode(IXamlType type) : BindingExpressionGrammar.INode
     {
         public IXamlType Type { get; set; } = type;
-        public int Level { get; set; }
+        public int32 Level { get; set; }
     }
 
     class LogicalAncestorBindingExpressionNode(IXamlType type) : BindingExpressionGrammar.INode
     {
         public IXamlType Type { get; set; } = type;
-        public int Level { get; set; }
+        public int32 Level { get; set; }
     }
 
     class TemplatedParentBindingExpressionNode(IXamlType type) : BindingExpressionGrammar.INode

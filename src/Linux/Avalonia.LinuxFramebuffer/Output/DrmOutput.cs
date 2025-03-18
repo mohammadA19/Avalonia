@@ -151,7 +151,7 @@ namespace Avalonia.LinuxFramebuffer.Output
                     throw new Win32Exception(ret, $"drmModeAddFb failed {ret}");
             }
 
-            gbm_bo_set_user_data(bo, new IntPtr((int)fbHandle), FbDestroyDelegate);
+            gbm_bo_set_user_data(bo, new IntPtr((int32)fbHandle), FbDestroyDelegate);
 
 
             return fbHandle;
@@ -306,7 +306,7 @@ namespace Avalonia.LinuxFramebuffer.Output
                         drmModePageFlip(_parent._card.Fd, _parent._crtcId, fb, DrmModePageFlip.Event, null);
 
                         DrmEventPageFlipHandlerDelegate flipCb =
-                            (int fd, uint sequence, uint tv_sec, uint tv_usec, void* user_data) =>
+                            (int32 fd, uint sequence, uint tv_sec, uint tv_usec, void* user_data) =>
                             {
                                 waitingForFlip = false;
                             };

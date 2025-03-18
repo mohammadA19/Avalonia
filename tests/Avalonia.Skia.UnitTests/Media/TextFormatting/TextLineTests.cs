@@ -37,7 +37,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
 
                     Assert.NotNull(textLine);
 
-                    var firstCharacterHit = textLine.GetPreviousCaretCharacterHit(new CharacterHit(int.MinValue));
+                    var firstCharacterHit = textLine.GetPreviousCaretCharacterHit(new CharacterHit(int32.MinValue));
 
                     Assert.Equal(textLine.FirstTextSourceIndex, firstCharacterHit.FirstCharacterIndex);
 
@@ -67,7 +67,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
 
                     Assert.NotNull(textLine);
 
-                    var lastCharacterHit = textLine.GetNextCaretCharacterHit(new CharacterHit(int.MaxValue));
+                    var lastCharacterHit = textLine.GetNextCaretCharacterHit(new CharacterHit(int32.MaxValue));
 
                     Assert.Equal(textLine.FirstTextSourceIndex + textLine.Length,
                         lastCharacterHit.FirstCharacterIndex + lastCharacterHit.TrailingLength);
@@ -96,7 +96,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
 
                 Assert.NotNull(textLine);
 
-                var clusters = new List<int>();
+                var clusters = new List<int32>();
 
                 foreach (var textRun in textLine.TextRuns.OrderBy(x => TextTestHelper.GetStartCharIndex(x.Text)))
                 {
@@ -145,7 +145,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
 
                 Assert.NotNull(textLine);
 
-                var clusters = new List<int>();
+                var clusters = new List<int32>();
 
                 foreach (var textRun in textLine.TextRuns.OrderBy(x => TextTestHelper.GetStartCharIndex(x.Text)))
                 {
@@ -888,7 +888,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
 
         private class MixedTextBufferTextSource : ITextSource
         {
-            public TextRun? GetTextRun(int textSourceIndex)
+            public TextRun? GetTextRun(int32 textSourceIndex)
             {
                 switch (textSourceIndex)
                 {
@@ -910,7 +910,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
         {
             private const string Text = "_A_A";
 
-            public TextRun? GetTextRun(int textSourceIndex)
+            public TextRun? GetTextRun(int32 textSourceIndex)
             {
                 switch (textSourceIndex)
                 {
@@ -943,9 +943,9 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
             return textLine.TextRuns.Cast<ShapedTextRun>().Any(x => !x.ShapedBuffer.IsLeftToRight);
         }
 
-        private static List<int> BuildGlyphClusters(TextLine textLine)
+        private static List<int32> BuildGlyphClusters(TextLine textLine)
         {
-            var glyphClusters = new List<int>();
+            var glyphClusters = new List<int32>();
 
             var shapedTextRuns = textLine.TextRuns.Cast<ShapedTextRun>().ToList();
 
@@ -1408,7 +1408,7 @@ namespace Avalonia.Skia.UnitTests.Media.TextFormatting
                 _textRuns = textRuns;
             }
 
-            public TextRun? GetTextRun(int textSourceIndex)
+            public TextRun? GetTextRun(int32 textSourceIndex)
             {
                 var currentPosition = 0;
 

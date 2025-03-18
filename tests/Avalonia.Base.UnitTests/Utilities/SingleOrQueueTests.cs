@@ -25,7 +25,7 @@ namespace Avalonia.Base.UnitTests.Utilities
         [Fact]
         public void Enqueue_Adds_Element()
         {
-            var queue = new SingleOrQueue<int>();
+            var queue = new SingleOrQueue<int32>();
 
             queue.Enqueue(1);
 
@@ -37,7 +37,7 @@ namespace Avalonia.Base.UnitTests.Utilities
         [Fact]
         public void Multiple_Elements_Dequeued_In_Correct_Order()
         {
-            var queue = new SingleOrQueue<int>();
+            var queue = new SingleOrQueue<int32>();
 
             queue.Enqueue(1);
             queue.Enqueue(2);

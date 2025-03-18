@@ -184,7 +184,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions.Transformers
             public override bool Equals(object? obj)
                 => Equals(obj as AdderSetter);
 
-            public override int GetHashCode()
+            public override int32 GetHashCode()
                 => (_getter.GetHashCode() * 397) ^ _adder.GetHashCode();
         }
     }

@@ -13,7 +13,7 @@ namespace Avalonia.Skia.Metal;
 internal unsafe class SkiaMetalApi
 {
     delegate* unmanaged[Stdcall] <IntPtr, IntPtr, IntPtr, IntPtr> _gr_direct_context_make_metal_with_options;
-    private delegate* unmanaged[Stdcall]<int, int, int, GRMtlTextureInfoNative*, IntPtr>
+    private delegate* unmanaged[Stdcall]<int32, int32, int32, GRMtlTextureInfoNative*, IntPtr>
         _gr_backendrendertarget_new_metal;
     private readonly ConstructorInfo _contextCtor;
     private readonly MethodInfo _contextOptionsToNative;
@@ -51,7 +51,7 @@ internal unsafe class SkiaMetalApi
         if(NativeLibraryEx.TryGetExport(dll, "gr_backendrendertarget_new_metal", out address))
         {
             _gr_backendrendertarget_new_metal =
-                (delegate* unmanaged[Stdcall]<int, int, int, GRMtlTextureInfoNative*, IntPtr>)address;
+                (delegate* unmanaged[Stdcall]<int32, int32, int32, GRMtlTextureInfoNative*, IntPtr>)address;
         }
         else
         {
@@ -97,7 +97,7 @@ internal unsafe class SkiaMetalApi
         public IntPtr Texture;
     }
 
-    public GRBackendRenderTarget CreateBackendRenderTarget(int width, int height, int samples, IntPtr texture)
+    public GRBackendRenderTarget CreateBackendRenderTarget(int32 width, int32 height, int32 samples, IntPtr texture)
     {
         var info = new GRMtlTextureInfoNative() { Texture = texture };
         var target = _gr_backendrendertarget_new_metal(width, height, samples, &info);

@@ -37,9 +37,9 @@ internal static class StorageProviderHelpers
     public static Uri UriFromFilePath(string path, bool isDirectory)
     {
         var uriPath = new StringBuilder(path)
-            .Replace("%", $"%{(int)'%':X2}")
-            .Replace("[", $"%{(int)'[':X2}")
-            .Replace("]", $"%{(int)']':X2}");
+            .Replace("%", $"%{(int32)'%':X2}")
+            .Replace("[", $"%{(int32)'[':X2}")
+            .Replace("]", $"%{(int32)']':X2}");
 
         if (!path.EndsWith('/') && isDirectory)
         {

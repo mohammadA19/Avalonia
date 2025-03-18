@@ -49,7 +49,7 @@ namespace Avalonia.Data
     /// </summary>
     public class RelativeSource
     {
-        private int _ancestorLevel = 1;
+        private int32 _ancestorLevel = 1;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RelativeSource"/> class.
@@ -77,7 +77,7 @@ namespace Avalonia.Data
         /// <remarks>
         /// Use the default value of 1 to look for the first ancestor of the specified type.
         /// </remarks>
-        public int AncestorLevel
+        public int32 AncestorLevel
         {
             get { return _ancestorLevel; }
             set

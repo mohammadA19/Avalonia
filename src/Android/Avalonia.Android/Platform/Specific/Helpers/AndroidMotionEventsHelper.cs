@@ -46,7 +46,7 @@ namespace Avalonia.Android.Platform.Specific.Helpers
 
             if (actionMasked == MotionEventActions.Move)
             {
-                for (int index = 0; index < e.PointerCount; index++)
+                for (int32 index = 0; index < e.PointerCount; index++)
                 {
                     var toolType = e.GetToolType(index);
                     var device = GetDevice(toolType);
@@ -68,7 +68,7 @@ namespace Avalonia.Android.Platform.Specific.Helpers
                             s_intermediatePointsPooledList.Clear();
                             s_intermediatePointsPooledList.Capacity = site;
 
-                            for (int pos = 0; pos < site; pos++)
+                            for (int32 pos = 0; pos < site; pos++)
                             {
                                 s_intermediatePointsPooledList.Add(CreateHistoricalPoint(e, index, pos));
                             }
@@ -218,7 +218,7 @@ namespace Avalonia.Android.Platform.Specific.Helpers
             };
         }
 
-        private RawPointerPoint CreatePoint(MotionEvent e, int index)
+        private RawPointerPoint CreatePoint(MotionEvent e, int32 index)
         {
             return new RawPointerPoint
             {
@@ -228,7 +228,7 @@ namespace Avalonia.Android.Platform.Specific.Helpers
             };
         }
 
-        private RawPointerPoint CreateHistoricalPoint(MotionEvent e, int index, int pos)
+        private RawPointerPoint CreateHistoricalPoint(MotionEvent e, int32 index, int32 pos)
         {
             return new RawPointerPoint
             {

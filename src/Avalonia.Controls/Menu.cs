@@ -96,7 +96,7 @@ namespace Avalonia.Controls
             }
         }
 
-        protected internal override void PrepareContainerForItemOverride(Control element, object? item, int index)
+        protected internal override void PrepareContainerForItemOverride(Control element, object? item, int32 index)
         {
             base.PrepareContainerForItemOverride(element, item, index);
 

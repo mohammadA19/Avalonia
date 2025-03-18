@@ -10,9 +10,9 @@ public partial class Dispatcher
     private readonly DispatcherPriorityQueue _queue = new();
     private bool _signaled;
     private bool _explicitBackgroundProcessingRequested;
-    private const int MaximumInputStarvationTimeInFallbackMode = 50;
-    private const int MaximumInputStarvationTimeInExplicitProcessingExplicitMode = 50;
-    private readonly int _maximumInputStarvationTime;
+    private const int32 MaximumInputStarvationTimeInFallbackMode = 50;
+    private const int32 MaximumInputStarvationTimeInExplicitProcessingExplicitMode = 50;
+    private readonly int32 _maximumInputStarvationTime;
     
     void RequestBackgroundProcessing()
     {

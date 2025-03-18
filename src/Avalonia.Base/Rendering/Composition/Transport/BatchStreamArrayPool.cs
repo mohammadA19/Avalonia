@@ -14,13 +14,13 @@ internal abstract class BatchStreamPoolBase<T> : IDisposable
 {
     readonly Stack<T> _pool = new();
     bool _disposed;
-    int _usage;
-    readonly int[] _usageStatistics = new int[10];
-    int _usageStatisticsSlot;
+    int32 _usage;
+    readonly int32[] _usageStatistics = new int32[10];
+    int32 _usageStatisticsSlot;
     readonly bool _reclaimImmediately;
 
-    public int CurrentUsage => _usage;
-    public int CurrentPool => _pool.Count;
+    public int32 CurrentUsage => _usage;
+    public int32 CurrentPool => _pool.Count;
 
     public BatchStreamPoolBase(bool needsFinalize, bool reclaimImmediately, Action<Func<bool>>? startTimer = null)
     {
@@ -133,9 +133,9 @@ internal abstract class BatchStreamPoolBase<T> : IDisposable
 
 internal sealed class BatchStreamObjectPool<T> : BatchStreamPoolBase<T[]> where T : class?
 {
-    public int ArraySize { get; }
+    public int32 ArraySize { get; }
 
-    public BatchStreamObjectPool(bool reclaimImmediately = false, int arraySize = 128, Action<Func<bool>>? startTimer = null) 
+    public BatchStreamObjectPool(bool reclaimImmediately = false, int32 arraySize = 128, Action<Func<bool>>? startTimer = null) 
         : base(false, reclaimImmediately, startTimer)
     {
         ArraySize = arraySize;
@@ -154,9 +154,9 @@ internal sealed class BatchStreamObjectPool<T> : BatchStreamPoolBase<T[]> where 
 
 internal sealed class BatchStreamMemoryPool : BatchStreamPoolBase<IntPtr>
 {
-    public int BufferSize { get; }
+    public int32 BufferSize { get; }
 
-    public BatchStreamMemoryPool(bool reclaimImmediately, int bufferSize = 1024, Action<Func<bool>>? startTimer = null) 
+    public BatchStreamMemoryPool(bool reclaimImmediately, int32 bufferSize = 1024, Action<Func<bool>>? startTimer = null) 
         : base(true, reclaimImmediately, startTimer)
     {
         BufferSize = bufferSize;

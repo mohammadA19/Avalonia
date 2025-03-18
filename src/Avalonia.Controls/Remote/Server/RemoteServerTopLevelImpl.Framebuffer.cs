@@ -55,7 +55,7 @@ namespace Avalonia.Controls.Remote.Server
 
             public double RenderScaling { get; }
 
-            public int Stride { get; }
+            public int32 Stride { get; }
 
             public FrameStatus GetStatus()
             {

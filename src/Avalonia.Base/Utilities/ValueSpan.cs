@@ -5,7 +5,7 @@
     /// </summary>
     public readonly record struct ValueSpan<T>
     {
-        public ValueSpan(int start, int length, T value)
+        public ValueSpan(int32 start, int32 length, T value)
         {
             Start = start;
             Length = length;
@@ -15,12 +15,12 @@
         /// <summary>
         /// Get's the start of the span.
         /// </summary>
-        public int Start { get; }
+        public int32 Start { get; }
 
         /// <summary>
         /// Get's the length of the span.
         /// </summary>
-        public int Length { get; }
+        public int32 Length { get; }
 
         /// <summary>
         /// Get's the value of the span.

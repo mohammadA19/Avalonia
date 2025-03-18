@@ -56,12 +56,12 @@ internal sealed class ExpressionTreeIndexerNode : CollectionNodeBase, ISettableN
         return _expression.Indexer == null || _expression.Indexer.Name == e.PropertyName;
     }
 
-    protected override int? TryGetFirstArgumentAsInt()
+    protected override int32? TryGetFirstArgumentAsInt()
     {
         var source = Source;
         if (source is null)
             return null;
-        return _firstArgumentDelegate.DynamicInvoke(source) as int?;
+        return _firstArgumentDelegate.DynamicInvoke(source) as int32?;
     }
 
     protected override void UpdateValue(object? source)

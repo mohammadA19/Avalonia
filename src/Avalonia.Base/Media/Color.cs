@@ -310,7 +310,7 @@ namespace Avalonia.Media
                 char[] extended = new char[extendedLength];
 #endif
 
-                for (int i = 0; i < input.Length; i++)
+                for (int32 i = 0; i < input.Length; i++)
                 {
                     extended[2 * i + 0] = input[i];
                     extended[2 * i + 1] = input[i];
@@ -394,7 +394,7 @@ namespace Avalonia.Media
             bool InternalTryParseByte(ReadOnlySpan<char> inString, out byte outByte)
             {
                 // The percent sign, if it exists, must be at the end of the number
-                int percentIndex = inString.IndexOf("%".AsSpan(), StringComparison.Ordinal);
+                int32 percentIndex = inString.IndexOf("%".AsSpan(), StringComparison.Ordinal);
 
                 if (percentIndex >= 0)
                 {
@@ -415,7 +415,7 @@ namespace Avalonia.Media
             bool InternalTryParseDouble(ReadOnlySpan<char> inString, out double outDouble)
             {
                 // The percent sign, if it exists, must be at the end of the number
-                int percentIndex = inString.IndexOf("%".AsSpan(), StringComparison.Ordinal);
+                int32 percentIndex = inString.IndexOf("%".AsSpan(), StringComparison.Ordinal);
 
                 if (percentIndex >= 0)
                 {
@@ -510,11 +510,11 @@ namespace Avalonia.Media
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {
-                int hashCode = A.GetHashCode();
+                int32 hashCode = A.GetHashCode();
                 hashCode = (hashCode * 397) ^ R.GetHashCode();
                 hashCode = (hashCode * 397) ^ G.GetHashCode();
                 hashCode = (hashCode * 397) ^ B.GetHashCode();

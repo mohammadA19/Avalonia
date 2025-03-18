@@ -44,7 +44,7 @@ namespace Avalonia.Media.Fonts
         /// <returns>
         ///     <c>True</c>, if the <see cref="FontManager"/> could match the character to specified parameters, <c>False</c> otherwise.
         /// </returns>
-        bool TryMatchCharacter(int codepoint, FontStyle fontStyle, FontWeight fontWeight,
+        bool TryMatchCharacter(int32 codepoint, FontStyle fontStyle, FontWeight fontWeight,
             FontStretch fontStretch, string? familyName, CultureInfo? culture, out Typeface typeface);
     }
 

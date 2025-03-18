@@ -20,7 +20,7 @@ namespace Avalonia.Native.Interop
     internal sealed class AvnString : NativeCallbackBase, IAvnString
     {
         private IntPtr _native;
-        private int _nativeLen;
+        private int32 _nativeLen;
 
         public AvnString(string s) => String = s;
 
@@ -33,7 +33,7 @@ namespace Avalonia.Native.Interop
             return _native.ToPointer();
         }
 
-        public int Length()
+        public int32 Length()
         {
             EnsureNative();
             return _nativeLen;
@@ -76,7 +76,7 @@ namespace Avalonia.Native.Interop
         public string[] ToStringArray() => _items.Select(n => n.String).ToArray();
 
         public uint Count => (uint)_items.Length;
-        public IAvnString Get(uint index) => _items[(int)index];
+        public IAvnString Get(uint index) => _items[(int32)index];
 
         protected override void Destroyed()
         {

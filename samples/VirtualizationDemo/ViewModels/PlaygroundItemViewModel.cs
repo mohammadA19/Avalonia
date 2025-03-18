@@ -6,7 +6,7 @@ public class PlaygroundItemViewModel : ViewModelBase
 {
     private string? _header;
 
-    public PlaygroundItemViewModel(int index) => Header = $"Item {index}";
+    public PlaygroundItemViewModel(int32 index) => Header = $"Item {index}";
     public PlaygroundItemViewModel(string? header) => Header = header;
 
     public string? Header

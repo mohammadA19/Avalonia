@@ -421,8 +421,8 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions.Transformers
 
     class XamlIlNthChildSelector : XamlIlSelectorNode
     {
-        private readonly int _step;
-        private readonly int _offset;
+        private readonly int32 _step;
+        private readonly int32 _offset;
         private readonly SelectorType _type;
 
         public enum SelectorType
@@ -431,7 +431,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions.Transformers
             NthLastChild
         }
 
-        public XamlIlNthChildSelector(XamlIlSelectorNode previous, int step, int offset, SelectorType type) : base(previous)
+        public XamlIlNthChildSelector(XamlIlSelectorNode previous, int32 step, int32 offset, SelectorType type) : base(previous)
         {
             _step = step;
             _offset = offset;

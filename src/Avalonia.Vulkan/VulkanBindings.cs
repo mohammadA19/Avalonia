@@ -10,7 +10,7 @@ static class VulkanHelpers
 {
     public static uint MakeVersion(Version v) => MakeVersion(v.Major, v.Minor, v.Build);
 
-    public static uint MakeVersion(int major, int minor, int patch)
+    public static uint MakeVersion(int32 major, int32 minor, int32 patch)
     {
         return (uint)((major << 22) | (minor << 12) | patch);
     }

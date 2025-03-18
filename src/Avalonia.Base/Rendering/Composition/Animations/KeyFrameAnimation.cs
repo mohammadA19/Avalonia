@@ -59,7 +59,7 @@ namespace Avalonia.Rendering.Composition.Animations
         /// <summary>
         /// The number of times to repeat the key frame animation.
         /// </summary>
-        public int IterationCount { get; set; } = 1;
+        public int32 IterationCount { get; set; } = 1;
         
         /// <summary>
         /// Specifies how to set the property value when animation is stopped

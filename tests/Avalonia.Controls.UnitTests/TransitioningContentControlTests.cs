@@ -70,7 +70,7 @@ namespace Avalonia.Controls.UnitTests
             var (target, transition) = CreateTarget(new Control());
 
             var control = new Control();
-            int counter = 0;
+            int32 counter = 0;
 
             control.AttachedToVisualTree += (s,e) => counter++;
 
@@ -380,9 +380,9 @@ namespace Avalonia.Controls.UnitTests
         {
             private TaskCompletionSource? _tcs;
 
-            public int StartCount { get; private set; }
-            public int FinishCount { get; private set; }
-            public int CancelCount { get; private set; }
+            public int32 StartCount { get; private set; }
+            public int32 FinishCount { get; private set; }
+            public int32 CancelCount { get; private set; }
 
             public event Action<Visual?, Visual?, bool>? Started;
 
@@ -421,7 +421,7 @@ namespace Avalonia.Controls.UnitTests
                 return x.From == y.From && x.To == y.To && x.HasRunToCompletion == y.HasRunToCompletion;
             }
 
-            public int GetHashCode(TransitionCompletedEventArgs obj)
+            public int32 GetHashCode(TransitionCompletedEventArgs obj)
                 => HashCode.Combine(obj.From, obj.To, obj.HasRunToCompletion);
         }
     }

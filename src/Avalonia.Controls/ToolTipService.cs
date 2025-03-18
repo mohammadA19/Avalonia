@@ -160,7 +160,7 @@ namespace Avalonia.Controls
             {
                 var betweenShowDelay = ToolTip.GetBetweenShowDelay(newValue);
 
-                int showDelay;
+                int32 showDelay;
 
                 if (betweenShowDelay >= 0 && (closedPreviousTip || (DateTime.UtcNow.Ticks - _lastTipCloseTime) <= betweenShowDelay * TimeSpan.TicksPerMillisecond))
                 {
@@ -202,7 +202,7 @@ namespace Avalonia.Controls
             }
         }
 
-        private void StartShowTimer(int showDelay, Control control)
+        private void StartShowTimer(int32 showDelay, Control control)
         {
             _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(showDelay), Tag = (this, control) };
             _timer.Tick += (o, e) =>

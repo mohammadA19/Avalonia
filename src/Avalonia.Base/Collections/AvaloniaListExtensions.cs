@@ -69,12 +69,12 @@ namespace Avalonia.Collections
         /// <returns>A disposable used to terminate the subscription.</returns>
         public static IDisposable ForEachItem<T>(
             this IAvaloniaReadOnlyList<T> collection,
-            Action<int, T> added,
-            Action<int, T> removed,
+            Action<int32, T> added,
+            Action<int32, T> removed,
             Action reset,
             bool weakSubscription = false)
         {
-            void Add(int index, IList items)
+            void Add(int32 index, IList items)
             {
                 foreach (T item in items)
                 {
@@ -82,7 +82,7 @@ namespace Avalonia.Collections
                 }
             }
 
-            void Remove(int index, IList items)
+            void Remove(int32 index, IList items)
             {
                 for (var i = items.Count - 1; i >= 0; --i)
                 {

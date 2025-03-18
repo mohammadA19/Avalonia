@@ -255,7 +255,7 @@ internal class AndroidStorageProvider : IStorageProvider
 
         return resultList;
 
-        void OnActivityResult(int requestCode, Result resultCode, Intent? data)
+        void OnActivityResult(int32 requestCode, Result resultCode, Intent? data)
         {
             if (currentRequestCode != requestCode)
             {

@@ -21,7 +21,7 @@ namespace Avalonia.Platform.Interop
             handle = _gcHandle.AddrOfPinnedObject();
         }
 
-        public int ByteLen => _data?.Length ?? 0;
+        public int32 ByteLen => _data?.Length ?? 0;
 
         protected override bool ReleaseHandle()
         {
@@ -41,7 +41,7 @@ namespace Avalonia.Platform.Interop
             var pstr = (byte*)s;
             if (pstr == null)
                 return null;
-            int len;
+            int32 len;
             for (len = 0; pstr[len] != 0; len++) ;
 
             var bytes = ArrayPool<byte>.Shared.Rent(len);

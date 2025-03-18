@@ -19,7 +19,7 @@
         /// <summary>
         /// Gets the number of newline characters at the end of a line.
         /// </summary>
-        public int NewlineLength { get; init; }
+        public int32 NewlineLength { get; init; }
         
         /// <summary>
         /// Gets the distance from the start of a paragraph to the starting point of a line.
@@ -34,7 +34,7 @@
         /// <summary>
         /// Gets the number of whitespace code points beyond the last non-blank character in a line.
         /// </summary>
-        public int TrailingWhitespaceLength { get; init; }
+        public int32 TrailingWhitespaceLength { get; init; }
 
         /// <summary>
         /// Gets the width of a line of text, excluding trailing whitespace characters.

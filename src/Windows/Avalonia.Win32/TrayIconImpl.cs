@@ -17,8 +17,8 @@ namespace Avalonia.Win32
     internal class TrayIconImpl : ITrayIconImpl
     {
         private static readonly Win32Icon s_emptyIcon;
-        private readonly int _uniqueId;
-        private static int s_nextUniqueId;
+        private readonly int32 _uniqueId;
+        private static int32 s_nextUniqueId;
         private static nint s_taskBarMonitor;
 
         private bool _iconAdded;
@@ -27,7 +27,7 @@ namespace Avalonia.Win32
         private Win32Icon? _icon;
         private string? _tooltipText;
         private readonly Win32NativeToManagedMenuExporter _exporter;
-        private static readonly Dictionary<int, TrayIconImpl> s_trayIcons = new();
+        private static readonly Dictionary<int32, TrayIconImpl> s_trayIcons = new();
         private bool _disposedValue;
         private static readonly uint WM_TASKBARCREATED = RegisterWindowMessage("TaskbarCreated");
 
@@ -139,7 +139,7 @@ namespace Avalonia.Win32
             if (!remove)
             {
                 iconData.uFlags = NIF.TIP | NIF.MESSAGE | NIF.ICON;
-                iconData.uCallbackMessage = (int)CustomWindowsMessage.WM_TRAYMOUSE;
+                iconData.uCallbackMessage = (int32)CustomWindowsMessage.WM_TRAYMOUSE;
                 iconData.hIcon = (_iconStale ? newIcon : _icon)?.Handle ?? s_emptyIcon.Handle;
                 iconData.szTip = _tooltipText ?? "";
 
@@ -195,11 +195,11 @@ namespace Avalonia.Win32
                 // Determine the type of message and call the matching event handlers
                 switch (lParam.ToInt32())
                 {
-                    case (int)WindowsMessage.WM_LBUTTONUP:
+                    case (int32)WindowsMessage.WM_LBUTTONUP:
                         OnClicked?.Invoke();
                         break;
 
-                    case (int)WindowsMessage.WM_RBUTTONUP:
+                    case (int32)WindowsMessage.WM_RBUTTONUP:
                         OnRightClicked();
                         break;
                 }
@@ -259,7 +259,7 @@ namespace Avalonia.Win32
                 }
             }
 
-            protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+            protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
             {
                 return NativeMenuBarPresenter.CreateContainerForNativeItem(item, index, recycleKey)
                        ?? base.CreateContainerForItemOverride(item, index, recycleKey);
@@ -342,7 +342,7 @@ namespace Avalonia.Win32
 
                 public void MoveAndResize(Point devicePoint, Size virtualSize)
                 {
-                    _moveResize(new PixelPoint((int)devicePoint.X, (int)devicePoint.Y), virtualSize, Scaling);
+                    _moveResize(new PixelPoint((int32)devicePoint.X, (int32)devicePoint.Y), virtualSize, Scaling);
                 }
 
                 public double Scaling => _hiddenWindow.Screens.Primary?.Scaling ?? 1.0;

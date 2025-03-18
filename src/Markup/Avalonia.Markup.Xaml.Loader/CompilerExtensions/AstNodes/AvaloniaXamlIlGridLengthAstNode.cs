@@ -25,7 +25,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions.AstNodes
         {
             codeGen
                 .Ldc_R8(_gridLength.Value)
-                .Ldc_I4((int)_gridLength.GridUnitType)
+                .Ldc_I4((int32)_gridLength.GridUnitType)
                 .Newobj(_types.GridLengthConstructorValueType);
             
             return XamlILNodeEmitResult.Type(0, Type.GetClrType());

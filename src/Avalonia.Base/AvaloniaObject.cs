@@ -207,7 +207,7 @@ namespace Avalonia
         /// See https://github.com/AvaloniaUI/Avalonia/pull/2747 for the discussion that prompted
         /// this.
         /// </remarks>
-        public sealed override int GetHashCode() => base.GetHashCode();
+        public sealed override int32 GetHashCode() => base.GetHashCode();
 
         /// <summary>
         /// Gets a <see cref="AvaloniaProperty"/> value.

@@ -8,12 +8,12 @@ namespace Avalonia.Android.Automation
 {
     internal class ScrollNodeInfoProvider : NodeInfoProvider<IScrollProvider>
     {
-        public ScrollNodeInfoProvider(ExploreByTouchHelper owner, AutomationPeer peer, int virtualViewId) : 
+        public ScrollNodeInfoProvider(ExploreByTouchHelper owner, AutomationPeer peer, int32 virtualViewId) : 
             base(owner, peer, virtualViewId)
         {
         }
 
-        public override bool PerformNodeAction(int action, Bundle? arguments)
+        public override bool PerformNodeAction(int32 action, Bundle? arguments)
         {
             IScrollProvider provider = GetProvider();
             switch (action)

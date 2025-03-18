@@ -56,7 +56,7 @@ namespace Avalonia.Media
             {
                 var keys = new FontFamilyKey[fontSources.Count];
 
-                for (int i = 0; i < fontSources.Count; i++)
+                for (int32 i = 0; i < fontSources.Count; i++)
                 {
                     var fontSource = fontSources[i];
 
@@ -124,7 +124,7 @@ namespace Avalonia.Media
 
             var segments = name.Split(',');
 
-            for (int i = 0; i < segments.Length; i++)
+            for (int32 i = 0; i < segments.Length; i++)
             {
                 var segment = segments[i];
                 var innerSegments = segment.Split('#');
@@ -214,7 +214,7 @@ namespace Avalonia.Media
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {

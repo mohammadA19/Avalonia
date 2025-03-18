@@ -53,7 +53,7 @@ internal struct PooledInlineList<T> : IDisposable, IEnumerable<T> where T : clas
         _item = list;
     }
 
-    public void EnsureCapacity(int count)
+    public void EnsureCapacity(int32 count)
     {
         if (count < 2)
             return;
@@ -68,11 +68,11 @@ internal struct PooledInlineList<T> : IDisposable, IEnumerable<T> where T : clas
         _item = null;
     }
 
-    public int Count => _item == null ? 0 : _item is SimplePooledList list ? list.Count : 1;
+    public int32 Count => _item == null ? 0 : _item is SimplePooledList list ? list.Count : 1;
     
     class SimplePooledList : IDisposable
     {
-        public int Count;
+        public int32 Count;
         public T[]? Items;
 
         public void Add(T item)
@@ -97,7 +97,7 @@ internal struct PooledInlineList<T> : IDisposable, IEnumerable<T> where T : clas
             ArrayPool<T>.Shared.Return(items);
         }
 
-        void GrowItems(int count)
+        void GrowItems(int32 count)
         {
             if (count < Count)
                 return;
@@ -107,7 +107,7 @@ internal struct PooledInlineList<T> : IDisposable, IEnumerable<T> where T : clas
             Items = newArr;
         }
         
-        public void EnsureCapacity(int count)
+        public void EnsureCapacity(int32 count)
         {
             if (Items == null)
                 Items = ArrayPool<T>.Shared.Rent(count);
@@ -151,7 +151,7 @@ internal struct PooledInlineList<T> : IDisposable, IEnumerable<T> where T : clas
     public struct Enumerator : IEnumerator<T>
     {
         private readonly T? _singleItem;
-        private int _index;
+        private int32 _index;
         private readonly SimplePooledList? _list;
         
         public Enumerator(object? item)

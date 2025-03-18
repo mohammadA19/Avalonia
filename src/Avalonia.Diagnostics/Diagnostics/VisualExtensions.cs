@@ -23,7 +23,7 @@ namespace Avalonia.Diagnostics
 
             var rect = new Rect(source.Bounds.Size).TransformToAABB(transform.Value);
             var top = rect.TopLeft;
-            var pixelSize = new PixelSize((int)rect.Width, (int)rect.Height);
+            var pixelSize = new PixelSize((int32)rect.Width, (int32)rect.Height);
             var dpiVector = new Vector(dpi, dpi);
 
             // get Visual root

@@ -51,20 +51,20 @@ internal class BlobReadableStream : Stream
     public override void SetLength(long value)
         => throw new NotSupportedException();
 
-    public override void Write(byte[] buffer, int offset, int count)
+    public override void Write(byte[] buffer, int32 offset, int32 count)
         => throw new NotSupportedException();
 
-    public override int Read(byte[] buffer, int offset, int count)
+    public override int32 Read(byte[] buffer, int32 offset, int32 count)
     {
         throw new InvalidOperationException("Browser supports only ReadAsync");
     }
 
-    public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override async Task<int32> ReadAsync(byte[] buffer, int32 offset, int32 count, CancellationToken cancellationToken)
         => await ReadAsync(buffer.AsMemory(offset, count), cancellationToken);
 
-    public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+    public override async ValueTask<int32> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
     {
-        var numBytesToRead = (int)Math.Min(buffer.Length, Length - _position);
+        var numBytesToRead = (int32)Math.Min(buffer.Length, Length - _position);
         var bytesRead = await StreamHelper.SliceAsync(JSReference, _position, numBytesToRead);
         if (bytesRead.Length != numBytesToRead)
         {
@@ -77,15 +77,15 @@ internal class BlobReadableStream : Stream
         return bytesRead.Length;
     }
 
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginRead(byte[] buffer, int32 offset, int32 count, AsyncCallback? callback, object? state)
     {
         var task = ReadAsync(buffer, offset, count, default);
         return TaskToAsyncResult.Begin(task, callback, state);
     }
 
-    public override int EndRead(IAsyncResult asyncResult)
+    public override int32 EndRead(IAsyncResult asyncResult)
     {
-        return TaskToAsyncResult.End<int>(asyncResult);
+        return TaskToAsyncResult.End<int32>(asyncResult);
     }
 
     protected override void Dispose(bool disposing)

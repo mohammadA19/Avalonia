@@ -8,7 +8,7 @@ namespace Avalonia.Platform;
 internal class RetainedFramebuffer : IDisposable
 {
     public PixelSize Size { get; }
-    public  int RowBytes { get; }
+    public  int32 RowBytes { get; }
     public PixelFormat Format { get; }
     public IntPtr Address => _blob?.Address ?? throw new ObjectDisposedException(nameof(RetainedFramebuffer));
     private UnmanagedBlob? _blob;
@@ -23,7 +23,7 @@ internal class RetainedFramebuffer : IDisposable
         
     }
     
-    public RetainedFramebuffer(PixelSize size, PixelFormat format, int rowBytes)
+    public RetainedFramebuffer(PixelSize size, PixelFormat format, int32 rowBytes)
     {
         if (size.Width <= 0 || size.Height <= 0)
             throw new ArgumentOutOfRangeException(nameof(size));

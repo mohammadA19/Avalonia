@@ -15,8 +15,8 @@ namespace Avalonia.Base.UnitTests.Styling
         [InlineData(4, -1, ":nth-child(4n-1)")]
         [InlineData(0, 1, ":nth-child(1)")]
         [InlineData(0, -1, ":nth-child(-1)")]
-        [InlineData(int.MaxValue, int.MinValue + 1, ":nth-child(2147483647n-2147483647)")]
-        public void Not_Selector_Should_Have_Correct_String_Representation(int step, int offset, string expected)
+        [InlineData(int32.MaxValue, int32.MinValue + 1, ":nth-child(2147483647n-2147483647)")]
+        public void Not_Selector_Should_Have_Correct_String_Representation(int32 step, int32 offset, string expected)
         {
             var target = default(Selector).NthChild(step, offset);
 
@@ -213,7 +213,7 @@ namespace Avalonia.Base.UnitTests.Styling
         [InlineData(+1, 6, false, false, false, false, false, true , true , true , true , true , true )]
         [InlineData(-1, 9, true , true , true , true , true , true , true , true , true , false, false)]
         public async Task Nth_Child_Master_Com_Test_Sigle_Selector(
-            int step, int offset, params bool[] items)
+            int32 step, int32 offset, params bool[] items)
         {
             var panel = new StackPanel();
             panel.Children.AddRange(items.Select(_ => new Border()));
@@ -222,7 +222,7 @@ namespace Avalonia.Base.UnitTests.Styling
             var target = previous.NthChild(step, offset);
 
             var results = new bool[items.Length];
-            for (int index = 0; index < items.Length; index++)
+            for (int32 index = 0; index < items.Length; index++)
             {
                 var border = panel.Children[index];
                 results[index] = await target.Match(border).Activator!.Take(1);
@@ -235,7 +235,7 @@ namespace Avalonia.Base.UnitTests.Styling
         [InlineData(+1, 4, -1, 8, false, false, false, true , true , true , true , true , false, false, false)]
         [InlineData(+3, 1, +2, 0, false, false, false, true , false, false, false, false, false, true , false)]
         public async Task Nth_Child_Master_Com_Test_Double_Selector(
-            int step1, int offset1, int step2, int offset2, params bool[] items)
+            int32 step1, int32 offset1, int32 step2, int32 offset2, params bool[] items)
         {
             var panel = new StackPanel();
             panel.Children.AddRange(items.Select(_ => new Border()));
@@ -245,7 +245,7 @@ namespace Avalonia.Base.UnitTests.Styling
             var target = middle.NthChild(step2, offset2);
 
             var results = new bool[items.Length];
-            for (int index = 0; index < items.Length; index++)
+            for (int32 index = 0; index < items.Length; index++)
             {
                 var border = panel.Children[index];
                 results[index] = await target.Match(border).Activator!.Take(1);
@@ -257,7 +257,7 @@ namespace Avalonia.Base.UnitTests.Styling
         [Theory] // http://nthmaster.com/
         [InlineData(+1, 2, 2, 1, -1, 9, false, false, true , false, true , false, true , false, true , false, false)]
         public async Task Nth_Child_Master_Com_Test_Triple_Selector(
-            int step1, int offset1, int step2, int offset2, int step3, int offset3, params bool[] items)
+            int32 step1, int32 offset1, int32 step2, int32 offset2, int32 step3, int32 offset3, params bool[] items)
         {
             var panel = new StackPanel();
             panel.Children.AddRange(items.Select(_ => new Border()));
@@ -268,7 +268,7 @@ namespace Avalonia.Base.UnitTests.Styling
             var target = middle2.NthChild(step3, offset3);
 
             var results = new bool[items.Length];
-            for (int index = 0; index < items.Length; index++)
+            for (int32 index = 0; index < items.Length; index++)
             {
                 var border = panel.Children[index];
                 results[index] = await target.Match(border).Activator!.Take(1);

@@ -2,9 +2,9 @@
 {
     internal class IndexedTextRun
     {
-        public int TextSourceCharacterIndex { get; init; }
-        public int RunIndex { get; set; }
-        public int NextRunIndex { get; set; }
+        public int32 TextSourceCharacterIndex { get; init; }
+        public int32 RunIndex { get; set; }
+        public int32 NextRunIndex { get; set; }
         public TextRun? TextRun { get; init; }
     }
 }

@@ -45,23 +45,23 @@ namespace Avalonia.Android.Platform.SkiaPlatform
 
         public IntPtr Address { get; set; }
         public PixelSize Size { get; }
-        public int RowBytes { get; }
+        public int32 RowBytes { get; }
         public Vector Dpi { get; }
         public PixelFormat Format { get; }
 
         [DllImport("android")]
         internal static extern IntPtr ANativeWindow_fromSurface(IntPtr jniEnv, IntPtr handle);
         [DllImport("android")]
-        internal static extern int ANativeWindow_getWidth(IntPtr window);
+        internal static extern int32 ANativeWindow_getWidth(IntPtr window);
         [DllImport("android")]
-        internal static extern int ANativeWindow_getHeight(IntPtr window);
+        internal static extern int32 ANativeWindow_getHeight(IntPtr window);
         [DllImport("android")]
         internal static extern void ANativeWindow_release(IntPtr window);
         [DllImport("android")]
         internal static extern void ANativeWindow_unlockAndPost(IntPtr window);
 
         [DllImport("android")]
-        internal static extern int ANativeWindow_lock(IntPtr window, ANativeWindow_Buffer* outBuffer, ARect* inOutDirtyBounds);
+        internal static extern int32 ANativeWindow_lock(IntPtr window, ANativeWindow_Buffer* outBuffer, ARect* inOutDirtyBounds);
         public enum AndroidPixelFormat
         {
             WINDOW_FORMAT_RGBA_8888 = 1,
@@ -71,23 +71,23 @@ namespace Avalonia.Android.Platform.SkiaPlatform
 
         internal struct ARect
         {
-            public int left;
-            public int top;
-            public int right;
-            public int bottom;
+            public int32 left;
+            public int32 top;
+            public int32 right;
+            public int32 bottom;
         }
         
         internal struct ANativeWindow_Buffer
         {
             // The number of pixels that are shown horizontally.
-            public int width;
+            public int32 width;
 
             // The number of pixels that are shown vertically.
-            public int height;
+            public int32 height;
 
             // The number of *pixels* that a line in the buffer takes in
             // memory.  This may be >= width.
-            public int stride;
+            public int32 stride;
 
             // The format of the buffer.  One of WINDOW_FORMAT_*
             public AndroidPixelFormat format;

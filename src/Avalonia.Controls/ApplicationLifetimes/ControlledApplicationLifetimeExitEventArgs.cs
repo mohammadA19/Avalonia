@@ -7,7 +7,7 @@ namespace Avalonia.Controls.ApplicationLifetimes
     /// </summary>
     public class ControlledApplicationLifetimeExitEventArgs : EventArgs
     {
-        public ControlledApplicationLifetimeExitEventArgs(int applicationExitCode)
+        public ControlledApplicationLifetimeExitEventArgs(int32 applicationExitCode)
         {
             ApplicationExitCode = applicationExitCode;
         }
@@ -15,6 +15,6 @@ namespace Avalonia.Controls.ApplicationLifetimes
         /// <summary>
         /// Gets or sets the exit code that an application returns to the operating system when the application exits.
         /// </summary>
-        public int ApplicationExitCode { get; set; }
+        public int32 ApplicationExitCode { get; set; }
     }
 }

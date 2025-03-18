@@ -599,8 +599,8 @@ namespace Avalonia.Base.UnitTests
             public static readonly DirectProperty<Class1, string> BarProperty =
                 AvaloniaProperty.RegisterDirect<Class1, string>(nameof(Bar), o => o.Bar);
 
-            public static readonly DirectProperty<Class1, int> BazProperty =
-                AvaloniaProperty.RegisterDirect<Class1, int>(
+            public static readonly DirectProperty<Class1, int32> BazProperty =
+                AvaloniaProperty.RegisterDirect<Class1, int32>(
                     nameof(Baz),
                     o => o.Baz,
                     (o, v) => o.Baz = v,
@@ -621,7 +621,7 @@ namespace Avalonia.Base.UnitTests
 
             private string _foo = "initial";
             private readonly string _bar = "bar";
-            private int _baz = 5;
+            private int32 _baz = 5;
             private double _doubleValue;
             private object _frank;
 
@@ -636,7 +636,7 @@ namespace Avalonia.Base.UnitTests
                 get { return _bar; }
             }
 
-            public int Baz
+            public int32 Baz
             {
                 get { return _baz; }
                 set { SetAndRaise(BazProperty, ref _baz, value); }
@@ -675,9 +675,9 @@ namespace Avalonia.Base.UnitTests
 
         private class TestStackOverflowViewModel : INotifyPropertyChanged
         {
-            public int SetterInvokedCount { get; private set; }
+            public int32 SetterInvokedCount { get; private set; }
 
-            public const int MaxInvokedCount = 1000;
+            public const int32 MaxInvokedCount = 1000;
 
             private double _value;
 
@@ -693,7 +693,7 @@ namespace Avalonia.Base.UnitTests
                         SetterInvokedCount++;
                         if (SetterInvokedCount < MaxInvokedCount)
                         {
-                            _value = (int)value;
+                            _value = (int32)value;
                             if (_value > 75) _value = 75;
                             if (_value < 25) _value = 25;
                         }

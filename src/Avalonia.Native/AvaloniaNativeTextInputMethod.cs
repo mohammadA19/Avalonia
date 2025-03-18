@@ -133,7 +133,7 @@ namespace Avalonia.Native
                 }
             }
 
-            public void SelectInSurroundingText(int start, int end)
+            public void SelectInSurroundingText(int32 start, int32 end)
             {
                 if (_client.SupportsSurroundingText)
                 {

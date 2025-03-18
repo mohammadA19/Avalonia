@@ -17,9 +17,9 @@ namespace Avalonia.Utilities
     /// </remarks>
     internal struct AvaloniaPropertyDictionary<TValue>
     {
-        private const int DefaultInitialCapacity = 4;
+        private const int32 DefaultInitialCapacity = 4;
         private Entry[]? _entries;
-        private int _entryCount;
+        private int32 _entryCount;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AvaloniaPropertyDictionary{TValue}"/>
@@ -38,7 +38,7 @@ namespace Avalonia.Utilities
         /// <param name="capactity">
         /// The initial number of elements that the collection can contain.
         /// </param>
-        public AvaloniaPropertyDictionary(int capactity)
+        public AvaloniaPropertyDictionary(int32 capactity)
         {
             _entries = new Entry[capactity];
             _entryCount = 0;
@@ -47,7 +47,7 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Gets the number of key/value pairs contained in the collection.
         /// </summary>
-        public int Count => _entryCount;
+        public int32 Count => _entryCount;
 
         /// <summary>
         /// Gets or sets the value associated with the specified key.
@@ -86,7 +86,7 @@ namespace Avalonia.Utilities
         /// <param name="index">
         /// The index of the entry, between 0 and <see cref="Count"/> - 1.
         /// </param>
-        public TValue this[int index]
+        public TValue this[int32 index]
         {
             get
             {
@@ -136,7 +136,7 @@ namespace Avalonia.Utilities
         /// </summary>
         /// <param name="index">The index of the entry, between 0 and <see cref="Count"/> - 1.</param>
         /// <returns>The value at the specified index.</returns>
-        public TValue GetValue(int index)
+        public TValue GetValue(int32 index)
         {
             if (index >= _entryCount)
                 ThrowOutOfRange();
@@ -192,7 +192,7 @@ namespace Avalonia.Utilities
         /// Removes the element at the specified index from the collection.
         /// </summary>
         /// <param name="index">The index.</param>
-        public void RemoveAt(int index)
+        public void RemoveAt(int32 index)
         {
             if (_entries is null)
                 ThrowOutOfRange();
@@ -242,7 +242,7 @@ namespace Avalonia.Utilities
                 do
                 {
                     // hi and lo are never negative: there's no overflow using unsigned math
-                    var i = (int)(((uint)hi + (uint)lo) >> 1);
+                    var i = (int32)(((uint)hi + (uint)lo) >> 1);
 
 #if NET6_0_OR_GREATER
                     // nuint cast to force zero extend instead of sign extend
@@ -274,7 +274,7 @@ namespace Avalonia.Utilities
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private int FindEntry(int propertyId)
+        private int32 FindEntry(int32 propertyId)
         {
             var lo = 0;
             var hi = _entryCount - 1;
@@ -286,7 +286,7 @@ namespace Avalonia.Utilities
                 do
                 {
                     // hi and lo are never negative: there's no overflow using unsigned math
-                    var i = (int)(((uint)hi + (uint)lo) >> 1);
+                    var i = (int32)(((uint)hi + (uint)lo) >> 1);
 
 #if NET6_0_OR_GREATER
                     // nuint cast to force zero extend instead of sign extend
@@ -316,7 +316,7 @@ namespace Avalonia.Utilities
         }
 
         [MemberNotNull(nameof(_entries))]
-        private void InsertEntry(Entry entry, int entryIndex)
+        private void InsertEntry(Entry entry, int32 entryIndex)
         {
             if (_entryCount > 0)
             {
@@ -324,7 +324,7 @@ namespace Avalonia.Utilities
                 {
                     var newSize = _entryCount == DefaultInitialCapacity ?
                         DefaultInitialCapacity * 2 :
-                        (int)(_entryCount * 1.5);
+                        (int32)(_entryCount * 1.5);
 
                     var destEntries = new Entry[newSize];
 
@@ -358,7 +358,7 @@ namespace Avalonia.Utilities
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private ref Entry UnsafeGetEntryRef(int index)
+        private ref Entry UnsafeGetEntryRef(int32 index)
         {
 #if NET6_0_OR_GREATER && !DEBUG
             // This type is performance critical: in release mode, skip any bound check the JIT compiler couldn't elide.
@@ -381,7 +381,7 @@ namespace Avalonia.Utilities
 
         private readonly struct Entry
         {
-            public readonly int Id;
+            public readonly int32 Id;
             public readonly TValue Value;
 
             public Entry(AvaloniaProperty property, TValue value)

@@ -46,8 +46,8 @@ internal class CompositionOpenGlSwapchain : SwapchainBase<IGlSwapchainImage>
 
 internal interface IGlTexture
 {
-    int TextureId { get; }
-    int InternalFormat { get; }
+    int32 TextureId { get; }
+    int32 InternalFormat { get; }
     PixelSize Size { get; }
 }
 
@@ -91,8 +91,8 @@ internal class DxgiMutexOpenGlSwapChainImage : IGlSwapchainImage
         _texture.Dispose();
     }
 
-    public int TextureId => _texture.TextureId;
-    public int InternalFormat => _texture.InternalFormat;
+    public int32 TextureId => _texture.TextureId;
+    public int32 InternalFormat => _texture.InternalFormat;
     public PixelSize Size => new(_texture.Properties.Width, _texture.Properties.Height);
     public Task? LastPresent => _lastPresent;
     public void BeginDraw() => _texture.AcquireKeyedMutex(0);
@@ -145,8 +145,8 @@ internal class CompositionOpenGlSwapChainImage : IGlSwapchainImage
         _texture.Dispose();
     }
 
-    public int TextureId => _texture.TextureId;
-    public int InternalFormat => _texture.InternalFormat;
+    public int32 TextureId => _texture.TextureId;
+    public int32 InternalFormat => _texture.InternalFormat;
     public PixelSize Size => _texture.Size;
     public Task? LastPresent { get; private set; }
     public void BeginDraw()

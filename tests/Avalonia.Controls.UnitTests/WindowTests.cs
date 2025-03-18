@@ -152,11 +152,11 @@ namespace Avalonia.Controls.UnitTests
                 var window = new Window();
                 var child = new Window();
 
-                int count = 0;
-                int windowClosing = 0;
-                int childClosing = 0;
-                int windowClosed = 0;
-                int childClosed = 0;
+                int32 count = 0;
+                int32 windowClosing = 0;
+                int32 childClosing = 0;
+                int32 windowClosed = 0;
+                int32 childClosed = 0;
 
                 window.Closing += (sender, e) =>
                 {
@@ -217,11 +217,11 @@ namespace Avalonia.Controls.UnitTests
                 var window = new Window();
                 var child = new Window();
 
-                int count = 0;
-                int windowClosing = 0;
-                int childClosing = 0;
-                int windowClosed = 0;
-                int childClosed = 0;
+                int32 count = 0;
+                int32 windowClosing = 0;
+                int32 childClosing = 0;
+                int32 windowClosed = 0;
+                int32 childClosed = 0;
 
                 window.Closing += (sender, e) =>
                 {
@@ -575,8 +575,8 @@ namespace Avalonia.Controls.UnitTests
                 window.Show();
 
                 var expectedPosition = new PixelPoint(
-                    (int)(screen1.Object.WorkingArea.Size.Width / 2 - window.ClientSize.Width / 2),
-                    (int)(screen1.Object.WorkingArea.Size.Height / 2 - window.ClientSize.Height / 2));
+                    (int32)(screen1.Object.WorkingArea.Size.Width / 2 - window.ClientSize.Width / 2),
+                    (int32)(screen1.Object.WorkingArea.Size.Height / 2 - window.ClientSize.Height / 2));
 
                 Assert.Equal(window.Position, expectedPosition);
             }
@@ -646,8 +646,8 @@ namespace Avalonia.Controls.UnitTests
                     window.ShowDialog(parentWindow);
 
                     var expectedPosition = new PixelPoint(
-                        (int)(parentWindow.Position.X + parentWindow.ClientSize.Width / 2 - window.ClientSize.Width / 2),
-                        (int)(parentWindow.Position.Y + parentWindow.ClientSize.Height / 2 - window.ClientSize.Height / 2));
+                        (int32)(parentWindow.Position.X + parentWindow.ClientSize.Width / 2 - window.ClientSize.Width / 2),
+                        (int32)(parentWindow.Position.Y + parentWindow.ClientSize.Height / 2 - window.ClientSize.Height / 2));
 
                     Assert.Equal(window.Position, expectedPosition);
                 }

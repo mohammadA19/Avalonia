@@ -43,11 +43,11 @@ namespace Avalonia.Media.TextFormatting
         internal sealed class ListPool<T>
         {
             // we don't need a big number here, these are for temporary usages only which should quickly be returned
-            private const int MaxSize = 16;
+            private const int32 MaxSize = 16;
 
             private readonly RentedList<T>[] _lists = new RentedList<T>[MaxSize];
-            private int _size;
-            private int _pendingReturnCount;
+            private int32 _size;
+            private int32 _pendingReturnCount;
 
             /// <summary>
             /// Rents a list.

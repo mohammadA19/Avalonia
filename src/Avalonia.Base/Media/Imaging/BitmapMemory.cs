@@ -7,7 +7,7 @@ namespace Avalonia.Media.Imaging;
 
 internal class BitmapMemory : IDisposable
 {
-    private readonly int _memorySize;
+    private readonly int32 _memorySize;
 
     public BitmapMemory(PixelFormat format, AlphaFormat alphaFormat, PixelSize size)
     {
@@ -46,12 +46,12 @@ internal class BitmapMemory : IDisposable
 
     public IntPtr Address { get; private set; }
     public PixelSize Size { get; }
-    public int RowBytes { get; }
+    public int32 RowBytes { get; }
     public PixelFormat Format { get; }
 
     public AlphaFormat AlphaFormat { get; }
 
-    public void CopyToRgba(AlphaFormat alphaFormat, IntPtr buffer, int stride)
+    public void CopyToRgba(AlphaFormat alphaFormat, IntPtr buffer, int32 stride)
     {
         PixelFormatTranscoder.Transcode(
             Address,

@@ -16,7 +16,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Default content for the CalendarDayButton.
         /// </summary>
-        private const int DefaultContent = 1;
+        private const int32 DefaultContent = 1;
 
         private bool _isCurrent;
         private bool _ignoringMouseOverState;
@@ -41,7 +41,7 @@ namespace Avalonia.Controls.Primitives
         /// Gets or sets the Calendar associated with this button.
         /// </summary>
         internal Calendar? Owner { get; set; }
-        internal int Index { get; set; }
+        internal int32 Index { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the button is the focused

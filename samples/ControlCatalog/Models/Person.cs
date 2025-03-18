@@ -16,7 +16,7 @@ namespace ControlCatalog.Models
         string _firstName = string.Empty;
         string _lastName = string.Empty;
         bool _isBanned;
-        private int _age;
+        private int32 _age;
 
         public string FirstName
         {
@@ -64,7 +64,7 @@ namespace ControlCatalog.Models
         /// <summary>
         ///    Gets or sets the age of the person
         /// </summary>
-        public int Age
+        public int32 Age
         {
             get => _age;
             set

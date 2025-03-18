@@ -407,7 +407,7 @@ namespace Avalonia.Controls
 
         }
 
-        private int GetNextCharacterPosition(int startPosition)
+        private int32 GetNextCharacterPosition(int32 startPosition)
         {
             if (MaskProvider != null)
             {
@@ -420,7 +420,7 @@ namespace Avalonia.Controls
             return startPosition;
         }
 
-        private void RefreshText(MaskedTextProvider? provider, int position)
+        private void RefreshText(MaskedTextProvider? provider, int32 position)
         {
             if (provider != null)
             {

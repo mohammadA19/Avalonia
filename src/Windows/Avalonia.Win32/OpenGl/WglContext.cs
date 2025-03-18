@@ -17,12 +17,12 @@ namespace Avalonia.Win32.OpenGl
         private readonly IntPtr _context;
         private readonly IntPtr _hWnd;
         private readonly IntPtr _dc;
-        private readonly int _pixelFormat;
+        private readonly int32 _pixelFormat;
         private readonly PixelFormatDescriptor _formatDescriptor;
 
         public IntPtr Handle => _context;
 
-        public WglContext(WglContext? sharedWith, GlVersion version, IntPtr context, IntPtr hWnd, IntPtr dc, int pixelFormat,
+        public WglContext(WglContext? sharedWith, GlVersion version, IntPtr context, IntPtr hWnd, IntPtr dc, int32 pixelFormat,
             PixelFormatDescriptor formatDescriptor)
         {
             Version = version;
@@ -54,8 +54,8 @@ namespace Avalonia.Win32.OpenGl
 
         public GlVersion Version { get; }
         public GlInterface GlInterface { get; }
-        public int SampleCount => 0;
-        public int StencilSize { get; }
+        public int32 SampleCount => 0;
+        public int32 StencilSize { get; }
 
         private bool IsCurrent => wglGetCurrentContext() == _context && wglGetCurrentDC() == _dc;
         public IDisposable MakeCurrent()

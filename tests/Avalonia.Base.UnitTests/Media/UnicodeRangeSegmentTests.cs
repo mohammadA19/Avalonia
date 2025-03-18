@@ -10,7 +10,7 @@ namespace Avalonia.Visuals.UnitTests.Media
         [InlineData("U+00-U+FF", 0, 255)]
         [InlineData("U+AB??", 43776, 44031)]
         [Theory]
-        public void Should_Parse(string s, int expectedStart, int expectedEnd)
+        public void Should_Parse(string s, int32 expectedStart, int32 expectedEnd)
         {
             var segment = UnicodeRangeSegment.Parse(s);
 
@@ -24,7 +24,7 @@ namespace Avalonia.Visuals.UnitTests.Media
         [InlineData(26)]
         [InlineData(100)]
         [Theory]
-        public void InRange_Should_Return_False_For_Values_Outside_Range(int value)
+        public void InRange_Should_Return_False_For_Values_Outside_Range(int32 value)
         {
             var segment = new UnicodeRangeSegment(20, 25);
 
@@ -35,7 +35,7 @@ namespace Avalonia.Visuals.UnitTests.Media
         [InlineData(21)]
         [InlineData(22)]
         [Theory]
-        public void InRange_Should_Return_True_For_Values_Within_Range(int value)
+        public void InRange_Should_Return_True_For_Values_Within_Range(int32 value)
         {
             var segment = new UnicodeRangeSegment(20, 22);
 

@@ -110,7 +110,7 @@ namespace Avalonia.Native
             }
         }
 
-        public int TryShutdown()
+        public int32 TryShutdown()
         {
             if (ShutdownRequested is null) return 1;
             var e = new ShutdownRequestedEventArgs();

@@ -125,7 +125,7 @@ namespace Avalonia.Platform
 
         // TODO12: make abstract
         /// <inheritdoc />
-        public override int GetHashCode()
+        public override int32 GetHashCode()
             => RuntimeHelpers.GetHashCode(this);
 
         /// <inheritdoc />

@@ -101,10 +101,10 @@ namespace Avalonia.Controls.Selection
         /// <param name="e">The details of the collection change.</param>
         /// <remarks>
         /// The implementation in <see cref="SelectionNodeBase{T}"/> calls
-        /// <see cref="OnItemsAdded(int, IList)"/> and <see cref="OnItemsRemoved(int, IList)"/>
+        /// <see cref="OnItemsAdded(int32, IList)"/> and <see cref="OnItemsRemoved(int32, IList)"/>
         /// in order to calculate how the collection change affects the currently selected items.
-        /// It then calls <see cref="OnIndexesChanged(int, int)"/> and
-        /// <see cref="OnSelectionRemoved(int, int, IReadOnlyList{T})"/> if necessary, according
+        /// It then calls <see cref="OnIndexesChanged(int32, int32)"/> and
+        /// <see cref="OnSelectionRemoved(int32, int32, IReadOnlyList{T})"/> if necessary, according
         /// to the <see cref="CollectionChangeState"/> returned by those methods.
         /// 
         /// Override this method and <see cref="OnSourceCollectionChangeFinished"/> to provide
@@ -206,7 +206,7 @@ namespace Avalonia.Controls.Selection
         /// <param name="shiftDelta">
         /// If positive, the number of items inserted, or if negative the number of items removed.
         /// </param>
-        protected virtual void OnIndexesChanged(int shiftIndex, int shiftDelta)
+        protected virtual void OnIndexesChanged(int32 shiftIndex, int32 shiftDelta)
         {
         }
 
@@ -220,7 +220,7 @@ namespace Avalonia.Controls.Selection
         /// Called by <see cref="OnSourceCollectionChanged(NotifyCollectionChangedEventArgs)"/>,
         /// detailing the items removed by a collection change.
         /// </summary>
-        protected virtual void OnSelectionRemoved(int index, int count, IReadOnlyList<T> deselectedItems)
+        protected virtual void OnSelectionRemoved(int32 index, int32 count, IReadOnlyList<T> deselectedItems)
         {
         }
 
@@ -230,7 +230,7 @@ namespace Avalonia.Controls.Selection
         /// <param name="begin">The inclusive index of the start of the range to select.</param>
         /// <param name="end">The inclusive index of the end of the range to select.</param>
         /// <returns>The number of items selected.</returns>
-        protected int CommitSelect(int begin, int end)
+        protected int32 CommitSelect(int32 begin, int32 end)
         {
             if (RangesEnabled)
             {
@@ -247,7 +247,7 @@ namespace Avalonia.Controls.Selection
         /// <param name="begin">The inclusive index of the start of the range to deselect.</param>
         /// <param name="end">The inclusive index of the end of the range to deselect.</param>
         /// <returns>The number of items selected.</returns>
-        protected int CommitDeselect(int begin, int end)
+        protected int32 CommitDeselect(int32 begin, int32 end)
         {
             if (RangesEnabled)
             {
@@ -271,7 +271,7 @@ namespace Avalonia.Controls.Selection
         /// assigning new indexes. Override this method to carry out additional computation when
         /// items are added.
         /// </remarks>
-        protected virtual CollectionChangeState OnItemsAdded(int index, IList items)
+        protected virtual CollectionChangeState OnItemsAdded(int32 index, IList items)
         {
             var count = items.Count;
             var shifted = false;
@@ -333,7 +333,7 @@ namespace Avalonia.Controls.Selection
         /// assigning new indexes. Override this method to carry out additional computation when
         /// items are removed.
         /// </remarks>
-        private protected virtual CollectionChangeState OnItemsRemoved(int index, IList items)
+        private protected virtual CollectionChangeState OnItemsRemoved(int32 index, IList items)
         {
             var count = items.Count;
             var removedRange = new IndexRange(index, index + count - 1);
@@ -414,13 +414,13 @@ namespace Avalonia.Controls.Selection
             /// Gets or sets the first index that was shifted as a result of the collection
             /// changing.
             /// </summary>
-            public int ShiftIndex { get; set; }
+            public int32 ShiftIndex { get; set; }
 
             /// <summary>
             /// Gets or sets a value indicating how the indexes after <see cref="ShiftIndex"/>
             /// were shifted.
             /// </summary>
-            public int ShiftDelta { get; set; }
+            public int32 ShiftDelta { get; set; }
 
             /// <summary>
             /// Gets or sets the items removed by the collection change, if any.

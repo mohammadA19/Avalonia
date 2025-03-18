@@ -227,7 +227,7 @@ namespace Avalonia.Data
         /// Gets the hash code for this instance of <see cref="BindingNotification"/>. 
         /// </summary>
         /// <returns>A hash code.</returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             return base.GetHashCode();
         }

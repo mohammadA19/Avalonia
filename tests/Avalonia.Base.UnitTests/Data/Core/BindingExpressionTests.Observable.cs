@@ -74,7 +74,7 @@ public partial class BindingExpressionTests
     public void Should_Work_With_Value_Type()
     {
         using var sync = UnitTestSynchronizationContext.Begin();
-        var source = new BehaviorSubject<int>(1);
+        var source = new BehaviorSubject<int32>(1);
         var data = new { Foo = source };
         var target = CreateTargetWithSource(data, o => o.Foo.StreamBinding());
 

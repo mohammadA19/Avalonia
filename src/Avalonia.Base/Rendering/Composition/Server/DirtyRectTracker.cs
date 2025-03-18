@@ -43,7 +43,7 @@ internal class DirtyRectTracker : IDirtyRectTracker
 
     public bool IsEmpty => _rect.IsEmpty;
     public bool Intersects(LtrbRect rect) => _normalRect.Intersects(rect);
-    public bool Contains(Point pt) => _rect.Contains((int)pt.X, (int)pt.Y);
+    public bool Contains(Point pt) => _rect.Contains((int32)pt.X, (int32)pt.Y);
 
     public void Reset() => _rect = default;
     public void Visualize(IDrawingContextImpl context)

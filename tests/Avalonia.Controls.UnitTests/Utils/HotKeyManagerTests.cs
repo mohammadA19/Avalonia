@@ -6,7 +6,7 @@ using Avalonia.Input.Raw;
 using Avalonia.Platform;
 using Avalonia.UnitTests;
 using Xunit;
-using Factory = System.Func<int, System.Action<object>, Avalonia.Controls.Window, Avalonia.AvaloniaObject>;
+using Factory = System.Func<int32, System.Action<object>, Avalonia.Controls.Window, Avalonia.AvaloniaObject>;
 
 namespace Avalonia.Controls.UnitTests.Utils
 {
@@ -68,7 +68,7 @@ namespace Avalonia.Controls.UnitTests.Utils
 
                 var action = new Action<object>(parameter =>
                 {
-                    if (parameter is int value)
+                    if (parameter is int32 value)
                     {
                         commandResult = value;
                     }
@@ -266,7 +266,7 @@ namespace Avalonia.Controls.UnitTests.Utils
                 {nameof(MenuItem),withCommand ? MakeMenu : MakeMenuWithoutCommand},
             };
 
-        private static AvaloniaObject MakeMenu(int expectedParameter, Action<object> action, Window root)
+        private static AvaloniaObject MakeMenu(int32 expectedParameter, Action<object> action, Window root)
         {
             var menuitem = new MenuItem()
             {
@@ -281,7 +281,7 @@ namespace Avalonia.Controls.UnitTests.Utils
             return menuitem;
         }
 
-        private static AvaloniaObject MakeButton(int expectedParameter, Action<object> action, Window root)
+        private static AvaloniaObject MakeButton(int32 expectedParameter, Action<object> action, Window root)
         {
             var button = new Button()
             {
@@ -293,7 +293,7 @@ namespace Avalonia.Controls.UnitTests.Utils
             return button;
         }
 
-        private static AvaloniaObject MakeMenuWithoutCommand(int expectedParameter, Action<object> action, Window root)
+        private static AvaloniaObject MakeMenuWithoutCommand(int32 expectedParameter, Action<object> action, Window root)
         {
             var menuitem = new MenuItem()
             {
@@ -306,7 +306,7 @@ namespace Avalonia.Controls.UnitTests.Utils
             return menuitem;
         }
 
-        private static AvaloniaObject MakeButtonWithoutCommand(int expectedParameter, Action<object> action, Window root)
+        private static AvaloniaObject MakeButtonWithoutCommand(int32 expectedParameter, Action<object> action, Window root)
         {
             var button = new Button()
             {

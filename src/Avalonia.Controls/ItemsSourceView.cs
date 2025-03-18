@@ -42,7 +42,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets the number of items in the collection.
         /// </summary>
-        public int Count => Source.Count;
+        public int32 Count => Source.Count;
 
         /// <summary>
         /// Gets the source collection.
@@ -54,14 +54,14 @@ namespace Avalonia.Controls
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns>The item.</returns>
-        public object? this[int index] => GetAt(index);
+        public object? this[int32 index] => GetAt(index);
 
         bool IList.IsFixedSize => false;
         bool IList.IsReadOnly => true;
         bool ICollection.IsSynchronized => false;
         object ICollection.SyncRoot => this;
 
-        object? IList.this[int index]
+        object? IList.this[int32 index]
         {
             get => GetAt(index);
             set => ThrowReadOnly();
@@ -133,9 +133,9 @@ namespace Avalonia.Controls
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns>The item.</returns>
-        public object? GetAt(int index) => Source[index];
+        public object? GetAt(int32 index) => Source[index];
         public bool Contains(object? item) => Source.Contains(item);
-        public int IndexOf(object? item) => Source.IndexOf(item);
+        public int32 IndexOf(object? item) => Source.IndexOf(item);
 
         /// <summary>
         /// Gets or creates an <see cref="ItemsSourceView"/> for the specified enumerable.
@@ -235,17 +235,17 @@ namespace Avalonia.Controls
             _postCollectionChanged?.Invoke(this, e);
         }
 
-        int IList.Add(object? value) => ThrowReadOnly();
+        int32 IList.Add(object? value) => ThrowReadOnly();
         void IList.Clear() => ThrowReadOnly();
-        void IList.Insert(int index, object? value) => ThrowReadOnly();
+        void IList.Insert(int32 index, object? value) => ThrowReadOnly();
         void IList.Remove(object? value) => ThrowReadOnly();
-        void IList.RemoveAt(int index) => ThrowReadOnly();
-        void ICollection.CopyTo(Array array, int index) => Source.CopyTo(array, index);
+        void IList.RemoveAt(int32 index) => ThrowReadOnly();
+        void ICollection.CopyTo(Array array, int32 index) => Source.CopyTo(array, index);
 
         /// <summary>
         /// Not implemented in Avalonia, preserved here for ItemsRepeater's usage.
         /// </summary>
-        internal string KeyFromIndex(int index) => throw new NotImplementedException();
+        internal string KeyFromIndex(int32 index) => throw new NotImplementedException();
 
         private protected void RaiseCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
@@ -297,7 +297,7 @@ namespace Avalonia.Controls
         }
 
         [DoesNotReturn]
-        private static int ThrowReadOnly() => throw new NotSupportedException("Collection is read-only.");
+        private static int32 ThrowReadOnly() => throw new NotSupportedException("Collection is read-only.");
     }
 
     public sealed class ItemsSourceView<T> : ItemsSourceView, IReadOnlyList<T>
@@ -326,14 +326,14 @@ namespace Avalonia.Controls
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns>The item.</returns>
-        public new T this[int index] => GetAt(index);
+        public new T this[int32 index] => GetAt(index);
 
         /// <summary>
         /// Retrieves the item at the specified index.
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns>The item.</returns>
-        public new T GetAt(int index) => (T)Source[index]!;
+        public new T GetAt(int32 index) => (T)Source[index]!;
 
         public new IEnumerator<T> GetEnumerator()
         {

@@ -38,7 +38,7 @@ namespace Avalonia.Benchmarks.Styling
             _window.Content = null;
 
             // Add a bunch of styles with lots of class selectors to complicate matters.
-            for (int i = 0; i < 100; ++i)
+            for (int32 i = 0; i < 100; ++i)
             {
                 _window.Styles.Add(new Style(x => x.OfType<TextBox>().Class("foo").Class("bar").Class("baz"))
                 {

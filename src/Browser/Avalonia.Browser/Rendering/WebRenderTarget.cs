@@ -16,12 +16,12 @@ abstract partial class BrowserRenderTarget(JSObject js)
     protected readonly JSObject Js = js;
 
     [JSImport("WebRenderTargetRegistry.getRenderTarget", AvaloniaModule.MainModuleName)]
-    private static partial JSObject? GetJsRenderTarget(int id);
+    private static partial JSObject? GetJsRenderTarget(int32 id);
     
     [JSImport("WebRenderTarget.setSize", AvaloniaModule.MainModuleName)]
-    private static partial void SetJsSize(JSObject target, int w, int h);
+    private static partial void SetJsSize(JSObject target, int32 w, int32 h);
 
-    public static BrowserRenderTarget? GetRenderTarget(int id, Func<(PixelSize, double)> sizeGetter)
+    public static BrowserRenderTarget? GetRenderTarget(int32 id, Func<(PixelSize, double)> sizeGetter)
     {
         var js = GetJsRenderTarget(id);
         if (js == null)

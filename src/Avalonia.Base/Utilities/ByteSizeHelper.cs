@@ -29,7 +29,7 @@ namespace Avalonia.Utilities
 
             var absSize = Math.Abs((double)bytes);
             var fpPower = Math.Log(absSize, 1000);
-            var intPower = (int)fpPower;
+            var intPower = (int32)fpPower;
             var iUnit = intPower >= Prefixes.Length
                 ? Prefixes.Length - 1
                 : intPower;

@@ -9,7 +9,7 @@ namespace Avalonia.Build.Tasks;
 internal static class Extensions
 {
     public static void LogError(this IBuildEngine engine, string code, string file, Exception ex,
-        int? lineNumber = null, int? linePosition = null)
+        int32? lineNumber = null, int32? linePosition = null)
     {
         if (lineNumber is null && linePosition is null
                                && ex is XmlException xe)
@@ -52,7 +52,7 @@ internal static class Extensions
     }
         
     public static void LogError(this IBuildEngine engine, string code, string file, string message,
-        int? lineNumber = null, int? linePosition = null)
+        int32? lineNumber = null, int32? linePosition = null)
     {
         engine.LogErrorEvent(new BuildErrorEventArgs("Avalonia", code, file ?? "",
             lineNumber ?? 0, linePosition ?? 0, lineNumber ?? 0, linePosition ?? 0,
@@ -60,7 +60,7 @@ internal static class Extensions
     }
 
     public static void LogWarning(this IBuildEngine engine, string code, string file, string message,
-        int lineNumber = 0, int linePosition = 0)
+        int32 lineNumber = 0, int32 linePosition = 0)
     {
         engine.LogWarningEvent(new BuildWarningEventArgs("Avalonia", code, file ?? "",
             lineNumber, linePosition, lineNumber, linePosition, message,

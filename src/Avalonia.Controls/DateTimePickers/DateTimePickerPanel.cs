@@ -49,16 +49,16 @@ namespace Avalonia.Controls.Primitives
             AvaloniaProperty.Register<DateTimePickerPanel, bool>(nameof(ShouldLoop));
 
         //Backing fields for properties
-        private int _minimumValue = 1;
-        private int _maximumValue = 2;
-        private int _selectedValue = 1;
-        private int _increment = 1;
+        private int32 _minimumValue = 1;
+        private int32 _maximumValue = 2;
+        private int32 _selectedValue = 1;
+        private int32 _increment = 1;
 
         //Helper fields
-        private int _selectedIndex = 0;
-        private int _totalItems;
-        private int _numItemsAboveBelowSelected;
-        private int _range;
+        private int32 _selectedIndex = 0;
+        private int32 _totalItems;
+        private int32 _numItemsAboveBelowSelected;
+        private int32 _range;
         private double _extentOne;
         private Size _extent;
         private Vector _offset;
@@ -119,7 +119,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Gets or sets the minimum value
         /// </summary>
-        public int MinimumValue
+        public int32 MinimumValue
         {
             get => _minimumValue;
             set
@@ -140,7 +140,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Gets or sets the maximum value
         /// </summary>
-        public int MaximumValue
+        public int32 MaximumValue
         {
             get => _maximumValue;
             set
@@ -161,7 +161,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Gets or sets the selected value
         /// </summary>
-        public int SelectedValue
+        public int32 SelectedValue
         {
             get => _selectedValue;
             set
@@ -191,7 +191,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Gets or sets the increment
         /// </summary>
-        public int Increment
+        public int32 Increment
         {
             get => _increment;
             set
@@ -226,8 +226,8 @@ namespace Avalonia.Controls.Primitives
 
                 if (dy > 0) // Scroll Down
                 {
-                    int numCountsToMove = 0;
-                    for (int i = 0; i < children.Count; i++)
+                    int32 numCountsToMove = 0;
+                    for (int32 i = 0; i < children.Count; i++)
                     {
                         if (children[i].Bounds.Bottom - dy < 0)
                             numCountsToMove++;
@@ -242,8 +242,8 @@ namespace Avalonia.Controls.Primitives
                 }
                 else if (dy < 0) // Scroll Up
                 {
-                    int numCountsToMove = 0;
-                    for (int i = children.Count - 1; i >= 0; i--)
+                    int32 numCountsToMove = 0;
+                    for (int32 i = children.Count - 1; i >= 0; i--)
                     {
                         if (children[i].Bounds.Top - dy > Bounds.Height)
                             numCountsToMove++;
@@ -258,7 +258,7 @@ namespace Avalonia.Controls.Primitives
                 //Setting selection will handle all invalidation
                 var newSel = (Offset.Y / ItemHeight) % _totalItems;
                 _suppressUpdateOffset = true;
-                SelectedValue = (int)newSel * Increment + MinimumValue;
+                SelectedValue = (int32)newSel * Increment + MinimumValue;
                 _suppressUpdateOffset = false;
 
                 System.Diagnostics.Debug.WriteLine(FormattableString.Invariant($"Offset: {_offset} ItemHeight: {ItemHeight}"));
@@ -293,13 +293,13 @@ namespace Avalonia.Controls.Primitives
                 UpdateHelperInfo();
 
             double initY = (availableSize.Height / 2.0) - (ItemHeight / 2.0);
-            _numItemsAboveBelowSelected = (int)Math.Ceiling(initY / ItemHeight) + 1;
+            _numItemsAboveBelowSelected = (int32)Math.Ceiling(initY / ItemHeight) + 1;
 
             var children = Children;
 
             CreateOrDestroyItems(children);
 
-            for (int i = 0; i < children.Count; i++)
+            for (int32 i = 0; i < children.Count; i++)
                 children[i].Measure(availableSize);
 
             if (!_hasInit)
@@ -327,7 +327,7 @@ namespace Avalonia.Controls.Primitives
                 var currentSet = Math.Truncate(Offset.Y / _extentOne);
                 initY += (_extentOne * currentSet) + (_selectedIndex - _numItemsAboveBelowSelected) * ItemHeight;
 
-                for (int i = 0; i < children.Count; i++)
+                for (int32 i = 0; i < children.Count; i++)
                 {
                     rc = new Rect(0, initY - Offset.Y, finalSize.Width, itemHgt);
                     children[i].Arrange(rc);
@@ -337,7 +337,7 @@ namespace Avalonia.Controls.Primitives
             else
             {
                 var first = Math.Max(0, (_selectedIndex - _numItemsAboveBelowSelected));
-                for (int i = 0; i < children.Count; i++)
+                for (int32 i = 0; i < children.Count; i++)
                 {
                     rc = new Rect(0, (initY + first * itemHgt) - Offset.Y, finalSize.Width, itemHgt);
                     children[i].Arrange(rc);
@@ -397,7 +397,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Scrolls up the specified number of items
         /// </summary>
-        public void ScrollUp(int numItems = 1)
+        public void ScrollUp(int32 numItems = 1)
         {
             var newY = Math.Max(Offset.Y - (numItems * ItemHeight), 0);
             Offset = new Vector(0, newY);
@@ -406,7 +406,7 @@ namespace Avalonia.Controls.Primitives
         /// <summary>
         /// Scrolls down the specified number of items
         /// </summary>
-        public void ScrollDown(int numItems = 1)
+        public void ScrollDown(int32 numItems = 1)
         {
             var scrollHeight = Math.Max(Extent.Height - ItemHeight, 0);
             var newY = Math.Min(Offset.Y + (numItems * ItemHeight), scrollHeight);
@@ -419,7 +419,7 @@ namespace Avalonia.Controls.Primitives
         private void UpdateHelperInfo()
         {
             _range = _maximumValue - _minimumValue + 1;
-            _totalItems = (int)Math.Ceiling((double)_range / _increment);
+            _totalItems = (int32)Math.Ceiling((double)_range / _increment);
 
             var itemHgt = ItemHeight;
             //If looping, measure 100x as many items as we actually have
@@ -437,14 +437,14 @@ namespace Avalonia.Controls.Primitives
         /// <param name="children"></param>
         private void CreateOrDestroyItems(Controls children)
         {
-            int totalItemsInViewport = _numItemsAboveBelowSelected * 2 + 1;
+            int32 totalItemsInViewport = _numItemsAboveBelowSelected * 2 + 1;
 
             if (!ShouldLoop)
             {
-                int numItemAboveSelect = _numItemsAboveBelowSelected;
+                int32 numItemAboveSelect = _numItemsAboveBelowSelected;
                 if (_selectedIndex - _numItemsAboveBelowSelected < 0)
                     numItemAboveSelect = _selectedIndex;
-                int numItemBelowSelect = _numItemsAboveBelowSelected;
+                int32 numItemBelowSelect = _numItemsAboveBelowSelected;
                 if (_selectedIndex + _numItemsAboveBelowSelected >= _totalItems)
                     numItemBelowSelect = _totalItems - _selectedIndex - 1;
 
@@ -480,7 +480,7 @@ namespace Avalonia.Controls.Primitives
             var selected = SelectedValue;
             var max = MaximumValue;
 
-            int first;
+            int32 first;
             if (ShouldLoop)
             {
                 first = (_selectedIndex - _numItemsAboveBelowSelected) % _totalItems;
@@ -491,7 +491,7 @@ namespace Avalonia.Controls.Primitives
                 first = min + Math.Max(0, _selectedIndex - _numItemsAboveBelowSelected) * Increment;
             }
 
-            for (int i = 0; i < children.Count; i++)
+            for (int32 i = 0; i < children.Count; i++)
             {
                 ListBoxItem item = (ListBoxItem)children[i];
                 item.Content = FormatContent(first, panelType);
@@ -503,7 +503,7 @@ namespace Avalonia.Controls.Primitives
             }
         }
 
-        private string FormatContent(int value, DateTimePickerPanelType panelType)
+        private string FormatContent(int32 value, DateTimePickerPanelType panelType)
         {
             switch (panelType)
             {
@@ -530,7 +530,7 @@ namespace Avalonia.Controls.Primitives
         /// Ensures the <see cref="SelectedValue"/> is within the bounds and
         /// follows the current Increment
         /// </summary>
-        private int CoerceSelected(int newValue)
+        private int32 CoerceSelected(int32 newValue)
         {
             if (newValue < MinimumValue)
                 return MinimumValue;
@@ -550,7 +550,7 @@ namespace Avalonia.Controls.Primitives
         {
             if (e.Source is Visual source && 
                 GetItemFromSource(source) is ListBoxItem listBoxItem &&
-                listBoxItem.Tag is int tag)
+                listBoxItem.Tag is int32 tag)
             {
                 SelectedValue = tag;
                 e.Handled = true;

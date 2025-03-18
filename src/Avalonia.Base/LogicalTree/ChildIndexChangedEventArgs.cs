@@ -36,7 +36,7 @@ namespace Avalonia.LogicalTree
         /// </summary>
         /// <param name="child">The child whose index was changed.</param>
         /// <param name="index">The new index of the child.</param>
-        public ChildIndexChangedEventArgs(ILogical child, int index)
+        public ChildIndexChangedEventArgs(ILogical child, int32 index)
         {
             Action = ChildIndexChangedAction.ChildIndexChanged;
             Child = child;
@@ -62,7 +62,7 @@ namespace Avalonia.LogicalTree
         /// <summary>
         /// Gets the new index of <see cref="Child"/> or -1 if all children should be re-evaluated.
         /// </summary>
-        public int Index { get; }
+        public int32 Index { get; }
 
         /// <summary>
         /// Gets an instance of the <see cref="ChildIndexChangedEventArgs"/> with an action of

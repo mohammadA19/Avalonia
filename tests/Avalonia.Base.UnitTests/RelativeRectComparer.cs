@@ -14,7 +14,7 @@ namespace Avalonia.Base.UnitTests
                    Math.Round(a.Rect.Height, 3) == Math.Round(b.Rect.Height, 3);
         }
 
-        public int GetHashCode(RelativeRect obj)
+        public int32 GetHashCode(RelativeRect obj)
         {
             throw new NotImplementedException();
         }

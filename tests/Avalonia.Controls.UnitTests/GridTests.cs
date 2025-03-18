@@ -43,7 +43,7 @@ namespace Avalonia.Controls.UnitTests
             return grid;
         }
 
-        private Control AddSizer(Grid grid, int column, double size = 30)
+        private Control AddSizer(Grid grid, int32 column, double size = 30)
         {
             var ctrl = new Control { MinWidth = size, MinHeight = size };
             ctrl.SetValue(Grid.ColumnProperty, column);
@@ -56,7 +56,7 @@ namespace Avalonia.Controls.UnitTests
         {
             output.WriteLine($"[Grid] ActualWidth: {grid.Bounds.Width} ActualHeight: {grid.Bounds.Width}");
             output.WriteLine($"[ColumnDefinitions]");
-            for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
+            for (int32 i = 0; i < grid.ColumnDefinitions.Count; i++)
             {
                 var cd = grid.ColumnDefinitions[i];
                 output.WriteLine($"[{i}] ActualWidth: {cd.ActualWidth} SharedSizeGroup: {cd.SharedSizeGroup}");
@@ -1276,7 +1276,7 @@ namespace Avalonia.Controls.UnitTests
                 ("A", new GridLength(1, GridUnitType.Star)),
                 ("A", new GridLength(1, GridUnitType.Star)),
                 (null, new GridLength()));
-            for (int i = 0; i < 3; i++)
+            for (int32 i = 0; i < 3; i++)
                 sizers.Add(AddSizer(grid, i, 6 + i * 6));
             var scope = new Grid();
             scope.Children.Add(grid);

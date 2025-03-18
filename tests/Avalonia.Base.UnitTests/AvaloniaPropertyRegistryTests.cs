@@ -21,8 +21,8 @@ namespace Avalonia.Base.UnitTests
         public void Registered_Properties_Count_Reflects_Newly_Added_Attached_Property()
         {
             var registry = new AvaloniaPropertyRegistry();
-            var metadata = new StyledPropertyMetadata<int>();
-            var property = new AttachedProperty<int>("test", typeof(object), typeof(object), metadata, true);
+            var metadata = new StyledPropertyMetadata<int32>();
+            var property = new AttachedProperty<int32>("test", typeof(object), typeof(object), metadata, true);
             registry.Register(typeof(object), property);
             registry.RegisterAttached(typeof(AvaloniaPropertyRegistryTests), property);
             property.AddOwner<Class4>();
@@ -118,8 +118,8 @@ namespace Avalonia.Base.UnitTests
             public static readonly StyledProperty<string> BazProperty =
                 AvaloniaProperty.Register<Class1, string>("Baz");
 
-            public static readonly StyledProperty<int> QuxProperty =
-                AvaloniaProperty.Register<Class1, int>("Qux");
+            public static readonly StyledProperty<int32> QuxProperty =
+                AvaloniaProperty.Register<Class1, int32>("Qux");
         }
 
         private class Class2 : Class1

@@ -9,7 +9,7 @@ namespace Avalonia.Threading;
 /// </summary>
 public partial class DispatcherTimer
 {
-    internal static int ActiveTimersCount { get; private set; }
+    internal static int32 ActiveTimersCount { get; private set; }
 
     /// <summary>
     ///     Creates a timer that uses theUI thread's Dispatcher2 to

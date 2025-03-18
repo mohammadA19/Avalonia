@@ -6,7 +6,7 @@ namespace SingleProjectSandbox;
 internal static class Program
 {
     [STAThread]
-    static int Main(string[] args) =>
+    static int32 Main(string[] args) =>
         BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
 

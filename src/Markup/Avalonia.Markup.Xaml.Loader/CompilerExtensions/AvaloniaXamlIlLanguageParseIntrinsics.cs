@@ -198,7 +198,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
                     {
                         new XamlConstantNode(node, types.XamlIlTypes.Double, relativePoint.Point.X),
                         new XamlConstantNode(node, types.XamlIlTypes.Double, relativePoint.Point.Y),
-                        new XamlConstantNode(node, types.RelativeUnit, (int) relativePoint.Unit),
+                        new XamlConstantNode(node, types.RelativeUnit, (int32) relativePoint.Unit),
                     });
 
                     return true;
@@ -329,7 +329,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
                     , new List<IXamlAstValueNode>()
                     {
                         new XamlConstantNode(node, context.Configuration.WellKnownTypes.String, uriText),
-                        new XamlConstantNode(node, types.UriKind, (int)kind),
+                        new XamlConstantNode(node, types.UriKind, (int32)kind),
                     });
                 return true;
             }
@@ -359,7 +359,7 @@ namespace Avalonia.Markup.Xaml.XamlIl.CompilerExtensions
                     if (pointParts.Length % 2 == 0)
                     {
                         items = new string[pointParts.Length / 2];
-                        for (int i = 0; i < pointParts.Length; i += 2)
+                        for (int32 i = 0; i < pointParts.Length; i += 2)
                         { 
                             items[i / 2] = string.Format(CultureInfo.InvariantCulture, "{0} {1}", pointParts[i],
                                 pointParts[i + 1]);

@@ -153,11 +153,11 @@ public struct LtrbRect
         return false;
     }
 
-    public override int GetHashCode()
+    public override int32 GetHashCode()
     {
         unchecked
         {
-            int hash = 17;
+            int32 hash = 17;
             hash = (hash * 23) + Left.GetHashCode();
             hash = (hash * 23) + Top.GetHashCode();
             hash = (hash * 23) + Right.GetHashCode();
@@ -183,9 +183,9 @@ public struct LtrbRect
 [PrivateApi]
 public struct LtrbPixelRect
 {
-    public int Left, Top, Right, Bottom;
+    public int32 Left, Top, Right, Bottom;
 
-    internal LtrbPixelRect(int x, int y, int right, int bottom)
+    internal LtrbPixelRect(int32 x, int32 y, int32 right, int32 bottom)
     {
         Left = x;
         Top = y;
@@ -220,14 +220,14 @@ public struct LtrbPixelRect
 
     internal Rect ToRectWithNoScaling() => new(Left, Top, (Right - Left), (Bottom - Top));
 
-    internal bool Contains(int x, int y)
+    internal bool Contains(int32 x, int32 y)
     {
         return x >= Left && x <= Right && y >= Top && y <= Bottom;
     }
 
     internal static LtrbPixelRect FromRectWithNoScaling(LtrbRect rect) =>
-        new((int)rect.Left, (int)rect.Top, (int)Math.Ceiling(rect.Right),
-            (int)Math.Ceiling(rect.Bottom));
+        new((int32)rect.Left, (int32)rect.Top, (int32)Math.Ceiling(rect.Right),
+            (int32)Math.Ceiling(rect.Bottom));
     
     public static bool operator ==(LtrbPixelRect left, LtrbPixelRect right)=>
         left.Left == right.Left && left.Top == right.Top && left.Right == right.Right && left.Bottom == right.Bottom;
@@ -245,11 +245,11 @@ public struct LtrbPixelRect
         return false;
     }
 
-    public override int GetHashCode()
+    public override int32 GetHashCode()
     {
         unchecked
         {
-            int hash = 17;
+            int32 hash = 17;
             hash = (hash * 23) + Left.GetHashCode();
             hash = (hash * 23) + Top.GetHashCode();
             hash = (hash * 23) + Right.GetHashCode();
@@ -262,7 +262,7 @@ public struct LtrbPixelRect
 
     internal static LtrbPixelRect FromRectUnscaled(LtrbRect rect)
     {
-        return new LtrbPixelRect((int)rect.Left, (int)rect.Top, (int)Math.Ceiling(rect.Right),
-            (int)Math.Ceiling(rect.Bottom));
+        return new LtrbPixelRect((int32)rect.Left, (int32)rect.Top, (int32)Math.Ceiling(rect.Right),
+            (int32)Math.Ceiling(rect.Bottom));
     }
 }

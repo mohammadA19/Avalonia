@@ -84,8 +84,8 @@ namespace Avalonia.Controls.Presenters
         private Size _extent;
         private IDisposable? _logicalScrollSubscription;
         private Size _viewport;
-        private Dictionary<int, Vector>? _activeLogicalGestureScrolls;
-        private Dictionary<int, Vector>? _scrollGestureSnapPoints;
+        private Dictionary<int32, Vector>? _activeLogicalGestureScrolls;
+        private Dictionary<int32, Vector>? _scrollGestureSnapPoints;
         private HashSet<Control>? _anchorCandidates;
         private Control? _anchorElement;
         private Rect _anchorElementBounds;
@@ -583,7 +583,7 @@ namespace Avalonia.Controls.Presenters
                 if (isLogical)
                 {
                     if (_activeLogicalGestureScrolls == null)
-                        _activeLogicalGestureScrolls = new Dictionary<int, Vector>();
+                        _activeLogicalGestureScrolls = new Dictionary<int32, Vector>();
                     _activeLogicalGestureScrolls[e.Id] = delta;
                 }
 
@@ -635,7 +635,7 @@ namespace Avalonia.Controls.Presenters
                 return;
 
             if (_scrollGestureSnapPoints == null)
-                _scrollGestureSnapPoints = new Dictionary<int, Vector>();
+                _scrollGestureSnapPoints = new Dictionary<int32, Vector>();
 
             var offset = Offset;
 
@@ -973,7 +973,7 @@ namespace Avalonia.Controls.Presenters
 
                 if (_areVerticalSnapPointsRegular)
                 {
-                    previousSnapPoint = (int)(estimatedOffset.Y / _verticalSnapPoint) * _verticalSnapPoint + _verticalSnapPointOffset;
+                    previousSnapPoint = (int32)(estimatedOffset.Y / _verticalSnapPoint) * _verticalSnapPoint + _verticalSnapPointOffset;
                     nextSnapPoint = previousSnapPoint + _verticalSnapPoint;
                     midPoint = (previousSnapPoint + nextSnapPoint) / 2;
                 }
@@ -996,7 +996,7 @@ namespace Avalonia.Controls.Presenters
 
                 if (_areHorizontalSnapPointsRegular)
                 {
-                    previousSnapPoint = (int)(estimatedOffset.X / _horizontalSnapPoint) * _horizontalSnapPoint + _horizontalSnapPointOffset;
+                    previousSnapPoint = (int32)(estimatedOffset.X / _horizontalSnapPoint) * _horizontalSnapPoint + _horizontalSnapPointOffset;
                     nextSnapPoint = previousSnapPoint + _horizontalSnapPoint;
                     midPoint = (previousSnapPoint + nextSnapPoint) / 2;
                 }

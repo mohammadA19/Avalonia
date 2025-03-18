@@ -14,8 +14,8 @@ namespace Avalonia.Base.UnitTests.Styling
         [InlineData(4, -1, ":nth-last-child(4n-1)")]
         [InlineData(0, 1, ":nth-last-child(1)")]
         [InlineData(0, -1, ":nth-last-child(-1)")]
-        [InlineData(int.MaxValue, int.MinValue + 1, ":nth-last-child(2147483647n-2147483647)")]
-        public void Not_Selector_Should_Have_Correct_String_Representation(int step, int offset, string expected)
+        [InlineData(int32.MaxValue, int32.MinValue + 1, ":nth-last-child(2147483647n-2147483647)")]
+        public void Not_Selector_Should_Have_Correct_String_Representation(int32 step, int32 offset, string expected)
         {
             var target = default(Selector).NthLastChild(step, offset);
 

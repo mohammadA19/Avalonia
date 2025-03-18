@@ -52,7 +52,7 @@ namespace Avalonia.Remote.Protocol
 
         async Task ReadExact(byte[] buffer)
         {
-            int read = 0;
+            int32 read = 0;
             while (read != buffer.Length)
             {
                 var readNow = await _inputStream.ReadAsync(buffer, read, buffer.Length - read, _cancel)
@@ -109,7 +109,7 @@ namespace Avalonia.Remote.Protocol
                 var serialized = Serializer.Serialize(data);
                 _outputBlock.Write(serialized, 0, serialized.Length);
                 _outputBlock.Seek(0, SeekOrigin.Begin);
-                var length = BitConverter.GetBytes((int)_outputBlock.Length - 20);
+                var length = BitConverter.GetBytes((int32)_outputBlock.Length - 20);
                 _outputBlock.Write(length, 0, length.Length);
                 _outputBlock.Seek(0, SeekOrigin.Begin);
 

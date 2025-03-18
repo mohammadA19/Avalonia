@@ -34,14 +34,14 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="MinuteIncrement"/> property
         /// </summary>
-        public static readonly StyledProperty<int> MinuteIncrementProperty =
-            AvaloniaProperty.Register<TimePicker, int>(nameof(MinuteIncrement), 1, coerce: CoerceMinuteIncrement);
+        public static readonly StyledProperty<int32> MinuteIncrementProperty =
+            AvaloniaProperty.Register<TimePicker, int32>(nameof(MinuteIncrement), 1, coerce: CoerceMinuteIncrement);
         
         /// <summary>
         /// Defines the <see cref="SecondIncrement"/> property
         /// </summary>
-        public static readonly StyledProperty<int> SecondIncrementProperty =
-            AvaloniaProperty.Register<TimePicker, int>(nameof(SecondIncrement), 1, coerce: CoerceSecondIncrement);
+        public static readonly StyledProperty<int32> SecondIncrementProperty =
+            AvaloniaProperty.Register<TimePicker, int32>(nameof(SecondIncrement), 1, coerce: CoerceSecondIncrement);
 
         /// <summary>
         /// Defines the <see cref="ClockIdentifier"/> property
@@ -91,13 +91,13 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the minute increment in the picker
         /// </summary>
-        public int MinuteIncrement
+        public int32 MinuteIncrement
         {
             get => GetValue(MinuteIncrementProperty);
             set => SetValue(MinuteIncrementProperty, value);
         }
 
-        private static int CoerceMinuteIncrement(AvaloniaObject sender, int value)
+        private static int32 CoerceMinuteIncrement(AvaloniaObject sender, int32 value)
         {
             if (value < 1 || value > 59)
                 throw new ArgumentOutOfRangeException(null, "1 >= MinuteIncrement <= 59");
@@ -108,13 +108,13 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the second increment in the picker
         /// </summary>
-        public int SecondIncrement
+        public int32 SecondIncrement
         {
             get => GetValue(SecondIncrementProperty);
             set => SetValue(SecondIncrementProperty, value);
         }
 
-        private static int CoerceSecondIncrement(AvaloniaObject sender, int value)
+        private static int32 CoerceSecondIncrement(AvaloniaObject sender, int32 value)
         {
             if (value < 1 || value > 59)
                 throw new ArgumentOutOfRangeException(null, "1 >= SecondIncrement <= 59");

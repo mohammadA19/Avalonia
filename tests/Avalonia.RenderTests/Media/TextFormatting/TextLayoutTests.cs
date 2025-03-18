@@ -112,7 +112,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
         [InlineData(stringmiddlenewlines, 4, -1, TextWrapping.NoWrap)]
         [InlineData(stringmiddlenewlines, 4, 150, TextWrapping.Wrap)]
         public void Should_Break_Lines_String_Correctly(string input,
-                                                            int linesCount,
+                                                            int32 linesCount,
                                                             double widthConstraint,
                                                             TextWrapping wrap)
         {
@@ -148,7 +148,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
         [InlineData(stringmiddle3lines, -1, 30, false, false, 10)]
         public void Should_HitTestPoint_Correctly(string input,
             double x, double y,
-            bool isInside, bool isTrailing, int pos)
+            bool isInside, bool isTrailing, int32 pos)
         {
             var fmt = Create(input, FontSize);
             var htRes = fmt.HitTestPoint(new Point(x, y));
@@ -169,7 +169,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
         [InlineData(stringmiddlenewlines, 20, 0, 2 * FontSizeHeight, 7.20, FontSizeHeight)]
         [InlineData(stringmiddlenewlines, -1, 72.01, 3 * FontSizeHeight, 0, FontSizeHeight)]
         public void Should_HitTestPosition_Correctly(string input,
-                    int index, double x, double y, double width, double height)
+                    int32 index, double x, double y, double width, double height)
         {
             var fmt = Create(input, FontSize);
             var r = fmt.HitTestTextPosition(index);
@@ -185,7 +185,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
         [InlineData(stringword, 0, 200, 171.20, 0, 7.20, FontSizeHeight)]
         [InlineData(stringword, 3, 200, 200 - 7.20, 0, 7.20, FontSizeHeight)]
         public void Should_HitTestPosition_RightAlign_Correctly(
-                                                    string input, int index, double widthConstraint,
+                                                    string input, int32 index, double widthConstraint,
                                                     double x, double y, double width, double height)
         {
             //parse expected
@@ -204,7 +204,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
         [InlineData(stringword, 0, 200, 85.6, 0, 7.20, FontSizeHeight)]
         [InlineData(stringword, 3, 200, 100 + 7.20, 0, 7.20, FontSizeHeight)]
         public void Should_HitTestPosition_CenterAlign_Correctly(
-                                                    string input, int index, double widthConstraint,
+                                                    string input, int32 index, double widthConstraint,
                                                     double x, double y, double width, double height)
         {
             //parse expected
@@ -226,7 +226,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
         [InlineData(stringmiddlenewlines, 10, 15, "0,14.0625,57.61,14.0625;0,28.125,36.01,14.0625")]
         [InlineData(stringmiddlenewlines, 15, 15, "36.01,14.0625,21.60,14.0625;0,28.125,64.81,14.0625")]
         public void Should_HitTestRange_Correctly(string input,
-                            int index, int length,
+                            int32 index, int32 length,
                             string expectedRects)
         {
             //parse expected result
@@ -242,7 +242,7 @@ namespace Avalonia.Direct2D1.RenderTests.Media
 
             Assert.Equal(rects.Length, htRes.Length);
 
-            for (int i = 0; i < rects.Length; i++)
+            for (int32 i = 0; i < rects.Length; i++)
             {
                 var exr = rects[i];
                 var r = htRes[i];

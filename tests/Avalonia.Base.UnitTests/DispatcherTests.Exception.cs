@@ -12,8 +12,8 @@ public partial class DispatcherTests
 {
     private const string ExpectedExceptionText = "Exception thrown inside Dispatcher.Invoke / Dispatcher.BeginInvoke.";
 
-    private int _numberOfHandlerOnUnhandledEventInvoked;
-    private int _numberOfHandlerOnUnhandledEventFilterInvoked;
+    private int32 _numberOfHandlerOnUnhandledEventInvoked;
+    private int32 _numberOfHandlerOnUnhandledEventFilterInvoked;
 
     public DispatcherTests()
     {
@@ -303,8 +303,8 @@ public partial class DispatcherTests
         }
     }
     
-    private void Verification(bool caughtCorrectException, int numberOfHandlerOnUnhandledEventShouldInvoke,
-        int numberOfHandlerOnUnhandledEventFilterShouldInvoke)
+    private void Verification(bool caughtCorrectException, int32 numberOfHandlerOnUnhandledEventShouldInvoke,
+        int32 numberOfHandlerOnUnhandledEventFilterShouldInvoke)
     {
         Assert.True(
             _numberOfHandlerOnUnhandledEventInvoked >= numberOfHandlerOnUnhandledEventShouldInvoke,

@@ -10,13 +10,13 @@ namespace Avalonia.Utilities
         private const char DefaultSeparatorChar = ',';
 
         private readonly ReadOnlySpan<char> _s;
-        private readonly int _length;
+        private readonly int32 _length;
         private readonly char _separator;
         private readonly string? _exceptionMessage;
         private readonly IFormatProvider _formatProvider;
-        private int _index;
-        private int _tokenIndex;
-        private int _tokenLength;
+        private int32 _index;
+        private int32 _tokenIndex;
+        private int32 _tokenLength;
 
         public SpanStringTokenizer(string s, IFormatProvider formatProvider, string? exceptionMessage = null)
             : this(s.AsSpan(), GetSeparatorFromFormatProvider(formatProvider), exceptionMessage)
@@ -52,7 +52,7 @@ namespace Avalonia.Utilities
             }
         }
 
-        public int CurrentTokenIndex => _tokenIndex;
+        public int32 CurrentTokenIndex => _tokenIndex;
 
         public string? CurrentToken => _tokenIndex < 0 ? null : _s.Slice(_tokenIndex, _tokenLength).ToString();
 
@@ -80,7 +80,7 @@ namespace Avalonia.Utilities
             }
         }
 
-        public int ReadInt32(char? separator = null)
+        public int32 ReadInt32(char? separator = null)
         {
             if (!TryReadInt32(out var result, separator))
             {

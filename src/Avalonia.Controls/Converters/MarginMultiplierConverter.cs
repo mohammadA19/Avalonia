@@ -18,7 +18,7 @@ namespace Avalonia.Controls.Converters
 
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is int scalarDepth)
+            if (value is int32 scalarDepth)
             {
                 return new Thickness(
                     Left ? Indent * scalarDepth : 0,

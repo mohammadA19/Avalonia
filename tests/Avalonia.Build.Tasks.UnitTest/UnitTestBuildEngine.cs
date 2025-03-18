@@ -40,9 +40,9 @@ internal class UnitTestBuildEngine : IBuildEngine, IDisposable
 
     public bool ContinueOnError { get; }
 
-    public int LineNumberOfTaskNode { get; }
+    public int32 LineNumberOfTaskNode { get; }
 
-    public int ColumnNumberOfTaskNode { get; }
+    public int32 ColumnNumberOfTaskNode { get; }
 
     public string ProjectFileOfTaskNode { get; }
 

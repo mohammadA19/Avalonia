@@ -28,9 +28,9 @@ namespace Avalonia.Diagnostics.ViewModels
 
         public TreeNodeCollection(TreeNode owner) => Owner = owner;
 
-        public TreeNode this[int index] => EnsureInitialized()[index];
+        public TreeNode this[int32 index] => EnsureInitialized()[index];
 
-        public int Count => EnsureInitialized().Count;
+        public int32 Count => EnsureInitialized().Count;
 
         protected TreeNode Owner { get; }
         bool IList.IsFixedSize => false;
@@ -38,7 +38,7 @@ namespace Avalonia.Diagnostics.ViewModels
         bool ICollection.IsSynchronized => false;
         object ICollection.SyncRoot => this;
 
-        object? IList.this[int index] 
+        object? IList.this[int32 index] 
         {
             get => this[index];
             set => throw new NotImplementedException();
@@ -86,13 +86,13 @@ namespace Avalonia.Diagnostics.ViewModels
             return _inner;
         }
 
-        int IList.Add(object? value) => throw new NotImplementedException();
+        int32 IList.Add(object? value) => throw new NotImplementedException();
         void IList.Clear() => throw new NotImplementedException();
         bool IList.Contains(object? value) => EnsureInitialized().Contains((TreeNode)value!);
-        int IList.IndexOf(object? value) => EnsureInitialized().IndexOf((TreeNode)value!);
-        void IList.Insert(int index, object? value) => throw new NotImplementedException();
+        int32 IList.IndexOf(object? value) => EnsureInitialized().IndexOf((TreeNode)value!);
+        void IList.Insert(int32 index, object? value) => throw new NotImplementedException();
         void IList.Remove(object? value) => throw new NotImplementedException();
-        void IList.RemoveAt(int index) => throw new NotImplementedException();
-        void ICollection.CopyTo(Array array, int index) => throw new NotImplementedException();
+        void IList.RemoveAt(int32 index) => throw new NotImplementedException();
+        void ICollection.CopyTo(Array array, int32 index) => throw new NotImplementedException();
     }
 }

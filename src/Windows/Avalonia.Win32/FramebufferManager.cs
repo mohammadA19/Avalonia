@@ -9,7 +9,7 @@ namespace Avalonia.Win32
 {
     internal class FramebufferManager : IFramebufferPlatformSurface, IDisposable
     {
-        private const int _bytesPerPixel = 4;
+        private const int32 _bytesPerPixel = 4;
         private static readonly PixelFormat s_format = PixelFormat.Bgra8888;
 
         private readonly IntPtr _hwnd;
@@ -106,16 +106,16 @@ namespace Avalonia.Win32
             return new Vector(96, 96);
         }
 
-        private static FramebufferData AllocateFramebufferData(int width, int height)
+        private static FramebufferData AllocateFramebufferData(int32 width, int32 height)
         {
             var bitmapBlob = new UnmanagedBlob(width * height * _bytesPerPixel);
 
             return new FramebufferData(bitmapBlob, width, height);
         }
 
-        private static void DrawToDevice(FramebufferData framebufferData, IntPtr hDC, int destX = 0, int destY = 0, int srcX = 0,
-            int srcY = 0, int width = -1,
-            int height = -1)
+        private static void DrawToDevice(FramebufferData framebufferData, IntPtr hDC, int32 destX = 0, int32 destY = 0, int32 srcX = 0,
+            int32 srcY = 0, int32 width = -1,
+            int32 height = -1)
         {
             if (width == -1)
                 width = framebufferData.Size.Width;
@@ -128,9 +128,9 @@ namespace Avalonia.Win32
                 0, (uint)framebufferData.Size.Height, framebufferData.Data.Address, ref bmpInfo, 0);
         }
 
-        private static bool DrawToWindow(IntPtr hWnd, FramebufferData framebufferData, int destX = 0, int destY = 0, int srcX = 0,
-            int srcY = 0, int width = -1,
-            int height = -1)
+        private static bool DrawToWindow(IntPtr hWnd, FramebufferData framebufferData, int32 destX = 0, int32 destY = 0, int32 srcX = 0,
+            int32 srcY = 0, int32 width = -1,
+            int32 height = -1)
         {
             if (framebufferData.Data.IsDisposed)
                 throw new ObjectDisposedException("Framebuffer");
@@ -161,11 +161,11 @@ namespace Avalonia.Win32
 
             public PixelSize Size { get; }
 
-            public int RowBytes => Size.Width * _bytesPerPixel;
+            public int32 RowBytes => Size.Width * _bytesPerPixel;
 
             public UnmanagedMethods.BITMAPINFOHEADER Header { get; }
 
-            public FramebufferData(UnmanagedBlob data, int width, int height)
+            public FramebufferData(UnmanagedBlob data, int32 width, int32 height)
             {
                 Data = data;
                 Size = new PixelSize(width, height);

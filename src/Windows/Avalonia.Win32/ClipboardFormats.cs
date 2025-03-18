@@ -10,7 +10,7 @@ namespace Avalonia.Win32
 {
     internal static class ClipboardFormats
     {
-        private const int MAX_FORMAT_NAME_LENGTH = 260;
+        private const int32 MAX_FORMAT_NAME_LENGTH = 260;
 
         private class ClipboardFormat
         {
@@ -68,7 +68,7 @@ namespace Avalonia.Win32
                 var pd = s_formatList.FirstOrDefault(f => StringComparer.OrdinalIgnoreCase.Equals(f.Name, format));
                 if (pd == null)
                 {
-                    int id = UnmanagedMethods.RegisterClipboardFormat(format);
+                    int32 id = UnmanagedMethods.RegisterClipboardFormat(format);
                     if (id == 0)
                         throw new Win32Exception();
                     pd = new ClipboardFormat(format, (ushort)id);

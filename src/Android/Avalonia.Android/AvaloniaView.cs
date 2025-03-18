@@ -74,7 +74,7 @@ namespace Avalonia.Android
         protected override void OnFocusChanged(bool gainFocus, FocusSearchDirection direction, global::Android.Graphics.Rect? previouslyFocusedRect)
         {
             base.OnFocusChanged(gainFocus, direction, previouslyFocusedRect);
-            _accessHelper.OnFocusChanged(gainFocus, (int)direction, previouslyFocusedRect);
+            _accessHelper.OnFocusChanged(gainFocus, (int32)direction, previouslyFocusedRect);
         }
 
         protected override bool DispatchHoverEvent(MotionEvent? e)

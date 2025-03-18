@@ -15,7 +15,7 @@ namespace Avalonia.Input
         /// <summary>
         /// Gets a unique identifier for the input pointer.
         /// </summary>
-        int Id { get; }
+        int32 Id { get; }
 
         /// <summary>
         /// Captures pointer input to the specified control.

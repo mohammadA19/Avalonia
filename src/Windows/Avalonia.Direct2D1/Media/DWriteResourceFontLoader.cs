@@ -23,7 +23,7 @@ namespace Avalonia.Direct2D1.Media
 
             foreach (var asset in fontAssets)
             {
-                var dataStream = new DataStream((int)asset.Length, true, true);
+                var dataStream = new DataStream((int32)asset.Length, true, true);
 
                 asset.CopyTo(dataStream);
 
@@ -33,9 +33,9 @@ namespace Avalonia.Direct2D1.Media
             }
 
             // Build a Key storage that stores the index of the font
-            _keyStream = new DataStream(sizeof(int) * _fontStreams.Count, true, true);
+            _keyStream = new DataStream(sizeof(int32) * _fontStreams.Count, true, true);
 
-            for (int i = 0; i < _fontStreams.Count; i++)
+            for (int32 i = 0; i < _fontStreams.Count; i++)
             {
                 _keyStream.Write(i);
             }
@@ -62,7 +62,7 @@ namespace Avalonia.Direct2D1.Media
         /// <returns>
         /// a reference to the newly created font file enumerator.
         /// </returns>
-        /// <unmanaged>HRESULT IDWriteFontCollectionLoader::CreateEnumeratorFromKey([None] IDWriteFactory* factory,[In, Buffer] const void* collectionKey,[None] int collectionKeySize,[Out] IDWriteFontFileEnumerator** fontFileEnumerator)</unmanaged>
+        /// <unmanaged>HRESULT IDWriteFontCollectionLoader::CreateEnumeratorFromKey([None] IDWriteFactory* factory,[In, Buffer] const void* collectionKey,[None] int32 collectionKeySize,[Out] IDWriteFontFileEnumerator** fontFileEnumerator)</unmanaged>
         FontFileEnumerator FontCollectionLoader.CreateEnumeratorFromKey(Factory factory, DataPointer collectionKey)
         {
             var enumerator = new DWriteResourceFontFileEnumerator(factory, this, collectionKey);
@@ -82,10 +82,10 @@ namespace Avalonia.Direct2D1.Media
         /// <remarks>
         /// The resource is closed when the last reference to fontFileStream is released.
         /// </remarks>
-        /// <unmanaged>HRESULT IDWriteFontFileLoader::CreateStreamFromKey([In, Buffer] const void* fontFileReferenceKey,[None] int fontFileReferenceKeySize,[Out] IDWriteFontFileStream** fontFileStream)</unmanaged>
+        /// <unmanaged>HRESULT IDWriteFontFileLoader::CreateStreamFromKey([In, Buffer] const void* fontFileReferenceKey,[None] int32 fontFileReferenceKeySize,[Out] IDWriteFontFileStream** fontFileStream)</unmanaged>
         FontFileStream FontFileLoader.CreateStreamFromKey(DataPointer fontFileReferenceKey)
         {
-            var index = SharpDX.Utilities.Read<int>(fontFileReferenceKey.Pointer);
+            var index = SharpDX.Utilities.Read<int32>(fontFileReferenceKey.Pointer);
 
             return _fontStreams[index];
         }

@@ -12,7 +12,7 @@ public class HexConverter : IValueConverter
         var str = value?.ToString();
         if (str == null)
             return AvaloniaProperty.UnsetValue;
-        if (int.TryParse(str, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int x))
+        if (int32.TryParse(str, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int32 x))
             return (decimal)x;
         return AvaloniaProperty.UnsetValue;
 
@@ -23,7 +23,7 @@ public class HexConverter : IValueConverter
         try
         {
             if (value is decimal d)
-                return ((int)d).ToString("X8");
+                return ((int32)d).ToString("X8");
             return AvaloniaProperty.UnsetValue;
         }
         catch

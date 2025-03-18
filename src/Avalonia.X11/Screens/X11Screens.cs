@@ -18,7 +18,7 @@ namespace Avalonia.X11.Screens
             _impl.Changed += () => Changed?.Invoke();
         }
 
-        protected override int GetScreenCount() => _impl.ScreenKeys.Length;
+        protected override int32 GetScreenCount() => _impl.ScreenKeys.Length;
 
         protected override IReadOnlyList<nint> GetAllScreenKeys() => _impl.ScreenKeys;
 

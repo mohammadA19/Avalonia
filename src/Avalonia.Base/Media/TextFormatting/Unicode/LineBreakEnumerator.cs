@@ -52,12 +52,12 @@ namespace Avalonia.Media.TextFormatting.Unicode
         private static bool IsBreakClass(LineBreakClass cls)
         {
             const ulong mask =
-                (1UL << (int)LineBreakClass.MandatoryBreak) |
-                (1UL << (int)LineBreakClass.LineFeed) |
-                (1UL << (int)LineBreakClass.CarriageReturn) |
-                (1UL << (int)LineBreakClass.NextLine);
+                (1UL << (int32)LineBreakClass.MandatoryBreak) |
+                (1UL << (int32)LineBreakClass.LineFeed) |
+                (1UL << (int32)LineBreakClass.CarriageReturn) |
+                (1UL << (int32)LineBreakClass.NextLine);
 
-            return ((1UL << (int)cls) & mask) != 0UL;
+            return ((1UL << (int32)cls) & mask) != 0UL;
         }
 
         private static LineBreak GetLineBreak(ReadOnlySpan<char> text, LineBreakState state, bool isRequired)
@@ -87,7 +87,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
             return new LineBreak(positionMeasure, positionWrap, isRequired);
         }
 
-        private static int FindPriorNonWhitespace(ReadOnlySpan<char> text, int from)
+        private static int32 FindPriorNonWhitespace(ReadOnlySpan<char> text, int32 from)
         {
             if (from > 0)
             {
@@ -1421,7 +1421,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 EndOfText = other.EndOfText;
             }
 
-            public BreakUnit(Codepoint codepoint, int start, int length)
+            public BreakUnit(Codepoint codepoint, int32 start, int32 length)
             {
                 Codepoint = codepoint;
                 Start = start;
@@ -1429,8 +1429,8 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 LineBreakClass = MapClass(codepoint);
             }
 
-            public int Start { get; }
-            public int Length { get; }
+            public int32 Start { get; }
+            public int32 Length { get; }
             public Codepoint Codepoint { get; }
             public bool EndOfText { get; init; }
             public bool StartOfText { get; init; }
@@ -1462,13 +1462,13 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 var cls = cp.LineBreakClass;
 
                 const ulong specialMask =
-                    (1UL << (int)LineBreakClass.Ambiguous) |
-                    (1UL << (int)LineBreakClass.Surrogate) |
-                    (1UL << (int)LineBreakClass.Unknown) |
-                    (1UL << (int)LineBreakClass.ComplexContext) |
-                    (1UL << (int)LineBreakClass.ConditionalJapaneseStarter);
+                    (1UL << (int32)LineBreakClass.Ambiguous) |
+                    (1UL << (int32)LineBreakClass.Surrogate) |
+                    (1UL << (int32)LineBreakClass.Unknown) |
+                    (1UL << (int32)LineBreakClass.ComplexContext) |
+                    (1UL << (int32)LineBreakClass.ConditionalJapaneseStarter);
 
-                if (((1UL << (int)cls) & specialMask) != 0UL)
+                if (((1UL << (int32)cls) & specialMask) != 0UL)
                 {
                     switch (cls)
                     {
@@ -1560,18 +1560,18 @@ namespace Avalonia.Media.TextFormatting.Unicode
                 _next = next;   
             }
 
-            public int Position { get; private set; }
+            public int32 Position { get; private set; }
 
-            public int RegionalIndicator { get; set; }
+            public int32 RegionalIndicator { get; set; }
 
-            public int Quotation { get; set; }
+            public int32 Quotation { get; set; }
 
             public BreakUnit LastBeforeWhitespace { get; set; }
 
             public BreakUnit LastBeforeSpace { get; set; }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            private static BreakUnit PeekAt(ReadOnlySpan<char> text, int index)
+            private static BreakUnit PeekAt(ReadOnlySpan<char> text, int32 index)
             {
                 if (text.Length == 0)
                 {

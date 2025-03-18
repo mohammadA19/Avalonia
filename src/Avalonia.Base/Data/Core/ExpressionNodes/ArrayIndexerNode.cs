@@ -10,9 +10,9 @@ namespace Avalonia.Data.Core.ExpressionNodes;
 /// </summary>
 internal sealed class ArrayIndexerNode : ExpressionNode, ISettableNode
 {
-    private readonly int[] _indexes;
+    private readonly int32[] _indexes;
 
-    public ArrayIndexerNode(int[] indexes)
+    public ArrayIndexerNode(int32[] indexes)
     {
         _indexes = indexes;
     }

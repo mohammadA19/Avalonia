@@ -9,12 +9,12 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 {
     public class FormattingBufferHelperTests
     {
-        public static TheoryData<int> SmallSizes => new() { 1, 500, 10_000, 125_000 };
-        public static TheoryData<int> LargeSizes => new() { 500_000, 1_000_000 };
+        public static TheoryData<int32> SmallSizes => new() { 1, 500, 10_000, 125_000 };
+        public static TheoryData<int32> LargeSizes => new() { 500_000, 1_000_000 };
 
         [Theory]
         [MemberData(nameof(SmallSizes))]
-        public void Should_Keep_Small_Buffer_List(int itemCount)
+        public void Should_Keep_Small_Buffer_List(int32 itemCount)
         {
             var capacity = FillAndClearList(itemCount);
 
@@ -23,16 +23,16 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
         [Theory]
         [MemberData(nameof(LargeSizes))]
-        public void Should_Reset_Large_Buffer_List(int itemCount)
+        public void Should_Reset_Large_Buffer_List(int32 itemCount)
         {
             var capacity = FillAndClearList(itemCount);
 
             Assert.Equal(0, capacity);
         }
 
-        private static int FillAndClearList(int itemCount)
+        private static int32 FillAndClearList(int32 itemCount)
         {
-            var list = new List<int>();
+            var list = new List<int32>();
 
             for (var i = 0; i < itemCount; ++i)
             {
@@ -46,7 +46,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
         [Theory]
         [MemberData(nameof(SmallSizes))]
-        public void Should_Keep_Small_Buffer_ArrayBuilder(int itemCount)
+        public void Should_Keep_Small_Buffer_ArrayBuilder(int32 itemCount)
         {
             var capacity = FillAndClearArrayBuilder(itemCount);
 
@@ -55,16 +55,16 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
         [Theory]
         [MemberData(nameof(LargeSizes))]
-        public void Should_Reset_Large_Buffer_ArrayBuilder(int itemCount)
+        public void Should_Reset_Large_Buffer_ArrayBuilder(int32 itemCount)
         {
             var capacity = FillAndClearArrayBuilder(itemCount);
 
             Assert.Equal(0, capacity);
         }
 
-        private static int FillAndClearArrayBuilder(int itemCount)
+        private static int32 FillAndClearArrayBuilder(int32 itemCount)
         {
-            var arrayBuilder = new ArrayBuilder<int>();
+            var arrayBuilder = new ArrayBuilder<int32>();
 
             for (var i = 0; i < itemCount; ++i)
             {
@@ -78,7 +78,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
         [Theory]
         [MemberData(nameof(SmallSizes))]
-        public void Should_Keep_Small_Buffer_Stack(int itemCount)
+        public void Should_Keep_Small_Buffer_Stack(int32 itemCount)
         {
             var capacity = FillAndClearStack(itemCount);
 
@@ -87,16 +87,16 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
         [Theory]
         [MemberData(nameof(LargeSizes))]
-        public void Should_Reset_Large_Buffer_Stack(int itemCount)
+        public void Should_Reset_Large_Buffer_Stack(int32 itemCount)
         {
             var capacity = FillAndClearStack(itemCount);
 
             Assert.Equal(0, capacity);
         }
 
-        private static int FillAndClearStack(int itemCount)
+        private static int32 FillAndClearStack(int32 itemCount)
         {
-            var stack = new Stack<int>();
+            var stack = new Stack<int32>();
 
             for (var i = 0; i < itemCount; ++i)
             {
@@ -114,7 +114,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
         [Theory]
         [MemberData(nameof(SmallSizes))]
-        public void Should_Keep_Small_Buffer_Dictionary(int itemCount)
+        public void Should_Keep_Small_Buffer_Dictionary(int32 itemCount)
         {
             var capacity = FillAndClearDictionary(itemCount);
 
@@ -123,16 +123,16 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
         [Theory]
         [MemberData(nameof(LargeSizes))]
-        public void Should_Reset_Large_Buffer_Dictionary(int itemCount)
+        public void Should_Reset_Large_Buffer_Dictionary(int32 itemCount)
         {
             var capacity = FillAndClearDictionary(itemCount);
 
             Assert.True(capacity <= 3); // dictionary trims to the nearest prime starting with 3
         }
 
-        private static int FillAndClearDictionary(int itemCount)
+        private static int32 FillAndClearDictionary(int32 itemCount)
         {
-            var dictionary = new Dictionary<int, int>();
+            var dictionary = new Dictionary<int32, int32>();
 
             for (var i = 0; i < itemCount; ++i)
             {

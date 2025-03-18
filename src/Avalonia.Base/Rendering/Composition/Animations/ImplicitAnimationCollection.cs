@@ -36,11 +36,11 @@ namespace Avalonia.Rendering.Composition.Animations
 
         bool ICollection<KeyValuePair<string, ICompositionAnimationBase>>.Contains(KeyValuePair<string, ICompositionAnimationBase> item) => _innerface.Contains(item);
 
-        void ICollection<KeyValuePair<string, ICompositionAnimationBase>>.CopyTo(KeyValuePair<string, ICompositionAnimationBase>[] array, int arrayIndex) => _innerface.CopyTo(array, arrayIndex);
+        void ICollection<KeyValuePair<string, ICompositionAnimationBase>>.CopyTo(KeyValuePair<string, ICompositionAnimationBase>[] array, int32 arrayIndex) => _innerface.CopyTo(array, arrayIndex);
 
         bool ICollection<KeyValuePair<string, ICompositionAnimationBase>>.Remove(KeyValuePair<string, ICompositionAnimationBase> item) => _innerface.Remove(item);
 
-        public int Count => _inner.Count;
+        public int32 Count => _inner.Count;
 
         bool ICollection<KeyValuePair<string, ICompositionAnimationBase>>.IsReadOnly => _innerface.IsReadOnly;
 

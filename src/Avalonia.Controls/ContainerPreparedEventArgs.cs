@@ -7,7 +7,7 @@ namespace Avalonia.Controls
     /// </summary>
     public class ContainerPreparedEventArgs : EventArgs
     {
-        public ContainerPreparedEventArgs(Control container, int index)
+        public ContainerPreparedEventArgs(Control container, int32 index)
         {
             Container = container;
             Index = index;
@@ -21,6 +21,6 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets the index of the item the container was prepared for.
         /// </summary>
-        public int Index { get; }
+        public int32 Index { get; }
     }
 }

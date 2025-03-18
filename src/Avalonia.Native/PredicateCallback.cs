@@ -12,7 +12,7 @@ namespace Avalonia.Native
             _predicate = predicate;
         }
 
-        int IAvnPredicateCallback.Evaluate()
+        int32 IAvnPredicateCallback.Evaluate()
         {
             return _predicate().AsComBool();
         }

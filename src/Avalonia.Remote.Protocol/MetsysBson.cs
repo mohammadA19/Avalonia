@@ -78,7 +78,7 @@ namespace Metsys.Bson
     {
         private static readonly IDictionary<Type, Types> _typeMap = new Dictionary<Type, Types>
                                                                             {
-                                                                                {typeof (int), Types.Int32},
+                                                                                {typeof (int32), Types.Int32},
                                                                                 {typeof (long), Types.Int64},
                                                                                 {typeof (bool), Types.Boolean},
                                                                                 {typeof (string), Types.String},
@@ -136,7 +136,7 @@ namespace Metsys.Bson
         private void NewDocument()
         {
             var old = _current;
-            _current = new Document { Parent = old, Length = (int)_writer.BaseStream.Position, Digested = 4 };
+            _current = new Document { Parent = old, Length = (int32)_writer.BaseStream.Position, Digested = 4 };
             _writer.Write(0); // length placeholder
         }
         private void EndDocument(bool includeEeo)
@@ -158,7 +158,7 @@ namespace Metsys.Bson
             }
         }
 
-        private void Written(int length)
+        private void Written(int32 length)
         {
             _current.Digested += length;
         }
@@ -222,7 +222,7 @@ namespace Metsys.Bson
             {
                 case Types.Int32:
                     Written(4);
-                    _writer.Write((int)value);
+                    _writer.Write((int32)value);
                     return;
                 case Types.Int64:
                     Written(8);
@@ -429,7 +429,7 @@ namespace Metsys.Bson
     {
         private static readonly object _inclock = new object();
 
-        private static int _counter;
+        private static int32 _counter;
         private static readonly byte[] _machineHash = GenerateHostHash();
         private static readonly byte[] _processId = BitConverter.GetBytes(GenerateProcId());
 
@@ -451,7 +451,7 @@ namespace Metsys.Bson
             return oid;
         }
 
-        private static int GenerateTime()
+        private static int32 GenerateTime()
         {
             var now = DateTime.Now.ToUniversalTime();
 
@@ -460,7 +460,7 @@ namespace Metsys.Bson
             return Convert.ToInt32(Math.Floor(diff.TotalMilliseconds));
         }
 
-        private static int GenerateInc()
+        private static int32 GenerateInc()
         {
             lock (_inclock)
             {
@@ -476,7 +476,7 @@ namespace Metsys.Bson
                 return md5.ComputeHash(Encoding.Default.GetBytes(host));
             }
         }
-        private static int GenerateProcId()
+        private static int32 GenerateProcId()
         {
             var proc = Process.GetCurrentProcess();
             return proc.Id;
@@ -555,7 +555,7 @@ namespace Metsys.Bson
             return !(a == b);
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             return Value != null ? ToString().GetHashCode() : 0;
         }
@@ -1008,9 +1008,9 @@ namespace Metsys.Bson
 {
     internal class Document
     {
-        public int Length;
+        public int32 Length;
         public Document Parent;
-        public int Digested;
+        public int32 Digested;
     }
 }
 
@@ -1028,7 +1028,7 @@ namespace Metsys.Bson
 
         private readonly static IDictionary<Types, Type> _typeMap = new Dictionary<Types, Type>
         {
-            {Types.Int32, typeof(int)},
+            {Types.Int32, typeof(int32)},
             {Types.Int64, typeof (long)},
             {Types.Boolean, typeof (bool)},
             {Types.String, typeof (string)},
@@ -1082,7 +1082,7 @@ namespace Metsys.Bson
             return DeserializeValue(t, Types.Object, options);
         }
 
-        private void Read(int read)
+        private void Read(int32 read)
         {
             _current.Digested += read;
         }
@@ -1100,7 +1100,7 @@ namespace Metsys.Bson
             return isDone;
         }
 
-        private void NewDocument(int length)
+        private void NewDocument(int32 length)
         {
             var old = _current;
             _current = new Document { Length = length, Parent = old, Digested = 4 };
@@ -1125,7 +1125,7 @@ namespace Metsys.Bson
             {
                 return ReadString();
             }
-            if (type == typeof(int))
+            if (type == typeof(int32))
             {
                 var val = ReadInt(storedType);
                 return options.LongIntegers ? (object)(long)val : (object)val;
@@ -1333,7 +1333,7 @@ namespace Metsys.Bson
             return Encoding.UTF8.GetString(buffer);
         }
 
-        private int ReadInt(Types storedType)
+        private int32 ReadInt(Types storedType)
         {
             switch (storedType)
             {
@@ -1342,12 +1342,12 @@ namespace Metsys.Bson
                     return _reader.ReadInt32();
                 case Types.Int64:
                     Read(8);
-                    return (int)_reader.ReadInt64();
+                    return (int32)_reader.ReadInt64();
                 case Types.Double:
                     Read(8);
-                    return (int)_reader.ReadDouble();
+                    return (int32)_reader.ReadDouble();
                 default:
-                    throw new BsonException("Could not create an int from " + storedType);
+                    throw new BsonException("Could not create an int32 from " + storedType);
             }
         }
 

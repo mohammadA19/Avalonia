@@ -71,11 +71,11 @@ namespace ControlCatalog.Pages
 
         protected override void OnOpenGlDeinit(GlInterface GL) => _content.Deinit(GL);
 
-        protected override unsafe void OnOpenGlRender(GlInterface gl, int fb)
+        protected override unsafe void OnOpenGlRender(GlInterface gl, int32 fb)
         {
             if (_knobs == null)
                 return;
-            _content.OnOpenGlRender(gl, fb, new PixelSize((int)Bounds.Width, (int)Bounds.Height),
+            _content.OnOpenGlRender(gl, fb, new PixelSize((int32)Bounds.Width, (int32)Bounds.Height),
                 _knobs.Yaw, _knobs.Pitch, _knobs.Roll, _knobs.Disco);
             if (_knobs.Disco > 0.01)
                 RequestNextFrameRendering();

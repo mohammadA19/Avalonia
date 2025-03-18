@@ -5,7 +5,7 @@ namespace Avalonia.Media.TextFormatting.Unicode
     public ref struct CodepointEnumerator
     {
         private readonly ReadOnlySpan<char> _text;
-        private int _offset;
+        private int32 _offset;
 
         public CodepointEnumerator(ReadOnlySpan<char> text)
             => _text = text;

@@ -5,11 +5,11 @@ namespace Avalonia.Markup.Xaml.UnitTests
     public class TestViewModel : NotifyingBase
     {
         private string _string;
-        private int _integer;
+        private int32 _integer;
         private TestViewModel _child;
         private bool _boolean;
 
-        public int Integer
+        public int32 Integer
         {
             get => _integer;
             set

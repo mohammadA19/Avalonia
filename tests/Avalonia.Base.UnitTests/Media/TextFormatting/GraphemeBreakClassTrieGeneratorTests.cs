@@ -21,7 +21,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
         [ClassData(typeof(GraphemeBreakTestDataGenerator))]
         [Theory(Skip = "Only run when we update the trie.")]
-        public void Should_Enumerate(string line, int lineNumber, string grapheme, string text)
+        public void Should_Enumerate(string line, int32 lineNumber, string grapheme, string text)
         {
             var enumerator = new GraphemeEnumerator(text);
 
@@ -33,7 +33,7 @@ namespace Avalonia.Base.UnitTests.Media.TextFormatting
 
             if (pass)
             {
-                for (int i = 0; i < grapheme.Length; i++)
+                for (int32 i = 0; i < grapheme.Length; i++)
                 {
                     var a = grapheme[i];
                     var b = actual[i];

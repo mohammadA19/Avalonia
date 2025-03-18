@@ -5,13 +5,13 @@ namespace Avalonia.OpenGL
 {
     public class OpenGlException : Exception
     {
-        public int? ErrorCode { get; }
+        public int32? ErrorCode { get; }
 
         public OpenGlException(string? message) : base(message)
         {
         }
 
-        private OpenGlException(string? message, int errorCode) : base(message)
+        private OpenGlException(string? message, int32 errorCode) : base(message)
         {
             ErrorCode = errorCode;
         }
@@ -27,13 +27,13 @@ namespace Avalonia.OpenGL
             return GetFormattedException(funcName, (GlErrors)err, err);
         }
 
-        public static OpenGlException GetFormattedException(string funcName, int errorCode) =>
+        public static OpenGlException GetFormattedException(string funcName, int32 errorCode) =>
             GetFormattedException(funcName, (GlErrors)errorCode, errorCode);
 
-        public static OpenGlException GetFormattedEglException(string funcName, int errorCode) =>
+        public static OpenGlException GetFormattedEglException(string funcName, int32 errorCode) =>
             GetFormattedException(funcName, (EglErrors)errorCode,errorCode);
 
-        private static OpenGlException GetFormattedException<T>(string funcName, T errorCode, int intErrorCode) where T : struct, Enum
+        private static OpenGlException GetFormattedException<T>(string funcName, T errorCode, int32 intErrorCode) where T : struct, Enum
         {
             try
             {

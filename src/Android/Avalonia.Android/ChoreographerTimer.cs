@@ -22,7 +22,7 @@ namespace Avalonia.Android
         private readonly ISet<AvaloniaView> _views = new HashSet<AvaloniaView>();
 
         private Action<TimeSpan>? _tick;
-        private int _count;
+        private int32 _count;
 
         public ChoreographerTimer()
         {

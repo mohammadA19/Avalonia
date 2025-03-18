@@ -104,7 +104,7 @@ namespace Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings
 
     public class CompiledBindingPathBuilder
     {
-        private readonly int _apiVersion;
+        private readonly int32 _apiVersion;
         private readonly List<ICompiledBindingPathElement> _elements = new();
 
         public CompiledBindingPathBuilder()
@@ -113,7 +113,7 @@ namespace Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings
 
         // TODO12: Remove this constructor. apiVersion is only needed for compatibility with
         // versions of Avalonia which used $self.Property() for building TemplatedParent bindings.
-        public CompiledBindingPathBuilder(int apiVersion) => _apiVersion = apiVersion;
+        public CompiledBindingPathBuilder(int32 apiVersion) => _apiVersion = apiVersion;
 
         public CompiledBindingPathBuilder Not()
         {
@@ -189,13 +189,13 @@ namespace Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings
             return this;
         }
 
-        public CompiledBindingPathBuilder Ancestor(Type ancestorType, int level)
+        public CompiledBindingPathBuilder Ancestor(Type ancestorType, int32 level)
         {
             _elements.Add(new AncestorPathElement(ancestorType, level));
             return this;
         }
 
-        public CompiledBindingPathBuilder VisualAncestor(Type ancestorType, int level)
+        public CompiledBindingPathBuilder VisualAncestor(Type ancestorType, int32 level)
         {
             _elements.Add(new VisualAncestorPathElement(ancestorType, level));
             return this;
@@ -207,7 +207,7 @@ namespace Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings
             return this;
         }
 
-        public CompiledBindingPathBuilder ArrayElement(int[] indices, Type elementType)
+        public CompiledBindingPathBuilder ArrayElement(int32[] indices, Type elementType)
         {
             _elements.Add(new ArrayElementPathElement(indices, elementType));
             return this;
@@ -344,14 +344,14 @@ namespace Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings
 
     internal class AncestorPathElement : ICompiledBindingPathElement, IControlSourceBindingPathElement
     {
-        public AncestorPathElement(Type? ancestorType, int level)
+        public AncestorPathElement(Type? ancestorType, int32 level)
         {
             AncestorType = ancestorType;
             Level = level;
         }
 
         public Type? AncestorType { get; }
-        public int Level { get; }
+        public int32 Level { get; }
 
         public override string ToString()
            => FormattableString.Invariant($"$parent[{AncestorType?.Name},{Level}]");
@@ -359,14 +359,14 @@ namespace Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings
 
     internal class VisualAncestorPathElement : ICompiledBindingPathElement, IControlSourceBindingPathElement
     {
-        public VisualAncestorPathElement(Type? ancestorType, int level)
+        public VisualAncestorPathElement(Type? ancestorType, int32 level)
         {
             AncestorType = ancestorType;
             Level = level;
         }
 
         public Type? AncestorType { get; }
-        public int Level { get; }
+        public int32 Level { get; }
     }
 
     internal class ElementNameElement : ICompiledBindingPathElement, IControlSourceBindingPathElement
@@ -392,13 +392,13 @@ namespace Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings
 
     internal class ArrayElementPathElement : ICompiledBindingPathElement
     {
-        public ArrayElementPathElement(int[] indices, Type elementType)
+        public ArrayElementPathElement(int32[] indices, Type elementType)
         {
             Indices = indices;
             ElementType = elementType;
         }
 
-        public int[] Indices { get; }
+        public int32[] Indices { get; }
         public Type ElementType { get; }
         public override string ToString()
             => FormattableString.Invariant($"[{string.Join(",", Indices)}]");

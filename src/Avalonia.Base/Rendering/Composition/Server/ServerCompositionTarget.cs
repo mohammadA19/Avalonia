@@ -37,7 +37,7 @@ namespace Avalonia.Rendering.Composition.Server
         public ulong Revision { get; private set; }
         public ICompositionTargetDebugEvents? DebugEvents { get; set; }
         public ReadbackIndices Readback { get; } = new();
-        public int RenderedVisuals { get; set; }
+        public int32 RenderedVisuals { get; set; }
 
         public ServerCompositionTarget(ServerCompositor compositor, Func<IEnumerable<object>> surfaces,
             DiagnosticTextRenderer? diagnosticTextRenderer)

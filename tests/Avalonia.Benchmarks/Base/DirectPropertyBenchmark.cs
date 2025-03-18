@@ -37,20 +37,20 @@ namespace Avalonia.Benchmarks.Base
 
         class DirectClass : AvaloniaObject
         {
-            private int _intValue;
+            private int32 _intValue;
 
-            public static readonly DirectProperty<DirectClass, int> IntValueProperty =
-                AvaloniaProperty.RegisterDirect<DirectClass, int>(nameof(IntValue),
+            public static readonly DirectProperty<DirectClass, int32> IntValueProperty =
+                AvaloniaProperty.RegisterDirect<DirectClass, int32>(nameof(IntValue),
                     o => o.IntValue,
                     (o, v) => o.IntValue = v);
 
-            public int IntValue
+            public int32 IntValue
             {
                 get => _intValue;
                 set => SetAndRaise(IntValueProperty, ref _intValue, value);
             }
 
-            public int IntValueSimple
+            public int32 IntValueSimple
             {
                 get => _intValue;
                 set

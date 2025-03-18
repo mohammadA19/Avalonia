@@ -121,8 +121,8 @@ namespace Avalonia.Controls.UnitTests
                 new ClrPropertyInfo(
                     nameof(ExceptionTest.LessThan10),
                     target => ((ExceptionTest)target).LessThan10,
-                    (target, value) => ((ExceptionTest)target).LessThan10 = (int)value,
-                    typeof(int)),
+                    (target, value) => ((ExceptionTest)target).LessThan10 = (int32)value,
+                    typeof(int32)),
                 PropertyInfoAccessorFactory.CreateInpcPropertyAccessor)
             .Build();
 
@@ -170,9 +170,9 @@ namespace Avalonia.Controls.UnitTests
 
         private class ExceptionTest
         {
-            private int _lessThan10;
+            private int32 _lessThan10;
 
-            public int LessThan10
+            public int32 LessThan10
             {
                 get { return _lessThan10; }
                 set
@@ -191,10 +191,10 @@ namespace Avalonia.Controls.UnitTests
 
         private class IndeiTest : INotifyDataErrorInfo
         {
-            private int _lessThan10;
+            private int32 _lessThan10;
             private Dictionary<string, IList<string>> _errors = new Dictionary<string, IList<string>>();
 
-            public int LessThan10
+            public int32 LessThan10
             {
                 get { return _lessThan10; }
                 set

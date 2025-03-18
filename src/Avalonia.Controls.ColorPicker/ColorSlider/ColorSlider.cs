@@ -97,8 +97,8 @@ namespace Avalonia.Controls.Primitives
             // independent pixels of controls.
 
             var scale = LayoutHelper.GetLayoutScale(this);
-            int pixelWidth;
-            int pixelHeight;
+            int32 pixelWidth;
+            int32 pixelHeight;
 
             if (base.Track != null)
             {

@@ -31,8 +31,8 @@ namespace Avalonia.X11
 
     internal unsafe class X11IconData : IWindowIconImpl, IFramebufferPlatformSurface
     {
-        private int _width;
-        private int _height;
+        private int32 _width;
+        private int32 _height;
         private uint[]? _bdata;
         public UIntPtr[]  Data { get; }
         

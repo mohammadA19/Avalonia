@@ -171,7 +171,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
     {
         public VkStructureType sType;
         public IntPtr pNext;
-        public int flags;
+        public int32 flags;
         public VkApplicationInfo* pApplicationInfo;
         public uint32_t enabledLayerCount;
         public byte** ppEnabledLayerNames;
@@ -506,7 +506,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
             public VkMemoryType Element30;
             public VkMemoryType Element31;
 
-            public ref VkMemoryType this[int index]
+            public ref VkMemoryType this[int32 index]
             {
                 get
                 {
@@ -542,7 +542,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
             public VkMemoryHeap Element14;
             public VkMemoryHeap Element15;
 
-            public ref VkMemoryHeap this[int index]
+            public ref VkMemoryHeap this[int32 index]
             {
                 get
                 {
@@ -719,7 +719,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
         public VkSemaphore semaphore;
         public VkSemaphoreImportFlags flags;
         public VkExternalSemaphoreHandleTypeFlags handleType;
-        public int fd;
+        public int32 fd;
     }
 
     unsafe struct VkImportSemaphoreWin32HandleInfoKHR
@@ -738,7 +738,7 @@ namespace Avalonia.Vulkan.UnmanagedInterop
         public VkStructureType sType;
         public void* pNext;
         public VkExternalMemoryHandleTypeFlagBits handleType;
-        public int fd;
+        public int32 fd;
     }
 
     unsafe struct VkImportMemoryWin32HandleInfoKHR

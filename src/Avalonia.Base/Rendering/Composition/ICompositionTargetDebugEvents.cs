@@ -2,7 +2,7 @@ namespace Avalonia.Rendering.Composition;
 
 internal interface ICompositionTargetDebugEvents
 {
-    int RenderedVisuals { get; }
+    int32 RenderedVisuals { get; }
     void IncrementRenderedVisuals();
     void RectInvalidated(Rect rc);
 }

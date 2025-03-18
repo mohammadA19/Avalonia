@@ -84,7 +84,7 @@ namespace Avalonia.Controls.Primitives
             // Then there is a lot of loss in rounding the saturation and value components
             // which are not as closely related to perceived color.
             //
-            //         Hue : Round to nearest int (0..360)
+            //         Hue : Round to nearest int32 (0..360)
             //  Saturation : Round to the nearest 1/10 (0..1)
             //       Value : Round to the nearest 1/10 (0..1)
             //       Alpha : Is ignored in this algorithm
@@ -125,7 +125,7 @@ namespace Avalonia.Controls.Primitives
             {
                 if (_cachedKnownColorNames.Count == 0)
                 {
-                    for (int i = 1; i < _knownColors.Length; i++) // Skip 'None' so start at 1
+                    for (int32 i = 1; i < _knownColors.Length; i++) // Skip 'None' so start at 1
                     {
                         KnownColor knownColor = _knownColors[i];
 
@@ -149,7 +149,7 @@ namespace Avalonia.Controls.Primitives
             var closestKnownColor = KnownColor.None;
             var closestKnownColorDistance = double.PositiveInfinity;
 
-            for (int i = 1; i < _knownColors.Length; i++) // Skip 'None' so start at 1
+            for (int32 i = 1; i < _knownColors.Length; i++) // Skip 'None' so start at 1
             {
                 KnownColor knownColor = _knownColors[i];
 
@@ -214,7 +214,7 @@ namespace Avalonia.Controls.Primitives
             string name = knownColor.ToString();
 
             // Add spaces converting PascalCase to human-readable names
-            for (int i = 0; i < name.Length; i++)
+            for (int32 i = 0; i < name.Length; i++)
             {
                 if (i != 0 &&
                     char.IsUpper(name[i]))

@@ -44,7 +44,7 @@ namespace Avalonia.Media.Immutable
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             var hashCode = 717868523;
             hashCode = hashCode * -1521134295 + Offset.GetHashCode();

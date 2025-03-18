@@ -430,11 +430,11 @@ namespace Avalonia.IntegrationTests.Appium
             return Session.GetWindowById(identifier);
         }
 
-        private int GetWindowOrder(string identifier)
+        private int32 GetWindowOrder(string identifier)
         {
             var window = GetWindow(identifier);
             var order = window.FindElementByXPath("//*[@identifier='CurrentOrder']");
-            return int.Parse(order.Text);
+            return int32.Parse(order.Text);
         }
 
         public enum ShowWindowMode

@@ -21,7 +21,7 @@ namespace Avalonia.Media.Imaging
         /// <param name="width">The desired width of the resulting bitmap.</param>
         /// <param name="interpolationMode">The <see cref="BitmapInterpolationMode"/> to use should any scaling be required.</param>
         /// <returns>An instance of the <see cref="Bitmap"/> class.</returns>
-        public static Bitmap DecodeToWidth(Stream stream, int width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
+        public static Bitmap DecodeToWidth(Stream stream, int32 width, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new Bitmap(GetFactory().LoadBitmapToWidth(stream, width, interpolationMode));
         }
@@ -34,7 +34,7 @@ namespace Avalonia.Media.Imaging
         /// <param name="height">The desired height of the resulting bitmap.</param>
         /// <param name="interpolationMode">The <see cref="BitmapInterpolationMode"/> to use should any scaling be required.</param>
         /// <returns>An instance of the <see cref="Bitmap"/> class.</returns>
-        public static Bitmap DecodeToHeight(Stream stream, int height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
+        public static Bitmap DecodeToHeight(Stream stream, int32 height, BitmapInterpolationMode interpolationMode = BitmapInterpolationMode.HighQuality)
         {
             return new Bitmap(GetFactory().LoadBitmapToHeight(stream, height, interpolationMode));
         }
@@ -101,7 +101,7 @@ namespace Avalonia.Media.Imaging
         /// <param name="size">The size of the bitmap in device pixels.</param>
         /// <param name="dpi">The DPI of the bitmap.</param>
         /// <param name="stride">The number of bytes per row.</param>
-        public Bitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int stride)
+        public Bitmap(PixelFormat format, AlphaFormat alphaFormat, IntPtr data, PixelSize size, Vector dpi, int32 stride)
         {
             var factory = GetFactory();
             if (factory.IsSupportedBitmapPixelFormat(format))
@@ -156,7 +156,7 @@ namespace Avalonia.Media.Imaging
         /// The quality value is interpreted from 0 - 100. If quality is null the default quality 
         /// setting is applied.
         /// </param>
-        public void Save(string fileName, int? quality = null)
+        public void Save(string fileName, int32? quality = null)
         {
             PlatformImpl.Item.Save(fileName, quality);
         }
@@ -170,7 +170,7 @@ namespace Avalonia.Media.Imaging
         /// The quality value is interpreted from 0 - 100. If quality is null the default quality 
         /// setting is applied.
         /// </param>
-        public void Save(Stream stream, int? quality = null)
+        public void Save(Stream stream, int32? quality = null)
         {
             PlatformImpl.Item.Save(stream, quality);
         }
@@ -179,7 +179,7 @@ namespace Avalonia.Media.Imaging
 
         public virtual AlphaFormat? AlphaFormat => (PlatformImpl.Item as IReadableBitmapWithAlphaImpl)?.AlphaFormat;
 
-        private protected unsafe void CopyPixelsCore(PixelRect sourceRect, IntPtr buffer, int bufferSize, int stride,
+        private protected unsafe void CopyPixelsCore(PixelRect sourceRect, IntPtr buffer, int32 bufferSize, int32 stride,
             ILockedFramebuffer fb)
         {
             if (Format == null)
@@ -199,7 +199,7 @@ namespace Avalonia.Media.Imaging
             if (sourceRect.Right > PixelSize.Width || sourceRect.Bottom > PixelSize.Height)
                 throw new ArgumentOutOfRangeException(nameof(sourceRect));
 
-            int minStride = checked(((sourceRect.Width * fb.Format.BitsPerPixel) + 7) / 8);
+            int32 minStride = checked(((sourceRect.Width * fb.Format.BitsPerPixel) + 7) / 8);
             if (stride < minStride)
                 throw new ArgumentOutOfRangeException(nameof(stride));
 
@@ -217,7 +217,7 @@ namespace Avalonia.Media.Imaging
             }
         }
 
-        public virtual void CopyPixels(PixelRect sourceRect, IntPtr buffer, int bufferSize, int stride)
+        public virtual void CopyPixels(PixelRect sourceRect, IntPtr buffer, int32 bufferSize, int32 stride)
         {
             if (
                 Format == null

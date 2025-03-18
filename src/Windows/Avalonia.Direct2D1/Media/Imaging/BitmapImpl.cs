@@ -9,11 +9,11 @@ namespace Avalonia.Direct2D1.Media
     {
         public abstract Vector Dpi { get; }
         public abstract PixelSize PixelSize { get; }
-        public int Version { get; protected set; } = 1;
+        public int32 Version { get; protected set; } = 1;
 
         public abstract OptionalDispose<D2DBitmap> GetDirect2DBitmap(SharpDX.Direct2D1.RenderTarget target);
 
-        public void Save(string fileName, int? quality = null)
+        public void Save(string fileName, int32? quality = null)
         {
             if (Path.GetExtension(fileName) != ".png")
             {
@@ -27,7 +27,7 @@ namespace Avalonia.Direct2D1.Media
             }
         }
 
-        public abstract void Save(Stream stream, int? quality = null);
+        public abstract void Save(Stream stream, int32? quality = null);
 
         public virtual void Dispose()
         {

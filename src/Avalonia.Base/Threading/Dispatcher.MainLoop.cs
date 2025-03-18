@@ -9,7 +9,7 @@ public partial class Dispatcher
 {
     internal bool ExitAllFramesRequested { get; private set; }
     internal bool HasShutdownStarted { get; private set; }
-    internal int DisabledProcessingCount { get; set; }
+    internal int32 DisabledProcessingCount { get; set; }
     private bool _hasShutdownFinished;
     private bool _startingShutdown;
     

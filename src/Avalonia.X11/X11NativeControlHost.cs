@@ -77,7 +77,7 @@ namespace Avalonia.X11
 
                 Handle = XCreateWindow(_display, parent.Value, 0, 0,
                     1,1, 0, 0,
-                    (int)CreateWindowArgs.InputOutput,
+                    (int32)CreateWindowArgs.InputOutput,
                     IntPtr.Zero, 
                     new UIntPtr((uint)(SetWindowValuemask.BorderPixel | SetWindowValuemask.BitGravity |
                                        SetWindowValuemask.BackPixel |
@@ -173,7 +173,7 @@ namespace Avalonia.X11
 
                 size *= _attachedTo.Window.RenderScaling;
                 XResizeWindow(_display, _child.Handle,
-                    Math.Max(1, (int)size.Width), Math.Max(1, (int)size.Height));
+                    Math.Max(1, (int32)size.Width), Math.Max(1, (int32)size.Height));
             }
             
             
@@ -185,8 +185,8 @@ namespace Avalonia.X11
                     throw new InvalidOperationException("The control isn't currently attached to a toplevel");
                 bounds *= _attachedTo.Window.RenderScaling;
                 
-                var pixelRect = new PixelRect((int)bounds.X, (int)bounds.Y, Math.Max(1, (int)bounds.Width),
-                    Math.Max(1, (int)bounds.Height));
+                var pixelRect = new PixelRect((int32)bounds.X, (int32)bounds.Y, Math.Max(1, (int32)bounds.Width),
+                    Math.Max(1, (int32)bounds.Height));
                 XMoveResizeWindow(_display, _child.Handle, 0, 0, pixelRect.Width, pixelRect.Height);
                 XMoveResizeWindow(_display, _holder.Handle, pixelRect.X, pixelRect.Y, pixelRect.Width,
                     pixelRect.Height);

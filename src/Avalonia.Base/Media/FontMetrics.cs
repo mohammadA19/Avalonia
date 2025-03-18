@@ -18,41 +18,41 @@
         /// <summary>
         ///     Gets the recommended distance above the baseline in design em size. 
         /// </summary>
-        public int Ascent { get; init; }
+        public int32 Ascent { get; init; }
 
         /// <summary>
         ///     Gets the recommended distance under the baseline in design em size. 
         /// </summary>
-        public int Descent { get; init; }
+        public int32 Descent { get; init; }
 
         /// <summary>
         ///      Gets the recommended additional space between two lines of text in design em size. 
         /// </summary>
-        public int LineGap { get; init; }
+        public int32 LineGap { get; init; }
 
         /// <summary>
         ///     Gets the recommended line spacing of a formed text line.
         /// </summary>
-        public int LineSpacing => Descent - Ascent + LineGap;
+        public int32 LineSpacing => Descent - Ascent + LineGap;
 
         /// <summary>
         ///     Gets a value that indicates the distance of the underline from the baseline in design em size.
         /// </summary>
-        public int UnderlinePosition { get; init; }
+        public int32 UnderlinePosition { get; init; }
 
         /// <summary>
         ///     Gets a value that indicates the thickness of the underline in design em size.
         /// </summary>
-        public int UnderlineThickness { get; init; }
+        public int32 UnderlineThickness { get; init; }
 
         /// <summary>
         ///     Gets a value that indicates the distance of the strikethrough from the baseline in design em size.
         /// </summary>
-        public int StrikethroughPosition { get; init; }
+        public int32 StrikethroughPosition { get; init; }
 
         /// <summary>
         ///     Gets a value that indicates the thickness of the underline in design em size.
         /// </summary>
-        public int StrikethroughThickness { get; init; }
+        public int32 StrikethroughThickness { get; init; }
     }
 }

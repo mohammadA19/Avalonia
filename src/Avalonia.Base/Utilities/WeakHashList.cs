@@ -6,13 +6,13 @@ namespace Avalonia.Utilities;
 
 internal class WeakHashList<T> where T : class
 {
-    public const int DefaultArraySize = 8;
+    public const int32 DefaultArraySize = 8;
     
     private struct Key
     {
         public WeakReference<T>? Weak;
         public T? Strong;
-        public int HashCode;
+        public int32 HashCode;
 
         public static Key MakeStrong(T r) => new()
         {
@@ -26,7 +26,7 @@ internal class WeakHashList<T> where T : class
             Weak = new WeakReference<T>(r)
         };
 
-        public override int GetHashCode() => HashCode;
+        public override int32 GetHashCode() => HashCode;
     }
 
     class KeyComparer : IEqualityComparer<Key>
@@ -57,13 +57,13 @@ internal class WeakHashList<T> where T : class
             }
         }
 
-        public int GetHashCode(Key obj) => obj.HashCode;
+        public int32 GetHashCode(Key obj) => obj.HashCode;
         public static KeyComparer Instance = new();
     }
 
-    Dictionary<Key, int>? _dic;
+    Dictionary<Key, int32>? _dic;
     WeakReference<T>?[]? _arr;
-    int _arrCount;
+    int32 _arrCount;
     
     public bool IsEmpty => _dic is not null ? _dic.Count == 0 : _arrCount == 0;
 
@@ -101,7 +101,7 @@ internal class WeakHashList<T> where T : class
             }
         }
 
-        _dic = new Dictionary<Key, int>(KeyComparer.Instance);
+        _dic = new Dictionary<Key, int32>(KeyComparer.Instance);
         foreach (var existing in _arr)
         {
             if (existing!.TryGetTarget(out var target))
@@ -149,7 +149,7 @@ internal class WeakHashList<T> where T : class
     {
         if (_arr != null)
         {
-            int empty = -1;
+            int32 empty = -1;
             for (var c = 0; c < _arrCount; c++)
             {
                 var r = _arr[c];

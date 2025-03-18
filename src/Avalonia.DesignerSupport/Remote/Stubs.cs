@@ -260,15 +260,15 @@ namespace Avalonia.DesignerSupport.Remote
         public IWindowIconImpl LoadIcon(IBitmapImpl bitmap) => new IconStub();
     }
 
-    class ScreenStub : ScreensBase<int, PlatformScreen>
+    class ScreenStub : ScreensBase<int32, PlatformScreen>
     {
-        protected override IReadOnlyList<int> GetAllScreenKeys() => new[] { 1 };
+        protected override IReadOnlyList<int32> GetAllScreenKeys() => new[] { 1 };
 
-        protected override PlatformScreen CreateScreenFromKey(int key) => new PlatformScreenStub(key);
+        protected override PlatformScreen CreateScreenFromKey(int32 key) => new PlatformScreenStub(key);
 
         private class PlatformScreenStub : PlatformScreen
         {
-            public PlatformScreenStub(int key) : base(new PlatformHandle((nint) key, nameof(ScreenStub))) 
+            public PlatformScreenStub(int32 key) : base(new PlatformHandle((nint) key, nameof(ScreenStub))) 
             {
                 Scaling = 1;
                 Bounds = WorkingArea = new PixelRect(0, 0, 4000, 4000);

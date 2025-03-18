@@ -174,6 +174,6 @@ public class Win32PlatformOptions
     /// Specifies a callback method to be called when compositor needs to create a platform graphics device
     /// Currently is only called for AngleEgl rendering mode when DirectX 11 is used
     /// </summary>
-    public Func<IReadOnlyList<PlatformGraphicsDeviceAdapterDescription>, int>?
+    public Func<IReadOnlyList<PlatformGraphicsDeviceAdapterDescription>, int32>?
         GraphicsAdapterSelectionCallback { get; set; }
 }

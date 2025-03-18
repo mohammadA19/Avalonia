@@ -9,12 +9,12 @@ namespace Avalonia.Controls.Selection
     {
         IEnumerable? Source { get; set; }
         bool SingleSelect { get; set; }
-        int SelectedIndex { get; set; }
-        IReadOnlyList<int> SelectedIndexes { get; }
+        int32 SelectedIndex { get; set; }
+        IReadOnlyList<int32> SelectedIndexes { get; }
         object? SelectedItem { get; set; }
         IReadOnlyList<object?> SelectedItems { get; }
-        int AnchorIndex { get; set; }
-        int Count { get; }
+        int32 AnchorIndex { get; set; }
+        int32 Count { get; }
 
         public event EventHandler<SelectionModelIndexesChangedEventArgs>? IndexesChanged;
         public event EventHandler<SelectionModelSelectionChangedEventArgs>? SelectionChanged;
@@ -23,11 +23,11 @@ namespace Avalonia.Controls.Selection
 
         public void BeginBatchUpdate();
         public void EndBatchUpdate();
-        bool IsSelected(int index);
-        void Select(int index);
-        void Deselect(int index);
-        void SelectRange(int start, int end);
-        void DeselectRange(int start, int end);
+        bool IsSelected(int32 index);
+        void Select(int32 index);
+        void Deselect(int32 index);
+        void SelectRange(int32 start, int32 end);
+        void DeselectRange(int32 start, int32 end);
         void SelectAll();
         void Clear();
     }

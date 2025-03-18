@@ -239,9 +239,9 @@ namespace Avalonia.Controls.UnitTests
         {
             public List<string> Items { get; set; }
 
-            public int SetterInvokedCount { get; private set; }
+            public int32 SetterInvokedCount { get; private set; }
 
-            public const int MaxInvokedCount = 1000;
+            public const int32 MaxInvokedCount = 1000;
 
             private string _selectedItem;
 
@@ -256,7 +256,7 @@ namespace Avalonia.Controls.UnitTests
                     {
                         SetterInvokedCount++;
 
-                        int index = Items.IndexOf(value);
+                        int32 index = Items.IndexOf(value);
 
                         if (MaxInvokedCount > SetterInvokedCount && index > 0)
                         {

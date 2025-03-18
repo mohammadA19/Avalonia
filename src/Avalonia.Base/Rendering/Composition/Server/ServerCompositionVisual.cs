@@ -101,7 +101,7 @@ namespace Avalonia.Rendering.Composition.Server
         /// Obtains "readback" data - the data that is sent from the render thread to the UI thread
         /// in non-blocking manner. Used mostly by hit-testing
         /// </summary>
-        public ref ReadbackData GetReadback(int idx)
+        public ref ReadbackData GetReadback(int32 idx)
         {
             if (idx == 0)
                 return ref _readback0;

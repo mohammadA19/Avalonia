@@ -12,19 +12,19 @@ namespace Avalonia.Base.UnitTests
     public class AvaloniaObjectTests_DataValidation
     {
         public abstract class TestBase<T>
-            where T : AvaloniaProperty<int>
+            where T : AvaloniaProperty<int32>
         {
             [Fact]
             public void Binding_Non_Validated_Property_Does_Not_Call_UpdateDataValidation()
             {
                 var target = new Class1();
-                var source = new Subject<BindingValue<int>>();
+                var source = new Subject<BindingValue<int32>>();
                 var property = GetNonValidatedProperty();
 
                 target.Bind(property, source);
                 source.OnNext(6);
-                source.OnNext(BindingValue<int>.BindingError(new Exception()));
-                source.OnNext(BindingValue<int>.DataValidationError(new Exception()));
+                source.OnNext(BindingValue<int32>.BindingError(new Exception()));
+                source.OnNext(BindingValue<int32>.DataValidationError(new Exception()));
                 source.OnNext(6);
 
                 Assert.Empty(target.Notifications);
@@ -34,15 +34,15 @@ namespace Avalonia.Base.UnitTests
             public void Binding_Validated_Property_Calls_UpdateDataValidation()
             {
                 var target = new Class1();
-                var source = new Subject<BindingValue<int>>();
+                var source = new Subject<BindingValue<int32>>();
                 var property = GetProperty();
                 var error1 = new Exception();
                 var error2 = new Exception();
 
                 target.Bind(property, source);
                 source.OnNext(6);
-                source.OnNext(BindingValue<int>.DataValidationError(error1));
-                source.OnNext(BindingValue<int>.BindingError(error2));
+                source.OnNext(BindingValue<int32>.DataValidationError(error1));
+                source.OnNext(BindingValue<int32>.BindingError(error2));
                 source.OnNext(7);
 
                 Assert.Equal(new Notification[]
@@ -82,7 +82,7 @@ namespace Avalonia.Base.UnitTests
             public void Binding_Overridden_Validated_Property_Calls_UpdateDataValidation()
             {
                 var target = new Class2();
-                var source = new Subject<BindingValue<int>>();
+                var source = new Subject<BindingValue<int32>>();
                 var property = GetNonValidatedProperty();
 
                 // Class2 overrides the non-validated property metadata to enable data validation.
@@ -96,13 +96,13 @@ namespace Avalonia.Base.UnitTests
             public void Disposing_Binding_Subscription_Clears_DataValidation()
             {
                 var target = new Class1();
-                var source = new Subject<BindingValue<int>>();
+                var source = new Subject<BindingValue<int32>>();
                 var property = GetProperty();
                 var error = new Exception();
                 var sub = target.Bind(property, source);
 
                 source.OnNext(6);
-                source.OnNext(BindingValue<int>.DataValidationError(error));
+                source.OnNext(BindingValue<int32>.DataValidationError(error));
                 sub.Dispose();
 
                 Assert.Equal(new Notification[]
@@ -117,13 +117,13 @@ namespace Avalonia.Base.UnitTests
             public void Completing_Binding_Clears_DataValidation()
             {
                 var target = new Class1();
-                var source = new Subject<BindingValue<int>>();
+                var source = new Subject<BindingValue<int32>>();
                 var property = GetProperty();
                 var error = new Exception();
                 
                 target.Bind(property, source);
                 source.OnNext(6);
-                source.OnNext(BindingValue<int>.DataValidationError(error));
+                source.OnNext(BindingValue<int32>.DataValidationError(error));
                 source.OnCompleted();
 
                 Assert.Equal(new Notification[]
@@ -138,7 +138,7 @@ namespace Avalonia.Base.UnitTests
             protected abstract T GetNonValidatedProperty();
         }
 
-        public class DirectPropertyTests : TestBase<DirectPropertyBase<int>>
+        public class DirectPropertyTests : TestBase<DirectPropertyBase<int32>>
         {
             [Fact]
             public void Bound_Validated_String_Property_Can_Be_Set_To_Null()
@@ -164,11 +164,11 @@ namespace Avalonia.Base.UnitTests
                 Assert.Null(target.ValidatedDirectString);
             }
 
-            protected override DirectPropertyBase<int> GetProperty() => Class1.ValidatedDirectIntProperty;
-            protected override DirectPropertyBase<int> GetNonValidatedProperty() => Class1.NonValidatedDirectIntProperty;
+            protected override DirectPropertyBase<int32> GetProperty() => Class1.ValidatedDirectIntProperty;
+            protected override DirectPropertyBase<int32> GetNonValidatedProperty() => Class1.NonValidatedDirectIntProperty;
         }
 
-        public class StyledPropertyTests : TestBase<StyledProperty<int>>
+        public class StyledPropertyTests : TestBase<StyledProperty<int32>>
         {
             [Fact]
             public void Bound_Validated_String_Property_Can_Be_Set_To_Null()
@@ -194,22 +194,22 @@ namespace Avalonia.Base.UnitTests
                 Assert.Null(target.ValidatedDirectString);
             }
 
-            protected override StyledProperty<int> GetProperty() => Class1.ValidatedStyledIntProperty;
-            protected override StyledProperty<int> GetNonValidatedProperty() => Class1.NonValidatedStyledIntProperty;
+            protected override StyledProperty<int32> GetProperty() => Class1.ValidatedStyledIntProperty;
+            protected override StyledProperty<int32> GetNonValidatedProperty() => Class1.NonValidatedStyledIntProperty;
         }
 
         private record class Notification(BindingValueType type, object? value, Exception? error);
 
         private class Class1 : AvaloniaObject
         {
-            public static readonly DirectProperty<Class1, int> NonValidatedDirectIntProperty =
-                AvaloniaProperty.RegisterDirect<Class1, int>(
+            public static readonly DirectProperty<Class1, int32> NonValidatedDirectIntProperty =
+                AvaloniaProperty.RegisterDirect<Class1, int32>(
                     nameof(NonValidatedDirectInt),
                     o => o.NonValidatedDirectInt,
                     (o, v) => o.NonValidatedDirectInt = v);
 
-            public static readonly DirectProperty<Class1, int> ValidatedDirectIntProperty =
-                AvaloniaProperty.RegisterDirect<Class1, int>(
+            public static readonly DirectProperty<Class1, int32> ValidatedDirectIntProperty =
+                AvaloniaProperty.RegisterDirect<Class1, int32>(
                     nameof(ValidatedDirectInt),
                     o => o.ValidatedDirectInt,
                     (o, v) => o.ValidatedDirectInt = v,
@@ -222,26 +222,26 @@ namespace Avalonia.Base.UnitTests
                     (o, v) => o.ValidatedDirectString = v,
                     enableDataValidation: true);
 
-            public static readonly StyledProperty<int> NonValidatedStyledIntProperty =
-                AvaloniaProperty.Register<Class1, int>(
+            public static readonly StyledProperty<int32> NonValidatedStyledIntProperty =
+                AvaloniaProperty.Register<Class1, int32>(
                     nameof(NonValidatedStyledInt));
 
-            public static readonly StyledProperty<int> ValidatedStyledIntProperty =
-                AvaloniaProperty.Register<Class1, int>(
+            public static readonly StyledProperty<int32> ValidatedStyledIntProperty =
+                AvaloniaProperty.Register<Class1, int32>(
                     nameof(ValidatedStyledInt),
                     enableDataValidation: true);
 
-            private int _nonValidatedDirect;
-            private int _directInt;
+            private int32 _nonValidatedDirect;
+            private int32 _directInt;
             private string? _directString;
 
-            public int NonValidatedDirectInt
+            public int32 NonValidatedDirectInt
             {
                 get { return _directInt; }
                 set { SetAndRaise(NonValidatedDirectIntProperty, ref _nonValidatedDirect, value); }
             }
 
-            public int ValidatedDirectInt
+            public int32 ValidatedDirectInt
             {
                 get { return _directInt; }
                 set { SetAndRaise(ValidatedDirectIntProperty, ref _directInt, value); }
@@ -253,13 +253,13 @@ namespace Avalonia.Base.UnitTests
                 set { SetAndRaise(ValidatedDirectStringProperty, ref _directString, value); }
             }
 
-            public int NonValidatedStyledInt
+            public int32 NonValidatedStyledInt
             {
                 get { return GetValue(NonValidatedStyledIntProperty); }
                 set { SetValue(NonValidatedStyledIntProperty, value); }
             }
 
-            public int ValidatedStyledInt
+            public int32 ValidatedStyledInt
             {
                 get => GetValue(ValidatedStyledIntProperty);
                 set => SetValue(ValidatedStyledIntProperty, value);
@@ -281,9 +281,9 @@ namespace Avalonia.Base.UnitTests
             static Class2()
             {
                 NonValidatedDirectIntProperty.OverrideMetadata<Class2>(
-                    new DirectPropertyMetadata<int>(enableDataValidation: true));
+                    new DirectPropertyMetadata<int32>(enableDataValidation: true));
                 NonValidatedStyledIntProperty.OverrideMetadata<Class2>(
-                    new StyledPropertyMetadata<int>(enableDataValidation: true));
+                    new StyledPropertyMetadata<int32>(enableDataValidation: true));
             }
         }
 

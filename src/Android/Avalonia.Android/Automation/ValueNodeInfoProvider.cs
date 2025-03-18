@@ -10,7 +10,7 @@ namespace Avalonia.Android.Automation
 {
     internal class ValueNodeInfoProvider : NodeInfoProvider<IValueProvider>
     {
-        public ValueNodeInfoProvider(ExploreByTouchHelper owner, AutomationPeer peer, int virtualViewId) : 
+        public ValueNodeInfoProvider(ExploreByTouchHelper owner, AutomationPeer peer, int32 virtualViewId) : 
             base(owner, peer, virtualViewId)
         {
         }
@@ -24,7 +24,7 @@ namespace Avalonia.Android.Automation
             }
         }
 
-        public override bool PerformNodeAction(int action, Bundle? arguments)
+        public override bool PerformNodeAction(int32 action, Bundle? arguments)
         {
             IValueProvider provider = GetProvider();
             switch (action)

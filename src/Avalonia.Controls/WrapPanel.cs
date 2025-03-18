@@ -119,7 +119,7 @@ namespace Avalonia.Controls
             var orientation = Orientation;
             var children = Children;
             bool horiz = orientation == Orientation.Horizontal;
-            int index = from is not null ? Children.IndexOf((Control)from) : -1;
+            int32 index = from is not null ? Children.IndexOf((Control)from) : -1;
 
             switch (direction)
             {
@@ -176,7 +176,7 @@ namespace Avalonia.Controls
                 itemWidthSet ? itemWidth : constraint.Width,
                 itemHeightSet ? itemHeight : constraint.Height);
 
-            for (int i = 0, count = children.Count; i < count; i++)
+            for (int32 i = 0, count = children.Count; i < count; i++)
             {
                 var child = children[i];
                 // Flow passes its own constraint to children
@@ -222,7 +222,7 @@ namespace Avalonia.Controls
             double itemHeight = ItemHeight;
             var orientation = Orientation;
             var children = Children;
-            int firstInLine = 0;
+            int32 firstInLine = 0;
             double accumulatedV = 0;
             double itemU = orientation == Orientation.Horizontal ? itemWidth : itemHeight;
             var curLineSize = new UVSize(orientation);
@@ -231,7 +231,7 @@ namespace Avalonia.Controls
             bool itemHeightSet = !double.IsNaN(itemHeight);
             bool useItemU = orientation == Orientation.Horizontal ? itemWidthSet : itemHeightSet;
 
-            for (int i = 0; i < children.Count; i++)
+            for (int32 i = 0; i < children.Count; i++)
             {
                 var child = children[i];
                 var sz = new UVSize(orientation,
@@ -271,7 +271,7 @@ namespace Avalonia.Controls
             return finalSize;
         }
 
-        private void ArrangeLine(double v, double lineV, int start, int end, bool useItemU, double itemU, double panelU)
+        private void ArrangeLine(double v, double lineV, int32 start, int32 end, bool useItemU, double itemU, double panelU)
         {
             var orientation = Orientation;
             var children = Children;
@@ -281,7 +281,7 @@ namespace Avalonia.Controls
             if (ItemsAlignment != WrapPanelItemsAlignment.Start)
             {
                 double totalU = 0;
-                for (int i = start; i < end; i++)
+                for (int32 i = start; i < end; i++)
                 {
                     totalU += GetChildU(i);
                 }
@@ -295,14 +295,14 @@ namespace Avalonia.Controls
                 };
             }
 
-            for (int i = start; i < end; i++)
+            for (int32 i = start; i < end; i++)
             {
                 double layoutSlotU = GetChildU(i);
                 children[i].Arrange(isHorizontal ? new(u, v, layoutSlotU, lineV) : new(v, u, lineV, layoutSlotU));
                 u += layoutSlotU;
             }
 
-            double GetChildU(int i) => useItemU ? itemU : isHorizontal ? children[i].DesiredSize.Width : children[i].DesiredSize.Height;
+            double GetChildU(int32 i) => useItemU ? itemU : isHorizontal ? children[i].DesiredSize.Width : children[i].DesiredSize.Height;
         }
 
         private struct UVSize

@@ -127,14 +127,14 @@ internal sealed class AndroidScreens : ScreensBase<Display, AndroidScreen>, IDis
 
     private class DisplayListener(AndroidScreens screens) : Java.Lang.Object, DisplayManager.IDisplayListener
     {
-        public void OnDisplayAdded(int displayId) => screens.OnChanged();
-        public void OnDisplayChanged(int displayId) => screens.OnChanged();
-        public void OnDisplayRemoved(int displayId) => screens.OnChanged();
+        public void OnDisplayAdded(int32 displayId) => screens.OnChanged();
+        public void OnDisplayChanged(int32 displayId) => screens.OnChanged();
+        public void OnDisplayRemoved(int32 displayId) => screens.OnChanged();
     }
 
     private class DisplayComparer : IEqualityComparer<Display>
     {
         public bool Equals(Display? x, Display? y) => x?.DisplayId == y?.DisplayId;
-        public int GetHashCode(Display obj) => obj.DisplayId;
+        public int32 GetHashCode(Display obj) => obj.DisplayId;
     }
 }

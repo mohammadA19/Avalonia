@@ -74,9 +74,9 @@ internal static class EastAsianWidthClassTrieGenerator
         return trieBuilder.Freeze();
     }
 
-    private static List<(int, int, string)> ReadData(string file)
+    private static List<(int32, int32, string)> ReadData(string file)
     {
-        var data = new List<(int, int, string)>();
+        var data = new List<(int32, int32, string)>();
 
         var rx = new Regex(@"([0-9A-F]+)(?:\.\.([0-9A-F]+))?\s*;\s*(\w+)\s*#.*", RegexOptions.Compiled);
 

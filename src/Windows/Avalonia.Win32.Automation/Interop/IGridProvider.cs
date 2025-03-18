@@ -12,7 +12,7 @@ namespace Avalonia.Win32.Automation.Interop;
 [Guid("b17d6187-0907-464b-a168-0ef17a1572b1")]
 internal partial interface IGridProvider
 {
-    IRawElementProviderSimple? GetItem(int row, int column);
-    int GetRowCount();
-    int GetColumnCount();
+    IRawElementProviderSimple? GetItem(int32 row, int32 column);
+    int32 GetRowCount();
+    int32 GetColumnCount();
 }

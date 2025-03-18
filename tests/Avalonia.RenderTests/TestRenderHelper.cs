@@ -60,7 +60,7 @@ static class TestRenderHelper
             Directory.CreateDirectory(dir);
         
         var factory = AvaloniaLocator.Current.GetRequiredService<IPlatformRenderInterface>();
-        var pixelSize = new PixelSize((int)target.Width, (int)target.Height);
+        var pixelSize = new PixelSize((int32)target.Width, (int32)target.Height);
         var size = new Size(target.Width, target.Height);
         var dpiVector = new Vector(dpi, dpi);
 
@@ -217,7 +217,7 @@ static class TestRenderHelper
 
         var meanSquaresError = squaresError / quantity;
 
-        const int channelCount = 4;
+        const int32 channelCount = 4;
             
         meanSquaresError = meanSquaresError / channelCount;
             

@@ -115,7 +115,7 @@ namespace Avalonia.Markup.UnitTests.Data
                 return Equals((DummyObject)obj);
             }
 
-            public override int GetHashCode()
+            public override int32 GetHashCode()
             {
                 return (_val != null ? _val.GetHashCode() : 0);
             }
@@ -731,9 +731,9 @@ namespace Avalonia.Markup.UnitTests.Data
 
         private class TestStackOverflowViewModel : INotifyPropertyChanged
         {
-            public int SetterInvokedCount { get; private set; }
+            public int32 SetterInvokedCount { get; private set; }
 
-            public const int MaxInvokedCount = 1000;
+            public const int32 MaxInvokedCount = 1000;
 
             private bool _boolValue;
             private double _value;
@@ -763,7 +763,7 @@ namespace Avalonia.Markup.UnitTests.Data
                         SetterInvokedCount++;
                         if (SetterInvokedCount < MaxInvokedCount)
                         {
-                            _value = (int)value;
+                            _value = (int32)value;
                             if (_value > 75)
                                 _value = 75;
                             if (_value < 25)
@@ -828,10 +828,10 @@ namespace Avalonia.Markup.UnitTests.Data
                 }
             }
 
-            public int FooSetCount { get; private set; }
+            public int32 FooSetCount { get; private set; }
 
 
-            public int SubscriberCount { get; private set; }
+            public int32 SubscriberCount { get; private set; }
 
             public event PropertyChangedEventHandler PropertyChanged
             {
@@ -888,8 +888,8 @@ namespace Avalonia.Markup.UnitTests.Data
 
         private class OldDataContextViewModel
         {
-            public int Foo { get; set; } = 1;
-            public int Bar { get; set; } = 2;
+            public int32 Foo { get; set; } = 1;
+            public int32 Bar { get; set; } = 2;
         }
 
         private class TestControl : Control
@@ -911,11 +911,11 @@ namespace Avalonia.Markup.UnitTests.Data
 
         private class OldDataContextTest : Control
         {
-            public static readonly StyledProperty<int> FooProperty =
-                AvaloniaProperty.Register<OldDataContextTest, int>("Foo");
+            public static readonly StyledProperty<int32> FooProperty =
+                AvaloniaProperty.Register<OldDataContextTest, int32>("Foo");
 
-            public static readonly StyledProperty<int> BarProperty =
-              AvaloniaProperty.Register<OldDataContextTest, int>("Bar");
+            public static readonly StyledProperty<int32> BarProperty =
+              AvaloniaProperty.Register<OldDataContextTest, int32>("Bar");
 
             public OldDataContextTest()
             {
@@ -925,10 +925,10 @@ namespace Avalonia.Markup.UnitTests.Data
 
         private class InheritanceTest : Decorator
         {
-            public static readonly StyledProperty<int> BazProperty =
-                AvaloniaProperty.Register<InheritanceTest, int>(nameof(Baz), defaultValue: 6, inherits: true);
+            public static readonly StyledProperty<int32> BazProperty =
+                AvaloniaProperty.Register<InheritanceTest, int32>(nameof(Baz), defaultValue: 6, inherits: true);
 
-            public int Baz
+            public int32 Baz
             {
                 get => GetValue(BazProperty);
                 set => SetValue(BazProperty, value);

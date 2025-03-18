@@ -5,7 +5,7 @@ namespace Avalonia.Media.TextFormatting
     /// <summary>
     /// Represents a single glyph.
     /// </summary>
-    public readonly record struct GlyphInfo(ushort GlyphIndex, int GlyphCluster, double GlyphAdvance, Vector GlyphOffset = default)
+    public readonly record struct GlyphInfo(ushort GlyphIndex, int32 GlyphCluster, double GlyphAdvance, Vector GlyphOffset = default)
     {
         internal static Comparer<GlyphInfo> ClusterAscendingComparer { get; } =
             Comparer<GlyphInfo>.Create((x, y) => x.GlyphCluster.CompareTo(y.GlyphCluster));
@@ -21,7 +21,7 @@ namespace Avalonia.Media.TextFormatting
         /// <summary>
         /// Get the glyph cluster.
         /// </summary>
-        public int GlyphCluster { get; } = GlyphCluster;
+        public int32 GlyphCluster { get; } = GlyphCluster;
 
         /// <summary>
         /// Get the glyph advance.

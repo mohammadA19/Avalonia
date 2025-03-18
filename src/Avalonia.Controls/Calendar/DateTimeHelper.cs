@@ -12,7 +12,7 @@ namespace Avalonia.Controls
 {
     internal static class DateTimeHelper
     {
-        public static DateTime? AddDays(DateTime time, int days)
+        public static DateTime? AddDays(DateTime time, int32 days)
         {
             System.Globalization.Calendar cal = new GregorianCalendar();
             try
@@ -25,7 +25,7 @@ namespace Avalonia.Controls
             }
         }
 
-        public static DateTime? AddMonths(DateTime time, int months)
+        public static DateTime? AddMonths(DateTime time, int32 months)
         {
             System.Globalization.Calendar cal = new GregorianCalendar();
             try
@@ -38,7 +38,7 @@ namespace Avalonia.Controls
             }
         }
 
-        public static DateTime? AddYears(DateTime time, int years)
+        public static DateTime? AddYears(DateTime time, int32 years)
         {
             System.Globalization.Calendar cal = new GregorianCalendar();
             try
@@ -51,17 +51,17 @@ namespace Avalonia.Controls
             }
         }
 
-        public static int CompareDays(DateTime dt1, DateTime dt2)
+        public static int32 CompareDays(DateTime dt1, DateTime dt2)
         {
             return DateTime.Compare(DiscardTime(dt1), DiscardTime(dt2));
         }
 
-        public static int CompareYearMonth(DateTime dt1, DateTime dt2)
+        public static int32 CompareYearMonth(DateTime dt1, DateTime dt2)
         {
             return (dt1.Year - dt2.Year) * 12 + (dt1.Month - dt2.Month);
         }
 
-        public static int DecadeOfDate(DateTime date)
+        public static int32 DecadeOfDate(DateTime date)
         {
             return date.Year - (date.Year % 10);
         }
@@ -76,7 +76,7 @@ namespace Avalonia.Controls
             return d.Date;
         }
 
-        public static int EndOfDecade(DateTime date)
+        public static int32 EndOfDecade(DateTime date)
         {
             return DecadeOfDate(date) + 9;
         }

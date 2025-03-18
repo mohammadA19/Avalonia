@@ -18,7 +18,7 @@ namespace Avalonia.Utilities
 
         public bool End => _s.IsEmpty;
         public char Peek => _s[0];
-        public int Position { get; private set; }
+        public int32 Position { get; private set; }
         public char Take()
         {
             Position++;
@@ -73,7 +73,7 @@ namespace Avalonia.Utilities
 
         public ReadOnlySpan<char> TakeUntil(char c)
         {
-            int len;
+            int32 len;
             for (len = 0; len < _s.Length && _s[len] != c; len++)
             {
             }
@@ -85,7 +85,7 @@ namespace Avalonia.Utilities
 
         public ReadOnlySpan<char> TakeWhile(Func<char, bool> condition)
         {
-            int len;
+            int32 len;
             for (len = 0; len < _s.Length && condition(_s[len]); len++)
             {
             }
@@ -95,7 +95,7 @@ namespace Avalonia.Utilities
             return span;
         }
 
-        public ReadOnlySpan<char> TryPeek(int count)
+        public ReadOnlySpan<char> TryPeek(int32 count)
         {
             if (_s.Length < count)
                 return ReadOnlySpan<char>.Empty;
@@ -108,7 +108,7 @@ namespace Avalonia.Utilities
             return _s.Slice(0, _s.Length - trimmed.Length);
         }
 
-        public void Skip(int count)
+        public void Skip(int32 count)
         {
             if (_s.Length < count)
                 throw new IndexOutOfRangeException();

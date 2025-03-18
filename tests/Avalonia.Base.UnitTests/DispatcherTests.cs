@@ -84,7 +84,7 @@ public partial class DispatcherTests
     {
         private readonly bool _useTestTimeout = true;
         private readonly CancellationToken? _cancel;
-        public int RunLoopCount { get; private set; }
+        public int32 RunLoopCount { get; private set; }
         
         public SimpleControlledDispatcherImpl()
         {
@@ -154,7 +154,7 @@ public partial class DispatcherTests
     {
         var impl = new SimpleDispatcherImpl();
         var disp = new Dispatcher(impl);
-        var actions = new List<int>();
+        var actions = new List<int32>();
         for (var c = 0; c < 10; c++)
         {
             var itemId = c;
@@ -197,7 +197,7 @@ public partial class DispatcherTests
         var impl = new SimpleDispatcherImpl();
         impl.TestInputPending = true;
         var disp = new Dispatcher(impl);
-        var actions = new List<int>();
+        var actions = new List<int32>();
         for (var c = 0; c < 10; c++)
         {
             var itemId = c;
@@ -381,8 +381,8 @@ public partial class DispatcherTests
 
     class WaitHelper : SynchronizationContext, NonPumpingLockHelper.IHelperImpl
     {
-        public int WaitCount;
-        public override int Wait(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
+        public int32 WaitCount;
+        public override int32 Wait(IntPtr[] waitHandles, bool waitAll, int32 millisecondsTimeout)
         {
             WaitCount++;
             return base.Wait(waitHandles, waitAll, millisecondsTimeout);
@@ -466,7 +466,7 @@ public partial class DispatcherTests
     [SuppressMessage("Usage", "xUnit1031:Do not use blocking task operations in test method", Justification = "Tests the dispatcher itself")]
     public void DispatcherInvokeAsyncUnwrapsTasks()
     {
-        int asyncMethodStage = 0;
+        int32 asyncMethodStage = 0;
         
         async Task AsyncMethod()
         {
@@ -475,7 +475,7 @@ public partial class DispatcherTests
             asyncMethodStage = 2;
         }
         
-        async Task<int> AsyncMethodWithResult()
+        async Task<int32> AsyncMethodWithResult()
         {
             await Task.Delay(100);
             return 1;

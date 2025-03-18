@@ -52,7 +52,7 @@ namespace Avalonia.Markup.Xaml.UnitTests.Converters
 
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values[0] is int i && values[1] is int j)
+            if (values[0] is int32 i && values[1] is int32 j)
             {
                 var p = i * j;
 

@@ -16,7 +16,7 @@ namespace Avalonia.Headless
 {
     internal class HeadlessWindowImpl : IWindowImpl, IPopupImpl, IFramebufferPlatformSurface, IHeadlessWindow
     {
-        private static int _nextGlobalZOrder = 1;
+        private static int32 _nextGlobalZOrder = 1;
 
         private readonly IKeyboardDevice _keyboard;
         private readonly IScreenImpl _screen;
@@ -25,7 +25,7 @@ namespace Avalonia.Headless
         private WriteableBitmap? _lastRenderedFrame;
         private readonly object _sync = new object();
         private readonly PixelFormat _frameBufferFormat;
-        private int _zOrder;
+        private int32 _zOrder;
         public bool IsPopup { get; }
 
         public HeadlessWindowImpl(bool isPopup, PixelFormat frameBufferFormat)
@@ -203,7 +203,7 @@ namespace Avalonia.Headless
 
             public IntPtr Address => _fb.Address;
             public PixelSize Size => _fb.Size;
-            public int RowBytes => _fb.RowBytes;
+            public int32 RowBytes => _fb.RowBytes;
             public Vector Dpi => _fb.Dpi;
             public PixelFormat Format => _fb.Format;
         }
@@ -437,7 +437,7 @@ namespace Avalonia.Headless
 
         public void GetWindowsZOrder(Span<Window> windows, Span<long> zOrder)
         {
-            for (int i = 0; i < windows.Length; ++i)
+            for (int32 i = 0; i < windows.Length; ++i)
             {
                 if (windows[i].PlatformImpl is HeadlessWindowImpl headlessWindowImpl)
                     zOrder[i] = headlessWindowImpl._zOrder;

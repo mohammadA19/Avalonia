@@ -24,9 +24,9 @@ namespace Avalonia.Controls
         private Size _viewport;
         private Dictionary<object, Stack<Control>>? _recyclePool;
         private Control? _realized;
-        private int _realizedIndex = -1;
+        private int32 _realizedIndex = -1;
         private Control? _transitionFrom;
-        private int _transitionFromIndex = -1;
+        private int32 _transitionFromIndex = -1;
         private CancellationTokenSource? _transition;
         private EventHandler? _scrollInvalidated;
 
@@ -43,7 +43,7 @@ namespace Avalonia.Controls
             get => _offset;
             set
             {
-                if ((int)_offset.X != value.X)
+                if ((int32)_offset.X != value.X)
                     InvalidateMeasure();
                 _offset = value;
             }
@@ -88,7 +88,7 @@ namespace Avalonia.Controls
         protected override Size MeasureOverride(Size availableSize)
         {
             var items = Items;
-            var index = (int)_offset.X;
+            var index = (int32)_offset.X;
 
             if (index != _realizedIndex)
             {
@@ -175,7 +175,7 @@ namespace Avalonia.Controls
 
         protected override IInputElement? GetControl(NavigationDirection direction, IInputElement? from, bool wrap) => null;
 
-        protected internal override Control? ContainerFromIndex(int index)
+        protected internal override Control? ContainerFromIndex(int32 index)
         {
             if (index < 0 || index >= Items.Count)
                 return null;
@@ -191,12 +191,12 @@ namespace Avalonia.Controls
             return _realized is not null ? new[] { _realized } : null;
         }
 
-        protected internal override int IndexFromContainer(Control container)
+        protected internal override int32 IndexFromContainer(Control container)
         {
             return container == _realized ? _realizedIndex : -1;
         }
 
-        protected internal override Control? ScrollIntoView(int index)
+        protected internal override Control? ScrollIntoView(int32 index)
         {
             return null;
         }
@@ -205,13 +205,13 @@ namespace Avalonia.Controls
         {
             base.OnItemsChanged(items, e);
 
-            void Add(int index, int count)
+            void Add(int32 index, int32 count)
             {
                 if (index <= _realizedIndex)
                     _realizedIndex += count;
             }
 
-            void Remove(int index, int count)
+            void Remove(int32 index, int32 count)
             {
                 var end = index + (count - 1);
 
@@ -273,7 +273,7 @@ namespace Avalonia.Controls
             InvalidateMeasure();
         }
 
-        private Control GetOrCreateElement(IReadOnlyList<object?> items, int index)
+        private Control GetOrCreateElement(IReadOnlyList<object?> items, int32 index)
         {
             Debug.Assert(ItemContainerGenerator is not null);
 
@@ -298,12 +298,12 @@ namespace Avalonia.Controls
             return e;
         }
 
-        private Control? GetRealizedElement(int index)
+        private Control? GetRealizedElement(int32 index)
         {
             return _realizedIndex == index ? _realized : null;
         }
 
-        private Control GetItemAsOwnContainer(object? item, int index)
+        private Control GetItemAsOwnContainer(object? item, int32 index)
         {
             Debug.Assert(ItemContainerGenerator is not null);
 
@@ -322,7 +322,7 @@ namespace Avalonia.Controls
             return controlItem;
         }
 
-        private Control? GetRecycledElement(object? item, int index, object? recycleKey)
+        private Control? GetRecycledElement(object? item, int32 index, object? recycleKey)
         {
             Debug.Assert(ItemContainerGenerator is not null);
 
@@ -343,7 +343,7 @@ namespace Avalonia.Controls
             return null;
         }
 
-        private Control CreateElement(object? item, int index, object? recycleKey)
+        private Control CreateElement(object? item, int32 index, object? recycleKey)
         {
             Debug.Assert(ItemContainerGenerator is not null);
 

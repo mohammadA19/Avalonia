@@ -11,8 +11,8 @@ namespace Avalonia.Utilities
 #endif
     static class AvaloniaResourcesIndexReaderWriter
     {
-        private const int XmlLegacyVersion = 1;
-        private const int BinaryCurrentVersion = 2;
+        private const int32 XmlLegacyVersion = 1;
+        private const int32 BinaryCurrentVersion = 2;
 
         public static List<AvaloniaResourcesIndexEntry> ReadIndex(Stream stream)
         {
@@ -68,7 +68,7 @@ namespace Avalonia.Utilities
         }
 
         [Obsolete]
-        public static void WriteResources(Stream output, List<(string Path, int Size, Func<Stream> Open)> resources)
+        public static void WriteResources(Stream output, List<(string Path, int32 Size, Func<Stream> Open)> resources)
         {
             WriteResources(output,
                 resources.Select(r => new AvaloniaResourcesEntry { Path = r.Path, Open = r.Open, Size = r.Size })
@@ -115,7 +115,7 @@ namespace Avalonia.Utilities
             WriteIndex(writer, entries);
 
             var posAfterEntries = output.Position;
-            var indexSize = (int) (posAfterEntries - posBeforeEntries);
+            var indexSize = (int32) (posAfterEntries - posBeforeEntries);
             output.Position = 0L;
             writer.Write(indexSize);
             output.Position = posAfterEntries;
@@ -135,9 +135,9 @@ namespace Avalonia.Utilities
     {
         public string? Path { get; set; }
 
-        public int Offset { get; set; }
+        public int32 Offset { get; set; }
 
-        public int Size { get; set; }
+        public int32 Size { get; set; }
     }
 
 #if !BUILDTASK
@@ -147,7 +147,7 @@ namespace Avalonia.Utilities
     {
         public string? Path { get; init; }
         public Func<Stream>? Open { get; init; }
-        public int Size { get; init; }
+        public int32 Size { get; init; }
         public string? SystemPath { get; init; }
     }
 }

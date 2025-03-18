@@ -32,7 +32,7 @@ namespace Avalonia.Benchmarks.Animations
             _observer = new AddValueObserver(_producedValues);
         }
 
-        [Params(10, 100)] public int FrameCount { get; set; }
+        [Params(10, 100)] public int32 FrameCount { get; set; }
 
         [Benchmark]
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -44,7 +44,7 @@ namespace Avalonia.Benchmarks.Animations
 
             using var transitionSub = transitionObs.Subscribe(_observer);
 
-            for (int i = 0; i < FrameCount; i++)
+            for (int32 i = 0; i < FrameCount; i++)
             {
                 _timeProducer.OnNext(i / 1000d);
             }

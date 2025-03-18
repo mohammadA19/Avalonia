@@ -171,7 +171,7 @@ internal class RoslynType : IXamlType
 
     public IXamlType? ArrayElementType => null;
         
-    public IXamlType MakeArrayType(int dimensions) => throw new NotSupportedException();
+    public IXamlType MakeArrayType(int32 dimensions) => throw new NotSupportedException();
 
     public IXamlType? BaseType => _symbol.BaseType is { } baseType ? new RoslynType(baseType, _assembly) : null;
 
@@ -221,7 +221,7 @@ internal class RoslynConstructor : IXamlConstructor
 
     public IXamlType DeclaringType => new RoslynType(_symbol.ContainingType, _assembly);
 
-    public IXamlParameterInfo GetParameterInfo(int index) => new RoslynParameter(_assembly, _symbol.Parameters[index]);
+    public IXamlParameterInfo GetParameterInfo(int32 index) => new RoslynParameter(_assembly, _symbol.Parameters[index]);
 }
 
 internal class RoslynProperty : IXamlProperty
@@ -319,5 +319,5 @@ internal class RoslynMethod : IXamlMethod
 
     public IReadOnlyList<IXamlCustomAttribute> CustomAttributes => [];
 
-    public IXamlParameterInfo GetParameterInfo(int index) => new RoslynParameter(_assembly, _symbol.Parameters[index]);
+    public IXamlParameterInfo GetParameterInfo(int32 index) => new RoslynParameter(_assembly, _symbol.Parameters[index]);
 }

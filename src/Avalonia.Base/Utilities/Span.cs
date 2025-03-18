@@ -20,9 +20,9 @@ namespace Avalonia.Utilities
     internal class Span
     {
         public readonly object? element;
-        public int length;
+        public int32 length;
 
-        public Span(object? element, int length)
+        public Span(object? element, int32 length)
         {
             this.element = element;
             this.length = length;
@@ -67,7 +67,7 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Delete n elements of vector
         /// </summary>
-        internal void Delete(int index, int count, ref SpanPosition latestPosition)
+        internal void Delete(int32 index, int32 count, ref SpanPosition latestPosition)
         {
             DeleteInternal(index, count);
 
@@ -75,7 +75,7 @@ namespace Avalonia.Utilities
                 latestPosition = new SpanPosition();
         }
 
-        private void DeleteInternal(int index, int count)
+        private void DeleteInternal(int32 index, int32 count)
         {
             // Do removes highest index to lowest to minimize the number
             // of array entries copied.
@@ -88,7 +88,7 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Insert n elements to vector
         /// </summary>
-        private void Insert(int index, int count)
+        private void Insert(int32 index, int32 count)
         {
             for (var c = 0; c < count; c++)
                 _spans.Insert(index, new Span(null, 0));
@@ -105,12 +105,12 @@ namespace Avalonia.Utilities
         /// position or, if the position is past the end of the vector, the index and cp just past the end of 
         /// the last span.</param>
         /// <returns>Returns true if cp is in range or false if not.</returns>
-        internal bool FindSpan(int cp, SpanPosition latestPosition, out SpanPosition spanPosition)
+        internal bool FindSpan(int32 cp, SpanPosition latestPosition, out SpanPosition spanPosition)
         {
             Debug.Assert(cp >= 0);
 
             var spanCount = _spans.Count;
-            int spanIndex, spanCP;
+            int32 spanIndex, spanCP;
 
             if (cp == 0)
             {
@@ -179,7 +179,7 @@ namespace Avalonia.Utilities
         /// Implementation of span element object must implement Object.Equals to
         /// avoid runtime reflection cost on equality check of nested-type object.
         /// </remarks>
-        public void SetValue(int first, int length, object element)
+        public void SetValue(int32 first, int32 length, object element)
         {
             Set(first, length, element, SpanVector.s_equals, new SpanPosition());
         }
@@ -188,7 +188,7 @@ namespace Avalonia.Utilities
         /// Set an element as a value to a character range; takes a SpanPosition of a recently accessed
         /// span for performance and returns a known valid SpanPosition
         /// </summary>
-        public SpanPosition SetValue(int first, int length, object element, SpanPosition spanPosition)
+        public SpanPosition SetValue(int32 first, int32 length, object element, SpanPosition spanPosition)
         {
             return Set(first, length, element, SpanVector.s_equals, spanPosition);
         }
@@ -196,7 +196,7 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Set an element as a reference to a character range
         /// </summary>
-        public void SetReference(int first, int length, object element)
+        public void SetReference(int32 first, int32 length, object element)
         {
             Set(first, length, element, SpanVector.s_referenceEquals, new SpanPosition());
         }
@@ -205,12 +205,12 @@ namespace Avalonia.Utilities
         /// Set an element as a reference to a character range; takes a SpanPosition of a recently accessed
         /// span for performance and returns a known valid SpanPosition
         /// </summary>
-        public SpanPosition SetReference(int first, int length, object element, SpanPosition spanPosition)
+        public SpanPosition SetReference(int32 first, int32 length, object element, SpanPosition spanPosition)
         {
             return Set(first, length, element, SpanVector.s_referenceEquals, spanPosition);
         }
 
-        private SpanPosition Set(int first, int length, object? element, Equals equals, SpanPosition spanPosition)
+        private SpanPosition Set(int32 first, int32 length, object? element, Equals equals, SpanPosition spanPosition)
         {
             var inRange = FindSpan(first, spanPosition, out spanPosition);
 
@@ -400,7 +400,7 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Number of spans in vector
         /// </summary>
-        public int Count
+        public int32 Count
         {
             get { return _spans.Count; }
         }
@@ -413,12 +413,12 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Span accessor at nth element
         /// </summary>
-        public Span this[int index]
+        public Span this[int32 index]
         {
             get { return _spans[index]; }
         }
 
-        private bool Resize(int targetCount)
+        private bool Resize(int32 targetCount)
         {
             if (targetCount > Count)
             {
@@ -446,7 +446,7 @@ namespace Avalonia.Utilities
     internal sealed class SpanEnumerator : IEnumerator
     {
         private readonly SpanVector _spans;
-        private int _current;    // current span
+        private int32 _current;    // current span
 
         internal SpanEnumerator(SpanVector spans)
         {
@@ -488,15 +488,15 @@ namespace Avalonia.Utilities
     /// </summary>
     internal readonly struct SpanPosition
     {
-        internal SpanPosition(int spanIndex, int spanOffset)
+        internal SpanPosition(int32 spanIndex, int32 spanOffset)
         {
             Index = spanIndex;
             Offset = spanOffset;
         }
 
-        internal int Index { get; }
+        internal int32 Index { get; }
 
-        internal int Offset { get; }
+        internal int32 Offset { get; }
     }
 
     /// <summary>
@@ -511,7 +511,7 @@ namespace Avalonia.Utilities
         {
         }
 
-        public SpanRider(SpanVector spans, SpanPosition latestPosition = new SpanPosition(), int cp = 0)
+        public SpanRider(SpanVector spans, SpanPosition latestPosition = new SpanPosition(), int32 cp = 0)
         {
             _spans = spans;
             _spanPosition = new SpanPosition();
@@ -523,12 +523,12 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Move rider to a given cp
         /// </summary>
-        public bool At(int cp)
+        public bool At(int32 cp)
         {
             return At(_spanPosition, cp);
         }
 
-        public bool At(SpanPosition latestPosition, int cp)
+        public bool At(SpanPosition latestPosition, int32 cp)
         {
             var inRange = _spans.FindSpan(cp, latestPosition, out _spanPosition);
             if (inRange)
@@ -544,7 +544,7 @@ namespace Avalonia.Utilities
                 // cp is out of range:
                 //  - Length is the default span length
                 //  - CurrentPosition is the end of the last span
-                Length = int.MaxValue;
+                Length = int32.MaxValue;
                 CurrentPosition = _spanPosition.Offset;
             }
 
@@ -554,7 +554,7 @@ namespace Avalonia.Utilities
         /// <summary>
         /// The first cp of the current span
         /// </summary>
-        public int CurrentSpanStart
+        public int32 CurrentSpanStart
         {
             get { return _spanPosition.Offset; }
         }
@@ -562,12 +562,12 @@ namespace Avalonia.Utilities
         /// <summary>
         /// The length of current span start from the current cp
         /// </summary>
-        public int Length { get; private set; }
+        public int32 Length { get; private set; }
 
         /// <summary>
         /// The current position
         /// </summary>
-        public int CurrentPosition { get; private set; }
+        public int32 CurrentPosition { get; private set; }
 
         /// <summary>
         /// The element of the current span
@@ -580,7 +580,7 @@ namespace Avalonia.Utilities
         /// <summary>
         /// Index of the span at the current position.
         /// </summary>
-        public int CurrentSpanIndex
+        public int32 CurrentSpanIndex
         {
             get { return _spanPosition.Index; }
         }

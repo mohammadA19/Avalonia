@@ -54,7 +54,7 @@ internal class NuiGlLayerSurface : IGlPlatformSurface
         {
             _ctx = ctx;
             _restoreContext = restoreContext;
-            Size = new PixelSize((int)nuiAvaloniaView.Size.Width, (int)nuiAvaloniaView.Size.Height);
+            Size = new PixelSize((int32)nuiAvaloniaView.Size.Width, (int32)nuiAvaloniaView.Size.Height);
             Scaling = nuiAvaloniaView.Scaling;
             Context = ctx;
         }

@@ -87,7 +87,7 @@ public partial class XYFocus
         if (navigationStrategyOverride.HasValue && !isAutoOverride)
         {
             // We can cast just by offsetting values because we have ensured that the XYFocusStrategy enums offset as expected
-            return (XYFocusNavigationStrategy)(int)(navigationStrategyOverride.Value - 1);
+            return (XYFocusNavigationStrategy)(int32)(navigationStrategyOverride.Value - 1);
         }
         else if (isAutoOverride && element.GetVisualParent() is InputElement parent)
         {

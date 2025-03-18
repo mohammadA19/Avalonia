@@ -19,7 +19,7 @@ namespace Avalonia.Android.Platform.Input
         private readonly TextEditBuffer _editBuffer;
         private readonly ConcurrentQueue<EditCommand> _commandQueue;
 
-        private int _batchLevel = 0;
+        private int32 _batchLevel = 0;
 
         public AvaloniaInputConnection(TopLevelImpl toplevel, IAndroidInputMethod inputMethod)
         {
@@ -29,7 +29,7 @@ namespace Avalonia.Android.Platform.Input
             _commandQueue = new ConcurrentQueue<EditCommand>();
         }
 
-        public int ExtractedTextToken { get; private set; }
+        public int32 ExtractedTextToken { get; private set; }
 
         public IAndroidInputMethod InputMethod => _inputMethod;
 
@@ -58,7 +58,7 @@ namespace Avalonia.Android.Platform.Input
             InputMethod.IMM.UpdateSelection(InputMethod.View, selection.Start, selection.End, composition.Start, composition.End);
         }
 
-        public bool SetComposingRegion(int start, int end)
+        public bool SetComposingRegion(int32 start, int32 end)
         {
             if (InputMethod.IsActive)
             {
@@ -67,7 +67,7 @@ namespace Avalonia.Android.Platform.Input
             return InputMethod.IsActive;
         }
 
-        public bool SetComposingText(ICharSequence? text, int newCursorPosition)
+        public bool SetComposingText(ICharSequence? text, int32 newCursorPosition)
         {
             if (text is null)
             {
@@ -83,7 +83,7 @@ namespace Avalonia.Android.Platform.Input
             return InputMethod.IsActive;
         }
 
-        public bool SetSelection(int start, int end)
+        public bool SetSelection(int32 start, int32 end)
         {
             if (InputMethod.IsActive)
             {
@@ -120,7 +120,7 @@ namespace Avalonia.Android.Platform.Input
             return IsInBatchEdit;
         }
 
-        public bool CommitText(ICharSequence? text, int newCursorPosition)
+        public bool CommitText(ICharSequence? text, int32 newCursorPosition)
         {
             if (InputMethod.Client is null || text is null)
             {
@@ -136,7 +136,7 @@ namespace Avalonia.Android.Platform.Input
             return InputMethod.IsActive;
         }
 
-        public bool DeleteSurroundingText(int beforeLength, int afterLength)
+        public bool DeleteSurroundingText(int32 beforeLength, int32 afterLength)
         {
             if (InputMethod.IsActive)
             {
@@ -188,7 +188,7 @@ namespace Avalonia.Android.Platform.Input
 
         public ExtractedText? GetExtractedText(ExtractedTextRequest? request, [GeneratedEnum] GetTextFlags flags)
         {
-            IsInMonitorMode = ((int)flags & (int)TextExtractFlags.Monitor) != 0;
+            IsInMonitorMode = ((int32)flags & (int32)TextExtractFlags.Monitor) != 0;
 
             ExtractedTextToken = IsInMonitorMode ? request?.Token ?? 0 : ExtractedTextToken;
 
@@ -200,7 +200,7 @@ namespace Avalonia.Android.Platform.Input
             return _editBuffer.ExtractedText;
         }
 
-        public bool PerformContextMenuAction(int id)
+        public bool PerformContextMenuAction(int32 id)
         {
             if (InputMethod.Client is not { } client)
                 return false;
@@ -251,7 +251,7 @@ namespace Avalonia.Android.Platform.Input
             return false;
         }
 
-        public bool DeleteSurroundingTextInCodePoints(int beforeLength, int afterLength)
+        public bool DeleteSurroundingTextInCodePoints(int32 beforeLength, int32 afterLength)
         {
             if (InputMethod.IsActive)
             {
@@ -282,13 +282,13 @@ namespace Avalonia.Android.Platform.Input
             return new SpannableString(_editBuffer.SelectedText);
         }
 
-        public ICharSequence? GetTextAfterCursorFormatted(int n, [GeneratedEnum] GetTextFlags flags)
+        public ICharSequence? GetTextAfterCursorFormatted(int32 n, [GeneratedEnum] GetTextFlags flags)
         {
             var end = Math.Min(_editBuffer.Selection.End, _editBuffer.Text.Length);
             return new SpannableString(_editBuffer.Text.Substring(end, Math.Min(n, _editBuffer.Text.Length - end)));
         }
 
-        public ICharSequence? GetTextBeforeCursorFormatted(int n, [GeneratedEnum] GetTextFlags flags)
+        public ICharSequence? GetTextBeforeCursorFormatted(int32 n, [GeneratedEnum] GetTextFlags flags)
         {
             var start = Math.Max(0, _editBuffer.Selection.Start - n);
             var length = _editBuffer.Selection.Start - start;
@@ -305,7 +305,7 @@ namespace Avalonia.Android.Platform.Input
             return false;
         }
 
-        public bool RequestCursorUpdates(int cursorUpdateMode)
+        public bool RequestCursorUpdates(int32 cursorUpdateMode)
         {
             return false;
         }

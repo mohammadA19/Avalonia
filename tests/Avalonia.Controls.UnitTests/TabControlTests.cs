@@ -410,7 +410,7 @@ namespace Avalonia.Controls.UnitTests
         {
             using var app = UnitTestApplication.Start(TestServices.StyledWindow);
 
-            int templatesBuilt = 0;
+            int32 templatesBuilt = 0;
 
             var target = new TabControl
             {
@@ -723,7 +723,7 @@ namespace Avalonia.Controls.UnitTests
         [InlineData(Key.A, 1)]
         [InlineData(Key.L, 2)]
         [InlineData(Key.D, 0)]
-        public void Should_TabControl_Recognizes_AccessKey(Key accessKey, int selectedTabIndex)
+        public void Should_TabControl_Recognizes_AccessKey(Key accessKey, int32 selectedTabIndex)
         {
             var ah = new AccessKeyHandler();
             var kd = new KeyboardDevice();

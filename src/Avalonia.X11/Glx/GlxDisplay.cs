@@ -40,8 +40,8 @@ namespace Avalonia.X11.Glx
                 GLX_STENCIL_SIZE, 8,
 
             };
-            int sampleCount = 0;
-            int stencilSize = 0;
+            int32 sampleCount = 0;
+            int32 stencilSize = 0;
             foreach (var attribs in new[]
             {
                 //baseAttribs.Concat(multiattribs),
@@ -120,7 +120,7 @@ namespace Avalonia.X11.Glx
             share.SampleCount, share.StencilSize, true);
 
         private GlxContext CreateContext(IntPtr defaultXid, IGlContext? share,
-            int sampleCount, int stencilSize, bool ownsPBuffer)
+            int32 sampleCount, int32 stencilSize, bool ownsPBuffer)
         {
             var sharelist = ((GlxContext?)share)?.Handle ?? IntPtr.Zero;
             IntPtr handle = default;
@@ -135,7 +135,7 @@ namespace Avalonia.X11.Glx
                 else if (profile.Type == GlProfileType.OpenGLES) 
                     profileMask = GLX_CONTEXT_ES2_PROFILE_BIT_EXT;
 
-                var attrs = new int[]
+                var attrs = new int32[]
                 {
                     GLX_CONTEXT_MAJOR_VERSION_ARB, profile.Major,
                     GLX_CONTEXT_MINOR_VERSION_ARB, profile.Minor,

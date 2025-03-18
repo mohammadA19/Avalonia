@@ -145,13 +145,13 @@ namespace Avalonia.Media
         /// Hashcode is not guaranteed to be unique.
         /// </summary>
         /// <returns>The hashcode for this object.</returns>
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             // Same algorithm as Color
             // This is used instead of HashCode.Combine() due to .NET Standard 2.0 requirements
             unchecked
             {
-                int hashCode = A.GetHashCode();
+                int32 hashCode = A.GetHashCode();
                 hashCode = (hashCode * 397) ^ H.GetHashCode();
                 hashCode = (hashCode * 397) ^ S.GetHashCode();
                 hashCode = (hashCode * 397) ^ L.GetHashCode();
@@ -304,7 +304,7 @@ namespace Avalonia.Media
             bool TryInternalParse(ReadOnlySpan<char> inString, out double outDouble)
             {
                 // The percent sign, if it exists, must be at the end of the number
-                int percentIndex = inString.IndexOf("%".AsSpan(), StringComparison.Ordinal);
+                int32 percentIndex = inString.IndexOf("%".AsSpan(), StringComparison.Ordinal);
 
                 if (percentIndex >= 0)
                 {

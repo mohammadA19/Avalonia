@@ -24,19 +24,19 @@ namespace Avalonia.PropertyStore
         public static FramePriority ToFramePriority(this BindingPriority priority, FrameType type = FrameType.Style)
         {
             Debug.Assert(priority != BindingPriority.LocalValue);
-            var p = (int)(priority > 0 ? priority : priority + 1);
-            return (FramePriority)(p * 3 + (int)type);
+            var p = (int32)(priority > 0 ? priority : priority + 1);
+            return (FramePriority)(p * 3 + (int32)type);
         }
 
         public static BindingPriority ToBindingPriority(this FramePriority priority)
         {
-            var p = (int)priority / 3;
+            var p = (int32)priority / 3;
             return p == 0 ? BindingPriority.Animation : (BindingPriority)p;
         }
 
         public static bool IsType(this FramePriority priority, FrameType type)
         {
-            return (FrameType)((int)priority % 3) == type;
+            return (FrameType)((int32)priority % 3) == type;
         }
     }
 }

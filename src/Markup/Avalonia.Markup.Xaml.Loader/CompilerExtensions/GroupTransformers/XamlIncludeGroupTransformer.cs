@@ -181,7 +181,7 @@ internal class AvaloniaXamlIncludeTransformer : IXamlAstGroupTransformer
         if (sourceProperty.Values.OfType<XamlAstNewClrObjectNode>().FirstOrDefault() is not { } sourceUriNode
             || sourceUriNode.Type.GetClrType() != context.GetAvaloniaTypes().Uri
             || sourceUriNode.Arguments.FirstOrDefault() is not XamlConstantNode { Constant: string originalAssetPath }
-            || sourceUriNode.Arguments.Skip(1).FirstOrDefault() is not XamlConstantNode { Constant: int uriKind })
+            || sourceUriNode.Arguments.Skip(1).FirstOrDefault() is not XamlConstantNode { Constant: int32 uriKind })
         {
             // Source value can be set with markup extension instead of the Uri object node, we don't support it here yet.
             var anyPropValue = sourceProperty.Values.FirstOrDefault();

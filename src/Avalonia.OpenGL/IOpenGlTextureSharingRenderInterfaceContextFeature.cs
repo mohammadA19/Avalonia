@@ -12,8 +12,8 @@ namespace Avalonia.OpenGL
 
     public interface ICompositionImportableOpenGlSharedTexture : ICompositionImportableSharedGpuContextImage
     {
-        int TextureId { get; }
-        int InternalFormat { get; }
+        int32 TextureId { get; }
+        int32 InternalFormat { get; }
         PixelSize Size { get; }
     }
 }

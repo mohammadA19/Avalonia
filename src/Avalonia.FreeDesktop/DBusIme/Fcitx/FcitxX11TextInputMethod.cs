@@ -46,9 +46,9 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
             return true;
         }
 
-        private void OnPreedit(Exception? arg1, ((string?, int)[]? str, int cursorpos) args)
+        private void OnPreedit(Exception? arg1, ((string?, int32)[]? str, int32 cursorpos) args)
         {
-            int? cursor = null;
+            int32? cursor = null;
             string? preeditString = null;
             if (args.str != null && args.str.Length > 0)
             {
@@ -94,7 +94,7 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
 
         protected override Task ResetContextCore() => _context?.ResetAsync() ?? Task.CompletedTask;
 
-        protected override async Task<bool> HandleKeyCore(RawKeyEventArgs args, int keyVal, int keyCode)
+        protected override async Task<bool> HandleKeyCore(RawKeyEventArgs args, int32 keyVal, int32 keyCode)
         {
             FcitxKeyState state = default;
             if (args.Modifiers.HasAllFlags(RawInputModifiers.Control))
@@ -110,7 +110,7 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
                 FcitxKeyEventType.FCITX_PRESS_KEY :
                 FcitxKeyEventType.FCITX_RELEASE_KEY;
             if (_context is not null)
-                return await _context.ProcessKeyEventAsync((uint)keyVal, (uint)keyCode, (uint)state, (int)type,
+                return await _context.ProcessKeyEventAsync((uint)keyVal, (uint)keyCode, (uint)state, (int32)type,
                     (uint)args.Timestamp).ConfigureAwait(false);
 
             return false;
@@ -168,7 +168,7 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
                 return PushFlagsIfNeeded();
             });
 
-        private void OnForward(Exception? e, (uint keyval, uint state, int type) ev)
+        private void OnForward(Exception? e, (uint keyval, uint state, int32 type) ev)
         {
             var state = (FcitxKeyState)ev.state;
             KeyModifiers mods = default;
@@ -183,8 +183,8 @@ namespace Avalonia.FreeDesktop.DBusIme.Fcitx
             FireForward(new X11InputMethodForwardedKey
             {
                 Modifiers = mods,
-                KeyVal = (int)ev.keyval,
-                Type = ev.type == (int)FcitxKeyEventType.FCITX_PRESS_KEY ?
+                KeyVal = (int32)ev.keyval,
+                Type = ev.type == (int32)FcitxKeyEventType.FCITX_PRESS_KEY ?
                     RawKeyEventType.KeyDown :
                     RawKeyEventType.KeyUp
             });

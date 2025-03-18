@@ -90,7 +90,7 @@ public static class AppiumDriverEx
     }
 #endif
 
-    public static Actions MoveToElementCenter(this Actions actions, AppiumWebElement element, int xOffset, int yOffset)
+    public static Actions MoveToElementCenter(this Actions actions, AppiumWebElement element, int32 xOffset, int32 yOffset)
     {
 #if APPIUM2
         // It's always Center in Appium 2

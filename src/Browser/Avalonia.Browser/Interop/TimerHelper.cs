@@ -25,10 +25,10 @@ internal static partial class TimerHelper
     }
 
     [JSImport("TimerHelper.setTimeout", AvaloniaModule.MainModuleName)]
-    public static partial int SetTimeout(int intervalMs);
+    public static partial int32 SetTimeout(int32 intervalMs);
 
     [JSImport("globalThis.clearTimeout")]
-    public static partial int ClearTimeout(int id);
+    public static partial int32 ClearTimeout(int32 id);
 
     public static Action? Interval;
     [JSExport]
@@ -39,8 +39,8 @@ internal static partial class TimerHelper
     }
     
     [JSImport("TimerHelper.setInterval", AvaloniaModule.MainModuleName)]
-    public static partial int SetInterval( int intervalMs);
+    public static partial int32 SetInterval( int32 intervalMs);
 
     [JSImport("globalThis.clearInterval")]
-    public static partial int ClearInterval(int id);
+    public static partial int32 ClearInterval(int32 id);
 }

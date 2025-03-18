@@ -32,7 +32,7 @@ namespace Avalonia.Controls.UnitTests.Primitives
         {
             using (CreateServices())
             {
-                int openedEvent = 0;
+                int32 openedEvent = 0;
                 var target = new Popup();
                 target.Opened += (s, a) => openedEvent++;
                 target.IsOpen = true;
@@ -46,7 +46,7 @@ namespace Avalonia.Controls.UnitTests.Primitives
         [Fact]
         public void Popup_Without_TopLevel_Shouldnt_Call_Open()
         {
-            int openedEvent = 0;
+            int32 openedEvent = 0;
             var target = new Popup();
             target.Opened += (s, a) => openedEvent++;
             target.IsOpen = true;
@@ -248,7 +248,7 @@ namespace Avalonia.Controls.UnitTests.Primitives
 
                 window.Content = target;
 
-                int openedCount = 0;
+                int32 openedCount = 0;
 
                 target.Opened += (sender, args) =>
                 {
@@ -273,7 +273,7 @@ namespace Avalonia.Controls.UnitTests.Primitives
                 window.ApplyTemplate();
                 target.Open();
 
-                int closedCount = 0;
+                int32 closedCount = 0;
 
                 target.Closed += (sender, args) =>
                 {
@@ -297,7 +297,7 @@ namespace Avalonia.Controls.UnitTests.Primitives
                 window.Content = target;
                 window.ApplyTemplate();
                 
-                int closedCount = 0;
+                int32 closedCount = 0;
 
                 target.Closed += (sender, args) =>
                 {

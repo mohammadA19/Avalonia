@@ -120,7 +120,7 @@ namespace Avalonia.LinuxFramebuffer
             }
         }
 
-        public int ExitCode { get; private set; }
+        public int32 ExitCode { get; private set; }
         public event EventHandler<ControlledApplicationLifetimeStartupEventArgs>? Startup;
         public event EventHandler<ControlledApplicationLifetimeExitEventArgs>? Exit;
 
@@ -129,7 +129,7 @@ namespace Avalonia.LinuxFramebuffer
             Startup?.Invoke(this, new ControlledApplicationLifetimeStartupEventArgs(args));
         }
 
-        public void Shutdown(int exitCode)
+        public void Shutdown(int32 exitCode)
         {
             ExitCode = exitCode;
             var e = new ControlledApplicationLifetimeExitEventArgs(exitCode);
@@ -174,21 +174,21 @@ namespace Avalonia.LinuxFramebuffer
 
 public static class LinuxFramebufferPlatformExtensions
 {
-    public static int StartLinuxFbDev(this AppBuilder builder, string[] args, string? fbdev = null, double scaling = 1, IInputBackend? inputBackend = default)
+    public static int32 StartLinuxFbDev(this AppBuilder builder, string[] args, string? fbdev = null, double scaling = 1, IInputBackend? inputBackend = default)
         => StartLinuxDirect(builder, args, new FbdevOutput(fileName: fbdev, format: null) { Scaling = scaling }, inputBackend);
-    public static int StartLinuxFbDev(this AppBuilder builder, string[] args, string fbdev, PixelFormat? format, double scaling, IInputBackend? inputBackend = default)
+    public static int32 StartLinuxFbDev(this AppBuilder builder, string[] args, string fbdev, PixelFormat? format, double scaling, IInputBackend? inputBackend = default)
         => StartLinuxDirect(builder, args, new FbdevOutput(fileName: fbdev, format: format) { Scaling = scaling }, inputBackend);
 
-    public static int StartLinuxFbDev(this AppBuilder builder, string[] args, FbDevOutputOptions options,
+    public static int32 StartLinuxFbDev(this AppBuilder builder, string[] args, FbDevOutputOptions options,
         IInputBackend? inputBackend = default)
         => StartLinuxDirect(builder, args, new FbdevOutput(options), inputBackend);
 
-    public static int StartLinuxDrm(this AppBuilder builder, string[] args, string? card = null, double scaling = 1, IInputBackend? inputBackend = default)
+    public static int32 StartLinuxDrm(this AppBuilder builder, string[] args, string? card = null, double scaling = 1, IInputBackend? inputBackend = default)
         => StartLinuxDirect(builder, args, new DrmOutput(card) { Scaling = scaling }, inputBackend);
-    public static int StartLinuxDrm(this AppBuilder builder, string[] args, string? card = null, bool connectorsForceProbe = false, DrmOutputOptions? options = null, IInputBackend? inputBackend = default)
+    public static int32 StartLinuxDrm(this AppBuilder builder, string[] args, string? card = null, bool connectorsForceProbe = false, DrmOutputOptions? options = null, IInputBackend? inputBackend = default)
         => StartLinuxDirect(builder, args, new DrmOutput(card, connectorsForceProbe, options), inputBackend);
 
-    public static int StartLinuxDirect(this AppBuilder builder, string[] args, IOutputBackend outputBackend, IInputBackend? inputBackend = default)
+    public static int32 StartLinuxDirect(this AppBuilder builder, string[] args, IOutputBackend outputBackend, IInputBackend? inputBackend = default)
     {
         var lifetime = LinuxFramebufferPlatform.Initialize(builder, outputBackend, inputBackend);
         builder.SetupWithLifetime(lifetime);

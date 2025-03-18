@@ -17,9 +17,9 @@ namespace Avalonia.Win32.Interop
 
         private static unsafe IntPtr Init()
         {
-            int result = CoCreateInstance(in ShellIds.TaskBarList, IntPtr.Zero, 1, in ShellIds.ITaskBarList2, out IntPtr instance);
+            int32 result = CoCreateInstance(in ShellIds.TaskBarList, IntPtr.Zero, 1, in ShellIds.ITaskBarList2, out IntPtr instance);
 
-            if (result != (int)HRESULT.S_OK)
+            if (result != (int32)HRESULT.S_OK)
             {
                 return IntPtr.Zero;
             }

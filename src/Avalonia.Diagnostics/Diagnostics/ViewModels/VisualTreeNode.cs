@@ -191,7 +191,7 @@ namespace Avalonia.Diagnostics.ViewModels
                 if (_application.ApplicationLifetime is Lifetimes.IClassicDesktopStyleApplicationLifetime classic)
                 {
 
-                    for (int i = 0; i < classic.Windows.Count; i++)
+                    for (int32 i = 0; i < classic.Windows.Count; i++)
                     {
                         var window = classic.Windows[i];
                         if (window is Views.MainWindow)

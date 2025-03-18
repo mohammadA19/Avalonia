@@ -15,7 +15,7 @@ namespace Avalonia.ReactiveUI
         /// <summary>
         /// Returns affinity for view.
         /// </summary>
-        public int GetAffinityForView(Type view)
+        public int32 GetAffinityForView(Type view)
         {
             return typeof(Visual).IsAssignableFrom(view) ? 10 : 0;
         }

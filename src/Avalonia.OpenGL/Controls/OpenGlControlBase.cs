@@ -237,8 +237,8 @@ namespace Avalonia.OpenGL.Controls
         private PixelSize GetPixelSize(IRenderRoot visualRoot)
         {
             var scaling = visualRoot.RenderScaling;
-            return new PixelSize(Math.Max(1, (int)(Bounds.Width * scaling)),
-                Math.Max(1, (int)(Bounds.Height * scaling)));
+            return new PixelSize(Math.Max(1, (int32)(Bounds.Width * scaling)),
+                Math.Max(1, (int32)(Bounds.Height * scaling)));
         }
         
         protected virtual void OnOpenGlInit(GlInterface gl)
@@ -256,6 +256,6 @@ namespace Avalonia.OpenGL.Controls
             
         }
         
-        protected abstract void OnOpenGlRender(GlInterface gl, int fb);
+        protected abstract void OnOpenGlRender(GlInterface gl, int32 fb);
     }
 }

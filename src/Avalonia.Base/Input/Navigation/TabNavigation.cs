@@ -228,7 +228,7 @@ namespace Avalonia.Input.Navigation
                     var children = elementAsVisual.VisualChildren;
                     var count = children.Count;
 
-                    for (int i = 0; i < count; i++)
+                    for (int32 i = 0; i < count; i++)
                     {
                         if (children[i] is InputElement ie)
                         {
@@ -264,7 +264,7 @@ namespace Avalonia.Input.Navigation
                     var children = elementAsVisual.VisualChildren;
                     var count = children.Count;
 
-                    for (int i = count - 1; i >= 0; i--)
+                    for (int32 i = count - 1; i >= 0; i--)
                     {
                         if (children[i] is InputElement ie)
                         {
@@ -287,14 +287,14 @@ namespace Avalonia.Input.Navigation
         private static IInputElement? GetFirstTabInGroup(IInputElement container)
         {
             IInputElement? firstTabElement = null;
-            int minIndexFirstTab = int.MinValue;
+            int32 minIndexFirstTab = int32.MinValue;
 
             var currElement = container;
             while ((currElement = GetNextInTree(currElement, container)) != null)
             {
                 if (IsTabStopOrGroup(currElement))
                 {
-                    int currPriority = KeyboardNavigation.GetTabIndex(currElement);
+                    int32 currPriority = KeyboardNavigation.GetTabIndex(currElement);
 
                     if (currPriority < minIndexFirstTab || firstTabElement == null)
                     {
@@ -326,13 +326,13 @@ namespace Avalonia.Input.Navigation
         private static IInputElement? GetLastTabInGroup(IInputElement container)
         {
             IInputElement? lastTabElement = null;
-            int maxIndexFirstTab = int.MaxValue;
+            int32 maxIndexFirstTab = int32.MaxValue;
             var currElement = GetLastInTree(container);
             while (currElement != null && currElement != container)
             {
                 if (IsTabStopOrGroup(currElement))
                 {
-                    int currPriority = KeyboardNavigation.GetTabIndex(currElement);
+                    int32 currPriority = KeyboardNavigation.GetTabIndex(currElement);
 
                     if (currPriority > maxIndexFirstTab || lastTabElement == null)
                     {
@@ -439,16 +439,16 @@ namespace Avalonia.Input.Navigation
             // min (index>currentTabIndex)
             IInputElement? nextTabElement = null;
             IInputElement? firstTabElement = null;
-            int minIndexFirstTab = int.MinValue;
-            int minIndex = int.MinValue;
-            int elementTabPriority = KeyboardNavigation.GetTabIndex(e);
+            int32 minIndexFirstTab = int32.MinValue;
+            int32 minIndex = int32.MinValue;
+            int32 elementTabPriority = KeyboardNavigation.GetTabIndex(e);
 
             IInputElement? currElement = container;
             while ((currElement = GetNextInTree(currElement, container)) != null)
             {
                 if (IsTabStopOrGroup(currElement))
                 {
-                    int currPriority = KeyboardNavigation.GetTabIndex(currElement);
+                    int32 currPriority = KeyboardNavigation.GetTabIndex(currElement);
                     if (currPriority > elementTabPriority)
                     {
                         if (currPriority < minIndex || nextTabElement == null)
@@ -500,7 +500,7 @@ namespace Avalonia.Input.Navigation
 
         private static IInputElement? GetPrevTabWithSameIndex(IInputElement e, IInputElement container)
         {
-            int elementTabPriority = KeyboardNavigation.GetTabIndex(e);
+            int32 elementTabPriority = KeyboardNavigation.GetTabIndex(e);
             var currElement = GetPreviousInTree(e, container);
             while (currElement != null)
             {
@@ -519,15 +519,15 @@ namespace Avalonia.Input.Navigation
             // max (index<currentTabIndex)
             IInputElement? lastTabElement = null;
             IInputElement? nextTabElement = null;
-            int elementTabPriority = KeyboardNavigation.GetTabIndex(e);
-            int maxIndexFirstTab = Int32.MaxValue;
-            int maxIndex = Int32.MaxValue;
+            int32 elementTabPriority = KeyboardNavigation.GetTabIndex(e);
+            int32 maxIndexFirstTab = Int32.MaxValue;
+            int32 maxIndex = Int32.MaxValue;
             var currElement = GetLastInTree(container);
             while (currElement != null)
             {
                 if (IsTabStopOrGroup(currElement) && currElement != container)
                 {
-                    int currPriority = KeyboardNavigation.GetTabIndex(currElement);
+                    int32 currPriority = KeyboardNavigation.GetTabIndex(currElement);
                     if (currPriority < elementTabPriority)
                     {
                         if (currPriority > maxIndex || nextTabElement == null)
@@ -580,7 +580,7 @@ namespace Avalonia.Input.Navigation
                 var count = children.Count;
                 IInputElement? prev = null;
                 
-                for (int i = 0; i < count; i++)
+                for (int32 i = 0; i < count; i++)
                 {
                     var vchild = children[i];
                     if (vchild == elementAsVisual)

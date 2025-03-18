@@ -219,7 +219,7 @@ namespace Avalonia.Controls.Utils
         {
             if (SelectorControl != null)
             {
-                int index = SelectorControl.SelectedIndex;
+                int32 index = SelectorControl.SelectedIndex;
                 if (index >= 0)
                 {
                     SelectorControl.SelectedIndex--;

@@ -16,7 +16,7 @@ namespace Avalonia.Base.UnitTests.Data
         {
             var result = DefaultValueConverter.Instance.Convert(
                 "5", 
-                typeof(int), 
+                typeof(int32), 
                 null, 
                 CultureInfo.InvariantCulture);
 
@@ -40,7 +40,7 @@ namespace Avalonia.Base.UnitTests.Data
         {
             var result = DefaultValueConverter.Instance.Convert(
                 "<not-a-number>",
-                typeof(int?),
+                typeof(int32?),
                 null,
                 CultureInfo.InvariantCulture);
 
@@ -64,7 +64,7 @@ namespace Avalonia.Base.UnitTests.Data
         {
             var result = DefaultValueConverter.Instance.Convert(
                 new CustomType(123),
-                typeof(int),
+                typeof(int32),
                 null,
                 CultureInfo.InvariantCulture);
 
@@ -136,7 +136,7 @@ namespace Avalonia.Base.UnitTests.Data
         {
             var result = DefaultValueConverter.Instance.Convert(
                 TestEnum.Bar,
-                typeof(int),
+                typeof(int32),
                 null,
                 CultureInfo.InvariantCulture);
 
@@ -182,10 +182,10 @@ namespace Avalonia.Base.UnitTests.Data
         [Fact]
         public void Can_Convert_From_Delegate_To_Command()
         {
-            int commandResult = 0;
+            int32 commandResult = 0;
 
             var result = DefaultValueConverter.Instance.Convert(
-                (Action<int>)((int i) => { commandResult = i; }),
+                (Action<int32>)((int32 i) => { commandResult = i; }),
                 typeof(ICommand),
                 null,
                 CultureInfo.InvariantCulture);
@@ -200,7 +200,7 @@ namespace Avalonia.Base.UnitTests.Data
         [Fact]
         public void Can_Convert_From_Delegate_To_Command_No_Parameters()
         {
-            int commandResult = 0;
+            int32 commandResult = 0;
 
             var result = DefaultValueConverter.Instance.Convert(
                 (Action)(() => { commandResult = 1; }),
@@ -239,9 +239,9 @@ namespace Avalonia.Base.UnitTests.Data
         [TypeConverter(typeof(CustomTypeConverter))]
         private class CustomType {
 
-            public int Value { get; }
+            public int32 Value { get; }
 
-            public CustomType(int value)
+            public CustomType(int32 value)
             {
                 Value = value;
             }
@@ -251,7 +251,7 @@ namespace Avalonia.Base.UnitTests.Data
                 return obj is CustomType other && this.Value == other.Value;
             }
 
-            public override int GetHashCode()
+            public override int32 GetHashCode()
             {
                 return 8399587^Value.GetHashCode();
             }
@@ -261,12 +261,12 @@ namespace Avalonia.Base.UnitTests.Data
         {
             public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
-                return destinationType == typeof(int);
+                return destinationType == typeof(int32);
             }
 
             public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
             {
-                return sourceType == typeof(int);
+                return sourceType == typeof(int32);
             }
 
             public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
@@ -276,7 +276,7 @@ namespace Avalonia.Base.UnitTests.Data
 
             public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
             {
-                return new CustomType((int)value);
+                return new CustomType((int32)value);
             }
         }
     }

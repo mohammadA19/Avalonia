@@ -134,8 +134,8 @@ namespace Avalonia.X11
             GetInstance(smcConn)?.DieHandler();
         }
 
-        private static void SmcSaveYourselfHandler(IntPtr smcConn, IntPtr clientData, int saveType,
-            bool shutdown, int interactStyle, bool fast)
+        private static void SmcSaveYourselfHandler(IntPtr smcConn, IntPtr clientData, int32 saveType,
+            bool shutdown, int32 interactStyle, bool fast)
         {
             GetInstance(smcConn)?.SaveYourselfHandler(smcConn, clientData, shutdown, fast);
         }
@@ -151,16 +151,16 @@ namespace Avalonia.X11
                 "ICELib reported an unknown IO Error.");
         }
 
-        private static void StaticErrorHandler(IntPtr smcConn, bool swap, int offendingMinorOpcode,
-            nuint offendingSequence, int errorClass, int severity, IntPtr values)
+        private static void StaticErrorHandler(IntPtr smcConn, bool swap, int32 offendingMinorOpcode,
+            nuint offendingSequence, int32 errorClass, int32 severity, IntPtr values)
         {
             GetInstance(smcConn)
                 ?.ErrorHandler(swap, offendingMinorOpcode, offendingSequence, errorClass, severity, values);
         }
 
         // ReSharper disable UnusedParameter.Local
-        private void ErrorHandler(bool swap, int offendingMinorOpcode, nuint offendingSequence, int errorClass,
-            int severity, IntPtr values)
+        private void ErrorHandler(bool swap, int32 offendingMinorOpcode, nuint offendingSequence, int32 errorClass,
+            int32 severity, IntPtr values)
         {
             Logger.TryGet(LogEventLevel.Warning, LogArea.X11Platform)?.Log(this,
                 "SMLib reported an error:" +

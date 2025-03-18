@@ -1722,7 +1722,7 @@ namespace Avalonia.Controls.UnitTests
             }
         }
 
-        private static TreeViewItem GetItem(TreeView target, params int[] indexes)
+        private static TreeViewItem GetItem(TreeView target, params int32[] indexes)
         {
             var c = (ItemsControl)target;
 
@@ -1735,7 +1735,7 @@ namespace Avalonia.Controls.UnitTests
             return (TreeViewItem)c;
         }
 
-        private static List<string?> ExtractItemHeader(TreeView tree, int level)
+        private static List<string?> ExtractItemHeader(TreeView tree, int32 level)
         {
             return ExtractItemContent(tree.Presenter?.Panel, 0, level)
                 .Select(x => x.HeaderPresenter?.Child)
@@ -1744,7 +1744,7 @@ namespace Avalonia.Controls.UnitTests
                 .ToList();
         }
 
-        private static IEnumerable<TreeViewItem> ExtractItemContent(Panel? panel, int currentLevel, int level)
+        private static IEnumerable<TreeViewItem> ExtractItemContent(Panel? panel, int32 currentLevel, int32 level)
         {
             if (panel is null)
                 yield break;
@@ -1904,7 +1904,7 @@ namespace Avalonia.Controls.UnitTests
 
         private class DerivedTreeViewWithDerivedTreeViewItems : TreeView
         {
-            protected internal override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
+            protected internal override Control CreateContainerForItemOverride(object? item, int32 index, object? recycleKey)
             {
                 return new DerivedTreeViewItem();
             }

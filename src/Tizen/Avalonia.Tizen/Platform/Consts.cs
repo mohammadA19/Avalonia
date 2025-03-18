@@ -1,8 +1,8 @@
 ﻿namespace Avalonia.Tizen.Platform;
 internal static class Consts
 {
-    public const int DpiX = 96;
-    public const int DpiY = 96;
+    public const int32 DpiX = 96;
+    public const int32 DpiY = 96;
     public static readonly Vector Dpi = new Vector(DpiX, DpiY);
 
     public const string VertexShader =

@@ -49,7 +49,7 @@ public partial class Dispatcher
                 if (_timers.Count > 0)
                 {
                     // We could do better if we sorted the list of timers.
-                    for (int i = 0; i < _timers.Count; i++)
+                    for (int32 i = 0; i < _timers.Count; i++)
                     {
                         var timer = _timers[i];
 
@@ -154,7 +154,7 @@ public partial class Dispatcher
             if (timers != null)
             {
                 DispatcherTimer? timer = null;
-                int iTimer = 0;
+                int32 iTimer = 0;
 
                 do
                 {

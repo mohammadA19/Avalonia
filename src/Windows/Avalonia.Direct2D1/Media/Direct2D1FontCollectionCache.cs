@@ -28,7 +28,7 @@ namespace Avalonia.Direct2D1.Media
         {
             var fontFamily = typeface.FontFamily;
             var fontCollection = GetOrAddFontCollection(fontFamily);
-            int index;
+            int32 index;
 
             foreach (var name in fontFamily.FamilyNames)
             {

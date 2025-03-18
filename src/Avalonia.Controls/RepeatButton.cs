@@ -12,21 +12,21 @@ namespace Avalonia.Controls
         /// <summary>
         /// Defines the <see cref="Interval"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> IntervalProperty =
-            AvaloniaProperty.Register<RepeatButton, int>(nameof(Interval), 100);
+        public static readonly StyledProperty<int32> IntervalProperty =
+            AvaloniaProperty.Register<RepeatButton, int32>(nameof(Interval), 100);
 
         /// <summary>
         /// Defines the <see cref="Delay"/> property.
         /// </summary>
-        public static readonly StyledProperty<int> DelayProperty =
-            AvaloniaProperty.Register<RepeatButton, int>(nameof(Delay), 300);
+        public static readonly StyledProperty<int32> DelayProperty =
+            AvaloniaProperty.Register<RepeatButton, int32>(nameof(Delay), 300);
 
         private DispatcherTimer? _repeatTimer;
 
         /// <summary>
         /// Gets or sets the amount of time, in milliseconds, of repeating clicks.
         /// </summary>
-        public int Interval
+        public int32 Interval
         {
             get => GetValue(IntervalProperty);
             set => SetValue(IntervalProperty, value);
@@ -35,7 +35,7 @@ namespace Avalonia.Controls
         /// <summary>
         /// Gets or sets the amount of time, in milliseconds, to wait before repeating begins.
         /// </summary>
-        public int Delay
+        public int32 Delay
         {
             get => GetValue(DelayProperty);
             set => SetValue(DelayProperty, value);

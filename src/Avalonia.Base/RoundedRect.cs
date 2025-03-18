@@ -14,7 +14,7 @@ namespace Avalonia
             return obj is RoundedRect other && Equals(other);
         }
 
-        public override int GetHashCode()
+        public override int32 GetHashCode()
         {
             unchecked
             {

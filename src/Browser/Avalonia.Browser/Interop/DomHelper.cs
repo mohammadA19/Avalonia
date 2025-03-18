@@ -29,7 +29,7 @@ internal static partial class DomHelper
     public static partial double[] GetSafeAreaPadding(JSObject globalThis);
 
     [JSImport("AvaloniaDOM.getDarkMode", AvaloniaModule.MainModuleName)]
-    public static partial int[] GetDarkMode(JSObject globalThis);
+    public static partial int32[] GetDarkMode(JSObject globalThis);
 
     [JSImport("AvaloniaDOM.addClass", AvaloniaModule.MainModuleName)]
     public static partial void AddCssClass(JSObject element, string className);

@@ -23,8 +23,8 @@ namespace Avalonia.Browser
 {
     internal class BrowserTopLevelImpl : ITopLevelImpl
     {
-        private static int s_lastTopLevelId = 0;
-        private static Dictionary<int, WeakReference<BrowserTopLevelImpl>> s_topLevels = new();
+        private static int32 s_lastTopLevelId = 0;
+        private static Dictionary<int32, WeakReference<BrowserTopLevelImpl>> s_topLevels = new();
         
         private readonly INativeControlHostImpl _nativeControlHost;
         private readonly IStorageProvider _storageProvider;
@@ -34,7 +34,7 @@ namespace Avalonia.Browser
         private readonly BrowserInputHandler _inputHandler;
         private string _currentCursor = CssCursor.Default;
         private BrowserSurface? _surface;
-        private readonly int _topLevelId;
+        private readonly int32 _topLevelId;
 
         static BrowserTopLevelImpl()
         {
@@ -42,7 +42,7 @@ namespace Avalonia.Browser
             InputHelper.InitializeBackgroundHandlers(BrowserWindowingPlatform.GlobalThis);
         }
 
-        public static BrowserTopLevelImpl? TryGetTopLevel(int id)
+        public static BrowserTopLevelImpl? TryGetTopLevel(int32 id)
         {
             return s_topLevels.TryGetValue(id, out var weakReference) &&
                 weakReference.TryGetTarget(out var topLevelImpl) ?
@@ -103,7 +103,7 @@ namespace Avalonia.Browser
 
         public Point PointToClient(PixelPoint point) => new(point.X, point.Y);
 
-        public PixelPoint PointToScreen(Point point) => new((int)point.X, (int)point.Y);
+        public PixelPoint PointToScreen(Point point) => new((int32)point.X, (int32)point.Y);
 
         public void SetCursor(ICursorImpl? cursor)
         {

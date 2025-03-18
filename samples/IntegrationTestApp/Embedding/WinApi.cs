@@ -6,7 +6,7 @@ namespace IntegrationTestApp.Embedding;
 
 internal class WinApi
 {
-    public const int GWL_WNDPROC = -4;
+    public const int32 GWL_WNDPROC = -4;
     public const uint TME_HOVER = 1;
     public const uint TME_LEAVE = 2;
     public const uint WM_CONTEXTMENU = 0x007B;
@@ -80,26 +80,26 @@ internal class WinApi
     public static extern IntPtr GetModuleHandle(string? lpModuleName);
 
     [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-    public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+    public static extern int32 GetWindowText(IntPtr hWnd, StringBuilder lpString, int32 nMaxCount);
 
 
     [DllImport("user32.dll", SetLastError = true)]
     public static extern IntPtr CreateWindowEx(
-        int dwExStyle,
+        int32 dwExStyle,
         string lpClassName,
         string lpWindowName,
         uint dwStyle,
-        int x,
-        int y,
-        int nWidth,
-        int nHeight,
+        int32 x,
+        int32 y,
+        int32 nWidth,
+        int32 nHeight,
         IntPtr hWndParent,
         IntPtr hMenu,
         IntPtr hInstance,
         IntPtr lpParam);
 
     [DllImport("user32.dll", SetLastError = true)]
-    public static extern IntPtr SetWindowLongPtr(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+    public static extern IntPtr SetWindowLongPtr(IntPtr hWnd, int32 nIndex, IntPtr dwNewLong);
 
     [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
     public static extern bool SetWindowText(IntPtr hwnd, String lpString);
@@ -110,7 +110,7 @@ internal class WinApi
     [StructLayout(LayoutKind.Sequential)]
     public struct TRACKMOUSEEVENT
     {
-        public int cbSize;
+        public int32 cbSize;
         public uint dwFlags;
         public IntPtr hwndTrack;
         public uint dwHoverTime;

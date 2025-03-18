@@ -10,12 +10,12 @@ namespace Avalonia.Controls.Selection
         /// <summary>
         /// Gets the indexes of the items that were removed from the selection.
         /// </summary>
-        public abstract IReadOnlyList<int> DeselectedIndexes { get; }
+        public abstract IReadOnlyList<int32> DeselectedIndexes { get; }
 
         /// <summary>
         /// Gets the indexes of the items that were added to the selection.
         /// </summary>
-        public abstract IReadOnlyList<int> SelectedIndexes { get; }
+        public abstract IReadOnlyList<int32> SelectedIndexes { get; }
 
         /// <summary>
         /// Gets the items that were removed from the selection.
@@ -37,13 +37,13 @@ namespace Avalonia.Controls.Selection
         private IReadOnlyList<object?>? _selectedItems;
 
         public SelectionModelSelectionChangedEventArgs(
-            IReadOnlyList<int>? deselectedIndices = null,
-            IReadOnlyList<int>? selectedIndices = null,
+            IReadOnlyList<int32>? deselectedIndices = null,
+            IReadOnlyList<int32>? selectedIndices = null,
             IReadOnlyList<T?>? deselectedItems = null,
             IReadOnlyList<T?>? selectedItems = null)
         {
-            DeselectedIndexes = deselectedIndices ?? Array.Empty<int>();
-            SelectedIndexes = selectedIndices ?? Array.Empty<int>();
+            DeselectedIndexes = deselectedIndices ?? Array.Empty<int32>();
+            SelectedIndexes = selectedIndices ?? Array.Empty<int32>();
             DeselectedItems = deselectedItems ?? Array.Empty<T>();
             SelectedItems = selectedItems ?? Array.Empty<T>();
         }
@@ -51,12 +51,12 @@ namespace Avalonia.Controls.Selection
         /// <summary>
         /// Gets the indexes of the items that were removed from the selection.
         /// </summary>
-        public override IReadOnlyList<int> DeselectedIndexes { get; }
+        public override IReadOnlyList<int32> DeselectedIndexes { get; }
 
         /// <summary>
         /// Gets the indexes of the items that were added to the selection.
         /// </summary>
-        public override IReadOnlyList<int> SelectedIndexes { get; }
+        public override IReadOnlyList<int32> SelectedIndexes { get; }
 
         /// <summary>
         /// Gets the items that were removed from the selection.
